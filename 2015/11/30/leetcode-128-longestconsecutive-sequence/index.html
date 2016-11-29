@@ -4,7 +4,7 @@
     <!-- Title -->
     
     <title>
-        机器学习算法笔记1_1:线性回归 | 野原圆长的Blog
+        LeetCode 128 Longest Consecutive Sequence | 野原圆长的Blog
     </title>
     
     <!-- Favicons -->
@@ -40,7 +40,7 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="http://buptweixin.github.io">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="机器学习算法笔记1_1:线性回归 | 野原圆长的Blog">
+    <meta property="og:title" content="LeetCode 128 Longest Consecutive Sequence | 野原圆长的Blog">
     <meta property="og:description" content="null">
     
      <!--[if lte IE 9]>
@@ -215,7 +215,7 @@
 	<ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
 		for="post-toc-trigger-btn">
 			
-			<ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#LMS-Least-Mean-Squares-算法"><span class="post-toc-number">1.</span> <span class="post-toc-text">LMS(Least Mean Squares)算法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#LMS的矩阵表示"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">LMS的矩阵表示</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#线性回归代价函数J解释"><span class="post-toc-number">2.</span> <span class="post-toc-text">线性回归代价函数J解释</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#局部加权线性回归-LWR-locally-weighted-linear-regression"><span class="post-toc-number">3.</span> <span class="post-toc-text">局部加权线性回归(LWR locally weighted linear regression)</span></a></li></ol>
+			<ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#解题思路"><span class="post-toc-number">1.</span> <span class="post-toc-text">解题思路</span></a></li></ol>
 		
 <!--			<li class="mdl-menu__item">Some Action</li>-->
 	</ul>
@@ -248,7 +248,7 @@
 		
 	
         <p class="article-headline-p">
-            机器学习算法笔记1_1:线性回归
+            LeetCode 128 Longest Consecutive Sequence
         </p>
     </div>
 
@@ -266,7 +266,7 @@
     <!-- Author Name & Date -->
     <div>
         <strong>Xin Wei</strong>
-        <span>6月 15, 2016</span>
+        <span>11月 30, 2015</span>
     </div>
     
     <div class="section-spacer"></div>
@@ -286,7 +286,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/机器学习/">机器学习</a>
+        <a class="post_tag-link" href="/tags/array/">array</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/cpp/">cpp</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/hard/">hard</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/算法/">算法</a>
     </ul>
     
     <!-- Share -->
@@ -301,21 +301,21 @@
     
     
     <!-- Share Twitter -->
-    <a class="post_share-link" href="https://twitter.com/intent/tweet?text=机器学习算法笔记1_1:线性回归&url=http://buptweixin.github.io//2016/06/15/ml-1/index.html&via=Xin Wei" target="_blank">
+    <a class="post_share-link" href="https://twitter.com/intent/tweet?text=LeetCode 128 Longest Consecutive Sequence&url=http://buptweixin.github.io//2015/11/30/leetcode-128-longestconsecutive-sequence/index.html&via=Xin Wei" target="_blank">
         <li class="mdl-menu__item">
             分享到 Twitter
         </li>
     </a>
     
     <!-- Share Google+ -->
-    <a class="post_share-link" href="https://plus.google.com/share?url=http://buptweixin.github.io//2016/06/15/ml-1/index.html" target="_blank">
+    <a class="post_share-link" href="https://plus.google.com/share?url=http://buptweixin.github.io//2015/11/30/leetcode-128-longestconsecutive-sequence/index.html" target="_blank">
         <li class="mdl-menu__item">
             分享到 Google+
         </li>
     </a>
     
     <!-- Share Weibo -->
-    <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=机器学习算法笔记1_1:线性回归&url=http://buptweixin.github.io//2016/06/15/ml-1/index.html&pic=&searchPic=false&style=simple" target="_blank">
+    <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=LeetCode 128 Longest Consecutive Sequence&url=http://buptweixin.github.io//2015/11/30/leetcode-128-longestconsecutive-sequence/index.html&pic=&searchPic=false&style=simple" target="_blank">
         <li class="mdl-menu__item">
             分享到微博
         </li>
@@ -327,69 +327,30 @@
                 <!-- Post Content -->
                 <div id="post-content" class="markdown-Material mdl-color-text--grey-700 mdl-card__supporting-text fade out">
 	
-		<p><img src="http://img2.imgtn.bdimg.com/it/u=4288980725,4019769355&amp;fm=21&amp;gp=0.jpg" alt=""><br><a id="more"></a><br>形式 $$h(x)=\sum_{i=0}^n\theta_ix_i=\theta^Tx$$</p>
-<p>代价函数:$$J(\theta)=\frac{1}{2}\sum<em>{i=1}^m(h(x</em>\theta^{(i)})-y^{(i)})^2$$</p>
-<h1 id="LMS-Least-Mean-Squares-算法"><a href="#LMS-Least-Mean-Squares-算法" class="headerlink" title="LMS(Least Mean Squares)算法"></a>LMS(Least Mean Squares)算法</h1><pre><code>1. 参数更新原则
-    梯度下降法，参数沿着使代价函数下降最快的方向改变，其中$\alpha$为学习速率
-    ![\theta](http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/94671222.jpg)
-    - 单样本更新
-        ![single sample](http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/52959073.jpg)
-        ![update](http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/42085607.jpg)
-        可以看到，当误差($y^{(i)}-h_\theta(x^{(i)})$)越大时，参数更新幅度越大，反之较小。
-        这只是针对一个样本的情况，当有多个样本时，有以下两种方法更新参数
-  - 批处理算法
-      ![](http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/74290904.jpg)
-  - 随机梯度下降法(stochastic gradient descent)
-      ![](http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/54579329.jpg)
-      由于批处理算法每次更新都需要浏览整个数据集，所以，通常来说(特别是训练街特别大的时候)，随机梯度下降法具有更快的收敛速度。
-</code></pre><h2 id="LMS的矩阵表示"><a href="#LMS的矩阵表示" class="headerlink" title="LMS的矩阵表示"></a>LMS的矩阵表示</h2><pre><code>1. 矩阵知识
-      1. 矩阵导数
-          ![](http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/43873001.jpg)
-      2. 迹
-          ![](http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/14921239.jpg)
-
-          - 如果`AB`是方阵则`trAB=trBA`，同理
-              ![](http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/603470.jpg)
-
-          - 其他性质
-              ![](http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/48266716.jpg) 
-              ![](http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/46476608.jpg)
-              `(4)`中要求A为非奇异矩阵
-3. 矩阵表示LMS
-    ![](http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/11349673.jpg)
-    ![](http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/42136785.jpg)
-    由`(2)(3)`可得
-    ![](http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/49393521.jpg)
-    所以
-    ![](http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/1131409.jpg)
-    其中第二步到第三步是因为$J(\theta)$是一个实数，而对于实数a有`a=tr(a)`；
-    第三步到第四步是因为$trA=trA^T$;
-    第四步到第五步利用了公式`(5)`,其中$A^T=\theta,B=B^T=X^TX,C=I$
-    当$J(\theta)$最小时，其对于$\theta$的导数为0，即有$X^TX\theta=X^Ty$即$\theta=(X^TX)^{-1}X^Ty$
-</code></pre><h1 id="线性回归代价函数J解释"><a href="#线性回归代价函数J解释" class="headerlink" title="线性回归代价函数J解释"></a>线性回归代价函数<code>J</code>解释</h1><pre><code>- 形式：将目标变量和自变量通过下式联系起来：
-    ![](http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/79597146.jpg)
-    其中$\epsilon^{(i)}$是误差项并且假设它服从高斯(Gaussian)独立同分布(IID, independently and identically distributed)
-    ![](http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/68010438.jpg)
-    即
-    ![](http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/44729673.jpg)
-    为了强调这个函数是由$\theta$决定,我们将其称为似然函数：
-    ![](http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/89092285.jpg)
-    由于$\epsilon^{(i)}$是独立同分布的，所以
-    ![](http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/11990276.jpg)
-    根据最大似然法则，我们应该选择使上面似然概率最大的$\theta$，为了方便，将其化为下面的对数似然函数形式
-    ![](http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/11566928.jpg)
-    所以，最大化似然函数等价于最小化下式：
-    ![](http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/47628282.jpg)
-    **这就是我们前面提到的代价函数**
-</code></pre><h1 id="局部加权线性回归-LWR-locally-weighted-linear-regression"><a href="#局部加权线性回归-LWR-locally-weighted-linear-regression" class="headerlink" title="局部加权线性回归(LWR locally weighted linear regression)"></a>局部加权线性回归(LWR locally weighted linear regression)</h1><pre><code>![](http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/88233407.jpg)
-当$\omega$很大时，该项在代价函数中的作用变得很明显；反之，对应项的误差将会被忽略。
-- 目的： 防止过拟合
-
-- $\omega$的选择：
-    ![](http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/36404035.jpg)
-    $x^{(i)}$为第i个样本点，x为查询点，两者越接近，对应项权重越靠近1，否则，趋近于0；$\tau$被称为带宽(bandwidth)参数，它控制权重相对于$x^{(i)}-x$改变的快慢。
-    这是我们接触的第一个非参数方法
-</code></pre><p>  （斯坦福机器学习教程）</p>
+		<blockquote>
+<p>Given an unsorted array of integers, find the length of the longest consecutive elements sequence.</p>
+<p>For example,<br>Given <code>[100, 4, 200, 1, 3, 2]</code>,<br>The longest consecutive elements sequence is <code>[1, 2, 3, 4]</code>. Return its length: <code>4</code>.</p>
+<p>Your algorithm should run in O(<em>n</em>) complexity.</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><ol>
+<li><p>采用unordered_set(<strong>set使用红黑树实现，它的find时间复杂度为$O(logN)$</strong>)</p>
+<ol>
+<li>将数字存入set关联容器nums_set($O(N)$)</li>
+<li>遍历set中的元素(<strong>set的find复杂度$O(1)$</strong>)<ol>
+<li>如果<code>num-1</code>不在set中，则开始对连续出现数字计数<ol>
+<li>初始化<code>int m=num+1</code></li>
+<li>在nums_set中寻找m，若找到，m+1</li>
+<li>如果没有找到则跳出循环</li>
+<li>更新最长序列为<code>max(longest, m - num)</code></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">longestConsecutive</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</div><div class="line">        <span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt; nums_set;</div><div class="line">        <span class="comment">// 将vector元素复制到set中，方便查找</span></div><div class="line">        nums_set.insert(nums.begin(), nums.end());</div><div class="line">        <span class="keyword">int</span> longest = <span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> num : nums_set)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span> (nums_set.find(num<span class="number">-1</span>) == nums_set.end())</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">int</span> m = num + <span class="number">1</span>;</div><div class="line">                <span class="keyword">while</span> (nums_set.find(m) != nums_set.end())</div><div class="line">                    ++m;</div><div class="line">                longest = max(longest, m - num);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> longest;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+</li>
+</ol>
 
 	
 	
@@ -410,7 +371,7 @@
     
     <!-- Prev Nav -->
     
-        <a href="/2016/06/15/ml-2/" id="post_nav-newer" class="prev-content">
+        <a href="/2016/06/15/kdd-2012/" id="post_nav-newer" class="prev-content">
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
                 <i class="material-icons">arrow_back</i>
             </button>
@@ -424,7 +385,7 @@
 
     <!-- Next Nav -->
     
-        <a href="/2016/06/15/docker-port-map/" id="post_nav-older" class="next-content">
+        <a href="/2015/11/30/leetcode-4-medianoftwosortedarrays/" id="post_nav-older" class="next-content">
             旧篇
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
