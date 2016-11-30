@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-    <!-- Title -->
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Title -->
     
     <title>
         分类: algorithm | 野原圆长的Blog
@@ -168,7 +168,7 @@
 		}
 	</script>
     
-    <!-- Custom Head -->
+    <!-- Custom Head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
     
 </head>
 	
@@ -177,7 +177,7 @@
     <body id="scheme-Paradox">
 
 		
-        <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+        <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="material-layout  mdl-js-layout has-drawer is-upgraded">
 				
 			
 			
@@ -801,7 +801,24 @@ It will not impact the appearance and can give developers a lot of support :)
     });
 </script>
             </main>
-        </div>
+        </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 		
     </body>
 		
