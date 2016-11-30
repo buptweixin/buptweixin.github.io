@@ -223,171 +223,52 @@
 
 <!-- Layouts -->
 
-    <!-- Post Module -->
-    <div class="material-post_container">
-		
-        <div class="material-post mdl-grid">
-            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
-
-                <!-- Post Header(Thumbnail & Title) -->
-                
-	<!-- Paradox Post Header -->
+    <!-- Tags Cloud -->
+	<style>
+	#bottom{
+		position: relative;
+	}
 	
-		
-			<!-- Random Thumbnail -->
-			<div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-				<script>
-    
-    var randomNum;
-    randomNum = Math.floor(Math.random() * 5 + 1);
-    
-    $(".post_thumbnail-random").css('background-image', 'url(' + '/img/random/' + randomNum + '.png' + ')');
-    
+	@media screen and (max-width: 480px){
+		.material-tagscloud{
+			margin: 6em 2em 0;
+		}
+	}
+	
+	.material-tagscloud a{
+		padding: 10px;
+		line-height: 40px;
+		white-space: nowrap;
+		transition: .6s;
+	}
+	.material-tagscloud a:hover{
+		transition: .6s;
+		color: #FAFAFA !important;
+    	background: #9E9E9E;
+	}
+</style>
+
+<div class=" material-tagscloud">
+	<div class="material-post mdl-grid">
+		<a href="/tags/Caffe/" style="font-size: 16px; color: #757575">Caffe</a> <a href="/tags/Deep-Learning/" style="font-size: 16px; color: #757575">Deep Learning</a> <a href="/tags/Python/" style="font-size: 24.14px; color: #515151">Python</a> <a href="/tags/array/" style="font-size: 21.43px; color: #5d5d5d">array</a> <a href="/tags/big-data/" style="font-size: 16px; color: #757575">big data</a> <a href="/tags/cpp/" style="font-size: 35px; color: #212121">cpp</a> <a href="/tags/cs231n/" style="font-size: 18.71px; color: #696969">cs231n</a> <a href="/tags/hard/" style="font-size: 21.43px; color: #5d5d5d">hard</a> <a href="/tags/language/" style="font-size: 32.29px; color: #2d2d2d">language</a> <a href="/tags/python/" style="font-size: 16px; color: #757575">python</a> <a href="/tags/大数据处理工具/" style="font-size: 16px; color: #757575">大数据处理工具</a> <a href="/tags/大数据工具/" style="font-size: 21.43px; color: #5d5d5d">大数据工具</a> <a href="/tags/推荐系统/" style="font-size: 16px; color: #757575">推荐系统</a> <a href="/tags/机器学习/" style="font-size: 29.57px; color: #393939">机器学习</a> <a href="/tags/深度学习/" style="font-size: 24.14px; color: #515151">深度学习</a> <a href="/tags/算法/" style="font-size: 26.86px; color: #454545">算法</a>
+	</div>
+</div>
+
+
+<script>
+	var adjustFooter = function(){
+		if( ($("#bottom").offset().top + $("#bottom").outerHeight() ) < $(window).height() ){
+			var footerBottom = $(window).height() - $("#bottom").outerHeight() - $("#bottom").offset().top;
+//			console.log(footerBottom);
+			$("#bottom").css("bottom", "-" + footerBottom + "px");
+		}
+	};
+	
+	$(document).ready(function(){
+		adjustFooter();
+	});
 </script>
 
-		
-	
-        <p class="article-headline-p">
-            标签
-        </p>
-    </div>
-
-	
-
-				
-				
-					<!-- Paradox Post Info -->
-					<div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
-    
-    <!-- Author Avatar -->
-    <div id="author-avatar">
-        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
-    </div>
-    <!-- Author Name & Date -->
-    <div>
-        <strong>Xin Wei</strong>
-        <span>11月 30, 2016</span>
-    </div>
-    
-    <div class="section-spacer"></div>
-	
-    <!-- Favorite -->
-<!--
-    <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
-        <i class="material-icons" role="presentation">favorite</i>
-        <span class="visuallyhidden">favorites</span>
-    </button>
--->
-    
-    <!-- Tags (bookmark) -->
-    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
-        <i class="material-icons" role="presentation">bookmark</i>
-        <span class="visuallyhidden">bookmark</span>
-    </button>
-    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
-        <li class="mdl-menu__item">
-        
-    </ul>
-    
-    <!-- Share -->
-    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
-    <i class="material-icons" role="presentation">share</i>
-    <span class="visuallyhidden">share</span>
-</button>
-<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
-    
-    
-    <!-- Leancloud Views -->
-    <a class="post_share-link" href="#">
-        <li class="mdl-menu__item">
-            <span id="/tags/index.html" class="leancloud-views_num" data-flag-title="标签">
-     &nbsp;浏览量
-</span>
-        </li>
-    </a>
-    
-    
-    
-    
-    <!-- Share Twitter -->
-    <a class="post_share-link" href="https://twitter.com/intent/tweet?text=标签&url=http://www.wowx.info//tags/index.html&via=Xin Wei" target="_blank">
-        <li class="mdl-menu__item">
-            分享到 Twitter
-        </li>
-    </a>
-    
-    <!-- Share Google+ -->
-    <a class="post_share-link" href="https://plus.google.com/share?url=http://www.wowx.info//tags/index.html" target="_blank">
-        <li class="mdl-menu__item">
-            分享到 Google+
-        </li>
-    </a>
-    
-    <!-- Share Weibo -->
-    <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=标签&url=http://www.wowx.info//tags/index.html&pic=&searchPic=false&style=simple" target="_blank">
-        <li class="mdl-menu__item">
-            分享到微博
-        </li>
-    </a>
-</ul>
-</div>
-				
-
-                <!-- Post Content -->
-                <div id="post-content" class="markdown-Material mdl-color-text--grey-700 mdl-card__supporting-text fade out">
-	
-		<div><br>    &lt;%- d3cloudtag(site.tags) %&gt;<br></div>
-
-	
-	
-	
-	
-</div>
-				
-				
-
-                <!-- Post Comments -->
-                
-    <!-- 使用多说评论 -->
-    <link rel="stylesheet" href="/css/duoshuo.min.css">
-<style>
-    #ds-thread #ds-reset .ds-post-button{
-        background-color: #0097A7 !important;
-    }
-    #ds-wrapper #ds-reset .ds-icons-32{
-        background-color: #0097A7 !important;
-    }
-    #ds-reset .ds-highlight {
-        color: #0097A7 !important;
-    }
-</style>
-<div id="comments">
-    <!-- 多说评论框 start -->
-        <div class="ds-thread" 
-            data-thread-key="tags/index.html" 
-            data-url="http://www.wowx.info//tags/index.html"
-            data-title="标签"></div>
-    <!-- 多说评论框 end -->
-</div>
-
-
-
-            </div>
-
-            <!-- Post Prev & Next Nav -->
-            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
-    
-    <!-- Prev Nav -->
-    
-
-    <!-- Section Spacer -->
-    <div class="section-spacer"></div>
-
-    <!-- Next Nav -->
-    
-</nav>
-        </div>
-    </div>
 
 				
 				
