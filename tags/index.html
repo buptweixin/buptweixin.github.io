@@ -4,7 +4,7 @@
     <!-- Title -->
     
     <title>
-        CS231n assignment1 multi svm -- 矩阵乘法的几何意义 | 野原圆长的Blog
+        Tagcloud | 野原圆长的Blog
     </title>
     
     <!-- Favicons -->
@@ -40,7 +40,7 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="http://buptweixin.github.io">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="CS231n assignment1 multi svm -- 矩阵乘法的几何意义 | 野原圆长的Blog">
+    <meta property="og:title" content="Tagcloud | 野原圆长的Blog">
     <meta property="og:description" content="null">
     
      <!--[if lte IE 9]>
@@ -215,7 +215,7 @@
 	<ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
 		for="post-toc-trigger-btn">
 			
-			<ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#问题引入"><span class="post-toc-number">1.</span> <span class="post-toc-text">问题引入</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#矩阵相乘的意义"><span class="post-toc-number">2.</span> <span class="post-toc-text">矩阵相乘的意义</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#所以？"><span class="post-toc-number">3.</span> <span class="post-toc-text">所以？</span></a></li></ol>
+			
 		
 <!--			<li class="mdl-menu__item">Some Action</li>-->
 	</ul>
@@ -248,7 +248,7 @@
 		
 	
         <p class="article-headline-p">
-            CS231n assignment1 multi svm -- 矩阵乘法的几何意义
+            Tagcloud
         </p>
     </div>
 
@@ -266,7 +266,7 @@
     <!-- Author Name & Date -->
     <div>
         <strong>Xin Wei</strong>
-        <span>9月 24, 2016</span>
+        <span>11月 30, 2016</span>
     </div>
     
     <div class="section-spacer"></div>
@@ -286,7 +286,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/cs231n/">cs231n</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/机器学习/">机器学习</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/深度学习/">深度学习</a>
+        
     </ul>
     
     <!-- Share -->
@@ -301,21 +301,21 @@
     
     
     <!-- Share Twitter -->
-    <a class="post_share-link" href="https://twitter.com/intent/tweet?text=CS231n assignment1 multi svm -- 矩阵乘法的几何意义&url=http://buptweixin.github.io//2016/09/24/matrix/index.html&via=Xin Wei" target="_blank">
+    <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Tagcloud&url=http://buptweixin.github.io//tags/index.html&via=Xin Wei" target="_blank">
         <li class="mdl-menu__item">
             分享到 Twitter
         </li>
     </a>
     
     <!-- Share Google+ -->
-    <a class="post_share-link" href="https://plus.google.com/share?url=http://buptweixin.github.io//2016/09/24/matrix/index.html" target="_blank">
+    <a class="post_share-link" href="https://plus.google.com/share?url=http://buptweixin.github.io//tags/index.html" target="_blank">
         <li class="mdl-menu__item">
             分享到 Google+
         </li>
     </a>
     
     <!-- Share Weibo -->
-    <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=CS231n assignment1 multi svm -- 矩阵乘法的几何意义&url=http://buptweixin.github.io//2016/09/24/matrix/index.html&pic=&searchPic=false&style=simple" target="_blank">
+    <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Tagcloud&url=http://buptweixin.github.io//tags/index.html&pic=&searchPic=false&style=simple" target="_blank">
         <li class="mdl-menu__item">
             分享到微博
         </li>
@@ -327,23 +327,7 @@
                 <!-- Post Content -->
                 <div id="post-content" class="markdown-Material mdl-color-text--grey-700 mdl-card__supporting-text fade out">
 	
-		<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-9-24/82257381.jpg" width="720px"><br><a id="more"></a></p>
-<h2 id="问题引入"><a href="#问题引入" class="headerlink" title="问题引入"></a>问题引入</h2><p>在cs231n的assignment1多类svm部分中，需要采用完全向量法求解损失函数对权重的梯度$dW$,$$\nabla<em>{w</em>{y_i}}L<em>i=-\left(\sum</em>{j\neq{y_i}}1(w_j^Tx<em>i-w</em>{y_i}^Tx_i+\Delta&gt;0)\right)x<em>i\\nabla</em>{w_j}L_i = 1\left(w_j^Tx<em>i-w</em>{y_i}^T+\Delta\right)x_i$$(<a href="http://cs231n.github.io/optimization-1/" target="_blank" rel="external">详细推导</a>),即给出输入$x_i$，假设正确类别是$y_i$,则权重的$y_i$列的梯度为满足$w_j^Tx<em>i-w</em>{y_i}^Tx_i+\Delta&gt;0$的列数量乘输入’$-x_i$’，其他列的梯度为当$w_j^Tx<em>i-w</em>{y_i}^Tx_i+\Delta&gt;0$等于$x_i$,否则为0.如何用矩阵方法解决得到答案呢？</p>
-<h2 id="矩阵相乘的意义"><a href="#矩阵相乘的意义" class="headerlink" title="矩阵相乘的意义"></a>矩阵相乘的意义</h2><p>假设有$2\times{3}$矩阵A和$3\times{2}$矩阵B相乘，我们知道结果如下：</p>
-<p>$$\left[\begin{array}{ccc}x11 &amp; x12 &amp; x13 \x21 &amp; x22 &amp; x23\end{array}\right] \times\left[\begin{array}{cc}y11 &amp; y12 \y21 &amp; y22 \y31 &amp; y32\end{array}\right]=\left[\begin{array}{cc}x<em>{11}y</em>{11}+x<em>{12}y</em>{21}+x<em>{13}y</em>{31} &amp; x<em>{11}y</em>{12}+x<em>{12}y</em>{22}+x<em>{13}y</em>{32} \x<em>{21}y</em>{11}+x<em>{22}y</em>{21}+x<em>{23}y</em>{31} &amp; x<em>{21}y</em>{12}+x<em>{22}y</em>{22}+x<em>{23}y</em>{32}\end{array}\right]$$</p>
-<p>那么它的意义是什么呢？</p>
-<p>我们仔细观察等式右边的每列，会发现同一列的B矩阵元素$y<em>{ij}$都是相等的<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-9-24/43625942.jpg" alt=""><br>$$\left[\begin{array}{cc}\left[\begin{array}{c}x</em>{11} \x<em>{21}\end{array}\right]y</em>{11}+\left[\begin{array}{c}x<em>{12} \x</em>{22}\end{array}\right]y<em>{21}+\left[\begin{array}{c}x</em>{13} \x<em>{23}\end{array}\right]y</em>{31} &amp; \left[\begin{array}{c}x<em>{11} \x</em>{21}\end{array}\right]y<em>{12}+\left[\begin{array}{c}x</em>{12} \x<em>{22}\end{array}\right]y</em>{22}+\left[\begin{array}{c}x<em>{13} \x</em>{23}\end{array}\right]y_{32}\end{array}\right]$$</p>
-<p>这就是说，对于矩阵$A\times{B}$,结果的第j列相当于矩阵$A$的每一列分别乘以矩阵$B$第j列第一到最后一个元素然后相加。</p>
-<h2 id="所以？"><a href="#所以？" class="headerlink" title="所以？"></a>所以？</h2><p>我们将$-x_i$乘以margin大于0的数量用来累加$x_i$正确类别对应的权重梯度，其他列根据margin是否大于0来累加，若大于0，累加对应列的梯度，否则不累加。</p>
-<p>具体步骤:</p>
-<ol>
-<li>使用包含n个D维数据的矩阵乘D行c列(c为分类类别数)权重W得到每个样本分成每一个类别的分数(第i行第j个元素代表第i个样本被分类到第j类的分数)；</li>
-<li>将每个数据的所有类别的分数都减去正确类别的分数再加上$\Delta$,并把正确类别对应项置为0得到margin；</li>
-<li>判断margin是否大于0，计算每一个输入数据得到的大于0的margin的数量</li>
-<li>将输入转置，每列代表一个数据，我们需要通过右边的矩阵指定每个数据累加的次数。</li>
-</ol>
-<p><a href="http://blog.csdn.net/zengdong_1991/article/details/51346201" target="_blank" rel="external">博文</a>给出的代码如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">svm_loss_vectorized</span><span class="params">(W, X, y, reg)</span>:</span></div><div class="line">  <span class="string">"""</span></div><div class="line">  Structured SVM loss function, vectorized implementation.</div><div class="line"></div><div class="line">  Inputs and outputs are the same as svm_loss_naive.</div><div class="line">  """</div><div class="line">  loss = <span class="number">0.0</span></div><div class="line">  dW = np.zeros(W.shape) <span class="comment"># initialize the gradient as zero</span></div><div class="line"></div><div class="line">  <span class="comment">#print(type(W))</span></div><div class="line">  <span class="comment">#print(type(X))</span></div><div class="line"></div><div class="line">  num_classes = W.shape[<span class="number">1</span>]</div><div class="line">  num_train = X.shape[<span class="number">0</span>]</div><div class="line">  </div><div class="line">  scores = X.dot(W)</div><div class="line">  correct_class_score = scores[np.arange(num_train), y]</div><div class="line"></div><div class="line">  <span class="comment">#print(scores.shape)</span></div><div class="line">  <span class="comment">#print(correct_class_score.shape)</span></div><div class="line">  <span class="comment">#print(type(scores))</span></div><div class="line">  <span class="comment">#print(type(correct_class_score))</span></div><div class="line"></div><div class="line">  tmpMat = scores.T - correct_class_score + <span class="number">1</span></div><div class="line">  tmpMat = tmpMat.T</div><div class="line">  tmpMat[np.arange(num_train), y] = <span class="number">0</span></div><div class="line"></div><div class="line">  margin = np.maximum(tmpMat, np.zeros((num_train, num_classes)))</div><div class="line"></div><div class="line">  <span class="comment">#print(margin.shape)</span></div><div class="line">  loss = np.sum(margin)</div><div class="line">  loss /= num_train</div><div class="line">  loss += <span class="number">0.5</span>*reg*np.sum(W*W)</div><div class="line"></div><div class="line">  <span class="comment"># Binarize into integers</span></div><div class="line">  binary = margin</div><div class="line">  binary[margin &gt; <span class="number">0</span>] = <span class="number">1</span></div><div class="line"></div><div class="line">  <span class="comment"># Perform the two operations simultaneously</span></div><div class="line">  <span class="comment"># (1) for all j: dW[j,:] = sum_&#123;i, j produces positive margin with i&#125; X[:,i].T</span></div><div class="line">  <span class="comment"># (2) for all i: dW[y[i],:] = sum_&#123;j != y_i, j produces positive margin with i&#125; -X[:,i].T</span></div><div class="line">  col_sum = np.sum(binary, axis=<span class="number">1</span>)</div><div class="line">  binary[np.arange(num_train), y] = -col_sum[range(num_train)]</div><div class="line">  dW = np.dot(X.T, binary)</div><div class="line"></div><div class="line">  <span class="comment"># Divide</span></div><div class="line">  dW /= num_train</div><div class="line"></div><div class="line">  <span class="comment"># Regularize</span></div><div class="line">  dW += reg*W</div><div class="line"></div><div class="line">  <span class="keyword">return</span> loss, dW</div></pre></td></tr></table></figure></p>
-
+		
 	
 	
 	
@@ -363,27 +347,11 @@
     
     <!-- Prev Nav -->
     
-        <a href="/2016/09/24/svm/" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            新篇
-        </a>
-    
 
     <!-- Section Spacer -->
     <div class="section-spacer"></div>
 
     <!-- Next Nav -->
-    
-        <a href="/2016/09/10/cycle/" id="post_nav-older" class="next-content">
-            旧篇
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_forward</i>
-            </button>
-        </a>
     
 </nav>
         </div>
