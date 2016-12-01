@@ -118,7 +118,7 @@
     <link href="http://www.wowx.info/2016/11/26/problems-of-caffe/"/>
     <id>http://www.wowx.info/2016/11/26/problems-of-caffe/</id>
     <published>2016-11-26T08:55:45.000Z</published>
-    <updated>2016-11-26T15:17:20.555Z</updated>
+    <updated>2016-12-01T07:43:57.764Z</updated>
     
     <content type="html"><![CDATA[<h3 id="make时出现hdf5-hpp-not-found-之类的问题"><a href="#make时出现hdf5-hpp-not-found-之类的问题" class="headerlink" title="make时出现hdf5.hpp not found`之类的问题"></a><code>make</code>时出现hdf5.hpp not found`之类的问题</h3><p>Ubuntu16.04中hdf5文件位置发生了变化，需要手工修改<br>首先，将Makefile.config中的</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include</div><div class="line">LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib</div></pre></td></tr></table></figure>
@@ -129,6 +129,7 @@
 <h3 id="使py-faster-rcnn等自带的老版本caffe支持GTX1080和cudnn-v5"><a href="#使py-faster-rcnn等自带的老版本caffe支持GTX1080和cudnn-v5" class="headerlink" title="使py-faster-rcnn等自带的老版本caffe支持GTX1080和cudnn v5"></a>使<a href="https://github.com/rbgirshick/py-faster-rcnn" target="_blank" rel="external">py-faster-rcnn</a>等自带的老版本caffe支持GTX1080和cudnn v5</h3><p>首先，进入caffe根目录添加官方caffe源到本地<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">cd caffe-faster-rcnn</div><div class="line">git remote add caffe https://github.com/BVLC/caffe.git  </div><div class="line">git fetch caffe  </div><div class="line">git merge caffe/master</div></pre></td></tr></table></figure></p>
 <p>merge步骤如果git提示本地修改没有保存不能合并的话,使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git stash</div></pre></td></tr></table></figure></p>
 <p>把本地修改暂存起来，再进行merge操作。<br>然后进入<code>$CAFFE_ROOT/include/caffe/layers/python_layer.hpp</code>找到<code>self_.attr(&quot;phase&quot;) = static_cast&lt;int&gt;(this-&gt;phase_);</code>这一行，将其注释掉。</p>
+<h3 id="Caffe运行速度很慢"><a href="#Caffe运行速度很慢" class="headerlink" title="Caffe运行速度很慢"></a>Caffe运行速度很慢</h3><p>配置完全相同的电脑，如果运行速度相差很多的话，一个可能是更快的那台机器采用了cudnn加速或cudnn的版本更高；另外一种情况是在Makefile.config中打开了debug选项，将其关闭就可以了。</p>
 ]]></content>
     
     <summary type="html">
