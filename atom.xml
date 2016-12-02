@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.wowx.info/"/>
-  <updated>2016-11-30T04:17:03.639Z</updated>
+  <updated>2016-12-02T09:14:14.805Z</updated>
   <id>http://www.wowx.info/</id>
   
   <author>
@@ -14,6 +14,68 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>leetcode_bestTimeBuyandSellStockI</title>
+    <link href="http://www.wowx.info/posts//posts/20161202170711/"/>
+    <id>http://www.wowx.info/posts//posts/20161202170711/</id>
+    <published>2016-12-02T09:07:11.000Z</published>
+    <updated>2016-12-02T09:14:14.805Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Best-Time-to-Buy-and-Sell-Stock"><a href="#Best-Time-to-Buy-and-Sell-Stock" class="headerlink" title="Best Time to Buy and Sell Stock"></a>Best Time to Buy and Sell Stock</h2><blockquote>
+<p>Say you have an array for which the <em>i</em>th element is the price of a given stock on day <em>i</em>.</p>
+<p>If you were only permitted to complete at most one transaction (ie, buy one and sell one share of the stock), design an algorithm to find the maximum profit.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt; Input: [7, 1, 5, 3, 6, 4]</div><div class="line">&gt; Output: 5</div><div class="line">&gt;</div><div class="line">&gt; max. difference = 6-1 = 5 (not 7-1 = 6, as selling price needs to be larger than buying price)</div><div class="line">&gt;</div></pre></td></tr></table></figure>
+</blockquote>
+<p>&gt;</p>
+<blockquote>
+<p><strong>Example 2:</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt; Input: [<span class="number">7</span>, <span class="number">6</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">1</span>]</div><div class="line">&gt; Output: <span class="number">0</span></div><div class="line">&gt;</div><div class="line">&gt; In <span class="keyword">this</span> <span class="keyword">case</span>, no transaction is done, i.e. max profit = <span class="number">0.</span></div><div class="line">&gt;</div></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h3><p>假设有一个数组，它的第i个元素表示某只股票在第i天的股价，设计一个算法找出最大收益，要求最多能进行一次买卖操作。</p>
+<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>采用冬天规划的方法来解此题,动态规划最重要的两步是状态定义和状态转移方程的定义</p>
+<h4 id="状态定义"><a href="#状态定义" class="headerlink" title="状态定义"></a>状态定义</h4><p>在任意时间点，只能处于两种状态：股票已经买入，股票已经卖出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">buy[i]:第i天处于已经买入股票的状态时最大资金</div><div class="line">sell[i]:第i天处于已经卖出股票的状态时最大资金</div></pre></td></tr></table></figure>
+<h4 id="状态转移方程的定义"><a href="#状态转移方程的定义" class="headerlink" title="状态转移方程的定义"></a>状态转移方程的定义</h4><ol>
+<li><p>buy[i]— 第i天已经处于买入股票状态</p>
+<p>因为只能买卖一次，所以状态转移只能是</p>
+<ol>
+<li><p>第i-1天已经处于买入股票状态，第i天不买卖股票，维持在买入状态:</p>
+<p><code>buy[i-1]-&gt;buy[i]</code></p>
+</li>
+</ol>
+</li>
+<li><p>sell[i]—第i天已经处于卖出股票的状态</p>
+<p>​</p>
+<ol>
+<li><p>第i-1天已经处于卖出股票状态，第i天不买卖，维持在卖出状态:</p>
+<p><code>sell[i-1]-&gt;sell[i]</code></p>
+</li>
+<li><p>第i-1天处于买入股票的状态，第i天将持有的股票卖出</p>
+<p><code>buy[i-1]-&gt;sell[i]</code></p>
+</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sell[i]=max(buy[i<span class="number">-1</span>]+prices[i], sell[i<span class="number">-1</span>]);</div><div class="line">buy[i]=max(-prices[i], buy[i<span class="number">-1</span>]);</div></pre></td></tr></table></figure>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">class Solution &#123;</div><div class="line">  public:</div><div class="line">  	int maxProfit(vector&lt;int&gt;&amp; prices) &#123;</div><div class="line">		int buy(INT_MIN), sell(0);</div><div class="line">      	for(int price: prices)</div><div class="line">          &#123;</div><div class="line">            sell = max(buy + price, sell);</div><div class="line">          	buy = max(-price, buy);</div><div class="line">          &#125;</div><div class="line">      	return sell;</div><div class="line">  	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Best-Time-to-Buy-and-Sell-Stock&quot;&gt;&lt;a href=&quot;#Best-Time-to-Buy-and-Sell-Stock&quot; class=&quot;headerlink&quot; title=&quot;Best Time to Buy and Sell Stoc
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="http://www.wowx.info/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="array" scheme="http://www.wowx.info/tags/array/"/>
+    
+      <category term="dp" scheme="http://www.wowx.info/tags/dp/"/>
+    
+  </entry>
   
   <entry>
     <title>二叉树、二叉查找树、2-3树及红黑树</title>
@@ -1232,10 +1294,10 @@ In [4]: pickle.load(open(&apos;test.pkl&apos;,&apos;rb&apos;)) Out[4]: [1, None,
   
   <entry>
     <title>几种常用激活函数介绍</title>
-    <link href="http://www.wowx.info/posts/undefined/"/>
-    <id>http://www.wowx.info/posts/undefined/</id>
+    <link href="http://www.wowx.info/posts/20160624/"/>
+    <id>http://www.wowx.info/posts/20160624/</id>
     <published>2016-06-23T16:34:28.000Z</published>
-    <updated>2016-11-25T17:50:24.604Z</updated>
+    <updated>2016-12-02T08:18:05.309Z</updated>
     
     <content type="html"><![CDATA[<p>由于线性模型的表达能力不够（甚至不能表达异或），需要使用激活函数(activation function)引入非线性因素，常用的激活函数有sigmoid函数、tanh函数、ReLu函数及其改进函数和Maxout等。<br><a id="more"></a></p>
 <h3 id="sigmod激活函数"><a href="#sigmod激活函数" class="headerlink" title="sigmod激活函数"></a>sigmod激活函数</h3><p>$$sigmoid(x)=\frac{1}{1+e^{-x}}$$</p>
@@ -1297,10 +1359,10 @@ In [4]: pickle.load(open(&apos;test.pkl&apos;,&apos;rb&apos;)) Out[4]: [1, None,
   
   <entry>
     <title>大数据基础设施综述</title>
-    <link href="http://www.wowx.info/posts/undefined/"/>
-    <id>http://www.wowx.info/posts/undefined/</id>
+    <link href="http://www.wowx.info/posts/20160618/"/>
+    <id>http://www.wowx.info/posts/20160618/</id>
     <published>2016-06-17T16:43:17.000Z</published>
-    <updated>2016-11-25T17:51:32.892Z</updated>
+    <updated>2016-12-02T08:19:43.389Z</updated>
     
     <content type="html"><![CDATA[<p>早在1980年，未来学家托夫勒就在《第三次浪潮》之中就提出大数据的概念并赞誉 其为“第三次浪潮的华彩乐章”，然而，这在当时并没有引起人们的特别注意，但是随着社交网络、物联网、云计算的兴起，我们身边的数据规模越来越大，2014年，全世界的用户每天在Twitter上发布超过6.6亿条微博，在facebook发布1000万张以上的照片……根据IDC报告，2013年全球数据量为4.4ZB，2016年将达到12ZB而到了2020年，这个数字将达到40ZB，如果将这些数据刻到光盘上并摞成一堆的话，其高度将达到地球和月球之间距离的200倍。面对如此海量的，“大数据”时代正式到来。<br><a id="more"></a></p>
 <p>什么是“大数据”，迄今没有公认的定义，IBM公司的观点认为，大数据应该满足规模性(Volume)、多样性(Variety)、实时性<br>(Velocity)，即”3V”要素[refs]；以IDC为代表的业界则认为大数据除了具备”3V”要素之外还需要具备第四“V”:价值性(Value);而NetApp公司则认为“大数据”应该包括分析(Analytic)带宽(Bandwidth)和内容(Content)即“ABC”特点[refs]。不管采用哪种定义，大数据本质都是工业传感器、互联网和物联网等产生的结构化、半结构化或者非结构化的数据的总和。人们通过对大数据的挖掘、处理以获得其中隐含的信息和知识，从而实现商业价值更好地为人们服务。而要对大数据进行挖掘、处理，就离不开大数据基础设施。本文对常用大数据处理系统做了分类，并对各种基础设施进行了简单的介绍，然后提出了现阶段大数据基础设施存在的问题，最后进行了总结。</p>
@@ -1874,52 +1936,6 @@ logging.warning(&apos;is when this event was logged.&apos;)
     
     
       <category term="大数据处理工具" scheme="http://www.wowx.info/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>HIVE的安装</title>
-    <link href="http://www.wowx.info/posts/undefined/"/>
-    <id>http://www.wowx.info/posts/undefined/</id>
-    <published>2016-06-15T04:50:59.000Z</published>
-    <updated>2016-11-25T17:22:09.731Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="http://img5.imgtn.bdimg.com/it/u=551134512,989074037&amp;fm=21&amp;gp=0.jpg" alt=""><br><a id="more"></a><br>本节介绍如何安装HIVE。</p>
-<ol>
-<li><p>下载hive</p>
-<pre><code>su hadoop
-cd /usr/local/hadoop-2.7.0
-wget http://labfile.oss.aliyuncs.com/apache-hive-1.1.0-bin.tar.gz
-</code></pre><p>解压：</p>
-<pre><code>tar zxvf apache-hive-1.1.0-bin.tar.gz
-</code></pre><p>重命名：</p>
-<pre><code>mv apache-hive-1.1.0-bin hive
-</code></pre></li>
-<li><p>配置环境变量</p>
-<pre><code>sudo vim /etc/profile
-# Hive environment
-export HIVE_HOME=/usr/local/hadoop/hive
-export PATH=$HIVE_HOME/bin:$HIVE_HOME/conf:$PATH
-</code></pre></li>
-</ol>
-<p>内嵌模式</p>
-<p>同时我们还要修改 Hive 目录下 /conf/hive-env.sh 文件（请根据自己的实际路径修改），该文件默认也不存在，同样是拷贝它的模版来修改：<br>      cd $HIVE_HOME/conf<br>      cp hive-default.xml.template hive-site.xml<br>      vim  $HIVE_HOME/conf/hive-env.sh </p>
-<h1 id="本地模式"><a href="#本地模式" class="headerlink" title="本地模式"></a>本地模式</h1><ol>
-<li><a href="http://www.cnblogs.com/xiaoluo501395377/archive/2013/04/07/3003278.html" target="_blank" rel="external">mysql安装</a></li>
-<li><a href="http://hatech.blog.51cto.com/8360868/1427748" target="_blank" rel="external">mysql配置</a></li>
-</ol>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;http://img5.imgtn.bdimg.com/it/u=551134512,989074037&amp;amp;fm=21&amp;amp;gp=0.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;
-    
-    </summary>
-    
-      <category term="工具" scheme="http://www.wowx.info/categories/%E5%B7%A5%E5%85%B7/"/>
-    
-    
-      <category term="大数据工具" scheme="http://www.wowx.info/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%B7%A5%E5%85%B7/"/>
     
   </entry>
   
