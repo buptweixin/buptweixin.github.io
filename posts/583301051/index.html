@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Title -->
+    
+    <title>
+        CS231n assignment1 -- Multiclass Support Vector Machine exercise | 野原圆长的Blog
+    </title>
+    
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/wx.png">
+    <link rel="icon" sizes="192x192" href="/img/wx.png">
+    <link rel="apple-touch-icon" href="/img/wx.png">
+    
+    <!-- Meta & INfo -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="Xin Wei">
+    <meta name="description" content="null">
+    <meta name="keywords" content="Blog deep_learging">
+    
+    <!--iOS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+    
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="野原圆长的Blog">
+    
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://www.wowx.info">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="CS231n assignment1 -- Multiclass Support Vector Machine exercise | 野原圆长的Blog">
+    <meta property="og:description" content="null">
+    
+     <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+        
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+    
+    <!-- Import CSS -->
+    <link rel="stylesheet" href="/css/material.min.css">
+    <link rel="stylesheet" href="/css/style.min.css">
+    <!-- Config CSS -->
+
+
+<!-- Other Styles -->
+<style>
+	body, html{
+		font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+	}
+	
+    a{
+        color: #00838F
+    }
+    
+    .mdl-card__media,
+    #search-label,
+    #search-form-label:after,
+    #scheme-Paradox .hot_tags-count,
+    #scheme-Paradox .sidebar_archives-count,
+    #scheme-Paradox .sidebar-colored .sidebar-header,
+    #scheme-Paradox .sidebar-colored .sidebar-badge{
+        background-color: #0097A7 !important
+    }
+    
+	/* Sidebar User Drop Down Menu Text Color */
+	#scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+    #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus{
+        color: #0097A7 !important
+    }
+    
+    #post_entry-right-info,
+    .sidebar-colored .sidebar-nav li:hover > a,
+    .sidebar-colored .sidebar-nav li:hover > a i,
+    .sidebar-colored .sidebar-nav li > a:hover,
+    .sidebar-colored .sidebar-nav li > a:hover i,
+    .sidebar-colored .sidebar-nav li > a:focus i,
+    .sidebar-colored .sidebar-nav > .open > a,
+    .sidebar-colored .sidebar-nav > .open > a:hover,
+    .sidebar-colored .sidebar-nav > .open > a:focus,
+    #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a{
+        color: #0097A7 !important
+    }
+    
+    .toTop{
+        background: #757575 !important
+    }
+		
+	.material-layout .material-post>.material-nav,
+	.material-layout .material-index>.material-nav,
+	.material-nav a{
+		color: #757575;
+	}
+		
+	#scheme-Paradox .MD-burger-layer {
+		background-color: #757575;
+	}
+
+	#scheme-Paradox #post-toc-trigger-btn{
+		color: #757575;
+	}
+	
+	.post-toc a:hover{
+		color: #00838F;
+		text-decoration: underline;
+	}
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+        body{
+            background-color: #F5F5F5
+        }
+		
+		/* blog_info bottom background */
+        #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+            background-color: #fff;
+        }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+        .fade {
+            transition: all 800ms linear;
+            -webkit-transform: translate3d(0,0,0);
+            -moz-transform: translate3d(0,0,0);
+            -ms-transform: translate3d(0,0,0);
+            -o-transform: translate3d(0,0,0);
+            transform: translate3d(0,0,0);
+            opacity: 1;
+        }
+
+        .fade.out{
+            opacity: 0;
+        }
+    </style>
+
+	<script src="/js/jquery.min.js"></script>
+	
+	<link rel="stylesheet" href="/css/highlight/solarized-dark.css">
+	
+	<!-- UC Browser Compatible-->
+	<script>
+		var agent = navigator.userAgent.toLowerCase();
+		if(agent.indexOf('ucbrowser')>0) {
+			document.write('<link rel="stylesheet" href="/css/uc.css">');
+		   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+		}
+	</script>
+    
+    <!-- Custom Head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+</head>
+	
+	
+
+    <body id="scheme-Paradox">
+
+		
+        <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+				
+			
+			
+            <!-- Main Container -->
+            <main class="material-layout__content" id="main">
+				
+                <!-- Top Anchor -->
+                <div id="top"></div>
+				
+				
+                <!-- Hamburger Button -->
+                <button class="MD-burger-icon sidebar-toggle">
+                    <span class="MD-burger-layer"></span>
+                </button>
+				
+				
+                
+	<!-- Back Button -->
+<!--
+	<div class="material-back" id="backhome-div" tabindex="0">
+		<a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" href="#" onclick="window.history.back();return false;" target="_self" role="button" data-upgraded=",MaterialButton,MaterialRipple">
+			<i class="material-icons" role="presentation">arrow_back</i>
+			<span class="mdl-button__ripple-container">
+				<span class="mdl-ripple"></span>
+			</span>
+		</a>
+	</div>			
+-->
+	<!-- Left aligned menu below button -->
+	<button id="post-toc-trigger-btn"
+			class="mdl-button mdl-js-button mdl-button--icon">
+	  <i class="material-icons">format_list_numbered</i>
+	</button>
+
+	<ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
+		for="post-toc-trigger-btn">
+			
+			<ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#CIFAR-10-Data-Loading-and-Preprocessing"><span class="post-toc-number">1.</span> <span class="post-toc-text">CIFAR-10 Data Loading and Preprocessing</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#SVM-Classifier"><span class="post-toc-number">2.</span> <span class="post-toc-text">SVM Classifier</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Inline-Question-1"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">Inline Question 1:</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Stochastic-Gradient-Descent"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">Stochastic Gradient Descent</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Inline-question-2"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">Inline question 2:</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#linear-svm-py"><span class="post-toc-number">3.</span> <span class="post-toc-text">linear_svm.py</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#svm-loss-naive"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">svm_loss_naive</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#svm-loss-vectorized"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">svm_loss_vectorized</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#linear-classifier-py"><span class="post-toc-number">4.</span> <span class="post-toc-text">linear_classifier.py</span></a></li></ol>
+		
+<!--			<li class="mdl-menu__item">Some Action</li>-->
+	</ul>
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+		
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+	<!-- Paradox Post Header -->
+	
+		
+			<!-- Random Thumbnail -->
+			<div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+				<script>
+    
+    var randomNum;
+    randomNum = Math.floor(Math.random() * 5 + 1);
+    
+    $(".post_thumbnail-random").css('background-image', 'url(' + '/img/random/' + randomNum + '.png' + ')');
+    
+</script>
+
+		
+	
+        <p class="article-headline-p">
+            CS231n assignment1 -- Multiclass Support Vector Machine exercise
+        </p>
+    </div>
+
+	
+
+				
+				
+					<!-- Paradox Post Info -->
+					<div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+    
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>Xin Wei</strong>
+        <span>9月 24, 2016</span>
+    </div>
+    
+    <div class="section-spacer"></div>
+	
+    <!-- Favorite -->
+<!--
+    <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+        <i class="material-icons" role="presentation">favorite</i>
+        <span class="visuallyhidden">favorites</span>
+    </button>
+-->
+    
+    <!-- Tags (bookmark) -->
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/机器学习/">机器学习</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/深度学习/">深度学习</a>
+    </ul>
+    
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+    
+    <!-- Leancloud Views -->
+    <a class="post_share-link" href="#">
+        <li class="mdl-menu__item">
+            <span id="/posts/583301051/" class="leancloud-views_num" data-flag-title="CS231n assignment1 -- Multiclass Support Vector Machine exercise">
+     &nbsp;浏览量
+</span>
+        </li>
+    </a>
+    
+    
+    
+    
+    <!-- Share Twitter -->
+    <a class="post_share-link" href="https://twitter.com/intent/tweet?text=CS231n assignment1 -- Multiclass Support Vector Machine exercise&url=http://www.wowx.info//posts/583301051/index.html&via=Xin Wei" target="_blank">
+        <li class="mdl-menu__item">
+            分享到 Twitter
+        </li>
+    </a>
+    
+    <!-- Share Google+ -->
+    <a class="post_share-link" href="https://plus.google.com/share?url=http://www.wowx.info//posts/583301051/index.html" target="_blank">
+        <li class="mdl-menu__item">
+            分享到 Google+
+        </li>
+    </a>
+    
+    <!-- Share Weibo -->
+    <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=CS231n assignment1 -- Multiclass Support Vector Machine exercise&url=http://www.wowx.info//posts/583301051/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <li class="mdl-menu__item">
+            分享到微博
+        </li>
+    </a>
+</ul>
+</div>
+				
+
+                <!-- Post Content -->
+                <div id="post-content" class="markdown-Material mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+	
+		<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-9-24/33138918.jpg" width="720px"><br><a id="more"></a><br>(<code>linear_svm.py</code>和<code>linear_classifier.py</code>见文末)</p>
+<p><em>Complete and hand in this completed worksheet (including its outputs and any supporting code outside of the worksheet) with your assignment submission. For more details see the <a href="http://vision.stanford.edu/teaching/cs231n/assignments.html" target="_blank" rel="external">assignments page</a> on the course website.</em></p>
+<p>In this exercise you will:</p>
+<ul>
+<li>implement a fully-vectorized <strong>loss function</strong> for the SVM</li>
+<li>implement the fully-vectorized expression for its <strong>analytic gradient</strong></li>
+<li><strong>check your implementation</strong> using numerical gradient</li>
+<li>use a validation set to <strong>tune the learning rate and regularization</strong> strength</li>
+<li><strong>optimize</strong> the loss function with <strong>SGD</strong></li>
+<li><strong>visualize</strong> the final learned weights</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Run some setup code for this notebook.</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> random</div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"><span class="keyword">from</span> cs231n.data_utils <span class="keyword">import</span> load_CIFAR10</div><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div><div class="line"></div><div class="line"><span class="comment"># This is a bit of magic to make matplotlib figures appear inline in the</span></div><div class="line"><span class="comment"># notebook rather than in a new window.</span></div><div class="line">%matplotlib inline</div><div class="line">plt.rcParams[<span class="string">'figure.figsize'</span>] = (<span class="number">10.0</span>, <span class="number">8.0</span>) <span class="comment"># set default size of plots</span></div><div class="line">plt.rcParams[<span class="string">'image.interpolation'</span>] = <span class="string">'nearest'</span></div><div class="line">plt.rcParams[<span class="string">'image.cmap'</span>] = <span class="string">'gray'</span></div><div class="line"></div><div class="line"><span class="comment"># Some more magic so that the notebook will reload external python modules;</span></div><div class="line"><span class="comment"># see http://stackoverflow.com/questions/1907993/autoreload-of-modules-in-ipython</span></div><div class="line">%load_ext autoreload</div><div class="line">%autoreload <span class="number">2</span></div></pre></td></tr></table></figure>
+<pre><code>The autoreload extension is already loaded. To reload it, use:
+  %reload_ext autoreload
+</code></pre><h2 id="CIFAR-10-Data-Loading-and-Preprocessing"><a href="#CIFAR-10-Data-Loading-and-Preprocessing" class="headerlink" title="CIFAR-10 Data Loading and Preprocessing"></a>CIFAR-10 Data Loading and Preprocessing</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Load the raw CIFAR-10 data.</span></div><div class="line">cifar10_dir = <span class="string">'cs231n/datasets/cifar-10-batches-py'</span></div><div class="line">X_train, y_train, X_test, y_test = load_CIFAR10(cifar10_dir)</div><div class="line"></div><div class="line"><span class="comment"># As a sanity check, we print out the size of the training and test data.</span></div><div class="line"><span class="keyword">print</span> <span class="string">'Training data shape: '</span>, X_train.shape</div><div class="line"><span class="keyword">print</span> <span class="string">'Training labels shape: '</span>, y_train.shape</div><div class="line"><span class="keyword">print</span> <span class="string">'Test data shape: '</span>, X_test.shape</div><div class="line"><span class="keyword">print</span> <span class="string">'Test labels shape: '</span>, y_test.shape</div></pre></td></tr></table></figure>
+<pre><code>Training data shape:  (50000, 32, 32, 3)
+Training labels shape:  (50000,)
+Test data shape:  (10000, 32, 32, 3)
+Test labels shape:  (10000,)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Visualize some examples from the dataset.</span></div><div class="line"><span class="comment"># We show a few examples of training images from each class.</span></div><div class="line">classes = [<span class="string">'plane'</span>, <span class="string">'car'</span>, <span class="string">'bird'</span>, <span class="string">'cat'</span>, <span class="string">'deer'</span>, <span class="string">'dog'</span>, <span class="string">'frog'</span>, <span class="string">'horse'</span>, <span class="string">'ship'</span>, <span class="string">'truck'</span>]</div><div class="line">num_classes = len(classes)</div><div class="line">samples_per_class = <span class="number">7</span></div><div class="line"><span class="keyword">for</span> y, cls <span class="keyword">in</span> enumerate(classes):</div><div class="line">    idxs = np.flatnonzero(y_train == y)</div><div class="line">    idxs = np.random.choice(idxs, samples_per_class, replace=<span class="keyword">False</span>)</div><div class="line">    <span class="keyword">for</span> i, idx <span class="keyword">in</span> enumerate(idxs):</div><div class="line">        plt_idx = i * num_classes + y + <span class="number">1</span></div><div class="line">        plt.subplot(samples_per_class, num_classes, plt_idx)</div><div class="line">        plt.imshow(X_train[idx].astype(<span class="string">'uint8'</span>))</div><div class="line">        plt.axis(<span class="string">'off'</span>)</div><div class="line">        <span class="keyword">if</span> i == <span class="number">0</span>:</div><div class="line">            plt.title(cls)</div><div class="line">plt.show()</div></pre></td></tr></table></figure>
+<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-9-24/62410481.jpg" alt="jpg"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Split the data into train, val, and test sets. In addition we will</span></div><div class="line"><span class="comment"># create a small development set as a subset of the training data;</span></div><div class="line"><span class="comment"># we can use this for development so our code runs faster.</span></div><div class="line">num_training = <span class="number">48000</span></div><div class="line">num_validation = <span class="number">1000</span></div><div class="line">num_test = <span class="number">1000</span></div><div class="line">num_dev = <span class="number">500</span></div><div class="line"></div><div class="line"><span class="comment"># Our validation set will be num_validation points from the original</span></div><div class="line"><span class="comment"># training set.</span></div><div class="line">mask = range(num_training, num_training + num_validation)</div><div class="line">print(X_train.shape)</div><div class="line">X_val = X_train[mask]</div><div class="line">y_val = y_train[mask]</div><div class="line"></div><div class="line"><span class="comment"># Our training set will be the first num_train points from the original</span></div><div class="line"><span class="comment"># training set.</span></div><div class="line">mask = range(num_training)</div><div class="line">X_train = X_train[mask]</div><div class="line">y_train = y_train[mask]</div><div class="line"></div><div class="line"><span class="comment"># We will also make a development set, which is a small subset of</span></div><div class="line"><span class="comment"># the training set.</span></div><div class="line">mask = np.random.choice(num_training, num_dev, replace=<span class="keyword">False</span>)</div><div class="line">X_dev = X_train[mask]</div><div class="line">y_dev = y_train[mask]</div><div class="line"></div><div class="line"><span class="comment"># We use the first num_test points of the original test set as our</span></div><div class="line"><span class="comment"># test set.</span></div><div class="line">mask = range(num_test)</div><div class="line">X_test = X_test[mask]</div><div class="line">y_test = y_test[mask]</div><div class="line"></div><div class="line"><span class="keyword">print</span> <span class="string">'Train data shape: '</span>, X_train.shape</div><div class="line"><span class="keyword">print</span> <span class="string">'Train labels shape: '</span>, y_train.shape</div><div class="line"><span class="keyword">print</span> <span class="string">'Validation data shape: '</span>, X_val.shape</div><div class="line"><span class="keyword">print</span> <span class="string">'Validation labels shape: '</span>, y_val.shape</div><div class="line"><span class="keyword">print</span> <span class="string">'Test data shape: '</span>, X_test.shape</div><div class="line"><span class="keyword">print</span> <span class="string">'Test labels shape: '</span>, y_test.shape</div></pre></td></tr></table></figure>
+<pre><code>(50000, 32, 32, 3)
+Train data shape:  (48000, 32, 32, 3)
+Train labels shape:  (48000,)
+Validation data shape:  (1000, 32, 32, 3)
+Validation labels shape:  (1000,)
+Test data shape:  (1000, 32, 32, 3)
+Test labels shape:  (1000,)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Preprocessing: reshape the image data into rows</span></div><div class="line">X_train = np.reshape(X_train, (X_train.shape[<span class="number">0</span>], <span class="number">-1</span>))</div><div class="line">X_val = np.reshape(X_val, (X_val.shape[<span class="number">0</span>], <span class="number">-1</span>))</div><div class="line">X_test = np.reshape(X_test, (X_test.shape[<span class="number">0</span>], <span class="number">-1</span>))</div><div class="line">X_dev = np.reshape(X_dev, (X_dev.shape[<span class="number">0</span>], <span class="number">-1</span>))</div><div class="line"></div><div class="line"><span class="comment"># As a sanity check, print out the shapes of the data</span></div><div class="line"><span class="keyword">print</span> <span class="string">'Training data shape: '</span>, X_train.shape</div><div class="line"><span class="keyword">print</span> <span class="string">'Validation data shape: '</span>, X_val.shape</div><div class="line"><span class="keyword">print</span> <span class="string">'Test data shape: '</span>, X_test.shape</div><div class="line"><span class="keyword">print</span> <span class="string">'dev data shape: '</span>, X_dev.shape</div></pre></td></tr></table></figure>
+<pre><code>Training data shape:  (48000, 3072)
+Validation data shape:  (1000, 3072)
+Test data shape:  (1000, 3072)
+dev data shape:  (500, 3072)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Preprocessing: subtract the mean image</span></div><div class="line"><span class="comment"># first: compute the image mean based on the training data</span></div><div class="line">mean_image = np.mean(X_train, axis=<span class="number">0</span>)</div><div class="line"><span class="keyword">print</span> mean_image[:<span class="number">10</span>] <span class="comment"># print a few of the elements</span></div><div class="line">plt.figure(figsize=(<span class="number">4</span>,<span class="number">4</span>))</div><div class="line">plt.imshow(mean_image.reshape((<span class="number">32</span>,<span class="number">32</span>,<span class="number">3</span>)).astype(<span class="string">'uint8'</span>)) <span class="comment"># visualize the mean image</span></div><div class="line">plt.show()</div></pre></td></tr></table></figure>
+<pre><code>[ 130.68429167  136.0083125   132.491625    130.09729167  135.374125
+  131.77220833  131.02608333  136.192375    132.50979167  131.55591667]
+</code></pre><p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-9-24/69418489.jpg" alt="jpg"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># second: subtract the mean image from train and test data</span></div><div class="line">X_train -= mean_image</div><div class="line">X_val -= mean_image</div><div class="line">X_test -= mean_image</div><div class="line">X_dev -= mean_image</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># third: append the bias dimension of ones (i.e. bias trick) so that our SVM</span></div><div class="line"><span class="comment"># only has to worry about optimizing a single weight matrix W.</span></div><div class="line">X_train = np.hstack([X_train, np.ones((X_train.shape[<span class="number">0</span>], <span class="number">1</span>))])</div><div class="line">X_val = np.hstack([X_val, np.ones((X_val.shape[<span class="number">0</span>], <span class="number">1</span>))])</div><div class="line">X_test = np.hstack([X_test, np.ones((X_test.shape[<span class="number">0</span>], <span class="number">1</span>))])</div><div class="line">X_dev = np.hstack([X_dev, np.ones((X_dev.shape[<span class="number">0</span>], <span class="number">1</span>))])</div><div class="line"></div><div class="line"><span class="keyword">print</span> X_train.shape, X_val.shape, X_test.shape, X_dev.shape</div></pre></td></tr></table></figure>
+<pre><code>(48000, 3073) (1000, 3073) (1000, 3073) (500, 3073)
+</code></pre><h2 id="SVM-Classifier"><a href="#SVM-Classifier" class="headerlink" title="SVM Classifier"></a>SVM Classifier</h2><p>Your code for this section will all be written inside <strong>cs231n/classifiers/linear_svm.py</strong>. </p>
+<p>As you can see, we have prefilled the function <code>compute_loss_naive</code> which uses for loops to evaluate the multiclass SVM loss function. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Evaluate the naive implementation of the loss we provided for you:</span></div><div class="line"><span class="keyword">from</span> cs231n.classifiers.linear_svm <span class="keyword">import</span> svm_loss_naive</div><div class="line"><span class="keyword">import</span> time</div><div class="line"></div><div class="line"><span class="comment"># generate a random SVM weight matrix of small numbers</span></div><div class="line">W = np.random.randn(<span class="number">3073</span>, <span class="number">10</span>) * <span class="number">0.0001</span> </div><div class="line"></div><div class="line">loss, grad = svm_loss_naive(W, X_dev, y_dev, <span class="number">0.00001</span>)</div><div class="line"><span class="keyword">print</span> <span class="string">'loss: %f'</span> % (loss, )</div></pre></td></tr></table></figure>
+<pre><code>loss: 9.238089
+</code></pre><p>The <code>grad</code> returned from the function above is right now all zero. Derive and implement the gradient for the SVM cost function and implement it inline inside the function <code>svm_loss_naive</code>. You will find it helpful to interleave your new code inside the existing function.</p>
+<p>To check that you have correctly implemented the gradient correctly, you can numerically estimate the gradient of the loss function and compare the numeric estimate to the gradient that you computed. We have provided code that does this for you:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Once you've implemented the gradient, recompute it with the code below</span></div><div class="line"><span class="comment"># and gradient check it with the function we provided for you</span></div><div class="line"></div><div class="line"><span class="comment"># Compute the loss and its gradient at W.</span></div><div class="line">loss, grad = svm_loss_naive(W, X_dev, y_dev, <span class="number">0.0</span>)</div><div class="line"></div><div class="line"><span class="comment"># Numerically compute the gradient along several randomly chosen dimensions, and</span></div><div class="line"><span class="comment"># compare them with your analytically computed gradient. The numbers should match</span></div><div class="line"><span class="comment"># almost exactly along all dimensions.</span></div><div class="line"><span class="keyword">from</span> cs231n.gradient_check <span class="keyword">import</span> grad_check_sparse</div><div class="line">f = <span class="keyword">lambda</span> w: svm_loss_naive(w, X_dev, y_dev, <span class="number">0.0</span>)[<span class="number">0</span>]</div><div class="line">grad_numerical = grad_check_sparse(f, W, grad)</div><div class="line"></div><div class="line"><span class="comment"># do the gradient check once again with regularization turned on</span></div><div class="line"><span class="comment"># you didn't forget the regularization gradient did you?</span></div><div class="line">loss, grad = svm_loss_naive(W, X_dev, y_dev, <span class="number">1e2</span>)</div><div class="line">f = <span class="keyword">lambda</span> w: svm_loss_naive(w, X_dev, y_dev, <span class="number">1e2</span>)[<span class="number">0</span>]</div><div class="line">grad_numerical = grad_check_sparse(f, W, grad)</div></pre></td></tr></table></figure>
+<pre><code>numerical: -42.284552 analytic: -42.284552, relative error: 1.252743e-11
+numerical: 6.663393 analytic: 6.633787, relative error: 2.226469e-03
+numerical: 9.055477 analytic: 9.055477, relative error: 4.214815e-11
+numerical: 4.588431 analytic: 4.682332, relative error: 1.012878e-02
+numerical: -35.470923 analytic: -35.586717, relative error: 1.629576e-03
+numerical: 32.062013 analytic: 32.009853, relative error: 8.140804e-04
+numerical: 1.995498 analytic: 1.995498, relative error: 3.098160e-10
+numerical: 5.303144 analytic: 5.284951, relative error: 1.718214e-03
+numerical: 29.937604 analytic: 29.895217, relative error: 7.084226e-04
+numerical: 8.352228 analytic: 8.252529, relative error: 6.004261e-03
+numerical: -0.608342 analytic: -0.608342, relative error: 5.322510e-10
+numerical: 8.731935 analytic: 8.731935, relative error: 2.857246e-11
+numerical: -49.861110 analytic: -49.952978, relative error: 9.203832e-04
+numerical: 14.137341 analytic: 14.137341, relative error: 1.591797e-12
+numerical: -11.234005 analytic: -11.320491, relative error: 3.834518e-03
+numerical: 5.436375 analytic: 5.436375, relative error: 3.739854e-11
+numerical: 6.393669 analytic: 6.393669, relative error: 3.920746e-12
+numerical: 2.897333 analytic: 2.897333, relative error: 1.499330e-10
+numerical: 14.298571 analytic: 14.298571, relative error: 5.740380e-12
+numerical: 2.318213 analytic: 2.318213, relative error: 1.423270e-10
+</code></pre><h3 id="Inline-Question-1"><a href="#Inline-Question-1" class="headerlink" title="Inline Question 1:"></a>Inline Question 1:</h3><p>It is possible that once in a while a dimension in the gradcheck will not match exactly. What could such a discrepancy be caused by? Is it a reason for concern? What is a simple example in one dimension where a gradient check could fail? <em>Hint: the SVM loss function is not strictly speaking differentiable</em></p>
+<p><strong>Your Answer:</strong> <em>fill this in.</em></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Next implement the function svm_loss_vectorized; for now only compute the loss;</span></div><div class="line"><span class="comment"># we will implement the gradient in a moment.</span></div><div class="line">tic = time.time()</div><div class="line">loss_naive, grad_naive = svm_loss_naive(W, X_dev, y_dev, <span class="number">0.00001</span>)</div><div class="line">toc = time.time()</div><div class="line"><span class="keyword">print</span> <span class="string">'Naive loss: %e computed in %fs'</span> % (loss_naive, toc - tic)</div><div class="line"></div><div class="line"><span class="keyword">from</span> cs231n.classifiers.linear_svm <span class="keyword">import</span> svm_loss_vectorized</div><div class="line">tic = time.time()</div><div class="line">loss_vectorized, _ = svm_loss_vectorized(W, X_dev, y_dev, <span class="number">0.00001</span>)</div><div class="line">toc = time.time()</div><div class="line"><span class="keyword">print</span> <span class="string">'Vectorized loss: %e computed in %fs'</span> % (loss_vectorized, toc - tic)</div><div class="line"></div><div class="line"><span class="comment"># The losses should match but your vectorized implementation should be much faster.</span></div><div class="line"><span class="keyword">print</span> <span class="string">'difference: %f'</span> % (loss_naive - loss_vectorized)</div></pre></td></tr></table></figure>
+<pre><code>Naive loss: 9.238089e+00 computed in 0.151197s
+Vectorized loss: 9.238089e+00 computed in 0.010412s
+difference: -0.000000
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Complete the implementation of svm_loss_vectorized, and compute the gradient</span></div><div class="line"><span class="comment"># of the loss function in a vectorized way.</span></div><div class="line"></div><div class="line"><span class="comment"># The naive implementation and the vectorized implementation should match, but</span></div><div class="line"><span class="comment"># the vectorized version should still be much faster.</span></div><div class="line">tic = time.time()</div><div class="line">_, grad_naive = svm_loss_naive(W, X_dev, y_dev, <span class="number">0.00001</span>)</div><div class="line">toc = time.time()</div><div class="line"><span class="keyword">print</span> <span class="string">'Naive loss and gradient: computed in %fs'</span> % (toc - tic)</div><div class="line"></div><div class="line">tic = time.time()</div><div class="line">_, grad_vectorized = svm_loss_vectorized(W, X_dev, y_dev, <span class="number">0.00001</span>)</div><div class="line">toc = time.time()</div><div class="line"><span class="keyword">print</span> <span class="string">'Vectorized loss and gradient: computed in %fs'</span> % (toc - tic)</div><div class="line"></div><div class="line"><span class="comment"># The loss is a single number, so it is easy to compare the values computed</span></div><div class="line"><span class="comment"># by the two implementations. The gradient on the other hand is a matrix, so</span></div><div class="line"><span class="comment"># we use the Frobenius norm to compare them.</span></div><div class="line">difference = np.linalg.norm(grad_naive - grad_vectorized, ord=<span class="string">'fro'</span>)</div><div class="line"><span class="keyword">print</span> <span class="string">'difference: %f'</span> % difference</div></pre></td></tr></table></figure>
+<pre><code>Naive loss and gradient: computed in 0.169627s
+Vectorized loss and gradient: computed in 0.006669s
+difference: 0.000000
+</code></pre><h3 id="Stochastic-Gradient-Descent"><a href="#Stochastic-Gradient-Descent" class="headerlink" title="Stochastic Gradient Descent"></a>Stochastic Gradient Descent</h3><p>We now have vectorized and efficient expressions for the loss, the gradient and our gradient matches the numerical gradient. We are therefore ready to do SGD to minimize the loss.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># In the file linear_classifier.py, implement SGD in the function</span></div><div class="line"><span class="comment"># LinearClassifier.train() and then run it with the code below.</span></div><div class="line"><span class="keyword">from</span> cs231n.classifiers <span class="keyword">import</span> LinearSVM</div><div class="line">svm = LinearSVM()</div><div class="line">tic = time.time()</div><div class="line">loss_hist = svm.train(X_train, y_train, learning_rate=<span class="number">1e-7</span>, reg=<span class="number">5e4</span>,</div><div class="line">                      num_iters=<span class="number">1500</span>, verbose=<span class="keyword">True</span>)</div><div class="line">toc = time.time()</div><div class="line"><span class="keyword">print</span> <span class="string">'That took %fs'</span> % (toc - tic)</div></pre></td></tr></table></figure>
+<pre><code>iteration 0 / 1500: loss 826.931548
+iteration 100 / 1500: loss 298.009871
+iteration 200 / 1500: loss 151.246289
+iteration 300 / 1500: loss 45.292200
+iteration 400 / 1500: loss 22.098365
+iteration 500 / 1500: loss 92.400622
+iteration 600 / 1500: loss 31.607161
+iteration 700 / 1500: loss 15.200437
+iteration 800 / 1500: loss 5.058404
+iteration 900 / 1500: loss 24.377453
+iteration 1000 / 1500: loss 20.425936
+iteration 1100 / 1500: loss 4.432021
+iteration 1200 / 1500: loss 24.301052
+iteration 1300 / 1500: loss 6.256650
+iteration 1400 / 1500: loss 7.022836
+That took 10.833756s
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># A useful debugging strategy is to plot the loss as a function of</span></div><div class="line"><span class="comment"># iteration number:</span></div><div class="line">plt.plot(loss_hist)</div><div class="line">plt.xlabel(<span class="string">'Iteration number'</span>)</div><div class="line">plt.ylabel(<span class="string">'Loss value'</span>)</div><div class="line">plt.show()</div></pre></td></tr></table></figure>
+<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-9-24/51531629.jpg" alt="jpg"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Write the LinearSVM.predict function and evaluate the performance on both the</span></div><div class="line"><span class="comment"># training and validation set</span></div><div class="line">y_train_pred = svm.predict(X_train)</div><div class="line"><span class="keyword">print</span> <span class="string">'training accuracy: %f'</span> % (np.mean(y_train == y_train_pred), )</div><div class="line">y_val_pred = svm.predict(X_val)</div><div class="line"><span class="keyword">print</span> <span class="string">'validation accuracy: %f'</span> % (np.mean(y_val == y_val_pred), )</div></pre></td></tr></table></figure>
+<pre><code>(3073, 10)
+(48000, 3073)
+training accuracy: 0.210563
+(3073, 10)
+(1000, 3073)
+validation accuracy: 0.232000
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Use the validation set to tune hyperparameters (regularization strength and</span></div><div class="line"><span class="comment"># learning rate). You should experiment with different ranges for the learning</span></div><div class="line"><span class="comment"># rates and regularization strengths; if you are careful you should be able to</span></div><div class="line"><span class="comment"># get a classification accuracy of about 0.4 on the validation set.</span></div><div class="line">learning_rates = [<span class="number">1e-7</span>, <span class="number">5e-5</span>]</div><div class="line">regularization_strengths = [<span class="number">5e4</span>, <span class="number">1e5</span>]</div><div class="line"></div><div class="line"><span class="comment"># results is dictionary mapping tuples of the form</span></div><div class="line"><span class="comment"># (learning_rate, regularization_strength) to tuples of the form</span></div><div class="line"><span class="comment"># (training_accuracy, validation_accuracy). The accuracy is simply the fraction</span></div><div class="line"><span class="comment"># of data points that are correctly classified.</span></div><div class="line">results = &#123;&#125;</div><div class="line">best_val = <span class="number">-1</span>   <span class="comment"># The highest validation accuracy that we have seen so far.</span></div><div class="line">best_svm = <span class="keyword">None</span> <span class="comment"># The LinearSVM object that achieved the highest validation rate.</span></div><div class="line"></div><div class="line"><span class="comment">################################################################################</span></div><div class="line"><span class="comment"># <span class="doctag">TODO:</span>                                                                        #</span></div><div class="line"><span class="comment"># Write code that chooses the best hyperparameters by tuning on the validation #</span></div><div class="line"><span class="comment"># set. For each combination of hyperparameters, train a linear SVM on the      #</span></div><div class="line"><span class="comment"># training set, compute its accuracy on the training and validation sets, and  #</span></div><div class="line"><span class="comment"># store these numbers in the results dictionary. In addition, store the best   #</span></div><div class="line"><span class="comment"># validation accuracy in best_val and the LinearSVM object that achieves this  #</span></div><div class="line"><span class="comment"># accuracy in best_svm.                                                        #</span></div><div class="line"><span class="comment">#                                                                              #</span></div><div class="line"><span class="comment"># Hint: You should use a small value for num_iters as you develop your         #</span></div><div class="line"><span class="comment"># validation code so that the SVMs don't take much time to train; once you are #</span></div><div class="line"><span class="comment"># confident that your validation code works, you should rerun the validation   #</span></div><div class="line"><span class="comment"># code with a larger value for num_iters.                                      #</span></div><div class="line"><span class="comment">################################################################################</span></div><div class="line">iters = <span class="number">1500</span> <span class="comment">#100</span></div><div class="line"><span class="keyword">for</span> lr <span class="keyword">in</span> learning_rates:</div><div class="line">    <span class="keyword">for</span> rs <span class="keyword">in</span> regularization_strengths:</div><div class="line">        svm = LinearSVM()</div><div class="line">        svm.train(X_train, y_train, learning_rate=lr, reg=rs, num_iters=iters)</div><div class="line"></div><div class="line">        y_train_pred = svm.predict(X_train)</div><div class="line">        acc_train = np.mean(y_train == y_train_pred)</div><div class="line">        y_val_pred = svm.predict(X_val)</div><div class="line">        acc_val = np.mean(y_val == y_val_pred)</div><div class="line"></div><div class="line">        results[(lr, rs)] = (acc_train, acc_val)</div><div class="line"></div><div class="line">        <span class="keyword">if</span> best_val &lt; acc_val:</div><div class="line">            best_val = acc_val</div><div class="line">            best_svm = svm</div><div class="line"><span class="comment">################################################################################</span></div><div class="line"><span class="comment">#                              END OF YOUR CODE                                #</span></div><div class="line"><span class="comment">################################################################################</span></div><div class="line">    </div><div class="line"><span class="comment"># Print out results.</span></div><div class="line"><span class="keyword">for</span> lr, reg <span class="keyword">in</span> sorted(results):</div><div class="line">    train_accuracy, val_accuracy = results[(lr, reg)]</div><div class="line">    <span class="keyword">print</span> <span class="string">'lr %e reg %e train accuracy: %f val accuracy: %f'</span> % (</div><div class="line">                lr, reg, train_accuracy, val_accuracy)</div><div class="line">    </div><div class="line"><span class="keyword">print</span> <span class="string">'best validation accuracy achieved during cross-validation: %f'</span> % best_val</div></pre></td></tr></table></figure>
+<pre><code>(3073, 10)
+(48000, 3073)
+(3073, 10)
+(1000, 3073)
+(3073, 10)
+(48000, 3073)
+(3073, 10)
+(1000, 3073)
+(3073, 10)
+(48000, 3073)
+(3073, 10)
+(1000, 3073)
+(3073, 10)
+(48000, 3073)
+(3073, 10)
+(1000, 3073)
+lr 1.000000e-07 reg 5.000000e+04 train accuracy: 0.174354 val accuracy: 0.187000
+lr 1.000000e-07 reg 1.000000e+05 train accuracy: 0.214229 val accuracy: 0.213000
+lr 5.000000e-05 reg 5.000000e+04 train accuracy: 0.078875 val accuracy: 0.067000
+lr 5.000000e-05 reg 1.000000e+05 train accuracy: 0.100062 val accuracy: 0.110000
+best validation accuracy achieved during cross-validation: 0.213000
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Visualize the cross-validation results</span></div><div class="line"><span class="keyword">import</span> math</div><div class="line">x_scatter = [math.log10(x[<span class="number">0</span>]) <span class="keyword">for</span> x <span class="keyword">in</span> results]</div><div class="line">y_scatter = [math.log10(x[<span class="number">1</span>]) <span class="keyword">for</span> x <span class="keyword">in</span> results]</div><div class="line"></div><div class="line"><span class="comment"># plot training accuracy</span></div><div class="line">marker_size = <span class="number">100</span></div><div class="line">colors = [results[x][<span class="number">0</span>] <span class="keyword">for</span> x <span class="keyword">in</span> results]</div><div class="line">plt.subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>)</div><div class="line">plt.scatter(x_scatter, y_scatter, marker_size, c=colors)</div><div class="line">plt.colorbar()</div><div class="line">plt.xlabel(<span class="string">'log learning rate'</span>)</div><div class="line">plt.ylabel(<span class="string">'log regularization strength'</span>)</div><div class="line">plt.title(<span class="string">'CIFAR-10 training accuracy'</span>)</div><div class="line"></div><div class="line"><span class="comment"># plot validation accuracy</span></div><div class="line">colors = [results[x][<span class="number">1</span>] <span class="keyword">for</span> x <span class="keyword">in</span> results] <span class="comment"># default size of markers is 20</span></div><div class="line">plt.subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">2</span>)</div><div class="line">plt.scatter(x_scatter, y_scatter, marker_size, c=colors)</div><div class="line">plt.colorbar()</div><div class="line">plt.xlabel(<span class="string">'log learning rate'</span>)</div><div class="line">plt.ylabel(<span class="string">'log regularization strength'</span>)</div><div class="line">plt.title(<span class="string">'CIFAR-10 validation accuracy'</span>)</div><div class="line">plt.show()</div></pre></td></tr></table></figure>
+<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-9-24/94997893.jpg" alt="jpg"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Evaluate the best svm on test set</span></div><div class="line">y_test_pred = best_svm.predict(X_test)</div><div class="line">test_accuracy = np.mean(y_test == y_test_pred)</div><div class="line"><span class="keyword">print</span> <span class="string">'linear SVM on raw pixels final test set accuracy: %f'</span> % test_accuracy</div></pre></td></tr></table></figure>
+<pre><code>(3073, 10)
+(1000, 3073)
+linear SVM on raw pixels final test set accuracy: 0.216000
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Visualize the learned weights for each class.</span></div><div class="line"><span class="comment"># Depending on your choice of learning rate and regularization strength, these may</span></div><div class="line"><span class="comment"># or may not be nice to look at.</span></div><div class="line">w = best_svm.W[:<span class="number">-1</span>,:] <span class="comment"># strip out the bias</span></div><div class="line">w = w.reshape(<span class="number">32</span>, <span class="number">32</span>, <span class="number">3</span>, <span class="number">10</span>)</div><div class="line">w_min, w_max = np.min(w), np.max(w)</div><div class="line">classes = [<span class="string">'plane'</span>, <span class="string">'car'</span>, <span class="string">'bird'</span>, <span class="string">'cat'</span>, <span class="string">'deer'</span>, <span class="string">'dog'</span>, <span class="string">'frog'</span>, <span class="string">'horse'</span>, <span class="string">'ship'</span>, <span class="string">'truck'</span>]</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> xrange(<span class="number">10</span>):</div><div class="line">  plt.subplot(<span class="number">2</span>, <span class="number">5</span>, i + <span class="number">1</span>)</div><div class="line">    </div><div class="line">  <span class="comment"># Rescale the weights to be between 0 and 255</span></div><div class="line">  wimg = <span class="number">255.0</span> * (w[:, :, :, i].squeeze() - w_min) / (w_max - w_min)</div><div class="line">  plt.imshow(wimg.astype(<span class="string">'uint8'</span>))</div><div class="line">  plt.axis(<span class="string">'off'</span>)</div><div class="line">  plt.title(classes[i])</div></pre></td></tr></table></figure>
+<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-9-24/60156847.jpg" alt="jpg"></p>
+<h3 id="Inline-question-2"><a href="#Inline-question-2" class="headerlink" title="Inline question 2:"></a>Inline question 2:</h3><p>Describe what your visualized SVM weights look like, and offer a brief explanation for why they look they way that they do.</p>
+<p><strong>Your answer:</strong> <em>fill this in</em></p>
+<h2 id="linear-svm-py"><a href="#linear-svm-py" class="headerlink" title="linear_svm.py"></a><code>linear_svm.py</code></h2><h3 id="svm-loss-naive"><a href="#svm-loss-naive" class="headerlink" title="svm_loss_naive"></a>svm_loss_naive</h3><p>非向量版本<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">svm_loss_naive</span><span class="params">(W, X, y, reg)</span>:</span></div><div class="line">  <span class="string">"""</span></div><div class="line">  Structured SVM loss function, naive implementation (with loops).</div><div class="line"></div><div class="line">  Inputs have dimension D, there are C classes, and we operate on minibatches</div><div class="line">  of N examples.</div><div class="line"></div><div class="line">  Inputs:</div><div class="line">  - W: A numpy array of shape (D, C) containing weights.</div><div class="line">  - X: A numpy array of shape (N, D) containing a minibatch of data.</div><div class="line">  - y: A numpy array of shape (N,) containing training labels; y[i] = c means</div><div class="line">    that X[i] has label c, where 0 &lt;= c &lt; C.</div><div class="line">  - reg: (float) regularization strength</div><div class="line"></div><div class="line">  Returns a tuple of:</div><div class="line">  - loss as single float</div><div class="line">  - gradient with respect to weights W; an array of same shape as W</div><div class="line">  """</div><div class="line">  dW = np.zeros(W.shape) <span class="comment"># initialize the gradient as zero</span></div><div class="line"></div><div class="line">  <span class="comment"># compute the loss and the gradient</span></div><div class="line">  num_classes = W.shape[<span class="number">1</span>]</div><div class="line">  num_train = X.shape[<span class="number">0</span>]</div><div class="line">  loss = <span class="number">0.0</span></div><div class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> xrange(num_train):</div><div class="line">    scores = X[i].dot(W)</div><div class="line">    correct_class_score = scores[y[i]]</div><div class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> xrange(num_classes):</div><div class="line">      <span class="keyword">if</span> j == y[i]:</div><div class="line">        <span class="keyword">continue</span></div><div class="line">      margin = scores[j] - correct_class_score + <span class="number">1</span> <span class="comment"># note delta = 1</span></div><div class="line">      <span class="keyword">if</span> margin &gt; <span class="number">0</span>:</div><div class="line">        loss += margin</div><div class="line">        dW[:, y[i]] -= X[i,:].T</div><div class="line">        dW[:, j] += X[i, :].T</div><div class="line"></div><div class="line">  <span class="comment"># Right now the loss is a sum over all training examples, but we want it</span></div><div class="line">  <span class="comment"># to be an average instead so we divide by num_train.</span></div><div class="line">  loss /= num_train</div><div class="line"></div><div class="line">  dW /= num_train</div><div class="line"></div><div class="line">  <span class="comment"># Add regularization to the loss.</span></div><div class="line">  loss += <span class="number">0.5</span> * reg * np.sum(W * W)</div><div class="line"></div><div class="line">  dW += reg*W</div><div class="line"></div><div class="line">  <span class="comment">#############################################################################</span></div><div class="line">  <span class="comment"># <span class="doctag">TODO:</span>                                                                     #</span></div><div class="line">  <span class="comment"># Compute the gradient of the loss function and store it dW.                #</span></div><div class="line">  <span class="comment"># Rather that first computing the loss and then computing the derivative,   #</span></div><div class="line">  <span class="comment"># it may be simpler to compute the derivative at the same time that the     #</span></div><div class="line">  <span class="comment"># loss is being computed. As a result you may need to modify some of the    #</span></div><div class="line">  <span class="comment"># code above to compute the gradient.                                       #</span></div><div class="line">  <span class="comment">#############################################################################</span></div><div class="line">  <span class="keyword">return</span> loss, dW</div></pre></td></tr></table></figure></p>
+<h3 id="svm-loss-vectorized"><a href="#svm-loss-vectorized" class="headerlink" title="svm_loss_vectorized"></a>svm_loss_vectorized</h3><p>向量化版<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">svm_loss_vectorized</span><span class="params">(W, X, y, reg)</span>:</span></div><div class="line">  <span class="string">"""</span></div><div class="line">  Structured SVM loss function, vectorized implementation.</div><div class="line"></div><div class="line">  Inputs and outputs are the same as svm_loss_naive.</div><div class="line">  """</div><div class="line">  loss = <span class="number">0.0</span></div><div class="line">  dW = np.zeros(W.shape) <span class="comment"># initialize the gradient as zero</span></div><div class="line">  num_classes = W.shape[<span class="number">1</span>]</div><div class="line">  num_train = X.shape[<span class="number">0</span>]</div><div class="line"></div><div class="line">  <span class="comment">#############################################################################</span></div><div class="line">  <span class="comment"># <span class="doctag">TODO:</span>                                                                     #</span></div><div class="line">  <span class="comment"># Implement a vectorized version of the structured SVM loss, storing the    #</span></div><div class="line">  <span class="comment"># result in loss.                                                           #</span></div><div class="line">  <span class="comment">#############################################################################</span></div><div class="line">  scores = X.dot(W)</div><div class="line">  correct_class_score = scores[np.arange(num_train), y]</div><div class="line">  tmpMat = scores.T - correct_class_score + <span class="number">1</span></div><div class="line">  tmpMat = tmpMat.T</div><div class="line">  tmpMat[np.arange(num_train), y] = <span class="number">0</span></div><div class="line"></div><div class="line">  margin = np.maximum(tmpMat, np.zeros((num_train, num_classes)))</div><div class="line"></div><div class="line">  loss = np.sum(margin)</div><div class="line">  loss /= num_train</div><div class="line">  loss += <span class="number">0.5</span>*reg*np.sum(W*W)</div><div class="line">  <span class="comment">#############################################################################</span></div><div class="line">  <span class="comment">#                             END OF YOUR CODE                              #</span></div><div class="line">  <span class="comment">#############################################################################</span></div><div class="line"></div><div class="line"></div><div class="line">  <span class="comment">#############################################################################</span></div><div class="line">  <span class="comment"># <span class="doctag">TODO:</span>                                                                     #</span></div><div class="line">  <span class="comment"># Implement a vectorized version of the gradient for the structured SVM     #</span></div><div class="line">  <span class="comment"># loss, storing the result in dW.                                           #</span></div><div class="line">  <span class="comment">#                                                                           #</span></div><div class="line">  <span class="comment"># Hint: Instead of computing the gradient from scratch, it may be easier    #</span></div><div class="line">  <span class="comment"># to reuse some of the intermediate values that you used to compute the     #</span></div><div class="line">  <span class="comment"># loss.                                                                     #</span></div><div class="line">  <span class="comment">#############################################################################</span></div><div class="line">  binary = margin</div><div class="line">  binary[margin &gt; <span class="number">0</span>] = <span class="number">1</span></div><div class="line"></div><div class="line">  col_sum = np.sum(binary, axis=<span class="number">1</span>)</div><div class="line">  binary[np.arange(num_train), y] = -col_sum[range(num_train)]</div><div class="line">  dW = np.dot(X.T, binary)</div><div class="line"></div><div class="line">  dW /= num_train</div><div class="line"></div><div class="line">  dW += reg*W</div><div class="line">  <span class="comment">#############################################################################</span></div><div class="line">  <span class="comment">#                             END OF YOUR CODE                              #</span></div><div class="line">  <span class="comment">#############################################################################</span></div><div class="line"></div><div class="line">  <span class="keyword">return</span> loss, dW</div></pre></td></tr></table></figure></p>
+<h2 id="linear-classifier-py"><a href="#linear-classifier-py" class="headerlink" title="linear_classifier.py"></a>linear_classifier.py</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">LinearClassifier</span><span class="params">(object)</span>:</span></div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">    self.W = <span class="keyword">None</span></div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(self, X, y, learning_rate=<span class="number">1e-3</span>, reg=<span class="number">1e-5</span>, num_iters=<span class="number">100</span>,</span></span></div><div class="line">            batch_size=<span class="number">200</span>, verbose=False):</div><div class="line">    <span class="string">"""</span></div><div class="line">    Train this linear classifier using stochastic gradient descent.</div><div class="line"></div><div class="line">    Inputs:</div><div class="line">    - X: A numpy array of shape (N, D) containing training data; there are N</div><div class="line">      training samples each of dimension D.</div><div class="line">    - y: A numpy array of shape (N,) containing training labels; y[i] = c</div><div class="line">      means that X[i] has label 0 &lt;= c &lt; C for C classes.</div><div class="line">    - learning_rate: (float) learning rate for optimization.</div><div class="line">    - reg: (float) regularization strength.</div><div class="line">    - num_iters: (integer) number of steps to take when optimizing</div><div class="line">    - batch_size: (integer) number of training examples to use at each step.</div><div class="line">    - verbose: (boolean) If true, print progress during optimization.</div><div class="line"></div><div class="line">    Outputs:</div><div class="line">    A list containing the value of the loss function at each training iteration.</div><div class="line">    """</div><div class="line">    num_train, dim = X.shape</div><div class="line">    num_classes = np.max(y) + <span class="number">1</span> <span class="comment"># assume y takes values 0...K-1 where K is number of classes</span></div><div class="line">    <span class="keyword">if</span> self.W <span class="keyword">is</span> <span class="keyword">None</span>:</div><div class="line">      <span class="comment"># lazily initialize W</span></div><div class="line">      self.W = <span class="number">0.001</span> * np.random.randn(dim, num_classes)</div><div class="line"></div><div class="line">    <span class="comment"># Run stochastic gradient descent to optimize W</span></div><div class="line">    loss_history = []</div><div class="line">    <span class="keyword">for</span> it <span class="keyword">in</span> xrange(num_iters):</div><div class="line">      X_batch = <span class="keyword">None</span></div><div class="line">      y_batch = <span class="keyword">None</span></div><div class="line"></div><div class="line">      <span class="comment">#########################################################################</span></div><div class="line">      <span class="comment"># <span class="doctag">TODO:</span>                                                                 #</span></div><div class="line">      <span class="comment"># Sample batch_size elements from the training data and their           #</span></div><div class="line">      <span class="comment"># corresponding labels to use in this round of gradient descent.        #</span></div><div class="line">      <span class="comment"># Store the data in X_batch and their corresponding labels in           #</span></div><div class="line">      <span class="comment"># y_batch; after sampling X_batch should have shape (dim, batch_size)   #</span></div><div class="line">      <span class="comment"># and y_batch should have shape (batch_size,)                           #</span></div><div class="line">      <span class="comment">#                                                                       #</span></div><div class="line">      <span class="comment"># Hint: Use np.random.choice to generate indices. Sampling with         #</span></div><div class="line">      <span class="comment"># replacement is faster than sampling without replacement.              #</span></div><div class="line">      <span class="comment">#########################################################################</span></div><div class="line">      idx = np.random.choice(np.arange(num_train), <span class="number">1</span>, replace=<span class="keyword">False</span>)</div><div class="line">      X_batch = X[idx]</div><div class="line">      y_batch = y[idx]</div><div class="line">      <span class="comment">#########################################################################</span></div><div class="line">      <span class="comment">#                       END OF YOUR CODE                                #</span></div><div class="line">      <span class="comment">#########################################################################</span></div><div class="line"></div><div class="line">      <span class="comment"># evaluate loss and gradient</span></div><div class="line">      loss, grad = self.loss(X_batch, y_batch, reg)</div><div class="line">      loss_history.append(loss)</div><div class="line"></div><div class="line">      <span class="comment"># perform parameter update</span></div><div class="line">      <span class="comment">#########################################################################</span></div><div class="line">      <span class="comment"># <span class="doctag">TODO:</span>                                                                 #</span></div><div class="line">      <span class="comment"># Update the weights using the gradient and the learning rate.          #</span></div><div class="line">      <span class="comment">#########################################################################</span></div><div class="line">      self.W -= learning_rate*grad;</div><div class="line">      <span class="comment">#########################################################################</span></div><div class="line">      <span class="comment">#                       END OF YOUR CODE                                #</span></div><div class="line">      <span class="comment">#########################################################################</span></div><div class="line"></div><div class="line">      <span class="keyword">if</span> verbose <span class="keyword">and</span> it % <span class="number">100</span> == <span class="number">0</span>:</div><div class="line">        <span class="keyword">print</span> <span class="string">'iteration %d / %d: loss %f'</span> % (it, num_iters, loss)</div><div class="line"></div><div class="line">    <span class="keyword">return</span> loss_history</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">predict</span><span class="params">(self, X)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    Use the trained weights of this linear classifier to predict labels for</div><div class="line">    data points.</div><div class="line"></div><div class="line">    Inputs:</div><div class="line">    - X: D x N array of training data. Each column is a D-dimensional point.</div><div class="line"></div><div class="line">    Returns:</div><div class="line">    - y_pred: Predicted labels for the data in X. y_pred is a 1-dimensional</div><div class="line">      array of length N, and each element is an integer giving the predicted</div><div class="line">      class.</div><div class="line">    """</div><div class="line">    y_pred = np.zeros(X.shape[<span class="number">1</span>])</div><div class="line">    <span class="comment">###########################################################################</span></div><div class="line">    <span class="comment"># <span class="doctag">TODO:</span>                                                                   #</span></div><div class="line">    <span class="comment"># Implement this method. Store the predicted labels in y_pred.            #</span></div><div class="line">    <span class="comment">###########################################################################</span></div><div class="line">    <span class="keyword">print</span> self.W.shape</div><div class="line">    <span class="keyword">print</span> X.shape</div><div class="line">    scores = np.dot(X, self.W)</div><div class="line">    y_pred = np.argmax(scores, axis=<span class="number">1</span>)</div><div class="line">    <span class="comment">###########################################################################</span></div><div class="line">    <span class="comment">#                           END OF YOUR CODE                              #</span></div><div class="line">    <span class="comment">###########################################################################</span></div><div class="line">    <span class="keyword">return</span> y_pred</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">loss</span><span class="params">(self, X_batch, y_batch, reg)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    Compute the loss function and its derivative.</div><div class="line">    Subclasses will override this.</div><div class="line"></div><div class="line">    Inputs:</div><div class="line">    - X_batch: A numpy array of shape (N, D) containing a minibatch of N</div><div class="line">      data points; each point has dimension D.</div><div class="line">    - y_batch: A numpy array of shape (N,) containing labels for the minibatch.</div><div class="line">    - reg: (float) regularization strength.</div><div class="line"></div><div class="line">    Returns: A tuple containing:</div><div class="line">    - loss as a single float</div><div class="line">    - gradient with respect to self.W; an array of the same shape as W</div><div class="line">    """</div><div class="line">    <span class="keyword">pass</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">LinearSVM</span><span class="params">(LinearClassifier)</span>:</span></div><div class="line">  <span class="string">""" A subclass that uses the Multiclass SVM loss function """</span></div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">loss</span><span class="params">(self, X_batch, y_batch, reg)</span>:</span></div><div class="line">    <span class="keyword">return</span> svm_loss_vectorized(self.W, X_batch, y_batch, reg)</div></pre></td></tr></table></figure>
+
+	
+	
+	
+	
+</div>
+				
+				
+
+                <!-- Post Comments -->
+                
+    <!-- 使用多说评论 -->
+    <link rel="stylesheet" href="/css/duoshuo.min.css">
+<style>
+    #ds-thread #ds-reset .ds-post-button{
+        background-color: #0097A7 !important;
+    }
+    #ds-wrapper #ds-reset .ds-icons-32{
+        background-color: #0097A7 !important;
+    }
+    #ds-reset .ds-highlight {
+        color: #0097A7 !important;
+    }
+</style>
+<div id="comments">
+    <!-- 多说评论框 start -->
+        <div class="ds-thread" 
+            data-thread-key="posts/583301051/" 
+            data-url="http://www.wowx.info//posts/583301051/index.html"
+            data-title="CS231n assignment1 -- Multiclass Support Vector Machine exercise"></div>
+    <!-- 多说评论框 end -->
+</div>
+
+
+
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    
+    <!-- Prev Nav -->
+    
+        <a href="/posts/401226963/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/posts/1889126307/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+        </div>
+    </div>
+
+				
+				
+					<!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay "></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored  sidebar-fixed-left" role="navigation">
+	<div id="sidebar-main">
+	    <!-- Sidebar Header -->
+		<div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+    <i class="material-icons">clear_all</i>
+    <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="Xin Wei's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        weixin@bupt.edu.cn
+        <b class="caret"></b>
+    </a>
+</div>
+
+		<!-- Sidebar Navigation  -->
+		<ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+			
+                <li>
+                    <a href="mailto:weixin@bupt.edu.cn" target="_blank" title="Email Me">
+						<i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    <li id="sidebar-first-li">
+        <a href="/" target="_self">
+            <i class="material-icons sidebar-material-icons">home</i>
+             主页
+        </a>
+    </li>
+
+    <!-- I'm Feeling Lucky -->
+<!--
+    <li class="dropdown">
+        <a href="" target="_self">
+            <i class="material-icons sidebar-material-icons">explore</i>
+             sidebar.imlucky
+        </a>
+    </li>
+-->
+
+	
+    <!-- Archives  -->
+    <li class="dropdown">
+        <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+            <i class="material-icons sidebar-material-icons">inbox</i>
+             归档
+            <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+            <a class="sidebar_archives-link" href="/archives/2016/11/">十一月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">十月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/07/">七月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/06/">六月 2016<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/07/">七月 2015<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/06/">六月 2015<span class="sidebar_archives-count">6</span></a>
+        </ul>
+    </li>
+
+    <!-- Divider -->
+    <li class="divider"></li>
+
+
+    <!-- Pages  -->
+	
+		<li>
+			<a href="/" title="home">
+				home
+			</a>
+		</li>
+	
+		<li>
+			<a href="/tags" title="标签">
+				标签
+			</a>
+		</li>
+	
+		<li>
+			<a href="/categories" title="分类">
+				分类
+			</a>
+		</li>
+	
+
+    <!-- Article Numebr  -->
+    <li>
+        <a href="/archives">
+             文章总数
+             <span class="sidebar-badge">38</span>
+        </a>
+    </li>
+</ul>
+
+		<!-- Sidebar Divider -->
+		<div class="sidebar-divider"></div>
+
+		<!-- Sidebar Footer -->
+		<!-- 
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持。 :) 
+-->
+
+<!-- Theme Material -->
+
+<!-- Help & Support -->
+<!--
+<a href="mailto:hiviosey@gmail.com" class="sidebar-footer-text-a">
+    <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+		sidebar.help
+		<span class="mdl-button__ripple-container">
+			<span class="mdl-ripple"></span>
+		</span>
+	</div>
+</a>
+-->
+
+<!-- Feedback -->
+<!--
+<a href="https://github.com/viosey/hexo-theme-material/issues" target="_blank" class="sidebar-footer-text-a">
+    <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+         sidebar.feedback
+                    <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></div>
+</a>
+-->
+
+<!-- Abount Theme -->
+<!--
+<a href="https://blog.viosey.com/index.php/Material.html" target="_blank" class="sidebar-footer-text-a">
+    <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+         sidebar.about_theme
+        <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></div>
+</a>-->
+
+	</div>
+    
+    <!-- Sidebar Sponsor -->
+    
+
+
+</aside>
+
+				
+				
+				
+					<!-- Footer Top Button -->
+					<div class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+				
+				
+				<!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+	
+	
+		<!-- Paradox Footer Left Section -->
+		<div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+    
+    
+    <!-- Facebook -->
+    
+    
+    
+    <!-- Google + -->
+    
+    
+    
+    <!-- Weibo -->
+    
+    <a href="http://weibo.com/buptweixin" target="view_window"><button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-weibo.png);">
+        <span class="visuallyhidden">Weibo</span>
+    </button></a>
+    
+    
+    <!-- Instagram -->
+    
+    
+    
+    <!-- Tumblr -->
+    
+    
+    
+    <!-- Github -->
+    
+    <a href="https://github.com/buptweixin" target="view_window"><button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-github.png);">
+        <span class="visuallyhidden">Github</span>
+    </button></a>
+    
+</div>
+
+
+		<!--Copyright-->
+		<div id="copyright">Copyright&nbsp;©&nbsp;<script type="text/javascript">var fd = new Date();document.write(fd.getFullYear());</script>&nbsp;野原圆长的Blog</div>
+
+		<!-- Paradox Footer Right Section -->
+
+		<!-- 
+		I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+		It will not impact the appearance and can give developers a lot of support :)
+
+		很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+		它不会影响美观并可以给开发者很大的支持。 :) 
+		-->
+
+		<div class="mdl-mini-footer--right-section">
+			<div>
+				<div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+				<div class="footer-develop-div">Theme - <a href="#" target="_blank" class="footer-develop-a">Material</a></div>
+			</div>
+		</div>
+	
+    
+</footer>
+
+                
+				<!-- Import File -->
+<script src="/js/highlight.min.js"></script>
+<script src="/js/js.min.js"></script>
+<script src="/js/nprogress.js"></script>
+
+<script type="text/javascript">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    
+    $('#nprogress .bar').css({
+        'background': '#FF4081'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #FF4081, 0 0 15px #FF4081'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#FF4081',
+        'border-left-color': '#FF4081'
+    });
+    
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+    <!-- Leancloud -->
+	<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+	<script>
+		AV.initialize("1wCxBs3gRuLUAR1VDMEUFx3N-gzGzoHsz", "6sT0Kp8aE2lG69USPb4k0cAb");
+	</script>
+    <script>
+	function showTime(Counter) {
+		var query = new AV.Query(Counter);
+		$(".leancloud-views_num").each(function() {
+			var url = $(this).attr("id").trim();
+			query.equalTo("url", url);
+			query.find({
+				success: function(results) {
+					if (results.length == 0) {
+						var content = '0 ' + $(document.getElementById(url)).text();
+						$(document.getElementById(url)).text(content);
+						return;
+					}
+					for (var i = 0; i < results.length; i++) {
+						var object = results[i];
+						var content = object.get('time') + ' ' + $(document.getElementById(url)).text();
+						$(document.getElementById(url)).text(content);
+					}
+				},
+				error: function(object, error) {
+					console.log("Error: " + error.code + " " + error.message);
+				}
+			});
+
+		});
+	}
+
+	function addCount(Counter) {
+		var Counter = AV.Object.extend("Counter");
+		url = $(".leancloud-views_num").attr('id').trim();
+		title = $(".leancloud-views_num").attr('data-flag-title').trim();
+		var query = new AV.Query(Counter);
+		query.equalTo("url", url);
+		query.find({
+			success: function(results) {
+				if (results.length > 0) {
+					var counter = results[0];
+					counter.fetchWhenSave(true);
+					counter.increment("time");
+					counter.save(null, {
+						success: function(counter) {
+							var content =  counter.get('time') + ' ' + $(document.getElementById(url)).text();
+							$(document.getElementById(url)).text(content);
+						},
+						error: function(counter, error) {
+							console.log('Failed to save Visitor num, with error message: ' + error.message);
+						}
+					});
+				} else {
+					var newcounter = new Counter();
+					newcounter.set("title", title);
+					newcounter.set("url", url);
+					newcounter.set("time", 1);
+					newcounter.save(null, {
+						success: function(newcounter) {
+							console.log("newcounter.get('time')="+newcounter.get('time'));
+							var content = newcounter.get('time') + ' ' + $(document.getElementById(url)).text();
+							$(document.getElementById(url)).text(content);
+						},
+						error: function(newcounter, error) {
+							console.log('Failed to create');
+						}
+					});
+				}
+			},
+			error: function(error) {
+				console.log('Error:' + error.code + " " + error.message);
+			}
+		});
+	}
+	$(function() {
+		var Counter = AV.Object.extend("Counter");
+		if ($('.leancloud-views_num').length == 1) {
+			addCount(Counter);
+		} else if ($('.post-title-link').length > 1) {
+			showTime(Counter);
+		}
+	}); 
+</script>
+
+
+
+
+
+    <!-- 多说公共 js 代码 start -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"buptweixin"};
+        (function() {
+            var ds = document.createElement('script');
+            ds.type = 'text/javascript';ds.async = true;
+            ds.src = 'https://static.duoshuo.com/embed.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0] 
+             || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+    </script>
+    <!-- 多说公共 js 代码 end -->
+
+
+
+
+<!-- Swiftye -->
+
+
+<!-- Local Search-->
+
+
+<!-- Window Load-->
+<script>
+    $(window).load(function() {
+        // Post_Toc parent position fixed
+        $(".post-toc-wrap").parent(".mdl-menu__container").css("position", "fixed");
+    });
+</script>
+            </main>
+        </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+		
+    </body>
+		
+	
+</html>

@@ -17,8 +17,8 @@
   
   <entry>
     <title>二叉树、二叉查找树、2-3树及红黑树</title>
-    <link href="http://www.wowx.info/2016/11/29/red-black-tree/"/>
-    <id>http://www.wowx.info/2016/11/29/red-black-tree/</id>
+    <link href="http://www.wowx.info/posts/undefined/"/>
+    <id>http://www.wowx.info/posts/undefined/</id>
     <published>2016-11-29T13:37:48.000Z</published>
     <updated>2016-11-30T04:17:03.639Z</updated>
     
@@ -115,8 +115,8 @@
   
   <entry>
     <title>Caffe 问题总结『不定期更新』</title>
-    <link href="http://www.wowx.info/2016/11/26/problems-of-caffe/"/>
-    <id>http://www.wowx.info/2016/11/26/problems-of-caffe/</id>
+    <link href="http://www.wowx.info/posts/undefined/"/>
+    <id>http://www.wowx.info/posts/undefined/</id>
     <published>2016-11-26T08:55:45.000Z</published>
     <updated>2016-12-01T07:43:57.764Z</updated>
     
@@ -147,8 +147,8 @@
   
   <entry>
     <title>梯度下降优化方法总结</title>
-    <link href="http://www.wowx.info/2016/10/07/gradient/"/>
-    <id>http://www.wowx.info/2016/10/07/gradient/</id>
+    <link href="http://www.wowx.info/posts/401226963/"/>
+    <id>http://www.wowx.info/posts/401226963/</id>
     <published>2016-10-06T16:53:53.000Z</published>
     <updated>2016-11-25T17:22:09.731Z</updated>
     
@@ -242,8 +242,8 @@
   
   <entry>
     <title>CS231n assignment1 -- Multiclass Support Vector Machine exercise</title>
-    <link href="http://www.wowx.info/2016/09/24/svm/"/>
-    <id>http://www.wowx.info/2016/09/24/svm/</id>
+    <link href="http://www.wowx.info/posts/583301051/"/>
+    <id>http://www.wowx.info/posts/583301051/</id>
     <published>2016-09-24T06:47:54.000Z</published>
     <updated>2016-11-25T17:22:09.731Z</updated>
     
@@ -406,8 +406,8 @@ linear SVM on raw pixels final test set accuracy: 0.216000
   
   <entry>
     <title>CS231n assignment1 multi svm -- 矩阵乘法的几何意义</title>
-    <link href="http://www.wowx.info/2016/09/24/matrix/"/>
-    <id>http://www.wowx.info/2016/09/24/matrix/</id>
+    <link href="http://www.wowx.info/posts/1889126307/"/>
+    <id>http://www.wowx.info/posts/1889126307/</id>
     <published>2016-09-23T17:32:20.000Z</published>
     <updated>2016-11-25T17:22:09.731Z</updated>
     
@@ -448,8 +448,8 @@ linear SVM on raw pixels final test set accuracy: 0.216000
   
   <entry>
     <title>神经网络引入循环不变性</title>
-    <link href="http://www.wowx.info/2016/09/10/cycle/"/>
-    <id>http://www.wowx.info/2016/09/10/cycle/</id>
+    <link href="http://www.wowx.info/posts/4051914833/"/>
+    <id>http://www.wowx.info/posts/4051914833/</id>
     <published>2016-09-10T02:20:40.000Z</published>
     <updated>2016-11-25T17:22:09.731Z</updated>
     
@@ -485,8 +485,8 @@ linear SVM on raw pixels final test set accuracy: 0.216000
   
   <entry>
     <title>使用Python统计处理基础篇--matplotlib</title>
-    <link href="http://www.wowx.info/2016/07/19/scipy-basic-matplotlib/"/>
-    <id>http://www.wowx.info/2016/07/19/scipy-basic-matplotlib/</id>
+    <link href="http://www.wowx.info/posts/undefined/"/>
+    <id>http://www.wowx.info/posts/undefined/</id>
     <published>2016-07-19T15:20:55.000Z</published>
     <updated>2016-11-25T17:22:09.731Z</updated>
     
@@ -648,8 +648,8 @@ plt.pie(Z, explode=None, labels=None,
   
   <entry>
     <title>使用Python统计处理基础篇--numpy</title>
-    <link href="http://www.wowx.info/2016/07/19/scipy-basic-numpy/"/>
-    <id>http://www.wowx.info/2016/07/19/scipy-basic-numpy/</id>
+    <link href="http://www.wowx.info/posts/undefined/"/>
+    <id>http://www.wowx.info/posts/undefined/</id>
     <published>2016-07-19T15:17:18.000Z</published>
     <updated>2016-11-25T17:22:09.731Z</updated>
     
@@ -949,8 +949,8 @@ array([-1.,  0.33333333])
   
   <entry>
     <title>使用Python统计处理基础篇--Python语言</title>
-    <link href="http://www.wowx.info/2016/07/19/scipy-basic-pythonlanguage/"/>
-    <id>http://www.wowx.info/2016/07/19/scipy-basic-pythonlanguage/</id>
+    <link href="http://www.wowx.info/posts/undefined/"/>
+    <id>http://www.wowx.info/posts/undefined/</id>
     <published>2016-07-19T15:12:17.000Z</published>
     <updated>2016-11-25T17:22:09.731Z</updated>
     
@@ -1207,8 +1207,8 @@ In [4]: pickle.load(open(&apos;test.pkl&apos;,&apos;rb&apos;)) Out[4]: [1, None,
   
   <entry>
     <title>使用Python统计处理基础篇--前言</title>
-    <link href="http://www.wowx.info/2016/07/19/scipy-basic-python/"/>
-    <id>http://www.wowx.info/2016/07/19/scipy-basic-python/</id>
+    <link href="http://www.wowx.info/posts/undefined/"/>
+    <id>http://www.wowx.info/posts/undefined/</id>
     <published>2016-07-19T14:59:17.000Z</published>
     <updated>2016-11-25T17:22:09.731Z</updated>
     
@@ -1232,8 +1232,8 @@ In [4]: pickle.load(open(&apos;test.pkl&apos;,&apos;rb&apos;)) Out[4]: [1, None,
   
   <entry>
     <title>几种常用激活函数介绍</title>
-    <link href="http://www.wowx.info/2016/06/24/activation-functions/"/>
-    <id>http://www.wowx.info/2016/06/24/activation-functions/</id>
+    <link href="http://www.wowx.info/posts/undefined/"/>
+    <id>http://www.wowx.info/posts/undefined/</id>
     <published>2016-06-23T16:34:28.000Z</published>
     <updated>2016-11-25T17:50:24.604Z</updated>
     
@@ -1297,8 +1297,8 @@ In [4]: pickle.load(open(&apos;test.pkl&apos;,&apos;rb&apos;)) Out[4]: [1, None,
   
   <entry>
     <title>大数据基础设施综述</title>
-    <link href="http://www.wowx.info/2016/06/18/big-data/"/>
-    <id>http://www.wowx.info/2016/06/18/big-data/</id>
+    <link href="http://www.wowx.info/posts/undefined/"/>
+    <id>http://www.wowx.info/posts/undefined/</id>
     <published>2016-06-17T16:43:17.000Z</published>
     <updated>2016-11-25T17:51:32.892Z</updated>
     
@@ -1387,8 +1387,8 @@ In [4]: pickle.load(open(&apos;test.pkl&apos;,&apos;rb&apos;)) Out[4]: [1, None,
   
   <entry>
     <title>Python记录日志</title>
-    <link href="http://www.wowx.info/2016/06/15/python-logging/"/>
-    <id>http://www.wowx.info/2016/06/15/python-logging/</id>
+    <link href="http://www.wowx.info/posts/undefined/"/>
+    <id>http://www.wowx.info/posts/undefined/</id>
     <published>2016-06-15T06:55:54.000Z</published>
     <updated>2016-11-25T17:22:09.731Z</updated>
     
@@ -1542,8 +1542,8 @@ logging.warning(&apos;is when this event was logged.&apos;)
   
   <entry>
     <title>机器学习算法笔记2_1 生成学习算法(Generative Learning algorithms)</title>
-    <link href="http://www.wowx.info/2016/06/15/ml-4/"/>
-    <id>http://www.wowx.info/2016/06/15/ml-4/</id>
+    <link href="http://www.wowx.info/posts/undefined/"/>
+    <id>http://www.wowx.info/posts/undefined/</id>
     <published>2016-06-15T05:25:56.000Z</published>
     <updated>2016-11-25T17:22:09.731Z</updated>
     
@@ -1589,8 +1589,8 @@ logging.warning(&apos;is when this event was logged.&apos;)
   
   <entry>
     <title>机器学习笔记1_3 广义线性模型(GLM, Generalized Linear Models)</title>
-    <link href="http://www.wowx.info/2016/06/15/ml-3/"/>
-    <id>http://www.wowx.info/2016/06/15/ml-3/</id>
+    <link href="http://www.wowx.info/posts/undefined/"/>
+    <id>http://www.wowx.info/posts/undefined/</id>
     <published>2016-06-15T05:20:53.000Z</published>
     <updated>2016-11-25T17:22:09.731Z</updated>
     
@@ -1619,8 +1619,8 @@ logging.warning(&apos;is when this event was logged.&apos;)
   
   <entry>
     <title>机器学习算法笔记1_2:分类和逻辑回归(Classification and Logistic regression)</title>
-    <link href="http://www.wowx.info/2016/06/15/ml-2/"/>
-    <id>http://www.wowx.info/2016/06/15/ml-2/</id>
+    <link href="http://www.wowx.info/posts/undefined/"/>
+    <id>http://www.wowx.info/posts/undefined/</id>
     <published>2016-06-15T05:08:10.000Z</published>
     <updated>2016-11-25T17:22:09.731Z</updated>
     
@@ -1659,8 +1659,8 @@ logging.warning(&apos;is when this event was logged.&apos;)
   
   <entry>
     <title>机器学习算法笔记1_1:线性回归</title>
-    <link href="http://www.wowx.info/2016/06/15/ml-1/"/>
-    <id>http://www.wowx.info/2016/06/15/ml-1/</id>
+    <link href="http://www.wowx.info/posts/undefined/"/>
+    <id>http://www.wowx.info/posts/undefined/</id>
     <published>2016-06-15T05:04:36.000Z</published>
     <updated>2016-11-25T17:22:09.731Z</updated>
     
@@ -1744,8 +1744,8 @@ logging.warning(&apos;is when this event was logged.&apos;)
   
   <entry>
     <title>Docker虚拟机与宿主机端口映射(Mac)</title>
-    <link href="http://www.wowx.info/2016/06/15/docker-port-map/"/>
-    <id>http://www.wowx.info/2016/06/15/docker-port-map/</id>
+    <link href="http://www.wowx.info/posts/undefined/"/>
+    <id>http://www.wowx.info/posts/undefined/</id>
     <published>2016-06-15T04:57:32.000Z</published>
     <updated>2016-11-25T17:22:09.731Z</updated>
     
@@ -1802,8 +1802,8 @@ logging.warning(&apos;is when this event was logged.&apos;)
   
   <entry>
     <title>HIVEQL的简单介绍</title>
-    <link href="http://www.wowx.info/2016/06/15/hive-3/"/>
-    <id>http://www.wowx.info/2016/06/15/hive-3/</id>
+    <link href="http://www.wowx.info/posts/undefined/"/>
+    <id>http://www.wowx.info/posts/undefined/</id>
     <published>2016-06-15T04:53:58.000Z</published>
     <updated>2016-11-25T17:22:09.731Z</updated>
     
@@ -1879,8 +1879,8 @@ logging.warning(&apos;is when this event was logged.&apos;)
   
   <entry>
     <title>HIVE的安装</title>
-    <link href="http://www.wowx.info/2016/06/15/hive-2/"/>
-    <id>http://www.wowx.info/2016/06/15/hive-2/</id>
+    <link href="http://www.wowx.info/posts/undefined/"/>
+    <id>http://www.wowx.info/posts/undefined/</id>
     <published>2016-06-15T04:50:59.000Z</published>
     <updated>2016-11-25T17:22:09.731Z</updated>
     
