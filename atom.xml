@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.wowx.info/"/>
-  <updated>2016-12-02T11:30:24.547Z</updated>
+  <updated>2016-12-02T11:34:20.179Z</updated>
   <id>http://www.wowx.info/</id>
   
   <author>
@@ -14,6 +14,132 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>leetcode Best Time to Buy and Sell Stock with Cooldown</title>
+    <link href="http://www.wowx.info/posts//posts/201612021923/"/>
+    <id>http://www.wowx.info/posts//posts/201612021923/</id>
+    <published>2016-12-02T11:23:34.000Z</published>
+    <updated>2016-12-02T11:34:20.179Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Best-time-to-buy-and-sell-stock-with-cooldown"><a href="#Best-time-to-buy-and-sell-stock-with-cooldown" class="headerlink" title="Best time to buy and sell stock with cooldown"></a>Best time to buy and sell stock with cooldown</h2><p>参考自<a href="https://discuss.leetcode.com/topic/30421/share-my-thinking-process" target="_blank" rel="external">leetcode discuss</a></p>
+<blockquote>
+<p>Say you have an array for which the <em>i</em>th element is the price of a given stock on day <em>i</em>.</p>
+<p>Design an algorithm to find the maximum profit. You may complete as many transactions as you like (ie, buy one and sell one share of the stock multiple times) with the following restrictions:</p>
+<ul>
+<li>You may not engage in multiple transactions at the same time (ie, you must sell the stock before you buy again).</li>
+<li>After you sell your stock, you cannot buy stock on next day. (ie, cooldown 1 day)</li>
+</ul>
+<p><strong>Example:</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; prices = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">0</span>, <span class="number">2</span>]</div><div class="line">&gt; maxProfit = <span class="number">3</span></div><div class="line">&gt; transactions = [buy, sell, cooldown, buy, sell]</div><div class="line">&gt;</div></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h3><p>和前面四题不同的是，本题不限制买卖股票的次数但是规定了卖出股票和第二天不能交易(即cooldown一天)</p>
+<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>还是采用动态规划的方法来解题，</p>
+<h4 id="第一步对问题状态的定义："><a href="#第一步对问题状态的定义：" class="headerlink" title="第一步对问题状态的定义："></a>第一步对问题<strong>状态的定义</strong>：</h4><p>本题除了已经买入状态、卖出状态之外多了一个休息状态(不进行买卖操作):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">buy[i]:第i天时为已经买入股票状态</div><div class="line">sell[i]:第天时股票已经卖出股票状态</div><div class="line">rest[i]:第i天的为休息状态，不进行买卖操作</div></pre></td></tr></table></figure>
+<h4 id="第二步对状态转移方程的定义："><a href="#第二步对状态转移方程的定义：" class="headerlink" title="第二步对状态转移方程的定义："></a>第二步对状态转移方程的定义：</h4><ol>
+<li><p>buy[i]—第i天为已经买入股票状态</p>
+<p>第i天为买入状态有两种转移可能:</p>
+<ol>
+<li><p>i-1天时已经是买入状态，第i天休息维持为买入状态:</p>
+<p><code>buy[i-1]-&gt;buy[i]</code></p>
+</li>
+<li><p>第i-1天为休息状态，第i天买入股票进入买入状态:</p>
+<p><code>rest[i-1]-&gt;buy[i]</code></p>
+<p>因为题目规定了卖出后必须冷却一天才能再次买入，所以没有第i-1天状态为卖出，在第i天再买入的情况</p>
+</li>
+</ol>
+</li>
+<li><p>sell[i]—第i天为已经卖出状态</p>
+<p>也有两种状态转移可能:</p>
+<ol>
+<li><p>第i-1天已经处于卖出状态，第i天休息维持为卖出状态</p>
+<p><code>sell[i-1]-&gt;sell[i]</code></p>
+</li>
+<li><p>第i-1天为买入状态，第i天将股票卖出而转移到卖出状态</p>
+<p><code>buy[i-1]-&gt;sell[i]</code></p>
+</li>
+</ol>
+</li>
+<li><p>rest[i]—第i天为休息状态</p>
+<p>前一天是任何状态，第i天都可能转移到休息状态</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">buy[i-1]-&gt;rest[i]</div><div class="line">sold[i-1]-&gt;rest[i]</div><div class="line">rest[i-1]-&gt;rest[i]</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>将上面的思考转化为状态转移方程：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">buy[i] = max(rest[i<span class="number">-1</span>]-prices[i], buy[i<span class="number">-1</span>]);</div><div class="line">sell[i] = max(buy[i<span class="number">-1</span>]+prices[i], sell[i<span class="number">-1</span>]);</div><div class="line">rest[i] = max(buy[i<span class="number">-1</span>], sell[i<span class="number">-1</span>], rest[i<span class="number">-1</span>]);</div></pre></td></tr></table></figure>
+<h4 id="如何防止-buy-rest-buy-状态转移的产生"><a href="#如何防止-buy-rest-buy-状态转移的产生" class="headerlink" title="如何防止[buy, rest, buy]状态转移的产生"></a>如何防止<code>[buy, rest, buy]</code>状态转移的产生</h4><p>一个事实是，第i天的状态为买入时的资金(<code>buy[i]</code>)一定小于第i天状态为卖出时的资金<code>(sell[i])</code>，即<code>buy[i]&lt;=sell[i]</code>,因此<code>rest</code>的状态转移方程中为了在第i天rest状态下达到最大资金，一定不是从第i-1天为买入状态<code>buy[i-1]</code>转移过来，所以排除了<code>[buy, rest]</code>这个过程，也就不会出现<code>[buy,rest,buy]</code>这种错误的状态转移过程。</p>
+<h4 id="化简状态转移方程、缩小缓存大小"><a href="#化简状态转移方程、缩小缓存大小" class="headerlink" title="化简状态转移方程、缩小缓存大小"></a>化简状态转移方程、缩小缓存大小</h4><p>继续观察，发现第i天为卖出状态下的资金不小于第i天状态为休息下的资金(<code>sell[i]&gt;=rest[i]</code>)，结合之前已知的<code>buy[i]&lt;=sell[i]</code>,得到<code>rest[i]=sell[i]-1</code>,将这个公式代入第一个公式<code>buy[i] = max(rest[i-1]-prices[i], buy[i-1])</code>,最后只剩下两个状态转移方程：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">buy[i] = max(sell[i<span class="number">-2</span>]-prices[i], buy[i<span class="number">-1</span>]);</div><div class="line">sell[i] = max(buy[i<span class="number">-1</span>]+prices[i], sell[i<span class="number">-1</span>]);</div></pre></td></tr></table></figure>
+<p>接下来，发现两个状态最多和上上个状态相关，可以只存储<code>buy</code>和<code>sell</code>两个时刻的值作为缓存。</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">class Solution &#123;</div><div class="line">public:</div><div class="line">	int maxProfit(vector&lt;int&gt;&amp; prices)&#123;</div><div class="line">     int buy(INT_MIN), sell(0), prev_sell(0), pre_buy;</div><div class="line">      for (int price:prices)</div><div class="line">        &#123;</div><div class="line">        	prev_buy = buy;</div><div class="line">        	buy = max(prev_sell - price, buy);</div><div class="line">        	prev_sell = sell;</div><div class="line">        	sell = max(prev_buy + price, sell);</div><div class="line">        &#125;</div><div class="line">      return sell;</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<hr>
+<a href="/posts//posts/20161202170711/" title="leetcode best Time Buy and SellStock I">leetcode best Time Buy and SellStock I</a>
+<a href="/posts//posts/201612021714/" title="leetcode Best Time to Buy and Sell Stock II">leetcode Best Time to Buy and Sell Stock II</a>
+<a href="/posts//posts/201612021917/" title="leetcode Best Time to Buy and Sell Stock III">leetcode Best Time to Buy and Sell Stock III</a>
+
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Best-time-to-buy-and-sell-stock-with-cooldown&quot;&gt;&lt;a href=&quot;#Best-time-to-buy-and-sell-stock-with-cooldown&quot; class=&quot;headerlink&quot; title=&quot;Be
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="http://www.wowx.info/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="array" scheme="http://www.wowx.info/tags/array/"/>
+    
+      <category term="dp" scheme="http://www.wowx.info/tags/dp/"/>
+    
+      <category term="leetcode" scheme="http://www.wowx.info/tags/leetcode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>leetcode Best Time to Buy and Sell Stock III</title>
+    <link href="http://www.wowx.info/posts//posts/201612021917/"/>
+    <id>http://www.wowx.info/posts//posts/201612021917/</id>
+    <published>2016-12-02T11:17:31.000Z</published>
+    <updated>2016-12-02T11:32:38.687Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Best-Time-to-Buy-and-Sell-Stock-III"><a href="#Best-Time-to-Buy-and-Sell-Stock-III" class="headerlink" title="Best Time to Buy and Sell Stock III"></a>Best Time to Buy and Sell Stock III</h2><blockquote>
+<p>Say you have an array for which the <em>i</em>th element is the price of a given stock on day <em>i</em>.</p>
+<p>Design an algorithm to find the maximum profit. You may complete at most <em>two</em> transactions.</p>
+<p><strong>Note:</strong><br>You may not engage in multiple transactions at the same time (ie, you must sell the stock before you buy again).</p>
+</blockquote>
+<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>假设有一个数组，它的第i个元素表示某只股票在第i天的股价，设计一个算法找出最大收益，要求最多能进行两次买卖操作。</p>
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>假设初始资金为0，建立四个变量<code>buy1st</code>,<code>sold1st</code>,<code>buy2nd</code>,<code>sold2nd</code>分别保存第一次买入后的资金，第一次卖出后的资金，第二次买入后的资金，第二次卖出后的资金。</p>
+<p>依次遍历股价数组，</p>
+<p>如果在当前价格第一次买入，耗费资金<code>prices[i]</code>,则第一次买入后剩余资金为<code>buy1st=-prices[i]</code>,</p>
+<p>如果之前已经购买过股票，且当前为第一次卖出,则卖出获利<code>prices[i]</code>,卖出后资金为<code>sold1st=buy1st + prices[i]</code></p>
+<p>如果当前为第二次买卖行为，在操作之前的资金为第一次卖出后的资金<code>sold1st</code>,所以，若在当前价格再次买入，耗费资金<code>prices[i]</code>,则买入后剩余资金变为<code>buy2nd=sold1st - prices[i]</code></p>
+<p>如果之前已经进行过第二次的买入行为，要在本次进行第二次卖出活动，卖出后将获得<code>prices[i]</code>,资金变为<code>buy2nd+prices[i]</code></p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; prices)</span> </span>&#123;</div><div class="line">        <span class="comment">// 假设起始资金为0，</span></div><div class="line">        <span class="comment">// 使用4个变量分别表示第一次买入后的资金,第一次卖出后的资金，第二次买入后的资金，第二次卖出后的资金</span></div><div class="line">        <span class="keyword">int</span> buy1st = INT_MIN, sold1st = <span class="number">0</span>, buy2nd = INT_MIN, sold2nd = <span class="number">0</span>;</div><div class="line">        <span class="comment">// 为了保证获利最大化，需要保证每次的资金量最大</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> price : prices)</div><div class="line">        &#123;</div><div class="line">            <span class="comment">// 为了防止本次买入操作覆盖之前的买入操作，应该先计算卖出再计算买入；</span></div><div class="line">            <span class="comment">// 同理，因为第二次的操作需要在第一次操作的基础上进行，应该先计算第二次的操作以防止覆盖</span></div><div class="line">            sold2nd = max(sold2nd, buy2nd + price);</div><div class="line">            buy2nd = max(buy2nd, sold1st - price);</div><div class="line">            sold1st = max(sold1st, buy1st + price);</div><div class="line">            buy1st = max(buy1st, -price);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> sold2nd;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<hr>
+<a href="/posts//posts/20161202170711/" title="leetcode best Time Buy and SellStock I">leetcode best Time Buy and SellStock I</a>
+<a href="/posts//posts/201612021714/" title="leetcode Best Time to Buy and Sell Stock II">leetcode Best Time to Buy and Sell Stock II</a>
+
+<a href="/posts//posts/201612021923/" title="leetcode Best Time to Buy and Sell Stock with Cooldown">leetcode Best Time to Buy and Sell Stock with Cooldown</a>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Best-Time-to-Buy-and-Sell-Stock-III&quot;&gt;&lt;a href=&quot;#Best-Time-to-Buy-and-Sell-Stock-III&quot; class=&quot;headerlink&quot; title=&quot;Best Time to Buy and S
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="http://www.wowx.info/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="array" scheme="http://www.wowx.info/tags/array/"/>
+    
+      <category term="dp" scheme="http://www.wowx.info/tags/dp/"/>
+    
+      <category term="leetcode" scheme="http://www.wowx.info/tags/leetcode/"/>
+    
+  </entry>
   
   <entry>
     <title>leetcode Best Time to Buy and Sell Stock II</title>
@@ -80,11 +206,11 @@
   </entry>
   
   <entry>
-    <title>leetcode_bestTimeBuyandSellStockI</title>
+    <title>leetcode best Time Buy and SellStock I</title>
     <link href="http://www.wowx.info/posts//posts/20161202170711/"/>
     <id>http://www.wowx.info/posts//posts/20161202170711/</id>
     <published>2016-12-02T09:07:11.000Z</published>
-    <updated>2016-12-02T11:29:58.583Z</updated>
+    <updated>2016-12-02T11:34:22.859Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Best-Time-to-Buy-and-Sell-Stock"><a href="#Best-Time-to-Buy-and-Sell-Stock" class="headerlink" title="Best Time to Buy and Sell Stock"></a>Best Time to Buy and Sell Stock</h2><blockquote>
 <p>Say you have an array for which the <em>i</em>th element is the price of a given stock on day <em>i</em>.</p>
@@ -126,9 +252,9 @@
 <h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">class Solution &#123;</div><div class="line">  public:</div><div class="line">  	int maxProfit(vector&lt;int&gt;&amp; prices) &#123;</div><div class="line">		int buy(INT_MIN), sell(0);</div><div class="line">      	for(int price: prices)</div><div class="line">          &#123;</div><div class="line">            sell = max(buy + price, sell);</div><div class="line">          	buy = max(-price, buy);</div><div class="line">          &#125;</div><div class="line">      	return sell;</div><div class="line">  	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 <hr>
 <a href="/posts//posts/201612021714/" title="leetcode Best Time to Buy and Sell Stock II">leetcode Best Time to Buy and Sell Stock II</a>
+<a href="/posts//posts/201612021917/" title="leetcode Best Time to Buy and Sell Stock III">leetcode Best Time to Buy and Sell Stock III</a>
 
-
-
+<a href="/posts//posts/201612021923/" title="leetcode Best Time to Buy and Sell Stock with Cooldown">leetcode Best Time to Buy and Sell Stock with Cooldown</a>
 ]]></content>
     
     <summary type="html">
@@ -1785,149 +1911,6 @@ logging.warning(&apos;is when this event was logged.&apos;)
     
     
       <category term="机器学习" scheme="http://www.wowx.info/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>机器学习算法笔记1_1:线性回归</title>
-    <link href="http://www.wowx.info/posts/undefined/"/>
-    <id>http://www.wowx.info/posts/undefined/</id>
-    <published>2016-06-15T05:04:36.000Z</published>
-    <updated>2016-11-25T17:22:09.731Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="http://img2.imgtn.bdimg.com/it/u=4288980725,4019769355&amp;fm=21&amp;gp=0.jpg" alt=""><br><a id="more"></a><br>形式 $$h(x)=\sum_{i=0}^n\theta_ix_i=\theta^Tx$$</p>
-<p>代价函数:$$J(\theta)=\frac{1}{2}\sum<em>{i=1}^m(h(x</em>\theta^{(i)})-y^{(i)})^2$$</p>
-<h1 id="LMS-Least-Mean-Squares-算法"><a href="#LMS-Least-Mean-Squares-算法" class="headerlink" title="LMS(Least Mean Squares)算法"></a>LMS(Least Mean Squares)算法</h1><pre><code>1. 参数更新原则
-    梯度下降法，参数沿着使代价函数下降最快的方向改变，其中$\alpha$为学习速率
-    ![\theta](http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/94671222.jpg)
-    - 单样本更新
-        ![single sample](http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/52959073.jpg)
-        ![update](http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/42085607.jpg)
-        可以看到，当误差($y^{(i)}-h_\theta(x^{(i)})$)越大时，参数更新幅度越大，反之较小。
-        这只是针对一个样本的情况，当有多个样本时，有以下两种方法更新参数
-  - 批处理算法
-      ![](http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/74290904.jpg)
-  - 随机梯度下降法(stochastic gradient descent)
-      ![](http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/54579329.jpg)
-      由于批处理算法每次更新都需要浏览整个数据集，所以，通常来说(特别是训练街特别大的时候)，随机梯度下降法具有更快的收敛速度。
-</code></pre><h2 id="LMS的矩阵表示"><a href="#LMS的矩阵表示" class="headerlink" title="LMS的矩阵表示"></a>LMS的矩阵表示</h2><pre><code>1. 矩阵知识
-      1. 矩阵导数
-          ![](http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/43873001.jpg)
-      2. 迹
-          ![](http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/14921239.jpg)
-
-          - 如果`AB`是方阵则`trAB=trBA`，同理
-              ![](http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/603470.jpg)
-
-          - 其他性质
-              ![](http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/48266716.jpg) 
-              ![](http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/46476608.jpg)
-              `(4)`中要求A为非奇异矩阵
-3. 矩阵表示LMS
-    ![](http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/11349673.jpg)
-    ![](http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/42136785.jpg)
-    由`(2)(3)`可得
-    ![](http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/49393521.jpg)
-    所以
-    ![](http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/1131409.jpg)
-    其中第二步到第三步是因为$J(\theta)$是一个实数，而对于实数a有`a=tr(a)`；
-    第三步到第四步是因为$trA=trA^T$;
-    第四步到第五步利用了公式`(5)`,其中$A^T=\theta,B=B^T=X^TX,C=I$
-    当$J(\theta)$最小时，其对于$\theta$的导数为0，即有$X^TX\theta=X^Ty$即$\theta=(X^TX)^{-1}X^Ty$
-</code></pre><h1 id="线性回归代价函数J解释"><a href="#线性回归代价函数J解释" class="headerlink" title="线性回归代价函数J解释"></a>线性回归代价函数<code>J</code>解释</h1><pre><code>- 形式：将目标变量和自变量通过下式联系起来：
-    ![](http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/79597146.jpg)
-    其中$\epsilon^{(i)}$是误差项并且假设它服从高斯(Gaussian)独立同分布(IID, independently and identically distributed)
-    ![](http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/68010438.jpg)
-    即
-    ![](http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/44729673.jpg)
-    为了强调这个函数是由$\theta$决定,我们将其称为似然函数：
-    ![](http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/89092285.jpg)
-    由于$\epsilon^{(i)}$是独立同分布的，所以
-    ![](http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/11990276.jpg)
-    根据最大似然法则，我们应该选择使上面似然概率最大的$\theta$，为了方便，将其化为下面的对数似然函数形式
-    ![](http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/11566928.jpg)
-    所以，最大化似然函数等价于最小化下式：
-    ![](http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/47628282.jpg)
-    **这就是我们前面提到的代价函数**
-</code></pre><h1 id="局部加权线性回归-LWR-locally-weighted-linear-regression"><a href="#局部加权线性回归-LWR-locally-weighted-linear-regression" class="headerlink" title="局部加权线性回归(LWR locally weighted linear regression)"></a>局部加权线性回归(LWR locally weighted linear regression)</h1><pre><code>![](http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/88233407.jpg)
-当$\omega$很大时，该项在代价函数中的作用变得很明显；反之，对应项的误差将会被忽略。
-- 目的： 防止过拟合
-
-- $\omega$的选择：
-    ![](http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/36404035.jpg)
-    $x^{(i)}$为第i个样本点，x为查询点，两者越接近，对应项权重越靠近1，否则，趋近于0；$\tau$被称为带宽(bandwidth)参数，它控制权重相对于$x^{(i)}-x$改变的快慢。
-    这是我们接触的第一个非参数方法
-</code></pre><p>  （斯坦福机器学习教程）</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;http://img2.imgtn.bdimg.com/it/u=4288980725,4019769355&amp;amp;fm=21&amp;amp;gp=0.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;
-    
-    </summary>
-    
-      <category term="算法" scheme="http://www.wowx.info/categories/%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="机器学习" scheme="http://www.wowx.info/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Docker虚拟机与宿主机端口映射(Mac)</title>
-    <link href="http://www.wowx.info/posts/undefined/"/>
-    <id>http://www.wowx.info/posts/undefined/</id>
-    <published>2016-06-15T04:57:32.000Z</published>
-    <updated>2016-11-25T17:22:09.731Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="http://www.kankanews.com/ICkengine/wp-content/plugins/wp-o-matic/cache/34a4feb39d_14061019117836.png" alt=""><br><a id="more"></a></p>
-<p>由于Boot2Docker的存在，造成了三层Mac-&gt;VirtualBox-&gt;Docker网络,这样就造成了如果我们即使在容器启动时使用<code>-p</code>参数暴露了相应端口宿主却仍然访问不了容器,这时候就需要手动修改宿主机到virtualbox的端口映射来解决这个问题。<br>由VirtualBox到Docker的映射可以通过run容器的时候指定-p参数实现，而从宿主机到VirtualBox端口映射需要通过下述方法实现:</p>
-<ol>
-<li><p>查询虚拟机网络：</p>
-<pre><code>$ VBoxManage list vms
-</code></pre><p>查询虚拟机网络状态， 默认虚拟机名为’default’</p>
-<pre><code>$ VBoxManage showvminfo &quot;default&quot; | grep NIC
-</code></pre><p>2.关闭运行中的虚拟机<br> 由于Boot2Docker会自动运行VirtualBox中的虚拟机，所以在设置网络映射时必须先关闭运行中的虚拟机。否则，将出现The machine ‘boot2docker’ is already locked for a session (or being unlocked)的错误提示</p>
-<pre><code>$ VBoxManage controlvm &quot;default&quot; poweroff
-</code></pre></li>
-<li><p>修改虚拟机与Mac系统的网络映射<br> 根据实际需要进行网络映射，其中</p>
-<ul>
-<li>rulename: 自定义规则名称</li>
-<li>hostip: Mac访问地址，可不填</li>
-<li>hostport: Mac映射端口</li>
-<li>guestip: 虚拟机访问地址，可不填</li>
-<li><p>guestport: 虚拟机映射端口</p>
-<pre><code>$ VBoxManage modifyvm &quot;dufault&quot; --natpf1 &quot;&lt;Rule Name&gt;,&lt;tcp|udp&gt;,&lt;Host IP&gt;,&lt;Host Port&gt;,&lt;Guest IP&gt;,&lt;Guest Port&gt;&quot;
-</code></pre></li>
-</ul>
-</li>
-<li><p>启动虚拟机</p>
-<p> 设置完成后重新启动虚拟机 $ VBoxManage startvm “default”</p>
-</li>
-<li><p>运行镜像</p>
-<p> 以wwj718提供的edX docker为例，运行其镜像</p>
-<pre><code>$ docker run -itd -p 8000:80 -p 8010:18010 --name edX wwj718/edx_cypress_docker:1.05
-</code></pre></li>
-<li><p>查看容器运行状态</p>
-<pre><code>$ docker ps
-</code></pre></li>
-<li><p>其他 - 删除映射端口，也需要关闭虚拟机，删除命令如下</p>
-<pre><code>$ VBoxManage modifyvm &quot;boot2docker-vm&quot; --natpf1 delete
-</code></pre></li>
-</ol>
-<p><a href="http://www.cnblogs.com/exnihilo/p/4891346.html" target="_blank" rel="external">阅读原文</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;http://www.kankanews.com/ICkengine/wp-content/plugins/wp-o-matic/cache/34a4feb39d_14061019117836.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;
-    
-    </summary>
-    
-      <category term="工具" scheme="http://www.wowx.info/categories/%E5%B7%A5%E5%85%B7/"/>
-    
-    
-      <category term="大数据工具" scheme="http://www.wowx.info/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%B7%A5%E5%85%B7/"/>
     
   </entry>
   
