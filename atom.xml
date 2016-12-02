@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.wowx.info/"/>
-  <updated>2016-12-02T09:16:40.944Z</updated>
+  <updated>2016-12-02T11:30:24.547Z</updated>
   <id>http://www.wowx.info/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>leetcode_bestTimeBuyandSellStockII</title>
+    <title>leetcode Best Time to Buy and Sell Stock II</title>
     <link href="http://www.wowx.info/posts//posts/201612021714/"/>
     <id>http://www.wowx.info/posts//posts/201612021714/</id>
     <published>2016-12-02T09:14:42.000Z</published>
-    <updated>2016-12-02T09:16:40.944Z</updated>
+    <updated>2016-12-02T11:30:24.547Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Best-Time-To-buy-and-sell-stock-II"><a href="#Best-Time-To-buy-and-sell-stock-II" class="headerlink" title="Best Time To buy and sell stock II"></a>Best Time To buy and sell stock II</h2><blockquote>
 <p>Say you have an array for which the <em>i</em>th element is the price of a given stock on day <em>i</em>.</p>
@@ -55,6 +55,11 @@
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sell[i]=max(buy[i-1]+prices[i], sell[i-1]);</div><div class="line">buy[i]=max(sell[i-1]-prices[i], buy[i-1]);</div></pre></td></tr></table></figure>
 <h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">class Solution &#123;</div><div class="line">  public:</div><div class="line">  	int maxProfit(vector&lt;int&gt;&amp; prices) &#123;</div><div class="line">		int buy(INT_MIN), sell(0), prev_sell;</div><div class="line">      	for(int price: prices)</div><div class="line">          &#123;</div><div class="line">          	prev_sell = sell;</div><div class="line">            sell = max(buy + price, prev_sell);</div><div class="line">          	buy = max(prev_sell-price, buy);</div><div class="line">          &#125;</div><div class="line">      	return sell;</div><div class="line">  	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<hr>
+<a href="/posts//posts/20161202170711/" title="leetcode_bestTimeBuyandSellStockI">leetcode_bestTimeBuyandSellStockI</a>
+
+
+
 ]]></content>
     
     <summary type="html">
@@ -79,7 +84,7 @@
     <link href="http://www.wowx.info/posts//posts/20161202170711/"/>
     <id>http://www.wowx.info/posts//posts/20161202170711/</id>
     <published>2016-12-02T09:07:11.000Z</published>
-    <updated>2016-12-02T09:14:14.805Z</updated>
+    <updated>2016-12-02T11:29:58.583Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Best-Time-to-Buy-and-Sell-Stock"><a href="#Best-Time-to-Buy-and-Sell-Stock" class="headerlink" title="Best Time to Buy and Sell Stock"></a>Best Time to Buy and Sell Stock</h2><blockquote>
 <p>Say you have an array for which the <em>i</em>th element is the price of a given stock on day <em>i</em>.</p>
@@ -119,6 +124,11 @@
 </ol>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sell[i]=max(buy[i<span class="number">-1</span>]+prices[i], sell[i<span class="number">-1</span>]);</div><div class="line">buy[i]=max(-prices[i], buy[i<span class="number">-1</span>]);</div></pre></td></tr></table></figure>
 <h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">class Solution &#123;</div><div class="line">  public:</div><div class="line">  	int maxProfit(vector&lt;int&gt;&amp; prices) &#123;</div><div class="line">		int buy(INT_MIN), sell(0);</div><div class="line">      	for(int price: prices)</div><div class="line">          &#123;</div><div class="line">            sell = max(buy + price, sell);</div><div class="line">          	buy = max(-price, buy);</div><div class="line">          &#125;</div><div class="line">      	return sell;</div><div class="line">  	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<hr>
+<a href="/posts//posts/201612021714/" title="leetcode Best Time to Buy and Sell Stock II">leetcode Best Time to Buy and Sell Stock II</a>
+
+
+
 ]]></content>
     
     <summary type="html">

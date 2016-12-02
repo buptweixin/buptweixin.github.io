@@ -363,6 +363,11 @@
 </ol>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sell[i]=max(buy[i<span class="number">-1</span>]+prices[i], sell[i<span class="number">-1</span>]);</div><div class="line">buy[i]=max(-prices[i], buy[i<span class="number">-1</span>]);</div></pre></td></tr></table></figure>
 <h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">class Solution &#123;</div><div class="line">  public:</div><div class="line">  	int maxProfit(vector&lt;int&gt;&amp; prices) &#123;</div><div class="line">		int buy(INT_MIN), sell(0);</div><div class="line">      	for(int price: prices)</div><div class="line">          &#123;</div><div class="line">            sell = max(buy + price, sell);</div><div class="line">          	buy = max(-price, buy);</div><div class="line">          &#125;</div><div class="line">      	return sell;</div><div class="line">  	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<hr>
+<a href="/posts//posts/201612021714/" title="leetcode Best Time to Buy and Sell Stock II">leetcode Best Time to Buy and Sell Stock II</a>
+
+
+
 
 	
 	
