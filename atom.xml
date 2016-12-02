@@ -98,6 +98,46 @@
   </entry>
   
   <entry>
+    <title>leetcode Best Time to Buy and Sell Stock IV</title>
+    <link href="http://www.wowx.info/posts//posts/201612021921/"/>
+    <id>http://www.wowx.info/posts//posts/201612021921/</id>
+    <published>2016-12-02T11:21:42.000Z</published>
+    <updated>2016-12-02T11:35:33.991Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Best-Time-to-Buy-and-Sell-Stock-IV"><a href="#Best-Time-to-Buy-and-Sell-Stock-IV" class="headerlink" title="Best Time to Buy and Sell Stock IV"></a>Best Time to Buy and Sell Stock IV</h2><blockquote>
+<p>Say you have an array for which the <em>i</em>th element is the price of a given stock on day <em>i</em>.</p>
+<p>Design an algorithm to find the maximum profit. You may complete at most <strong>k</strong> transactions.</p>
+<p><strong>Note:</strong><br>You may not engage in multiple transactions at the same time (ie, you must sell the stock before you buy again).</p>
+</blockquote>
+<h3 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h3><p>假设有一个数组，它的第i个元素表示某只股票在第i天的股价，设计一个算法找出最大收益，要求最多能进行k次买卖操作。</p>
+<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>和上一题类似，只是将四个买入卖出变量替换成了两个买入卖出数组buys和solds。</p>
+<p>另外，在test case中会出现多达100000维的prices且k接近100000，如果用同样的方法解会造成LTE，需要区别对待，这时，做一个判断，若k&gt;prices.size()/2,则将所有相邻递增的价格的delta累加在一起。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="keyword">int</span> k, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; prices)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (k &lt; <span class="number">1</span>) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        </div><div class="line">        <span class="keyword">if</span> (k &gt; prices.size() / <span class="number">2</span>)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">long</span> rst = <span class="number">0</span>;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; prices.size(); ++i)</div><div class="line">                <span class="keyword">if</span> (prices[i] &gt; prices[i - <span class="number">1</span>])</div><div class="line">                    rst += prices[i] - prices[i - <span class="number">1</span>];</div><div class="line">            <span class="keyword">return</span> rst;</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; buys(k, INT_MIN), solds(k, <span class="number">0</span>);</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> price : prices)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = buys.size() - <span class="number">1</span>; i &gt; <span class="number">0</span>; --i)</div><div class="line">            &#123;</div><div class="line">                solds[i] = max(solds[i], buys[i] + price);</div><div class="line">                buys[i] = max(buys[i], solds[i<span class="number">-1</span>] - price);</div><div class="line">            &#125;</div><div class="line">            solds[<span class="number">0</span>] = max(solds[<span class="number">0</span>], buys[<span class="number">0</span>] + price);</div><div class="line">            buys[<span class="number">0</span>] = max(buys[<span class="number">0</span>], -price);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> solds[k - <span class="number">1</span>];   </div><div class="line">    &#125;  </div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<hr>
+<a href="/posts//posts/20161202170711/" title="leetcode best Time Buy and SellStock I">leetcode best Time Buy and SellStock I</a>
+<a href="/posts//posts/201612021714/" title="leetcode Best Time to Buy and Sell Stock II">leetcode Best Time to Buy and Sell Stock II</a>
+<a href="/posts//posts/201612021917/" title="leetcode Best Time to Buy and Sell Stock III">leetcode Best Time to Buy and Sell Stock III</a>
+<a href="/posts//posts/201612021923/" title="leetcode Best Time to Buy and Sell Stock with Cooldown">leetcode Best Time to Buy and Sell Stock with Cooldown</a>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Best-Time-to-Buy-and-Sell-Stock-IV&quot;&gt;&lt;a href=&quot;#Best-Time-to-Buy-and-Sell-Stock-IV&quot; class=&quot;headerlink&quot; title=&quot;Best Time to Buy and Sel
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="http://www.wowx.info/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="array" scheme="http://www.wowx.info/tags/array/"/>
+    
+      <category term="dp" scheme="http://www.wowx.info/tags/dp/"/>
+    
+      <category term="leetcode" scheme="http://www.wowx.info/tags/leetcode/"/>
+    
+  </entry>
+  
+  <entry>
     <title>leetcode Best Time to Buy and Sell Stock III</title>
     <link href="http://www.wowx.info/posts//posts/201612021917/"/>
     <id>http://www.wowx.info/posts//posts/201612021917/</id>
@@ -1856,46 +1896,6 @@ logging.warning(&apos;is when this event was logged.&apos;)
 <li>形式：<br> <img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/29689208.jpg" alt=""><br> $\eta$称为自然参数(natural parameter), T(y)是充分统计量（通常T(y)=y）,$a(\eta)$称为log partition function，上式中$e^{-a(\eta)}$作为归一化参数。通过改变$\eta$可以得到不同的分布<ul>
 <li>伯努利分布（对应逻辑回归）：<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/87755533.jpg" alt=""><br>上式中$\eta=log(\frac{\phi}{1-\phi})$,有趣的是，如果我们反解出$\phi$会得到$\phi=\frac{1}{1+e^{-\eta}}$,正好是sigmoid函数<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/41184129.jpg" alt=""></li>
 <li>高斯分布(对应线性回归)<br>为了简便起见，令$\sigma^2=1$得到<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/3441285.jpg" alt=""><br>其中：<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/7657473.jpg" alt=""></li>
-</ul>
-</li>
-</ol>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;http://img2.imgtn.bdimg.com/it/u=4288980725,4019769355&amp;amp;fm=21&amp;amp;gp=0.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;
-    
-    </summary>
-    
-      <category term="算法" scheme="http://www.wowx.info/categories/%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="机器学习" scheme="http://www.wowx.info/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>机器学习算法笔记1_2:分类和逻辑回归(Classification and Logistic regression)</title>
-    <link href="http://www.wowx.info/posts/undefined/"/>
-    <id>http://www.wowx.info/posts/undefined/</id>
-    <published>2016-06-15T05:08:10.000Z</published>
-    <updated>2016-11-25T17:22:09.731Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="http://img2.imgtn.bdimg.com/it/u=4288980725,4019769355&amp;fm=21&amp;gp=0.jpg" alt=""><br><a id="more"></a></p>
-<h1 id="逻辑回归："><a href="#逻辑回归：" class="headerlink" title="逻辑回归："></a>逻辑回归：</h1><p>虽然逻辑回归的名字为<code>回归</code>，实际上它的作用是通过计算不同样本为不同类别的概率来预测其所属的类别，即它是一种分类算法。</p>
-<ol>
-<li><p>形式</p>
-<p> 逻辑回归的形式为：</p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/33256912.jpg" alt=""></p>
-<p>它采用sigmoid函数：$$g(z)=\frac{1}{1+e^{-z}}$$<br>其函数图形如下：<br><img src="http://a.hiphotos.baidu.com/baike/c0%3Dbaike80%2C5%2C5%2C80%2C26/sign=95100fc203087bf469e15fbb93ba3c49/77c6a7efce1b9d16757faae8f2deb48f8d5464fa.jpg" alt=""></p>
-<p>它可以将输入映射为<code>[0,1]</code>区间上的”概率”。<br>sigmoid函数有一个非常好的性质：它的导数形式为$g^\prime(z)=(1-g(z))g(z)$，这样我们可以直接通过$g(z)$求得$g^\prime(z)$。</p>
-</li>
-<li><p>逻辑回归</p>
-<p>假设：<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/3452462.jpg" alt=""><br>即：<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/15493701.jpg" alt=""><br>若有m个样本，则似然函数形式是：<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/46449563.jpg" alt=""><br>对数形式：<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/77798218.jpg" alt=""><br>采用梯度上升法求其最大值<br>求导：<br>  <img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/86076883.jpg" alt=""><br>更新规则为：<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/96742367.jpg" alt=""><br>可以发现，则个规则形式上和LMS更新规则是一样的，然而，他们的分界函数$h_\theta(x)$却完全不相同了（逻辑回归中h(x)是非线性函数）。关于这部分内容在GLM部分解释。<br>注意：若h(x)不是sigmoid函数而是阈值函数：<br>  <img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/48803505.jpg" alt=""><br>  这个算法称为感知学习算法。虽然得到更新准则虽然相似，但与逻辑回归完全不是一个算法了。</p>
-</li>
-<li>另一种最大化似然函数的方法–牛顿逼近法<ul>
-<li>原理：假设我们想得到一个函数的过零点$f(\theta)=0$,可以通过一下方法不断更新$\theta$来得到：<br>  <img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/67155830.jpg" alt=""><br>  其直观解释如下图：<br>  <img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/3954882.jpg" alt=""><br>  给定一个初始点$\theta_0$,如果$f(\theta_0)$和其导数同号说明过零点在初始点左边，否则在初始点右边，将初始点更新过该店的切线的过零点继续上述步骤，得到的切线过零点会不断逼近最终所要求的函数过零点。</li>
-<li>应用： 在逻辑回归中，我们要求似然函数的最大(最小)值，即似然函数导数为0， 因此可以利用牛顿逼近法：<br>  <img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/7125742.jpg" alt=""><br>  由于lr算法中$\theta$是一个向量，上式改写为：<br>  <img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/33301254.jpg" alt=""><br>  其中<strong>H</strong>为Hessian矩阵:<br>  <img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/26633663.jpg" alt=""><br>  牛顿法往往比(批处理)梯度下降法更快收敛。</li>
 </ul>
 </li>
 </ol>
