@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Title -->
+    
+    <title>
+        cmake note | 野原圆长的Blog
+    </title>
+    
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/wx.png">
+    <link rel="icon" sizes="192x192" href="/img/wx.png">
+    <link rel="apple-touch-icon" href="/img/wx.png">
+    
+    <!-- Meta & INfo -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="Xin Wei">
+    <meta name="description" content="null">
+    <meta name="keywords" content="Blog deep_learging">
+    
+    <!--iOS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+    
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="野原圆长的Blog">
+    
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://www.wowx.info">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="cmake note | 野原圆长的Blog">
+    <meta property="og:description" content="null">
+    
+     <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+        
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+    
+    <!-- Import CSS -->
+    <link rel="stylesheet" href="/css/material.min.css">
+    <link rel="stylesheet" href="/css/style.min.css">
+    <!-- Config CSS -->
+
+
+<!-- Other Styles -->
+<style>
+	body, html{
+		font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+	}
+	
+    a{
+        color: #00838F
+    }
+    
+    .mdl-card__media,
+    #search-label,
+    #search-form-label:after,
+    #scheme-Paradox .hot_tags-count,
+    #scheme-Paradox .sidebar_archives-count,
+    #scheme-Paradox .sidebar-colored .sidebar-header,
+    #scheme-Paradox .sidebar-colored .sidebar-badge{
+        background-color: #0097A7 !important
+    }
+    
+	/* Sidebar User Drop Down Menu Text Color */
+	#scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+    #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus{
+        color: #0097A7 !important
+    }
+    
+    #post_entry-right-info,
+    .sidebar-colored .sidebar-nav li:hover > a,
+    .sidebar-colored .sidebar-nav li:hover > a i,
+    .sidebar-colored .sidebar-nav li > a:hover,
+    .sidebar-colored .sidebar-nav li > a:hover i,
+    .sidebar-colored .sidebar-nav li > a:focus i,
+    .sidebar-colored .sidebar-nav > .open > a,
+    .sidebar-colored .sidebar-nav > .open > a:hover,
+    .sidebar-colored .sidebar-nav > .open > a:focus,
+    #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a{
+        color: #0097A7 !important
+    }
+    
+    .toTop{
+        background: #757575 !important
+    }
+		
+	.material-layout .material-post>.material-nav,
+	.material-layout .material-index>.material-nav,
+	.material-nav a{
+		color: #757575;
+	}
+		
+	#scheme-Paradox .MD-burger-layer {
+		background-color: #757575;
+	}
+
+	#scheme-Paradox #post-toc-trigger-btn{
+		color: #757575;
+	}
+	
+	.post-toc a:hover{
+		color: #00838F;
+		text-decoration: underline;
+	}
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+        body{
+            background-color: #F5F5F5
+        }
+		
+		/* blog_info bottom background */
+        #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+            background-color: #fff;
+        }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+        .fade {
+            transition: all 800ms linear;
+            -webkit-transform: translate3d(0,0,0);
+            -moz-transform: translate3d(0,0,0);
+            -ms-transform: translate3d(0,0,0);
+            -o-transform: translate3d(0,0,0);
+            transform: translate3d(0,0,0);
+            opacity: 1;
+        }
+
+        .fade.out{
+            opacity: 0;
+        }
+    </style>
+
+	<script src="/js/jquery.min.js"></script>
+	
+	<link rel="stylesheet" href="/css/highlight/solarized-dark.css">
+	
+	<!-- UC Browser Compatible-->
+	<script>
+		var agent = navigator.userAgent.toLowerCase();
+		if(agent.indexOf('ucbrowser')>0) {
+			document.write('<link rel="stylesheet" href="/css/uc.css">');
+		   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+		}
+	</script>
+    
+    <!-- Custom Head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+</head>
+	
+	
+
+    <body id="scheme-Paradox">
+
+		
+        <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+				
+			
+			
+            <!-- Main Container -->
+            <main class="material-layout__content" id="main">
+				
+                <!-- Top Anchor -->
+                <div id="top"></div>
+				
+				
+                <!-- Hamburger Button -->
+                <button class="MD-burger-icon sidebar-toggle">
+                    <span class="MD-burger-layer"></span>
+                </button>
+				
+				
+                
+	<!-- Back Button -->
+<!--
+	<div class="material-back" id="backhome-div" tabindex="0">
+		<a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" href="#" onclick="window.history.back();return false;" target="_self" role="button" data-upgraded=",MaterialButton,MaterialRipple">
+			<i class="material-icons" role="presentation">arrow_back</i>
+			<span class="mdl-button__ripple-container">
+				<span class="mdl-ripple"></span>
+			</span>
+		</a>
+	</div>			
+-->
+	<!-- Left aligned menu below button -->
+	<button id="post-toc-trigger-btn"
+			class="mdl-button mdl-js-button mdl-button--icon">
+	  <i class="material-icons">format_list_numbered</i>
+	</button>
+
+	<ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
+		for="post-toc-trigger-btn">
+			
+			<ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#基本构建"><span class="post-toc-number">1.</span> <span class="post-toc-text">基本构建</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#工程构建"><span class="post-toc-number">2.</span> <span class="post-toc-text">工程构建</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#文件结构"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">文件结构</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#CMakeLists-txt"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">CMakeLists.txt</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#说明"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">说明</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安装"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">安装</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#静态库和动态库的构建"><span class="post-toc-number">3.</span> <span class="post-toc-text">静态库和动态库的构建</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#目录结构"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">目录结构</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#CMakeLists-txt-1"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">CMakeLists.txt</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#工程CMakeLists-txt"><span class="post-toc-number">3.2.1.</span> <span class="post-toc-text">工程CMakeLists.txt</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#lib-CMakeLists-txt"><span class="post-toc-number">3.2.2.</span> <span class="post-toc-text">lib/CMakeLists.txt</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#解释"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">解释</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用外部共享库和头文件"><span class="post-toc-number">4.</span> <span class="post-toc-text">使用外部共享库和头文件</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#文件结构-1"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">文件结构</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#CMakeLists-txt-2"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">CMakeLists.txt</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#工程"><span class="post-toc-number">4.2.1.</span> <span class="post-toc-text">工程</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#src-CMakeLists-txt"><span class="post-toc-number">4.2.2.</span> <span class="post-toc-text">src/CMakeLists.txt</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#头文件添加"><span class="post-toc-number">4.2.3.</span> <span class="post-toc-text">头文件添加</span></a></li></ol></li></ol></li></ol>
+		
+<!--			<li class="mdl-menu__item">Some Action</li>-->
+	</ul>
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+		
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+	<!-- Paradox Post Header -->
+	
+		<!-- Custom Thumbnail -->
+		<div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(http://ww4.sinaimg.cn/large/6425ef91jw1fal3j2cvarj20be06g0sw.jpg)">
+	
+        <p class="article-headline-p">
+            cmake note
+        </p>
+    </div>
+
+	
+
+				
+				
+					<!-- Paradox Post Info -->
+					<div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+    
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>Xin Wei</strong>
+        <span>12月 10, 2016</span>
+    </div>
+    
+    <div class="section-spacer"></div>
+	
+    <!-- Favorite -->
+<!--
+    <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+        <i class="material-icons" role="presentation">favorite</i>
+        <span class="visuallyhidden">favorites</span>
+    </button>
+-->
+    
+    <!-- Tags (bookmark) -->
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/cmake/">cmake</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/cpp/">cpp</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/tools/">tools</a>
+    </ul>
+    
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+    
+    <!-- Leancloud Views -->
+    <a class="post_share-link" href="#">
+        <li class="mdl-menu__item">
+            <span id="/posts/posts/" class="leancloud-views_num" data-flag-title="cmake note">
+     &nbsp;浏览量
+</span>
+        </li>
+    </a>
+    
+    
+    
+    
+    <!-- Share Twitter -->
+    <a class="post_share-link" href="https://twitter.com/intent/tweet?text=cmake note&url=http://www.wowx.info//posts/posts/index.html&via=Xin Wei" target="_blank">
+        <li class="mdl-menu__item">
+            分享到 Twitter
+        </li>
+    </a>
+    
+    <!-- Share Google+ -->
+    <a class="post_share-link" href="https://plus.google.com/share?url=http://www.wowx.info//posts/posts/index.html" target="_blank">
+        <li class="mdl-menu__item">
+            分享到 Google+
+        </li>
+    </a>
+    
+    <!-- Share Weibo -->
+    <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=cmake note&url=http://www.wowx.info//posts/posts/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <li class="mdl-menu__item">
+            分享到微博
+        </li>
+    </a>
+</ul>
+</div>
+				
+
+                <!-- Post Content -->
+                <div id="post-content" class="markdown-Material mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+	
+		<p>本文是<a href="http://sewm.pku.edu.cn/src/paradise/reference/CMake%20Practice.pdf" target="_blank" rel="external">cmake实践</a>的笔记</p>
+<h2 id="基本构建"><a href="#基本构建" class="headerlink" title="基本构建"></a>基本构建</h2><figure class="highlight cmake"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">PROJECT</span> (HELLO)</div><div class="line"><span class="keyword">SET</span>(SRC_LIST main.c)</div><div class="line"><span class="keyword">MESSAGE</span>(STATUS <span class="string">"This is BINARY dir "</span> <span class="variable">$&#123;HELLO_BINARY_DIR&#125;</span>) </div><div class="line"><span class="keyword">MESSAGE</span>(STATUS <span class="string">"This is SOURCE dir "</span><span class="variable">$&#123;HELLO_SOURCE_DIR&#125;</span>) </div><div class="line"><span class="keyword">ADD_EXECUTABLE</span>(hello <span class="variable">$&#123;SRC_LIST&#125;</span>)</div></pre></td></tr></table></figure>
+<ol>
+<li><code>PROJECT(projectname [CXX] [C] [Java])</code>:工程名</li>
+<li><code>SET (VAR [VALUE] [CACHE TYPE DOCSTRING [FORCE]])</code>：设定变量</li>
+<li><p><code>MESSAGE([SEND_ERROR | STATUS | FATAL_ERROR] &quot;message to display&quot; ...)</code></p>
+<p><code>SEND_ERROR</code>:产生错误，生成过程被跳过<br><code>STATUS</code>: 输出前缀为<code>--</code>的信息<br><code>FATAL_ERROR</code>:立即终止所有cmake过程</p>
+</li>
+<li><code>ADD_EXECUTABLE(hello ${SRC_LIST})</code>:定义了这个工程会生成一个文件名为 hello的可执行文件,相关的源文件是 SRC_LIST 中定义的源文件列表</li>
+<li>cmake 中除了在if中之外，引用变量需要用<code>${VAR}</code>括起来</li>
+</ol>
+<h2 id="工程构建"><a href="#工程构建" class="headerlink" title="工程构建"></a>工程构建</h2><h3 id="文件结构"><a href="#文件结构" class="headerlink" title="文件结构"></a>文件结构</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── CMakeLists.txt</div><div class="line">├── COPYRIGHT</div><div class="line">├── README</div><div class="line">├── doc</div><div class="line">│   └── hello.txt</div><div class="line">├── runhello.sh</div><div class="line">└── src</div><div class="line">    ├── CMakeLists.txt</div><div class="line">    └── main.cpp</div></pre></td></tr></table></figure>
+<h3 id="CMakeLists-txt"><a href="#CMakeLists-txt" class="headerlink" title="CMakeLists.txt"></a>CMakeLists.txt</h3><p>工程CMakeLists.txt<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">PROJECT (HELLO CXX)</div><div class="line">MESSAGE(STATUS &quot;This is Binary dir&quot; $&#123;HELLO_BINARY_DIR&#125;)</div><div class="line">MESSAGE(STATUS &quot;This is SOURCE dir&quot; $&#123;HELLO_SOURCE_DIR&#125;)</div><div class="line">install(FILES COPYRIGHT README DESTINATION share/doc/cmake/t2)</div><div class="line">INSTALL(PROGRAMS runhello.sh DESTINATION bin)</div><div class="line">install(DIRECTORY doc/ DESTINATION share/doc/cmake/t2)</div><div class="line">ADD_SUBDIRECTORY(src bin)</div></pre></td></tr></table></figure></p>
+<p>src下的CMakeLists.txt<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">set(EXECUTABLE_OUTPUT_PATH $&#123;PROJECT_BINARY_DIR&#125;/bin)</div><div class="line">ADD_EXECUTABLE(hello main.cpp)</div><div class="line">INSTALL(TARGETS hello</div><div class="line">    RUNTIME DESTINATION bin</div><div class="line">    )</div></pre></td></tr></table></figure></p>
+<h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-12-9/24651252.jpg" alt=""></p>
+<ol>
+<li><code>ADD_SUBDIRECTORY(source_dir [binary_dir] [EXCLUDE_FROM_ALL])</code>:这个指令用于向当前工程添加存放源文件的子目录,并可以指定中间二进制和目标二进制存放的位置。EXCLUDE_FROM_ALL 参数的含义是将这个目录从编译过程中排除.指定 bin 目录后,相当于在编译时 将 src 重命名为 bin,所有的中间结果和目标二进制都将存放在 bin 目录。</li>
+<li><code>SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)</code>:换个位置保存目标二进制</li>
+<li><p><code>SET(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)</code></p>
+<p>问题是,我应该把这两条指令写在工程的 CMakeLists.txt 还是 src 目录下的 CMakeLists.txt,把握一个简单的原则,在哪里 ADD_EXECUTABLE 或 ADD_LIBRARY, 如果需要改变目标存放路径,就在哪里加入上述的定义。</p>
+</li>
+</ol>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>安装前缀在通过<code>-DCMAKE_INSTALL_PREFIX</code>指定，如:<code>cmake -DCMAKE_INSTALL_PREFIX=/share/usr ..</code>如果没有指定前缀，默认安装到<code>/usr/local</code>,<br>在<code>CMakeLists.txt</code>中使用<code>DESTINATION</code>指代它</p>
+<ol>
+<li>目标可执行文件的安装</li>
+</ol>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">INSTALL</span>(TARGETS targets...</div><div class="line">          [[ARCHIVE|LIBRARY|RUNTIME]</div><div class="line">                      [DESTINATION &lt;dir&gt;]</div><div class="line">                      [PERMISSIONS permissions...]</div><div class="line">                      [CONFIGURATIONS</div><div class="line">        [Debug|Release|...]]</div><div class="line">                      [COMPONENT &lt;component&gt;]</div><div class="line">                      [OPTIONAL]</div><div class="line">                     ] [...])</div></pre></td></tr></table></figure>
+<p>  例子<br><figure class="highlight cmake"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">INSTALL</span>(TARGETS myrun mylib mystaticlib</div><div class="line">   RUNTIME DESTINATION bin</div><div class="line">   LIBRARY DESTINATION lib</div><div class="line">   ARCHIVE DESTINATION libstatic</div><div class="line">)</div></pre></td></tr></table></figure></p>
+<p>  其中myrun为<code>add_executable</code>中添加的可执行文件变量</p>
+<ol>
+<li>普通文件的安装</li>
+</ol>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">INSTALL</span>(FILES files... DESTINATION &lt;dir&gt;</div><div class="line">          [PERMISSIONS permissions...]</div><div class="line">          [CONFIGURATIONS [Debug|Release|...]]</div><div class="line">          [COMPONENT &lt;component&gt;]</div><div class="line">          [RENAME &lt;name&gt;] [OPTIONAL])</div></pre></td></tr></table></figure>
+<p>  默认权限为644</p>
+<ol>
+<li>非目标文件的可执行文件安装(比如shell脚本之类)</li>
+</ol>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">INSTALL</span>(PROGRAMS files... DESTINATION &lt;dir&gt;</div><div class="line">          [PERMISSIONS permissions...]</div><div class="line">          [CONFIGURATIONS [Debug|Release|...]]</div><div class="line">          [COMPONENT &lt;component&gt;]</div><div class="line">          [RENAME &lt;name&gt;] [OPTIONAL])</div></pre></td></tr></table></figure>
+<p>  默认755权限</p>
+<ol>
+<li><p>目录的安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">INSTALL(DIRECTORY dirs... DESTINATION &lt;dir&gt;</div><div class="line">          [FILE_PERMISSIONS permissions...]</div><div class="line">          [DIRECTORY_PERMISSIONS permissions...]</div><div class="line">          [USE_SOURCE_PERMISSIONS]</div><div class="line">          [CONFIGURATIONS [Debug|Release|...]]</div><div class="line">          [COMPONENT &lt;component&gt;]</div><div class="line">          [[PATTERN &lt;pattern&gt; | REGEX &lt;regex&gt;]</div><div class="line">           [EXCLUDE] [PERMISSIONS permissions...]] [...])</div></pre></td></tr></table></figure>
+<p>如果dirs以<code>/</code>结尾，则安装dirs下的所有文件，否则连同父目录一同安装<br>使用PATTERN可以使用正则表达式过滤</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">  INSTALL(DIRECTORY icons scripts/ DESTINATION share/myproj</div><div class="line">PATTERN &quot;CVS&quot; EXCLUDE</div><div class="line">            PATTERN &quot;scripts/*&quot;</div><div class="line">            PERMISSIONS OWNER_EXECUTE OWNER_WRITE OWNER_READ</div><div class="line">                    GROUP_EXECUTE GROUP_READ)</div></pre></td></tr></table></figure>
+</li>
+<li><p>安装时CMAKE脚本执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">  安装时 CMAKE 脚本的执行:</div><div class="line">INSTALL([[SCRIPT &lt;file&gt;] [CODE &lt;code&gt;]] [...])</div><div class="line">SCRIPT 参数用于在安装时调用 cmake 脚本文件(也就是&lt;abc&gt;.cmake 文件) CODE 参数用于执行 CMAKE 指令,必须以双引号括起来。比如: INSTALL(CODE &quot;MESSAGE(\&quot;Sample install message.\&quot;)&quot;)</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="静态库和动态库的构建"><a href="#静态库和动态库的构建" class="headerlink" title="静态库和动态库的构建"></a>静态库和动态库的构建</h2><h3 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── CMakeLists.txt</div><div class="line">├── build</div><div class="line">└── lib</div><div class="line">    ├── CMakeLists.txt</div><div class="line">    ├── hello.cpp</div><div class="line">    └── hello.h</div></pre></td></tr></table></figure>
+<h3 id="CMakeLists-txt-1"><a href="#CMakeLists-txt-1" class="headerlink" title="CMakeLists.txt"></a>CMakeLists.txt</h3><h4 id="工程CMakeLists-txt"><a href="#工程CMakeLists-txt" class="headerlink" title="工程CMakeLists.txt"></a>工程CMakeLists.txt</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">PROJECT(HELLOLIB)</div><div class="line">ADD_SUBDIRECTORY(lib)</div></pre></td></tr></table></figure>
+<h4 id="lib-CMakeLists-txt"><a href="#lib-CMakeLists-txt" class="headerlink" title="lib/CMakeLists.txt"></a>lib/CMakeLists.txt</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">SET(LIB_SRC hello.cpp)</div><div class="line">ADD_LIBRARY(hello SHARED $&#123;LIB_SRC&#125;)</div><div class="line">ADD_LIBRARY(hello_static STATIC $&#123;LIB_SRC&#125;)</div><div class="line">SET_TARGET_PROPERTIES(hello_static PROPERTIES OUTPUT_NAME hello)</div><div class="line">GET_TARGET_PROPERTY(OUTPUT_VALUE hello_static OUTPUT_NAME)</div><div class="line">MESSAGE(STATUS &quot;The output name of hello_static is:&quot; $&#123;OUTPUT_VALUE&#125;)</div><div class="line">SET_TARGET_PROPERTIES(hello PROPERTIES CLEAN_DIRECT 1)</div><div class="line">SET_TARGET_PROPERTIES(hello_static PROPERTIES CLEAN_DIRECT 1)</div><div class="line">SET_TARGET_PROPERTIES(hello PROPERTIES VERSION 1.1 SOVERSION 1)</div><div class="line"></div><div class="line">INSTALL(TARGETS hello hello_static</div><div class="line">    LIBRARY DESTINATION lib</div><div class="line">    ARCHIVE DESTINATION lib</div><div class="line">    )</div><div class="line"></div><div class="line">INSTALL(FILES hello.h DESTINATION include)</div></pre></td></tr></table></figure>
+<h3 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h3><ol>
+<li><p><code>ADD_LIBRARY</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ADD_LIBRARY(libname    [SHARED|STATIC|MODULE]</div><div class="line">        [EXCLUDE_FROM_ALL]</div><div class="line">              source1 source2 ... sourceN)</div></pre></td></tr></table></figure>
+<p>SHARED: 动态链接库<br>STATIC: 静态链接库<br>MODULE: 在使用 dyld 的系统有效,如果不支持 dyld,则被当作 SHARED 对待<br>EXCLUDE_FROM_ALL 参数的意思是这个库不会被默认构建,除非有其他的组件依赖或者手 工构建。</p>
+</li>
+<li><p><code>SET_TARGET_PROPERTIES</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">SET_TARGET_PROPERTIES,其基本语法是: SET_TARGET_PROPERTIES(target1 target2 ...</div><div class="line">                    PROPERTIES prop1 value1</div><div class="line">                    prop2 value2 ...)</div></pre></td></tr></table></figure>
+</li>
+<li><p>版本号</p>
+<p><code>SET_TARGET_PROPERTIES(hello PROPERTIES VERSION 1.2 SOVERSION 1)</code></p>
+</li>
+</ol>
+<ul>
+<li><code>VERSION</code>: 动态库版本</li>
+<li><code>SOVERSION</code>: API版本</li>
+</ul>
+<h2 id="使用外部共享库和头文件"><a href="#使用外部共享库和头文件" class="headerlink" title="使用外部共享库和头文件"></a>使用外部共享库和头文件</h2><h3 id="文件结构-1"><a href="#文件结构-1" class="headerlink" title="文件结构"></a>文件结构</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── CMakeLists.txt</div><div class="line">├── build</div><div class="line">└── src</div><div class="line">    ├── CMakeLists.txt</div><div class="line">    └── main.cpp</div></pre></td></tr></table></figure>
+<h3 id="CMakeLists-txt-2"><a href="#CMakeLists-txt-2" class="headerlink" title="CMakeLists.txt"></a>CMakeLists.txt</h3><h4 id="工程"><a href="#工程" class="headerlink" title="工程"></a>工程</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">PROJECT(NEWHELLO)</div><div class="line">ADD_SUBDIRECTORY(src bin)</div></pre></td></tr></table></figure>
+<h4 id="src-CMakeLists-txt"><a href="#src-CMakeLists-txt" class="headerlink" title="src/CMakeLists.txt"></a>src/CMakeLists.txt</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">SET(SRC_CPP main.cpp)</div><div class="line">ADD_EXECUTABLE(main $&#123;SRC_CPP&#125;)</div><div class="line">INCLUDE_DIRECTORIES(/Users/weixin/workspace/test/cmake/include)</div><div class="line">TARGET_LINK_LIBRARIES(main /Users/weixin/workspace/test/cmake/lib/libhello.dylib)</div></pre></td></tr></table></figure>
+<h4 id="头文件添加"><a href="#头文件添加" class="headerlink" title="头文件添加"></a>头文件添加</h4><p>如果共享库头文件不在标准搜索路径<code>/usr/include /usr/local/include</code>则需要手动添加</p>
+<ol>
+<li><code>INCLUDE_DIRECTORIES([AFTER|BEFORE] [SYSTEM] dir1 dir2 ...)</code><br><code>SET(CMAKE_INCLUDE_DIRECTORIES_BEFORE on)</code>:将添加的头文件路径放在已有路径前面<br><code>INCLUDE_DIRECTORIES(/usr/include/hello)</code></li>
+<li><p>通过设置环境变量</p>
+<p><code>export CMAKE_INCLUDE_PATH=/usr/include/hello</code><br>然后将<code>INCLUDE_DIRECTORIES(/usr/include/hello)</code>替换为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">  FIND_PATH(myHeader hello.h)</div><div class="line">IF(myHeader)</div><div class="line">INCLUDE_DIRECTORIES($&#123;myHeader&#125;)</div><div class="line">ENDIF(myHeader)</div></pre></td></tr></table></figure>
+<p>FIND_PATH格式:<code>FIND_PATH(myHeader NAMES hello.h PATHS /usr/include
+/usr/include/hello)</code></p>
+</li>
+</ol>
+
+	
+	
+	
+	
+</div>
+				
+				
+
+                <!-- Post Comments -->
+                
+    <!-- 使用多说评论 -->
+    <link rel="stylesheet" href="/css/duoshuo.min.css">
+<style>
+    #ds-thread #ds-reset .ds-post-button{
+        background-color: #0097A7 !important;
+    }
+    #ds-wrapper #ds-reset .ds-icons-32{
+        background-color: #0097A7 !important;
+    }
+    #ds-reset .ds-highlight {
+        color: #0097A7 !important;
+    }
+</style>
+<div id="comments">
+    <!-- 多说评论框 start -->
+        <div class="ds-thread" 
+            data-thread-key="posts//posts//" 
+            data-url="http://www.wowx.info//posts/posts/index.html"
+            data-title="cmake note"></div>
+    <!-- 多说评论框 end -->
+</div>
+
+
+
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    
+    <!-- Prev Nav -->
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/posts//posts/201612021923/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+        </div>
+    </div>
+
+				
+				
+					<!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay "></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored  sidebar-fixed-left" role="navigation">
+	<div id="sidebar-main">
+	    <!-- Sidebar Header -->
+		<div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+    <i class="material-icons">clear_all</i>
+    <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="Xin Wei's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        weixin@bupt.edu.cn
+        <b class="caret"></b>
+    </a>
+</div>
+
+		<!-- Sidebar Navigation  -->
+		<ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+			
+                <li>
+                    <a href="mailto:weixin@bupt.edu.cn" target="_blank" title="Email Me">
+						<i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    <li id="sidebar-first-li">
+        <a href="/" target="_self">
+            <i class="material-icons sidebar-material-icons">home</i>
+             主页
+        </a>
+    </li>
+
+    <!-- I'm Feeling Lucky -->
+<!--
+    <li class="dropdown">
+        <a href="" target="_self">
+            <i class="material-icons sidebar-material-icons">explore</i>
+             sidebar.imlucky
+        </a>
+    </li>
+-->
+
+	
+    <!-- Archives  -->
+    <li class="dropdown">
+        <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+            <i class="material-icons sidebar-material-icons">inbox</i>
+             归档
+            <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+            <a class="sidebar_archives-link" href="/archives/2016/12/">十二月 2016<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">十一月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">十月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/07/">七月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/06/">六月 2016<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/07/">七月 2015<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/06/">六月 2015<span class="sidebar_archives-count">6</span></a>
+        </ul>
+    </li>
+
+    <!-- Divider -->
+    <li class="divider"></li>
+
+
+    <!-- Pages  -->
+	
+		<li>
+			<a href="/" title="home">
+				home
+			</a>
+		</li>
+	
+		<li>
+			<a href="/tags" title="标签">
+				标签
+			</a>
+		</li>
+	
+		<li>
+			<a href="/categories" title="分类">
+				分类
+			</a>
+		</li>
+	
+
+    <!-- Article Numebr  -->
+    <li>
+        <a href="/archives">
+             文章总数
+             <span class="sidebar-badge">44</span>
+        </a>
+    </li>
+</ul>
+
+		<!-- Sidebar Divider -->
+		<div class="sidebar-divider"></div>
+
+		<!-- Sidebar Footer -->
+		<!-- 
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持。 :) 
+-->
+
+<!-- Theme Material -->
+
+<!-- Help & Support -->
+<!--
+<a href="mailto:hiviosey@gmail.com" class="sidebar-footer-text-a">
+    <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+		sidebar.help
+		<span class="mdl-button__ripple-container">
+			<span class="mdl-ripple"></span>
+		</span>
+	</div>
+</a>
+-->
+
+<!-- Feedback -->
+<!--
+<a href="https://github.com/viosey/hexo-theme-material/issues" target="_blank" class="sidebar-footer-text-a">
+    <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+         sidebar.feedback
+                    <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></div>
+</a>
+-->
+
+<!-- Abount Theme -->
+<!--
+<a href="https://blog.viosey.com/index.php/Material.html" target="_blank" class="sidebar-footer-text-a">
+    <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+         sidebar.about_theme
+        <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></div>
+</a>-->
+
+	</div>
+    
+    <!-- Sidebar Sponsor -->
+    
+
+
+</aside>
+
+				
+				
+				
+					<!-- Footer Top Button -->
+					<div class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+				
+				
+				<!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+	
+	
+		<!-- Paradox Footer Left Section -->
+		<div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+    
+    
+    <!-- Facebook -->
+    
+    
+    
+    <!-- Google + -->
+    
+    
+    
+    <!-- Weibo -->
+    
+    <a href="http://weibo.com/buptweixin" target="view_window"><button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-weibo.png);">
+        <span class="visuallyhidden">Weibo</span>
+    </button></a>
+    
+    
+    <!-- Instagram -->
+    
+    
+    
+    <!-- Tumblr -->
+    
+    
+    
+    <!-- Github -->
+    
+    <a href="https://github.com/buptweixin" target="view_window"><button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-github.png);">
+        <span class="visuallyhidden">Github</span>
+    </button></a>
+    
+</div>
+
+
+		<!--Copyright-->
+		<div id="copyright">Copyright&nbsp;©&nbsp;<script type="text/javascript">var fd = new Date();document.write(fd.getFullYear());</script>&nbsp;野原圆长的Blog</div>
+
+		<!-- Paradox Footer Right Section -->
+
+		<!-- 
+		I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+		It will not impact the appearance and can give developers a lot of support :)
+
+		很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+		它不会影响美观并可以给开发者很大的支持。 :) 
+		-->
+
+		<div class="mdl-mini-footer--right-section">
+			<div>
+				<div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+				<div class="footer-develop-div">Theme - <a href="#" target="_blank" class="footer-develop-a">Material</a></div>
+			</div>
+		</div>
+	
+    
+</footer>
+
+                
+				<!-- Import File -->
+<script src="/js/highlight.min.js"></script>
+<script src="/js/js.min.js"></script>
+<script src="/js/nprogress.js"></script>
+
+<script type="text/javascript">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    
+    $('#nprogress .bar').css({
+        'background': '#FF4081'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #FF4081, 0 0 15px #FF4081'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#FF4081',
+        'border-left-color': '#FF4081'
+    });
+    
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+    <!-- Leancloud -->
+	<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+	<script>
+		AV.initialize("1wCxBs3gRuLUAR1VDMEUFx3N-gzGzoHsz", "6sT0Kp8aE2lG69USPb4k0cAb");
+	</script>
+    <script>
+	function showTime(Counter) {
+		var query = new AV.Query(Counter);
+		$(".leancloud-views_num").each(function() {
+			var url = $(this).attr("id").trim();
+			query.equalTo("url", url);
+			query.find({
+				success: function(results) {
+					if (results.length == 0) {
+						var content = '0 ' + $(document.getElementById(url)).text();
+						$(document.getElementById(url)).text(content);
+						return;
+					}
+					for (var i = 0; i < results.length; i++) {
+						var object = results[i];
+						var content = object.get('time') + ' ' + $(document.getElementById(url)).text();
+						$(document.getElementById(url)).text(content);
+					}
+				},
+				error: function(object, error) {
+					console.log("Error: " + error.code + " " + error.message);
+				}
+			});
+
+		});
+	}
+
+	function addCount(Counter) {
+		var Counter = AV.Object.extend("Counter");
+		url = $(".leancloud-views_num").attr('id').trim();
+		title = $(".leancloud-views_num").attr('data-flag-title').trim();
+		var query = new AV.Query(Counter);
+		query.equalTo("url", url);
+		query.find({
+			success: function(results) {
+				if (results.length > 0) {
+					var counter = results[0];
+					counter.fetchWhenSave(true);
+					counter.increment("time");
+					counter.save(null, {
+						success: function(counter) {
+							var content =  counter.get('time') + ' ' + $(document.getElementById(url)).text();
+							$(document.getElementById(url)).text(content);
+						},
+						error: function(counter, error) {
+							console.log('Failed to save Visitor num, with error message: ' + error.message);
+						}
+					});
+				} else {
+					var newcounter = new Counter();
+					newcounter.set("title", title);
+					newcounter.set("url", url);
+					newcounter.set("time", 1);
+					newcounter.save(null, {
+						success: function(newcounter) {
+							console.log("newcounter.get('time')="+newcounter.get('time'));
+							var content = newcounter.get('time') + ' ' + $(document.getElementById(url)).text();
+							$(document.getElementById(url)).text(content);
+						},
+						error: function(newcounter, error) {
+							console.log('Failed to create');
+						}
+					});
+				}
+			},
+			error: function(error) {
+				console.log('Error:' + error.code + " " + error.message);
+			}
+		});
+	}
+	$(function() {
+		var Counter = AV.Object.extend("Counter");
+		if ($('.leancloud-views_num').length == 1) {
+			addCount(Counter);
+		} else if ($('.post-title-link').length > 1) {
+			showTime(Counter);
+		}
+	}); 
+</script>
+
+
+
+
+
+    <!-- 多说公共 js 代码 start -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"buptweixin"};
+        (function() {
+            var ds = document.createElement('script');
+            ds.type = 'text/javascript';ds.async = true;
+            ds.src = 'https://static.duoshuo.com/embed.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0] 
+             || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+    </script>
+    <!-- 多说公共 js 代码 end -->
+
+
+
+
+<!-- Swiftye -->
+
+
+<!-- Local Search-->
+
+
+<!-- Window Load-->
+<script>
+    $(window).load(function() {
+        // Post_Toc parent position fixed
+        $(".post-toc-wrap").parent(".mdl-menu__container").css("position", "fixed");
+    });
+</script>
+            </main>
+        </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+		
+    </body>
+		
+	
+</html>

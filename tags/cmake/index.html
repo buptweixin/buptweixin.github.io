@@ -4,7 +4,7 @@
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Title -->
     
     <title>
-        leetcode Best Time to Buy and Sell Stock with Cooldown | 野原圆长的Blog
+        标签: cmake | 野原圆长的Blog
     </title>
     
     <!-- Favicons -->
@@ -40,7 +40,7 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="http://www.wowx.info">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="leetcode Best Time to Buy and Sell Stock with Cooldown | 野原圆长的Blog">
+    <meta property="og:title" content="标签: cmake | 野原圆长的Blog">
     <meta property="og:description" content="null">
     
      <!--[if lte IE 9]>
@@ -194,260 +194,214 @@
                 </button>
 				
 				
-                
-	<!-- Back Button -->
-<!--
-	<div class="material-back" id="backhome-div" tabindex="0">
-		<a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" href="#" onclick="window.history.back();return false;" target="_self" role="button" data-upgraded=",MaterialButton,MaterialRipple">
-			<i class="material-icons" role="presentation">arrow_back</i>
-			<span class="mdl-button__ripple-container">
-				<span class="mdl-ripple"></span>
-			</span>
-		</a>
-	</div>			
--->
-	<!-- Left aligned menu below button -->
-	<button id="post-toc-trigger-btn"
-			class="mdl-button mdl-js-button mdl-button--icon">
-	  <i class="material-icons">format_list_numbered</i>
-	</button>
-
-	<ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
-		for="post-toc-trigger-btn">
-			
-			<ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Best-time-to-buy-and-sell-stock-with-cooldown"><span class="post-toc-number">1.</span> <span class="post-toc-text">Best time to buy and sell stock with cooldown</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#题意"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">题意</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#解题思路"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">解题思路</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#第一步对问题状态的定义："><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">第一步对问题状态的定义：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#第二步对状态转移方程的定义："><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">第二步对状态转移方程的定义：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#如何防止-buy-rest-buy-状态转移的产生"><span class="post-toc-number">1.2.3.</span> <span class="post-toc-text">如何防止[buy, rest, buy]状态转移的产生</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#化简状态转移方程、缩小缓存大小"><span class="post-toc-number">1.2.4.</span> <span class="post-toc-text">化简状态转移方程、缩小缓存大小</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#实现"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">实现</span></a></li></ol></li></ol>
-		
-<!--			<li class="mdl-menu__item">Some Action</li>-->
-	</ul>
-
-
-<!-- Layouts -->
-
-    <!-- Post Module -->
-    <div class="material-post_container">
-		
-        <div class="material-post mdl-grid">
-            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
-
-                <!-- Post Header(Thumbnail & Title) -->
-                
-	<!-- Paradox Post Header -->
+                <!-- Index Module -->
+<div class="material-index mdl-grid">
 	
-		<!-- Custom Thumbnail -->
-		<div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(http://ww4.sinaimg.cn/large/6425ef91jw1f9apllc7boj20ic0960v9.jpg)">
-	
-        <p class="article-headline-p">
-            leetcode Best Time to Buy and Sell Stock with Cooldown
-        </p>
+		<!-- Paradox Header -->
+		<!-- Daily pic -->
+<div class="mdl-card daily-pic mdl-cell mdl-cell--8-col index-top-block">
+    
+    <!-- Pic & Slogan -->
+    <div class="mdl-card__media mdl-color-text--grey-50" style="background-image:url(/img/daily_pic.png)">
+        <p class="index-top-block-slogan"><a href="#">Hi, nice to meet you</a></p>
     </div>
 
-	
-
-				
-				
-					<!-- Paradox Post Info -->
-					<div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
-    
-    <!-- Author Avatar -->
-    <div id="author-avatar">
-        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
-    </div>
-    <!-- Author Name & Date -->
-    <div>
-        <strong>Xin Wei</strong>
-        <span>12月 02, 2016</span>
-    </div>
-    
-    <div class="section-spacer"></div>
-	
-    <!-- Favorite -->
-<!--
-    <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
-        <i class="material-icons" role="presentation">favorite</i>
-        <span class="visuallyhidden">favorites</span>
-    </button>
--->
-    
-    <!-- Tags (bookmark) -->
-    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
-        <i class="material-icons" role="presentation">bookmark</i>
-        <span class="visuallyhidden">bookmark</span>
-    </button>
-    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
-        <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/array/">array</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/dp/">dp</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/leetcode/">leetcode</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/算法/">算法</a>
-    </ul>
-    
-    <!-- Share -->
-    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
-    <i class="material-icons" role="presentation">share</i>
-    <span class="visuallyhidden">share</span>
-</button>
-<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
-    
-    
-    <!-- Leancloud Views -->
-    <a class="post_share-link" href="#">
-        <li class="mdl-menu__item">
-            <span id="/posts/posts/201612021923/" class="leancloud-views_num" data-flag-title="leetcode Best Time to Buy and Sell Stock with Cooldown">
-     &nbsp;浏览量
-</span>
-        </li>
-    </a>
-    
-    
-    
-    
-    <!-- Share Twitter -->
-    <a class="post_share-link" href="https://twitter.com/intent/tweet?text=leetcode Best Time to Buy and Sell Stock with Cooldown&url=http://www.wowx.info//posts/posts/201612021923/index.html&via=Xin Wei" target="_blank">
-        <li class="mdl-menu__item">
-            分享到 Twitter
-        </li>
-    </a>
-    
-    <!-- Share Google+ -->
-    <a class="post_share-link" href="https://plus.google.com/share?url=http://www.wowx.info//posts/posts/201612021923/index.html" target="_blank">
-        <li class="mdl-menu__item">
-            分享到 Google+
-        </li>
-    </a>
-    
-    <!-- Share Weibo -->
-    <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=leetcode Best Time to Buy and Sell Stock with Cooldown&url=http://www.wowx.info//posts/posts/201612021923/index.html&pic=&searchPic=false&style=simple" target="_blank">
-        <li class="mdl-menu__item">
-            分享到微博
-        </li>
-    </a>
-</ul>
-</div>
-				
-
-                <!-- Post Content -->
-                <div id="post-content" class="markdown-Material mdl-color-text--grey-700 mdl-card__supporting-text fade out">
-	
-		<h2 id="Best-time-to-buy-and-sell-stock-with-cooldown"><a href="#Best-time-to-buy-and-sell-stock-with-cooldown" class="headerlink" title="Best time to buy and sell stock with cooldown"></a>Best time to buy and sell stock with cooldown</h2><p>参考自<a href="https://discuss.leetcode.com/topic/30421/share-my-thinking-process" target="_blank" rel="external">leetcode discuss</a></p>
-<blockquote>
-<p>Say you have an array for which the <em>i</em>th element is the price of a given stock on day <em>i</em>.</p>
-<p>Design an algorithm to find the maximum profit. You may complete as many transactions as you like (ie, buy one and sell one share of the stock multiple times) with the following restrictions:</p>
-<ul>
-<li>You may not engage in multiple transactions at the same time (ie, you must sell the stock before you buy again).</li>
-<li>After you sell your stock, you cannot buy stock on next day. (ie, cooldown 1 day)</li>
-</ul>
-<p><strong>Example:</strong></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; prices = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">0</span>, <span class="number">2</span>]</div><div class="line">&gt; maxProfit = <span class="number">3</span></div><div class="line">&gt; transactions = [buy, sell, cooldown, buy, sell]</div><div class="line">&gt;</div></pre></td></tr></table></figure>
-</blockquote>
-<h3 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h3><p>和前面四题不同的是，本题不限制买卖股票的次数但是规定了卖出股票和第二天不能交易(即cooldown一天)</p>
-<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>还是采用动态规划的方法来解题，</p>
-<h4 id="第一步对问题状态的定义："><a href="#第一步对问题状态的定义：" class="headerlink" title="第一步对问题状态的定义："></a>第一步对问题<strong>状态的定义</strong>：</h4><p>本题除了已经买入状态、卖出状态之外多了一个休息状态(不进行买卖操作):</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">buy[i]:第i天时为已经买入股票状态</div><div class="line">sell[i]:第天时股票已经卖出股票状态</div><div class="line">rest[i]:第i天的为休息状态，不进行买卖操作</div></pre></td></tr></table></figure>
-<h4 id="第二步对状态转移方程的定义："><a href="#第二步对状态转移方程的定义：" class="headerlink" title="第二步对状态转移方程的定义："></a>第二步对状态转移方程的定义：</h4><ol>
-<li><p>buy[i]—第i天为已经买入股票状态</p>
-<p>第i天为买入状态有两种转移可能:</p>
-<ol>
-<li><p>i-1天时已经是买入状态，第i天休息维持为买入状态:</p>
-<p><code>buy[i-1]-&gt;buy[i]</code></p>
-</li>
-<li><p>第i-1天为休息状态，第i天买入股票进入买入状态:</p>
-<p><code>rest[i-1]-&gt;buy[i]</code></p>
-<p>因为题目规定了卖出后必须冷却一天才能再次买入，所以没有第i-1天状态为卖出，在第i天再买入的情况</p>
-</li>
-</ol>
-</li>
-<li><p>sell[i]—第i天为已经卖出状态</p>
-<p>也有两种状态转移可能:</p>
-<ol>
-<li><p>第i-1天已经处于卖出状态，第i天休息维持为卖出状态</p>
-<p><code>sell[i-1]-&gt;sell[i]</code></p>
-</li>
-<li><p>第i-1天为买入状态，第i天将股票卖出而转移到卖出状态</p>
-<p><code>buy[i-1]-&gt;sell[i]</code></p>
-</li>
-</ol>
-</li>
-<li><p>rest[i]—第i天为休息状态</p>
-<p>前一天是任何状态，第i天都可能转移到休息状态</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">buy[i-1]-&gt;rest[i]</div><div class="line">sold[i-1]-&gt;rest[i]</div><div class="line">rest[i-1]-&gt;rest[i]</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>将上面的思考转化为状态转移方程：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">buy[i] = max(rest[i<span class="number">-1</span>]-prices[i], buy[i<span class="number">-1</span>]);</div><div class="line">sell[i] = max(buy[i<span class="number">-1</span>]+prices[i], sell[i<span class="number">-1</span>]);</div><div class="line">rest[i] = max(buy[i<span class="number">-1</span>], sell[i<span class="number">-1</span>], rest[i<span class="number">-1</span>]);</div></pre></td></tr></table></figure>
-<h4 id="如何防止-buy-rest-buy-状态转移的产生"><a href="#如何防止-buy-rest-buy-状态转移的产生" class="headerlink" title="如何防止[buy, rest, buy]状态转移的产生"></a>如何防止<code>[buy, rest, buy]</code>状态转移的产生</h4><p>一个事实是，第i天的状态为买入时的资金(<code>buy[i]</code>)一定小于第i天状态为卖出时的资金<code>(sell[i])</code>，即<code>buy[i]&lt;=sell[i]</code>,因此<code>rest</code>的状态转移方程中为了在第i天rest状态下达到最大资金，一定不是从第i-1天为买入状态<code>buy[i-1]</code>转移过来，所以排除了<code>[buy, rest]</code>这个过程，也就不会出现<code>[buy,rest,buy]</code>这种错误的状态转移过程。</p>
-<h4 id="化简状态转移方程、缩小缓存大小"><a href="#化简状态转移方程、缩小缓存大小" class="headerlink" title="化简状态转移方程、缩小缓存大小"></a>化简状态转移方程、缩小缓存大小</h4><p>继续观察，发现第i天为卖出状态下的资金不小于第i天状态为休息下的资金(<code>sell[i]&gt;=rest[i]</code>)，结合之前已知的<code>buy[i]&lt;=sell[i]</code>,得到<code>rest[i]=sell[i]-1</code>,将这个公式代入第一个公式<code>buy[i] = max(rest[i-1]-prices[i], buy[i-1])</code>,最后只剩下两个状态转移方程：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">buy[i] = max(sell[i<span class="number">-2</span>]-prices[i], buy[i<span class="number">-1</span>]);</div><div class="line">sell[i] = max(buy[i<span class="number">-1</span>]+prices[i], sell[i<span class="number">-1</span>]);</div></pre></td></tr></table></figure>
-<p>接下来，发现两个状态最多和上上个状态相关，可以只存储<code>buy</code>和<code>sell</code>两个时刻的值作为缓存。</p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">class Solution &#123;</div><div class="line">public:</div><div class="line">	int maxProfit(vector&lt;int&gt;&amp; prices)&#123;</div><div class="line">     int buy(INT_MIN), sell(0), prev_sell(0), pre_buy;</div><div class="line">      for (int price:prices)</div><div class="line">        &#123;</div><div class="line">        	prev_buy = buy;</div><div class="line">        	buy = max(prev_sell - price, buy);</div><div class="line">        	prev_sell = sell;</div><div class="line">        	sell = max(prev_buy + price, sell);</div><div class="line">        &#125;</div><div class="line">      return sell;</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<hr>
-<a href="/posts//posts/20161202170711/" title="leetcode best Time Buy and SellStock I">leetcode best Time Buy and SellStock I</a>
-<a href="/posts//posts/201612021714/" title="leetcode Best Time to Buy and Sell Stock II">leetcode Best Time to Buy and Sell Stock II</a>
-<a href="/posts//posts/201612021917/" title="leetcode Best Time to Buy and Sell Stock III">leetcode Best Time to Buy and Sell Stock III</a>
-<a href="/posts//posts/201612021921/" title="leetcode Best Time to Buy and Sell Stock IV">leetcode Best Time to Buy and Sell Stock IV</a>
-
-	
-	
-	
-	
-</div>
-				
-				
-
-                <!-- Post Comments -->
-                
-    <!-- 使用多说评论 -->
-    <link rel="stylesheet" href="/css/duoshuo.min.css">
-<style>
-    #ds-thread #ds-reset .ds-post-button{
-        background-color: #0097A7 !important;
-    }
-    #ds-wrapper #ds-reset .ds-icons-32{
-        background-color: #0097A7 !important;
-    }
-    #ds-reset .ds-highlight {
-        color: #0097A7 !important;
-    }
-</style>
-<div id="comments">
-    <!-- 多说评论框 start -->
-        <div class="ds-thread" 
-            data-thread-key="posts//posts/201612021923/" 
-            data-url="http://www.wowx.info//posts/posts/201612021923/index.html"
-            data-title="leetcode Best Time to Buy and Sell Stock with Cooldown"></div>
-    <!-- 多说评论框 end -->
-</div>
-
-
-
-            </div>
-
-            <!-- Post Prev & Next Nav -->
-            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
-    
-    <!-- Prev Nav -->
-    
-        <a href="/posts//posts//" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            新篇
-        </a>
-    
-
-    <!-- Section Spacer -->
-    <div class="section-spacer"></div>
-
-    <!-- Next Nav -->
-    
-        <a href="/posts//posts/201612021921/" id="post_nav-older" class="next-content">
-            旧篇
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_forward</i>
-            </button>
-        </a>
-    
-</nav>
+    <!-- Avatar & Name -->
+    <div class="mdl-card__supporting-text meta mdl-color-text--grey-600">
+        <!-- Author Avatar -->
+        <div id="author-avatar">
+            <img src="/img/avatar.png" width="32px" height="32px" alt="avatar">
+        </div>
+        <div>
+            <strong>Xin Wei</strong>
         </div>
     </div>
+</div>
+
+		<!-- Blog info -->
+<div class="mdl-card something-else mdl-cell mdl-cell--8-col mdl-cell--4-col-desktop index-top-block">
+	
+    <!-- Search -->
+	
+	<!-- Google -->
+	<div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable" method="post" action="">
+		<label id="search-label" class="mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--fab mdl-color--accent mdl-shadow--4dp" for="search">
+			<i class="material-icons mdl-color-text--white" role="presentation">search</i>
+		</label>
+
+		<form id="search-form" method="get" action="//google.com/search" accept-charset="UTF-8" class="mdl-textfield__expandable-holder" target="_blank">
+			<input class="mdl-textfield__input search-input" type="search" name="q" id="search" placeholder="">
+			<label id="search-form-label" class="mdl-textfield__label" for="search"></label>
+			
+			<input type="hidden" name="sitesearch" value="http://www.wowx.info">
+		</form>
+	</div>
+
+
+
+
+
+
+    <!-- LOGO -->
+    <div class="something-else-logo mdl-color--white mdl-color-text--grey-600">
+        <a href="null">
+            <img src="/img/wx.png" alt="logo" />
+        </a>
+    </div>
+
+    <!-- Infomation -->
+    <div class="mdl-card__supporting-text meta meta--fill mdl-color-text--grey-600">
+        <!-- Blog Title -->
+        <div>
+            <strong>野原圆长的Blog</strong>
+        </div>
+        <div class="section-spacer"></div>
+        
+        <!-- Pages -->
+        <button id="show-pages-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+            <i class="material-icons" role="presentation">view_carousel</i>
+            <span class="visuallyhidden">Pages</span>
+        </button>
+        <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="show-pages-button">
+            
+                <a class="index_share-link" href="/" title="home">
+                    <l class="mdl-menu__item mdl-js-ripple-effect"i>
+                        home
+                    </li>
+                </a>
+            
+                <a class="index_share-link" href="/tags" title="标签">
+                    <l class="mdl-menu__item mdl-js-ripple-effect"i>
+                        标签
+                    </li>
+                </a>
+            
+                <a class="index_share-link" href="/categories" title="分类">
+                    <l class="mdl-menu__item mdl-js-ripple-effect"i>
+                        分类
+                    </li>
+                </a>
+            
+        </ul>
+        
+        <!-- Menu -->
+        <button id="menubtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+            <i class="material-icons" role="presentation">more_vert</i>
+            <span class="visuallyhidden">show menu</span>
+        </button>
+        <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="menubtn">
+            
+            <a class="index_share-link" href="null">
+                <li class="mdl-menu__item mdl-js-ripple-effect">
+                    文章 RSS
+                </li>
+            </a>
+            <a class="index_share-link" href="https://twitter.com/intent/tweet?text=野原圆长的Blog&url=http://www.wowx.info/&via=Xin Wei" target="_blank">
+                <li class="mdl-menu__item mdl-js-ripple-effect">
+                    分享到 Twitter
+                </li>
+            </a>
+            <a class="index_share-link" href="https://plus.google.com/share?url=http://www.wowx.info/" target="_blank">
+                <li class="mdl-menu__item mdl-js-ripple-effect">
+                    分享到 Google+
+                </li>
+            </a>
+            <a class="index_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=野原圆长的Blog&url=http://www.wowx.info/&pic=&searchPic=false&style=simple" target="_blank">
+                <li class="mdl-menu__item mdl-js-ripple-effect">
+                    分享到微博
+                </li>
+            </a>
+        </ul>
+    </div>
+</div>
+
+	
+    
+    
+		
+			<!-- Paradox Thumbnail -->
+        	<div class="post_entry-module mdl-card mdl-cell mdl-cell--12-col fade out">
+    
+    <!-- Post Thumbnail -->
+	
+		<!-- Custom Thumbnail -->
+		<div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(http://ww4.sinaimg.cn/large/6425ef91jw1fal3j2cvarj20be06g0sw.jpg)">
+	
+				
+		<!-- Post Title -->
+		<p class="article-headline-p"><a href="/posts/posts/">cmake note</a></p>
+	</div>
+
+    <!-- Post Excerpt -->
+    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
+        
+          本文是
+        
+        &nbsp;&nbsp;&nbsp;
+        <span>
+            <a href="/posts/posts/" target="_self">继续阅读</a>
+        </span>
+    </div>
+    <!-- Post_entry Info-->
+    <div id="post_entry-info">
+        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
+            <!-- Author Avatar -->
+            <div id="author-avatar">
+                <img src="/img/avatar.png" width="44px" height="44px" alt="Xin Wei's avatar">
+            </div>
+            <div>
+                <strong>Xin Wei</strong>
+                <span>12月 10, 2016</span>
+            </div>
+        </div>
+        <div id="post_entry-right-info">
+            <!-- Category -->
+            <span class="post_entry-category">
+                
+            </span>
+            
+            
+                <!-- Comment Number -->
+                &nbsp;|&nbsp;
+                <span class="post_entry-comment" >
+                        <span class="ds-thread-count" data-thread-key="undefined" data-count-type="comments"></span>
+                </span>
+            
+            
+            <!-- Post Views -->
+            <span class="post_entry-views">
+                
+            </span>
+        </div>
+    </div>
+            
+</div>
+
+		
+		
+    
+    
+	
+		<script>
+    
+    var randomNum;
+    
+    var locatePost = $(".something-else").next();
+    for(var i=0; i < 10; i++){
+        
+        randomNum = Math.floor(Math.random() * 5 + 1);
+        
+        locatePost.children(".post_thumbnail-random").attr('id', 'random_thumbnail-'+randomNum);
+        locatePost.children(".post_thumbnail-random").css('background-image', 'url(' + '/img/random/' + randomNum + '.png' + ')')
+        
+        locatePost = locatePost.next();
+    }
+    
+</script>
+
+	
+
+</div>
 
 				
 				
