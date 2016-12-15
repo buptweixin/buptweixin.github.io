@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.wowx.info/"/>
-  <updated>2016-12-09T18:23:15.174Z</updated>
+  <updated>2016-12-15T15:55:49.128Z</updated>
   <id>http://www.wowx.info/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://www.wowx.info/posts//posts//"/>
     <id>http://www.wowx.info/posts//posts//</id>
     <published>2016-12-09T18:18:07.000Z</published>
-    <updated>2016-12-09T18:23:15.174Z</updated>
+    <updated>2016-12-15T15:55:49.128Z</updated>
     
     <content type="html"><![CDATA[<p>本文是<a href="http://sewm.pku.edu.cn/src/paradise/reference/CMake%20Practice.pdf" target="_blank" rel="external">cmake实践</a>的笔记</p>
 <h2 id="基本构建"><a href="#基本构建" class="headerlink" title="基本构建"></a>基本构建</h2><figure class="highlight cmake"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">PROJECT</span> (HELLO)</div><div class="line"><span class="keyword">SET</span>(SRC_LIST main.c)</div><div class="line"><span class="keyword">MESSAGE</span>(STATUS <span class="string">"This is BINARY dir "</span> <span class="variable">$&#123;HELLO_BINARY_DIR&#125;</span>) </div><div class="line"><span class="keyword">MESSAGE</span>(STATUS <span class="string">"This is SOURCE dir "</span><span class="variable">$&#123;HELLO_SOURCE_DIR&#125;</span>) </div><div class="line"><span class="keyword">ADD_EXECUTABLE</span>(hello <span class="variable">$&#123;SRC_LIST&#125;</span>)</div></pre></td></tr></table></figure>
@@ -103,6 +103,8 @@
 /usr/include/hello)</code></p>
 </li>
 </ol>
+<h2 id="其他命令"><a href="#其他命令" class="headerlink" title="其他命令"></a>其他命令</h2><h3 id="添加预定义宏"><a href="#添加预定义宏" class="headerlink" title="添加预定义宏"></a>添加预定义宏</h3><p><code>ADD_DEFINITIONS(-DCPU_ONLY)</code></p>
+<h3 id="在cmake中添加LD-LIBRARY-PATH"><a href="#在cmake中添加LD-LIBRARY-PATH" class="headerlink" title="在cmake中添加LD_LIBRARY_PATH"></a>在cmake中添加LD_LIBRARY_PATH</h3><p><code>SET(CMAKE_EXE_LINKER_FLAGS &quot;${CMAKE_EXE_LINKER_FLAGS} -wl, -rpath -Wl, /home/wx/workspace/caffes/py-faster-rcnn/caffe-fast-rcnn/build/lib&quot;)</code></p>
 ]]></content>
     
     <summary type="html">
