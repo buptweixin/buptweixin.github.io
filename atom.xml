@@ -518,10 +518,10 @@
   
   <entry>
     <title>Caffe 问题总结『不定期更新』</title>
-    <link href="http://www.wowx.info/posts/undefined/"/>
-    <id>http://www.wowx.info/posts/undefined/</id>
+    <link href="http://www.wowx.info/posts//posts/201611260711/"/>
+    <id>http://www.wowx.info/posts//posts/201611260711/</id>
     <published>2016-11-26T08:55:45.000Z</published>
-    <updated>2016-12-01T07:43:57.764Z</updated>
+    <updated>2016-12-15T14:36:13.608Z</updated>
     
     <content type="html"><![CDATA[<h3 id="make时出现hdf5-hpp-not-found-之类的问题"><a href="#make时出现hdf5-hpp-not-found-之类的问题" class="headerlink" title="make时出现hdf5.hpp not found`之类的问题"></a><code>make</code>时出现hdf5.hpp not found`之类的问题</h3><p>Ubuntu16.04中hdf5文件位置发生了变化，需要手工修改<br>首先，将Makefile.config中的</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include</div><div class="line">LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib</div></pre></td></tr></table></figure>
