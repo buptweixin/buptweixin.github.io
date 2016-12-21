@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.wowx.info/"/>
-  <updated>2016-12-15T15:55:49.128Z</updated>
+  <updated>2016-12-21T15:48:24.670Z</updated>
   <id>http://www.wowx.info/</id>
   
   <author>
@@ -17,10 +17,10 @@
   
   <entry>
     <title>cmake note</title>
-    <link href="http://www.wowx.info/posts//posts//"/>
-    <id>http://www.wowx.info/posts//posts//</id>
+    <link href="http://www.wowx.info/posts//posts/20161210021807/"/>
+    <id>http://www.wowx.info/posts//posts/20161210021807/</id>
     <published>2016-12-09T18:18:07.000Z</published>
-    <updated>2016-12-15T15:55:49.128Z</updated>
+    <updated>2016-12-21T15:48:24.670Z</updated>
     
     <content type="html"><![CDATA[<p>本文是<a href="http://sewm.pku.edu.cn/src/paradise/reference/CMake%20Practice.pdf" target="_blank" rel="external">cmake实践</a>的笔记</p>
 <h2 id="基本构建"><a href="#基本构建" class="headerlink" title="基本构建"></a>基本构建</h2><figure class="highlight cmake"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">PROJECT</span> (HELLO)</div><div class="line"><span class="keyword">SET</span>(SRC_LIST main.c)</div><div class="line"><span class="keyword">MESSAGE</span>(STATUS <span class="string">"This is BINARY dir "</span> <span class="variable">$&#123;HELLO_BINARY_DIR&#125;</span>) </div><div class="line"><span class="keyword">MESSAGE</span>(STATUS <span class="string">"This is SOURCE dir "</span><span class="variable">$&#123;HELLO_SOURCE_DIR&#125;</span>) </div><div class="line"><span class="keyword">ADD_EXECUTABLE</span>(hello <span class="variable">$&#123;SRC_LIST&#125;</span>)</div></pre></td></tr></table></figure>
@@ -422,10 +422,10 @@
   
   <entry>
     <title>二叉树、二叉查找树、2-3树及红黑树</title>
-    <link href="http://www.wowx.info/posts/undefined/"/>
-    <id>http://www.wowx.info/posts/undefined/</id>
+    <link href="http://www.wowx.info/posts/201606112921/"/>
+    <id>http://www.wowx.info/posts/201606112921/</id>
     <published>2016-11-29T13:37:48.000Z</published>
-    <updated>2016-11-30T04:17:03.639Z</updated>
+    <updated>2016-12-21T15:54:27.066Z</updated>
     
     <content type="html"><![CDATA[<p>本文参考自<a href="http://my.csdn.net/yang_yulei" target="_blank" rel="external">yang_yulei</a>的<a href="http://blog.csdn.net/yang_yulei/article/details/26066409" target="_blank" rel="external">博客</a></p>
 <h1 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h1><h2 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h2><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><p>适用于静态表(不允许插入)，效率很高</p>
@@ -894,10 +894,10 @@ linear SVM on raw pixels final test set accuracy: 0.216000
   
   <entry>
     <title>使用Python统计处理基础篇--matplotlib</title>
-    <link href="http://www.wowx.info/posts/undefined/"/>
-    <id>http://www.wowx.info/posts/undefined/</id>
+    <link href="http://www.wowx.info/posts/20160719232055/"/>
+    <id>http://www.wowx.info/posts/20160719232055/</id>
     <published>2016-07-19T15:20:55.000Z</published>
-    <updated>2016-11-25T17:22:09.731Z</updated>
+    <updated>2016-12-21T15:54:39.162Z</updated>
     
     <content type="html"><![CDATA[<p><img src="http://public.download.csdn.net/uploads_album/2016/04/25/4767aab89bd7277ff41c611a0dd93ccb.jpg" alt=""><br><a id="more"></a></p>
 <h1 id="Matplotlib：plotting"><a href="#Matplotlib：plotting" class="headerlink" title="Matplotlib：plotting"></a>Matplotlib：plotting</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
@@ -1057,10 +1057,10 @@ plt.pie(Z, explode=None, labels=None,
   
   <entry>
     <title>使用Python统计处理基础篇--numpy</title>
-    <link href="http://www.wowx.info/posts/undefined/"/>
-    <id>http://www.wowx.info/posts/undefined/</id>
+    <link href="http://www.wowx.info/posts/20160719231718/"/>
+    <id>http://www.wowx.info/posts/20160719231718/</id>
     <published>2016-07-19T15:17:18.000Z</published>
-    <updated>2016-11-25T17:22:09.731Z</updated>
+    <updated>2016-12-21T15:54:50.510Z</updated>
     
     <content type="html"><![CDATA[<p><img src="http://public.download.csdn.net/uploads_album/2016/04/25/4767aab89bd7277ff41c611a0dd93ccb.jpg" alt=""><br><a id="more"></a></p>
 <h2 id="Numpy"><a href="#Numpy" class="headerlink" title="Numpy"></a>Numpy</h2><blockquote>
@@ -1358,10 +1358,10 @@ array([-1.,  0.33333333])
   
   <entry>
     <title>使用Python统计处理基础篇--Python语言</title>
-    <link href="http://www.wowx.info/posts/undefined/"/>
-    <id>http://www.wowx.info/posts/undefined/</id>
+    <link href="http://www.wowx.info/posts/20160719231217/"/>
+    <id>http://www.wowx.info/posts/20160719231217/</id>
     <published>2016-07-19T15:12:17.000Z</published>
-    <updated>2016-11-25T17:22:09.731Z</updated>
+    <updated>2016-12-21T15:55:09.157Z</updated>
     
     <content type="html"><![CDATA[<p><img src="http://public.download.csdn.net/uploads_album/2016/04/25/4767aab89bd7277ff41c611a0dd93ccb.jpg" alt=""><br><a id="more"></a></p>
 <h2 id="Ipython"><a href="#Ipython" class="headerlink" title="Ipython"></a>Ipython</h2><h3 id="魔法方法"><a href="#魔法方法" class="headerlink" title="魔法方法"></a>魔法方法</h3><ul>
@@ -1616,10 +1616,10 @@ In [4]: pickle.load(open(&apos;test.pkl&apos;,&apos;rb&apos;)) Out[4]: [1, None,
   
   <entry>
     <title>使用Python统计处理基础篇--前言</title>
-    <link href="http://www.wowx.info/posts/undefined/"/>
-    <id>http://www.wowx.info/posts/undefined/</id>
+    <link href="http://www.wowx.info/posts/20160719225917/"/>
+    <id>http://www.wowx.info/posts/20160719225917/</id>
     <published>2016-07-19T14:59:17.000Z</published>
-    <updated>2016-11-25T17:22:09.731Z</updated>
+    <updated>2016-12-21T15:55:23.005Z</updated>
     
     <content type="html"><![CDATA[<p><img src="http://public.download.csdn.net/uploads_album/2016/04/25/4767aab89bd7277ff41c611a0dd93ccb.jpg" alt=""><br><a id="more"></a></p>
 <p>本系列博客对Python在统计学中的应用，涵盖了Python语言、画图等方方面面。</p>
@@ -1796,10 +1796,10 @@ In [4]: pickle.load(open(&apos;test.pkl&apos;,&apos;rb&apos;)) Out[4]: [1, None,
   
   <entry>
     <title>Python记录日志</title>
-    <link href="http://www.wowx.info/posts/undefined/"/>
-    <id>http://www.wowx.info/posts/undefined/</id>
+    <link href="http://www.wowx.info/posts/20160615145554/"/>
+    <id>http://www.wowx.info/posts/20160615145554/</id>
     <published>2016-06-15T06:55:54.000Z</published>
-    <updated>2016-11-25T17:22:09.731Z</updated>
+    <updated>2016-12-21T15:54:18.162Z</updated>
     
     <content type="html"><![CDATA[<p><img src="http://www.linuxlusers.com/wp-content/uploads/2013/09/python.png" alt=""><br><a id="more"></a><br>对于小型项目而言，大家习惯于使用print语句打印信息到终端进行调试，然而，当项目代码量扩大到了一定级别后，打印调试的方法就显得很凌乱了，更重要的是，当debug完成后，甄别并删除(或注释)调试用的打印语句变得非常令人头痛。而使用日志模块则能很好地解决这些问题。</p>
 <h3 id="1-什么是日志"><a href="#1-什么是日志" class="headerlink" title="1. 什么是日志"></a>1. 什么是日志</h3><p>日志(logging)是在程序运行过程中对发生的事件的追踪、记录。程序开发者们在代码中引入日志模块以指示某种特定事件的发生，而这些事件可以依据重要程度划分为不同的层级，比如一般信息(info),警告(warning)，错误(error)等。</p>
@@ -1951,10 +1951,10 @@ logging.warning(&apos;is when this event was logged.&apos;)
   
   <entry>
     <title>机器学习算法笔记2_1 生成学习算法(Generative Learning algorithms)</title>
-    <link href="http://www.wowx.info/posts/undefined/"/>
-    <id>http://www.wowx.info/posts/undefined/</id>
+    <link href="http://www.wowx.info/posts/201606151325566/"/>
+    <id>http://www.wowx.info/posts/201606151325566/</id>
     <published>2016-06-15T05:25:56.000Z</published>
-    <updated>2016-11-25T17:22:09.731Z</updated>
+    <updated>2016-12-21T15:54:01.863Z</updated>
     
     <content type="html"><![CDATA[<p><img src="http://img2.imgtn.bdimg.com/it/u=4288980725,4019769355&amp;fm=21&amp;gp=0.jpg" alt=""><br><a id="more"></a><br>我们之前学习的算法都是基于$p(y|x;\theta)$, 他的思想是找出找出一个决策边界来将两类分开，而生成算法是先对两个类别分别建模，为了将样本分开，将样本代入两个模型，看样本与哪个类别更匹配。<br>  这种试图直接从输入$x$映射到类别标签{0,1}的算法被称为<strong>判别学习算法</strong>；而通过计算p(x|y)（和p(y)）来得到模型的算法被称为<strong>生成学习算法</strong><br>  通过贝叶斯函数得到$p(y|x) = \frac{p(x|y)p(y)}{p(x)}$, $$\arg{\max_y}p(y|x)=\arg{\max_y}\frac{p(x|y)p(y)}{p(x)}=\arg{\max_y}p(x|y)p(x)$$</p>
 <ol>

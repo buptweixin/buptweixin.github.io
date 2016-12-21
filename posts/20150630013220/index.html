@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Title -->
+    
+    <title>
+        C++ primer笔记 -- 标准库--IO类 | 野原圆长的Blog
+    </title>
+    
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/wx.png">
+    <link rel="icon" sizes="192x192" href="/img/wx.png">
+    <link rel="apple-touch-icon" href="/img/wx.png">
+    
+    <!-- Meta & INfo -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="Xin Wei">
+    <meta name="description" content="null">
+    <meta name="keywords" content="Blog deep_learging">
+    
+    <!--iOS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+    
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="野原圆长的Blog">
+    
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://www.wowx.info">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="C++ primer笔记 -- 标准库--IO类 | 野原圆长的Blog">
+    <meta property="og:description" content="null">
+    
+     <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+        
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+    
+    <!-- Import CSS -->
+    <link rel="stylesheet" href="/css/material.min.css">
+    <link rel="stylesheet" href="/css/style.min.css">
+    <!-- Config CSS -->
+
+
+<!-- Other Styles -->
+<style>
+	body, html{
+		font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+	}
+	
+    a{
+        color: #00838F
+    }
+    
+    .mdl-card__media,
+    #search-label,
+    #search-form-label:after,
+    #scheme-Paradox .hot_tags-count,
+    #scheme-Paradox .sidebar_archives-count,
+    #scheme-Paradox .sidebar-colored .sidebar-header,
+    #scheme-Paradox .sidebar-colored .sidebar-badge{
+        background-color: #0097A7 !important
+    }
+    
+	/* Sidebar User Drop Down Menu Text Color */
+	#scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+    #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus{
+        color: #0097A7 !important
+    }
+    
+    #post_entry-right-info,
+    .sidebar-colored .sidebar-nav li:hover > a,
+    .sidebar-colored .sidebar-nav li:hover > a i,
+    .sidebar-colored .sidebar-nav li > a:hover,
+    .sidebar-colored .sidebar-nav li > a:hover i,
+    .sidebar-colored .sidebar-nav li > a:focus i,
+    .sidebar-colored .sidebar-nav > .open > a,
+    .sidebar-colored .sidebar-nav > .open > a:hover,
+    .sidebar-colored .sidebar-nav > .open > a:focus,
+    #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a{
+        color: #0097A7 !important
+    }
+    
+    .toTop{
+        background: #757575 !important
+    }
+		
+	.material-layout .material-post>.material-nav,
+	.material-layout .material-index>.material-nav,
+	.material-nav a{
+		color: #757575;
+	}
+		
+	#scheme-Paradox .MD-burger-layer {
+		background-color: #757575;
+	}
+
+	#scheme-Paradox #post-toc-trigger-btn{
+		color: #757575;
+	}
+	
+	.post-toc a:hover{
+		color: #00838F;
+		text-decoration: underline;
+	}
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+        body{
+            background-color: #F5F5F5
+        }
+		
+		/* blog_info bottom background */
+        #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+            background-color: #fff;
+        }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+        .fade {
+            transition: all 800ms linear;
+            -webkit-transform: translate3d(0,0,0);
+            -moz-transform: translate3d(0,0,0);
+            -ms-transform: translate3d(0,0,0);
+            -o-transform: translate3d(0,0,0);
+            transform: translate3d(0,0,0);
+            opacity: 1;
+        }
+
+        .fade.out{
+            opacity: 0;
+        }
+    </style>
+
+	<script src="/js/jquery.min.js"></script>
+	
+	<link rel="stylesheet" href="/css/highlight/solarized-dark.css">
+	
+	<!-- UC Browser Compatible-->
+	<script>
+		var agent = navigator.userAgent.toLowerCase();
+		if(agent.indexOf('ucbrowser')>0) {
+			document.write('<link rel="stylesheet" href="/css/uc.css">');
+		   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+		}
+	</script>
+    
+    <!-- Custom Head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+</head>
+	
+	
+
+    <body id="scheme-Paradox">
+
+		
+        <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+				
+			
+			
+            <!-- Main Container -->
+            <main class="material-layout__content" id="main">
+				
+                <!-- Top Anchor -->
+                <div id="top"></div>
+				
+				
+                <!-- Hamburger Button -->
+                <button class="MD-burger-icon sidebar-toggle">
+                    <span class="MD-burger-layer"></span>
+                </button>
+				
+				
+                
+	<!-- Back Button -->
+<!--
+	<div class="material-back" id="backhome-div" tabindex="0">
+		<a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" href="#" onclick="window.history.back();return false;" target="_self" role="button" data-upgraded=",MaterialButton,MaterialRipple">
+			<i class="material-icons" role="presentation">arrow_back</i>
+			<span class="mdl-button__ripple-container">
+				<span class="mdl-ripple"></span>
+			</span>
+		</a>
+	</div>			
+-->
+	<!-- Left aligned menu below button -->
+	<button id="post-toc-trigger-btn"
+			class="mdl-button mdl-js-button mdl-button--icon">
+	  <i class="material-icons">format_list_numbered</i>
+	</button>
+
+	<ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
+		for="post-toc-trigger-btn">
+			
+			<ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#C-标准库-—-IO库"><span class="post-toc-number">1.</span> <span class="post-toc-text">C++标准库 — IO库</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#IO类"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">IO类</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#IO对象不能进行拷贝或赋值"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">IO对象不能进行拷贝或赋值</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#条件状态"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">条件状态</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#输出缓冲"><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text">输出缓冲</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件输入输出"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">文件输入输出</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#open-和-close成员函数"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">open 和 close成员函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#自动构造和析构"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">自动构造和析构</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#文件模式"><span class="post-toc-number">1.2.3.</span> <span class="post-toc-text">文件模式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#默认模式"><span class="post-toc-number">1.2.3.1.</span> <span class="post-toc-text">默认模式</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#string-流"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">string 流</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#istringstream"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">istringstream</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ostringstream"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">ostringstream</span></a></li></ol></li></ol></li></ol>
+		
+<!--			<li class="mdl-menu__item">Some Action</li>-->
+	</ul>
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+		
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+	<!-- Paradox Post Header -->
+	
+		
+			<!-- Random Thumbnail -->
+			<div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+				<script>
+    
+    var randomNum;
+    randomNum = Math.floor(Math.random() * 5 + 1);
+    
+    $(".post_thumbnail-random").css('background-image', 'url(' + '/img/random/' + randomNum + '.png' + ')');
+    
+</script>
+
+		
+	
+        <p class="article-headline-p">
+            C++ primer笔记 -- 标准库--IO类
+        </p>
+    </div>
+
+	
+
+				
+				
+					<!-- Paradox Post Info -->
+					<div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+    
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>Xin Wei</strong>
+        <span>6月 30, 2015</span>
+    </div>
+    
+    <div class="section-spacer"></div>
+	
+    <!-- Favorite -->
+<!--
+    <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+        <i class="material-icons" role="presentation">favorite</i>
+        <span class="visuallyhidden">favorites</span>
+    </button>
+-->
+    
+    <!-- Tags (bookmark) -->
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/cpp/">cpp</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/language/">language</a>
+    </ul>
+    
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+    
+    <!-- Leancloud Views -->
+    <a class="post_share-link" href="#">
+        <li class="mdl-menu__item">
+            <span id="/posts/20150630013220/" class="leancloud-views_num" data-flag-title="C++ primer笔记 -- 标准库--IO类">
+     &nbsp;浏览量
+</span>
+        </li>
+    </a>
+    
+    
+    
+    
+    <!-- Share Twitter -->
+    <a class="post_share-link" href="https://twitter.com/intent/tweet?text=C++ primer笔记 -- 标准库--IO类&url=http://www.wowx.info//posts/20150630013220/index.html&via=Xin Wei" target="_blank">
+        <li class="mdl-menu__item">
+            分享到 Twitter
+        </li>
+    </a>
+    
+    <!-- Share Google+ -->
+    <a class="post_share-link" href="https://plus.google.com/share?url=http://www.wowx.info//posts/20150630013220/index.html" target="_blank">
+        <li class="mdl-menu__item">
+            分享到 Google+
+        </li>
+    </a>
+    
+    <!-- Share Weibo -->
+    <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=C++ primer笔记 -- 标准库--IO类&url=http://www.wowx.info//posts/20150630013220/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <li class="mdl-menu__item">
+            分享到微博
+        </li>
+    </a>
+</ul>
+</div>
+				
+
+                <!-- Post Content -->
+                <div id="post-content" class="markdown-Material mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+	
+		<p><img src="http://ww3.sinaimg.cn/large/6425ef91jw1f9aa7pkr9wj20e80e8t97.jpg" width="420px"><br><a id="more"></a></p>
+<h1 id="C-标准库-—-IO库"><a href="#C-标准库-—-IO库" class="headerlink" title="C++标准库 — IO库"></a>C++标准库 — IO库</h1><h2 id="IO类"><a href="#IO类" class="headerlink" title="IO类"></a>IO类</h2><p>[TOC]</p>
+<table>
+<thead>
+<tr>
+<th>头文件</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>iostream</td>
+<td>istream, wistream从流读数据                                                                   ostream, wostream从流写数据;                                                              stream,wstream从文件读写数据</td>
+</tr>
+<tr>
+<td>fstream</td>
+<td>ifstream, wifstream从文件读数据                                                    ;ofstream, wofstream从文件写数据;                                        fstream,wfstream从文件读写数据</td>
+</tr>
+<tr>
+<td>sstream</td>
+<td>istringstream, wistringstream从string读数据;                         ostringstream, wostringstream从string写数据;                         stringstream, wstringstream读写数据</td>
+</tr>
+</tbody>
+</table>
+<p>上面的带<code>w</code>前缀的类型都是用来处理<code>wchar_t</code>类型的数据的。</p>
+<p>ifstream和istringstream继承自istream, ofstream和ostringstream继承自ostream;</p>
+<h3 id="IO对象不能进行拷贝或赋值"><a href="#IO对象不能进行拷贝或赋值" class="headerlink" title="IO对象不能进行拷贝或赋值"></a>IO对象不能进行拷贝或赋值</h3><p>因为IO对象不能进行拷贝和赋值操作，下面的行为全都是错的：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">ofstream out1, out2;</div><div class="line">out1 = out2;</div><div class="line"><span class="function">ofstream <span class="title">print</span><span class="params">(ofstream)</span></span>;</div><div class="line">out2 = print(out2);</div></pre></td></tr></table></figure>
+<p>正确的使用IO对象的方式是通过引用的方式对其进行传递和返回。</p>
+<h3 id="条件状态"><a href="#条件状态" class="headerlink" title="条件状态"></a>条件状态</h3><table>
+<thead>
+<tr>
+<th>strm::iostate</th>
+<th>strm是一种IO类型，iostate是一种与机器无关的类型提供了表达条件状态的完整功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>strm::badbit</td>
+<td>指出流已经崩溃</td>
+</tr>
+<tr>
+<td>strm::failbit</td>
+<td>指出一个IO操作失败了</td>
+</tr>
+<tr>
+<td>strm::eofbit</td>
+<td>流到了文件结束</td>
+</tr>
+<tr>
+<td>strm::goodbit</td>
+<td>指出流未处于错误状态，应保证为0</td>
+</tr>
+<tr>
+<td>s.eof()</td>
+<td>若eofbit置位则返回true</td>
+</tr>
+<tr>
+<td>s.fail()</td>
+<td>返回failbit是否置位</td>
+</tr>
+<tr>
+<td>s.bad()</td>
+<td>返回badbit是否置位</td>
+</tr>
+<tr>
+<td>s.good()</td>
+<td>若goodbit处于有效状态返回true</td>
+</tr>
+<tr>
+<td>s.clear()</td>
+<td>将流中所有状态复位，<strong>将流设为有效</strong></td>
+</tr>
+<tr>
+<td>s.clear(flags)</td>
+<td>根据flags复位</td>
+</tr>
+<tr>
+<td>s.setstate(flags)</td>
+<td>根据flags置位</td>
+</tr>
+<tr>
+<td>s.rdstate()</td>
+<td>返回s的当前状态，类型为strm::iostate</td>
+</tr>
+</tbody>
+</table>
+<p><code>badbit</code>表示系统级的错误，被置位后流就不能使用了。</p>
+<p><code>failbit</code>表示发生可恢复错误，比如期望读入数值却读入了字符，流还可以被使用。<code>goodbit</code>为0表示发生错误。如果<code>badbit,failbit和eofbit</code>任何一个被置位，则条件检测状态会失败。</p>
+<h3 id="输出缓冲"><a href="#输出缓冲" class="headerlink" title="输出缓冲"></a>输出缓冲</h3><p>每个输出流都管理着一个缓冲区，<code>os&lt;&lt;&quot;Please enter a value:&quot;</code>这个操作可能会马上显示也可能被存起来直到缓冲刷新才输出。</p>
+<p>有很多操作会导致缓冲区被刷新，比如:</p>
+<ol>
+<li><p>程序结束</p>
+<p>注意，若程序崩溃，输出缓冲区不会被刷新，它的输出数据很可能停留在缓冲区等待打印。所以当调试一个已经崩溃的程序时，需要确认已经输出的数据确实已经刷新了，否则，可能将大量时间浪费在代码为什么没有执行上。</p>
+</li>
+<li><p>缓冲区满</p>
+</li>
+<li><p><code>endl,flush, ends</code>操作符</p>
+<ul>
+<li><code>cout&lt;&lt;&quot;hi&quot;&lt;&lt;endl;</code>:输出内容和换行，然后刷新缓冲区</li>
+<li><code>cout&lt;&lt;&quot;hi&quot;&lt;&lt;flush;</code>:输出内容然后刷新缓冲区</li>
+<li><code>cout&lt;&lt;&quot;hi&quot;&lt;&lt;ends;</code>输出内容和一个空字符，然后刷新缓冲区</li>
+</ul>
+</li>
+<li><p>使用<code>unitbuf</code>操作符设置内部状态，如果流设置了这个操作符，则该流的写入操作是立即刷新的，比如<code>cerr</code>默认设置了<code>unitbuf</code>因此对它的写入操作会马上刷新</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cout</span> &lt;&lt; unitbuf;	<span class="comment">//所有输出操作都会立即刷新缓冲区</span></div><div class="line"><span class="built_in">cout</span> &lt;&lt; nounitbuf;	<span class="comment">//回到正常缓冲方式</span></div></pre></td></tr></table></figure>
+<p>​</p>
+</li>
+<li><p>如果一个流和另一个流相关联，当被关联的流被读写时，关联流缓冲区也会被刷新。比如<code>cin</code>和<code>cerr</code>都被关联到了<code>cout</code>所以，只要读<code>cin</code>或写<code>cerr</code>都会导致<code>cout</code>刷新</p>
+</li>
+</ol>
+<h2 id="文件输入输出"><a href="#文件输入输出" class="headerlink" title="文件输入输出"></a>文件输入输出</h2><p>头文件<code>fstream</code>定义了三个类型来支持文件IO:</p>
+<ul>
+<li><code>ifstream</code>:从给定文件读数据</li>
+<li><code>ofstream</code>:写数据到给定文件</li>
+<li><code>fstream</code>:读写给定文件</li>
+</ul>
+<p>除了通用的<code>&lt;&lt;, &gt;&gt;, getline</code>等操作外文件IO有一些特殊的方法:</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>fstream</em> fstrm;</td>
+<td>创建一个未绑定的文件流，<em>fstream</em>是头文件<code>fstream</code>定义的一个类型</td>
+</tr>
+<tr>
+<td><em>fstream</em> fstrm(s);</td>
+<td>创建一个fstream并打开名为s的文件。s可以使string 类型或者c风格字符串指针，构造函数是explicit的。默认文件模式依赖于<code>fsteam</code>的类型</td>
+</tr>
+<tr>
+<td><em>fstream</em> fstrm(s, mode);</td>
+<td>创建一个fstream，并按指定模式打开文件s。</td>
+</tr>
+<tr>
+<td>fstrm.open(s);</td>
+<td>打开名为s的文件，并将文件与fstream绑定。</td>
+</tr>
+<tr>
+<td>fstrm.close()</td>
+<td>关闭与fstrm绑定的文件</td>
+</tr>
+<tr>
+<td>fstrm.is_open()</td>
+<td>返回一个bool值，指出关联的文件是否被成功打开且尚未关闭</td>
+</tr>
+</tbody>
+</table>
+<p>下面的例子以传递给main的参数来制定文件进行读写</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="built_in">string</span> argv[])</span></span></div><div class="line">&#123;</div><div class="line">  <span class="function">ifstream <span class="title">input</span><span class="params">(argv[<span class="number">1</span>])</span></span>;</div><div class="line">  <span class="function">ofstream <span class="title">output</span><span class="params">(argv[<span class="number">2</span>])</span></span>;</div><div class="line">  Sales_data total;</div><div class="line">  <span class="keyword">if</span> (read(input, total)) &#123;</div><div class="line">    Sales_data trans;</div><div class="line">    <span class="keyword">while</span>(read(input, trans)) &#123;</div><div class="line">      <span class="keyword">if</span> (total.isbn() == trans.isbn())&#123;</div><div class="line">        total.combine(trans);</div><div class="line">      &#125; <span class="keyword">else</span> &#123;</div><div class="line">        print(output, total) &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">        total = trans;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">    print(output, total) &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="built_in">cerr</span> &lt;&lt; <span class="string">"No data?!"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="open-和-close成员函数"><a href="#open-和-close成员函数" class="headerlink" title="open 和 close成员函数"></a>open 和 close成员函数</h3><p>可以先定义一个空的文本流对象，然后调用open将它与文件关联起来，如果调用open失败，<code>failbit</code>会失败，所以对open进行检查很有必要:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function">ifstream <span class="title">in</span><span class="params">(file)</span></span>;</div><div class="line"><span class="function">ofstream <span class="title">out</span><span class="params">(file)</span></span>;</div><div class="line">out.open(ifile + <span class="string">".copy"</span>);</div><div class="line"><span class="keyword">if</span> (out) &#123;<span class="comment">//对open进行检查</span></div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>打开另一个文件之前需要调用<code>close</code>将原先文件流关闭</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">out.close();</div><div class="line">out.open(file);</div></pre></td></tr></table></figure>
+<h3 id="自动构造和析构"><a href="#自动构造和析构" class="headerlink" title="自动构造和析构"></a>自动构造和析构</h3><p>当fstream对象离开其作用域时，与之关联的文件会被自动关闭:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">for (auto p = argv + 1; p != argv + argc; ++p) &#123;</div><div class="line">  ifstream input(p);</div><div class="line">  if (input) &#123;</div><div class="line">    process(input);</div><div class="line">  &#125; else </div><div class="line">  	cerr &lt;&lt; &quot;counldn&apos;t open: &quot; + string(*p);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上面的程序循环遍历参数提供的文件列表，在每次循环结束后文件都会被自动关闭而不需要使用<code>close</code>显式关闭。</p>
+<h3 id="文件模式"><a href="#文件模式" class="headerlink" title="文件模式"></a>文件模式</h3><table>
+<thead>
+<tr>
+<th>模式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>in</td>
+<td>读模式打开,只能对<code>ifstream, fstream</code>设置</td>
+</tr>
+<tr>
+<td>out</td>
+<td>写模式打开，只能对<code>ofstream,fstream</code>设置</td>
+</tr>
+<tr>
+<td>app</td>
+<td>每次写操作定位到文件 末尾，只要没有设置trunc模式就可以设定</td>
+</tr>
+<tr>
+<td>ate</td>
+<td>打开文件后立即定位到文件末尾，可用于任意文件流对象，可以和任何模式组合</td>
+</tr>
+<tr>
+<td>trunc</td>
+<td>截断文件，只有out模式被设置时才可以设定，默认是这样的截断模式</td>
+</tr>
+<tr>
+<td>binary</td>
+<td>以二进制方式打开进行IO，可以用于任意文件流对象，可以和任何模式组合</td>
+</tr>
+</tbody>
+</table>
+<h4 id="默认模式"><a href="#默认模式" class="headerlink" title="默认模式"></a>默认模式</h4><table>
+<thead>
+<tr>
+<th>流</th>
+<th>默认模式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ifstream</td>
+<td>in</td>
+</tr>
+<tr>
+<td>ofstream</td>
+<td>out</td>
+</tr>
+<tr>
+<td>fstream</td>
+<td>in+out</td>
+</tr>
+</tbody>
+</table>
+<p><code>out</code>模式会丢弃打开文件的内容，为了阻止这个清空操作，需要同时指定<code>app</code>模式：<code>ofstream app(&quot;file&quot;, ofstream::out | ofstream::app)</code> </p>
+<h2 id="string-流"><a href="#string-流" class="headerlink" title="string 流"></a>string 流</h2><p><code>sstream</code>头文件定义了三个类型来支持内存IO:</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>istringstream</td>
+<td>从string读数据</td>
+</tr>
+<tr>
+<td>ostringstream</td>
+<td>写数据到string</td>
+</tr>
+<tr>
+<td>stringstream</td>
+<td>读写string</td>
+</tr>
+</tbody>
+</table>
+<p><code>sstream</code>除了定义通用操作之外，还定义了如下操作</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>sstream</strong> strm</td>
+<td>strm是未绑定的stringstream对象。<strong>sstream</strong>是头文件sstream中定义的一个类型</td>
+</tr>
+<tr>
+<td><strong>sstream</strong> strm(s)</td>
+<td>strm保存着string s的一个拷贝，这个构造函数是explicit的</td>
+</tr>
+<tr>
+<td>strm.str()</td>
+<td>返回strm保存的string的拷贝</td>
+</tr>
+<tr>
+<td>strm.str(s)</td>
+<td>将string s拷贝到strm中，返回void</td>
+</tr>
+<tr>
+<td>strm.clear()</td>
+<td>清空当前流</td>
+</tr>
+</tbody>
+</table>
+<h3 id="istringstream"><a href="#istringstream" class="headerlink" title="istringstream"></a>istringstream</h3><p>当我们有一些工作是整行文本处理而另外一些是对单词处理时，可以使用<code>istringstream</code></p>
+<p>假如由下面格式的数据，每一行都保存着一条联系人信息，第一个字段是人名，后面跟着一条或多条该人的电话号码：</p>
+<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-11-1/54710484.jpg" alt=""></p>
+<p>希望将这些信息保存到如下的数据结构中：</p>
+<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-11-1/81510367.jpg" alt=""></p>
+<p>可以先用<code>cin</code>的<code>getline</code>来获取记录，然后使用<code>istringstream</code>来处理每个字段，如下所示：</p>
+<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-11-1/8040067.jpg" alt=""></p>
+<h3 id="ostringstream"><a href="#ostringstream" class="headerlink" title="ostringstream"></a>ostringstream</h3><p><code>ostringstream</code>对于逐步构造输出还是很有效的。还是上面的例子，如果我们想逐个验证号码并改变格式，如果是有效的号码就希望输出到一个新的文件，而对于无效的号码，我们并不打算输出到新文件中而是打印一条包含人名的错误信息，对于每个人，知道验证完所有号码后才可以进行输出到文件操作，但是，我们可以先输出内容马上”写入”到一个内存<code>ostringstream</code>中：</p>
+<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-11-1/8121492.jpg" alt=""></p>
+
+	
+	
+	
+	
+</div>
+				
+				
+
+                <!-- Post Comments -->
+                
+    <!-- 使用多说评论 -->
+    <link rel="stylesheet" href="/css/duoshuo.min.css">
+<style>
+    #ds-thread #ds-reset .ds-post-button{
+        background-color: #0097A7 !important;
+    }
+    #ds-wrapper #ds-reset .ds-icons-32{
+        background-color: #0097A7 !important;
+    }
+    #ds-reset .ds-highlight {
+        color: #0097A7 !important;
+    }
+</style>
+<div id="comments">
+    <!-- 多说评论框 start -->
+        <div class="ds-thread" 
+            data-thread-key="posts/20150630013220/" 
+            data-url="http://www.wowx.info//posts/20150630013220/index.html"
+            data-title="C++ primer笔记 -- 标准库--IO类"></div>
+    <!-- 多说评论框 end -->
+</div>
+
+
+
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    
+    <!-- Prev Nav -->
+    
+        <a href="/posts/20150702013220/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/posts/201506240132/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+        </div>
+    </div>
+
+				
+				
+					<!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay "></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored  sidebar-fixed-left" role="navigation">
+	<div id="sidebar-main">
+	    <!-- Sidebar Header -->
+		<div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+    <i class="material-icons">clear_all</i>
+    <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="Xin Wei's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        weixin@bupt.edu.cn
+        <b class="caret"></b>
+    </a>
+</div>
+
+		<!-- Sidebar Navigation  -->
+		<ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+			
+                <li>
+                    <a href="mailto:weixin@bupt.edu.cn" target="_blank" title="Email Me">
+						<i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    <li id="sidebar-first-li">
+        <a href="/" target="_self">
+            <i class="material-icons sidebar-material-icons">home</i>
+             主页
+        </a>
+    </li>
+
+    <!-- I'm Feeling Lucky -->
+<!--
+    <li class="dropdown">
+        <a href="" target="_self">
+            <i class="material-icons sidebar-material-icons">explore</i>
+             sidebar.imlucky
+        </a>
+    </li>
+-->
+
+	
+    <!-- Archives  -->
+    <li class="dropdown">
+        <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+            <i class="material-icons sidebar-material-icons">inbox</i>
+             归档
+            <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+            <a class="sidebar_archives-link" href="/archives/2016/12/">十二月 2016<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">十一月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">十月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/07/">七月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/06/">六月 2016<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/07/">七月 2015<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/06/">六月 2015<span class="sidebar_archives-count">6</span></a>
+        </ul>
+    </li>
+
+    <!-- Divider -->
+    <li class="divider"></li>
+
+
+    <!-- Pages  -->
+	
+		<li>
+			<a href="/" title="home">
+				home
+			</a>
+		</li>
+	
+		<li>
+			<a href="/tags" title="标签">
+				标签
+			</a>
+		</li>
+	
+		<li>
+			<a href="/categories" title="分类">
+				分类
+			</a>
+		</li>
+	
+
+    <!-- Article Numebr  -->
+    <li>
+        <a href="/archives">
+             文章总数
+             <span class="sidebar-badge">44</span>
+        </a>
+    </li>
+</ul>
+
+		<!-- Sidebar Divider -->
+		<div class="sidebar-divider"></div>
+
+		<!-- Sidebar Footer -->
+		<!-- 
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持。 :) 
+-->
+
+<!-- Theme Material -->
+
+<!-- Help & Support -->
+<!--
+<a href="mailto:hiviosey@gmail.com" class="sidebar-footer-text-a">
+    <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+		sidebar.help
+		<span class="mdl-button__ripple-container">
+			<span class="mdl-ripple"></span>
+		</span>
+	</div>
+</a>
+-->
+
+<!-- Feedback -->
+<!--
+<a href="https://github.com/viosey/hexo-theme-material/issues" target="_blank" class="sidebar-footer-text-a">
+    <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+         sidebar.feedback
+                    <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></div>
+</a>
+-->
+
+<!-- Abount Theme -->
+<!--
+<a href="https://blog.viosey.com/index.php/Material.html" target="_blank" class="sidebar-footer-text-a">
+    <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+         sidebar.about_theme
+        <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></div>
+</a>-->
+
+	</div>
+    
+    <!-- Sidebar Sponsor -->
+    
+
+
+</aside>
+
+				
+				
+				
+					<!-- Footer Top Button -->
+					<div class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+				
+				
+				<!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+	
+	
+		<!-- Paradox Footer Left Section -->
+		<div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+    
+    
+    <!-- Facebook -->
+    
+    
+    
+    <!-- Google + -->
+    
+    
+    
+    <!-- Weibo -->
+    
+    <a href="http://weibo.com/buptweixin" target="view_window"><button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-weibo.png);">
+        <span class="visuallyhidden">Weibo</span>
+    </button></a>
+    
+    
+    <!-- Instagram -->
+    
+    
+    
+    <!-- Tumblr -->
+    
+    
+    
+    <!-- Github -->
+    
+    <a href="https://github.com/buptweixin" target="view_window"><button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-github.png);">
+        <span class="visuallyhidden">Github</span>
+    </button></a>
+    
+</div>
+
+
+		<!--Copyright-->
+		<div id="copyright">Copyright&nbsp;©&nbsp;<script type="text/javascript">var fd = new Date();document.write(fd.getFullYear());</script>&nbsp;野原圆长的Blog</div>
+
+		<!-- Paradox Footer Right Section -->
+
+		<!-- 
+		I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+		It will not impact the appearance and can give developers a lot of support :)
+
+		很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+		它不会影响美观并可以给开发者很大的支持。 :) 
+		-->
+
+		<div class="mdl-mini-footer--right-section">
+			<div>
+				<div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+				<div class="footer-develop-div">Theme - <a href="#" target="_blank" class="footer-develop-a">Material</a></div>
+			</div>
+		</div>
+	
+    
+</footer>
+
+                
+				<!-- Import File -->
+<script src="/js/highlight.min.js"></script>
+<script src="/js/js.min.js"></script>
+<script src="/js/nprogress.js"></script>
+
+<script type="text/javascript">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    
+    $('#nprogress .bar').css({
+        'background': '#FF4081'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #FF4081, 0 0 15px #FF4081'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#FF4081',
+        'border-left-color': '#FF4081'
+    });
+    
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+    <!-- Leancloud -->
+	<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+	<script>
+		AV.initialize("1wCxBs3gRuLUAR1VDMEUFx3N-gzGzoHsz", "6sT0Kp8aE2lG69USPb4k0cAb");
+	</script>
+    <script>
+	function showTime(Counter) {
+		var query = new AV.Query(Counter);
+		$(".leancloud-views_num").each(function() {
+			var url = $(this).attr("id").trim();
+			query.equalTo("url", url);
+			query.find({
+				success: function(results) {
+					if (results.length == 0) {
+						var content = '0 ' + $(document.getElementById(url)).text();
+						$(document.getElementById(url)).text(content);
+						return;
+					}
+					for (var i = 0; i < results.length; i++) {
+						var object = results[i];
+						var content = object.get('time') + ' ' + $(document.getElementById(url)).text();
+						$(document.getElementById(url)).text(content);
+					}
+				},
+				error: function(object, error) {
+					console.log("Error: " + error.code + " " + error.message);
+				}
+			});
+
+		});
+	}
+
+	function addCount(Counter) {
+		var Counter = AV.Object.extend("Counter");
+		url = $(".leancloud-views_num").attr('id').trim();
+		title = $(".leancloud-views_num").attr('data-flag-title').trim();
+		var query = new AV.Query(Counter);
+		query.equalTo("url", url);
+		query.find({
+			success: function(results) {
+				if (results.length > 0) {
+					var counter = results[0];
+					counter.fetchWhenSave(true);
+					counter.increment("time");
+					counter.save(null, {
+						success: function(counter) {
+							var content =  counter.get('time') + ' ' + $(document.getElementById(url)).text();
+							$(document.getElementById(url)).text(content);
+						},
+						error: function(counter, error) {
+							console.log('Failed to save Visitor num, with error message: ' + error.message);
+						}
+					});
+				} else {
+					var newcounter = new Counter();
+					newcounter.set("title", title);
+					newcounter.set("url", url);
+					newcounter.set("time", 1);
+					newcounter.save(null, {
+						success: function(newcounter) {
+							console.log("newcounter.get('time')="+newcounter.get('time'));
+							var content = newcounter.get('time') + ' ' + $(document.getElementById(url)).text();
+							$(document.getElementById(url)).text(content);
+						},
+						error: function(newcounter, error) {
+							console.log('Failed to create');
+						}
+					});
+				}
+			},
+			error: function(error) {
+				console.log('Error:' + error.code + " " + error.message);
+			}
+		});
+	}
+	$(function() {
+		var Counter = AV.Object.extend("Counter");
+		if ($('.leancloud-views_num').length == 1) {
+			addCount(Counter);
+		} else if ($('.post-title-link').length > 1) {
+			showTime(Counter);
+		}
+	}); 
+</script>
+
+
+
+
+
+    <!-- 多说公共 js 代码 start -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"buptweixin"};
+        (function() {
+            var ds = document.createElement('script');
+            ds.type = 'text/javascript';ds.async = true;
+            ds.src = 'https://static.duoshuo.com/embed.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0] 
+             || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+    </script>
+    <!-- 多说公共 js 代码 end -->
+
+
+
+
+<!-- Swiftye -->
+
+
+<!-- Local Search-->
+
+
+<!-- Window Load-->
+<script>
+    $(window).load(function() {
+        // Post_Toc parent position fixed
+        $(".post-toc-wrap").parent(".mdl-menu__container").css("position", "fixed");
+    });
+</script>
+            </main>
+        </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+		
+    </body>
+		
+	
+</html>
