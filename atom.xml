@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.wowx.info/"/>
-  <updated>2016-12-22T15:58:53.719Z</updated>
+  <updated>2016-12-22T16:02:55.288Z</updated>
   <id>http://www.wowx.info/</id>
   
   <author>
@@ -17,10 +17,10 @@
   
   <entry>
     <title>leetcode 459: solvers of ransom note</title>
-    <link href="http://www.wowx.info/posts//posts/20161222235418/"/>
-    <id>http://www.wowx.info/posts//posts/20161222235418/</id>
+    <link href="http://www.wowx.info/posts//posts/2016122223541811/"/>
+    <id>http://www.wowx.info/posts//posts/2016122223541811/</id>
     <published>2016-12-22T15:54:18.000Z</published>
-    <updated>2016-12-22T15:58:53.719Z</updated>
+    <updated>2016-12-22T16:02:55.288Z</updated>
     
     <content type="html"><![CDATA[<h2 id="“LeetCode-459-Repeated-Substring-Pattern”的几种解法"><a href="#“LeetCode-459-Repeated-Substring-Pattern”的几种解法" class="headerlink" title="“LeetCode: 459 Repeated Substring Pattern”的几种解法"></a>“LeetCode: 459 Repeated Substring Pattern”的几种解法</h2><h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">Given a non-empty string check if it can be constructed by taking a substring of it and appending multiple copies of the substring together. You may assume the given string consists of lowercase English letters only and its length will not exceed 10000.</div><div class="line"></div><div class="line">Example 1:</div><div class="line">Input: &quot;abab&quot;</div><div class="line"></div><div class="line">Output: True</div><div class="line"></div><div class="line">Explanation: It&apos;s the substring &quot;ab&quot; twice.</div><div class="line">Example 2:</div><div class="line">Input: &quot;aba&quot;</div><div class="line"></div><div class="line">Output: False</div><div class="line">Example 3:</div><div class="line">Input: &quot;abcabcabcabc&quot;</div><div class="line"></div><div class="line">Output: True</div><div class="line"></div><div class="line">Explanation: It&apos;s the substring &quot;abc&quot; four times. (And the substring &quot;abcabc&quot; twice.)</div></pre></td></tr></table></figure>
 <h4 id="解法一"><a href="#解法一" class="headerlink" title="解法一"></a>解法一</h4><p>如果<code>str</code> 由子字符串<code>subStr</code>构成，则<code>subStr</code>的长度必然是<code>str</code>长度的约数，并且这个长度一定小于<code>str</code>长度的一半，利用这个性质可以求解这个问题</p>
