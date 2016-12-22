@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.wowx.info/"/>
-  <updated>2016-12-22T15:51:53.653Z</updated>
+  <updated>2016-12-22T15:56:46.903Z</updated>
   <id>http://www.wowx.info/</id>
   
   <author>
@@ -14,6 +14,41 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>leetcode 459: solvers of ransom note</title>
+    <link href="http://www.wowx.info/posts//posts/20161222235418/"/>
+    <id>http://www.wowx.info/posts//posts/20161222235418/</id>
+    <published>2016-12-22T15:54:18.000Z</published>
+    <updated>2016-12-22T15:56:46.903Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="“LeetCode-459-Repeated-Substring-Pattern”的几种解法"><a href="#“LeetCode-459-Repeated-Substring-Pattern”的几种解法" class="headerlink" title="“LeetCode: 459 Repeated Substring Pattern”的几种解法"></a>“LeetCode: 459 Repeated Substring Pattern”的几种解法</h2><h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">Given a non-empty string check if it can be constructed by taking a substring of it and appending multiple copies of the substring together. You may assume the given string consists of lowercase English letters only and its length will not exceed 10000.</div><div class="line"></div><div class="line">Example 1:</div><div class="line">Input: &quot;abab&quot;</div><div class="line"></div><div class="line">Output: True</div><div class="line"></div><div class="line">Explanation: It&apos;s the substring &quot;ab&quot; twice.</div><div class="line">Example 2:</div><div class="line">Input: &quot;aba&quot;</div><div class="line"></div><div class="line">Output: False</div><div class="line">Example 3:</div><div class="line">Input: &quot;abcabcabcabc&quot;</div><div class="line"></div><div class="line">Output: True</div><div class="line"></div><div class="line">Explanation: It&apos;s the substring &quot;abc&quot; four times. (And the substring &quot;abcabc&quot; twice.)</div></pre></td></tr></table></figure>
+<h4 id="解法一"><a href="#解法一" class="headerlink" title="解法一"></a>解法一</h4><p>如果<code>str</code> 由子字符串<code>subStr</code>构成，则<code>subStr</code>的长度必然是<code>str</code>长度的约数，并且这个长度一定小于<code>str</code>长度的一半，利用这个性质可以求解这个问题</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">method1</span><span class="params">(<span class="built_in">string</span> str)</span> </span>&#123;</div><div class="line">        <span class="keyword">size_t</span> len = str.size();</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = len / <span class="number">2</span>; i &gt;=<span class="number">1</span>; --i)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span> (len % i == <span class="number">0</span>)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">int</span> p = len / i;</div><div class="line">                <span class="function"><span class="built_in">string</span> <span class="title">newStr</span><span class="params">(<span class="string">""</span>)</span></span>;</div><div class="line">                <span class="built_in">string</span> subStr = str.substr(<span class="number">0</span>, i);</div><div class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; p; ++j)</div><div class="line">                    newStr += subStr;</div><div class="line">                <span class="keyword">if</span> (newStr == str)</div><div class="line">                    <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h4 id="解法二"><a href="#解法二" class="headerlink" title="解法二"></a>解法二</h4><p>若<code>str</code>是由某个子串重复构成的，那么将两个<code>str</code>拼接在一起，然后将拼接后的字符串去头去尾，仍然可以在这个字符串中找到<code>str</code></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">method2</span><span class="params">(<span class="built_in">string</span> str)</span> </span>&#123;</div><div class="line">  <span class="built_in">string</span> newStr = (str + str).substr(<span class="number">1</span>, str.size()*<span class="number">2</span> - <span class="number">2</span>);</div><div class="line">  <span class="keyword">return</span> newStr.find(str) != <span class="built_in">string</span>::npos;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="解法三"><a href="#解法三" class="headerlink" title="解法三"></a>解法三</h4><p>这个方法利用了经典的字符串匹配算法KMP算法中的最大前缀后缀数组<code>next</code>，<code>next[i]</code>保存了字符串位置<code>i</code>处的最大前缀末尾位置，这篇博客讲解的很详细<a href="http://www.tuicool.com/articles/e2Qbyyf" target="_blank" rel="external">如果你看不懂KMP算法，那就看一看这篇文章</a>。</p>
+<p>主要思想为，如果<code>str</code>由<code>n</code>个长度为<code>k</code>的相同子串<code>subStr</code>构成，那么最大后缀为图中黄框部分，最大前缀为图中红框部分，且黄框部分的长度一定能被<code>subStr</code>长度整除</p>
+<p><img src="http://ww4.sinaimg.cn/large/6425ef91jw1fazjmoltsij20bk02t74o.jpg" alt=""></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; getNext(<span class="built_in">string</span> str) &#123;</div><div class="line">        <span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; next(str.size(), <span class="number">0</span>);</div><div class="line">        next[<span class="number">0</span>] = <span class="number">-1</span>;</div><div class="line">        <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt; str.size(); ++i)</div><div class="line">        &#123;</div><div class="line">            j = next[i - <span class="number">1</span>];</div><div class="line">            <span class="keyword">while</span>(str[i] != str[j + <span class="number">1</span>] &amp;&amp; j &gt;= <span class="number">0</span>)</div><div class="line">                j = next[j];</div><div class="line">            <span class="keyword">if</span> (str[i] == str[j + <span class="number">1</span>])</div><div class="line">                next[i] = j  + <span class="number">1</span>;</div><div class="line">            <span class="keyword">else</span></div><div class="line">                next[i] = <span class="number">-1</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> next;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">method3</span><span class="params">(<span class="built_in">string</span> str)</span> </span>&#123;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; next = getNext(str);</div><div class="line">        <span class="keyword">size_t</span> len_str = str.size();</div><div class="line">        <span class="keyword">size_t</span> len = next[len_str - <span class="number">1</span>] + <span class="number">1</span>;</div><div class="line">        <span class="keyword">return</span> (len &gt; <span class="number">0</span>) &amp;&amp; (len_str%(len_str - len) == <span class="number">0</span>);</div><div class="line">        </div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;“LeetCode-459-Repeated-Substring-Pattern”的几种解法&quot;&gt;&lt;a href=&quot;#“LeetCode-459-Repeated-Substring-Pattern”的几种解法&quot; class=&quot;headerlink&quot; title=&quot;
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="http://www.wowx.info/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
+    
+      <category term="array" scheme="http://www.wowx.info/tags/array/"/>
+    
+      <category term="hard" scheme="http://www.wowx.info/tags/hard/"/>
+    
+  </entry>
   
   <entry>
     <title>leetcode: 383 ransom note</title>
@@ -1831,161 +1866,6 @@ In [4]: pickle.load(open(&apos;test.pkl&apos;,&apos;rb&apos;)) Out[4]: [1, None,
     
     
       <category term="big data" scheme="http://www.wowx.info/tags/big-data/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Python记录日志</title>
-    <link href="http://www.wowx.info/posts/20160615145554/"/>
-    <id>http://www.wowx.info/posts/20160615145554/</id>
-    <published>2016-06-15T06:55:54.000Z</published>
-    <updated>2016-12-21T15:54:18.162Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="http://www.linuxlusers.com/wp-content/uploads/2013/09/python.png" alt=""><br><a id="more"></a><br>对于小型项目而言，大家习惯于使用print语句打印信息到终端进行调试，然而，当项目代码量扩大到了一定级别后，打印调试的方法就显得很凌乱了，更重要的是，当debug完成后，甄别并删除(或注释)调试用的打印语句变得非常令人头痛。而使用日志模块则能很好地解决这些问题。</p>
-<h3 id="1-什么是日志"><a href="#1-什么是日志" class="headerlink" title="1. 什么是日志"></a>1. 什么是日志</h3><p>日志(logging)是在程序运行过程中对发生的事件的追踪、记录。程序开发者们在代码中引入日志模块以指示某种特定事件的发生，而这些事件可以依据重要程度划分为不同的层级，比如一般信息(info),警告(warning)，错误(error)等。</p>
-<h3 id="2-如何使用日志模块"><a href="#2-如何使用日志模块" class="headerlink" title="2. 如何使用日志模块"></a>2. 如何使用日志模块</h3><p>Python的日志模块提供了一系列的函数用来记录不同的日志信息，包括’debug()’,<code>info()</code>,<code>warning</code>,<code>error()</code>,<code>critical()</code>等，下面的表对不同的函数适用范围做了说明：</p>
-<table>
-<thead>
-<tr>
-<th>任务</th>
-<th>合适的工具</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>打印脚本信息或代码信息到控制台</td>
-<td>print()</td>
-</tr>
-<tr>
-<td>在程序正常运行时发生的报告事件（例如状态监测或故障调查）</td>
-<td>logging.info()(或者在诊断时使用logging.debug())输出详细的信息</td>
-</tr>
-<tr>
-<td>在运行出现问题时发出警告信息</td>
-<td>logging.warning()</td>
-</tr>
-<tr>
-<td>对特定的运行时事件报告错误</td>
-<td>抛出异常</td>
-</tr>
-<tr>
-<td>不引发异常的错误报告</td>
-<td>比如长时间运行的服务器进程中的错误处理程序</td>
-</tr>
-</tbody>
-</table>
-<p>这些函数都是根据追踪事件的级别和严重程度来命名的。如下所示：</p>
-<table>
-<thead>
-<tr>
-<th>级别</th>
-<th>使用场景</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>DEBUG</td>
-<td>并且只在调试程序时关心的程序运行详细信息</td>
-</tr>
-<tr>
-<td>INFO</td>
-<td>确认程序像预期一样工作</td>
-</tr>
-<tr>
-<td>WARNING</td>
-<td>指示超出预期的事件的发生或未来的将发生的问题</td>
-</tr>
-<tr>
-<td>ERROR</td>
-<td>由于一些严重的问题，程序不能执行某些特定的函数</td>
-</tr>
-<tr>
-<td>CRITICAL</td>
-<td>严重的错误，用来指示程序将不能继续运行下去</td>
-</tr>
-</tbody>
-</table>
-<p>默认的层级是WARNING，即只追踪警告及其以上的事件发生，比如下面的简单的例子：</p>
-<pre><code>import logging
-logging.warning(&apos;Watch out!&apos;) # 将会在终端打印信息
-logging.info(&apos;I told you so&apos;) # 不会打印任何信息
-</code></pre><p>运行结果：<br><code>WARNING:root:Watch out!</code></p>
-<h3 id="3-将日志记录到文件中"><a href="#3-将日志记录到文件中" class="headerlink" title="3.将日志记录到文件中"></a>3.将日志记录到文件中</h3><pre><code>import logging
-logging.basicConfig(filename=&apos;example.log&apos;,level=logging.DEBUG)
-logging.debug(&apos;This message should go to the log file&apos;)
-logging.info(&apos;So should this&apos;)
-logging.warning(&apos;And this, too&apos;)
-</code></pre><p>执行上面的代码，然后打开<code>example.log</code>文件，将会看到下面的内容：</p>
-<pre><code>DEBUG:root:This message should go to the log file
-INFO:root:So should this
-WARNING:root:And this, too
-</code></pre><p>这段代码也对如何设置日志层级进行了说明。其实，也可以通过命令行的方式设置：<br><code>--log=INFO</code><br>然后加入下面的代码读到设置好的层级信息：</p>
-<pre><code>numeric_level = getattr(logging, loglevel.upper(), None)
-if not isinstance(numeric_level, int):
-          raise ValueError(&apos;Invalid log level: %s&apos; % loglevel)
-logging.basicConfig(level=numeric_level, ...)
-</code></pre><p>如果不断运行上面的程序，新的日志将追加到旧的日志之后，这会变得越来越庞大，可以通过下面的方法使新的日志覆盖旧的日志：</p>
-<pre><code>logging.basicConfig(filename=&apos;example.log&apos;, filemode=&apos;w&apos;, level=logging.DEBUG)
-</code></pre><h3 id="4-从多个模块收集日志信息"><a href="#4-从多个模块收集日志信息" class="headerlink" title="4.从多个模块收集日志信息"></a>4.从多个模块收集日志信息</h3><p>下面的代码演示了当你的程序由多个模块组成时管理日志的方法：<br><code># myapp.py</code></p>
-<pre><code>import logging
-import mylib
-
-def main():
-    logging.basicConfig(filename=&apos;myapp.log&apos;, level=logging.INFO)
-    logging.info(&apos;Started&apos;)
-    mylib.do_something()
-    logging.info(&apos;Finished&apos;)
-
-if __name__ == &apos;__main__&apos;:
-    main()
-</code></pre><p><code># mylib.py</code></p>
-<pre><code>    import logging
-def do_something():
-    logging.info(&apos;Doing something&apos;)
-</code></pre><p>运行<code>myapp.py</code>的结果：</p>
-<pre><code>INFO:root:Started
-INFO:root:Doing something
-INFO:root:Finished
-</code></pre><h3 id="5-记录变量信息"><a href="#5-记录变量信息" class="headerlink" title="5. 记录变量信息"></a>5. 记录变量信息</h3><p>可以使用格式化字符串的方法记录变量：</p>
-<pre><code>import logging
-logging.warning(&apos;%s before you %s&apos;, &apos;Look&apos;, &apos;leap!&apos;)
-</code></pre><p>除了上面的方法外，也可以使用str.format()和string.Template方法。</p>
-<h3 id="6-改变日志格式"><a href="#6-改变日志格式" class="headerlink" title="6.改变日志格式"></a>6.改变日志格式</h3><pre><code>import logging
-logging.basicConfig(format=&apos;%(levelname)s:%(message)s&apos;, level=logging.DEBUG)
-logging.debug(&apos;This message should appear on the console&apos;)
-logging.info(&apos;So should this&apos;)
-logging.warning(&apos;And this, too&apos;)
-</code></pre><p>输出：</p>
-<pre><code>DEBUG:This message should appear on the console
-INFO:So should this
-WARNING:And this, too
-</code></pre><h3 id="7-显示日期时间"><a href="#7-显示日期时间" class="headerlink" title="7. 显示日期时间"></a>7. 显示日期时间</h3><p>在格式化输出信息中引入<code>(asctime)s</code>来显示时间：</p>
-<pre><code>import logging
-logging.basicConfig(format=&apos;%(asctime)s %(message)s&apos;)
-logging.warning(&apos;is when this event was logged.&apos;)
-</code></pre><p>输出：</p>
-<pre><code>2010-12-12 11:41:42,612 is when this event was logged.
-</code></pre><p>默认的日期格式是ISO8601，你也可以在<code>basicConfig</code>中进行改变：</p>
-<pre><code>import logging
-logging.basicConfig(format=&apos;%(asctime)s %(message)s&apos;, datefmt=&apos;%m/%d/%Y %I:%M:%S %p&apos;)
-logging.warning(&apos;is when this event was logged.&apos;)
-</code></pre><p>输出：</p>
-<pre><code>12/12/2010 11:46:36 AM is when this event was logged.
-</code></pre><p>除此之外，还可以使用<code>time.strftime()</code>来改变时间格式。</p>
-<p>更高级的使用方法请看官方教程 <a href="https://docs.python.org/3.4/howto/logging.html#logging-basic-tutorial" target="_blank" rel="external">Advanced Logging Tutorial</a></p>
-<p>关注微信公众号IT练功房，分享最新IT资讯，学习编程技能，让我们共同进步！<br>!</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;http://www.linuxlusers.com/wp-content/uploads/2013/09/python.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;
-    
-    </summary>
-    
-      <category term="编程语言" scheme="http://www.wowx.info/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
-    
-    
-      <category term="python" scheme="http://www.wowx.info/tags/python/"/>
     
   </entry>
   
