@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.wowx.info/"/>
-  <updated>2016-12-21T15:48:24.670Z</updated>
+  <updated>2016-12-22T15:51:53.653Z</updated>
   <id>http://www.wowx.info/</id>
   
   <author>
@@ -14,6 +14,46 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>leetcode: 383 ransom note</title>
+    <link href="http://www.wowx.info/posts//posts/20161222234842/"/>
+    <id>http://www.wowx.info/posts//posts/20161222234842/</id>
+    <published>2016-12-22T15:48:42.000Z</published>
+    <updated>2016-12-22T15:51:53.653Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="LeetCote-string-383-Ransom-Note"><a href="#LeetCote-string-383-Ransom-Note" class="headerlink" title="LeetCote_string_383_Ransom Note"></a>LeetCote_string_383_Ransom Note</h2><h3 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h3><p>Given an arbitrary ransom note string and another string containing letters from all the magazines, write a function that will return true if the ransom note can be constructed from the magazines ; otherwise, it will return false.</p>
+<p>Each letter in the magazine string can only be used once in your ransom note.</p>
+<p><strong>Note:</strong><br>You may assume that both strings contain only lowercase letters.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">canConstruct(&quot;a&quot;, &quot;b&quot;) -&gt; false</div><div class="line">canConstruct(&quot;aa&quot;, &quot;ab&quot;) -&gt; false</div><div class="line">canConstruct(&quot;aa&quot;, &quot;aab&quot;) -&gt; true</div></pre></td></tr></table></figure>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>用一个计数器数组统计<code>magzine</code>中每个字母出现的次数，然后统计<code>ransomNote</code>中字母，计算两个字符串的对应字母出现次数的差值，若小于0说明<code>ransomNote</code>要构成<code>magzine</code>还缺少该字母</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">canConstruct</span><span class="params">(<span class="built_in">string</span> ransomNote, <span class="built_in">string</span> magazine)</span> </span>&#123;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; count(<span class="number">26</span>, <span class="number">0</span>);</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">char</span> ch : magazine)</div><div class="line">            ++count[ch - <span class="string">'a'</span>];</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">char</span> ch : ransomNote)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span> (count[ch - <span class="string">'a'</span>] == <span class="number">0</span>)</div><div class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">            --count[ch - <span class="string">'a'</span>];</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h3><ul>
+<li><p>时间复杂度</p>
+<p>$O(N) + O(M)$,N, M分别为<code>magzine</code>和<code>ransomNote</code>的长度</p>
+</li>
+<li><p>空间复杂度</p>
+<p>$O(1)$,只要一个长度为26的数组即可</p>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;LeetCote-string-383-Ransom-Note&quot;&gt;&lt;a href=&quot;#LeetCote-string-383-Ransom-Note&quot; class=&quot;headerlink&quot; title=&quot;LeetCote_string_383_Ransom Not
+    
+    </summary>
+    
+    
+      <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
+    
+      <category term="算法" scheme="http://www.wowx.info/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="string" scheme="http://www.wowx.info/tags/string/"/>
+    
+      <category term="easy" scheme="http://www.wowx.info/tags/easy/"/>
+    
+  </entry>
   
   <entry>
     <title>cmake note</title>
@@ -250,7 +290,7 @@
     <link href="http://www.wowx.info/posts//posts/201612021917/"/>
     <id>http://www.wowx.info/posts//posts/201612021917/</id>
     <published>2016-12-02T11:17:31.000Z</published>
-    <updated>2016-12-02T11:32:38.687Z</updated>
+    <updated>2016-12-21T15:56:22.172Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Best-Time-to-Buy-and-Sell-Stock-III"><a href="#Best-Time-to-Buy-and-Sell-Stock-III" class="headerlink" title="Best Time to Buy and Sell Stock III"></a>Best Time to Buy and Sell Stock III</h2><blockquote>
 <p>Say you have an array for which the <em>i</em>th element is the price of a given stock on day <em>i</em>.</p>
@@ -1946,53 +1986,6 @@ logging.warning(&apos;is when this event was logged.&apos;)
     
     
       <category term="python" scheme="http://www.wowx.info/tags/python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>机器学习算法笔记2_1 生成学习算法(Generative Learning algorithms)</title>
-    <link href="http://www.wowx.info/posts/201606151325566/"/>
-    <id>http://www.wowx.info/posts/201606151325566/</id>
-    <published>2016-06-15T05:25:56.000Z</published>
-    <updated>2016-12-21T15:54:01.863Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="http://img2.imgtn.bdimg.com/it/u=4288980725,4019769355&amp;fm=21&amp;gp=0.jpg" alt=""><br><a id="more"></a><br>我们之前学习的算法都是基于$p(y|x;\theta)$, 他的思想是找出找出一个决策边界来将两类分开，而生成算法是先对两个类别分别建模，为了将样本分开，将样本代入两个模型，看样本与哪个类别更匹配。<br>  这种试图直接从输入$x$映射到类别标签{0,1}的算法被称为<strong>判别学习算法</strong>；而通过计算p(x|y)（和p(y)）来得到模型的算法被称为<strong>生成学习算法</strong><br>  通过贝叶斯函数得到$p(y|x) = \frac{p(x|y)p(y)}{p(x)}$, $$\arg{\max_y}p(y|x)=\arg{\max_y}\frac{p(x|y)p(y)}{p(x)}=\arg{\max_y}p(x|y)p(x)$$</p>
-<ol>
-<li>高斯判决分析(GDA, Gaussian discriminant analysis)<br>假设p(x|y)服从多元正太分布.<ol>
-<li>多元正太分布<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-17/44099232.jpg" alt=""><br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-17/39746352.jpg" alt=""><br>$Cov(X)=\Sigma=E[(X-E(X)(X-E(X))^T)]=E[XX^T]-(E[X]E[X]^T)$<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-17/62770753.jpg" alt=""><br>左图$\Sigma=I$,中图$\Sigma=0.6I$，右图$\Sigma=2I$,可以看到随着协方差增大，分布越趋近”扁平”。<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-17/91600254.jpg" alt=""><br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-17/66619732.jpg" alt=""><br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-17/23182267.jpg" alt=""><br>随着协方差非对角线元素的增大，分布越趋于正45度方向压缩<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-17/12656381.jpg" alt=""><br>随着协方差非对角线元素的减小， 分布逐渐向-45度方向压缩。右图显示，任意地改变参数分布投影趋近椭圆。</li>
-<li>高斯判决分析模型(GDA)<ul>
-<li>应用条件：特征x为连续随机变量</li>
-<li>模型：用多远正态分布给$f(x|y)$建模，模型如下：<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-18/22658348.jpg" alt=""><br>即：<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-18/12516938.jpg" alt=""><br>从上式可以看出这个模型通常采用不同的均值，相同的方差。即模型的参数为$\phi,\Sigma,\mu_0,\mu_1$，写成对数形式如下：<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-20/80926224.jpg" alt=""><br>参数计算如下<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-20/13010063.jpg" alt=""><br>样本分布图<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-20/74991606.jpg" alt=""></li>
-</ul>
-</li>
-<li>高斯决策模型与逻辑回归的关系<br>如果将$p(y=1|x;\phi,\mu_0,\mu_1,\Sigma)$看成关于x的函数，则其形式可以改写成：<br>  <img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-20/36435926.jpg" alt=""><br>这正是LR的形式。即如果$p(x|y)$符合多元高斯分布且共享$\Sigma$,则$p(y|x)$将符合Logistics函数的形式，但这只是充分不必要条件，$f(y|x)$若符合Logistic函数，不能推出$f(x|y)$符合多元正太分布。<br>GDA与LR的比较：<ol>
-<li>GDA对x具有很强的假设(服从多元正太分布)，如果满足则能更好的适应样本，会是更好的模型,且asymptotically efficient；在大的训练样本的前提下，没有模型能比GDA更好。但是LR鲁棒性更强，不要求x一定符合高斯分布；</li>
-<li>GDA需要的训练样本比LR更少<br>实际中由于LR对数据先验概率的适应性而更多的被使用。</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>朴素贝叶斯（Naive Bays）：适用于文本分类<br>GDA中，要求x是连续的向量，而朴素贝叶斯则是针对输入x是离散变量的情况。<ol>
-<li>朴素贝叶斯假设<br>假设当给定$y$时向量$x$的各个分量相互独立</li>
-<li>推论<br>$$p(x<em>1,…,x</em>{50000})\=p(x_1|y)p(x_2|y,x_1)p(x_3|y,x_1,x_2)…p(x_3|y,x_1,x<em>2,…x</em>{49999})\=p(x_1|y)p(x_2|y)p(x<em>3|y)p(x</em>{50000}|y)\=\prod_{i=1}^np(x<em>i|y)$$<br>以垃圾邮件过滤为例，假设样本是如下所示的向量，每个元素对应词汇表中一个词汇，如果邮件中存在对应词则置为1否则为0；<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-20/83825276.jpg" alt=""><br>那么模型参数是$$\phi</em>{i|y=1}=p(x<em>i=1|y=1)\\phi</em>{i|y=0}=p(x_i=1|y=0)\ \phi_y=p(y=1)$$,对于训练集${(x^{(i)},y^{(i)});i=1,2,…,m}$,可以写出如下联合似然函数：<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-21/82773690.jpg" alt=""></li>
-</ol>
-</li>
-<li>Laplace平滑<br> 上面的朴素贝叶斯有一个问题，当有一个此前从未出现的词出现在一个新的email中时，由于：<br> <img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-21/92824613.jpg" alt=""><br> 从而使<br> <img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-21/15494214.jpg" alt=""><br> 造成无法判决。<br> 为避免这种情况，可以使用拉普拉斯平滑法：<br> <img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-21/26159084.jpg" alt=""><br> 其中k为z可能取值的数量。</li>
-<li>文本分类事件模型（Event models for text classification）<br>在的朴素贝叶斯模型是基于多元伯努利分布（x向量元素只能取0或1），其生成一封邮件的过程是<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-21/30952952.jpg" alt=""><br>与不素贝叶斯模型不同的是，多项事件模型(multinomal event model)表示一封邮件的向量x中的元素取自{1,2,…,|V|}, 其中，V为字典长度，这样，一封邮件就被表示成长度等于邮件词汇数的向量。该模型生成邮件的过程是这样的：<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-21/57113128.jpg" alt=""><br>虽然概率形式上和朴素贝叶斯很相似，但是其含义发生了很大的变化，特别是$x_i|y$已经变成了多项式分布。<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-21/69996969.jpg" alt=""><br>参数：<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-21/89127686.jpg" alt=""><br>使用拉普拉斯平滑后的参数：<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-21/50796606.jpg" alt=""></li>
-</ol>
-<p>(斯坦福机器学习笔记)</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;http://img2.imgtn.bdimg.com/it/u=4288980725,4019769355&amp;amp;fm=21&amp;amp;gp=0.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;
-    
-    </summary>
-    
-      <category term="算法" scheme="http://www.wowx.info/categories/%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="机器学习" scheme="http://www.wowx.info/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   

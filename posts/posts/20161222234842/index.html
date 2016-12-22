@@ -4,7 +4,7 @@
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Title -->
     
     <title>
-        C++ primer笔记 — 函数 | 野原圆长的Blog
+        leetcode: 383 ransom note | 野原圆长的Blog
     </title>
     
     <!-- Favicons -->
@@ -40,7 +40,7 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="http://www.wowx.info">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="C++ primer笔记 — 函数 | 野原圆长的Blog">
+    <meta property="og:title" content="leetcode: 383 ransom note | 野原圆长的Blog">
     <meta property="og:description" content="null">
     
      <!--[if lte IE 9]>
@@ -215,7 +215,7 @@
 	<ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
 		for="post-toc-trigger-btn">
 			
-			<ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#在头文件中进行函数声明"><span class="post-toc-number">1.</span> <span class="post-toc-text">在头文件中进行函数声明</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#指针形参"><span class="post-toc-number">2.</span> <span class="post-toc-text">指针形参</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用引用避免拷贝"><span class="post-toc-number">3.</span> <span class="post-toc-text">使用引用避免拷贝</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数组形参"><span class="post-toc-number">4.</span> <span class="post-toc-text">数组形参</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#main-处理命令行选项"><span class="post-toc-number">5.</span> <span class="post-toc-text">main: 处理命令行选项</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#含有可变形参的函数"><span class="post-toc-number">6.</span> <span class="post-toc-text">含有可变形参的函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#尽量使用常量引用"><span class="post-toc-number">7.</span> <span class="post-toc-text">尽量使用常量引用</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#内联函数和constexpr-常量表达式函数"><span class="post-toc-number">8.</span> <span class="post-toc-text">内联函数和constexpr(常量表达式函数)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#inline"><span class="post-toc-number">8.1.</span> <span class="post-toc-text">inline</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#constexpr"><span class="post-toc-number">8.2.</span> <span class="post-toc-text">constexpr</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#调试帮助"><span class="post-toc-number">9.</span> <span class="post-toc-text">调试帮助</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#assert预处理宏"><span class="post-toc-number">9.1.</span> <span class="post-toc-text">assert预处理宏</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#NDEBUG预处理变量"><span class="post-toc-number">9.2.</span> <span class="post-toc-text">NDEBUG预处理变量</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数匹配"><span class="post-toc-number">10.</span> <span class="post-toc-text">函数匹配</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数指针"><span class="post-toc-number">11.</span> <span class="post-toc-text">函数指针</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用"><span class="post-toc-number">11.1.</span> <span class="post-toc-text">使用</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#函数指针形参"><span class="post-toc-number">11.2.</span> <span class="post-toc-text">函数指针形参</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#返回指向函数的指针"><span class="post-toc-number">12.</span> <span class="post-toc-text">返回指向函数的指针</span></a></li></ol>
+			<ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#LeetCote-string-383-Ransom-Note"><span class="post-toc-number">1.</span> <span class="post-toc-text">LeetCote_string_383_Ransom Note</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#题意"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">题意</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#思路"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">思路</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#实现"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">实现</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#复杂度"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">复杂度</span></a></li></ol></li></ol>
 		
 <!--			<li class="mdl-menu__item">Some Action</li>-->
 	</ul>
@@ -233,22 +233,11 @@
                 
 	<!-- Paradox Post Header -->
 	
-		
-			<!-- Random Thumbnail -->
-			<div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-				<script>
-    
-    var randomNum;
-    randomNum = Math.floor(Math.random() * 5 + 1);
-    
-    $(".post_thumbnail-random").css('background-image', 'url(' + '/img/random/' + randomNum + '.png' + ')');
-    
-</script>
-
-		
+		<!-- Custom Thumbnail -->
+		<div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(http://ww4.sinaimg.cn/large/6425ef91jw1f9apllc7boj20ic0960v9.jpg)">
 	
         <p class="article-headline-p">
-            C++ primer笔记 — 函数
+            leetcode: 383 ransom note
         </p>
     </div>
 
@@ -266,7 +255,7 @@
     <!-- Author Name & Date -->
     <div>
         <strong>Xin Wei</strong>
-        <span>6月 18, 2015</span>
+        <span>12月 22, 2016</span>
     </div>
     
     <div class="section-spacer"></div>
@@ -286,7 +275,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/cpp/">cpp</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/language/">language</a>
+        <a class="post_tag-link" href="/tags/cpp/">cpp</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/easy/">easy</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/string/">string</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/算法/">算法</a>
     </ul>
     
     <!-- Share -->
@@ -300,7 +289,7 @@
     <!-- Leancloud Views -->
     <a class="post_share-link" href="#">
         <li class="mdl-menu__item">
-            <span id="/posts/20150618013220/" class="leancloud-views_num" data-flag-title="C++ primer笔记 — 函数">
+            <span id="/posts/posts/20161222234842/" class="leancloud-views_num" data-flag-title="leetcode: 383 ransom note">
      &nbsp;浏览量
 </span>
         </li>
@@ -310,21 +299,21 @@
     
     
     <!-- Share Twitter -->
-    <a class="post_share-link" href="https://twitter.com/intent/tweet?text=C++ primer笔记 — 函数&url=http://www.wowx.info//posts/20150618013220/index.html&via=Xin Wei" target="_blank">
+    <a class="post_share-link" href="https://twitter.com/intent/tweet?text=leetcode: 383 ransom note&url=http://www.wowx.info//posts/posts/20161222234842/index.html&via=Xin Wei" target="_blank">
         <li class="mdl-menu__item">
             分享到 Twitter
         </li>
     </a>
     
     <!-- Share Google+ -->
-    <a class="post_share-link" href="https://plus.google.com/share?url=http://www.wowx.info//posts/20150618013220/index.html" target="_blank">
+    <a class="post_share-link" href="https://plus.google.com/share?url=http://www.wowx.info//posts/posts/20161222234842/index.html" target="_blank">
         <li class="mdl-menu__item">
             分享到 Google+
         </li>
     </a>
     
     <!-- Share Weibo -->
-    <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=C++ primer笔记 — 函数&url=http://www.wowx.info//posts/20150618013220/index.html&pic=&searchPic=false&style=simple" target="_blank">
+    <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=leetcode: 383 ransom note&url=http://www.wowx.info//posts/posts/20161222234842/index.html&pic=&searchPic=false&style=simple" target="_blank">
         <li class="mdl-menu__item">
             分享到微博
         </li>
@@ -336,69 +325,20 @@
                 <!-- Post Content -->
                 <div id="post-content" class="markdown-Material mdl-color-text--grey-700 mdl-card__supporting-text fade out">
 	
-		<p><img src="http://ww3.sinaimg.cn/large/6425ef91jw1f9aa7pkr9wj20e80e8t97.jpg" width="420px"><br><a id="more"></a></p>
-<h2 id="在头文件中进行函数声明"><a href="#在头文件中进行函数声明" class="headerlink" title="在头文件中进行函数声明"></a>在头文件中进行函数声明</h2><ol>
-<li>自己写的头文件要用<code>#include&quot;xxxx.h&quot;</code>的形式引用</li>
-<li>size_t定义在<code>cstddef</code>头文件中，不需要使用<code>using std::size_t</code></li>
-<li><p>分离式编译<br>假如<code>Chapter6.h</code>包含有函数的声明，<code>fact.cc</code>含有函数的定义，<code>factMain</code>包含使用了该函数的主函数，则使用下列命令编译他们</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ CC factMain.cc fact.cc #生成factMain.exe 或者 a.out</div><div class="line">$ CC factMain.cc fact.cc -o main # 生成main或者main.exe</div></pre></td></tr></table></figure>
-<p>以后如果我们修改了其中一个文件，只需要重新编译那个改动了的文件。这就是分离式编译机制，分离式编译机制会产生后缀名为<code>.obj</code>(windows)或<code>.o</code>(UNIX)的文件，含义是该文件包含对象的object code， 接下来编译器负责把对象链接在一起形成可执行文件。</p>
-<p>具体过程如下</p>
-<ol>
-<li><code>$ CC -c factMain.cc # 生成factMain.o</code></li>
-<li><code>$ CC -c fact.cc #生成fact.o</code></li>
-<li><code>$ CC factMain.o fact.o #生成factMain.exe 或者 a.out</code> </li>
-</ol>
+		<h2 id="LeetCote-string-383-Ransom-Note"><a href="#LeetCote-string-383-Ransom-Note" class="headerlink" title="LeetCote_string_383_Ransom Note"></a>LeetCote_string_383_Ransom Note</h2><h3 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h3><p>Given an arbitrary ransom note string and another string containing letters from all the magazines, write a function that will return true if the ransom note can be constructed from the magazines ; otherwise, it will return false.</p>
+<p>Each letter in the magazine string can only be used once in your ransom note.</p>
+<p><strong>Note:</strong><br>You may assume that both strings contain only lowercase letters.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">canConstruct(&quot;a&quot;, &quot;b&quot;) -&gt; false</div><div class="line">canConstruct(&quot;aa&quot;, &quot;ab&quot;) -&gt; false</div><div class="line">canConstruct(&quot;aa&quot;, &quot;aab&quot;) -&gt; true</div></pre></td></tr></table></figure>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>用一个计数器数组统计<code>magzine</code>中每个字母出现的次数，然后统计<code>ransomNote</code>中字母，计算两个字符串的对应字母出现次数的差值，若小于0说明<code>ransomNote</code>要构成<code>magzine</code>还缺少该字母</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">canConstruct</span><span class="params">(<span class="built_in">string</span> ransomNote, <span class="built_in">string</span> magazine)</span> </span>&#123;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; count(<span class="number">26</span>, <span class="number">0</span>);</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">char</span> ch : magazine)</div><div class="line">            ++count[ch - <span class="string">'a'</span>];</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">char</span> ch : ransomNote)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span> (count[ch - <span class="string">'a'</span>] == <span class="number">0</span>)</div><div class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">            --count[ch - <span class="string">'a'</span>];</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h3><ul>
+<li><p>时间复杂度</p>
+<p>$O(N) + O(M)$,N, M分别为<code>magzine</code>和<code>ransomNote</code>的长度</p>
 </li>
-</ol>
-<h2 id="指针形参"><a href="#指针形参" class="headerlink" title="指针形参"></a>指针形参</h2><p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-13/96401508.jpg" alt=""></p>
-<h2 id="使用引用避免拷贝"><a href="#使用引用避免拷贝" class="headerlink" title="使用引用避免拷贝"></a>使用引用避免拷贝</h2><p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-13/12984780.jpg" alt=""></p>
-<h2 id="数组形参"><a href="#数组形参" class="headerlink" title="数组形参"></a>数组形参</h2><p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-13/10396786.jpg" alt=""></p>
-<p>标准库规范管理数组实参</p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-13/18434862.jpg" alt=""></p>
-<p>显式传递数组长度<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-13/99675923.jpg" alt=""></p>
-<h2 id="main-处理命令行选项"><a href="#main-处理命令行选项" class="headerlink" title="main: 处理命令行选项"></a>main: 处理命令行选项</h2><p><code>int main(int argc, char *argv[]) {...}</code><br>或者<br><code>int main(int argc, char **argv) {...}</code><br><code>argv</code>第一个元素指向程序的名字，而后是跟的参数</p>
-<h2 id="含有可变形参的函数"><a href="#含有可变形参的函数" class="headerlink" title="含有可变形参的函数"></a>含有可变形参的函数</h2><ul>
-<li>initializer_list<br>适用于所有<strong>实参类型相同</strong>情况<br>它定义在<code>initializer_list</code>头文件中，提供如下操作<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-14/97106667.jpg" alt=""><br>其中的元素永远是常量值<br>通过下列方法实现可变形参<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-14/38652993.jpg" alt=""><br>向其中传递必须使用花括号<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-14/36677149.jpg" alt=""></li>
-<li>可变参数模板(16.4节)</li>
-<li><p>省略符形参</p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-15/71105368.jpg" alt=""></p>
-<p>一般只用于与C函数交互的接口程序</p>
+<li><p>空间复杂度</p>
+<p>$O(1)$,只要一个长度为26的数组即可</p>
 </li>
 </ul>
-<h2 id="尽量使用常量引用"><a href="#尽量使用常量引用" class="headerlink" title="尽量使用常量引用"></a>尽量使用常量引用</h2><p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-23/63724431.jpg" alt=""></p>
-<h2 id="内联函数和constexpr-常量表达式函数"><a href="#内联函数和constexpr-常量表达式函数" class="headerlink" title="内联函数和constexpr(常量表达式函数)"></a>内联函数和constexpr(常量表达式函数)</h2><h3 id="inline"><a href="#inline" class="headerlink" title="inline"></a>inline</h3><p>对于规模较小的操作可以写入内联(inline)函数中，编译时会自动将内联函数展开。这样做可以从函数字面值而不是阅读源码理解操作的目的、需要修改操作只要修改一处地方就可以了并且利于重用。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">const</span> <span class="built_in">string</span> &amp; </span></div><div class="line"><span class="title">shorterString</span><span class="params">(<span class="keyword">const</span> <span class="built_in">string</span> &amp;s1, <span class="keyword">const</span> <span class="built_in">string</span> &amp;s2)</span></div><div class="line">&#123;</div><div class="line">  <span class="keyword">return</span> s1.size() &lt;= s2.size() ? s1 : s2;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="constexpr"><a href="#constexpr" class="headerlink" title="constexpr"></a>constexpr</h3><p>constexpr 函数是指用于常量表达式的函数，它的函数体只能包含不执行任何操作(空语句、类型别名、using声明等)并且有且只有一条返回语句。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">constexpr</span> <span class="keyword">int</span> <span class="title">new_sz</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> <span class="number">42</span>;&#125;</div><div class="line"><span class="function"><span class="keyword">constexpr</span> size_t <span class="title">scale</span><span class="params">(<span class="keyword">size_t</span> cnt)</span> </span>&#123; <span class="keyword">return</span> new_sz() * cnt;&#125;</div></pre></td></tr></table></figure></p>
-<p>如果<code>scale</code>函数的参数是常量表达式的话，它返回值也是常量表达式，正确，否则定义错误。</p>
-<p>constexpr隐含的被定义为inline。</p>
-<p><strong>inline和constexpr应该放在头文件中</strong></p>
-<h2 id="调试帮助"><a href="#调试帮助" class="headerlink" title="调试帮助"></a>调试帮助</h2><h3 id="assert预处理宏"><a href="#assert预处理宏" class="headerlink" title="assert预处理宏"></a>assert预处理宏</h3><p>定义<code>cassert</code>头文件中，因为它由预处理器管理所以我们可以直接使用预处理命令而不需要使用using声明。</p>
-<p><code>assert</code>一般用于检查<code>不能发生</code>的条件，比如<code>assert(word.size()&gt;threshold);</code>要求所有单词的长度都大于阈值。</p>
-<h3 id="NDEBUG预处理变量"><a href="#NDEBUG预处理变量" class="headerlink" title="NDEBUG预处理变量"></a>NDEBUG预处理变量</h3><p><code>assert</code>的状态由<code>NDEBUG</code>控制，如果定义了这个预处理变量则assert什么也不做(需要在引入<code>cassert</code>之前定义)，也可以使用编译器命令定义<code>$CC -D NDEBUG main.C</code></p>
-<p>也可以使用如下方法编写自己的条件调试代码<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> ia[], <span class="keyword">size_t</span> size)</span> </span></div><div class="line">&#123;</div><div class="line">  <span class="meta">#<span class="meta-keyword">ifndef</span> NDEBUG</span></div><div class="line">    <span class="built_in">cerr</span> &lt;&lt; __func__ &lt;&lt;<span class="string">": array size is "</span> &lt;&lt; size &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">  <span class="meta">#<span class="meta-keyword">endif</span></span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>其中<code>__func__</code>输出当前调试函数的名字，除此之外其他4个对于程序调试很有用的预定义的名字:</p>
-<ul>
-<li>`<strong>FILE</strong>:存放文件名的字符串字面值</li>
-<li><code>__LINE__</code>:存放当前行号的整形字面值<ul>
-<li><code>__TIME__</code>:存放文件编译时间的字符串字面值</li>
-<li><code>__DATE__</code>:存放文件日期的字符串字面值</li>
-</ul>
-</li>
-</ul>
-<p>例子<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (word.size() &lt; threshold)</div><div class="line">  <span class="built_in">cerr</span> &lt;&lt; <span class="string">"Error: "</span> &lt;&lt; __FILE__</div><div class="line">       &lt;&lt; <span class="string">": in function "</span> &lt;&lt; __func__</div><div class="line">       &lt;&lt; <span class="string">" at line "</span> &lt;&lt; __LINE__ &lt;&lt; <span class="built_in">endl</span></div><div class="line">       &lt;&lt; <span class="string">"compile on "</span> &lt;&lt; __DATE__</div><div class="line">       &lt;&lt; <span class="string">"at "</span> &lt;&lt; __TIME__ &lt;&lt; <span class="built_in">endl</span></div><div class="line">       &lt;&lt; <span class="string">"   word read was \""</span> &lt;&lt; word</div><div class="line">       &lt;&lt; <span class="string">"\": Length too short"</span> &lt;&lt; <span class="built_in">endl</span>;</div></pre></td></tr></table></figure></p>
-<h2 id="函数匹配"><a href="#函数匹配" class="headerlink" title="函数匹配"></a>函数匹配</h2><p>匹配那个最接近 最好不要进行类型转换的</p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-28/84596709.jpg" alt=""></p>
-<h2 id="函数指针"><a href="#函数指针" class="headerlink" title="函数指针"></a>函数指针</h2><p>函数类型是由返回类型和形参共同确定的，如<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">lengthCompare</span><span class="params">(<span class="keyword">const</span> <span class="built_in">string</span> &amp;, <span class="keyword">const</span> <span class="built_in">string</span> &amp;)</span></span>;</div></pre></td></tr></table></figure></p>
-<p>类型是<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">bool</span>(<span class="keyword">const</span> <span class="built_in">string</span> &amp;, <span class="keyword">const</span> <span class="built_in">string</span> &amp;);</div></pre></td></tr></table></figure></p>
-<p>所以，可以通过下面的方式声明指向函数的指针<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">bool</span> (*pf)(<span class="keyword">const</span> <span class="built_in">string</span> &amp;, <span class="keyword">const</span> <span class="built_in">string</span> &amp;);</div></pre></td></tr></table></figure></p>
-<p>上面的扩号不能少，否则变为返回bool型指针的函数。</p>
-<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>若把函数名当做值使用，则它会自动转换为指针<br><code>pf = lengthCompare;</code>与<code>pf = &amp;lengthCompare;</code>等价，取地址符是可选的</p>
-<p>可以直接使用指向函数的指针调用函数，不需要解引用<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-28/88503807.jpg" alt=""></p>
-<h3 id="函数指针形参"><a href="#函数指针形参" class="headerlink" title="函数指针形参"></a>函数指针形参</h3><p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-28/83567501.jpg" alt=""></p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-28/19798196.jpg" alt=""></p>
-<h2 id="返回指向函数的指针"><a href="#返回指向函数的指针" class="headerlink" title="返回指向函数的指针"></a>返回指向函数的指针</h2><p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-28/205054.jpg" alt=""><br>也可以<br><code>int (*f1(int)) (int *, int)</code></p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-28/83818386.jpg" alt=""></p>
 
 	
 	
@@ -426,9 +366,9 @@
 <div id="comments">
     <!-- 多说评论框 start -->
         <div class="ds-thread" 
-            data-thread-key="posts/20150618013220/" 
-            data-url="http://www.wowx.info//posts/20150618013220/index.html"
-            data-title="C++ primer笔记 — 函数"></div>
+            data-thread-key="posts//posts/20161222234842/" 
+            data-url="http://www.wowx.info//posts/posts/20161222234842/index.html"
+            data-title="leetcode: 383 ransom note"></div>
     <!-- 多说评论框 end -->
 </div>
 
@@ -441,21 +381,13 @@
     
     <!-- Prev Nav -->
     
-        <a href="/posts/201506240132/" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            新篇
-        </a>
-    
 
     <!-- Section Spacer -->
     <div class="section-spacer"></div>
 
     <!-- Next Nav -->
     
-        <a href="/posts/20150617013220/" id="post_nav-older" class="next-content">
+        <a href="/posts//posts/20161210021807/" id="post_nav-older" class="next-content">
             旧篇
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
