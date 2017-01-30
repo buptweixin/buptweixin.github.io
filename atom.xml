@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.wowx.info/"/>
-  <updated>2017-01-30T06:36:35.211Z</updated>
+  <updated>2017-01-30T17:03:56.256Z</updated>
   <id>http://www.wowx.info/</id>
   
   <author>
@@ -14,6 +14,64 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>LeetCode string 5 17 49 151</title>
+    <link href="http://www.wowx.info/posts/20170130233720/"/>
+    <id>http://www.wowx.info/posts/20170130233720/</id>
+    <published>2017-01-30T17:01:51.000Z</published>
+    <updated>2017-01-30T17:03:56.256Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="151-Reverse-Words-in-a-String"><a href="#151-Reverse-Words-in-a-String" class="headerlink" title="151 Reverse Words in a String"></a>151 Reverse Words in a String</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
+<p>Given an input string, reverse the string word by word.</p>
+<p>For example,<br>Given s = “the sky is blue”,<br>return “blue is sky the”.</p>
+<p>Update (2015-02-12):<br>For C programmers: Try to solve it in-place in O(1) space.</p>
+</blockquote>
+<p>给出一个字符串，反转其中单词的顺序，注意，如果单词之间由多个空格，只保留一个</p>
+<h3 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h3><p>首先，去除字符串中所有多余的空格(使用了自定义条件的unique方法)， 然后翻转整个字符串，最后依次翻转每个单词，该算法时间复杂度$O(N)$,空间复杂度$O(1)$。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution</div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span>:</div><div class="line">        <span class="function"><span class="keyword">void</span> <span class="title">reverseWords</span><span class="params">(<span class="built_in">string</span> &amp;s)</span></span></div><div class="line">        &#123;</div><div class="line">            <span class="comment">/************** 去除单词间重复空格 ************/</span></div><div class="line">            <span class="built_in">string</span>::iterator new_end = <span class="built_in">std</span>::unique(s.begin(), s.end(), \</div><div class="line">                    [](<span class="keyword">char</span> lhs, <span class="keyword">char</span> rhs)&#123;<span class="keyword">return</span> (lhs == rhs) &amp;&amp; (lhs == <span class="string">' '</span>);&#125;);</div><div class="line">            s.erase(new_end, s.end());</div><div class="line">            </div><div class="line">            <span class="comment">/******************   翻转整个字符串   *************/</span></div><div class="line">            reverse(s.begin(), s.end());</div><div class="line">            <span class="comment">// 给字符串首尾添加空格方便判断单词位置</span></div><div class="line">            s = <span class="string">" "</span> + s + <span class="string">" "</span>;</div><div class="line">            <span class="keyword">int</span> start = <span class="number">0</span>;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.length() - <span class="number">1</span>; ++i)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">if</span> (s[i] == <span class="string">' '</span> &amp;&amp; s[i + <span class="number">1</span>] != <span class="string">' '</span>)</div><div class="line">                    start = i + <span class="number">1</span>;</div><div class="line">                <span class="keyword">if</span> (s[i] != <span class="string">' '</span> &amp;&amp; s[i + <span class="number">1</span>] == <span class="string">' '</span>)</div><div class="line">                &#123;</div><div class="line">                    reverse(s.begin() + start, \</div><div class="line">                            s.begin() + i + <span class="number">1</span>);</div><div class="line">                    start = i + <span class="number">1</span>;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="comment">// 去除首位空格</span></div><div class="line">            s.erase(<span class="number">0</span>, s.find_first_not_of(<span class="string">" "</span>));</div><div class="line">            s.erase(s.find_last_not_of(<span class="string">" "</span>) + <span class="number">1</span>);</div><div class="line">        &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="5-Longest-Palindromic-Substring"><a href="#5-Longest-Palindromic-Substring" class="headerlink" title="5. Longest Palindromic Substring"></a>5. Longest Palindromic Substring</h2><h3 id="Problem-Desceiption"><a href="#Problem-Desceiption" class="headerlink" title="Problem Desceiption"></a>Problem Desceiption</h3><blockquote>
+<p>Given a string s, find the longest palindromic substring in s. You may assume that the maximum length of s is 1000.</p>
+<p>Example:</p>
+<p>Input: “babad”</p>
+<p>Output: “bab”</p>
+<p>Note: “aba” is also a valid answer.<br>Example:</p>
+<p>Input: “cbbd”</p>
+<p>Output: “bb”</p>
+</blockquote>
+<p>给出一个字符串返回最大长度回文子串</p>
+<h3 id="Method-1"><a href="#Method-1" class="headerlink" title="Method"></a>Method</h3><p>依次以字符串的每个元素为回文中心进行计算，如果碰到连续重复字符，则以直接以重复字符中心为回文中心(因为回文对称)，下次比较以重复字符段下一个字符为回文中心<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="built_in">string</span> <span class="title">longestPalindrome</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</div><div class="line">        <span class="comment">// 关键是依次以每个字符为回文中心向两边扩展</span></div><div class="line">        <span class="keyword">if</span> (s.empty()) <span class="keyword">return</span> <span class="string">""</span>;</div><div class="line">        <span class="keyword">if</span> (s.size() == <span class="number">1</span>) <span class="keyword">return</span> s;</div><div class="line">        <span class="keyword">int</span> start = <span class="number">0</span>, max_len = <span class="number">1</span>;</div><div class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</div><div class="line">        <span class="keyword">while</span>(i &lt; s.length())</div><div class="line">        &#123;</div><div class="line">            <span class="comment">// 如果回文中心到字符串尾部的长度小于当前最长回文的一半，则不可能出现更长的回文，结束</span></div><div class="line">            <span class="keyword">if</span> (s.size() - i &lt;= max_len / <span class="number">2</span>)</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            <span class="keyword">int</span> left = i, right = i;</div><div class="line">            <span class="comment">// 跳过重复字符串</span></div><div class="line">            <span class="keyword">while</span>(right &lt; s.length() - <span class="number">1</span> &amp;&amp; s[right] == s[right + <span class="number">1</span>])</div><div class="line">                ++right;</div><div class="line">            <span class="comment">// 下一个可能的回文中心必定在重复字符串之外，因为需要保证两边有相同数量的字符</span></div><div class="line">            i = right + <span class="number">1</span>;</div><div class="line">            <span class="keyword">while</span>(right &lt; s.length() - <span class="number">1</span> &amp;&amp; left &gt; <span class="number">0</span> &amp;&amp; s[right + <span class="number">1</span>] == s[left - <span class="number">1</span>])</div><div class="line">            &#123;</div><div class="line">                ++right;</div><div class="line">                --left;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">int</span> new_len = right - left + <span class="number">1</span>;</div><div class="line">            <span class="keyword">if</span> (new_len &gt; max_len)</div><div class="line">            &#123;</div><div class="line">                start = left;</div><div class="line">                max_len = new_len;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> s.substr(start, max_len);</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<h2 id="17-Letter-Combinations-of-a-Phone-Number"><a href="#17-Letter-Combinations-of-a-Phone-Number" class="headerlink" title="17. Letter Combinations of a Phone Number"></a>17. Letter Combinations of a Phone Number</h2><h3 id="Problem-Description-1"><a href="#Problem-Description-1" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
+<p>Given a digit string, return all possible letter combinations that the number could represent.</p>
+<p>A mapping of digit to letters (just like on the telephone buttons) is given below.</p>
+<p>Input:Digit string “23”<br>Output: [“ad”, “ae”, “af”, “bd”, “be”, “bf”, “cd”, “ce”, “cf”].<br>Note:<br>Although the above answer is in lexicographical order, your answer could be in any order you want.</p>
+</blockquote>
+<p>给出一个由数字构成的字符串，返回它能映射成的所有电话键盘上的字母组合。</p>
+<h3 id="Method-2"><a href="#Method-2" class="headerlink" title="Method"></a>Method</h3><p>用一个字符串数组存储每个按键对应的字符串表，然后依次遍历给出的字符串，根据字符串表获得其对应的字符表，将其添加于之前组合后面。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; letterCombinations(<span class="built_in">string</span> digits) &#123;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; res;</div><div class="line">        <span class="keyword">if</span> (digits.empty())</div><div class="line">            <span class="keyword">return</span> res;</div><div class="line">        <span class="built_in">string</span> charmap[<span class="number">10</span>] = &#123;<span class="string">"0"</span>, <span class="string">"1"</span>, <span class="string">"abc"</span>, <span class="string">"def"</span>, <span class="string">"ghi"</span>, <span class="string">"jkl"</span>, <span class="string">"mno"</span>, <span class="string">"pqrs"</span>, <span class="string">"tuv"</span>, <span class="string">"wxyz"</span>&#125;;</div><div class="line">        res.push_back(<span class="string">""</span>);</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; digits.size(); ++i)</div><div class="line">        &#123;</div><div class="line">            <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; tmpvec;</div><div class="line">            <span class="built_in">string</span> chars = charmap[digits[i] - <span class="string">'0'</span>];</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; chars.size(); ++j)</div><div class="line">                <span class="keyword">for</span> (<span class="built_in">string</span> str : res)</div><div class="line">                    tmpvec.push_back(str + chars[j]);</div><div class="line">            res = tmpvec;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="49-Group-Anagrams"><a href="#49-Group-Anagrams" class="headerlink" title="49. Group Anagrams"></a>49. Group Anagrams</h2><h3 id="Problem-Description-2"><a href="#Problem-Description-2" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
+<p>Given an array of strings, group anagrams together.</p>
+<p>For example, given: [“eat”, “tea”, “tan”, “ate”, “nat”, “bat”],<br>Return:</p>
+<p>[<br> [“ate”, “eat”,”tea”],<br> [“nat”,”tan”],<br> [“bat”]<br>]<br>Note: All inputs will be in lower-case.</p>
+</blockquote>
+<p>给出一个字符串列表，将由相同字母不同顺序构成的字符串分组</p>
+<h3 id="Method-3"><a href="#Method-3" class="headerlink" title="Method"></a>Method</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt; groupAnagrams(<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; strs) &#123;</div><div class="line">        <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="built_in">multiset</span>&lt;<span class="built_in">string</span>&gt;&gt; mp;</div><div class="line">        <span class="keyword">for</span> (<span class="built_in">string</span> str : strs)</div><div class="line">        &#123;</div><div class="line">            <span class="built_in">string</span> tmp = str;</div><div class="line">            sort(tmp.begin(), tmp.end());</div><div class="line">            mp[tmp].insert(str);</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt; res;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> m : mp)</div><div class="line">        &#123;</div><div class="line">            <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; anagram(m.second.begin(), m.second.end());</div><div class="line">            res.push_back(anagram);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;151-Reverse-Words-in-a-String&quot;&gt;&lt;a href=&quot;#151-Reverse-Words-in-a-String&quot; class=&quot;headerlink&quot; title=&quot;151 Reverse Words in a String&quot;&gt;&lt;/a
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="http://www.wowx.info/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
+    
+      <category term="string" scheme="http://www.wowx.info/tags/string/"/>
+    
+  </entry>
   
   <entry>
     <title>LeetCode string 93 385 3 30</title>
@@ -1862,31 +1920,6 @@ In [4]: pickle.load(open(&apos;test.pkl&apos;,&apos;rb&apos;)) Out[4]: [1, None,
 </code></pre></li>
 <li>文件关闭</li>
 </ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;http://public.download.csdn.net/uploads_album/2016/04/25/4767aab89bd7277ff41c611a0dd93ccb.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;
-    
-    </summary>
-    
-      <category term="工具" scheme="http://www.wowx.info/categories/%E5%B7%A5%E5%85%B7/"/>
-    
-    
-      <category term="Python" scheme="http://www.wowx.info/tags/Python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>使用Python统计处理基础篇--前言</title>
-    <link href="http://www.wowx.info/posts/20160719225917/"/>
-    <id>http://www.wowx.info/posts/20160719225917/</id>
-    <published>2016-07-19T14:59:17.000Z</published>
-    <updated>2016-12-21T15:55:23.005Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="http://public.download.csdn.net/uploads_album/2016/04/25/4767aab89bd7277ff41c611a0dd93ccb.jpg" alt=""><br><a id="more"></a></p>
-<p>本系列博客对Python在统计学中的应用，涵盖了Python语言、画图等方方面面。</p>
-<p>主要参考了<a href="http://www.scipy-lectures.org/" target="_blank" rel="external">scipy-lectures</a>,我将一些要点整理出来了，方便大家查阅。</p>
 ]]></content>
     
     <summary type="html">
