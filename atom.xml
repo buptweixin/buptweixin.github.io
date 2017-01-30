@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.wowx.info/"/>
-  <updated>2016-12-26T15:41:05.805Z</updated>
+  <updated>2017-01-30T06:36:35.211Z</updated>
   <id>http://www.wowx.info/</id>
   
   <author>
@@ -14,6 +14,70 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>LeetCode string 93 385 3 30</title>
+    <link href="http://www.wowx.info/posts/20170129233720/"/>
+    <id>http://www.wowx.info/posts/20170129233720/</id>
+    <published>2017-01-29T06:33:12.000Z</published>
+    <updated>2017-01-30T06:36:35.211Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="93-Restore-IP-Addresses"><a href="#93-Restore-IP-Addresses" class="headerlink" title="93 Restore IP Addresses"></a>93 Restore IP Addresses</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
+<p>Given a string containing only digits, restore it by returning all possible valid IP address combinations.</p>
+<p>For example:<br>Given “25525511135”,</p>
+<p>return [“255.255.11.135”, “255.255.111.35”]. (Order does not matter)</p>
+</blockquote>
+<p>给出一个由数字组成的字符串，解码出所有可能的ip地址。</p>
+<h3 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h3><h4 id="直接遍历所有情况"><a href="#直接遍历所有情况" class="headerlink" title="直接遍历所有情况"></a>直接遍历所有情况</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; restoreIpAddresses(<span class="built_in">string</span> s) &#123;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; ips;</div><div class="line">        <span class="built_in">string</span> ip;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> a = <span class="number">1</span>; a &lt; <span class="number">4</span>; ++a)</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> b = <span class="number">1</span>; b &lt; <span class="number">4</span>; ++b)</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> c = <span class="number">1</span>; c &lt; <span class="number">4</span>; ++c)</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> d = <span class="number">1</span>; d &lt; <span class="number">4</span>; ++d)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span> (a + b + c + d == s.length())</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">int</span> part1 = stoi(s.substr(<span class="number">0</span>, a));</div><div class="line">                <span class="keyword">int</span> part2 = stoi(s.substr(a, b));</div><div class="line">                <span class="keyword">int</span> part3 = stoi(s.substr(a+b, c));</div><div class="line">                <span class="keyword">int</span> part4 = stoi(s.substr(a+b+c, d));</div><div class="line">                <span class="keyword">if</span> (part1 &lt;= <span class="number">255</span> &amp;&amp; part2 &lt;= <span class="number">255</span> &amp;&amp; part3 &lt;= <span class="number">255</span> &amp;&amp; part4 &lt;= <span class="number">255</span>)</div><div class="line">                &#123;</div><div class="line">                    ip = to_string(part1) + <span class="string">"."</span> + to_string(part2) + <span class="string">"."</span> + to_string(part3) + <span class="string">"."</span> + to_string(part4);</div><div class="line">                    <span class="keyword">if</span> (ip.length() == s.length() + <span class="number">3</span>)</div><div class="line">                        ips.push_back(ip);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> ips;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h4 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; restoreIpAddresses(<span class="built_in">string</span> s) &#123;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; res;</div><div class="line">        restoreIP(s, res, <span class="number">0</span>, <span class="string">""</span>, <span class="number">0</span>);</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"><span class="keyword">private</span>:</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">restoreIP</span><span class="params">(<span class="built_in">string</span>&amp; s, <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; solution, <span class="keyword">int</span> idx, <span class="built_in">string</span> restored, \</span></span></div><div class="line">            <span class="keyword">int</span> count)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span> (count &gt; <span class="number">4</span>) <span class="keyword">return</span>;</div><div class="line">        <span class="keyword">if</span> (count == <span class="number">4</span> &amp;&amp; idx == s.length()) solution.push_back(restored);</div><div class="line"></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; <span class="number">4</span>; ++i)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span> (idx + i &gt; s.length()) <span class="keyword">break</span>;</div><div class="line">            <span class="built_in">string</span> substring = s.substr(idx, i);</div><div class="line">            <span class="keyword">if</span> ((substring[<span class="number">0</span>] == <span class="string">'0'</span> &amp;&amp; substring.length() &gt; <span class="number">1</span>) || \</div><div class="line">                    (i == <span class="number">3</span> &amp;&amp; stoi(substring) &gt; <span class="number">255</span>))</div><div class="line">                <span class="keyword">continue</span>;</div><div class="line">            restoreIP(s, solution, idx + i, restored + substring + (count == <span class="number">3</span> ? <span class="string">""</span> : <span class="string">"."</span>),\</div><div class="line">                    count + <span class="number">1</span>);</div><div class="line"></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="385-Mini-Parser"><a href="#385-Mini-Parser" class="headerlink" title="385 Mini Parser"></a>385 Mini Parser</h2><h3 id="Problem-Description-1"><a href="#Problem-Description-1" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
+<p>Given a nested list of integers represented as a string, implement a parser to deserialize it.</p>
+<p>Each element is either an integer, or a list – whose elements may also be integers or other lists.</p>
+<p>Note: You may assume that the string is well-formed:</p>
+<p>String is non-empty.<br>String does not contain white spaces.<br>String contains only digits 0-9, [, - ,, ].<br>Example 1:</p>
+<p>Given s = “324”,</p>
+<p>You should return a NestedInteger object which contains a single integer 324.<br>Example 2:</p>
+<p>Given s = “[123,[456,[789]]]”,</p>
+<p>Return a NestedInteger object containing a nested list with 2 elements:</p>
+<ol>
+<li>An integer containing value 123.</li>
+<li>A nested list containing two elements:<br>i.  An integer containing value 456.<br>ii. A nested list with one element:<pre><code>a. An integer containing value 789.
+</code></pre>Subscribe to see which companies asked this question</li>
+</ol>
+</blockquote>
+<h3 id="Method-1"><a href="#Method-1" class="headerlink" title="Method"></a>Method</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function">NestedInteger <span class="title">deserialize</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</div><div class="line">        <span class="function"><span class="built_in">istringstream</span> <span class="title">in</span><span class="params">(s)</span></span>;</div><div class="line">        <span class="keyword">return</span> deserialize(in);</div><div class="line">    &#125;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">    <span class="function">NestedInteger <span class="title">deserialize</span><span class="params">(<span class="built_in">istringstream</span> &amp;in)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> num;</div><div class="line">        <span class="keyword">if</span> (in &gt;&gt; num)</div><div class="line">            <span class="keyword">return</span> NestedInteger(num);</div><div class="line">        in.clear();</div><div class="line">        in.get();</div><div class="line">        NestedInteger <span class="built_in">list</span>;</div><div class="line">        <span class="keyword">while</span>(in.peek() != <span class="string">']'</span>)</div><div class="line">        &#123;</div><div class="line">            <span class="built_in">list</span>.add(deserialize(in));</div><div class="line">            <span class="keyword">if</span> (in.peek() == <span class="string">','</span>)</div><div class="line">                in.get();</div><div class="line">        &#125;</div><div class="line">        in.get();</div><div class="line">        <span class="keyword">return</span> <span class="built_in">list</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="3-Longest-Substring-Without-Repeating-Characters"><a href="#3-Longest-Substring-Without-Repeating-Characters" class="headerlink" title="3 Longest Substring Without Repeating Characters"></a>3 Longest Substring Without Repeating Characters</h2><h3 id="Problem-Description-2"><a href="#Problem-Description-2" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
+<p>Given a string, find the length of the longest substring without repeating characters.</p>
+<p>Examples:</p>
+<p>Given “abcabcbb”, the answer is “abc”, which the length is 3.</p>
+<p>Given “bbbbb”, the answer is “b”, with the length of 1.</p>
+<p>Given “pwwkew”, the answer is “wke”, with the length of 3. Note that the answer must be a substring, “pwke” is a subsequence and not a substring.</p>
+<p>Subscribe to see which companies asked this question</p>
+</blockquote>
+<h3 id="Method-2"><a href="#Method-2" class="headerlink" title="Method"></a>Method</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; alphatable(<span class="number">256</span>, <span class="number">-1</span>);</div><div class="line">        <span class="keyword">int</span> start = <span class="number">-1</span>, maxlen = <span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.length(); ++i) &#123;</div><div class="line">            <span class="keyword">if</span> (alphatable[s[i]] &gt; start)</div><div class="line">                start = alphatable[s[i]];</div><div class="line">            alphatable[s[i]] = i;</div><div class="line">            maxlen = max(maxlen, i - start);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> maxlen;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="30-Substring-with-Concatenation-of-All-Words"><a href="#30-Substring-with-Concatenation-of-All-Words" class="headerlink" title="30. Substring with Concatenation of All Words"></a>30. Substring with Concatenation of All Words</h2><h3 id="Problem-Description-3"><a href="#Problem-Description-3" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
+<p>You are given a string, s, and a list of words, words, that are all of the same length. Find all starting indices of substring(s) in s that is a concatenation of each word in words exactly once and without any intervening characters.</p>
+<p>For example, given:<br>s: “barfoothefoobarman”<br>words: [“foo”, “bar”]</p>
+<p>You should return the indices: [0,9].<br>(order does not matter).</p>
+</blockquote>
+<p>给出一个字符串s和一个等长单词构成的单词数组words，找出words中所有单词任意拼接(每个单词最多出现一次)在s中出现的位置。</p>
+<h3 id="Method-3"><a href="#Method-3" class="headerlink" title="Method"></a>Method</h3><p>用一个<code>unordered_map&lt;string, int&gt; words</code>存储words中每个单词出现的次数，另一个<code>unordered_map&lt;string, int&gt; seen</code>存储s中每个单词出现的次数，如果seen中对应单词数大于words中单词数则退出进入下一次比较<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; findSubstring(<span class="built_in">string</span> s, <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; words) &#123;</div><div class="line">        <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt; counts;</div><div class="line">        <span class="keyword">for</span> (<span class="built_in">string</span> word : words)</div><div class="line">            counts[word]++;</div><div class="line">        <span class="keyword">int</span> n = s.length(), num = words.size(), len = words[<span class="number">0</span>].length();</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; indexes;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n - num * len + <span class="number">1</span>; ++i)</div><div class="line">        &#123;</div><div class="line">            <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt; seen;</div><div class="line">            <span class="keyword">int</span> j = <span class="number">0</span>;</div><div class="line">            <span class="keyword">for</span> (; j &lt; num; ++j)</div><div class="line">            &#123;</div><div class="line">                <span class="built_in">string</span> substring = s.substr(i + len * j, len);</div><div class="line">                <span class="keyword">if</span> (counts.find(substring) != counts.end())</div><div class="line">                &#123;</div><div class="line">                    seen[substring]++;</div><div class="line">                    <span class="keyword">if</span> (seen[substring] &gt; counts[substring])</div><div class="line">                        <span class="keyword">break</span>;</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">else</span></div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span> (j == num) indexes.push_back(i);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> indexes;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;93-Restore-IP-Addresses&quot;&gt;&lt;a href=&quot;#93-Restore-IP-Addresses&quot; class=&quot;headerlink&quot; title=&quot;93 Restore IP Addresses&quot;&gt;&lt;/a&gt;93 Restore IP Add
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="http://www.wowx.info/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
+    
+      <category term="string" scheme="http://www.wowx.info/tags/string/"/>
+    
+  </entry>
   
   <entry>
     <title>Note of Machine Learning Yearning</title>
@@ -133,9 +197,9 @@
       <category term="机器学习" scheme="http://www.wowx.info/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="机器学习" scheme="http://www.wowx.info/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
       <category term="深度学习" scheme="http://www.wowx.info/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="机器学习" scheme="http://www.wowx.info/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
@@ -840,9 +904,9 @@
       <category term="机器学习" scheme="http://www.wowx.info/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="机器学习" scheme="http://www.wowx.info/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
       <category term="深度学习" scheme="http://www.wowx.info/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="机器学习" scheme="http://www.wowx.info/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
       <category term="cs231n" scheme="http://www.wowx.info/tags/cs231n/"/>
     
@@ -1006,9 +1070,9 @@ linear SVM on raw pixels final test set accuracy: 0.216000
       <category term="机器学习" scheme="http://www.wowx.info/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="机器学习" scheme="http://www.wowx.info/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
       <category term="深度学习" scheme="http://www.wowx.info/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="机器学习" scheme="http://www.wowx.info/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
@@ -1046,9 +1110,9 @@ linear SVM on raw pixels final test set accuracy: 0.216000
       <category term="机器学习" scheme="http://www.wowx.info/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="机器学习" scheme="http://www.wowx.info/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
       <category term="深度学习" scheme="http://www.wowx.info/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="机器学习" scheme="http://www.wowx.info/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
       <category term="cs231n" scheme="http://www.wowx.info/tags/cs231n/"/>
     
@@ -1835,71 +1899,6 @@ In [4]: pickle.load(open(&apos;test.pkl&apos;,&apos;rb&apos;)) Out[4]: [1, None,
     
     
       <category term="Python" scheme="http://www.wowx.info/tags/Python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>几种常用激活函数介绍</title>
-    <link href="http://www.wowx.info/posts/20160624/"/>
-    <id>http://www.wowx.info/posts/20160624/</id>
-    <published>2016-06-23T16:34:28.000Z</published>
-    <updated>2016-12-02T08:18:05.309Z</updated>
-    
-    <content type="html"><![CDATA[<p>由于线性模型的表达能力不够（甚至不能表达异或），需要使用激活函数(activation function)引入非线性因素，常用的激活函数有sigmoid函数、tanh函数、ReLu函数及其改进函数和Maxout等。<br><a id="more"></a></p>
-<h3 id="sigmod激活函数"><a href="#sigmod激活函数" class="headerlink" title="sigmod激活函数"></a>sigmod激活函数</h3><p>$$sigmoid(x)=\frac{1}{1+e^{-x}}$$</p>
-<h4 id="函数图像"><a href="#函数图像" class="headerlink" title="函数图像"></a>函数图像</h4><p>sigmoid 函数图像是一条光滑的”S”型曲线，</p>
-<p><img src="http://images0.cnblogs.com/blog/760242/201505/211727262911982.png" alt=""></p>
-<h4 id="函数性质"><a href="#函数性质" class="headerlink" title="函数性质"></a>函数性质</h4><ol>
-<li>当输入趋近于负无穷时，sigmoid函数取值趋近于0，反之，当输入趋近于正无穷时其取值趋近于1；</li>
-<li>整个曲线都是光滑(可微)的，且任何一点的导数都大于零；</li>
-<li>导数形式简单，为$$sigmoid^\prime(x)=sigmoid(x)(1-sigmoid(x))$$<br> 这个性质很重要，因为只要在正向传播中计算了$sigmoid(x)$,反向传播求导时就可以很方便的通过$sigmoid(x)$求出$sigmoid^\prime(x)$</li>
-</ol>
-<h4 id="应用状况"><a href="#应用状况" class="headerlink" title="应用状况"></a>应用状况</h4><p>由于sigmoid函数的取值区间[0, 1]可以用来表示概率这一 性质，所以在过去很长一段时间其被广泛使用，然而，随着考虑到sigmoid函数同时具有如下的两个问题，近些年其逐渐被冷落。</p>
-<ol>
-<li>梯度消失问题：神经网络的反向传播过程是通过链式法则实现的，然而我们看sigmoid函数图像可知，当输入很大或者很小时，其导数是接近于0的，这在网络层数较少时可能不是问题，然而深度学习中网络层数动辄几十上百层，这样很可能造成梯度的消失；</li>
-<li>输出的中心不是0:上级神经元的输出中心非零会造成下层神经元的输入中心非0。</li>
-</ol>
-<h3 id="tanh激活函数"><a href="#tanh激活函数" class="headerlink" title="tanh激活函数"></a>tanh激活函数</h3><p>tanh函数形式如下所示：$$tanh(x)=\frac{e^x-e^{-x}}{e^x+e^{-x}}$$，它和sigmoid函数关系为$$tanh(x)=2sigmoid(2x)-1$$</p>
-<h4 id="函数图像-1"><a href="#函数图像-1" class="headerlink" title="函数图像"></a>函数图像</h4><p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-6-23/56765549.jpg" alt=""></p>
-<p>tanh函数图像和sigmoid函数很相似，但是其值域为(-1,1)，且其输出中心为0，这样就能避免上面提到的sigmoid存在的第二个问题。</p>
-<h4 id="函数性质-1"><a href="#函数性质-1" class="headerlink" title="函数性质"></a>函数性质</h4><ol>
-<li>当输入趋近于负无穷时，tanh函数取值趋近于-1，反之，当输入趋近于正无穷时其取值趋近于1；</li>
-<li>整个曲线都是光滑(可微)的，且任何一点的导数都大于零；</li>
-<li>导数形式为$$tanh^\prime(x)=1-[tanh(x)]^2$$</li>
-<li>输出以0为中心</li>
-</ol>
-<h4 id="应用状况-1"><a href="#应用状况-1" class="headerlink" title="应用状况"></a>应用状况</h4><p>和sigmoid函数一样，tanh函数也存在梯度消失的问题，但是他的输出中心为0，所以他比sigmoid函数更常用。</p>
-<h3 id="ReLu激活函数"><a href="#ReLu激活函数" class="headerlink" title="ReLu激活函数"></a>ReLu激活函数</h3><p>sigmoid函数和tanh函数的输出不具备稀疏性，因此需要加入惩罚因子(正则项)来训练出接近0的系数，而ReLu(Rectified Linear Unite)是对其的线性修正，它的公式为$$ReLu(x)=max(0,x)$$</p>
-<h4 id="函数图像-2"><a href="#函数图像-2" class="headerlink" title="函数图像"></a>函数图像</h4><p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-6-24/2147013.jpg" alt=""></p>
-<p>从上图可以看到，当输入小于0时，输出为0，即神经元是被抑制的，当输入大于0时，输出和输入成正比例关系。</p>
-<h4 id="函数性质-2"><a href="#函数性质-2" class="headerlink" title="函数性质"></a>函数性质</h4><p>优点</p>
-<ol>
-<li>收敛速度快：和sigmoid函数、tanh函数相比，ReLu具有更快的收敛速度</li>
-<li>计算简单： ReLu计算只需要使用简单的max操作</li>
-<li>能产生大量稀疏解： 因为左半部分是被抑制的，所以使用ReLu作为激活函数训练出来的网络参数有很大一部分都是0。</li>
-</ol>
-<p>缺点：</p>
-<p>如果一个很大的梯度流过了ReLu某个神经元，因为ReLU输入小于0时梯度为0 ，会造成这个神经元将不会再更新，造成神经元“死亡”现象，具体的可以看评论栏第一条(感谢@tg提醒，之前理解错了)。</p>
-<h4 id="改进"><a href="#改进" class="headerlink" title="改进"></a>改进</h4><p>为了避免神经元“死亡”现象，研究人员提出了Leak ReLu的改进函数，其把当x小于0时的输出由0变为很小的负数。</p>
-<h3 id="Maxout激活函数"><a href="#Maxout激活函数" class="headerlink" title="Maxout激活函数"></a>Maxout激活函数</h3><p>Maxout其实是改变了神经元的形式，它将每个神经元由原来一次训练一组参数扩展为同时训练多组参数，然后选择激活值最大的作为下一层的激活值，比如同时训练3组参数：$$max(w_1^Tx+b_1, w_2^Tx+b_2, w_3^Tx+b_3)$$</p>
-<p>可以看出ReLu为Maxout同时训练两组参数且$w_2,b_2$取0时的情形，因此maxout拥有ReLu的所有优点同时避免了神经元“死亡”的现象；但是，由于需要多训练了几组参数，网络的效率也大大降低了。</p>
-<h3 id="该如何选择"><a href="#该如何选择" class="headerlink" title="该如何选择"></a>该如何选择</h3><ol>
-<li>不要使用sigmoid；</li>
-<li>可以考虑使用tanh；</li>
-<li>使用ReLU激活函数的话，注意不要把学习率设得太高，避免产生结点”死亡”现象；</li>
-<li>最好使用Maxout或者Leaky ReLU， 他们的效果比tanh好。</li>
-</ol>
-<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><p><a href="http://cs231n.github.io/neural-networks-1/" target="_blank" rel="external">CS231n Convolutional Neural Networks for Visual Recognition</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;由于线性模型的表达能力不够（甚至不能表达异或），需要使用激活函数(activation function)引入非线性因素，常用的激活函数有sigmoid函数、tanh函数、ReLu函数及其改进函数和Maxout等。&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="机器学习" scheme="http://www.wowx.info/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   

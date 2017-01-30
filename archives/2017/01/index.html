@@ -4,7 +4,7 @@
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Title -->
     
     <title>
-        HIVE的安装 | 野原圆长的Blog
+        archive_a: 2017/1 | 野原圆长的Blog
     </title>
     
     <!-- Favicons -->
@@ -40,7 +40,7 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="http://www.wowx.info">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="HIVE的安装 | 野原圆长的Blog">
+    <meta property="og:title" content="archive_a: 2017/1 | 野原圆长的Blog">
     <meta property="og:description" content="null">
     
      <!--[if lte IE 9]>
@@ -194,239 +194,214 @@
                 </button>
 				
 				
-                
-	<!-- Back Button -->
-<!--
-	<div class="material-back" id="backhome-div" tabindex="0">
-		<a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" href="#" onclick="window.history.back();return false;" target="_self" role="button" data-upgraded=",MaterialButton,MaterialRipple">
-			<i class="material-icons" role="presentation">arrow_back</i>
-			<span class="mdl-button__ripple-container">
-				<span class="mdl-ripple"></span>
-			</span>
-		</a>
-	</div>			
--->
-	<!-- Left aligned menu below button -->
-	<button id="post-toc-trigger-btn"
-			class="mdl-button mdl-js-button mdl-button--icon">
-	  <i class="material-icons">format_list_numbered</i>
-	</button>
-
-	<ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
-		for="post-toc-trigger-btn">
-			
-			<ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#本地模式"><span class="post-toc-number">1.</span> <span class="post-toc-text">本地模式</span></a></li></ol>
-		
-<!--			<li class="mdl-menu__item">Some Action</li>-->
-	</ul>
-
-
-<!-- Layouts -->
-
-    <!-- Post Module -->
-    <div class="material-post_container">
-		
-        <div class="material-post mdl-grid">
-            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
-
-                <!-- Post Header(Thumbnail & Title) -->
-                
-	<!-- Paradox Post Header -->
+                <!-- Index Module -->
+<div class="material-index mdl-grid">
 	
+		<!-- Paradox Header -->
+		<!-- Daily pic -->
+<div class="mdl-card daily-pic mdl-cell mdl-cell--8-col index-top-block">
+    
+    <!-- Pic & Slogan -->
+    <div class="mdl-card__media mdl-color-text--grey-50" style="background-image:url(/img/daily_pic.png)">
+        <p class="index-top-block-slogan"><a href="#">Hi, nice to meet you</a></p>
+    </div>
+
+    <!-- Avatar & Name -->
+    <div class="mdl-card__supporting-text meta mdl-color-text--grey-600">
+        <!-- Author Avatar -->
+        <div id="author-avatar">
+            <img src="/img/avatar.png" width="32px" height="32px" alt="avatar">
+        </div>
+        <div>
+            <strong>Xin Wei</strong>
+        </div>
+    </div>
+</div>
+
+		<!-- Blog info -->
+<div class="mdl-card something-else mdl-cell mdl-cell--8-col mdl-cell--4-col-desktop index-top-block">
+	
+    <!-- Search -->
+	
+	<!-- Google -->
+	<div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable" method="post" action="">
+		<label id="search-label" class="mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--fab mdl-color--accent mdl-shadow--4dp" for="search">
+			<i class="material-icons mdl-color-text--white" role="presentation">search</i>
+		</label>
+
+		<form id="search-form" method="get" action="//google.com/search" accept-charset="UTF-8" class="mdl-textfield__expandable-holder" target="_blank">
+			<input class="mdl-textfield__input search-input" type="search" name="q" id="search" placeholder="">
+			<label id="search-form-label" class="mdl-textfield__label" for="search"></label>
+			
+			<input type="hidden" name="sitesearch" value="http://www.wowx.info">
+		</form>
+	</div>
+
+
+
+
+
+
+    <!-- LOGO -->
+    <div class="something-else-logo mdl-color--white mdl-color-text--grey-600">
+        <a href="null">
+            <img src="/img/wx.png" alt="logo" />
+        </a>
+    </div>
+
+    <!-- Infomation -->
+    <div class="mdl-card__supporting-text meta meta--fill mdl-color-text--grey-600">
+        <!-- Blog Title -->
+        <div>
+            <strong>野原圆长的Blog</strong>
+        </div>
+        <div class="section-spacer"></div>
+        
+        <!-- Pages -->
+        <button id="show-pages-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+            <i class="material-icons" role="presentation">view_carousel</i>
+            <span class="visuallyhidden">Pages</span>
+        </button>
+        <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="show-pages-button">
+            
+                <a class="index_share-link" href="/" title="home">
+                    <l class="mdl-menu__item mdl-js-ripple-effect"i>
+                        home
+                    </li>
+                </a>
+            
+                <a class="index_share-link" href="/tags" title="标签">
+                    <l class="mdl-menu__item mdl-js-ripple-effect"i>
+                        标签
+                    </li>
+                </a>
+            
+                <a class="index_share-link" href="/categories" title="分类">
+                    <l class="mdl-menu__item mdl-js-ripple-effect"i>
+                        分类
+                    </li>
+                </a>
+            
+        </ul>
+        
+        <!-- Menu -->
+        <button id="menubtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+            <i class="material-icons" role="presentation">more_vert</i>
+            <span class="visuallyhidden">show menu</span>
+        </button>
+        <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="menubtn">
+            
+            <a class="index_share-link" href="null">
+                <li class="mdl-menu__item mdl-js-ripple-effect">
+                    文章 RSS
+                </li>
+            </a>
+            <a class="index_share-link" href="https://twitter.com/intent/tweet?text=野原圆长的Blog&url=http://www.wowx.info/&via=Xin Wei" target="_blank">
+                <li class="mdl-menu__item mdl-js-ripple-effect">
+                    分享到 Twitter
+                </li>
+            </a>
+            <a class="index_share-link" href="https://plus.google.com/share?url=http://www.wowx.info/" target="_blank">
+                <li class="mdl-menu__item mdl-js-ripple-effect">
+                    分享到 Google+
+                </li>
+            </a>
+            <a class="index_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=野原圆长的Blog&url=http://www.wowx.info/&pic=&searchPic=false&style=simple" target="_blank">
+                <li class="mdl-menu__item mdl-js-ripple-effect">
+                    分享到微博
+                </li>
+            </a>
+        </ul>
+    </div>
+</div>
+
+	
+    
+    
 		
-			<!-- Random Thumbnail -->
-			<div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-				<script>
+			<!-- Paradox Thumbnail -->
+        	<div class="post_entry-module mdl-card mdl-cell mdl-cell--12-col fade out">
+    
+    <!-- Post Thumbnail -->
+	
+		<!-- Custom Thumbnail -->
+		<div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(http://ww4.sinaimg.cn/large/6425ef91jw1f9apllc7boj20ic0960v9.jpg)">
+	
+				
+		<!-- Post Title -->
+		<p class="article-headline-p"><a href="/posts/20170129233720/">LeetCode string 93 385 3 30</a></p>
+	</div>
+
+    <!-- Post Excerpt -->
+    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
+        
+          
+        
+        &nbsp;&nbsp;&nbsp;
+        <span>
+            <a href="/posts/20170129233720/" target="_self">继续阅读</a>
+        </span>
+    </div>
+    <!-- Post_entry Info-->
+    <div id="post_entry-info">
+        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
+            <!-- Author Avatar -->
+            <div id="author-avatar">
+                <img src="/img/avatar.png" width="44px" height="44px" alt="Xin Wei's avatar">
+            </div>
+            <div>
+                <strong>Xin Wei</strong>
+                <span>1月 29, 2017</span>
+            </div>
+        </div>
+        <div id="post_entry-right-info">
+            <!-- Category -->
+            <span class="post_entry-category">
+                
+            </span>
+            
+            
+                <!-- Comment Number -->
+                &nbsp;|&nbsp;
+                <span class="post_entry-comment" >
+                        <span class="ds-thread-count" data-thread-key="undefined" data-count-type="comments"></span>
+                </span>
+            
+            
+            <!-- Post Views -->
+            <span class="post_entry-views">
+                
+            </span>
+        </div>
+    </div>
+            
+</div>
+
+		
+		
+    
+    
+	
+		<script>
     
     var randomNum;
-    randomNum = Math.floor(Math.random() * 5 + 1);
     
-    $(".post_thumbnail-random").css('background-image', 'url(' + '/img/random/' + randomNum + '.png' + ')');
+    var locatePost = $(".something-else").next();
+    for(var i=0; i < 10; i++){
+        
+        randomNum = Math.floor(Math.random() * 5 + 1);
+        
+        locatePost.children(".post_thumbnail-random").attr('id', 'random_thumbnail-'+randomNum);
+        locatePost.children(".post_thumbnail-random").css('background-image', 'url(' + '/img/random/' + randomNum + '.png' + ')')
+        
+        locatePost = locatePost.next();
+    }
     
 </script>
 
-		
-	
-        <p class="article-headline-p">
-            HIVE的安装
-        </p>
-    </div>
-
 	
 
-				
-				
-					<!-- Paradox Post Info -->
-					<div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
-    
-    <!-- Author Avatar -->
-    <div id="author-avatar">
-        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
-    </div>
-    <!-- Author Name & Date -->
-    <div>
-        <strong>Xin Wei</strong>
-        <span>6月 15, 2016</span>
-    </div>
-    
-    <div class="section-spacer"></div>
-	
-    <!-- Favorite -->
-<!--
-    <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
-        <i class="material-icons" role="presentation">favorite</i>
-        <span class="visuallyhidden">favorites</span>
-    </button>
--->
-    
-    <!-- Tags (bookmark) -->
-    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
-        <i class="material-icons" role="presentation">bookmark</i>
-        <span class="visuallyhidden">bookmark</span>
-    </button>
-    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
-        <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/大数据工具/">大数据工具</a>
-    </ul>
-    
-    <!-- Share -->
-    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
-    <i class="material-icons" role="presentation">share</i>
-    <span class="visuallyhidden">share</span>
-</button>
-<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
-    
-    
-    <!-- Leancloud Views -->
-    <a class="post_share-link" href="#">
-        <li class="mdl-menu__item">
-            <span id="/posts/201606151250/" class="leancloud-views_num" data-flag-title="HIVE的安装">
-     &nbsp;浏览量
-</span>
-        </li>
-    </a>
-    
-    
-    
-    
-    <!-- Share Twitter -->
-    <a class="post_share-link" href="https://twitter.com/intent/tweet?text=HIVE的安装&url=http://www.wowx.info//posts/201606151250/index.html&via=Xin Wei" target="_blank">
-        <li class="mdl-menu__item">
-            分享到 Twitter
-        </li>
-    </a>
-    
-    <!-- Share Google+ -->
-    <a class="post_share-link" href="https://plus.google.com/share?url=http://www.wowx.info//posts/201606151250/index.html" target="_blank">
-        <li class="mdl-menu__item">
-            分享到 Google+
-        </li>
-    </a>
-    
-    <!-- Share Weibo -->
-    <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=HIVE的安装&url=http://www.wowx.info//posts/201606151250/index.html&pic=&searchPic=false&style=simple" target="_blank">
-        <li class="mdl-menu__item">
-            分享到微博
-        </li>
-    </a>
-</ul>
 </div>
-				
-
-                <!-- Post Content -->
-                <div id="post-content" class="markdown-Material mdl-color-text--grey-700 mdl-card__supporting-text fade out">
-	
-		<p><img src="http://img5.imgtn.bdimg.com/it/u=551134512,989074037&amp;fm=21&amp;gp=0.jpg" alt=""><br><a id="more"></a><br>本节介绍如何安装HIVE。</p>
-<ol>
-<li><p>下载hive</p>
-<pre><code>su hadoop
-cd /usr/local/hadoop-2.7.0
-wget http://labfile.oss.aliyuncs.com/apache-hive-1.1.0-bin.tar.gz
-</code></pre><p>解压：</p>
-<pre><code>tar zxvf apache-hive-1.1.0-bin.tar.gz
-</code></pre><p>重命名：</p>
-<pre><code>mv apache-hive-1.1.0-bin hive
-</code></pre></li>
-<li><p>配置环境变量</p>
-<pre><code>sudo vim /etc/profile
-# Hive environment
-export HIVE_HOME=/usr/local/hadoop/hive
-export PATH=$HIVE_HOME/bin:$HIVE_HOME/conf:$PATH
-</code></pre></li>
-</ol>
-<p>内嵌模式</p>
-<p>同时我们还要修改 Hive 目录下 /conf/hive-env.sh 文件（请根据自己的实际路径修改），该文件默认也不存在，同样是拷贝它的模版来修改：<br>      cd $HIVE_HOME/conf<br>      cp hive-default.xml.template hive-site.xml<br>      vim  $HIVE_HOME/conf/hive-env.sh </p>
-<h1 id="本地模式"><a href="#本地模式" class="headerlink" title="本地模式"></a>本地模式</h1><ol>
-<li><a href="http://www.cnblogs.com/xiaoluo501395377/archive/2013/04/07/3003278.html" target="_blank" rel="external">mysql安装</a></li>
-<li><a href="http://hatech.blog.51cto.com/8360868/1427748" target="_blank" rel="external">mysql配置</a></li>
-</ol>
-
-	
-	
-	
-	
-</div>
-				
-				
-
-                <!-- Post Comments -->
-                
-    <!-- 使用多说评论 -->
-    <link rel="stylesheet" href="/css/duoshuo.min.css">
-<style>
-    #ds-thread #ds-reset .ds-post-button{
-        background-color: #0097A7 !important;
-    }
-    #ds-wrapper #ds-reset .ds-icons-32{
-        background-color: #0097A7 !important;
-    }
-    #ds-reset .ds-highlight {
-        color: #0097A7 !important;
-    }
-</style>
-<div id="comments">
-    <!-- 多说评论框 start -->
-        <div class="ds-thread" 
-            data-thread-key="posts/201606151250/" 
-            data-url="http://www.wowx.info//posts/201606151250/index.html"
-            data-title="HIVE的安装"></div>
-    <!-- 多说评论框 end -->
-</div>
-
-
-
-            </div>
-
-            <!-- Post Prev & Next Nav -->
-            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
-    
-    <!-- Prev Nav -->
-    
-        <a href="/posts/201606151253581/" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            新篇
-        </a>
-    
-
-    <!-- Section Spacer -->
-    <div class="section-spacer"></div>
-
-    <!-- Next Nav -->
-    
-        <a href="/posts/20160615124640/" id="post_nav-older" class="next-content">
-            旧篇
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_forward</i>
-            </button>
-        </a>
-    
-</nav>
-        </div>
-    </div>
 
 				
 				
