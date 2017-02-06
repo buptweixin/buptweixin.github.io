@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.wowx.info/"/>
-  <updated>2017-02-06T11:21:02.742Z</updated>
+  <updated>2017-02-06T16:48:22.953Z</updated>
   <id>http://www.wowx.info/</id>
   
   <author>
@@ -14,6 +14,102 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>LeetCode 2017 02 05 string 10 72 68 76</title>
+    <link href="http://www.wowx.info/posts/20170207004639/"/>
+    <id>http://www.wowx.info/posts/20170207004639/</id>
+    <published>2017-02-06T16:46:39.000Z</published>
+    <updated>2017-02-06T16:48:22.953Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="10-Regular-Expression-Matching"><a href="#10-Regular-Expression-Matching" class="headerlink" title="10. Regular Expression Matching"></a>10. Regular Expression Matching</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
+<p>Implement regular expression matching with support for ‘.’ and ‘*’.</p>
+<p>‘.’ Matches any single character.<br>‘*’ Matches zero or more of the preceding element.</p>
+<p>The matching should cover the entire input string (not partial).</p>
+<p>The function prototype should be:<br>bool isMatch(const char <em>s, const char </em>p)</p>
+<p>Some examples:<br>isMatch(“aa”,”a”) → false<br>isMatch(“aa”,”aa”) → true<br>isMatch(“aaa”,”aa”) → false<br>isMatch(“aa”, “a<em>“) → true<br>isMatch(“aa”, “.</em>“) → true<br>isMatch(“ab”, “.<em>“) → true<br>isMatch(“aab”, “c</em>a*b”) → true</p>
+</blockquote>
+<p>编辑一个简单的正则表达式解析器，其中<code>.</code>匹配任何单个字符，<code>*</code>匹配0个或者多个前置字符。</p>
+<h3 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h3><p>采用动态规划的方法解决这类问题，使用<code>dp[i][j]</code>表示<code>s[0, ..., i)</code>是否匹配<code>p[0,...,j)</code>，则：</p>
+<ol>
+<li>若<code>p[j-1]!=&#39;*&#39;</code>，这时候如果前一段s和p匹配(<code>dp[i-1][j-1] == true</code>)且当前字符相等(<code>p[j-1]==s[i-1]</code>)或<code>p[j-1] == &#39;.&#39;</code>则<code>dp[i][j]==truee</code></li>
+<li>若<code>p[j-1]==&#39;*&#39;</code>,有两种情况<ol>
+<li>‘*’前面的字符出现0次<br><code>dp[i][j] = dp[i][j-2]</code></li>
+<li>‘*’前面的字符出现至少1次<br><code>dp[i][j] = dp[i-1][j] &amp;&amp; s[i-1] == p[i-2] || p[i-2] == &#39;.&#39;</code></li>
+</ol>
+</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isMatch</span><span class="params">(<span class="built_in">string</span> s, <span class="built_in">string</span> p)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> m = s.length(), n = p.length(); </div><div class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt; &gt; dp(m + <span class="number">1</span>, <span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt; (n + <span class="number">1</span>, <span class="literal">false</span>));</div><div class="line">        dp[<span class="number">0</span>][<span class="number">0</span>] = <span class="literal">true</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= m; i++)</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</div><div class="line">                <span class="keyword">if</span> (p[j - <span class="number">1</span>] == <span class="string">'*'</span>)</div><div class="line">                    dp[i][j] = dp[i][j - <span class="number">2</span>] || (i &gt; <span class="number">0</span> &amp;&amp; (s[i - <span class="number">1</span>] == p[j - <span class="number">2</span>] || p[j - <span class="number">2</span>] == <span class="string">'.'</span>) &amp;&amp; dp[i - <span class="number">1</span>][j]);</div><div class="line">                <span class="keyword">else</span> dp[i][j] = i &gt; <span class="number">0</span> &amp;&amp; dp[i - <span class="number">1</span>][j - <span class="number">1</span>] &amp;&amp; (s[i - <span class="number">1</span>] == p[j - <span class="number">1</span>] || p[j - <span class="number">1</span>] == <span class="string">'.'</span>);</div><div class="line">        <span class="keyword">return</span> dp[m][n];</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="72-Edit-Distance"><a href="#72-Edit-Distance" class="headerlink" title="72. Edit Distance"></a>72. Edit Distance</h2><h3 id="Problem-Description-1"><a href="#Problem-Description-1" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
+<p>Given two words word1 and word2, find the minimum number of steps required to convert word1 to word2. (each operation is counted as 1 step.)</p>
+<p>You have the following 3 operations permitted on a word:</p>
+<p>a) Insert a character<br>b) Delete a character<br>c) Replace a character</p>
+</blockquote>
+<p>给出两个单词word1和word2，求他们的最小编辑距离，即使用最少的</p>
+<ol>
+<li>删除字符</li>
+<li>插入字符</li>
+<li>替换字符</li>
+</ol>
+<p>操作将word1转化为word2</p>
+<h3 id="Method-1"><a href="#Method-1" class="headerlink" title="Method"></a>Method</h3><p>这是一个典型的动态规划问题,使用<code>dp[i][j]</code>表示由word1的前i个字符构成的子串转化为word2前j个字符构成的子串的最小编辑距离(状态)。 首先考虑特殊情况，如果两个字符串任何一个的长度为0，那么显然这时候的最小编辑距离为其中长度不为0的字符串的长度。接着考虑普通情况，如果已知<code>dp[i-1][j-1], dp[i-1][j], dp[i][j-1]</code>，那么有以下情况</p>
+<ol>
+<li>如果<code>word1[i]==word2[j]</code>,则两字符串已经相等<code>dp[i][j]==dp[i-1][j-1]</code></li>
+<li>如果<code>word1[i]!=word2[j]</code>,则需要考虑以下情况<ol>
+<li>如果word1比word2更长，且已知<code>dp[i-1][j]</code>,则需要将多余的字符删掉，<code>dp[i][j] == dp[i-1][j] + 1</code></li>
+<li>如果<code>dp[i][j-1]</code>后，word1比word2更短，且已知<code>dp[i][j-1]</code>,则需要把word2第j一个字符删除（或将该字符复制到word1的末尾），<code>dp[i][j] == dp[i][j-1] + 1</code></li>
+<li>如果<code>dp[i-1][j-1]</code>操作后word1和word2等长，则只需要将word1第i个字符改为word2的第j个字符，<code>dp[i][j] == dp[i-1][j-1] + 1</code></li>
+</ol>
+</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">minDistance</span><span class="params">(<span class="built_in">string</span> word1, <span class="built_in">string</span> word2)</span> </span>&#123;</div><div class="line">        <span class="keyword">size_t</span> m = word1.length(), n = word2.length();</div><div class="line">        <span class="keyword">if</span> (m == <span class="number">0</span>)</div><div class="line">            <span class="keyword">return</span> n;</div><div class="line">        <span class="keyword">if</span> (n == <span class="number">0</span>)</div><div class="line">            <span class="keyword">return</span> m;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; dp(m+<span class="number">1</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(n+<span class="number">1</span>, <span class="number">0</span>));</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= m; ++i)</div><div class="line">            dp[i][<span class="number">0</span>] = i;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= n; ++j)</div><div class="line">            dp[<span class="number">0</span>][j] = j;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; ++i)</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; ++j)</div><div class="line">                dp[i][j] = min(min(dp[i<span class="number">-1</span>][j], dp[i][j<span class="number">-1</span>]) + <span class="number">1</span>, dp[i<span class="number">-1</span>][j<span class="number">-1</span>] + (word1[i<span class="number">-1</span>] == word2[j<span class="number">-1</span>] ? <span class="number">0</span> : <span class="number">1</span>));</div><div class="line">        <span class="keyword">return</span> dp[m][n];</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="68-Text-Justification"><a href="#68-Text-Justification" class="headerlink" title="68. Text Justification"></a>68. Text Justification</h2><h3 id="Problem-Description-2"><a href="#Problem-Description-2" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
+<p>Given an array of words and a length L, format the text such that each line has exactly L characters and is fully (left and right) justified.</p>
+<p>You should pack your words in a greedy approach; that is, pack as many words as you can in each line. Pad extra spaces ‘ ‘ when necessary so that each line has exactly L characters.</p>
+<p>Extra spaces between words should be distributed as evenly as possible. If the number of spaces on a line do not divide evenly between words, the empty slots on the left will be assigned more spaces than the slots on the right.</p>
+<p>For the last line of text, it should be left justified and no extra space is inserted between words.</p>
+<p>For example,<br>words: [“This”, “is”, “an”, “example”, “of”, “text”, “justification.”]<br>L: 16.</p>
+<p>Return the formatted lines as:<br>[<br>  “This    is    an”,<br>  “example  of text”,<br>  “justification.  “<br>]<br>Note: Each word is guaranteed not to exceed L in length.</p>
+<p>Corner Cases:<br> A line other than the last line might contain only one word. What should you do in this case?<br> In this case, that line should be left-justified.</p>
+</blockquote>
+<p>给定一个单词数组<code>words</code>和长度<code>L</code>,将单词拼接成多行字符串，使用空格隔开，每行的长度需要等于<code>L</code>，最后一行不能再单词间添加空格。</p>
+<h3 id="Method-2"><a href="#Method-2" class="headerlink" title="Method"></a>Method</h3><ol>
+<li>计算每行最多能容纳的单词数</li>
+<li>在单词之间补零<ol>
+<li>若为最后一行，单词之间只能由一个空格</li>
+<li>若不是最后一行，在单词之间平分多余的空格，然后将剩余的空格分给每个单词的左边</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; fullJustify(<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; &amp;words, <span class="keyword">int</span> L) &#123;</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; res;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>, k, l; i &lt; words.size(); i += k) &#123;</div><div class="line">    <span class="comment">//计算本行单词数量k</span></div><div class="line">        <span class="keyword">for</span>(k = l = <span class="number">0</span>; i + k &lt; words.size() and l + words[i+k].size() &lt;= L - k; k++) &#123;</div><div class="line">            l += words[i+k].size();</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="built_in">string</span> tmp = words[i];</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; k - <span class="number">1</span>; j++) &#123;</div><div class="line">        <span class="comment">//若为最后一行，每个单词之间只添加一个空格</span></div><div class="line">            <span class="keyword">if</span>(i + k &gt;= words.size()) tmp += <span class="string">" "</span>;</div><div class="line">        <span class="comment">// 如果不是最后一行，先在单词间添加相等数量的空格，剩余空格添加到单词左边</span></div><div class="line">            <span class="keyword">else</span> tmp += <span class="built_in">string</span>((L - l) / (k - <span class="number">1</span>) + (j &lt; (L - l) % (k - <span class="number">1</span>)), <span class="string">' '</span>);</div><div class="line">            tmp += words[i+j+<span class="number">1</span>];</div><div class="line">        &#125;</div><div class="line">        tmp += <span class="built_in">string</span>(L - tmp.size(), <span class="string">' '</span>);</div><div class="line">        res.push_back(tmp);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> res;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="76-Minimum-Window-Substring"><a href="#76-Minimum-Window-Substring" class="headerlink" title="76. Minimum Window Substring"></a>76. Minimum Window Substring</h2><h3 id="Problem-Description-3"><a href="#Problem-Description-3" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
+<p>Given a string S and a string T, find the minimum window in S which will contain all the characters in T in complexity O(n).</p>
+<p>For example,<br>S = “ADOBECODEBANC”<br>T = “ABC”<br>Minimum window is “BANC”.</p>
+<p>Note:<br>If there is no such window in S that covers all characters in T, return the empty string “”.</p>
+<p>If there are multiple such windows, you are guaranteed that there will always be only one unique minimum window in S.</p>
+</blockquote>
+<p>给定一个字符串S和T,找出S中的最短窗口使其包含所有T中的字符</p>
+<h3 id="Method-3"><a href="#Method-3" class="headerlink" title="Method"></a>Method</h3><p>首先，使用一个向量记录T中每个字符出现的次数，并使用<code>counter</code>记录当前已经匹配到T中字符的个数，将其初始化为0；然后以0为开始位置遍历S，每遇到一个字符则向量对应位置减1，如果该字符出现在了T中<code>counter</code>也减1。当<code>counter</code>变为0时，说明已经在S中找到T的所有字符，记录这时候窗口长度，然后以start的下一个位置开始继续寻找下一个窗口。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="built_in">string</span> <span class="title">minWindow</span><span class="params">(<span class="built_in">string</span> s, <span class="built_in">string</span> t)</span> </span>&#123;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="built_in">map</span>(<span class="number">128</span>,<span class="number">0</span>);</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> c: t) <span class="built_in">map</span>[c]++;</div><div class="line">        <span class="keyword">int</span> counter=t.size(), begin=<span class="number">0</span>, end=<span class="number">0</span>, d=INT_MAX, head=<span class="number">0</span>;</div><div class="line">        <span class="keyword">while</span>(end&lt;s.size())&#123;</div><div class="line">            <span class="keyword">if</span>(<span class="built_in">map</span>[s[end++]]--&gt;<span class="number">0</span>) counter--; <span class="comment">//in t</span></div><div class="line">            <span class="keyword">while</span>(counter==<span class="number">0</span>)&#123; <span class="comment">//valid</span></div><div class="line">                <span class="keyword">if</span>(end-begin&lt;d)  d=end-(head=begin);</div><div class="line">                <span class="keyword">if</span>(<span class="built_in">map</span>[s[begin++]]++==<span class="number">0</span>) counter++;  <span class="comment">//make it invalid</span></div><div class="line">            &#125;  </div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> d==INT_MAX? <span class="string">""</span>:s.substr(head, d);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h1 id="关于大多数寻找子串的问题，都可以使用下面的模板"><a href="#关于大多数寻找子串的问题，都可以使用下面的模板" class="headerlink" title="关于大多数寻找子串的问题，都可以使用下面的模板"></a>关于大多数寻找子串的问题，都可以使用下面的模板</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">findSubstring</span><span class="params">(<span class="built_in">string</span> s)</span></span>&#123;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="built_in">map</span>(<span class="number">128</span>,<span class="number">0</span>);</div><div class="line">        <span class="keyword">int</span> counter; <span class="comment">// check whether the substring is valid</span></div><div class="line">        <span class="keyword">int</span> begin=<span class="number">0</span>, end=<span class="number">0</span>; <span class="comment">//two pointers, one point to tail and one  head</span></div><div class="line">        <span class="keyword">int</span> d; <span class="comment">//the length of substring</span></div><div class="line"></div><div class="line">        <span class="keyword">for</span>() &#123; <span class="comment">/* initialize the hash map here */</span> &#125;</div><div class="line"></div><div class="line">        <span class="keyword">while</span>(end&lt;s.size())&#123;</div><div class="line"></div><div class="line">            <span class="keyword">if</span>(<span class="built_in">map</span>[s[end++]]-- ?)&#123;  <span class="comment">/* modify counter here */</span> &#125;</div><div class="line"></div><div class="line">            <span class="keyword">while</span>(<span class="comment">/* counter condition */</span>)&#123; </div><div class="line">                 </div><div class="line">                 <span class="comment">/* update d here if finding minimum*/</span></div><div class="line"></div><div class="line">                <span class="comment">//increase begin to make it invalid/valid again</span></div><div class="line">                </div><div class="line">                <span class="keyword">if</span>(<span class="built_in">map</span>[s[begin++]]++ ?)&#123; <span class="comment">/*modify counter here*/</span> &#125;</div><div class="line">            &#125;  </div><div class="line"></div><div class="line">            <span class="comment">/* update d here if finding maximum*/</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> d;</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p>比如，寻找最多含有两种不同字符的最长子串的长度<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">lengthOfLongestSubstringTwoDistinct</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="built_in">map</span>(<span class="number">128</span>, <span class="number">0</span>);</div><div class="line">        <span class="keyword">int</span> counter = <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> start = <span class="number">0</span>, end = <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> d = <span class="number">0</span>;</div><div class="line">        <span class="keyword">while</span> (end &lt; s.size())</div><div class="line">        &#123;</div><div class="line">          <span class="keyword">if</span> (<span class="built_in">map</span>[s[end++]]++ == <span class="number">0</span>) counter ++;</div><div class="line">          <span class="keyword">while</span> (counter &gt; <span class="number">2</span>) <span class="keyword">if</span>(<span class="built_in">map</span>[s[start++]]-- == <span class="number">1</span>) counter--;</div><div class="line">          d = max(d, end - start);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> d;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>寻找最长的不含有重复字符的子串长度<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</div><div class="line">  <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="built_in">map</span>(<span class="number">128</span>, <span class="number">0</span>);</div><div class="line">  <span class="keyword">int</span> begin = <span class="number">0</span>, end = <span class="number">0</span>;</div><div class="line">  <span class="keyword">int</span> d = <span class="number">0</span>;</div><div class="line">  <span class="keyword">while</span>(end &lt; s.size())</div><div class="line">  &#123;</div><div class="line">    <span class="keyword">if</span> (<span class="built_in">map</span>[s[end++]]++ &gt; <span class="number">0</span>) counter++;</div><div class="line">    <span class="keyword">while</span>(counter &gt; <span class="number">0</span>) <span class="keyword">if</span> (<span class="built_in">map</span>[s[begin++]]-- &gt; <span class="number">1</span>) counter--;</div><div class="line">    d = max(d, end - begin);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;10-Regular-Expression-Matching&quot;&gt;&lt;a href=&quot;#10-Regular-Expression-Matching&quot; class=&quot;headerlink&quot; title=&quot;10. Regular Expression Matching&quot;
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="http://www.wowx.info/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
+    
+      <category term="string" scheme="http://www.wowx.info/tags/string/"/>
+    
+  </entry>
   
   <entry>
     <title>LeetCode string 91 227 71 43</title>
@@ -1431,307 +1527,6 @@ plt.pie(Z, explode=None, labels=None,
 <p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-7-18/90777188.jpg" alt=""></p>
 <p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-7-18/27875800.jpg" alt=""></p>
 <p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-7-18/62084585.jpg" alt=""></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;http://public.download.csdn.net/uploads_album/2016/04/25/4767aab89bd7277ff41c611a0dd93ccb.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;
-    
-    </summary>
-    
-      <category term="工具" scheme="http://www.wowx.info/categories/%E5%B7%A5%E5%85%B7/"/>
-    
-    
-      <category term="Python" scheme="http://www.wowx.info/tags/Python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>使用Python统计处理基础篇--numpy</title>
-    <link href="http://www.wowx.info/posts/20160719231718/"/>
-    <id>http://www.wowx.info/posts/20160719231718/</id>
-    <published>2016-07-19T15:17:18.000Z</published>
-    <updated>2016-12-21T15:54:50.510Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="http://public.download.csdn.net/uploads_album/2016/04/25/4767aab89bd7277ff41c611a0dd93ccb.jpg" alt=""><br><a id="more"></a></p>
-<h2 id="Numpy"><a href="#Numpy" class="headerlink" title="Numpy"></a>Numpy</h2><blockquote>
-<p>Numpy 扩展了Python对多维数据的支持，并且由于更加接近于硬件而更加高效，它专为科学计算设计，使用起来很方便</p>
-</blockquote>
-<ul>
-<li><p>查找</p>
-<pre><code>&gt;&gt;&gt; np.lookfor(&apos;create array&apos;)
-Search results for &apos;create array&apos;       
---------------------------------- 
-numpy.array
-    Create an array.
-numpy.memmap
-    Create a memory-map to an array stored in a *binary* file on disk.
-</code></pre></li>
-<li><p>创建数组</p>
-<ul>
-<li>一维<pre><code>&gt;&gt;&gt; a = np.array([0,1,2])
-&gt;&gt;&gt; a.ndim
-1
-&gt;&gt;&gt; a.shape
-(4,)
-&gt;&gt;&gt; len(a)
-4
-</code></pre></li>
-<li><p>二维、三维</p>
-<pre><code>&gt;&gt;&gt; a = np.array([[0,1,2],[4,5,6]])
-&gt;&gt;&gt; a.ndim
-2
-&gt;&gt;&gt; a.shape
-(2, 3)
-&gt;&gt;&gt; len(a)
-2
-</code></pre></li>
-<li>创建数组的函数<ul>
-<li>np.arange(10)<br>生成0-9<br>np.arange(1, 9, 2)<br>起始1，终止9，间隔2</li>
-<li>np.linspace(0, 1, 6, endpoint=False)<br>起点0，终点1，6个点, 不包括1</li>
-<li>np.ones((3, 3))<br>生成全1的3x3数组</li>
-<li>np.zeros((3, 3))<br>生成全0的3x3数组</li>
-<li>np.empty((3,4))<br>生成没有初始化的3x4数组</li>
-<li>np.eye(3)<br>生成对角线为1，其他为0的3x3数组</li>
-<li>d = np.diag(np.array([1, 2, 3, 4]))<br>生成以提供的列表为对角线元素其他为0的4x4数组</li>
-<li>np.random.rand(3, 3)<br>生成0-1平均分布的3x3数组</li>
-<li>np.random.randn(3,3)<br>生成标准正太分布的3x3数组</li>
-<li>np.random.seed(1234)<br>指定种子</li>
-<li>np.triu(np.ones((3,3)), k=1)<br>生成上三角矩阵，第二个参数是指定从第几列开始三角化,类似的，<code>np.tril()</code>生成下三角矩阵；<strong>对上三角矩阵转置就可以得到下三角矩阵</strong></li>
-</ul>
-</li>
-<li><p>dtype</p>
-<p>  int32,int64, float64, complex, bool, S7字符串,uint32, uint64等</p>
-</li>
-<li>可视化<pre><code>&gt;&gt;&gt; x = np.linspace(0, 3, 20)
-&gt;&gt;&gt; y = np.linspace(0, 9, 20)
-&gt;&gt;&gt; plt.plot(x, y) # line plot     
-[&lt;matplotlib.lines.Line2D object at ...&gt;] 
-&gt;&gt;&gt; plt.plot(x, y, &apos;o&apos;) # dot plot   
-[&lt;matplotlib.lines.Line2D object at ...&gt;]
-</code></pre></li>
-<li>读取元素<br>a[1, 1]第二行第二列</li>
-<li><p>切片</p>
-<pre><code>a[2:9:3]：2-9范围每间隔一个位置取一个元素
-a[2::2, ::2]: 以2为间隔获取第3到最后一行数据与以2为间隔获取列数据的交
-</code></pre></li>
-<li><p>瓦片操作tile<br>按指定次数重复数组</p>
-<pre><code>&gt;&gt;&gt; np.tile(b, 2)
-array([[1, 2, 1, 2],
-       [3, 4, 3, 4]])
-</code></pre></li>
-<li><p>复制和视图(views)<br>numpy中array的切片操作会得到原数组的view，实际上数组元素并没有被复制，也就是如果你更改切片得到的对象，原数组相应的也会被改变，可以使用<code>np.may_share_memory()</code>来判断两个数组是否共享一块内存。如果想要强制复制，可以使用copy方法</p>
-<pre><code>&gt;&gt;&gt; a = np.array([1,2,3,4,5,6,7,8,9])
-&gt;&gt;&gt; b = a[::2]
-&gt;&gt;&gt; np.may_share_memory(a, b)
-True
-&gt;&gt;&gt; c = a[::2].copy()
-&gt;&gt;&gt; np.may_share_memory(a, c)
-False
-</code></pre></li>
-<li><p>扩展索引<br>除了用数字作为索引之外，numpy也支持采用bool值或数组做蒙版(mask)</p>
-<ul>
-<li><p>使用bool值：</p>
-<pre><code>&gt;&gt;&gt; np.random.seed(3)
-&gt;&gt;&gt; a = np.random.random_integers(0, 20, 15)
-&gt;&gt;&gt; mask = (a % 3 == 0)
-&gt;&gt;&gt; extract_from_a = a[mask] # or, a[a%3==0]
-array([ 3, 0, 9, 6, 0, 12])
-&gt;&gt;&gt; a[mask] = -1
-</code></pre></li>
-<li><p>使用数组<br>使用由整数组成的数组作为索引可以使同一个元素出现多次</p>
-<pre><code>a[[2, 3, 2, 4, 2]]
-a[[9, 7]] = -100
-</code></pre><p>使用numpy多维数组作为索引的话，得到的结果维数和多维数组一样</p>
-<pre><code>&gt;&gt;&gt; a = np.arange(10)
-&gt;&gt;&gt; idx = np.array([[3, 4], [9, 7]]) 
-&gt;&gt;&gt; idx.shape
-(2, 2)
-&gt;&gt;&gt; a[idx]
-array([[3, 4],
-[9, 7]])
-</code></pre></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="数组数学运算"><a href="#数组数学运算" class="headerlink" title="数组数学运算"></a>数组数学运算</h4><ul>
-<li><p>对单个数组做+-*/等运算会作用于每个元素</p>
-<pre><code>&gt;&gt;&gt; a = np.array([1, 2, 3, 4])
-&gt;&gt;&gt; 2**a
-array([ 2,  4,  8, 16])
-</code></pre></li>
-<li>两个数组+-*/对应位运算， 比直接用列表推导计算快很多</li>
-<li>矩阵乘法: <code>c.dot(c)</code></li>
-<li>比较<ul>
-<li>元素级：直接对两数组做<code>== &gt; &lt; !=</code></li>
-<li>数组级：<code>np.array_equal(a, b)</code></li>
-<li>逻辑：<code>np.logical_and(a, b),np.logical_or(a, b)</code></li>
-</ul>
-</li>
-<li>函数<br><code>np.log(a), np.sin(a), np.cos(a)</code></li>
-<li>线性代数<br><code>numpy.linalg</code>提供了一些常用的线性代数函数，但是由于效率问题，更推荐使用<code>scipy.linalg</code></li>
-<li>比较两个数组每个对应元素差值是否都小于一个阈值<br><code>np.allclose(a, b, rtol=1e-05, atol=1e-08)</code><br>参数<code>rtol</code>是相对误差的阈值(绝对误差=<code>rtol</code> <em> abs(<code>b</code>))<br>参数<code>atol</code>是a与b的绝对误差<br>`abs(a-b)=(atol+rtol</em>abs(b))`</li>
-<li>基本reduce操作<ul>
-<li>np.sum(x， axis=0) 或x.sum(axis=0)<br>在axis维上对数组累加<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-7-4/29379599.jpg" alt=""></li>
-<li>其他:<code>x.min(),x.max(),x.argmin(), x.argmax(), np.all(), np.any()</code></li>
-<li>统计: <code>x.mean(),np.median(x),x.std()</code></li>
-<li>np.cumsum() 按指定方向累加，元素个数不变</li>
-</ul>
-</li>
-</ul>
-<h4 id="广播Broadcasting"><a href="#广播Broadcasting" class="headerlink" title="广播Broadcasting"></a>广播Broadcasting</h4><p>当两个数组的维度不同时，numpy会自动将他们转换为相同维度运算，其机理类似tile操作。</p>
-<p>  <img src="http://7xkyov.com1.z0.glb.clouddn.com/16-7-7/68155027.jpg" alt=""></p>
-<pre><code>&gt;&gt;&gt;a = np.tile(np.arange(0, 40, 10),  (3, 1))
-&gt;&gt;&gt;a + np.array([0, 1, 2, 3])
-array([[ 0, 11, 22, 33],
-       [ 0, 11, 22, 33],
-       [ 0, 11, 22, 33]])
-</code></pre><p>  事实上，在之前我们已经遇到广播这种情况了</p>
-<pre><code>&gt;&gt;&gt;a=np.ones((4, 5))
-&gt;&gt;&gt;a[0]=2
-&gt;&gt;&gt;a
-array([[2., 2., 2., 2., 2.],
-       [1., 1., 1., 1., 1.],
-       [1., 1., 1., 1., 1.],
-       [1., 1., 1., 1., 1.]])
-</code></pre><p><strong>一个有用的trick</strong></p>
-<pre><code>&gt;&gt;&gt; a = np.arange(0, 40, 10)
-&gt;&gt;&gt; a.shape
-(4,)
-&gt;&gt;&gt; a = a[:, np.newaxis] # adds a new axis -&gt; 2D array
-&gt;&gt;&gt; a.shape
-(4, 1)
-&gt;&gt;&gt; a 
-array([[ 0],
-       [10],
-       [20],
-       [30]])
-&gt;&gt;&gt; a + b
-array([[ 0, 1, 2],
-       [10, 11, 12],
-       [20, 21, 22],
-       [30, 31, 32]])
-</code></pre><p>直接使用ogrid：</p>
-<pre><code>&gt;&gt;&gt; x, y = np.ogrid[0:5, 0:5] 
-&gt;&gt;&gt; x, y
-(array([[0],
-       [1],
-       [2],
-       [3],
-       [4]]), array([[0, 1, 2, 3, 4]]))
-&gt;&gt;&gt; x.shape, y.shape
-((5, 1), (1, 5))
-</code></pre><p>使用mgrid直接得到两个扩展矩阵</p>
-<pre><code>&gt;&gt;&gt; x, y = np.mgrid[0:4, 0:4] &gt;&gt;&gt; x
-array([[0, 0, 0, 0],
-       [1, 1, 1, 1],
-       [2, 2, 2, 2],
-       [3, 3, 3, 3]])
-&gt;&gt;&gt; y
-array([[0, 1, 2, 3],
-       [0, 1, 2, 3],
-       [0, 1, 2, 3],
-       [0, 1, 2, 3]])
-</code></pre><h3 id="矩阵形状操作"><a href="#矩阵形状操作" class="headerlink" title="矩阵形状操作"></a>矩阵形状操作</h3><ul>
-<li><p>使用ravel展开矩阵</p>
-<pre><code>&gt;&gt;&gt; a = np.array([[1, 2, 3], [4, 5, 6]]) 
-&gt;&gt;&gt; a.ravel()
-array([1, 2, 3, 4, 5, 6])
-</code></pre><p><strong>ravel和flatten的不同是，前者是view操作，后者是copy</strong></p>
-</li>
-<li><p>reshaping</p>
-<pre><code>&gt;&gt;&gt; a.shape
-(2, 3)
-&gt;&gt;&gt; b = a.ravel()
-&gt;&gt;&gt; b = b.reshape((2, 3)) 
-&gt;&gt;&gt; b
-array([[1, 2, 3],
-[4, 5, 6]])
-
-or
-
-&gt;&gt;&gt; a.reshape((2, -1)) # unspecified (-1) value is inferred 
-array([[1, 2, 3],
-[4, 5, 6]])
-</code></pre></li>
-</ul>
-<p><strong>注意，reshape操作有可能返回copy也有可能返回view</strong></p>
-<p>view:<br>b = a.ravel()<br>b = b.reshape((2,3))<br>改变b也会改变a</p>
-<p>copy:<br>b=a.T.reshape(3*2)<br>复制</p>
-<h4 id="增加维度"><a href="#增加维度" class="headerlink" title="增加维度"></a>增加维度</h4><pre><code>&gt;&gt;&gt; z = np.array([1, 2, 3]) 
-&gt;&gt;&gt; z
-array([1, 2, 3])
-&gt;&gt;&gt; z[:, np.newaxis] 
-array(
-[[1],
-[2], 
-[3]])
-
-&gt;&gt;&gt; z[np.newaxis, :] 
-array([[1, 2, 3]])
-</code></pre><h4 id="维度调换"><a href="#维度调换" class="headerlink" title="维度调换"></a>维度调换</h4><pre><code>&gt;&gt;&gt; a = np.arange(4*3*2).reshape(4, 3, 2) 
-&gt;&gt;&gt; a.shape
-(4, 3, 2)
-&gt;&gt;&gt; a[0, 2, 1]
-5
-&gt;&gt;&gt; b = a.transpose(1, 2, 0) 
-&gt;&gt;&gt; b.shape
-(3, 2, 4)
-&gt;&gt;&gt; b[2, 1, 0]
-5
-</code></pre><p>创建view</p>
-<h4 id="改变大小resizing"><a href="#改变大小resizing" class="headerlink" title="改变大小resizing"></a>改变大小resizing</h4><p>如果改变后大小大于原数组则补零,如果更小则截断。另外，如果数组和其他变量相关，则不能使用resize操作</p>
-<pre><code>&gt;&gt;&gt; a = np.arange(4)
-&gt;&gt;&gt; a.resize((8,))
-&gt;&gt;&gt; a
-array([0, 1, 2, 3, 0, 0, 0, 0])
-
-&gt;&gt;&gt; b = a
-&gt;&gt;&gt; a.resize((4,))
-Traceback (most recent call last):
-  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
-</code></pre><h4 id="数组排序"><a href="#数组排序" class="headerlink" title="数组排序"></a>数组排序</h4><p>np.sort(a, axis=1)得到新的对象：</p>
-<p>a.sort(axis=1)原地排序</p>
-<p>其他<code>np.argsort(a), np.argmax(a), np.argmin(a)</code></p>
-<h4 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h4><ul>
-<li><p>隐式转换<br>操作不同类型的数据时，会自动转换到内存占用大的数据，比如，整数转换为浮点数</p>
-</li>
-<li><p>强制转换<br>使用np.astype(dtype)强制转换，比如<code>b = a.astype(int)</code></p>
-</li>
-<li>取整<br>四舍五入<code>np.around(a)</code></li>
-</ul>
-<h4 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h4><ul>
-<li>数据类型位宽<pre><code>int8 int16 int32 int64 
-uint8 uint16 uint32 uint64
-float16 float32 float64 float96 float128
-complex64 complex128 complex192 complex256 
-</code></pre></li>
-<li>structured 类型<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-7-7/26505147.jpg" alt=""></li>
-<li><p>maskdarray:dealing with (propagation of ) missing data</p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-7-7/70225261.jpg" alt=""></p>
-</li>
-</ul>
-<h3 id="高级操作"><a href="#高级操作" class="headerlink" title="高级操作"></a>高级操作</h3><h4 id="多项式"><a href="#多项式" class="headerlink" title="多项式"></a>多项式</h4><ul>
-<li><p>一维多项式</p>
-<pre><code>&gt;&gt;&gt; p = np.poly1d([3, 2, -1]) 
-&gt;&gt;&gt; p(0)
--1
-&gt;&gt;&gt; p.roots
-array([-1.,  0.33333333])
-&gt;&gt;&gt; p.order 
-2
-</code></pre></li>
-<li><p>多项式拟合</p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-7-7/81245914.jpg" alt=""></p>
-<ul>
-<li>切比雪夫Chebyshev</li>
-</ul>
-</li>
-</ul>
-<h4 id="读取文件"><a href="#读取文件" class="headerlink" title="读取文件"></a>读取文件</h4><p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-7-7/4520886.jpg" alt=""></p>
-<h4 id="读取图像"><a href="#读取图像" class="headerlink" title="读取图像"></a>读取图像</h4><p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-7-7/25369059.jpg" alt=""></p>
 ]]></content>
     
     <summary type="html">
