@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.wowx.info/"/>
-  <updated>2017-01-30T17:03:56.256Z</updated>
+  <updated>2017-02-06T11:21:02.742Z</updated>
   <id>http://www.wowx.info/</id>
   
   <author>
@@ -14,6 +14,76 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>LeetCode string 91 227 71 43</title>
+    <link href="http://www.wowx.info/posts/20170131191915/"/>
+    <id>http://www.wowx.info/posts/20170131191915/</id>
+    <published>2017-01-31T11:19:15.000Z</published>
+    <updated>2017-02-06T11:21:02.742Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="91-Decode-Ways"><a href="#91-Decode-Ways" class="headerlink" title="91. Decode Ways"></a>91. Decode Ways</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
+<p>A message containing letters from A-Z is being encoded to numbers using the following mapping:</p>
+<p>‘A’ -&gt; 1<br>‘B’ -&gt; 2<br>…<br>‘Z’ -&gt; 26<br>Given an encoded message containing digits, determine the total number of ways to decode it.</p>
+<p>For example,<br>Given encoded message “12”, it could be decoded as “AB” (1 &gt;2) or “L” (12).</p>
+<p>The number of ways decoding “12” is 2.</p>
+</blockquote>
+<p>给定一个由数字组成的字符串，根据转码表(见英文题干)确认这些数字有多少种解码结果</p>
+<h3 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h3><p>采用动态规划的方法，假设我们已经知道字符串s[:i-1]有l1种解码方案，而s[:i-2]有l2种解码结果，我们可以通过s[i]和s[i-1]确认s[:i]的解码方案总数，具体为：</p>
+<ul>
+<li>如果s[i]为0<ul>
+<li>如果<code>s[i-1] = &#39;2&#39; || s[i-1] = &#39;1&#39;</code>则只有<code>s[i-1]s[i]</code>是合法的解码规则, 即s[:i]的解码总数是l2;</li>
+<li>其他情况下不管是<code>s[i]</code>还是<code>s[i-1]s[i]</code>都没有合法的解码规则，整个字符串不能解码，返回0</li>
+</ul>
+</li>
+<li>如果<code>s[i]</code>不等于0(<code>0-9</code>)<ul>
+<li>如果<code>s[i-1] = &#39;2&#39; &amp;&amp; s[i] &lt;= 6</code> 或者<code>s[i-1] = &#39;1&#39;</code>, 则<code>s[i]</code>和<code>s[i-1]s[i]</code>都符合解码规则，s[:i]的解码总数为<code>l1 + l2</code>;</li>
+<li>否则只有<code>s[i]</code>符合解码规则而<code>s[i-1]s[i]</code>不符合任何解码规则，<code>s[:i]</code>解码总数为l1;</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">numDecodings</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (!s.size() || s.front() == <span class="string">'0'</span>) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> l1 = <span class="number">1</span>, l2 = <span class="number">1</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; s.size(); ++i)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span> (s[i] == <span class="string">'0'</span>)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">if</span> (s[i - <span class="number">1</span>] == <span class="string">'1'</span> || s[i - <span class="number">1</span>] == <span class="string">'2'</span>)</div><div class="line">                &#123;</div><div class="line">                    <span class="keyword">int</span> tmp = l1;</div><div class="line">                    l1 = l2;</div><div class="line">                    l2 = tmp;</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">else</span></div><div class="line">                    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span></div><div class="line">            &#123;</div><div class="line">                <span class="keyword">if</span> (s[i - <span class="number">1</span>] == <span class="string">'1'</span> || (s[i - <span class="number">1</span>] == <span class="string">'2'</span> &amp;&amp; s[i] &lt;= <span class="string">'6'</span>))</div><div class="line">                &#123;</div><div class="line">                    <span class="keyword">int</span> tmp = l1;</div><div class="line">                    l1 = l1 + l2;</div><div class="line">                    l2 = tmp;</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">else</span></div><div class="line">                    l2 = l1;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> l1;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>简化版<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">numDecodings</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (!s.size() || s.front() == <span class="string">'0'</span>) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    <span class="comment">// r2: decode ways of s[i-2] , r1: decode ways of s[i-1]</span></div><div class="line">    <span class="keyword">int</span> r1 = <span class="number">1</span>, r2 = <span class="number">1</span>;</div><div class="line"></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; s.size(); i++) &#123;</div><div class="line">        <span class="comment">// zero voids ways of the last because zero cannot be used separately</span></div><div class="line">        <span class="keyword">if</span> (s[i] == <span class="string">'0'</span>) r1 = <span class="number">0</span>;</div><div class="line"></div><div class="line">        <span class="comment">// possible two-digit letter, so new r1 is sum of both while new r2 is the old r1</span></div><div class="line">        <span class="keyword">if</span> (s[i - <span class="number">1</span>] == <span class="string">'1'</span> || s[i - <span class="number">1</span>] == <span class="string">'2'</span> &amp;&amp; s[i] &lt;= <span class="string">'6'</span>) &#123;</div><div class="line">            r1 = r2 + r1;</div><div class="line">            r2 = r1 - r2;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">// one-digit letter, no new way added</span></div><div class="line">        <span class="keyword">else</span> &#123;</div><div class="line">            r2 = r1;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> r1;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="227-Basic-Calculator-II"><a href="#227-Basic-Calculator-II" class="headerlink" title="227. Basic Calculator II"></a>227. Basic Calculator II</h2><h3 id="Problem-Description-1"><a href="#Problem-Description-1" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
+<p>Implement a basic calculator to evaluate a simple expression string.</p>
+<p>The expression string contains only non-negative integers, +, -, *, / operators and empty spaces . The integer division should truncate toward zero.</p>
+<p>You may assume that the given expression is always valid.</p>
+<p>Some examples:<br>“3+2*2” = 7<br>“ 3/2 “ = 1<br>“ 3+5 / 2 “ = 5<br>Note: Do not use the eval built-in library function.</p>
+</blockquote>
+<p>设计一个简单的计算器程序，其输入只包含数字和<code>+, -, *, /</code>和空格。</p>
+<h3 id="Method-1"><a href="#Method-1" class="headerlink" title="Method"></a>Method</h3><p>由于没有括号等其他符号，可以将算式化简成数字的加法，使用栈来存储数字，如果遇到<code>+</code>则将数字直接入栈，如果遇到<code>-</code>则将<code>-num</code>入栈，如果遇到<code>*</code>则将上个数字出栈与当前数字相乘的结果入栈，同样的遇到<code>/</code>则将上个数字出栈和当前数字相除的结果入栈。<br>最后，将栈中所有数字取出相加则得到最后的结果。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">calculate</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</div><div class="line">        s = <span class="string">"+"</span> + s + <span class="string">"]"</span>;</div><div class="line">        <span class="function"><span class="built_in">istringstream</span> <span class="title">in</span><span class="params">(s)</span></span>;</div><div class="line">        <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; numStk;</div><div class="line">        <span class="keyword">int</span> num;</div><div class="line">        <span class="keyword">char</span> op;</div><div class="line">        <span class="keyword">while</span> (in.peek() != <span class="string">']'</span>)</div><div class="line">        &#123;</div><div class="line">            op = in.get();</div><div class="line">            <span class="keyword">if</span> (op == <span class="string">' '</span>)</div><div class="line">                <span class="keyword">continue</span>;</div><div class="line">            in &gt;&gt; num;</div><div class="line">            <span class="keyword">if</span> (op == <span class="string">'+'</span>)</div><div class="line">                numStk.push(num);</div><div class="line">            <span class="keyword">if</span> (op == <span class="string">'-'</span>)</div><div class="line">                numStk.push(-num);</div><div class="line">            <span class="keyword">if</span> (op == <span class="string">'*'</span>)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">int</span> res = numStk.top() * num;</div><div class="line">                numStk.pop();</div><div class="line">                numStk.push(res);</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span> (op == <span class="string">'/'</span>)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">int</span> res = numStk.top() / num;</div><div class="line">                numStk.pop();</div><div class="line">                numStk.push(res);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">long</span> <span class="keyword">long</span> rst= <span class="number">0</span>;</div><div class="line">        <span class="keyword">while</span> (!numStk.empty())</div><div class="line">        &#123;</div><div class="line">            rst += numStk.top();</div><div class="line">            numStk.pop();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> rst;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="71-Simplify-Path"><a href="#71-Simplify-Path" class="headerlink" title="71. Simplify Path"></a>71. Simplify Path</h2><h3 id="Problem-Description-2"><a href="#Problem-Description-2" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
+<p>Given an absolute path for a file (Unix-style), simplify it.</p>
+<p>For example,<br>path = “/home/“, =&gt; “/home”<br>path = “/a/./b/../../c/“, =&gt; “/c”<br>Corner Cases:<br>Did you consider the case where path = “/../“?<br>In this case, you should return “/“.<br>Another corner case is the path might contain multiple slashes ‘/‘ together, such as “/home//foo/“.<br>In this case, you should ignore redundant slashes and return “/home/foo”.</p>
+</blockquote>
+<p>给出一个表示linux路径的字符串，按要求将其化简</p>
+<h3 id="Method-2"><a href="#Method-2" class="headerlink" title="Method"></a>Method</h3><p>c++ 中<code>getline</code>类似于java中的<code>split</code></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="built_in">string</span> <span class="title">simplifyPath</span><span class="params">(<span class="built_in">string</span> path)</span> </span>&#123;</div><div class="line">    <span class="built_in">string</span> res, tmp;</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; stk;</div><div class="line">    <span class="function"><span class="built_in">stringstream</span> <span class="title">ss</span><span class="params">(path)</span></span>;</div><div class="line">    <span class="keyword">while</span>(getline(ss,tmp,<span class="string">'/'</span>)) &#123;</div><div class="line">        <span class="keyword">if</span> (tmp == <span class="string">""</span> or tmp == <span class="string">"."</span>) <span class="keyword">continue</span>;</div><div class="line">        <span class="keyword">if</span> (tmp == <span class="string">".."</span> and !stk.empty()) stk.pop_back();</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (tmp != <span class="string">".."</span>) stk.push_back(tmp);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> str : stk) res += <span class="string">"/"</span>+str;</div><div class="line">    <span class="keyword">return</span> res.empty() ? <span class="string">"/"</span> : res;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="43-Multiply-Strings"><a href="#43-Multiply-Strings" class="headerlink" title="43. Multiply Strings"></a>43. Multiply Strings</h2><h3 id="Problem-Description-3"><a href="#Problem-Description-3" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
+<p>Given two non-negative integers num1 and num2 represented as strings, return the product of num1 and num2.</p>
+<p>Note:</p>
+<p>The length of both num1 and num2 is &lt; 110.<br>Both num1 and num2 contains only digits 0-9.<br>Both num1 and num2 does not contain any leading zero.<br>You must not use any built-in BigInteger library or convert the inputs to integer directly.</p>
+</blockquote>
+<p>给定两个表示数字的字符串，不使用<code>eval</code>或直接转换为数字的方法计算两个数的乘积，结果用字符串表示。</p>
+<h3 id="Method-3"><a href="#Method-3" class="headerlink" title="Method"></a>Method</h3><p>用两层for循环分别遍历两个字符串，外层为乘数，内层为被乘数，乘数从最低位开始取出一位数依次和被乘数相乘，将结果对10取余数加上之前的进位和前面结果得到对应为的乘积，结果的对10取整为下一位的进位。注意，每一位乘数乘完被乘数后，应该将未处理的进位加入相应位置然后将其置0；</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">string multiply(string num1, string num2) &#123;</div><div class="line">    string sum(num1.size() + num2.size(), '0');</div><div class="line"></div><div class="line">    for (int i = num1.size() - 1; 0 &lt;= i; --i) &#123;</div><div class="line">        int carry = 0;</div><div class="line">        for (int j = num2.size() - 1; 0 &lt;= j; --j) &#123;</div><div class="line">            int tmp = (sum[i + j + 1] - '0') + (num1[i] - '0') * (num2[j] - '0') + carry;</div><div class="line">            sum[i + j + 1] = tmp % 10 + '0';</div><div class="line">            carry = tmp / 10;</div><div class="line">        &#125;</div><div class="line">        sum[i] += carry;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    size_t startpos = sum.find_first_not_of("0");</div><div class="line">    if (string::npos != startpos) &#123;</div><div class="line">        return sum.substr(startpos);</div><div class="line">    &#125;</div><div class="line">    return "0";</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;91-Decode-Ways&quot;&gt;&lt;a href=&quot;#91-Decode-Ways&quot; class=&quot;headerlink&quot; title=&quot;91. Decode Ways&quot;&gt;&lt;/a&gt;91. Decode Ways&lt;/h2&gt;&lt;h3 id=&quot;Problem-Descrip
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="http://www.wowx.info/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
+    
+      <category term="string" scheme="http://www.wowx.info/tags/string/"/>
+    
+  </entry>
   
   <entry>
     <title>LeetCode string 5 17 49 151</title>
@@ -1662,264 +1732,6 @@ array([-1.,  0.33333333])
 </ul>
 <h4 id="读取文件"><a href="#读取文件" class="headerlink" title="读取文件"></a>读取文件</h4><p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-7-7/4520886.jpg" alt=""></p>
 <h4 id="读取图像"><a href="#读取图像" class="headerlink" title="读取图像"></a>读取图像</h4><p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-7-7/25369059.jpg" alt=""></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;http://public.download.csdn.net/uploads_album/2016/04/25/4767aab89bd7277ff41c611a0dd93ccb.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;
-    
-    </summary>
-    
-      <category term="工具" scheme="http://www.wowx.info/categories/%E5%B7%A5%E5%85%B7/"/>
-    
-    
-      <category term="Python" scheme="http://www.wowx.info/tags/Python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>使用Python统计处理基础篇--Python语言</title>
-    <link href="http://www.wowx.info/posts/20160719231217/"/>
-    <id>http://www.wowx.info/posts/20160719231217/</id>
-    <published>2016-07-19T15:12:17.000Z</published>
-    <updated>2016-12-21T15:55:09.157Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="http://public.download.csdn.net/uploads_album/2016/04/25/4767aab89bd7277ff41c611a0dd93ccb.jpg" alt=""><br><a id="more"></a></p>
-<h2 id="Ipython"><a href="#Ipython" class="headerlink" title="Ipython"></a>Ipython</h2><h3 id="魔法方法"><a href="#魔法方法" class="headerlink" title="魔法方法"></a>魔法方法</h3><ul>
-<li>%run script.py<br>在IPython中运行python脚本</li>
-<li>%whos<br>显示当前环境中的变量及其类型和数据</li>
-<li>%cd<br>改变当前工作路径</li>
-<li>%timeit<br>使用标准库中的timeit模块测试函数运行时间</li>
-<li>%cpaste<br>粘贴剪贴板里的内容到IPython中运行，可以包含<code>&gt;&gt;&gt;</code>、<code>In[12]:</code>等标准提示符，以<code>--</code>或<code>Ctrl+D</code>结束</li>
-<li>%debug<br>当程序运行出错时，输入该命令进入ipdb debug模式</li>
-<li>%alias<br>列出模仿UNIX中的一些命令</li>
-</ul>
-<p>who查看模块<br>whos查看变量</p>
-<h2 id="Python语言"><a href="#Python语言" class="headerlink" title="Python语言"></a>Python语言</h2><h3 id="基础数据类型"><a href="#基础数据类型" class="headerlink" title="基础数据类型"></a>基础数据类型</h3><ul>
-<li>整型</li>
-<li>浮点型</li>
-<li><p>复数</p>
-<pre><code>&gt;&gt;&gt;a=1.5+0.5j
-&gt;&gt;&gt;a.real 
-1.5
-&gt;&gt;&gt;a.imag
-0.5
-</code></pre></li>
-<li>布尔型</li>
-</ul>
-<h3 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h3><ul>
-<li><p>Lists</p>
-<ul>
-<li>基础特性省略……</li>
-<li><p>切片</p>
-<ul>
-<li>格式：<code>l[start:stop:stride]</code></li>
-<li>说明：<code>stride</code>可以省略，默认为1，为了求逆，令其为<code>-1</code></li>
-<li><code>append,pop,extend(list)拼接,list[::-1]翻转,list.reverse()原地翻转,list*2重复两次,sorted(list)排序(生成新的对象),list.sort()原地排序</code></li>
-<li><p>其他</p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-6-30/12689433.jpg" alt=""></p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>Strings</p>
-<ul>
-<li><p>三种语法</p>
-<pre><code>s = &apos;Hello, how are you?&apos;
-s = &quot;Hi, what&apos;s up&quot;
-s = &apos;&apos;&apos;Hello,
-       how are you&apos;&apos;&apos;
-s = &quot;&quot;&quot;Hi,
-what&apos;s up?&quot;&quot;&quot;
-</code></pre></li>
-<li><p>获取char<br>可以通过<code>[]</code>获取到string中的字符，但是不能改变他只能使用<code>replace</code>新建</p>
-<pre><code>In [55]: a.replace(&apos;l&apos;, &apos;z&apos;, 1) Out[55]: &apos;hezlo, world!&apos;
-In [56]: a.replace(&apos;l&apos;, &apos;z&apos;) Out[56]: &apos;hezzo, worzd!&apos;
-</code></pre></li>
-<li><p>格式化字符串</p>
-<pre><code>print(&quot;I&apos;m %s. I&apos;m %d year old&quot; % (&apos;Vamei&apos;, 99))
-
-print(&quot;I&apos;m %(name)s. I&apos;m %(age)d year old&quot; % {&apos;name&apos;:&apos;Vamei&apos;, &apos;age&apos;:99})
-</code></pre></li>
-</ul>
-</li>
-<li><p>字典</p>
-<ul>
-<li>d.keys()</li>
-<li>d.values()</li>
-<li>d.items()</li>
-<li>d.pop(‘a’)</li>
-<li>d.popitem()<br>…</li>
-</ul>
-</li>
-<li>元组</li>
-<li>set</li>
-</ul>
-<h3 id="赋值操作符"><a href="#赋值操作符" class="headerlink" title="赋值操作符"></a>赋值操作符</h3><p>赋值操作符用来绑定(重新绑定)值到名字上或者改变名字对应对象的值。</p>
-<ul>
-<li><p>一个对象可以绑定到多个名字上</p>
-<pre><code>In [1]: a = [1, 2, 3] 
-In [2]: b = a
-In [3]: a
-Out[3]: [1, 2, 3]
-In [4]: b
-Out[4]: [1, 2, 3]
-In [5]: a is b Out[5]: True
-In [6]: b[1] = &apos;hi!&apos; 
-In [7]: a
-Out[7]: [1, &apos;hi!&apos;, 3]
-</code></pre></li>
-<li><p>使用indexing或slices操作在原地改变值</p>
-<pre><code>In [1]: a = [1, 2, 3]
-In [3]: a
-Out[3]: [1, 2, 3]
-In [4]: a = [&apos;a&apos;, &apos;b&apos;, &apos;c&apos;] # Creates another object. In [5]: a
-Out[5]: [&apos;a&apos;, &apos;b&apos;, &apos;c&apos;]
-In [6]: id(a)
-Out[6]: 138641676
-In [7]: a[:] = [1, 2, 3] # Modifies object in place. In [8]: a
-Out[8]: [1, 2, 3]
-In [9]: id(a)
-Out[9]: 138641676 # Same as in Out[6], yours will differ...
-</code></pre></li>
-<li>mutable对象可以原地改变值，immutable对象一旦创建就不可以改变</li>
-</ul>
-<h3 id="控制语句"><a href="#控制语句" class="headerlink" title="控制语句"></a>控制语句</h3><ul>
-<li><code>if...elif..else</code></li>
-<li><code>for/range</code></li>
-<li><code>while/break/continue</code></li>
-</ul>
-<h3 id="高级迭代"><a href="#高级迭代" class="headerlink" title="高级迭代"></a>高级迭代</h3><ul>
-<li>for word in message.split()</li>
-<li>for index, item in enumerate(words) 遍历列表</li>
-<li>for key, val in sorted(d.items())遍历字典</li>
-</ul>
-<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><ul>
-<li><p>形式</p>
-<pre><code>def double_it(x):
-  return x * 2
-</code></pre></li>
-<li><p>全局变量</p>
-<p>  定义在函数外面<br>  但在函数内部无法改变全局变量的值，需要使用<code>global</code>关键字</p>
-</li>
-<li><p>可变数量的参数</p>
-<ul>
-<li>*args:打包在元组中的任意数量的参数</li>
-<li><p>**kwargs:打包在字典中的任意数量参数</p>
-<pre><code>In [56]: arg(1,2,3,4,a=1,b=2,c=3)
-args: (1, 2, 3, 4)
-kwargs: {&apos;b&apos;: 2, &apos;a&apos;: 1, &apos;c&apos;: 3}
-</code></pre></li>
-</ul>
-</li>
-<li>函数是对象因此可以<ul>
-<li>复制给变量</li>
-<li>作为列表的值</li>
-<li>作为参数传递给其他函数</li>
-</ul>
-</li>
-</ul>
-<h3 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h3><ul>
-<li><p>脚本参数</p>
-<p>  import sys<br>  print sys.argv</p>
-<p>  $ python file.py test arguments<br>  [‘file.py’, ‘test’, ‘arguments’]</p>
-</li>
-</ul>
-<h3 id="module"><a href="#module" class="headerlink" title="module"></a>module</h3><ul>
-<li>自定义模块<ul>
-<li>建立<code>.py</code>文件，比如<code>demo.py</code></li>
-<li>导入,<code>import demo</code></li>
-<li>module是被缓存的，所以当module发生改变时，在Python2.x中使用<code>reload(demo)</code>,python3.x中使用<pre><code>import importlib
-importlib.reload(demo)
-</code></pre></li>
-</ul>
-</li>
-<li><p>Ipython中查看模块who，查看变量whos，dir(demo)查看模块中的方法</p>
-<p>如果某些函数常常被不同脚本调用则将它们写入模块中</p>
-</li>
-<li><p>python查找模块位置</p>
-<pre><code>import sys
-sys.path
-</code></pre><p>  或查看`PYTHONPATH</p>
-</li>
-</ul>
-<h3 id="包"><a href="#包" class="headerlink" title="包"></a>包</h3><p>包是一个包含许多模块的目录，也就是模块的模块。一个包中必须包含一个<code>__init__.py</code>文件来告诉python这是一个包</p>
-<p>使用<code>包名.__file__</code>可以得到包所在的路径,如</p>
-<pre><code>In [1]: import scipy 
-In [2]: scipy.__file__
-Out[2]: &apos;/usr/lib/python2.6/dist-packages/scipy/__init__.pyc&apos;
-</code></pre><h3 id="输入和输出"><a href="#输入和输出" class="headerlink" title="输入和输出"></a>输入和输出</h3><ul>
-<li>文件模式<br>只读：r，只写：w，追加：a，读写：r+，二进制:b</li>
-</ul>
-<h3 id="标准库"><a href="#标准库" class="headerlink" title="标准库"></a>标准库</h3><h4 id="os"><a href="#os" class="headerlink" title="os"></a>os</h4><blockquote>
-<p>os模块使你可以方便地使用与操作系统相关的函数</p>
-</blockquote>
-<ul>
-<li>当前路径： os.getcwd()</li>
-<li>列出目录下的文件: os.listdir(os.curdir)</li>
-<li>新建文件夹：os.mkdir(‘dir’)</li>
-<li>重命名文件夹: os.rename(‘foodir’)</li>
-<li>删除文件夹: os.rmdir(foodir)</li>
-<li>删除文件：os.remove(junk.txt)</li>
-</ul>
-<h5 id="os-path"><a href="#os-path" class="headerlink" title="os.path"></a>os.path</h5><ul>
-<li>a = os.path.abspath(‘junk.txt’):获得绝对路径</li>
-<li>os.path.split(a):将a的路径和文件名分开存放在元组中</li>
-<li>os.path.dirname(a):提取a的路径</li>
-<li>os.path.basename(a):提取a的文件名</li>
-<li>os.path.splitext(os.path.basename(a)):分开文件名和后缀 “Out[80]: (‘junk’, ‘.txt’)”</li>
-<li>os.path.exists(‘junk.txt’):判断是否存在</li>
-<li>os.path.isdir(a):判断是否是路径</li>
-<li>os.path.expanduser(‘~/local’):把包含~和~user转换为用户目录</li>
-<li>os.path.join(os.path.expanduser(‘~’), ‘local’, ‘bin’)</li>
-<li>os.system(‘ls’):运行外部命令；更好的是使用<code>sh</code>模块（Python3中没有了）</li>
-</ul>
-<p><strong>遍历文件夹</strong></p>
-<pre><code>In [10]: for dirpath, dirnames, filenames in os.walk(os.curdir):
-....:   for fp in filenames:
-....:     print os.path.abspath(fp)
-</code></pre><p>  其中，<code>dirpath</code>为文件夹的路径，<code>dirnames</code>为该文件夹下包含的子目录（相对路径），<code>filenames</code>为<code>dirpath</code>下的非目录文件</p>
-<h5 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h5><ul>
-<li><code>os.environ.keys()</code></li>
-<li><code>os.environ[&#39;PYTHONPATH&#39;]</code>等同<code>os.getenv(&#39;PYTHONPATH&#39;)</code></li>
-</ul>
-<h4 id="shutil：高层文件操作模块"><a href="#shutil：高层文件操作模块" class="headerlink" title="shutil：高层文件操作模块"></a>shutil：高层文件操作模块</h4><ul>
-<li>shutil.rmtree:递归删除目录树</li>
-<li>shutil.move:移动文件或文件夹</li>
-<li>shutil.copy:复制多个文件或文件夹</li>
-</ul>
-<h4 id="glob-正则匹配文件"><a href="#glob-正则匹配文件" class="headerlink" title="glob:正则匹配文件"></a><strong>glob:正则匹配文件</strong></h4><p>比如，找出目录下所有txt文件</p>
-<pre><code>In [18]: import glob
-In [19]: glob.glob(&apos;*.txt&apos;)
-Out[19]: [&apos;holy_grail.txt&apos;, &apos;junk.txt&apos;, &apos;newfile.txt&apos;]
-</code></pre><h4 id="sys-模块"><a href="#sys-模块" class="headerlink" title="sys 模块"></a>sys 模块</h4><blockquote>
-<p>和系统有关的python解释器信息，比如什么版本的python，解释器安装位置等</p>
-</blockquote>
-<ul>
-<li>sys.platform: 系统</li>
-<li>sys.version: python解释器版本</li>
-<li>sys.prefix:解释器安装位置</li>
-<li>sys.argv: 获得提供给脚本的参数</li>
-<li>sys.path:模块搜索路径，从PYTHONPATH环境变量获得</li>
-</ul>
-<h4 id="pickle：持久化模块"><a href="#pickle：持久化模块" class="headerlink" title="pickle：持久化模块"></a>pickle：持久化模块</h4><pre><code>In [1]: import pickle
-In [2]: l = [1, None, &apos;Stan&apos;]
-In [3]: pickle.dump(l, open(&apos;test.pkl&apos;, &apos;wb&apos;))
-In [4]: pickle.load(open(&apos;test.pkl&apos;,&apos;rb&apos;)) Out[4]: [1, None, &apos;Stan&apos;]
-</code></pre><h3 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h3><ul>
-<li>try/except</li>
-<li>try/finally</li>
-<li><p>对属性做检查</p>
-<pre><code>In [11]: def print_sorted(collection):
-          try: 
-            collection.sort()
-          except AttributeError: 
-            pass
-          print(collection)
-</code></pre></li>
-<li>文件关闭</li>
-</ul>
 ]]></content>
     
     <summary type="html">
