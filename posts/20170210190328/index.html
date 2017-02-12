@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Title -->
+    
+    <title>
+        LeetCode String 44 32 336 273 214 | 野原圆长的Blog
+    </title>
+    
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/wx.png">
+    <link rel="icon" sizes="192x192" href="/img/wx.png">
+    <link rel="apple-touch-icon" href="/img/wx.png">
+    
+    <!-- Meta & INfo -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="Xin Wei">
+    <meta name="description" content="null">
+    <meta name="keywords" content="Blog deep_learging">
+    
+    <!--iOS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+    
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="野原圆长的Blog">
+    
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://www.wowx.info">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="LeetCode String 44 32 336 273 214 | 野原圆长的Blog">
+    <meta property="og:description" content="null">
+    
+     <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+        
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+    
+    <!-- Import CSS -->
+    <link rel="stylesheet" href="/css/material.min.css">
+    <link rel="stylesheet" href="/css/style.min.css">
+    <!-- Config CSS -->
+
+
+<!-- Other Styles -->
+<style>
+	body, html{
+		font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+	}
+	
+    a{
+        color: #00838F
+    }
+    
+    .mdl-card__media,
+    #search-label,
+    #search-form-label:after,
+    #scheme-Paradox .hot_tags-count,
+    #scheme-Paradox .sidebar_archives-count,
+    #scheme-Paradox .sidebar-colored .sidebar-header,
+    #scheme-Paradox .sidebar-colored .sidebar-badge{
+        background-color: #0097A7 !important
+    }
+    
+	/* Sidebar User Drop Down Menu Text Color */
+	#scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+    #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus{
+        color: #0097A7 !important
+    }
+    
+    #post_entry-right-info,
+    .sidebar-colored .sidebar-nav li:hover > a,
+    .sidebar-colored .sidebar-nav li:hover > a i,
+    .sidebar-colored .sidebar-nav li > a:hover,
+    .sidebar-colored .sidebar-nav li > a:hover i,
+    .sidebar-colored .sidebar-nav li > a:focus i,
+    .sidebar-colored .sidebar-nav > .open > a,
+    .sidebar-colored .sidebar-nav > .open > a:hover,
+    .sidebar-colored .sidebar-nav > .open > a:focus,
+    #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a{
+        color: #0097A7 !important
+    }
+    
+    .toTop{
+        background: #757575 !important
+    }
+		
+	.material-layout .material-post>.material-nav,
+	.material-layout .material-index>.material-nav,
+	.material-nav a{
+		color: #757575;
+	}
+		
+	#scheme-Paradox .MD-burger-layer {
+		background-color: #757575;
+	}
+
+	#scheme-Paradox #post-toc-trigger-btn{
+		color: #757575;
+	}
+	
+	.post-toc a:hover{
+		color: #00838F;
+		text-decoration: underline;
+	}
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+        body{
+            background-color: #F5F5F5
+        }
+		
+		/* blog_info bottom background */
+        #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+            background-color: #fff;
+        }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+        .fade {
+            transition: all 800ms linear;
+            -webkit-transform: translate3d(0,0,0);
+            -moz-transform: translate3d(0,0,0);
+            -ms-transform: translate3d(0,0,0);
+            -o-transform: translate3d(0,0,0);
+            transform: translate3d(0,0,0);
+            opacity: 1;
+        }
+
+        .fade.out{
+            opacity: 0;
+        }
+    </style>
+
+	<script src="/js/jquery.min.js"></script>
+	
+	<link rel="stylesheet" href="/css/highlight/solarized-dark.css">
+	
+	<!-- UC Browser Compatible-->
+	<script>
+		var agent = navigator.userAgent.toLowerCase();
+		if(agent.indexOf('ucbrowser')>0) {
+			document.write('<link rel="stylesheet" href="/css/uc.css">');
+		   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+		}
+	</script>
+    
+    <!-- Custom Head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+</head>
+	
+	
+
+    <body id="scheme-Paradox">
+
+		
+        <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+				
+			
+			
+            <!-- Main Container -->
+            <main class="material-layout__content" id="main">
+				
+                <!-- Top Anchor -->
+                <div id="top"></div>
+				
+				
+                <!-- Hamburger Button -->
+                <button class="MD-burger-icon sidebar-toggle">
+                    <span class="MD-burger-layer"></span>
+                </button>
+				
+				
+                
+	<!-- Back Button -->
+<!--
+	<div class="material-back" id="backhome-div" tabindex="0">
+		<a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" href="#" onclick="window.history.back();return false;" target="_self" role="button" data-upgraded=",MaterialButton,MaterialRipple">
+			<i class="material-icons" role="presentation">arrow_back</i>
+			<span class="mdl-button__ripple-container">
+				<span class="mdl-ripple"></span>
+			</span>
+		</a>
+	</div>			
+-->
+	<!-- Left aligned menu below button -->
+	<button id="post-toc-trigger-btn"
+			class="mdl-button mdl-js-button mdl-button--icon">
+	  <i class="material-icons">format_list_numbered</i>
+	</button>
+
+	<ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
+		for="post-toc-trigger-btn">
+			
+			<ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#2017-02-10-44-32-336-273-214"><span class="post-toc-number">1.</span> <span class="post-toc-text">2017-02-10 44 32 336 273 214</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#44-Wildcard-Matching"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">44.Wildcard Matching</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Problem-Description"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">Problem Description</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Method"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">Method</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#32-Longest-Valid-Parentheses"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">32.Longest Valid Parentheses</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Problem-Description-1"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">Problem Description</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Method-1"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">Method</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#336-Palindrome-Pairs"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">336. Palindrome Pairs</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Problem-Description-2"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">Problem Description</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Method-2"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">Method</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#273-Integer-to-English-Words"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">273.Integer to English Words</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Problem-Description-3"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">Problem Description</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Method-3"><span class="post-toc-number">1.4.2.</span> <span class="post-toc-text">Method</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#214-Shortest-Palindrome"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">214. Shortest Palindrome</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Problem-Description-4"><span class="post-toc-number">1.5.1.</span> <span class="post-toc-text">Problem Description</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Method-4"><span class="post-toc-number">1.5.2.</span> <span class="post-toc-text">Method</span></a></li></ol></li></ol></li></ol>
+		
+<!--			<li class="mdl-menu__item">Some Action</li>-->
+	</ul>
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+		
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+	<!-- Paradox Post Header -->
+	
+		
+			<!-- Random Thumbnail -->
+			<div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+				<script>
+    
+    var randomNum;
+    randomNum = Math.floor(Math.random() * 5 + 1);
+    
+    $(".post_thumbnail-random").css('background-image', 'url(' + '/img/random/' + randomNum + '.png' + ')');
+    
+</script>
+
+		
+	
+        <p class="article-headline-p">
+            LeetCode String 44 32 336 273 214
+        </p>
+    </div>
+
+	
+
+				
+				
+					<!-- Paradox Post Info -->
+					<div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+    
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>Xin Wei</strong>
+        <span>2月 12, 2017</span>
+    </div>
+    
+    <div class="section-spacer"></div>
+	
+    <!-- Favorite -->
+<!--
+    <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+        <i class="material-icons" role="presentation">favorite</i>
+        <span class="visuallyhidden">favorites</span>
+    </button>
+-->
+    
+    <!-- Tags (bookmark) -->
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/cpp/">cpp</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/string/">string</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/算法/">算法</a>
+    </ul>
+    
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+    
+    <!-- Leancloud Views -->
+    <a class="post_share-link" href="#">
+        <li class="mdl-menu__item">
+            <span id="/posts/20170210190328/" class="leancloud-views_num" data-flag-title="LeetCode String 44 32 336 273 214">
+     &nbsp;浏览量
+</span>
+        </li>
+    </a>
+    
+    
+    
+    
+    <!-- Share Twitter -->
+    <a class="post_share-link" href="https://twitter.com/intent/tweet?text=LeetCode String 44 32 336 273 214&url=http://www.wowx.info//posts/20170210190328/index.html&via=Xin Wei" target="_blank">
+        <li class="mdl-menu__item">
+            分享到 Twitter
+        </li>
+    </a>
+    
+    <!-- Share Google+ -->
+    <a class="post_share-link" href="https://plus.google.com/share?url=http://www.wowx.info//posts/20170210190328/index.html" target="_blank">
+        <li class="mdl-menu__item">
+            分享到 Google+
+        </li>
+    </a>
+    
+    <!-- Share Weibo -->
+    <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=LeetCode String 44 32 336 273 214&url=http://www.wowx.info//posts/20170210190328/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <li class="mdl-menu__item">
+            分享到微博
+        </li>
+    </a>
+</ul>
+</div>
+				
+
+                <!-- Post Content -->
+                <div id="post-content" class="markdown-Material mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+	
+		<h1 id="2017-02-10-44-32-336-273-214"><a href="#2017-02-10-44-32-336-273-214" class="headerlink" title="2017-02-10 44 32 336 273 214"></a>2017-02-10 44 32 336 273 214</h1><h2 id="44-Wildcard-Matching"><a href="#44-Wildcard-Matching" class="headerlink" title="44.Wildcard Matching"></a>44.Wildcard Matching</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
+<p>Implement wildcard pattern matching with support for ‘?’ and ‘*’.</p>
+<p>‘?’ Matches any single character.</p>
+<p>‘*’ Matches any sequence of characters (including the empty sequence).</p>
+<p>The matching should cover the entire input string (not partial).</p>
+<p>The function prototype should be:</p>
+<p>bool isMatch(const char <em>s, const char </em>p)</p>
+<p>Some examples:</p>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">isMatch("aa","a") → false</div><div class="line">isMatch("aa","aa") → true</div><div class="line">isMatch("aaa","aa") → false</div><div class="line">isMatch("aa", "*") → true</div><div class="line">isMatch("aa", "a*") → true</div><div class="line">isMatch("ab", "?*") → true</div><div class="line">isMatch("aab", "c*a*b") → false</div></pre></td></tr></table></figure>
+<p>实现支持<code>?</code>和<code>*</code>的通配符匹配</p>
+<h3 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h3><p>直接采用类似第10题的dp算法会超时，应该采用下面的方法：</p>
+<p>采用两个指针i和j分别遍历两个字符串，当j对应的通配符不是<code>*</code>时，只需要比较两个指向字符是否相等或者<code>p[j]==&#39;?&#39;</code>即可；当遇到<code>*</code>时，要考虑两种情况，一是<code>*</code>没有匹配任何字符，二是<code>*</code>匹配了不少于1个字符，对于第一种情况，只需要遇到<code>*</code>后比较<code>s[i]</code>和<code>p[j+1]</code>即可，对于第二种情况，则需要记录下<code>*</code>出现时的i 和 j, 当遇到不匹配字符时，回溯到<code>*</code>出现的地方，用*一直替代到不匹配的地方。代码如下</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isMatch</span><span class="params">(<span class="built_in">string</span> s, <span class="built_in">string</span> p)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> m = s.length(), n = p.length();</div><div class="line">        <span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>, asterisk = <span class="number">-1</span>, match;</div><div class="line">        <span class="keyword">while</span> (i &lt; m) &#123;</div><div class="line">            <span class="keyword">if</span> (j &lt; n &amp;&amp; p[j] == <span class="string">'*'</span>) &#123;</div><div class="line">                <span class="comment">// 记录下遇到的星号所在位置，星号有两种匹配情况，1:匹配0个字符，2:匹配不小于1个字符，通过下面两个if语句来判断</span></div><div class="line">                match = i; </div><div class="line">                asterisk = j++;</div><div class="line">            &#125;</div><div class="line">            <span class="comment">// 如果当前s和p对应字符相等，该字符匹配，进入下一对字符比较(也有可能是星号匹配了0个字符)</span></div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (j &lt; n &amp;&amp; (s[i] == p[j] || p[j] == <span class="string">'?'</span>)) &#123;</div><div class="line">                i++; </div><div class="line">                j++;</div><div class="line">            &#125;</div><div class="line">            <span class="comment">// 当</span></div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (asterisk &gt;= <span class="number">0</span>) &#123;</div><div class="line">                i = ++match;</div><div class="line">                j = asterisk + <span class="number">1</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">while</span> (j &lt; n &amp;&amp; p[j] == <span class="string">'*'</span>) j++;</div><div class="line">        <span class="keyword">return</span> j == n;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="32-Longest-Valid-Parentheses"><a href="#32-Longest-Valid-Parentheses" class="headerlink" title="32.Longest Valid Parentheses"></a>32.Longest Valid Parentheses</h2><h3 id="Problem-Description-1"><a href="#Problem-Description-1" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
+<p>Given a string containing just the characters <code>&#39;(&#39;</code> and <code>&#39;)&#39;</code>, find the length of the longest valid (well-formed) parentheses substring.</p>
+<p>For <code>&quot;(()&quot;</code>, the longest valid parentheses substring is <code>&quot;()&quot;</code>, which has length = 2.</p>
+<p>Another example is <code>&quot;)()())&quot;</code>, where the longest valid parentheses substring is <code>&quot;()()&quot;</code>, which has length = 4.</p>
+</blockquote>
+<p>给定一个只包含<code>(</code>和<code>)</code>的字符串，找出符合括号配对规则的最大合法长度</p>
+<h3 id="Method-1"><a href="#Method-1" class="headerlink" title="Method"></a>Method</h3><p>遍历字符串，如果遇到<code>(</code>将其所在位置压栈，遇到<code>)</code>的话，首先判断栈是否为空，是空的话<code>)</code>非法，将其序号压入栈中，否则需要继续判断栈顶是否是<code>(</code>，如果是的话表示配对合法，直接将<code>(</code>序号出栈，否则该<code>)</code>没有配对成功，将其入栈。遍历完整个字符串之后，如果栈为空，说明字符串中所有括号都配对成功，直接返回字符串长度即可，否则，计算没对非法括号之间的距离，其中最大的即为答案。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">longestValidParentheses</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</div><div class="line">        <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; ss;</div><div class="line">        <span class="built_in">string</span>::size_type n = s.length();</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span> (s[i] == <span class="string">')'</span>)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">if</span> (ss.empty())</div><div class="line">                    ss.push(i);</div><div class="line">                <span class="keyword">else</span></div><div class="line">                &#123;</div><div class="line">                    <span class="keyword">if</span> (s[ss.top()] == <span class="string">'('</span>)</div><div class="line">                        ss.pop();</div><div class="line">                    <span class="keyword">else</span> ss.push(i);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span></div><div class="line">                ss.push(i);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (ss.empty())</div><div class="line">            <span class="keyword">return</span> n;</div><div class="line">        <span class="built_in">string</span>::size_type a = n, b = <span class="number">0</span>, length = <span class="number">0</span>;</div><div class="line">        <span class="keyword">while</span>(!ss.empty())</div><div class="line">        &#123;</div><div class="line">            b = ss.top();</div><div class="line">            ss.pop();</div><div class="line">            length = max(length, a-b<span class="number">-1</span>);</div><div class="line">            a = b;</div><div class="line">        &#125;</div><div class="line">        length = max(length, a);</div><div class="line">        <span class="keyword">return</span> length;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="336-Palindrome-Pairs"><a href="#336-Palindrome-Pairs" class="headerlink" title="336. Palindrome Pairs"></a>336. Palindrome Pairs</h2><h3 id="Problem-Description-2"><a href="#Problem-Description-2" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
+<p>Given a list of <strong>unique</strong> words, find all pairs of <strong>distinct</strong> indices <code>(i, j)</code> in the given list, so that the concatenation of the two words, i.e. <code>words[i] + words[j]</code> is a palindrome.</p>
+<p><strong>Example 1:</strong></p>
+<p>Given <code>words</code> = <code>[&quot;bat&quot;, &quot;tab&quot;, &quot;cat&quot;]</code></p>
+<p>Return <code>[[0, 1], [1, 0]]</code></p>
+<p>The palindromes are <code>[&quot;battab&quot;, &quot;tabbat&quot;]</code></p>
+<p><strong>Example 2:</strong></p>
+<p>Given <code>words</code> = <code>[&quot;abcd&quot;, &quot;dcba&quot;, &quot;lls&quot;, &quot;s&quot;, &quot;sssll&quot;]</code></p>
+<p>Return <code>[[0, 1], [1, 0], [3, 2], [2, 4]]</code></p>
+<p>The palindromes are <code>[&quot;dcbaabcd&quot;, &quot;abcddcba&quot;, &quot;slls&quot;, &quot;llssssll&quot;]</code></p>
+</blockquote>
+<p>给出一组字单词数组，找出所有能构成回文的单词对。</p>
+<h3 id="Method-2"><a href="#Method-2" class="headerlink" title="Method"></a>Method</h3><p>假设单词数量为n, 平均长度为k，如果采用两层循环遍历整个数组的简单方法的话时间复杂度为$O(n^2k)$,会超时。<a href="https://discuss.leetcode.com/topic/40654/easy-to-understand-ac-c-solution-o-n-k-2-using-map/7" target="_blank" rel="external">下面的方法</a>时间复杂度为$O(nk^2)$</p>
+<p>其原理为：</p>
+<p>如果两个单词能拼接成回文的话，那么较短的单词一定会以逆序的形式出现在较长的单词的开头或者末尾，即<code>palindrome = shorter+ longer = shorter + (middle + reverse(shorter)) orpalindrome = longer + shorter = (reverse(shorter) + middle) + shorter</code></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; palindromePairs(<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; words) &#123;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; result;</div><div class="line">        <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt; dict;</div><div class="line">        <span class="keyword">int</span> i, j, size = words.size();</div><div class="line">        <span class="built_in">string</span> left, right, tmp;</div><div class="line">        <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; size; i++) &#123;</div><div class="line">            tmp = words[i];</div><div class="line">            reverse(tmp.begin(), tmp.end());</div><div class="line">            dict[tmp] = i;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; size; i++) &#123;</div><div class="line">            <span class="keyword">for</span>(j = <span class="number">0</span>; j &lt; words[i].size(); j++) &#123;</div><div class="line">                left = words[i].substr(<span class="number">0</span>, j);</div><div class="line">                right = words[i].substr(j);</div><div class="line">                <span class="keyword">if</span>(dict.find(left) != dict.end() &amp;&amp; dict[left] != i &amp;&amp; isPalindrome(right)) &#123;</div><div class="line">                    result.push_back(&#123;i, dict[left]&#125;);</div><div class="line">                    <span class="keyword">if</span>(left.empty())</div><div class="line">                        result.push_back(&#123;dict[left], i&#125;);</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">if</span>(dict.find(right) != dict.end() &amp;&amp; dict[right] != i &amp;&amp; isPalindrome(left))</div><div class="line">                    result.push_back(&#123;dict[right], i&#125;);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> result;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line"><span class="keyword">private</span>:</div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isPalindrome</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> start, end, size = s.size();</div><div class="line">        <span class="keyword">for</span>(start = <span class="number">0</span>, end = size - <span class="number">1</span>; start &lt; end; start++, end--) &#123;</div><div class="line">            <span class="keyword">if</span>(s[start] != s[end])</div><div class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="273-Integer-to-English-Words"><a href="#273-Integer-to-English-Words" class="headerlink" title="273.Integer to English Words"></a>273.Integer to English Words</h2><h3 id="Problem-Description-3"><a href="#Problem-Description-3" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
+<p>Convert a non-negative integer to its english words representation. Given input is guaranteed to be less than 231 - 1.</p>
+<p>For example,</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="number">123</span> -&gt; <span class="string">"One Hundred Twenty Three"</span></div><div class="line"><span class="number">12345</span> -&gt; <span class="string">"Twelve Thousand Three Hundred Forty Five"</span></div><div class="line"><span class="number">1234567</span> -&gt; <span class="string">"One Million Two Hundred Thirty Four Thousand Five Hundred Sixty Seven"</span></div></pre></td></tr></table></figure>
+<p>给出一个小于$2^{32}-1$的数字，将其转化为英文单词。</p>
+<h3 id="Method-3"><a href="#Method-3" class="headerlink" title="Method"></a>Method</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="built_in">string</span> <span class="title">numberToWords</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (num == <span class="number">0</span>)</div><div class="line">            <span class="keyword">return</span> <span class="string">"Zero"</span>;</div><div class="line">        <span class="keyword">int</span> aliq, rem = num;</div><div class="line">        <span class="built_in">string</span> units[] = &#123;<span class="string">"Billion"</span>, <span class="string">"Million"</span>, <span class="string">"Thousand"</span>&#125;;</div><div class="line">        <span class="built_in">string</span> res = <span class="string">""</span>;</div><div class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> div = <span class="number">1000000000</span>; div &gt;= <span class="number">1</span>; div /= <span class="number">1000</span>)</div><div class="line">        &#123;</div><div class="line">            </div><div class="line">            </div><div class="line">            aliq = rem / div;</div><div class="line">            rem  %= div;</div><div class="line">            res += threeDigitsToString(aliq) + ((i &lt; <span class="number">3</span> &amp;&amp; aliq &gt; <span class="number">0</span>) ? (<span class="string">" "</span> + units[i]) : <span class="string">""</span>) + (div &gt; <span class="number">1</span> &amp;&amp; aliq &gt; <span class="number">0</span> &amp;&amp; rem &gt; <span class="number">0</span> ? <span class="string">" "</span> : <span class="string">""</span>);</div><div class="line">            ++i;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="built_in">string</span> <span class="title">threeDigitsToString</span><span class="params">(<span class="keyword">int</span> num)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="built_in">string</span> units[] = &#123;<span class="string">""</span>, <span class="string">"One"</span>, <span class="string">"Two"</span>, <span class="string">"Three"</span>, <span class="string">"Four"</span>, <span class="string">"Five"</span>, <span class="string">"Six"</span>, <span class="string">"Seven"</span>, <span class="string">"Eight"</span>, <span class="string">"Nine"</span> &#125;;</div><div class="line">        <span class="built_in">string</span> tens[] = &#123;<span class="string">"Ten"</span>, <span class="string">"Eleven"</span>, <span class="string">"Twelve"</span>, <span class="string">"Thirteen"</span>, <span class="string">"Fourteen"</span>, <span class="string">"Fifteen"</span>, <span class="string">"Sixteen"</span>, <span class="string">"Seventeen"</span>, <span class="string">"Eighteen"</span>, <span class="string">"Nineteen"</span>&#125;;</div><div class="line">        <span class="built_in">string</span> decades[] = &#123;<span class="string">"Twenty"</span>, <span class="string">"Thirty"</span>, <span class="string">"Forty"</span>, <span class="string">"Fifty"</span>, <span class="string">"Sixty"</span>, <span class="string">"Seventy"</span>, <span class="string">"Eighty"</span>, <span class="string">"Ninety"</span>&#125;;</div><div class="line">        <span class="built_in">string</span> str;</div><div class="line">        <span class="keyword">int</span> rem, aliq;</div><div class="line">        aliq = num / <span class="number">100</span>;</div><div class="line">        rem = num % <span class="number">100</span>;</div><div class="line">        <span class="keyword">if</span> (aliq &gt; <span class="number">0</span>)</div><div class="line">            str += units[aliq] + <span class="string">" Hundred"</span> + ((rem &gt; <span class="number">0</span>) ? <span class="string">" "</span> : <span class="string">""</span>);</div><div class="line">        </div><div class="line">        <span class="keyword">if</span> (rem &gt;= <span class="number">10</span> and rem &lt; <span class="number">20</span>) </div><div class="line">        &#123;</div><div class="line">            str += tens[rem - <span class="number">10</span>];</div><div class="line">            <span class="keyword">return</span> str;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (rem &gt;= <span class="number">20</span>)</div><div class="line">        &#123;</div><div class="line">            aliq = rem / <span class="number">10</span>;</div><div class="line">            rem = num % <span class="number">10</span>;</div><div class="line">            str += decades[aliq - <span class="number">2</span>] + (rem &gt; <span class="number">0</span> ? <span class="string">" "</span> : <span class="string">""</span>);</div><div class="line">        &#125;</div><div class="line">        str += units[rem];</div><div class="line">        <span class="keyword">return</span> str;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="214-Shortest-Palindrome"><a href="#214-Shortest-Palindrome" class="headerlink" title="214. Shortest Palindrome"></a>214. Shortest Palindrome</h2><h3 id="Problem-Description-4"><a href="#Problem-Description-4" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
+<p>Given a string S, you are allowed to convert it to a palindrome by adding characters in front of it. Find and return the shortest palindrome you can find by performing this transformation.</p>
+<p>For example:</p>
+<p>Given <code>&quot;aacecaaa&quot;</code>, return <code>&quot;aaacecaaa&quot;</code>.</p>
+<p>Given <code>&quot;abcd&quot;</code>, return <code>&quot;dcbabcd&quot;</code>.</p>
+</blockquote>
+<p>给出一个字符串，在其左边加入最少的字符使其构成回文</p>
+<h3 id="Method-4"><a href="#Method-4" class="headerlink" title="Method"></a>Method</h3><p>直接判断<code>s[0,...,i]</code>是否是回文的方法时间复杂度为$O(n^2)$, 会超时</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="built_in">string</span> <span class="title">shortestPalindrome</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (isPalindrome(s))</div><div class="line">            <span class="keyword">return</span> s;</div><div class="line">        <span class="keyword">int</span> len = <span class="number">0</span>, boundary = <span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = s.length(); i &gt;=<span class="number">0</span>; --i)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span> (isPalindrome(s.substr(<span class="number">0</span>, i)))</div><div class="line">            &#123;</div><div class="line">                boundary = max(i, boundary);</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">string</span> tmp = s.substr(boundary, s.length() - boundary + <span class="number">1</span>);</div><div class="line">        reverse(tmp.begin(), tmp.end());</div><div class="line">        <span class="keyword">return</span> tmp + s;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isPalindrome</span><span class="params">(<span class="built_in">string</span> s)</span></span>&#123;</div><div class="line">        <span class="keyword">int</span> l = <span class="number">0</span>, r = s.length() - <span class="number">1</span>;</div><div class="line">        <span class="keyword">while</span> (l &lt;= r)</div><div class="line">            <span class="keyword">if</span>(s[l++] != s[r--]) <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>下面的方法采用<a href="http://www.tuicool.com/articles/e2Qbyyf" target="_blank" rel="external">KMP算法</a>中最长前缀后缀数组<code>next</code>的概念，时间复杂度为$O(N)$。首先，用一个不在字符串中出现的字符将s和其逆序连在一起,然后求得其<code>next</code>数组，通过<code>next</code>数组的最后一个元素即可找到s中以第一个字符开头的最长回文，然后将剩余部分拼接在其前面。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="built_in">string</span> <span class="title">shortestPalindrome</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</div><div class="line">        <span class="built_in">string</span> rev_s = s;</div><div class="line">        reverse(rev_s.begin(), rev_s.end());</div><div class="line">        <span class="built_in">string</span> tmp = s + <span class="string">"#"</span> + rev_s;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; next = get_next(tmp);</div><div class="line">        <span class="keyword">return</span> rev_s.substr(<span class="number">0</span>, s.size() - next[tmp.size()<span class="number">-1</span>] - <span class="number">1</span>) + s;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; get_next(<span class="built_in">string</span> str)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">string</span>::size_type len = str.length();</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; next(len, <span class="number">-1</span>);</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; len; ++i)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">int</span> j = next[i<span class="number">-1</span>];</div><div class="line">            <span class="keyword">while</span>(str[j + <span class="number">1</span>] != str[i] and j &gt;= <span class="number">0</span>)</div><div class="line">                j = next[j];</div><div class="line">            <span class="keyword">if</span> (str[j + <span class="number">1</span>] == str[i])</div><div class="line">                next[i] = j + <span class="number">1</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> next;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+
+	
+	
+	
+	
+</div>
+				
+				
+
+                <!-- Post Comments -->
+                
+    <!-- 使用多说评论 -->
+    <link rel="stylesheet" href="/css/duoshuo.min.css">
+<style>
+    #ds-thread #ds-reset .ds-post-button{
+        background-color: #0097A7 !important;
+    }
+    #ds-wrapper #ds-reset .ds-icons-32{
+        background-color: #0097A7 !important;
+    }
+    #ds-reset .ds-highlight {
+        color: #0097A7 !important;
+    }
+</style>
+<div id="comments">
+    <!-- 多说评论框 start -->
+        <div class="ds-thread" 
+            data-thread-key="posts/20170210190328/" 
+            data-url="http://www.wowx.info//posts/20170210190328/index.html"
+            data-title="LeetCode String 44 32 336 273 214"></div>
+    <!-- 多说评论框 end -->
+</div>
+
+
+
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    
+    <!-- Prev Nav -->
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/posts/20170207004639/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+        </div>
+    </div>
+
+				
+				
+					<!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay "></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored  sidebar-fixed-left" role="navigation">
+	<div id="sidebar-main">
+	    <!-- Sidebar Header -->
+		<div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+    <i class="material-icons">clear_all</i>
+    <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="Xin Wei's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        weixin@bupt.edu.cn
+        <b class="caret"></b>
+    </a>
+</div>
+
+		<!-- Sidebar Navigation  -->
+		<ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+			
+                <li>
+                    <a href="mailto:weixin@bupt.edu.cn" target="_blank" title="Email Me">
+						<i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    <li id="sidebar-first-li">
+        <a href="/" target="_self">
+            <i class="material-icons sidebar-material-icons">home</i>
+             主页
+        </a>
+    </li>
+
+    <!-- I'm Feeling Lucky -->
+<!--
+    <li class="dropdown">
+        <a href="" target="_self">
+            <i class="material-icons sidebar-material-icons">explore</i>
+             sidebar.imlucky
+        </a>
+    </li>
+-->
+
+	
+    <!-- Archives  -->
+    <li class="dropdown">
+        <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+            <i class="material-icons sidebar-material-icons">inbox</i>
+             归档
+            <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+            <a class="sidebar_archives-link" href="/archives/2017/02/">二月 2017<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/12/">十二月 2016<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">十一月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">十月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/07/">七月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/06/">六月 2016<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/07/">七月 2015<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/06/">六月 2015<span class="sidebar_archives-count">6</span></a>
+        </ul>
+    </li>
+
+    <!-- Divider -->
+    <li class="divider"></li>
+
+
+    <!-- Pages  -->
+	
+		<li>
+			<a href="/" title="home">
+				home
+			</a>
+		</li>
+	
+		<li>
+			<a href="/tags" title="标签">
+				标签
+			</a>
+		</li>
+	
+		<li>
+			<a href="/categories" title="分类">
+				分类
+			</a>
+		</li>
+	
+
+    <!-- Article Numebr  -->
+    <li>
+        <a href="/archives">
+             文章总数
+             <span class="sidebar-badge">52</span>
+        </a>
+    </li>
+</ul>
+
+		<!-- Sidebar Divider -->
+		<div class="sidebar-divider"></div>
+
+		<!-- Sidebar Footer -->
+		<!-- 
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持。 :) 
+-->
+
+<!-- Theme Material -->
+
+<!-- Help & Support -->
+<!--
+<a href="mailto:hiviosey@gmail.com" class="sidebar-footer-text-a">
+    <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+		sidebar.help
+		<span class="mdl-button__ripple-container">
+			<span class="mdl-ripple"></span>
+		</span>
+	</div>
+</a>
+-->
+
+<!-- Feedback -->
+<!--
+<a href="https://github.com/viosey/hexo-theme-material/issues" target="_blank" class="sidebar-footer-text-a">
+    <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+         sidebar.feedback
+                    <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></div>
+</a>
+-->
+
+<!-- Abount Theme -->
+<!--
+<a href="https://blog.viosey.com/index.php/Material.html" target="_blank" class="sidebar-footer-text-a">
+    <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+         sidebar.about_theme
+        <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></div>
+</a>-->
+
+	</div>
+    
+    <!-- Sidebar Sponsor -->
+    
+
+
+</aside>
+
+				
+				
+				
+					<!-- Footer Top Button -->
+					<div class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+				
+				
+				<!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+	
+	
+		<!-- Paradox Footer Left Section -->
+		<div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+    
+    
+    <!-- Facebook -->
+    
+    
+    
+    <!-- Google + -->
+    
+    
+    
+    <!-- Weibo -->
+    
+    <a href="http://weibo.com/buptweixin" target="view_window"><button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-weibo.png);">
+        <span class="visuallyhidden">Weibo</span>
+    </button></a>
+    
+    
+    <!-- Instagram -->
+    
+    
+    
+    <!-- Tumblr -->
+    
+    
+    
+    <!-- Github -->
+    
+    <a href="https://github.com/buptweixin" target="view_window"><button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-github.png);">
+        <span class="visuallyhidden">Github</span>
+    </button></a>
+    
+</div>
+
+
+		<!--Copyright-->
+		<div id="copyright">Copyright&nbsp;©&nbsp;<script type="text/javascript">var fd = new Date();document.write(fd.getFullYear());</script>&nbsp;野原圆长的Blog</div>
+
+		<!-- Paradox Footer Right Section -->
+
+		<!-- 
+		I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+		It will not impact the appearance and can give developers a lot of support :)
+
+		很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+		它不会影响美观并可以给开发者很大的支持。 :) 
+		-->
+
+		<div class="mdl-mini-footer--right-section">
+			<div>
+				<div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+				<div class="footer-develop-div">Theme - <a href="#" target="_blank" class="footer-develop-a">Material</a></div>
+			</div>
+		</div>
+	
+    
+</footer>
+
+                
+				<!-- Import File -->
+<script src="/js/highlight.min.js"></script>
+<script src="/js/js.min.js"></script>
+<script src="/js/nprogress.js"></script>
+
+<script type="text/javascript">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    
+    $('#nprogress .bar').css({
+        'background': '#FF4081'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #FF4081, 0 0 15px #FF4081'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#FF4081',
+        'border-left-color': '#FF4081'
+    });
+    
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+    <!-- Leancloud -->
+	<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+	<script>
+		AV.initialize("1wCxBs3gRuLUAR1VDMEUFx3N-gzGzoHsz", "6sT0Kp8aE2lG69USPb4k0cAb");
+	</script>
+    <script>
+	function showTime(Counter) {
+		var query = new AV.Query(Counter);
+		$(".leancloud-views_num").each(function() {
+			var url = $(this).attr("id").trim();
+			query.equalTo("url", url);
+			query.find({
+				success: function(results) {
+					if (results.length == 0) {
+						var content = '0 ' + $(document.getElementById(url)).text();
+						$(document.getElementById(url)).text(content);
+						return;
+					}
+					for (var i = 0; i < results.length; i++) {
+						var object = results[i];
+						var content = object.get('time') + ' ' + $(document.getElementById(url)).text();
+						$(document.getElementById(url)).text(content);
+					}
+				},
+				error: function(object, error) {
+					console.log("Error: " + error.code + " " + error.message);
+				}
+			});
+
+		});
+	}
+
+	function addCount(Counter) {
+		var Counter = AV.Object.extend("Counter");
+		url = $(".leancloud-views_num").attr('id').trim();
+		title = $(".leancloud-views_num").attr('data-flag-title').trim();
+		var query = new AV.Query(Counter);
+		query.equalTo("url", url);
+		query.find({
+			success: function(results) {
+				if (results.length > 0) {
+					var counter = results[0];
+					counter.fetchWhenSave(true);
+					counter.increment("time");
+					counter.save(null, {
+						success: function(counter) {
+							var content =  counter.get('time') + ' ' + $(document.getElementById(url)).text();
+							$(document.getElementById(url)).text(content);
+						},
+						error: function(counter, error) {
+							console.log('Failed to save Visitor num, with error message: ' + error.message);
+						}
+					});
+				} else {
+					var newcounter = new Counter();
+					newcounter.set("title", title);
+					newcounter.set("url", url);
+					newcounter.set("time", 1);
+					newcounter.save(null, {
+						success: function(newcounter) {
+							console.log("newcounter.get('time')="+newcounter.get('time'));
+							var content = newcounter.get('time') + ' ' + $(document.getElementById(url)).text();
+							$(document.getElementById(url)).text(content);
+						},
+						error: function(newcounter, error) {
+							console.log('Failed to create');
+						}
+					});
+				}
+			},
+			error: function(error) {
+				console.log('Error:' + error.code + " " + error.message);
+			}
+		});
+	}
+	$(function() {
+		var Counter = AV.Object.extend("Counter");
+		if ($('.leancloud-views_num').length == 1) {
+			addCount(Counter);
+		} else if ($('.post-title-link').length > 1) {
+			showTime(Counter);
+		}
+	}); 
+</script>
+
+
+
+
+
+    <!-- 多说公共 js 代码 start -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"buptweixin"};
+        (function() {
+            var ds = document.createElement('script');
+            ds.type = 'text/javascript';ds.async = true;
+            ds.src = 'https://static.duoshuo.com/embed.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0] 
+             || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+    </script>
+    <!-- 多说公共 js 代码 end -->
+
+
+
+
+<!-- Swiftye -->
+
+
+<!-- Local Search-->
+
+
+<!-- Window Load-->
+<script>
+    $(window).load(function() {
+        // Post_Toc parent position fixed
+        $(".post-toc-wrap").parent(".mdl-menu__container").css("position", "fixed");
+    });
+</script>
+            </main>
+        </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+		
+    </body>
+		
+	
+</html>
