@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.wowx.info/"/>
-  <updated>2017-02-12T11:05:27.419Z</updated>
+  <updated>2017-02-12T11:06:16.179Z</updated>
   <id>http://www.wowx.info/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://www.wowx.info/posts/20170210190328/"/>
     <id>http://www.wowx.info/posts/20170210190328/</id>
     <published>2017-02-12T11:03:28.000Z</published>
-    <updated>2017-02-12T11:05:27.419Z</updated>
+    <updated>2017-02-12T11:06:16.179Z</updated>
     
     <content type="html"><![CDATA[<h1 id="2017-02-10-44-32-336-273-214"><a href="#2017-02-10-44-32-336-273-214" class="headerlink" title="2017-02-10 44 32 336 273 214"></a>2017-02-10 44 32 336 273 214</h1><h2 id="44-Wildcard-Matching"><a href="#44-Wildcard-Matching" class="headerlink" title="44.Wildcard Matching"></a>44.Wildcard Matching</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
 <p>Implement wildcard pattern matching with support for ‘?’ and ‘*’.</p>
