@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.wowx.info/"/>
-  <updated>2017-02-14T16:20:29.777Z</updated>
+  <updated>2017-02-14T16:21:52.061Z</updated>
   <id>http://www.wowx.info/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Leetcode string 127 126 115 97</title>
+    <title>Leetcode string 127 126 115 97 87</title>
     <link href="http://www.wowx.info/posts/20170213235935/"/>
     <id>http://www.wowx.info/posts/20170213235935/</id>
     <published>2017-02-14T15:59:35.000Z</published>
-    <updated>2017-02-14T16:20:29.777Z</updated>
+    <updated>2017-02-14T16:21:52.061Z</updated>
     
     <content type="html"><![CDATA[<h1 id="2017-02-13-127-126-115-97"><a href="#2017-02-13-127-126-115-97" class="headerlink" title="2017-02-13 127 126 115 97"></a>2017-02-13 127 126 115 97</h1><h2 id="127-Word-Ladder"><a href="#127-Word-Ladder" class="headerlink" title="127 Word Ladder"></a>127 Word Ladder</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
 <p>Given two words (<em>beginWord</em> and <em>endWord</em>), and a dictionary’s word list, find the length of shortest transformation sequence from <em>beginWord</em> to <em>endWord</em>, such that:</p>
