@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.wowx.info/"/>
-  <updated>2017-02-13T01:13:46.760Z</updated>
+  <updated>2017-02-14T16:01:05.021Z</updated>
   <id>http://www.wowx.info/</id>
   
   <author>
@@ -14,6 +14,131 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Leetcode string 127 126 115 97</title>
+    <link href="http://www.wowx.info/posts/20170213235935/"/>
+    <id>http://www.wowx.info/posts/20170213235935/</id>
+    <published>2017-02-14T15:59:35.000Z</published>
+    <updated>2017-02-14T16:01:05.021Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="2017-02-13-127-126-115-97"><a href="#2017-02-13-127-126-115-97" class="headerlink" title="2017-02-13 127 126 115 97"></a>2017-02-13 127 126 115 97</h1><h2 id="127-Word-Ladder"><a href="#127-Word-Ladder" class="headerlink" title="127 Word Ladder"></a>127 Word Ladder</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
+<p>Given two words (<em>beginWord</em> and <em>endWord</em>), and a dictionary’s word list, find the length of shortest transformation sequence from <em>beginWord</em> to <em>endWord</em>, such that:</p>
+<ol>
+<li>Only one letter can be changed at a time.</li>
+<li>Each transformed word must exist in the word list. Note that <em>beginWord</em> is <em>not</em> a transformed word.</li>
+</ol>
+<p>For example,</p>
+<p>Given:</p>
+<p><em>beginWord</em> = <code>&quot;hit&quot;</code></p>
+<p><em>endWord</em> = <code>&quot;cog&quot;</code><br><em>wordList</em> = <code>[&quot;hot&quot;,&quot;dot&quot;,&quot;dog&quot;,&quot;lot&quot;,&quot;log&quot;,&quot;cog&quot;]</code></p>
+<p>As one shortest transformation is <code>&quot;hit&quot; -&gt; &quot;hot&quot; -&gt; &quot;dot&quot; -&gt; &quot;dog&quot; -&gt; &quot;cog&quot;</code>,<br>return its length <code>5</code>.</p>
+<p><strong>Note:</strong></p>
+<ul>
+<li>Return 0 if there is no such transformation sequence.</li>
+<li>All words have the same length.</li>
+<li>All words contain only lowercase alphabetic characters.</li>
+<li>You may assume no duplicates in the word list.</li>
+<li>You may assume <em>beginWord</em> and <em>endWord</em> are non-empty and are not the same.</li>
+</ul>
+<p><strong>UPDATE (2017/1/20):</strong><br>The <em>wordList</em> parameter had been changed to a list of strings (instead of a set of strings). Please reload the code definition to get the latest changes.</p>
+</blockquote>
+<p>给出起点、终点单词以及中间单词列表，每次通过改变一个字母，使起点单词最终变为终点单词，要求中间单词必须出现在中间单词列表中。</p>
+<h3 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h3><p>采用双端广度优先搜索算法(BFS),使用一个数组<code>beginVec&lt;string&gt;</code>存储左边的搜索空间，其初始存储<code>beginWord</code>,使用另一个<code>vector&lt;string&gt;</code>数组存储右边的搜索空间，其初始存储的是<code>endWord</code>。正式开始搜索时，因为以左边空间为字母替换搜索依据，所以为了减少搜索量，当<code>beginVec</code>比<code>endVec</code>长时交换两个数组。然后，只要两个数组都不为空，那么遍历<code>beginVec</code>中的单词，在依次对单词的每一位用<code>a-z</code>来替换</p>
+<ol>
+<li>如果替换一位字符后的单词出现在了<code>endVec</code>中，那么已经找到了变换路径，返回<code>len+1</code>;</li>
+<li>若替换一位后的单词不在<code>endVec</code>中，但是在<code>WordList</code>中，则该单词可能是路径中间单词，将其存入下一次的左边搜索空间(<code>tmp</code>)中, 同时将该单词从<code>wordList</code>中删除，避免重复使用。</li>
+</ol>
+<p>遍历完<code>beginVec</code>中的所有单词后，将下次的左边搜索空间赋给<code>beginVec</code>然后重复这个过程。</p>
+<p>如果不存在变换路径，则在某一步<code>tmp</code>为空，此时<code>beginVec=tmp</code>也变为空，<code>while</code>循环不满足条件，退出，返回0；否则必然在某次<code>while</code>循环中，变换一个字母的<code>word</code>会出现在<code>endVec</code>中。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">ladderLength</span><span class="params">(<span class="built_in">string</span> beginWord, <span class="built_in">string</span> endWord, <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; wordList)</span> </span>&#123;</div><div class="line">        <span class="built_in">string</span>::size_type len = <span class="number">1</span>, strLen = beginWord.length();</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; beginVec(&#123;beginWord&#125;), endVec(&#123;endWord&#125;);</div><div class="line">        <span class="keyword">while</span> (beginVec.size() &gt; <span class="number">0</span> and endVec.size() &gt; <span class="number">0</span>)</div><div class="line">        &#123;</div><div class="line">            <span class="comment">// 以较长的vector作为beginVec，能有效减少比较的次数</span></div><div class="line">            <span class="keyword">if</span> (beginVec.size() &gt; endVec.size())</div><div class="line">                beginVec.swap(endVec);</div><div class="line">            </div><div class="line">            <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; tmp;</div><div class="line">            <span class="keyword">for</span> (<span class="built_in">string</span> word : beginVec)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">for</span> (<span class="built_in">string</span>::size_type i = <span class="number">0</span>; i &lt; word.length(); ++i)</div><div class="line">                &#123;</div><div class="line">                    <span class="keyword">for</span> (<span class="keyword">char</span> ch = <span class="string">'a'</span>; ch &lt;= <span class="string">'z'</span>; ++ch)</div><div class="line">                    &#123;</div><div class="line">                        <span class="keyword">char</span> old = word[i];</div><div class="line">                        <span class="keyword">if</span> (ch == old)</div><div class="line">                            <span class="keyword">continue</span>;</div><div class="line">                        word[i] = ch;</div><div class="line">                        </div><div class="line">                        <span class="keyword">auto</span> posWordList = find(wordList.begin(), wordList.end(), word);</div><div class="line">                        <span class="comment">// 如果替换一个字符后的word存在于endWord，说明已经找到路径了，直接返回路径长度</span></div><div class="line">                        <span class="keyword">if</span> (find(endVec.begin(), endVec.end(), word) != endVec.end())</div><div class="line">                            <span class="keyword">return</span> len + <span class="number">1</span>;</div><div class="line">                        <span class="comment">// 如果替换一个字符后的word不在endWord中，但在wordList中，则将该word存入下次的beginVec(tmp)中</span></div><div class="line">                        <span class="keyword">else</span> <span class="keyword">if</span> ( posWordList != wordList.end())</div><div class="line">                        &#123;</div><div class="line">                            tmp.push_back(word);</div><div class="line">                            wordList.erase(posWordList);</div><div class="line">                        &#125;</div><div class="line">                        word[i] = old;</div><div class="line">                    &#125;</div><div class="line">                    </div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            beginVec = tmp;</div><div class="line">            ++len;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="126-Word-Ladder-II"><a href="#126-Word-Ladder-II" class="headerlink" title="126 Word Ladder II"></a>126 Word Ladder II</h2><h3 id="Problem-Description-1"><a href="#Problem-Description-1" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
+<p>Given two words (<em>beginWord</em> and <em>endWord</em>), and a dictionary’s word list, find all shortest transformation sequence(s) from <em>beginWord</em> to <em>endWord</em>, such that:</p>
+<ol>
+<li>Only one letter can be changed at a time</li>
+<li>Each transformed word must exist in the word list. Note that <em>beginWord</em> is <em>not</em> a transformed word.</li>
+</ol>
+<p>For example,</p>
+<p>Given:<br><em>beginWord</em> = <code>&quot;hit&quot;</code><br><em>endWord</em> = <code>&quot;cog&quot;</code><br><em>wordList</em> = <code>[&quot;hot&quot;,&quot;dot&quot;,&quot;dog&quot;,&quot;lot&quot;,&quot;log&quot;,&quot;cog&quot;]</code></p>
+<p>Return</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt;  [</div><div class="line">&gt;    [&quot;hit&quot;,&quot;hot&quot;,&quot;dot&quot;,&quot;dog&quot;,&quot;cog&quot;],</div><div class="line">&gt;    [&quot;hit&quot;,&quot;hot&quot;,&quot;lot&quot;,&quot;log&quot;,&quot;cog&quot;]</div><div class="line">&gt;  ]</div><div class="line">&gt;</div></pre></td></tr></table></figure>
+<p><strong>Note:</strong></p>
+<ul>
+<li>Return an empty list if there is no such transformation sequence.</li>
+<li>All words have the same length.</li>
+<li>All words contain only lowercase alphabetic characters.</li>
+<li>You may assume no duplicates in the word list.</li>
+<li>You may assume <em>beginWord</em> and <em>endWord</em> are non-empty and are not the same.</li>
+</ul>
+<p><strong>UPDATE (2017/1/20):</strong><br>The <em>wordList</em> parameter had been changed to a list of strings (instead of a set of strings). Please reload the code definition to get the latest changes.</p>
+</blockquote>
+<p>给定起始单词、结束单词和过度单词列表，每次只能改变一个字母的情况下，找出所有起始单词到过度单词的路径。</p>
+<h3 id="Method-1"><a href="#Method-1" class="headerlink" title="Method"></a>Method</h3><p>首先使用一个map，找出每个单词到下一个可到达单词，然后从起始单词开始，从这个map中不断搜索，直到到达结束单词。</p>
+<p>注意，因为为了减少搜索复杂度，当起始单词数组长度大于结束单词数组时，将两个数组交换，使用<code>flip</code>来记录是否发生了这种交换。当没有发生交换时，以<code>origin_word</code>为键，wordList中单词<code>word</code>为值存储，否则以<code>word</code>为键，<code>origin_word</code>为值存储，这样，保证了从起始单词到结束单词的路径创建过程中，不会出现循环路径。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt; findLadders(<span class="built_in">string</span> beginWord, <span class="built_in">string</span> endWord, <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; wordList) &#123;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; path(&#123;beginWord&#125;);</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt; res;</div><div class="line">        <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt; forest;</div><div class="line">        <span class="keyword">if</span> (findLadders(beginWord, endWord, wordList, forest))</div><div class="line">            getLadders(beginWord, endWord, forest, path, res);</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">findLadders</span><span class="params">(<span class="built_in">string</span> start, <span class="built_in">string</span> end, <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; &amp;wordList, <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt; &amp;forest)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; beginVec(&#123;start&#125;), endVec(&#123;end&#125;);</div><div class="line">        <span class="keyword">bool</span> flip = <span class="literal">false</span>, found = <span class="literal">false</span>;</div><div class="line">        <span class="keyword">while</span> (!beginVec.empty() and !endVec.empty())</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span> (beginVec.size() &gt; endVec.size())</div><div class="line">            &#123;</div><div class="line">                flip = !flip;</div><div class="line">                beginVec.swap(endVec);</div><div class="line">            &#125;</div><div class="line">            <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; tmp;</div><div class="line">            <span class="keyword">for</span> (<span class="built_in">string</span> word : beginVec)</div><div class="line">            &#123;</div><div class="line">                <span class="built_in">string</span> originWord = word;</div><div class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; word.length(); ++i)</div><div class="line">                &#123;</div><div class="line">                    <span class="keyword">char</span> old = word[i];</div><div class="line">                    <span class="keyword">for</span> (<span class="keyword">char</span> ch = <span class="string">'a'</span>; ch &lt;= <span class="string">'z'</span>; ++ch)</div><div class="line">                    &#123;</div><div class="line">                        <span class="keyword">if</span> (ch == old)</div><div class="line">                            <span class="keyword">continue</span>;</div><div class="line">                        word[i] = ch;</div><div class="line">                        <span class="keyword">if</span> (find(endVec.begin(), endVec.end(), word) != endVec.end())</div><div class="line">                        &#123;</div><div class="line">                            flip ? forest[word].push_back(originWord) : forest[originWord].push_back(word);</div><div class="line">                            found = <span class="literal">true</span>;</div><div class="line">                        &#125;</div><div class="line">                        <span class="keyword">else</span> <span class="keyword">if</span> (find(wordList.begin(), wordList.end(), word) != wordList.end())</div><div class="line">                        &#123;</div><div class="line">                            flip ? forest[word].push_back(originWord) : forest[originWord].push_back(word);</div><div class="line">                            tmp.push_back(word);</div><div class="line">                        &#125;</div><div class="line">                    &#125;</div><div class="line">                    word[i] = old;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span> (found) <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">            <span class="keyword">for</span> (<span class="built_in">string</span> word : tmp)</div><div class="line">                wordList.erase(find(wordList.begin(), wordList.end(), word));</div><div class="line">            beginVec = tmp;</div><div class="line">            </div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">getLadders</span><span class="params">(<span class="built_in">string</span> begin, <span class="built_in">string</span> end, <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt; &amp;nexts, \</span></span></div><div class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; &amp;path, <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt; res)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span> (begin == end)</div><div class="line">        &#123;</div><div class="line">            res.push_back(path);</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">for</span> (<span class="built_in">string</span> str : nexts[begin])</div><div class="line">        &#123;</div><div class="line">            path.push_back(str);</div><div class="line">            getLadders(str, end, nexts, path, res);</div><div class="line">            path.pop_back();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="115-Distinct-Subsequences"><a href="#115-Distinct-Subsequences" class="headerlink" title="115. Distinct Subsequences"></a>115. Distinct Subsequences</h2><h3 id="Problem-Description-2"><a href="#Problem-Description-2" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
+<p>Given a string <strong>S</strong> and a string <strong>T</strong>, count the number of distinct subsequences of <strong>T</strong> in <strong>S</strong>.</p>
+<p>A subsequence of a string is a new string which is formed from the original string by deleting some (can be none) of the characters without disturbing the relative positions of the remaining characters. (ie, <code>&quot;ACE&quot;</code> is a subsequence of <code>&quot;ABCDE&quot;</code> while <code>&quot;AEC&quot;</code> is not).</p>
+<p>Here is an example:</p>
+<p><strong>S</strong> = <code>&quot;rabbbit&quot;</code>, <strong>T</strong> = <code>&quot;rabbit&quot;</code></p>
+<p>Return <code>3</code>.</p>
+</blockquote>
+<p>给出一个字符串s和t，如果只能删除s中字符，有多少种删除方式可以使s变为t(包括不删除任何字符)。</p>
+<h3 id="Method-2"><a href="#Method-2" class="headerlink" title="Method"></a>Method</h3><p>此题应该使用动态规划的方法来完成，假设s和t的长度分别为m和n，构造一个<code>(m+1)*(n+1)</code>大小的二维数组dp，其中<code>dp[i][j]</code>表示字符串<code>s[0,...,i-1]</code>转换为<code>t[0,...,j-1]</code>的方法数。首先来分析两种最基本情况：</p>
+<ol>
+<li>如果<code>i&gt;0 and j==0</code>即s子串长度大于0,t子串长度为0，这时只有把s子串中所有字符删除才能变换为t子串，故这种情况下<code>dp[i][j]=dp[i][0]=1</code></li>
+<li>如果<code>i &lt; j</code>,这时s子串已经比t的子串要短了，不可能通过删除字符的方法将s的子串转换为t的子串，故<code>dp[i][j]=0</code></li>
+</ol>
+<p>接下来讨论一般情况，即<code>i&gt;=j&gt;0</code>,这时需要考虑当前字符<code>s[i-1]</code>是否等于<code>t[j-1]</code></p>
+<ol>
+<li><p><code>s[i-1]==t[j-1]</code>:这时有两种情况:</p>
+<ol>
+<li><p><code>s[0,...,i-1]</code>转换到<code>t[0,...,j-1]</code>的过程中把<code>s[i-1]</code>删除了，此时相当于要把<code>s[0,...,i-2]</code>转换为<code>t[0,...,i-1]</code>,即<code>dp[i][j]=dp[i-1][j]</code></p>
+</li>
+<li><p><code>s[0,...,i-1]</code>转换到<code>t[0,...,j-1]</code>的过程保留了<code>s[i-1]</code>,这时，因为<code>s[i-1]</code>已经和<code>t[j-1]</code>对应上了，这对字符不起作用，所以<code>dp[i][j]=dp[i-1][j-1]</code></p>
+<p>因此，结合上面两种情况<code>dp[i][j]=dp[i-1][j]+dp[i-1][j-1]</code></p>
+</li>
+</ol>
+</li>
+<li><p><code>s[i-1]!=t[j-1]</code></p>
+<p>此时，若保留<code>s[i-1]</code>，两个串必定对不上，所以应该将其删除，因此<code>dp[i][j]=dp[i-1][j]</code></p>
+</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">numDistinct</span><span class="params">(<span class="built_in">string</span> s, <span class="built_in">string</span> t)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> m = s.length(), n = t.length();</div><div class="line"></div><div class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; dp(m+<span class="number">1</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(n+<span class="number">1</span>, <span class="number">0</span>));</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= m; ++i)</div><div class="line">            dp[i][<span class="number">0</span>] = <span class="number">1</span>;</div><div class="line"></div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; ++i)</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n ; ++j)</div><div class="line">            &#123;</div><div class="line">                dp[i][j] = dp[i<span class="number">-1</span>][j];</div><div class="line">                <span class="keyword">if</span>(s[i<span class="number">-1</span>] == t[j<span class="number">-1</span>])</div><div class="line">                    dp[i][j] += dp[i<span class="number">-1</span>][j<span class="number">-1</span>];</div><div class="line">            &#125;</div><div class="line">        <span class="keyword">return</span> dp[m][n];</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>这个有个只需要O(N)空间复杂度的<a href="https://discuss.leetcode.com/topic/19778/7-10-lines-c-solutions-with-detailed-explanations-o-m-n-time-and-o-m-space/2" target="_blank" rel="external">算法</a></p>
+<h2 id="97-Interleaving-String"><a href="#97-Interleaving-String" class="headerlink" title="97 Interleaving String"></a>97 Interleaving String</h2><h3 id="Problem-Description-3"><a href="#Problem-Description-3" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
+<p>Given <em>s1</em>, <em>s2</em>, <em>s3</em>, find whether <em>s3</em> is formed by the interleaving of <em>s1</em> and <em>s2</em>.</p>
+<p>For example,</p>
+<p>Given:</p>
+<p><em>s1</em> = <code>&quot;aabcc&quot;</code>,</p>
+<p><em>s2</em> = <code>&quot;dbbca&quot;</code>,</p>
+<p>When <em>s3</em> = <code>&quot;aadbbcbcac&quot;</code>, return true.</p>
+<p>When <em>s3</em> = <code>&quot;aadbbbaccc&quot;</code>, return false.</p>
+</blockquote>
+<p>给出三个字符串<code>s1</code> <code>s2</code> 和<code>s3</code>， 判断<code>s3</code>是否是通过<code>s1</code>和<code>s2</code>混合得到的(<code>s3</code>中<code>s1</code>和<code>s2</code>的字母相对位置不发生改变)</p>
+<h3 id="Method-3"><a href="#Method-3" class="headerlink" title="Method"></a>Method</h3><p>采用动态规划算法，m和n分别是两个s1和s2的长度，用大小为<code>(m+1)*(n+1)</code>的二维数组<code>dp</code>来存储中间结果，<code>dp[i][j]</code>表示<code>s1[0,...,i-1]</code>和<code>s[0,...,j-1]</code>是否能够合成<code>s3[0,...,i+j-1]</code>,下面来分析状态转移方式。</p>
+<ol>
+<li>若果<code>i==0 and j==0</code>,则两个空串必然能构成另一个空串，<code>dp[0][0]=true</code></li>
+<li>假如<code>i==0</code>或<code>j==0</code>,则<code>s3[0,...,i+j-1]</code>只能由另外一个非空字符串构成，<code>dp[i][0]=dp[i-1][0] &amp;&amp; s1[i-1] == s3[i-1]</code>或<code>dp[i][0]=dp[0][j-1] &amp;&amp; s2[j-1] == s3[j-1]</code></li>
+<li>其他情况下，<code>s3</code>新增加的字符要么来自于<code>s1</code>要么来自于<code>s2</code>,如果来自于<code>s1</code>的话<code>dp[i-1][j] &amp;&amp; (s1[i-1] == s3[i - 1 +j]</code>，如果来自于<code>s2</code>的话<code>dp[i][j-1] &amp;&amp; (s2[j-1] == s3[i + j -1])</code></li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isInterleave</span><span class="params">(<span class="built_in">string</span> s1, <span class="built_in">string</span> s2, <span class="built_in">string</span> s3)</span> </span>&#123;</div><div class="line">        <span class="built_in">string</span>::size_type len1 = s1.length(), len2 = s2.length();</div><div class="line">        <span class="keyword">if</span> (s3.length() != len1 + len2)</div><div class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt;&gt; dp(len1+<span class="number">1</span>, <span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt;(len2+<span class="number">1</span>, <span class="literal">false</span>));</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= len1; ++i)</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= len2; ++j)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">if</span> (i == <span class="number">0</span> and j == <span class="number">0</span>)</div><div class="line">                    dp[i][j] = <span class="literal">true</span>;</div><div class="line">                <span class="keyword">else</span> <span class="keyword">if</span> (i == <span class="number">0</span>)</div><div class="line">                    dp[<span class="number">0</span>][j] = dp[<span class="number">0</span>][j<span class="number">-1</span>] &amp;&amp; (s2[j<span class="number">-1</span>] == s3[j<span class="number">-1</span>]);</div><div class="line">                <span class="keyword">else</span> <span class="keyword">if</span> (j == <span class="number">0</span>)</div><div class="line">                    dp[i][<span class="number">0</span>] = dp[i<span class="number">-1</span>][<span class="number">0</span>] &amp;&amp; (s1[i<span class="number">-1</span>] == s3[i<span class="number">-1</span>]);</div><div class="line">                <span class="keyword">else</span></div><div class="line">                <span class="comment">// s3的当前字符要么来自s1要么来自s2</span></div><div class="line">                    dp[i][j] = (dp[i][j<span class="number">-1</span>] &amp;&amp; (s2[j<span class="number">-1</span>] == s3[i + j <span class="number">-1</span>])) || (dp[i<span class="number">-1</span>][j] &amp;&amp; (s1[i<span class="number">-1</span>] == s3[i - <span class="number">1</span> +j]));</div><div class="line">            &#125;</div><div class="line">        <span class="keyword">return</span> dp[len1][len2];</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;2017-02-13-127-126-115-97&quot;&gt;&lt;a href=&quot;#2017-02-13-127-126-115-97&quot; class=&quot;headerlink&quot; title=&quot;2017-02-13 127 126 115 97&quot;&gt;&lt;/a&gt;2017-02-13 
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="http://www.wowx.info/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
+    
+      <category term="string" scheme="http://www.wowx.info/tags/string/"/>
+    
+  </entry>
   
   <entry>
     <title>LeetCode String 44 32 336 273 214</title>
@@ -1420,43 +1545,6 @@ linear SVM on raw pixels final test set accuracy: 0.216000
       <category term="机器学习" scheme="http://www.wowx.info/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
       <category term="cs231n" scheme="http://www.wowx.info/tags/cs231n/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>神经网络引入循环不变性</title>
-    <link href="http://www.wowx.info/posts/4051914833/"/>
-    <id>http://www.wowx.info/posts/4051914833/</id>
-    <published>2016-09-10T02:20:40.000Z</published>
-    <updated>2016-11-25T17:22:09.731Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-9-10/38358535.jpg" width="720px"><br><a id="more"></a></p>
-<p>由于实际中的数据会以各种各样的形式出现，所以我们在挑选神经网络的训练数据集时需要尽可能的覆盖到所有的情况。比如要训练一个网络来根据病人的x光判断手掌骨骼是否出现畸形，我们会希望用于训练的照片中手掌的位置、方向要尽可能与实际情况吻合，这样可以降低过拟合情况的发生。</p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-9-10/987196.jpg" alt=""></p>
-<p>我们通常会采取两个方法来试图解决这个问题，一是在采集样本过程中尽量考虑各种情况，二是人为的对现有的图像做旋转、平移等操作增加样本空间位置信息；然而，很多时候采集新样本的成本很高，第一个方法很难实施，而旋转图像增加样本的方法往往会造成信息的冗余使网络训练速度减慢。为此，Google DeepMind团队在ICML2016论文 <em>Exploiting Cyclic Symmetry in Convolutional Neural Networks</em> 中提出了将循环不变性编码进神经网络方法，这个方法将网络对图像的处理分成四个路径，每个路径处理不同角度的图片，这样就可以学习到图像的各个角度信息从而对旋转不敏感，也即题目中的”旋转不变性”。</p>
-<h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><p>为了实现这样的网络，作者提出了四种操作：Slice、Roll、Poll和Stack。<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-9-10/72030550.jpg" alt=""></p>
-<h3 id="Cycle-slice"><a href="#Cycle-slice" class="headerlink" title="Cycle slice"></a>Cycle slice</h3><p>Slice 操作将原始图像复制四份分别旋转0°、90°、180°和270°，作为网络四条独立路径的输入，如下如所示：</p>
-<p>  <img src="http://7xkyov.com1.z0.glb.clouddn.com/16-9-10/61482297.jpg" alt=""></p>
-<p>至于为什么选择0°、90°、180°和270°这四个角度旋转是因为这几个操作只需要使用简单的矩阵转置就能实现而且是只有这几个旋转操作不需要插值，效率很高。同时，这4个角度效果已经很好了，作者尝试了八角度的旋转，然而对结果的提升不大却大大降低了训练速度。</p>
-<h3 id="Cycle-roll，-Cycle-Stack"><a href="#Cycle-roll，-Cycle-Stack" class="headerlink" title="Cycle roll， Cycle Stack"></a>Cycle roll， Cycle Stack</h3><p>进行完Slice操作后，可以获得四条独立的路径，每条路径上都包含不同角度图片的feature map，为了更进一步提高后续层能够使用的信息，在几次卷积之后可以把四条路径的feature map综合在一起：<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-9-10/613856.jpg" alt=""><br>如上图所示，每条路径的都和其他三条路径的feature map综合在了一起，然后使用Stack操作将每个路径上的四个feature map拼接在一起形成一个大的feature map，由于只需要简单地将其他路径上的feature map复制在一起所以这一步的计算量很小。</p>
-<p>注意， 虽然每条路径都是相同的四个feature map，但是他们的组合顺序是不一样的，所以每条路径都是不同的。</p>
-<h3 id="Cycle-Pool"><a href="#Cycle-Pool" class="headerlink" title="Cycle Pool"></a>Cycle Pool</h3><p>Pool操作是Slice 的对偶操作，它在最后的全连接之前把四条路径的feature map重新组合在一起，这样网络学习到的特征就综合在一起了。</p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-9-10/27629001.jpg" alt=""></p>
-<h2 id="循环不变网络"><a href="#循环不变网络" class="headerlink" title="循环不变网络"></a>循环不变网络</h2><p>四个操作在网路中的位置如图所示。<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-9-10/54519667.jpg" alt=""><br>作者在所有四条路径中每次使用的filter都是相同的，这样就和未加入循环不变性的网络的参数数量基本保持了一致。注意，虽然用的filter是一样的，但是每条路径feature map和filter的相对位置是不一样的。</p>
-<h2 id="使用效果"><a href="#使用效果" class="headerlink" title="使用效果"></a>使用效果</h2><p>作者使用这种网络获得了kaggle nbsb（National Data Science Bowl）项目的冠军，具体的请查阅<a href="http://benanne.github.io/2015/03/17/plankton.html" target="_blank" rel="external">Classifying plankton with deep neural networks<br>MARCH 17, 2015</a></p>
-<p>代码见<a href="https://github.com/benanne/kaggle-ndsb" target="_blank" rel="external">kaggle-ndsb</a>.</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;http://7xkyov.com1.z0.glb.clouddn.com/16-9-10/38358535.jpg&quot; width=&quot;720px&quot;/&gt;&lt;br&gt;
-    
-    </summary>
-    
-      <category term="论文" scheme="http://www.wowx.info/categories/%E8%AE%BA%E6%96%87/"/>
-    
-    
-      <category term="深度学习" scheme="http://www.wowx.info/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
