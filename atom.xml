@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.wowx.info/"/>
-  <updated>2017-02-14T16:21:52.061Z</updated>
+  <updated>2017-02-15T08:46:45.018Z</updated>
   <id>http://www.wowx.info/</id>
   
   <author>
@@ -14,6 +14,66 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>LeetCode string dp 64 494</title>
+    <link href="http://www.wowx.info/posts/20170215164353/"/>
+    <id>http://www.wowx.info/posts/20170215164353/</id>
+    <published>2017-02-15T08:43:53.000Z</published>
+    <updated>2017-02-15T08:46:45.018Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="2017-02-25-String-DP-Valid-Number"><a href="#2017-02-25-String-DP-Valid-Number" class="headerlink" title="2017-02-25 String DP Valid Number"></a>2017-02-25 String DP Valid Number</h1><h2 id="65-Valid-Number"><a href="#65-Valid-Number" class="headerlink" title="65. Valid Number"></a>65. Valid Number</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
+<p>Validate if a given string is numeric.</p>
+<p>Some examples:</p>
+<p><code>&quot;0&quot;</code> =&gt; <code>true</code><br><code>&quot; 0.1 &quot;</code> =&gt; <code>true</code><br><code>&quot;abc&quot;</code> =&gt; <code>false</code><br><code>&quot;1 a&quot;</code> =&gt; <code>false</code><br><code>&quot;2e10&quot;</code> =&gt; <code>true</code></p>
+<p><strong>Note:</strong> It is intended for the problem statement to be ambiguous. You should gather all requirements up front before implementing one.</p>
+<p><strong>Update (2015-02-10):</strong></p>
+<p>The signature of the <code>C++</code> function had been updated. If you still see your function signature accepts a <code>const char *</code> argument, please click the reload button  to reset your code definition.</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">graph TB</div><div class="line">s0((S0)) --&gt; |正负号|s1((S1))</div><div class="line">s0 --&gt; |0到9|s2((S2))</div><div class="line">s0 --&gt; |&quot;遇到.&quot;|s6((S6))</div><div class="line">s1 --&gt; |&quot;0到9&quot;|s2</div><div class="line">s1 --&gt; |&quot;遇到.&quot;|s6</div><div class="line">s2 --&gt; |&quot;遇到.&quot;|s6</div><div class="line">s2 --&gt; |&quot;遇到e&quot;|s3((S3))</div><div class="line">s6 --&gt; |&quot;遇到e&quot;|s3</div><div class="line">s3 --&gt; |&quot;0到9&quot;|s5((S5))</div><div class="line">s3 --&gt; |&quot;正负号&quot;|s4((S4))</div><div class="line">s6 --&gt; |&quot;0到9&quot;|s7((S7))</div><div class="line">s7 --&gt; |&quot;遇到e&quot;|s3</div></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isNumber</span><span class="params">(<span class="built_in">string</span> str)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> state=<span class="number">0</span>, flag=<span class="number">0</span>; <span class="comment">// flag to judge the special case "."</span></div><div class="line">        <span class="keyword">while</span>(str[<span class="number">0</span>]==<span class="string">' '</span>)  str.erase(<span class="number">0</span>,<span class="number">1</span>);<span class="comment">//delete the  prefix whitespace </span></div><div class="line">        <span class="keyword">while</span>(str[str.length()<span class="number">-1</span>]==<span class="string">' '</span>) str.erase(str.length()<span class="number">-1</span>, <span class="number">1</span>);<span class="comment">//delete the suffix whitespace</span></div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;str.length(); i++)&#123;</div><div class="line">            <span class="keyword">if</span>(<span class="string">'0'</span>&lt;=str[i] &amp;&amp; str[i]&lt;=<span class="string">'9'</span>)&#123;</div><div class="line">                flag=<span class="number">1</span>;</div><div class="line">                <span class="keyword">if</span>(state&lt;=<span class="number">2</span>) state=<span class="number">2</span>;</div><div class="line">                <span class="keyword">else</span> state=(state&lt;=<span class="number">5</span>)?<span class="number">5</span>:<span class="number">7</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(<span class="string">'+'</span>==str[i] || <span class="string">'-'</span>==str[i])&#123;</div><div class="line">                <span class="keyword">if</span>(state==<span class="number">0</span> || state==<span class="number">3</span>) state++;</div><div class="line">                <span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(<span class="string">'.'</span>==str[i])&#123;</div><div class="line">                <span class="keyword">if</span>(state&lt;=<span class="number">2</span>) state=<span class="number">6</span>;</div><div class="line">                <span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(<span class="string">'e'</span>==str[i])&#123;</div><div class="line">                <span class="keyword">if</span>(flag&amp;&amp;(state==<span class="number">2</span> || state==<span class="number">6</span> || state==<span class="number">7</span>)) state=<span class="number">3</span>;</div><div class="line">                <span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> (state==<span class="number">2</span> || state==<span class="number">5</span> || (flag&amp;&amp;state==<span class="number">6</span>) || state==<span class="number">7</span>);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="494-Target-Sum"><a href="#494-Target-Sum" class="headerlink" title="494. Target Sum"></a>494. Target Sum</h2><h3 id="Problem-Description-1"><a href="#Problem-Description-1" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
+<p>You are given a list of non-negative integers, a1, a2, …, an, and a target, S. Now you have 2 symbols + and -. For each integer, you should choose one from + and - as its new symbol.</p>
+<p>Find out how many ways to assign symbols to make sum of integers equal to target S.</p>
+<p>Example 1:</p>
+<p>Input: nums is [1, 1, 1, 1, 1], S is 3. </p>
+<p>Output: 5</p>
+<p>Explanation: </p>
+<p>-1+1+1+1+1 = 3</p>
+<p>+1-1+1+1+1 = 3</p>
+<p>+1+1-1+1+1 = 3</p>
+<p>+1+1+1-1+1 = 3</p>
+<p>+1+1+1+1-1 = 3</p>
+<p>There are 5 ways to assign symbols to make the sum of nums be target 3.</p>
+<p>Note:</p>
+<p>The length of the given array is positive and will not exceed 20.</p>
+<p>The sum of elements in the given array will not exceed 1000.</p>
+<p>Your output answer is guaranteed to be fitted in a 32-bit integer.</p>
+</blockquote>
+<p>给定一组数和一个目标数字，只使用<code>+</code>和<code>-</code>将子数组连接起来计算结果，求有多少种组合的结果等于目标数字</p>
+<h3 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h3><p>假设将这组数分成正数部分的和<code>P</code>和负数部分的和<code>N</code>，则题意可表示为</p>
+<p><code>P - N == S</code></p>
+<p>如果两边同时加上整个数组的和<code>sum(nums)==P + N</code>,则：</p>
+<p><code>P- N + P + N == S + sum(nums), 即2*P == S + sum(nums)</code>,因此，我们的问题转化成了求子数组使得其和等于<code>(S+sum(nums))/2</code>，另外需要注意的是，我们可以看到上式左边乘2了，所以<code>S+sum(nums)</code>必须是偶数，如果不是偶数肯定没有符合要求的结果，直接返回0.</p>
+<p>接下来就是如何在数组<code>nums</code>中找到子数组<code>P</code>使其和等于<code>(S+sum(nums))/2</code>,这里有一个通用的动态规划办法，具体做法是：</p>
+<p>假如数组为<code>nums</code>, 目标和为<code>target</code>,首先确立状态，这里以<code>dp[i]</code>表示和为i的<code>nums</code>子数组的个数。接下来确定状态转移，假如现在有数字<code>num</code>,和所有以小于i的数为目标的组合数，则<code>dp[i] = dp[i] + dp[i-num]</code></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findTargetSumWays</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> S)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> sum = accumulate(nums.begin(), nums.end(), <span class="number">0</span>);</div><div class="line">        <span class="keyword">if</span> ((sum + S) % <span class="number">2</span> != <span class="number">0</span> or sum &lt; S)</div><div class="line">            <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> target = (sum + S) / <span class="number">2</span>;</div><div class="line">        <span class="keyword">return</span> subsetSum(nums, target);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">subsetSum</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;nums, <span class="keyword">int</span> target)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dp(target+<span class="number">1</span>, <span class="number">0</span>);</div><div class="line">        dp[<span class="number">0</span>] = <span class="number">1</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> num : nums)</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = target; i &gt;= num; --i)</div><div class="line">                dp[i]+=dp[i-num];</div><div class="line">                </div><div class="line">        <span class="keyword">return</span> dp[target];</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;2017-02-25-String-DP-Valid-Number&quot;&gt;&lt;a href=&quot;#2017-02-25-String-DP-Valid-Number&quot; class=&quot;headerlink&quot; title=&quot;2017-02-25 String DP Valid
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="http://www.wowx.info/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
+    
+      <category term="string" scheme="http://www.wowx.info/tags/string/"/>
+    
+  </entry>
   
   <entry>
     <title>Leetcode string 127 126 115 97 87</title>
@@ -651,9 +711,9 @@
       <category term="机器学习" scheme="http://www.wowx.info/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="深度学习" scheme="http://www.wowx.info/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-    
       <category term="机器学习" scheme="http://www.wowx.info/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="深度学习" scheme="http://www.wowx.info/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
@@ -1358,9 +1418,9 @@
       <category term="机器学习" scheme="http://www.wowx.info/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="深度学习" scheme="http://www.wowx.info/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-    
       <category term="机器学习" scheme="http://www.wowx.info/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="深度学习" scheme="http://www.wowx.info/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
       <category term="cs231n" scheme="http://www.wowx.info/tags/cs231n/"/>
     
@@ -1524,51 +1584,9 @@ linear SVM on raw pixels final test set accuracy: 0.216000
       <category term="机器学习" scheme="http://www.wowx.info/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="深度学习" scheme="http://www.wowx.info/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-    
       <category term="机器学习" scheme="http://www.wowx.info/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
-  </entry>
-  
-  <entry>
-    <title>CS231n assignment1 multi svm -- 矩阵乘法的几何意义</title>
-    <link href="http://www.wowx.info/posts/1889126307/"/>
-    <id>http://www.wowx.info/posts/1889126307/</id>
-    <published>2016-09-23T17:32:20.000Z</published>
-    <updated>2016-11-25T17:22:09.731Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-9-24/82257381.jpg" width="720px"><br><a id="more"></a></p>
-<h2 id="问题引入"><a href="#问题引入" class="headerlink" title="问题引入"></a>问题引入</h2><p>在cs231n的assignment1多类svm部分中，需要采用完全向量法求解损失函数对权重的梯度$dW$,$$\nabla<em>{w</em>{y_i}}L<em>i=-\left(\sum</em>{j\neq{y_i}}1(w_j^Tx<em>i-w</em>{y_i}^Tx_i+\Delta&gt;0)\right)x<em>i\\nabla</em>{w_j}L_i = 1\left(w_j^Tx<em>i-w</em>{y_i}^T+\Delta\right)x_i$$(<a href="http://cs231n.github.io/optimization-1/" target="_blank" rel="external">详细推导</a>),即给出输入$x_i$，假设正确类别是$y_i$,则权重的$y_i$列的梯度为满足$w_j^Tx<em>i-w</em>{y_i}^Tx_i+\Delta&gt;0$的列数量乘输入’$-x_i$’，其他列的梯度为当$w_j^Tx<em>i-w</em>{y_i}^Tx_i+\Delta&gt;0$等于$x_i$,否则为0.如何用矩阵方法解决得到答案呢？</p>
-<h2 id="矩阵相乘的意义"><a href="#矩阵相乘的意义" class="headerlink" title="矩阵相乘的意义"></a>矩阵相乘的意义</h2><p>假设有$2\times{3}$矩阵A和$3\times{2}$矩阵B相乘，我们知道结果如下：</p>
-<p>$$\left[\begin{array}{ccc}x11 &amp; x12 &amp; x13 \x21 &amp; x22 &amp; x23\end{array}\right] \times\left[\begin{array}{cc}y11 &amp; y12 \y21 &amp; y22 \y31 &amp; y32\end{array}\right]=\left[\begin{array}{cc}x<em>{11}y</em>{11}+x<em>{12}y</em>{21}+x<em>{13}y</em>{31} &amp; x<em>{11}y</em>{12}+x<em>{12}y</em>{22}+x<em>{13}y</em>{32} \x<em>{21}y</em>{11}+x<em>{22}y</em>{21}+x<em>{23}y</em>{31} &amp; x<em>{21}y</em>{12}+x<em>{22}y</em>{22}+x<em>{23}y</em>{32}\end{array}\right]$$</p>
-<p>那么它的意义是什么呢？</p>
-<p>我们仔细观察等式右边的每列，会发现同一列的B矩阵元素$y<em>{ij}$都是相等的<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-9-24/43625942.jpg" alt=""><br>$$\left[\begin{array}{cc}\left[\begin{array}{c}x</em>{11} \x<em>{21}\end{array}\right]y</em>{11}+\left[\begin{array}{c}x<em>{12} \x</em>{22}\end{array}\right]y<em>{21}+\left[\begin{array}{c}x</em>{13} \x<em>{23}\end{array}\right]y</em>{31} &amp; \left[\begin{array}{c}x<em>{11} \x</em>{21}\end{array}\right]y<em>{12}+\left[\begin{array}{c}x</em>{12} \x<em>{22}\end{array}\right]y</em>{22}+\left[\begin{array}{c}x<em>{13} \x</em>{23}\end{array}\right]y_{32}\end{array}\right]$$</p>
-<p>这就是说，对于矩阵$A\times{B}$,结果的第j列相当于矩阵$A$的每一列分别乘以矩阵$B$第j列第一到最后一个元素然后相加。</p>
-<h2 id="所以？"><a href="#所以？" class="headerlink" title="所以？"></a>所以？</h2><p>我们将$-x_i$乘以margin大于0的数量用来累加$x_i$正确类别对应的权重梯度，其他列根据margin是否大于0来累加，若大于0，累加对应列的梯度，否则不累加。</p>
-<p>具体步骤:</p>
-<ol>
-<li>使用包含n个D维数据的矩阵乘D行c列(c为分类类别数)权重W得到每个样本分成每一个类别的分数(第i行第j个元素代表第i个样本被分类到第j类的分数)；</li>
-<li>将每个数据的所有类别的分数都减去正确类别的分数再加上$\Delta$,并把正确类别对应项置为0得到margin；</li>
-<li>判断margin是否大于0，计算每一个输入数据得到的大于0的margin的数量</li>
-<li>将输入转置，每列代表一个数据，我们需要通过右边的矩阵指定每个数据累加的次数。</li>
-</ol>
-<p><a href="http://blog.csdn.net/zengdong_1991/article/details/51346201" target="_blank" rel="external">博文</a>给出的代码如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">svm_loss_vectorized</span><span class="params">(W, X, y, reg)</span>:</span></div><div class="line">  <span class="string">"""</span></div><div class="line">  Structured SVM loss function, vectorized implementation.</div><div class="line"></div><div class="line">  Inputs and outputs are the same as svm_loss_naive.</div><div class="line">  """</div><div class="line">  loss = <span class="number">0.0</span></div><div class="line">  dW = np.zeros(W.shape) <span class="comment"># initialize the gradient as zero</span></div><div class="line"></div><div class="line">  <span class="comment">#print(type(W))</span></div><div class="line">  <span class="comment">#print(type(X))</span></div><div class="line"></div><div class="line">  num_classes = W.shape[<span class="number">1</span>]</div><div class="line">  num_train = X.shape[<span class="number">0</span>]</div><div class="line">  </div><div class="line">  scores = X.dot(W)</div><div class="line">  correct_class_score = scores[np.arange(num_train), y]</div><div class="line"></div><div class="line">  <span class="comment">#print(scores.shape)</span></div><div class="line">  <span class="comment">#print(correct_class_score.shape)</span></div><div class="line">  <span class="comment">#print(type(scores))</span></div><div class="line">  <span class="comment">#print(type(correct_class_score))</span></div><div class="line"></div><div class="line">  tmpMat = scores.T - correct_class_score + <span class="number">1</span></div><div class="line">  tmpMat = tmpMat.T</div><div class="line">  tmpMat[np.arange(num_train), y] = <span class="number">0</span></div><div class="line"></div><div class="line">  margin = np.maximum(tmpMat, np.zeros((num_train, num_classes)))</div><div class="line"></div><div class="line">  <span class="comment">#print(margin.shape)</span></div><div class="line">  loss = np.sum(margin)</div><div class="line">  loss /= num_train</div><div class="line">  loss += <span class="number">0.5</span>*reg*np.sum(W*W)</div><div class="line"></div><div class="line">  <span class="comment"># Binarize into integers</span></div><div class="line">  binary = margin</div><div class="line">  binary[margin &gt; <span class="number">0</span>] = <span class="number">1</span></div><div class="line"></div><div class="line">  <span class="comment"># Perform the two operations simultaneously</span></div><div class="line">  <span class="comment"># (1) for all j: dW[j,:] = sum_&#123;i, j produces positive margin with i&#125; X[:,i].T</span></div><div class="line">  <span class="comment"># (2) for all i: dW[y[i],:] = sum_&#123;j != y_i, j produces positive margin with i&#125; -X[:,i].T</span></div><div class="line">  col_sum = np.sum(binary, axis=<span class="number">1</span>)</div><div class="line">  binary[np.arange(num_train), y] = -col_sum[range(num_train)]</div><div class="line">  dW = np.dot(X.T, binary)</div><div class="line"></div><div class="line">  <span class="comment"># Divide</span></div><div class="line">  dW /= num_train</div><div class="line"></div><div class="line">  <span class="comment"># Regularize</span></div><div class="line">  dW += reg*W</div><div class="line"></div><div class="line">  <span class="keyword">return</span> loss, dW</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;http://7xkyov.com1.z0.glb.clouddn.com/16-9-24/82257381.jpg&quot; width=&quot;720px&quot;/&gt;&lt;br&gt;
-    
-    </summary>
-    
-      <category term="机器学习" scheme="http://www.wowx.info/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-    
       <category term="深度学习" scheme="http://www.wowx.info/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="机器学习" scheme="http://www.wowx.info/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="cs231n" scheme="http://www.wowx.info/tags/cs231n/"/>
     
   </entry>
   

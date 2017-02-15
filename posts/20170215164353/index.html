@@ -4,7 +4,7 @@
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Title -->
     
     <title>
-        二叉树、二叉查找树、2-3树及红黑树 | 野原圆长的Blog
+        LeetCode string dp 64 494 | 野原圆长的Blog
     </title>
     
     <!-- Favicons -->
@@ -40,7 +40,7 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="http://www.wowx.info">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="二叉树、二叉查找树、2-3树及红黑树 | 野原圆长的Blog">
+    <meta property="og:title" content="LeetCode string dp 64 494 | 野原圆长的Blog">
     <meta property="og:description" content="null">
     
      <!--[if lte IE 9]>
@@ -215,7 +215,7 @@
 	<ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
 		for="post-toc-trigger-btn">
 			
-			<ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#红黑树"><span class="post-toc-number">1.</span> <span class="post-toc-text">红黑树</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二分查找"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">二分查找</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#优点"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">优点</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#缺点"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">缺点</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二叉查找树"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">二叉查找树</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#平衡查找树"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">平衡查找树</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-3查找树"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">2-3查找树</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#红黑树-1"><span class="post-toc-number">1.2.3.</span> <span class="post-toc-text">红黑树</span></a></li></ol></li></ol></li></ol>
+			<ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#2017-02-25-String-DP-Valid-Number"><span class="post-toc-number">1.</span> <span class="post-toc-text">2017-02-25 String DP Valid Number</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#65-Valid-Number"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">65. Valid Number</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Problem-Description"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">Problem Description</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#494-Target-Sum"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">494. Target Sum</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Problem-Description-1"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">Problem Description</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Method"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">Method</span></a></li></ol></li></ol></li></ol>
 		
 <!--			<li class="mdl-menu__item">Some Action</li>-->
 	</ul>
@@ -233,22 +233,11 @@
                 
 	<!-- Paradox Post Header -->
 	
-		
-			<!-- Random Thumbnail -->
-			<div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-				<script>
-    
-    var randomNum;
-    randomNum = Math.floor(Math.random() * 5 + 1);
-    
-    $(".post_thumbnail-random").css('background-image', 'url(' + '/img/random/' + randomNum + '.png' + ')');
-    
-</script>
-
-		
+		<!-- Custom Thumbnail -->
+		<div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(http://ww4.sinaimg.cn/large/6425ef91jw1f9apllc7boj20ic0960v9.jpg)">
 	
         <p class="article-headline-p">
-            二叉树、二叉查找树、2-3树及红黑树
+            LeetCode string dp 64 494
         </p>
     </div>
 
@@ -266,7 +255,7 @@
     <!-- Author Name & Date -->
     <div>
         <strong>Xin Wei</strong>
-        <span>11月 29, 2016</span>
+        <span>2月 15, 2017</span>
     </div>
     
     <div class="section-spacer"></div>
@@ -286,7 +275,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/算法/">算法</a>
+        <a class="post_tag-link" href="/tags/cpp/">cpp</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/string/">string</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/算法/">算法</a>
     </ul>
     
     <!-- Share -->
@@ -300,7 +289,7 @@
     <!-- Leancloud Views -->
     <a class="post_share-link" href="#">
         <li class="mdl-menu__item">
-            <span id="/posts/201606112921/" class="leancloud-views_num" data-flag-title="二叉树、二叉查找树、2-3树及红黑树">
+            <span id="/posts/20170215164353/" class="leancloud-views_num" data-flag-title="LeetCode string dp 64 494">
      &nbsp;浏览量
 </span>
         </li>
@@ -310,21 +299,21 @@
     
     
     <!-- Share Twitter -->
-    <a class="post_share-link" href="https://twitter.com/intent/tweet?text=二叉树、二叉查找树、2-3树及红黑树&url=http://www.wowx.info//posts/201606112921/index.html&via=Xin Wei" target="_blank">
+    <a class="post_share-link" href="https://twitter.com/intent/tweet?text=LeetCode string dp 64 494&url=http://www.wowx.info//posts/20170215164353/index.html&via=Xin Wei" target="_blank">
         <li class="mdl-menu__item">
             分享到 Twitter
         </li>
     </a>
     
     <!-- Share Google+ -->
-    <a class="post_share-link" href="https://plus.google.com/share?url=http://www.wowx.info//posts/201606112921/index.html" target="_blank">
+    <a class="post_share-link" href="https://plus.google.com/share?url=http://www.wowx.info//posts/20170215164353/index.html" target="_blank">
         <li class="mdl-menu__item">
             分享到 Google+
         </li>
     </a>
     
     <!-- Share Weibo -->
-    <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=二叉树、二叉查找树、2-3树及红黑树&url=http://www.wowx.info//posts/201606112921/index.html&pic=&searchPic=false&style=simple" target="_blank">
+    <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=LeetCode string dp 64 494&url=http://www.wowx.info//posts/20170215164353/index.html&pic=&searchPic=false&style=simple" target="_blank">
         <li class="mdl-menu__item">
             分享到微博
         </li>
@@ -336,84 +325,42 @@
                 <!-- Post Content -->
                 <div id="post-content" class="markdown-Material mdl-color-text--grey-700 mdl-card__supporting-text fade out">
 	
-		<p>本文参考自<a href="http://my.csdn.net/yang_yulei" target="_blank" rel="external">yang_yulei</a>的<a href="http://blog.csdn.net/yang_yulei/article/details/26066409" target="_blank" rel="external">博客</a></p>
-<h1 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h1><h2 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h2><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><p>适用于静态表(不允许插入)，效率很高</p>
-<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><p>不能同时支持任意插入、删除同时兼顾查找</p>
-<h2 id="二叉查找树"><a href="#二叉查找树" class="headerlink" title="二叉查找树"></a>二叉查找树</h2><ul>
-<li><p>特点</p>
-<p>左子树任意元素小于根节点，右子树任意元素大于根节点</p>
-</li>
-</ul>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-29/57653207.jpg" alt=""></p>
-<ul>
-<li><p>投影</p>
-<p>将其所有元素投影到直线上，保证一个结点的左子树中的键出现在它的右边，右子树中的键出现在它的右边，那么我们一定可以得到一条有序的键列。</p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-29/92888508.jpg" alt=""></p>
-</li>
-<li><p>优点</p>
-<p>相较于二分查找，能高效实现插入和删除操作</p>
-</li>
-<li><p>缺点</p>
-<p>树有可能是不平衡的，最糟糕情况下时间复杂度退化为$O(N)$,如下所示:</p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-29/29355175.jpg" alt=""></p>
-</li>
-<li><p><strong>与快速排序的类比</strong></p>
-<p>树的根结点就是快速排序中的第一个切分元素（左侧的键都比它小，右侧的键都比它大），而这对于所有的子树同样适用，这和快速排序中对于子数组的递归排序完全对应。</p>
-</li>
-</ul>
-<h3 id="平衡查找树"><a href="#平衡查找树" class="headerlink" title="平衡查找树"></a>平衡查找树</h3><p>限定树的高度约等于$\log{N}$,以保证查找在$\log{N}$次比较内结束</p>
-<h3 id="2-3查找树"><a href="#2-3查找树" class="headerlink" title="2-3查找树"></a>2-3查找树</h3><p>顾名思义，2-3查找树即为即有2-结点又有3-结点的树，它的结构如下</p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-29/32088768.jpg" alt=""></p>
-<p>一个3-结点内有两个键，左子树的键都比左键小，右子树的元素都比右键小，而中子树的元素介于两者之间。一个完美2-3树的所有空节点到根的距离都是相同的。</p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-29/32088768.jpg" alt=""></p>
-<ul>
-<li><p>查找</p>
-<p>2-3树的查找比较简单，和二叉树类似</p>
-</li>
-<li><p>插入</p>
-<p>2-3树的插入涉及到了3-结点的展开</p>
-<p>3-结点的展开如下所示</p>
-<p>​    <img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-29/33755704.jpg" alt=""></p>
-<ul>
-<li><p>向父结点为2结点的3-结点插入</p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-29/34357326.jpg" alt=""></p>
-</li>
-<li><p>向父结点是3-结点插入</p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-29/70658742.jpg" alt=""></p>
-<p>2-3树插入算法的根本在于这些变换都是局部的：除了相关的结点和链接之外不必修改或者检查树的其他部分。每次变换中，变更的链接数量不会超过一个很小的常数。所有局部变换都不会影响整棵树的有序性和平衡性。</p>
-</li>
-</ul>
-</li>
-<li><p>优点</p>
-<p>2-3树在最坏情况下仍有较好的性能。每个操作中处理每个结点的时间都不会超过一个很小的常数，且这两个操作都只会访问一条路径上的结点，所以任何查找或插入的成本都不会超过对数级别</p>
-</li>
-<li><p>缺点</p>
-<p>维护两种操作需要大量代码，产生的额外开销可能比标准二叉查找树更慢。</p>
-</li>
-</ul>
-<h3 id="红黑树-1"><a href="#红黑树-1" class="headerlink" title="红黑树"></a>红黑树</h3><p>红黑树就是用红链表示3-节点的2-3树</p>
-<p>3-结点和红链的转化规则如下：</p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-29/76753789.jpg" alt=""></p>
-<ul>
-<li><p>另一种定义</p>
-<ol>
-<li>红链接均为左链接。</li>
-<li>没有任何一个结点同时和两条红链接相连。</li>
-<li>该树是完美黑色平衡的，即任意空链接到根结点的路径上的黑链接数量相同。</li>
-</ol>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-29/963151.jpg" alt=""></p>
-</li>
-<li><p>旋转</p>
-<p>在我们实现的某些操作中可能会出现红色右链接或者两条连续的红链接，但在操作完成前这些情况都会被小心地旋转并修复。</p>
-<p>（我们在这里不讨论旋转的几种情况，把红黑树看做2-3树，自然可以得到正确的旋转后结果）</p>
-</li>
-<li><p>插入</p>
-<p>在插入时我们可以使用旋转操作帮助我们保证2-3树和红黑树之间的一一对应关系，因为旋转操作可以保持红黑树的两个重要性质：有序性和完美平衡性。</p>
-</li>
-<li><p>构造过程</p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-29/64933751.jpg" alt=""></p>
-</li>
-</ul>
+		<h1 id="2017-02-25-String-DP-Valid-Number"><a href="#2017-02-25-String-DP-Valid-Number" class="headerlink" title="2017-02-25 String DP Valid Number"></a>2017-02-25 String DP Valid Number</h1><h2 id="65-Valid-Number"><a href="#65-Valid-Number" class="headerlink" title="65. Valid Number"></a>65. Valid Number</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
+<p>Validate if a given string is numeric.</p>
+<p>Some examples:</p>
+<p><code>&quot;0&quot;</code> =&gt; <code>true</code><br><code>&quot; 0.1 &quot;</code> =&gt; <code>true</code><br><code>&quot;abc&quot;</code> =&gt; <code>false</code><br><code>&quot;1 a&quot;</code> =&gt; <code>false</code><br><code>&quot;2e10&quot;</code> =&gt; <code>true</code></p>
+<p><strong>Note:</strong> It is intended for the problem statement to be ambiguous. You should gather all requirements up front before implementing one.</p>
+<p><strong>Update (2015-02-10):</strong></p>
+<p>The signature of the <code>C++</code> function had been updated. If you still see your function signature accepts a <code>const char *</code> argument, please click the reload button  to reset your code definition.</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">graph TB</div><div class="line">s0((S0)) --&gt; |正负号|s1((S1))</div><div class="line">s0 --&gt; |0到9|s2((S2))</div><div class="line">s0 --&gt; |&quot;遇到.&quot;|s6((S6))</div><div class="line">s1 --&gt; |&quot;0到9&quot;|s2</div><div class="line">s1 --&gt; |&quot;遇到.&quot;|s6</div><div class="line">s2 --&gt; |&quot;遇到.&quot;|s6</div><div class="line">s2 --&gt; |&quot;遇到e&quot;|s3((S3))</div><div class="line">s6 --&gt; |&quot;遇到e&quot;|s3</div><div class="line">s3 --&gt; |&quot;0到9&quot;|s5((S5))</div><div class="line">s3 --&gt; |&quot;正负号&quot;|s4((S4))</div><div class="line">s6 --&gt; |&quot;0到9&quot;|s7((S7))</div><div class="line">s7 --&gt; |&quot;遇到e&quot;|s3</div></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isNumber</span><span class="params">(<span class="built_in">string</span> str)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> state=<span class="number">0</span>, flag=<span class="number">0</span>; <span class="comment">// flag to judge the special case "."</span></div><div class="line">        <span class="keyword">while</span>(str[<span class="number">0</span>]==<span class="string">' '</span>)  str.erase(<span class="number">0</span>,<span class="number">1</span>);<span class="comment">//delete the  prefix whitespace </span></div><div class="line">        <span class="keyword">while</span>(str[str.length()<span class="number">-1</span>]==<span class="string">' '</span>) str.erase(str.length()<span class="number">-1</span>, <span class="number">1</span>);<span class="comment">//delete the suffix whitespace</span></div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;str.length(); i++)&#123;</div><div class="line">            <span class="keyword">if</span>(<span class="string">'0'</span>&lt;=str[i] &amp;&amp; str[i]&lt;=<span class="string">'9'</span>)&#123;</div><div class="line">                flag=<span class="number">1</span>;</div><div class="line">                <span class="keyword">if</span>(state&lt;=<span class="number">2</span>) state=<span class="number">2</span>;</div><div class="line">                <span class="keyword">else</span> state=(state&lt;=<span class="number">5</span>)?<span class="number">5</span>:<span class="number">7</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(<span class="string">'+'</span>==str[i] || <span class="string">'-'</span>==str[i])&#123;</div><div class="line">                <span class="keyword">if</span>(state==<span class="number">0</span> || state==<span class="number">3</span>) state++;</div><div class="line">                <span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(<span class="string">'.'</span>==str[i])&#123;</div><div class="line">                <span class="keyword">if</span>(state&lt;=<span class="number">2</span>) state=<span class="number">6</span>;</div><div class="line">                <span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(<span class="string">'e'</span>==str[i])&#123;</div><div class="line">                <span class="keyword">if</span>(flag&amp;&amp;(state==<span class="number">2</span> || state==<span class="number">6</span> || state==<span class="number">7</span>)) state=<span class="number">3</span>;</div><div class="line">                <span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> (state==<span class="number">2</span> || state==<span class="number">5</span> || (flag&amp;&amp;state==<span class="number">6</span>) || state==<span class="number">7</span>);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="494-Target-Sum"><a href="#494-Target-Sum" class="headerlink" title="494. Target Sum"></a>494. Target Sum</h2><h3 id="Problem-Description-1"><a href="#Problem-Description-1" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
+<p>You are given a list of non-negative integers, a1, a2, …, an, and a target, S. Now you have 2 symbols + and -. For each integer, you should choose one from + and - as its new symbol.</p>
+<p>Find out how many ways to assign symbols to make sum of integers equal to target S.</p>
+<p>Example 1:</p>
+<p>Input: nums is [1, 1, 1, 1, 1], S is 3. </p>
+<p>Output: 5</p>
+<p>Explanation: </p>
+<p>-1+1+1+1+1 = 3</p>
+<p>+1-1+1+1+1 = 3</p>
+<p>+1+1-1+1+1 = 3</p>
+<p>+1+1+1-1+1 = 3</p>
+<p>+1+1+1+1-1 = 3</p>
+<p>There are 5 ways to assign symbols to make the sum of nums be target 3.</p>
+<p>Note:</p>
+<p>The length of the given array is positive and will not exceed 20.</p>
+<p>The sum of elements in the given array will not exceed 1000.</p>
+<p>Your output answer is guaranteed to be fitted in a 32-bit integer.</p>
+</blockquote>
+<p>给定一组数和一个目标数字，只使用<code>+</code>和<code>-</code>将子数组连接起来计算结果，求有多少种组合的结果等于目标数字</p>
+<h3 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h3><p>假设将这组数分成正数部分的和<code>P</code>和负数部分的和<code>N</code>，则题意可表示为</p>
+<p><code>P - N == S</code></p>
+<p>如果两边同时加上整个数组的和<code>sum(nums)==P + N</code>,则：</p>
+<p><code>P- N + P + N == S + sum(nums), 即2*P == S + sum(nums)</code>,因此，我们的问题转化成了求子数组使得其和等于<code>(S+sum(nums))/2</code>，另外需要注意的是，我们可以看到上式左边乘2了，所以<code>S+sum(nums)</code>必须是偶数，如果不是偶数肯定没有符合要求的结果，直接返回0.</p>
+<p>接下来就是如何在数组<code>nums</code>中找到子数组<code>P</code>使其和等于<code>(S+sum(nums))/2</code>,这里有一个通用的动态规划办法，具体做法是：</p>
+<p>假如数组为<code>nums</code>, 目标和为<code>target</code>,首先确立状态，这里以<code>dp[i]</code>表示和为i的<code>nums</code>子数组的个数。接下来确定状态转移，假如现在有数字<code>num</code>,和所有以小于i的数为目标的组合数，则<code>dp[i] = dp[i] + dp[i-num]</code></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findTargetSumWays</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> S)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> sum = accumulate(nums.begin(), nums.end(), <span class="number">0</span>);</div><div class="line">        <span class="keyword">if</span> ((sum + S) % <span class="number">2</span> != <span class="number">0</span> or sum &lt; S)</div><div class="line">            <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> target = (sum + S) / <span class="number">2</span>;</div><div class="line">        <span class="keyword">return</span> subsetSum(nums, target);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">subsetSum</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;nums, <span class="keyword">int</span> target)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dp(target+<span class="number">1</span>, <span class="number">0</span>);</div><div class="line">        dp[<span class="number">0</span>] = <span class="number">1</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> num : nums)</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = target; i &gt;= num; --i)</div><div class="line">                dp[i]+=dp[i-num];</div><div class="line">                </div><div class="line">        <span class="keyword">return</span> dp[target];</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 
 	
 	
@@ -441,9 +388,9 @@
 <div id="comments">
     <!-- 多说评论框 start -->
         <div class="ds-thread" 
-            data-thread-key="posts/201606112921/" 
-            data-url="http://www.wowx.info//posts/201606112921/index.html"
-            data-title="二叉树、二叉查找树、2-3树及红黑树"></div>
+            data-thread-key="posts/20170215164353/" 
+            data-url="http://www.wowx.info//posts/20170215164353/index.html"
+            data-title="LeetCode string dp 64 494"></div>
     <!-- 多说评论框 end -->
 </div>
 
@@ -456,21 +403,13 @@
     
     <!-- Prev Nav -->
     
-        <a href="/posts//posts/20161202170711/" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            新篇
-        </a>
-    
 
     <!-- Section Spacer -->
     <div class="section-spacer"></div>
 
     <!-- Next Nav -->
     
-        <a href="/posts//posts/201611260711/" id="post_nav-older" class="next-content">
+        <a href="/posts/20170213235935/" id="post_nav-older" class="next-content">
             旧篇
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
