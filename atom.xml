@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.wowx.info/"/>
-  <updated>2017-02-15T09:27:53.520Z</updated>
+  <updated>2017-02-19T11:39:37.290Z</updated>
   <id>http://www.wowx.info/</id>
   
   <author>
@@ -14,6 +14,137 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Introducing a DeepLab v2 and Fine-tuning it to ISPRS Dataset</title>
+    <link href="http://www.wowx.info/posts/20170219193755/"/>
+    <id>http://www.wowx.info/posts/20170219193755/</id>
+    <published>2017-02-19T11:37:55.000Z</published>
+    <updated>2017-02-19T11:39:37.290Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="http://arxiv.org/abs/1606.00915" target="_blank" rel="external">DeepLab v2</a>[^2]是Liang-Chieh Chen等人提出的一种state-of-art语义分割网络，当前许多优秀模型都是基于该网络进行改进的，因此，学习和使用这个模型有很大的价值。本文从语义分割的原理开始，详细讲解DeepLab的实现原理，并将其应用于ISPRS数据集。</p>
+<h2 id="语义分割"><a href="#语义分割" class="headerlink" title="语义分割"></a>语义分割</h2><p>语义分割可以看作是像素级的目标检测算法，其可以按像素所属的目标类别给予其不同的标记，严格的区分物体的边界。</p>
+<p>语义分割在自动驾驶、战场感知等方面有着广泛应用。</p>
+<p><img src="/img/blog/69SQFsT.png" alt="69SQFsT"></p>
+<h3 id="深度神经网络在语义分割上的应用"><a href="#深度神经网络在语义分割上的应用" class="headerlink" title="深度神经网络在语义分割上的应用"></a>深度神经网络在语义分割上的应用</h3><p>深度卷积神经网络在语义分割中的已经有了一种通用的框架，其结构如下：</p>
+<p><img src="/img/blog/3adeadf2a20b0cc9cd68553a95f00552_r.png" alt="3adeadf2a20b0cc9cd68553a95f00552_r"></p>
+<p>首先使用类似FCN[^1]的深度处理图像得到粗糙的分割结果，然后使用条件随机场(CRF)或马尔科夫随机场(MRF)进行后处理得到最终的精细结果。我们首先介绍全卷积网络的工作原理然后在介绍DeepLab时介绍条件随机场。</p>
+<h3 id="全卷积网络-FCN"><a href="#全卷积网络-FCN" class="headerlink" title="全卷积网络(FCN)"></a>全卷积网络(FCN)</h3><p>在分类网络中，我们通常在卷积层后连接若干个全连接层，将特征图转换为固定长度的特征向量，然后将特征向量输入softmax层得到图片在每个分类上的概率。</p>
+<p>而在语义分割任务中，我们要得到的是像素级的分类结果，因此，作者用卷积层替代了所有的全连接层，将得到的特征图上采样至原图尺寸，然后同样使用softmax层对得到的像素级结果进行处理获得最终分割结果。</p>
+<p><img src="/img/blog/fcn0.png" alt="fcn0"></p>
+<h3 id="FCN等语义分割网络中存在的难点以及DeepLab模型如何克服它们"><a href="#FCN等语义分割网络中存在的难点以及DeepLab模型如何克服它们" class="headerlink" title="FCN等语义分割网络中存在的难点以及DeepLab模型如何克服它们"></a>FCN等语义分割网络中存在的难点以及DeepLab模型如何克服它们</h3><p>仔细分析上面的全连接网络，我们可以发现以下的问题：</p>
+<ol>
+<li><p>随着网络的加深特征分辨率越来越低</p>
+<p>由于池化层的存在，随着网络加深，后续得到的特征图分辨率不断减小，最后上采样恢复原图尺寸时很多细节将会丢失</p>
+</li>
+<li><p>网络不能对不同尺度</p>
+<p>由于网络的卷积核是固定的，其感受野不变，因此这种网络只能对某一特定尺度的目标有效</p>
+</li>
+<li><p>随着网络的加深，特征图将丢失局部特征</p>
+</li>
+</ol>
+<h2 id="DeepLab"><a href="#DeepLab" class="headerlink" title="DeepLab"></a>DeepLab</h2><p>为了解决前述问题，Liang-Chieh Chen等人提出了DeepLab模型，这个模型主要的创新点主要有三块：</p>
+<ol>
+<li>引进了带孔的卷积概念</li>
+<li>引进了带孔的金字塔池化的概念</li>
+<li>使用全连接随机场对网络输出进行后处理</li>
+</ol>
+<p>下面，我们分别详细介绍</p>
+<h3 id="带孔的卷积层"><a href="#带孔的卷积层" class="headerlink" title="带孔的卷积层"></a>带孔的卷积层</h3><p>作者引进带孔的卷积主要解决了空间分辨率下降的问题，我们知道，特征图分辨率的下降主要是由于池化层中大于1的stride造成的，我们以一维情况来说明</p>
+<p><img src="/img/blog/hehe04.jpg" alt="hehe04"></p>
+<p>为了不减小特征图尺寸，我们将池化层的stride改为1，然而我们发现这样的话，卷积层的感受野发生了变化，如下图所示：</p>
+<p><img src="/img/blog/hehe03.jpg" alt="hehe03"></p>
+<p>未改变stride之前，c1，c2感受野是f1,f2，f3,f4,改变之后，c1 c2的感受野变成了f1,f2和f3，为了维持感受野不变，作者提出了带孔的卷积层，其效果如下：</p>
+<p><img src="/img/blog/hehe01.jpg" alt="hehe01"></p>
+<p>如上图所示，作者在卷积核之间引入了“孔洞”，这样就实现了增大空间分辨率同时不改变感受受野和参数数量的效果。</p>
+<h3 id="带孔空间金字塔池化"><a href="#带孔空间金字塔池化" class="headerlink" title="带孔空间金字塔池化"></a>带孔空间金字塔池化</h3><p>受空间金字塔池化[^3]的影响，作者提出了带孔空间金字塔池化(Atrous Spatial Pyramid Pooling，ASPP)的概念</p>
+<p><img src="/img/blog/1487526374105.png" alt="1487526374105"></p>
+<p>由于不同的孔洞率对应着不同的感受野大小，可以提取不同尺度的目标特征，ASPP使用多种孔洞率的卷积核对相同特征图同时处理，然后将最后结果融合在一起，获得了良好的效果。</p>
+<p><img src="/img/blog/1487526704375.png" alt="1487526704375"></p>
+<h3 id="全连接条件随机场后处理"><a href="#全连接条件随机场后处理" class="headerlink" title="全连接条件随机场后处理"></a>全连接条件随机场后处理</h3><p>随着网络的深度加深，顶层节点的感受野增大，得到的特征图越来越平滑而丢失了局部信息，如下图第一列所示。</p>
+<p><img src="/img/blog/1487529582806.png" alt="1487529582806"></p>
+<p>作者发现，使用全连接条件随机场能很好地将底层细节信息还原回分割结果，具体可以参考[^4],简要来说，全连接条件随机场的目标是最小化以下能量函数：</p>
+<p>$$E(\bf{x})=\sum_i{\theta_i(\bf{x<em>i})}+\sum</em>{ij}\theta_{ij}(x_i, x_j)$$</p>
+<p>其中，$\theta_i(x_i)=-log(P(x<em>i))$为即为深度卷积网络输出的每个像素的置信度，而$\theta</em>{ij}(x_i,x_j)$为如下形式：</p>
+<p>$$\theta_{ij}(x_i,x_j)=\mu(x_i,x_j)[\omega_1exp(-\frac{|p_i-p<em>j|^2}{2\sigma</em>\gamma^2}-\frac{|I_i-I<em>j|^2}{2\sigma</em>\beta^2})+\omega_2exp(-\frac{|p_i-p<em>j|^2}{2\sigma</em>\gamma^2})]$$</p>
+<p>其中当$x_i\neq{x_2}$时，$\mu(x_i,x_j)=1$,否则为0，即只惩罚具有不同分类的像素。括号中的另外两项为两个高斯核，第一个由像素位置和像素颜色共同决定，第二个高斯核只由像素位置决定，即第一个核函数控制位置相近且颜色相近的像素为相同类别，第二个高斯核只控制具有相近位置的像素具有相同高斯核。</p>
+<h2 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h2><p><img src="/img/blog/1487530918957.png" alt="1487530918957"></p>
+<p>作者使用基于残差网络的DeepLabv2在VOC2012数据集上取得了79.7的mIOU。</p>
+<h2 id="使用ISPRS数据集训练DeepLab"><a href="#使用ISPRS数据集训练DeepLab" class="headerlink" title="使用ISPRS数据集训练DeepLab"></a>使用ISPRS数据集训练DeepLab</h2><p>[待续]</p>
+<p>[^1]: Long J, Shelhamer E, Darrell T. Fully convolutional networks for semantic segmentation[C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2015: 3431-3440.<br>[^2]: Chen, Liang-Chieh, et al. “Deeplab: Semantic image segmentation with deep convolutional nets, atrous convolution, and fully connected crfs.” <em>arXiv preprint arXiv:1606.00915</em> (2016).<br>[^3]: He K, Zhang X, Ren S, et al. Spatial pyramid pooling in deep convolutional networks for visual recognition[C]//European Conference on Computer Vision. Springer International Publishing, 2014: 346-361.<br>[^4]: Koltun V. Efficient inference in fully connected crfs with gaussian edge potentials[J]. Adv. Neural Inf. Process. Syst, 2011, 2(3): 4.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;a href=&quot;http://arxiv.org/abs/1606.00915&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;DeepLab v2&lt;/a&gt;[^2]是Liang-Chieh Chen等人提出的一种state-of-art语义分割网络，当前许
+    
+    </summary>
+    
+    
+      <category term="机器学习" scheme="http://www.wowx.info/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>DEEP LEARNING TUTORIAL</title>
+    <link href="http://www.wowx.info/posts/20170217000134/"/>
+    <id>http://www.wowx.info/posts/20170217000134/</id>
+    <published>2017-02-16T16:01:34.000Z</published>
+    <updated>2017-02-16T16:05:19.152Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="chapter2-线性代数-Linear-algebra"><a href="#chapter2-线性代数-Linear-algebra" class="headerlink" title="chapter2 线性代数 Linear algebra"></a>chapter2 线性代数 Linear algebra</h2><ol>
+<li><p>张量：多于两维的量</p>
+</li>
+<li><p>矩阵与向量的乘积$Ax=b​$中，矩阵的列向量可以看成是从原点出发的不同方向，而$x​$表示分别沿着这些方向走多远的距离能到达$b​$,$Ax=\sum_i{x<em>iA</em>{:,i}}​$</p>
+</li>
+<li><p>生成子空间span：线性组合$\sum_i{c_iv^{(i)}}$能到达的点的集合</p>
+</li>
+<li><p>一个列向量线性相关的方阵被称为<strong>奇异</strong>的</p>
+</li>
+<li><p>范数</p>
+<p>$$|x|_p=(\sum_i(x_i)^p)^{\frac{1}{p}},p\gt{0}$$</p>
+<p>衡量矩阵大小的Frobenius范数Frobenius norm：$$|A|<em>F=\sqrt{\sum</em>{i,j}A^2_{i,j}}$$</p>
+</li>
+<li><p>标准正交:$$A^TA=AA^T=I$$,$A^{-1}=A^T$,行列向量都标准正交，这种矩阵很方便计算逆矩阵</p>
+</li>
+<li><p>特征分解：$\bf{Av}=\bf{\lambda{v}}$只有方阵才有,可以重写为$\bf{A}=\bf{V}diag(\lambda)\bf{V^{-1}}$,V为以正交单位特征向量构成的方阵</p>
+<p><img src="http://ww1.sinaimg.cn/large/6425ef91ly1fcqhcifh5oj213c0on0wh" alt=""></p>
+</li>
+<li><p>奇异值分解：</p>
+<p>类似于$\bf{A}=\bf{V}diag(\lambda)\bf{V^{-1}}$,奇异值分解为$\bf{A=UDV^T}$,形状分别为mxm,mxn,nxn,U和V是正交矩阵，D是对角矩阵且不一定是方阵</p>
+<p><img src="http://ww1.sinaimg.cn/large/6425ef91ly1fcqhlb9ossj210309dju8" alt=""></p>
+</li>
+<li><p>迹</p>
+<p>矩阵对角线的总和</p>
+</li>
+<li><p>PCA的证明</p>
+<p>使用编解码的概念</p>
+</li>
+</ol>
+<h2 id="Chapter-3-概率与信息论"><a href="#Chapter-3-概率与信息论" class="headerlink" title="Chapter 3 概率与信息论"></a>Chapter 3 概率与信息论</h2><ol>
+<li>概率论和信息论的作用<ol>
+<li>概率论：帮助我们做出不确定性的陈述以及不确定性存在情况下的推理</li>
+<li>信息论: 帮助我们量化概率分布中不确定性的总量</li>
+</ol>
+</li>
+<li>频率概率和贝叶斯概率<ol>
+<li>频率概率:直接与事件发生的频率相关，比如抽牌抽到红桃A</li>
+<li>贝叶斯概率:涉及到确定性水平，如病人患流感的概率，不能通过产生无数病人的副本让他们在不同潜在情况下产生相同的症状</li>
+</ol>
+</li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;chapter2-线性代数-Linear-algebra&quot;&gt;&lt;a href=&quot;#chapter2-线性代数-Linear-algebra&quot; class=&quot;headerlink&quot; title=&quot;chapter2 线性代数 Linear algebra&quot;&gt;&lt;/a&gt;ch
+    
+    </summary>
+    
+    
+      <category term="深度学习" scheme="http://www.wowx.info/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
   
   <entry>
     <title>LeetCode 常见问题解决方法</title>
@@ -754,9 +885,9 @@
       <category term="机器学习" scheme="http://www.wowx.info/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="深度学习" scheme="http://www.wowx.info/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-    
       <category term="机器学习" scheme="http://www.wowx.info/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="深度学习" scheme="http://www.wowx.info/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
@@ -1335,137 +1466,6 @@
     
     
       <category term="算法" scheme="http://www.wowx.info/tags/%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Caffe 问题总结『不定期更新』</title>
-    <link href="http://www.wowx.info/posts//posts/201611260711/"/>
-    <id>http://www.wowx.info/posts//posts/201611260711/</id>
-    <published>2016-11-26T08:55:45.000Z</published>
-    <updated>2016-12-17T15:05:32.768Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="make时出现hdf5-hpp-not-found-之类的问题"><a href="#make时出现hdf5-hpp-not-found-之类的问题" class="headerlink" title="make时出现hdf5.hpp not found`之类的问题"></a><code>make</code>时出现hdf5.hpp not found`之类的问题</h3><p>Ubuntu16.04中hdf5文件位置发生了变化，需要手工修改<br>首先，将Makefile.config中的</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include</div><div class="line">LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib</div></pre></td></tr></table></figure>
-<p>修改为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">INCLUDE_DIRS :=  $(PYTHON_INCLUDE) /usr/local/include /usr/include/hdf5/serial</div><div class="line">LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib /usr/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/hdf5/serial</div></pre></td></tr></table></figure>
-<p>然后在caffe根目录下执行下面的命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">cd $CAFFE_ROOT</div><div class="line">find . -type f -exec sed -i -e &apos;s^&quot;hdf5.h&quot;^&quot;hdf5/serial/hdf5.h&quot;^g&apos; -e &apos;s^&quot;hdf5_hl.h&quot;^&quot;hdf5/serial/hdf5_hl.h&quot;^g&apos; &apos;&#123;&#125;&apos; \;</div><div class="line">cd /usr/lib/x86_64-linux-gnu</div><div class="line">sudo ln -s libhdf5_serial.so.10.1.0 libhdf5.so</div><div class="line">sudo ln -s libhdf5_serial_hl.so.10.0.2 libhdf5_hl.so</div><div class="line">\\注意：这里的10.1.0和10.0.2根据不同的系统可能对应的数字会不同，比如在ubuntu15.10中其数字就是8.0.2.</div><div class="line">\\具体的数字可以在打开的文件中查看对应文件后面跟的数字</div></pre></td></tr></table></figure>
-<h3 id="使py-faster-rcnn等自带的老版本caffe支持GTX1080和cudnn-v5"><a href="#使py-faster-rcnn等自带的老版本caffe支持GTX1080和cudnn-v5" class="headerlink" title="使py-faster-rcnn等自带的老版本caffe支持GTX1080和cudnn v5"></a>使<a href="https://github.com/rbgirshick/py-faster-rcnn" target="_blank" rel="external">py-faster-rcnn</a>等自带的老版本caffe支持GTX1080和cudnn v5</h3><p>首先，进入caffe根目录添加官方caffe源到本地<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">cd caffe-faster-rcnn</div><div class="line">git remote add caffe https://github.com/BVLC/caffe.git  </div><div class="line">git fetch caffe  </div><div class="line">git merge caffe/master</div></pre></td></tr></table></figure></p>
-<p>merge步骤如果git提示本地修改没有保存不能合并的话,使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git stash</div></pre></td></tr></table></figure></p>
-<p>把本地修改暂存起来，再进行merge操作。<br>然后进入<code>$CAFFE_ROOT/include/caffe/layers/python_layer.hpp</code>找到<code>self_.attr(&quot;phase&quot;) = static_cast&lt;int&gt;(this-&gt;phase_);</code>这一行，将其注释掉。</p>
-<h3 id="Caffe运行速度很慢"><a href="#Caffe运行速度很慢" class="headerlink" title="Caffe运行速度很慢"></a>Caffe运行速度很慢</h3><p>配置完全相同的电脑，如果运行速度相差很多的话，一个可能是更快的那台机器采用了cudnn加速或cudnn的版本更高；另外一种情况是在Makefile.config中打开了debug选项，将其关闭就可以了。</p>
-<h3 id="build-release-lib-libcaffe-so：对‘google-protobuf-Message-DebugString-const’未定义的引用"><a href="#build-release-lib-libcaffe-so：对‘google-protobuf-Message-DebugString-const’未定义的引用" class="headerlink" title=".build_release/lib/libcaffe.so：对‘google::protobuf::Message::DebugString() const’未定义的引用"></a><code>.build_release/lib/libcaffe.so：对‘google::protobuf::Message::DebugString() const’未定义的引用</code></h3><p>可能是安装cuda的时候gcc和g++的版本被降低到了4.9以下，通过下列方法将他们改回来:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sudo rm /usr/bin/gcc</div><div class="line">sudo rm /usr/bin/g++</div><div class="line">sudo ln -s /usr/bin/gcc-5 /usr/bin/gcc</div><div class="line">sudo ln -s /usr/bin/g++-5 /usr/bin/g++</div></pre></td></tr></table></figure>
-<p>然后进入<code>sudo vim /usr/local/cuda/include/host_config.h</code>将115行的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">#error -- unsupported GNU version! gcc versions later than 5.3 are not supported!</div></pre></td></tr></table></figure></p>
-<p>注释掉</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;make时出现hdf5-hpp-not-found-之类的问题&quot;&gt;&lt;a href=&quot;#make时出现hdf5-hpp-not-found-之类的问题&quot; class=&quot;headerlink&quot; title=&quot;make时出现hdf5.hpp not found`之类的问
-    
-    </summary>
-    
-    
-      <category term="Caffe" scheme="http://www.wowx.info/tags/Caffe/"/>
-    
-      <category term="Deep Learning" scheme="http://www.wowx.info/tags/Deep-Learning/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>梯度下降优化方法总结</title>
-    <link href="http://www.wowx.info/posts/401226963/"/>
-    <id>http://www.wowx.info/posts/401226963/</id>
-    <published>2016-10-06T16:53:53.000Z</published>
-    <updated>2016-11-25T17:22:09.731Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-7/66166948.jpg" width="720px"><br><a id="more"></a><br>参考并翻译自Sebastian Ruder博士的总结文章<a href="http://sebastianruder.com/optimizing-gradient-descent/index.html" target="_blank" rel="external">An overview of gradient descent optimization algorithms</a>。</p>
-<hr>
-<p>梯度下降方法是目前最流行的神经网络优化方法，现在主流的深度学习框架(caffe,keras,MXNET等)都包含了若干种梯度下降算法。虽然我们可以把它们看成黑盒直接使用，但是在不同场合下相同的算法可能有着很大的性能差异，因此，了解这些算法各自内在的原理可以帮助我们更好地训练网络。</p>
-<h2 id="基本梯度下降算法"><a href="#基本梯度下降算法" class="headerlink" title="基本梯度下降算法"></a>基本梯度下降算法</h2><p>有三种基本的梯度下降算法，他们的主要区别在于用于计算一次目标函数梯度的样本数量。</p>
-<h3 id="批量梯度下降-Batch-graduebt-descent"><a href="#批量梯度下降-Batch-graduebt-descent" class="headerlink" title="批量梯度下降(Batch graduebt descent)"></a>批量梯度下降(Batch graduebt descent)</h3><p>批量梯度下降算法使用整个训练集计算目标函数的梯度并更新参数$\theta$,具体公式为<br>$$\theta=\theta-\eta\nabla_\theta{J(\theta)}$$</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(nb_epochs):</div><div class="line">  params_grad = evaluate_gradient(loss_function, data, params)</div><div class="line">  params = params - learning_rate * params_grad</div></pre></td></tr></table></figure>
-<p>因为每更新一次参数就需要计算整个数据集，所以批量梯度下降算法十分缓慢而且难以存放在内存中计算，更致命的是，使用批量梯度下降的算法无法在线更新。</p>
-<h3 id="随机梯度下降-Stochatic-gradient-decent，-SGD"><a href="#随机梯度下降-Stochatic-gradient-decent，-SGD" class="headerlink" title="随机梯度下降(Stochatic gradient decent， SGD)"></a>随机梯度下降(Stochatic gradient decent， SGD)</h3><p>与批量梯度下降方法不同，随机梯度下降方法一次只使用一个样本进行目标函数梯度计算，它的公式为</p>
-<p>$$\theta=\theta-\eta\nabla_\theta{J(\theta;x^{(i)},y^{(i)})}$$</p>
-<p>因为每次只计算一个样本，所以SGD计算非常快并且适合线上更新模型。但是，频繁地更新参数也使得目标函数抖动非常厉害。<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-6/58710139.jpg" alt=""><br>SGD频繁地参数更新可以使算法跳出局部最优点，更可能寻找到接近全局最优的解。<br>SGD代码如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(nb_epochs):</div><div class="line">  np.random.shuffle(data)</div><div class="line">  <span class="keyword">for</span> example <span class="keyword">in</span> data:</div><div class="line">    params_grad = evaluate_gradient(loss_function, example, params)</div><div class="line">    patams = params - learning_rate * params_grad</div></pre></td></tr></table></figure>
-<p>注意，上面的代码在每个epoch都对训练数据进行了打乱操作，这样可以保证不同epoch学习到的特征和训练样本的出现顺序没有关系。</p>
-<h3 id="小批量梯度下降-mini-batch-gradient-descent"><a href="#小批量梯度下降-mini-batch-gradient-descent" class="headerlink" title="小批量梯度下降(mini-batch gradient descent)"></a>小批量梯度下降(mini-batch gradient descent)</h3><p>小批量梯度下降结合了批量梯度下降和随机梯度下降的优点，它一次以小批量的训练数据计算目标函数的权重并更新参数。公式如下：</p>
-<p>$$\theta=\theta-\eta\nabla_\theta{J(\theta;x^{(i:i+n)};y^{(i:i+n)})}$$</p>
-<p>其中，n为每批训练集的数量，一般设为50到256。<br>这个算法有下面几个方面的优点：</p>
-<ol>
-<li>相比较SGD增加了一次更新使用的训练数据量，使得目标函数收敛得更加平稳；</li>
-<li>可以使用矩阵操作对每批数据进行计算，大大提升了算法的效率。</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(nb_epochs):</div><div class="line">  np.random.shuffle(data)</div><div class="line">  <span class="keyword">for</span> batch <span class="keyword">in</span> get_batches(data, batch_size=<span class="number">50</span>):</div><div class="line">    params_grad = evaluate_gradient(loss_function, batch, params)</div><div class="line">    params = params - learning_rate * params_grad</div></pre></td></tr></table></figure>
-<h2 id="挑战"><a href="#挑战" class="headerlink" title="挑战"></a>挑战</h2><p>mini-batch gradient descent 虽然相较于批量梯度下降和随机梯度下降方法效果有所改善但是任然存在许多挑战：</p>
-<ol>
-<li>难以选择合适的学习速率：如果学习速率选择过小会造成网络收敛太慢，但是设得太大可能使得损失函数在最小点周围不断摇摆而永远达不到最小点；</li>
-<li>可以在训练开始时设置一个较大地学习率然后每训练若干个周期后按比例降低学习率，虽然这个方法有一些作用，但是由于降低学习率的周期是人为事先设定的，所以它不能很好地适应数据内在的规律；</li>
-<li>另一方面，我们对特征向量中的所有的特征都采用了相同的学习率，如果训练数据十分稀疏并且不同特征的变化频率差别很大，这时候对变化频率慢得特征采用大的学习率而对变化频率快的特征采用小的学习率是更好的选择。</li>
-<li>这些梯度下降方法难以逃脱”鞍点”, 如下图所示，鞍点既不是最大点也不是最小点，在这个点附近，所有方向上的梯度都接近于0，这些梯度下降算法很难逃离它。<img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-6/49626041.jpg" alt="鞍点"></li>
-</ol>
-<h2 id="梯度下降优化算法"><a href="#梯度下降优化算法" class="headerlink" title="梯度下降优化算法"></a>梯度下降优化算法</h2><p>下文我们将介绍常用的能够解决上述挑战的一些算法。</p>
-<h3 id="冲量-Momentum"><a href="#冲量-Momentum" class="headerlink" title="冲量(Momentum)"></a>冲量(Momentum)</h3><p>实际中，我们遇到的目标函数往往在不同的维度上梯度相差很大，比如在下面的函数等高线图中可以看出函数在纵向上要比横向陡峭得多。<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-6/54928422.jpg" alt=""><br>然而SGD等基本梯度下降算法并不知道这些，因为y方向梯度大x方向梯度小所以它们会在y方向上不断摇摆而沿x方向缓慢移动，但是我们知道在y方向的震荡是无用的只有x方向的才在不断接近最优点。</p>
-<p>冲量方法在SGD的基础上，加上了上一步的梯度：</p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-7/44299763.jpg" alt=""><br>其中$\gamma$通常设为0.9。</p>
-<p>由于目标函数在y方向上摇摆，所以前后两次计算的梯度在y方向上相反，所以相加后相互抵消，而x方向上梯度方向不变，所以x方向的梯度是累加的，其效果就是损失函数在y方向上的震荡减小了，而更加迅速地从x方向接近最优点。</p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-6/2017898.jpg" alt=""></p>
-<p>也可以把这个过程和在斜坡放一个球让其滚下类比：当从斜坡顶端释放一个小球时，由于重力的作用小球滚下的速度会越来越快；与此类似，冲量的作用会使相同方向的梯度不断累加，不同方向的梯度相互抵消，其效果就是逼近最优点的速度不断加快。</p>
-<p>知乎上这篇文章<a href="https://zhuanlan.zhihu.com/p/21486826" target="_blank" rel="external">解释</a>得挺详细的。</p>
-<h3 id="Nesterov-accelerated-gradient"><a href="#Nesterov-accelerated-gradient" class="headerlink" title="Nesterov accelerated gradient"></a>Nesterov accelerated gradient</h3><p>想象小球从山坡上滑落，它的速度沿着山坡不断加快，然而这并不是令我们满意的结果，当小球接近山谷(最优点)时，它已经有了很大的速度，很可能会再次冲向山谷的另一边，而错过了最优点。我们需要一颗更加“聪明”的小球，它能够感知坡度的变化，从而在它再次冲上山坡之前减速而避免错过山谷。</p>
-<p>Nesterov accelerated gradient(NAG)就是一种让小球变“聪明”的方法。NAG不但增加了动量项，并且计算参数的梯度时，在损失函数中减去了梯度项将其作为下一次参数所在位置的预估：</p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-7/59700971.jpg" alt=""></p>
-<p>同样，上式中的$\gamma$一般设为0.9。<br>如下图所示，蓝色的是动量方法的更新路径，首先计算一次梯度更新一小步，然后在下一次累加上一次计算的梯度从而更新一大步。而NAG算法每一步更新过程由两个步骤组成：第一步($\gamma{v_{t-1}}$, 图中棕色)使用之前计算的梯度移动一大步，第二步在移动后的位置计算的梯度方向移动一小步(图中红色线)进行修正，经过这样的两步合成了最终的绿线部分。</p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-6/2896856.jpg" alt=""></p>
-<p>分析上面的原理可知，当“小球”将要冲上山坡的另一面时，红色线表示的预测梯度方向发生改变，从而将棕色向量往回拉达到了“减速”的效果。</p>
-<p>通过NAG方法，我们使参数更新速率能够自适应“坡度”的变化，另一方面，我们希望每个单独的参数能够自适应各自的变化频率，比如，稀疏特征采用高的更新速率，其他特征采用相对较低的更新速率。下面介绍几种常用的方法。</p>
-<h3 id="Adagrad"><a href="#Adagrad" class="headerlink" title="Adagrad"></a>Adagrad</h3><p>Adagrad是一种适合处理稀疏特征的梯度更新算法，它对稀疏特征采用高的更新速率，而对其他特征采用相对较低的更新速率。<a href="http://blog.csdn.net/heyongluoyao8/article/details/52478715#reference_4" target="_blank" rel="external">Dean</a>等人发现Adagrad能很好地提高SGD的鲁棒性，它已经被谷歌用来训练大规模的神经网络。</p>
-<p>与之前我们使用相同的学习速率$\eta$来更新所有的参数不同，Adagrad对每个参数使用不同的参数进行更新。我们用$g_{t,i}$来表示参数$\theta_i$在第t次更新时的梯度，即</p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-7/4086375.jpg" alt=""></p>
-<p>按照这个约定，SGD的更新规则可以写作：</p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-7/73833668.jpg" alt="$$\theta_{t+1,i}=\theta_{t,i}-\eta{g_{t,i}}$$"></p>
-<p>而Adagrad的更新规则可以表示为：</p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-7/54119088.jpg" alt="$$\theta_{t+1,i}=\theta_{t,i}-\frac{\eta}{\sqrt{G_{t,ii}+\epsilon}}g_{t,i}$$"></p>
-<p>其中，$G_{t,ii}$是一个$\mathbb{R}^{d\times{d}}$维的对角矩阵，其第i行第i列的元素为过去到当前第i个参数的梯度平方和，$\epsilon$是为了防止分母为0的平滑项。进一步，可以将上式向量化如下：</p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-7/91696471.jpg" alt="$$\theta_{t+1}=\theta_t-\frac{\eta}{\sqrt{G_t+\epsilon}}\bigodot{g_t}$$"></p>
-<p>其中，$\bigodot$表示矩阵和向量的乘法。</p>
-<p>这样，利用Adagrad就可以自动根据每个特征的稀疏性来设置不同的学习率。</p>
-<p>Adagrad主要缺点是$G_t$累加了参数的历史梯度的平方，所以到后期学习率会越来越小，最后无法再学习到新的信息。下面介绍的算法就是来解决这个问题的。</p>
-<h3 id="Adadelta"><a href="#Adadelta" class="headerlink" title="Adadelta"></a>Adadelta</h3><p>Adadelta主要解决了Adagrad算法中学习率衰减过快的问题，它不再累加参数所有的历史梯度平方和，转而设定一个窗口w，只求前w个历史梯度平方的平均数$E[g^2]_t$,$E[g^2]_t$可以通过之前的梯度平方的平均和当前梯度的平方计算得到：</p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-7/1108012.jpg" alt="$$E[g^2]_t=\gamma{E[g^2]_{t-1}}+(1-\gamma)g_t^2$$"></p>
-<p>其中，$\gamma$相似于冲量参数$\gamma$.</p>
-<p>Adadelta更新规则可以写作：</p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-7/81630582.jpg" alt="$$\Delta\theta_t=-\frac{\eta}{\sqrt{E[g^2]_t+\epsilon}}\bigodot{g_t}$$"><br>或者<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-7/38586086.jpg" alt="$$\Delta\theta_t=-\frac{\eta}{RMS[g]_t}\bigodot{g_t}$$"></p>
-<h3 id="RMSprop"><a href="#RMSprop" class="headerlink" title="RMSprop"></a>RMSprop</h3><p>RMSprop由Hinton提出，实际上是Adadelta的一种特殊形式。</p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-7/26348078.jpg" alt="$$E[g^2]_t=0.9E[g^2]_{t-1}+0.1g_t^2\\\theta_{t+1}=\theta_t-\frac{\eta}{\sqrt{E[g^2]_t}+\epsilon}\bigodot{g_t}$$"></p>
-<h3 id="Adam"><a href="#Adam" class="headerlink" title="Adam"></a>Adam</h3><p>Adam的全称是Adaptive Moment Estimation, 它也是一种自适应学习率方法，与Adadelta和RMSprop类似，它将每个参数的历史梯度平方均值存于$v_t$中，不同的是，Adam还使用了类似冲量的衰减项$m_t$:</p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-7/81118386.jpg" alt="$$m_t=\beta_1{m_{t-1}}+(1-\beta_1)g_t\\v_t=\beta_2{v_{t-1}}+(1-\beta_2)g_t^2$$"></p>
-<p>$m_t,v_t$分别是梯度的带权平均和带权有偏方差，由于当$\beta_1,\beta_2$接近于1时，这两项接近于0，作者对他们进行了偏差修正：</p>
-<p>$$\hat{m}_t=\frac{m_t}{1-\beta_1^t}\\hat{v}_t=\frac{v_t}{1-\beta_2^t}$$</p>
-<p>最终更新方程为：</p>
-<p>$$\theta_{t+1}=\theta_t-\frac{\eta}{\sqrt{\bar{\hat{v}_t}}+\epsilon}\bigodot{\hat{m}_t}$$</p>
-<p>建议将$\beta_1$设为0.9,$\beta_2$设为0.999, $\epsilon$设为$10^{-8}$</p>
-<h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><p>图a中，所有方法都从相同位置出发，经历不同的路径到达了最小点，其中Adagrad、Adadelta和RMSprop一开始就朝向正确的方向并且迅速收敛，而冲量、NAG则会冲向错误的方向，但是由于NAG会向前多“看”一步所以能很快找到正确的方向。<br><img src="http://img.blog.csdn.net/20160909001731629" alt=""><br>图b显示了这些方法逃离鞍点的能力，鞍点有部分方向有正梯度另一些方向有负梯度，SGD方法逃离能力最差，冲量和NAG方法也不尽如人意，而Adagrad、RMSprop、Adadelta很快就能从鞍点逃离出来。<br><img src="http://img.blog.csdn.net/20160909001936276" alt=""><br><!-- indicate-the-source --></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;http://7xkyov.com1.z0.glb.clouddn.com/16-10-7/66166948.jpg&quot; width=&quot;720px&quot;/&gt;&lt;br&gt;
-    
-    </summary>
-    
-      <category term="机器学习" scheme="http://www.wowx.info/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="深度学习" scheme="http://www.wowx.info/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="机器学习" scheme="http://www.wowx.info/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="cs231n" scheme="http://www.wowx.info/tags/cs231n/"/>
     
   </entry>
   
