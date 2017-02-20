@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.wowx.info/"/>
-  <updated>2017-02-19T11:39:37.290Z</updated>
+  <updated>2017-02-20T16:50:28.419Z</updated>
   <id>http://www.wowx.info/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Introducing a DeepLab v2 and Fine-tuning it to ISPRS Dataset</title>
+    <title>Introducing DeepLab v2 and Fine-tuning it to ISPRS Dataset</title>
     <link href="http://www.wowx.info/posts/20170219193755/"/>
     <id>http://www.wowx.info/posts/20170219193755/</id>
     <published>2017-02-19T11:37:55.000Z</published>
-    <updated>2017-02-19T11:39:37.290Z</updated>
+    <updated>2017-02-20T16:50:28.419Z</updated>
     
     <content type="html"><![CDATA[<p><a href="http://arxiv.org/abs/1606.00915" target="_blank" rel="external">DeepLab v2</a><sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>是Liang-Chieh Chen等人提出的一种state-of-art语义分割网络，当前许多优秀模型都是基于该网络进行改进的，因此，学习和使用这个模型有很大的价值。本文从语义分割的原理开始，详细讲解DeepLab的实现原理，并将其应用于ISPRS数据集。</p>
 <h2 id="语义分割"><a href="#语义分割" class="headerlink" title="语义分割"></a>语义分割</h2><p>语义分割可以看作是像素级的目标检测算法，其可以按像素所属的目标类别给予其不同的标记，严格的区分物体的边界。</p>
@@ -181,13 +181,13 @@
   </entry>
   
   <entry>
-    <title>LeetCode string dp 64 494</title>
+    <title>LeetCode string dp 64 494 300 386</title>
     <link href="http://www.wowx.info/posts/20170215164353/"/>
     <id>http://www.wowx.info/posts/20170215164353/</id>
     <published>2017-02-15T08:43:53.000Z</published>
-    <updated>2017-02-20T16:47:07.827Z</updated>
+    <updated>2017-02-20T16:49:40.939Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="2017-02-25-String-DP-65-494-300"><a href="#2017-02-25-String-DP-65-494-300" class="headerlink" title="2017-02-25 String DP 65  494 300"></a>2017-02-25 String DP 65  494 300</h1><h2 id="65-Valid-Number"><a href="#65-Valid-Number" class="headerlink" title="65. Valid Number"></a>65. Valid Number</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
+    <content type="html"><![CDATA[<h1 id="2017-02-25-String-DP-65-494-300-386"><a href="#2017-02-25-String-DP-65-494-300-386" class="headerlink" title="2017-02-25 String DP 65  494 300 386"></a>2017-02-25 String DP 65  494 300 386</h1><h2 id="65-Valid-Number"><a href="#65-Valid-Number" class="headerlink" title="65. Valid Number"></a>65. Valid Number</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
 <p>Validate if a given string is numeric.</p>
 <p>Some examples:</p>
 <p><code>&quot;0&quot;</code> =&gt; <code>true</code><br><code>&quot; 0.1 &quot;</code> =&gt; <code>true</code><br><code>&quot;abc&quot;</code> =&gt; <code>false</code><br><code>&quot;1 a&quot;</code> =&gt; <code>false</code><br><code>&quot;2e10&quot;</code> =&gt; <code>true</code></p>
@@ -259,7 +259,7 @@
     
     <summary type="html">
     
-      &lt;h1 id=&quot;2017-02-25-String-DP-65-494-300&quot;&gt;&lt;a href=&quot;#2017-02-25-String-DP-65-494-300&quot; class=&quot;headerlink&quot; title=&quot;2017-02-25 String DP 65  494 3
+      &lt;h1 id=&quot;2017-02-25-String-DP-65-494-300-386&quot;&gt;&lt;a href=&quot;#2017-02-25-String-DP-65-494-300-386&quot; class=&quot;headerlink&quot; title=&quot;2017-02-25 String DP 6
     
     </summary>
     
