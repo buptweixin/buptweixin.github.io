@@ -325,13 +325,13 @@
                 <!-- Post Content -->
                 <div id="post-content" class="markdown-Material mdl-color-text--grey-700 mdl-card__supporting-text fade out">
 	
-		<p><a href="http://arxiv.org/abs/1606.00915" target="_blank" rel="external">DeepLab v2</a>[^2]是Liang-Chieh Chen等人提出的一种state-of-art语义分割网络，当前许多优秀模型都是基于该网络进行改进的，因此，学习和使用这个模型有很大的价值。本文从语义分割的原理开始，详细讲解DeepLab的实现原理，并将其应用于ISPRS数据集。</p>
+		<p><a href="http://arxiv.org/abs/1606.00915" target="_blank" rel="external">DeepLab v2</a><sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>是Liang-Chieh Chen等人提出的一种state-of-art语义分割网络，当前许多优秀模型都是基于该网络进行改进的，因此，学习和使用这个模型有很大的价值。本文从语义分割的原理开始，详细讲解DeepLab的实现原理，并将其应用于ISPRS数据集。</p>
 <h2 id="语义分割"><a href="#语义分割" class="headerlink" title="语义分割"></a>语义分割</h2><p>语义分割可以看作是像素级的目标检测算法，其可以按像素所属的目标类别给予其不同的标记，严格的区分物体的边界。</p>
 <p>语义分割在自动驾驶、战场感知等方面有着广泛应用。</p>
 <p><img src="/img/blog/69SQFsT.png" alt="69SQFsT"></p>
 <h3 id="深度神经网络在语义分割上的应用"><a href="#深度神经网络在语义分割上的应用" class="headerlink" title="深度神经网络在语义分割上的应用"></a>深度神经网络在语义分割上的应用</h3><p>深度卷积神经网络在语义分割中的已经有了一种通用的框架，其结构如下：</p>
 <p><img src="/img/blog/3adeadf2a20b0cc9cd68553a95f00552_r.png" alt="3adeadf2a20b0cc9cd68553a95f00552_r"></p>
-<p>首先使用类似FCN[^1]的深度处理图像得到粗糙的分割结果，然后使用条件随机场(CRF)或马尔科夫随机场(MRF)进行后处理得到最终的精细结果。我们首先介绍全卷积网络的工作原理然后在介绍DeepLab时介绍条件随机场。</p>
+<p>首先使用类似FCN<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>的深度处理图像得到粗糙的分割结果，然后使用条件随机场(CRF)或马尔科夫随机场(MRF)进行后处理得到最终的精细结果。我们首先介绍全卷积网络的工作原理然后在介绍DeepLab时介绍条件随机场。</p>
 <h3 id="全卷积网络-FCN"><a href="#全卷积网络-FCN" class="headerlink" title="全卷积网络(FCN)"></a>全卷积网络(FCN)</h3><p>在分类网络中，我们通常在卷积层后连接若干个全连接层，将特征图转换为固定长度的特征向量，然后将特征向量输入softmax层得到图片在每个分类上的概率。</p>
 <p>而在语义分割任务中，我们要得到的是像素级的分类结果，因此，作者用卷积层替代了所有的全连接层，将得到的特征图上采样至原图尺寸，然后同样使用softmax层对得到的像素级结果进行处理获得最终分割结果。</p>
 <p><img src="/img/blog/fcn0.png" alt="fcn0"></p>
@@ -360,13 +360,13 @@
 <p>未改变stride之前，c1，c2感受野是f1,f2，f3,f4,改变之后，c1 c2的感受野变成了f1,f2和f3，为了维持感受野不变，作者提出了带孔的卷积层，其效果如下：</p>
 <p><img src="/img/blog/hehe01.jpg" alt="hehe01"></p>
 <p>如上图所示，作者在卷积核之间引入了“孔洞”，这样就实现了增大空间分辨率同时不改变感受受野和参数数量的效果。</p>
-<h3 id="带孔空间金字塔池化"><a href="#带孔空间金字塔池化" class="headerlink" title="带孔空间金字塔池化"></a>带孔空间金字塔池化</h3><p>受空间金字塔池化[^3]的影响，作者提出了带孔空间金字塔池化(Atrous Spatial Pyramid Pooling，ASPP)的概念</p>
+<h3 id="带孔空间金字塔池化"><a href="#带孔空间金字塔池化" class="headerlink" title="带孔空间金字塔池化"></a>带孔空间金字塔池化</h3><p>受空间金字塔池化<sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup>的影响，作者提出了带孔空间金字塔池化(Atrous Spatial Pyramid Pooling，ASPP)的概念</p>
 <p><img src="/img/blog/1487526374105.png" alt="1487526374105"></p>
 <p>由于不同的孔洞率对应着不同的感受野大小，可以提取不同尺度的目标特征，ASPP使用多种孔洞率的卷积核对相同特征图同时处理，然后将最后结果融合在一起，获得了良好的效果。</p>
 <p><img src="/img/blog/1487526704375.png" alt="1487526704375"></p>
 <h3 id="全连接条件随机场后处理"><a href="#全连接条件随机场后处理" class="headerlink" title="全连接条件随机场后处理"></a>全连接条件随机场后处理</h3><p>随着网络的深度加深，顶层节点的感受野增大，得到的特征图越来越平滑而丢失了局部信息，如下图第一列所示。</p>
 <p><img src="/img/blog/1487529582806.png" alt="1487529582806"></p>
-<p>作者发现，使用全连接条件随机场能很好地将底层细节信息还原回分割结果，具体可以参考[^4],简要来说，全连接条件随机场的目标是最小化以下能量函数：</p>
+<p>作者发现，使用全连接条件随机场能很好地将底层细节信息还原回分割结果，具体可以参考<sup id="fnref:4"><a href="#fn:4" rel="footnote">4</a></sup>,简要来说，全连接条件随机场的目标是最小化以下能量函数：</p>
 <p>$$E(\bf{x})=\sum_i{\theta_i(\bf{x<em>i})}+\sum</em>{ij}\theta_{ij}(x_i, x_j)$$</p>
 <p>其中，$\theta_i(x_i)=-log(P(x<em>i))$为即为深度卷积网络输出的每个像素的置信度，而$\theta</em>{ij}(x_i,x_j)$为如下形式：</p>
 <p>$$\theta_{ij}(x_i,x_j)=\mu(x_i,x_j)[\omega_1exp(-\frac{|p_i-p<em>j|^2}{2\sigma</em>\gamma^2}-\frac{|I_i-I<em>j|^2}{2\sigma</em>\beta^2})+\omega_2exp(-\frac{|p_i-p<em>j|^2}{2\sigma</em>\gamma^2})]$$</p>
@@ -374,8 +374,7 @@
 <h2 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h2><p><img src="/img/blog/1487530918957.png" alt="1487530918957"></p>
 <p>作者使用基于残差网络的DeepLabv2在VOC2012数据集上取得了79.7的mIOU。</p>
 <h2 id="使用ISPRS数据集训练DeepLab"><a href="#使用ISPRS数据集训练DeepLab" class="headerlink" title="使用ISPRS数据集训练DeepLab"></a>使用ISPRS数据集训练DeepLab</h2><p>[待续]</p>
-<p>[^1]: Long J, Shelhamer E, Darrell T. Fully convolutional networks for semantic segmentation[C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2015: 3431-3440.<br>[^2]: Chen, Liang-Chieh, et al. “Deeplab: Semantic image segmentation with deep convolutional nets, atrous convolution, and fully connected crfs.” <em>arXiv preprint arXiv:1606.00915</em> (2016).<br>[^3]: He K, Zhang X, Ren S, et al. Spatial pyramid pooling in deep convolutional networks for visual recognition[C]//European Conference on Computer Vision. Springer International Publishing, 2014: 346-361.<br>[^4]: Koltun V. Efficient inference in fully connected crfs with gaussian edge potentials[J]. Adv. Neural Inf. Process. Syst, 2011, 2(3): 4.</p>
-
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;">Long J, Shelhamer E, Darrell T. Fully convolutional networks for semantic segmentation[C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2015: 3431-3440.</span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;">Chen, Liang-Chieh, et al. &quot;Deeplab: Semantic image segmentation with deep convolutional nets, atrous convolution, and fully connected crfs.&quot; <em>arXiv preprint arXiv:1606.00915</em> (2016).</span><a href="#fnref:2" rev="footnote"> ↩</a></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">3.</span><span style="display: inline-block; vertical-align: top;">He K, Zhang X, Ren S, et al. Spatial pyramid pooling in deep convolutional networks for visual recognition[C]//European Conference on Computer Vision. Springer International Publishing, 2014: 346-361.</span><a href="#fnref:3" rev="footnote"> ↩</a></li><li id="fn:4"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">4.</span><span style="display: inline-block; vertical-align: top;">Koltun V. Efficient inference in fully connected crfs with gaussian edge potentials[J]. Adv. Neural Inf. Process. Syst, 2011, 2(3): 4.</span><a href="#fnref:4" rev="footnote"> ↩</a></li></ol></div></div>
 	
 	
 	
