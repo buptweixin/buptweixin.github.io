@@ -215,7 +215,7 @@
 	<ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
 		for="post-toc-trigger-btn">
 			
-			<ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#chapter2-线性代数-Linear-algebra"><span class="post-toc-number">1.</span> <span class="post-toc-text">chapter2 线性代数 Linear algebra</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Chapter-3-概率与信息论"><span class="post-toc-number">2.</span> <span class="post-toc-text">Chapter 3 概率与信息论</span></a></li></ol>
+			<ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#chapter2-线性代数-Linear-algebra"><span class="post-toc-number">1.</span> <span class="post-toc-text">chapter2 线性代数 Linear algebra</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Chapter-3-概率与信息论"><span class="post-toc-number">2.</span> <span class="post-toc-text">Chapter 3 概率与信息论</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Chapter-5-机器学习基础"><span class="post-toc-number">3.</span> <span class="post-toc-text">Chapter 5 机器学习基础</span></a></li></ol>
 		
 <!--			<li class="mdl-menu__item">Some Action</li>-->
 	</ul>
@@ -364,6 +364,14 @@
 <li>频率概率:直接与事件发生的频率相关，比如抽牌抽到红桃A</li>
 <li>贝叶斯概率:涉及到确定性水平，如病人患流感的概率，不能通过产生无数病人的副本让他们在不同潜在情况下产生相同的症状</li>
 </ol>
+</li>
+</ol>
+<h2 id="Chapter-5-机器学习基础"><a href="#Chapter-5-机器学习基础" class="headerlink" title="Chapter 5 机器学习基础"></a>Chapter 5 机器学习基础</h2><ol>
+<li>容量：指模型拟合各种函数的能力，容量低可能难以拟合，容量高可能过拟合<br> 度量容量的最有名的方法：VC维，表示二元分类器能标记的点x的最大数量<br> 训练误差和泛化误差随着模型容量的增长而增长，但是随着训练样本增多而下降</li>
+<li>没有免费午餐定理<br> 如果在所有可能的数据分布上取平均，那么每个分类算法在未事先观测到的点上都有相同的错误率,没有一个机器学习算法总是比其他的好。但是，现实中，我们不必考虑所有的数据分布，我们可以设计在这些分布上效果好的算法。</li>
+<li>正则化<ul>
+<li>权重衰减<br>  $$J(\omega)=MSE_{train} + \lambda\omega^T\omega$$<br>  对于线性回归模型,权重衰减因子越大</li>
+</ul>
 </li>
 </ol>
 
