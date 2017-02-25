@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.wowx.info/"/>
-  <updated>2017-02-20T16:50:28.419Z</updated>
+  <updated>2017-02-25T07:17:34.676Z</updated>
   <id>http://www.wowx.info/</id>
   
   <author>
@@ -14,6 +14,46 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>LeetCode 20170225 dp 516</title>
+    <link href="http://www.wowx.info/posts/20170225144631/"/>
+    <id>http://www.wowx.info/posts/20170225144631/</id>
+    <published>2017-02-25T06:46:31.000Z</published>
+    <updated>2017-02-25T07:17:34.676Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="516-Longest-Palindromic-Subsequence"><a href="#516-Longest-Palindromic-Subsequence" class="headerlink" title="516. Longest Palindromic Subsequence"></a>516. Longest Palindromic Subsequence</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
+<p>Given a string s, find the longest palindromic subsequence’s length in s. You may assume that the maximum length of s is 1000.</p>
+<p>Example 1:<br>Input:</p>
+<p>“bbbab”<br>Output:<br>4<br>One possible longest palindromic subsequence is “bbbb”.<br>Example 2:<br>Input:</p>
+<p>“cbbd”<br>Output:<br>2<br>One possible longest palindromic subsequence is “bb”.</p>
+</blockquote>
+<p>给定一个字符串s，找出其所有回文子串中最长的一个并返回其长度</p>
+<h3 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h3><p>采用动态规划方法来解题</p>
+<ol>
+<li>重新定义题目<br> 将字符串切分成短的子串，通过短子串的最长回文得到包含它的长串的回文长度</li>
+<li>定义状态<br> <code>dp[i][j]</code>表示子串<code>s[1,...,n]</code>的最长回文长度</li>
+<li>状态转移<br> 如果子串<code>s[i+1, ..., j-1]</code>两边的字符相等，则子串长度要加上这两个字符,<br> 如果俩字符不相等，则<code>s[i,...,j]</code>最长回文为<code>dp[i][j-1]</code>和<code>dp[i+1][j]</code>中最长的一个<br> 因为要求<code>dp[i][j]</code>需要先知道<code>dp[i+1][j-1]</code>和<code>dp[i][j-1],dp[i+1][j]</code>,所以求解过程中，<code>i</code>应该减,<code>j</code>应该递增</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">longestPalindromeSubseq</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</div><div class="line">        <span class="built_in">string</span>::size_type len = s.length();</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; dp(len, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(len, <span class="number">0</span>));</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = len - <span class="number">1</span>; i &gt;=<span class="number">0</span>; --i)</div><div class="line">        &#123;</div><div class="line">            dp[i][i] = <span class="number">1</span>;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i+<span class="number">1</span>; j &lt; len; ++j)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">if</span> (s[i] == s[j])</div><div class="line">                    dp[i][j] = dp[i+<span class="number">1</span>][j<span class="number">-1</span>] + <span class="number">2</span>;</div><div class="line">                <span class="keyword">else</span></div><div class="line">                    dp[i][j] = max(dp[i+<span class="number">1</span>][j], dp[i][j<span class="number">-1</span>]);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> dp[<span class="number">0</span>][len<span class="number">-1</span>];</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;516-Longest-Palindromic-Subsequence&quot;&gt;&lt;a href=&quot;#516-Longest-Palindromic-Subsequence&quot; class=&quot;headerlink&quot; title=&quot;516. Longest Palindrom
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="http://www.wowx.info/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
+    
+      <category term="string" scheme="http://www.wowx.info/tags/string/"/>
+    
+      <category term="dp" scheme="http://www.wowx.info/tags/dp/"/>
+    
+  </entry>
   
   <entry>
     <title>Introducing DeepLab v2 and Fine-tuning it to ISPRS Dataset</title>
@@ -1227,9 +1267,9 @@
     
       <category term="算法" scheme="http://www.wowx.info/tags/%E7%AE%97%E6%B3%95/"/>
     
-      <category term="array" scheme="http://www.wowx.info/tags/array/"/>
-    
       <category term="dp" scheme="http://www.wowx.info/tags/dp/"/>
+    
+      <category term="array" scheme="http://www.wowx.info/tags/array/"/>
     
       <category term="leetcode" scheme="http://www.wowx.info/tags/leetcode/"/>
     
@@ -1267,9 +1307,9 @@
     
       <category term="算法" scheme="http://www.wowx.info/tags/%E7%AE%97%E6%B3%95/"/>
     
-      <category term="array" scheme="http://www.wowx.info/tags/array/"/>
-    
       <category term="dp" scheme="http://www.wowx.info/tags/dp/"/>
+    
+      <category term="array" scheme="http://www.wowx.info/tags/array/"/>
     
       <category term="leetcode" scheme="http://www.wowx.info/tags/leetcode/"/>
     
@@ -1311,9 +1351,9 @@
     
       <category term="算法" scheme="http://www.wowx.info/tags/%E7%AE%97%E6%B3%95/"/>
     
-      <category term="array" scheme="http://www.wowx.info/tags/array/"/>
-    
       <category term="dp" scheme="http://www.wowx.info/tags/dp/"/>
+    
+      <category term="array" scheme="http://www.wowx.info/tags/array/"/>
     
       <category term="leetcode" scheme="http://www.wowx.info/tags/leetcode/"/>
     
@@ -1375,9 +1415,9 @@
     
       <category term="算法" scheme="http://www.wowx.info/tags/%E7%AE%97%E6%B3%95/"/>
     
-      <category term="array" scheme="http://www.wowx.info/tags/array/"/>
-    
       <category term="dp" scheme="http://www.wowx.info/tags/dp/"/>
+    
+      <category term="array" scheme="http://www.wowx.info/tags/array/"/>
     
       <category term="leetcode" scheme="http://www.wowx.info/tags/leetcode/"/>
     
@@ -1444,107 +1484,9 @@
     
       <category term="算法" scheme="http://www.wowx.info/tags/%E7%AE%97%E6%B3%95/"/>
     
-      <category term="array" scheme="http://www.wowx.info/tags/array/"/>
-    
       <category term="dp" scheme="http://www.wowx.info/tags/dp/"/>
     
-  </entry>
-  
-  <entry>
-    <title>二叉树、二叉查找树、2-3树及红黑树</title>
-    <link href="http://www.wowx.info/posts/201606112921/"/>
-    <id>http://www.wowx.info/posts/201606112921/</id>
-    <published>2016-11-29T13:37:48.000Z</published>
-    <updated>2016-12-21T15:54:27.066Z</updated>
-    
-    <content type="html"><![CDATA[<p>本文参考自<a href="http://my.csdn.net/yang_yulei" target="_blank" rel="external">yang_yulei</a>的<a href="http://blog.csdn.net/yang_yulei/article/details/26066409" target="_blank" rel="external">博客</a></p>
-<h1 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h1><h2 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h2><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><p>适用于静态表(不允许插入)，效率很高</p>
-<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><p>不能同时支持任意插入、删除同时兼顾查找</p>
-<h2 id="二叉查找树"><a href="#二叉查找树" class="headerlink" title="二叉查找树"></a>二叉查找树</h2><ul>
-<li><p>特点</p>
-<p>左子树任意元素小于根节点，右子树任意元素大于根节点</p>
-</li>
-</ul>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-29/57653207.jpg" alt=""></p>
-<ul>
-<li><p>投影</p>
-<p>将其所有元素投影到直线上，保证一个结点的左子树中的键出现在它的右边，右子树中的键出现在它的右边，那么我们一定可以得到一条有序的键列。</p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-29/92888508.jpg" alt=""></p>
-</li>
-<li><p>优点</p>
-<p>相较于二分查找，能高效实现插入和删除操作</p>
-</li>
-<li><p>缺点</p>
-<p>树有可能是不平衡的，最糟糕情况下时间复杂度退化为$O(N)$,如下所示:</p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-29/29355175.jpg" alt=""></p>
-</li>
-<li><p><strong>与快速排序的类比</strong></p>
-<p>树的根结点就是快速排序中的第一个切分元素（左侧的键都比它小，右侧的键都比它大），而这对于所有的子树同样适用，这和快速排序中对于子数组的递归排序完全对应。</p>
-</li>
-</ul>
-<h3 id="平衡查找树"><a href="#平衡查找树" class="headerlink" title="平衡查找树"></a>平衡查找树</h3><p>限定树的高度约等于$\log{N}$,以保证查找在$\log{N}$次比较内结束</p>
-<h3 id="2-3查找树"><a href="#2-3查找树" class="headerlink" title="2-3查找树"></a>2-3查找树</h3><p>顾名思义，2-3查找树即为即有2-结点又有3-结点的树，它的结构如下</p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-29/32088768.jpg" alt=""></p>
-<p>一个3-结点内有两个键，左子树的键都比左键小，右子树的元素都比右键小，而中子树的元素介于两者之间。一个完美2-3树的所有空节点到根的距离都是相同的。</p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-29/32088768.jpg" alt=""></p>
-<ul>
-<li><p>查找</p>
-<p>2-3树的查找比较简单，和二叉树类似</p>
-</li>
-<li><p>插入</p>
-<p>2-3树的插入涉及到了3-结点的展开</p>
-<p>3-结点的展开如下所示</p>
-<p>​    <img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-29/33755704.jpg" alt=""></p>
-<ul>
-<li><p>向父结点为2结点的3-结点插入</p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-29/34357326.jpg" alt=""></p>
-</li>
-<li><p>向父结点是3-结点插入</p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-29/70658742.jpg" alt=""></p>
-<p>2-3树插入算法的根本在于这些变换都是局部的：除了相关的结点和链接之外不必修改或者检查树的其他部分。每次变换中，变更的链接数量不会超过一个很小的常数。所有局部变换都不会影响整棵树的有序性和平衡性。</p>
-</li>
-</ul>
-</li>
-<li><p>优点</p>
-<p>2-3树在最坏情况下仍有较好的性能。每个操作中处理每个结点的时间都不会超过一个很小的常数，且这两个操作都只会访问一条路径上的结点，所以任何查找或插入的成本都不会超过对数级别</p>
-</li>
-<li><p>缺点</p>
-<p>维护两种操作需要大量代码，产生的额外开销可能比标准二叉查找树更慢。</p>
-</li>
-</ul>
-<h3 id="红黑树-1"><a href="#红黑树-1" class="headerlink" title="红黑树"></a>红黑树</h3><p>红黑树就是用红链表示3-节点的2-3树</p>
-<p>3-结点和红链的转化规则如下：</p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-29/76753789.jpg" alt=""></p>
-<ul>
-<li><p>另一种定义</p>
-<ol>
-<li>红链接均为左链接。</li>
-<li>没有任何一个结点同时和两条红链接相连。</li>
-<li>该树是完美黑色平衡的，即任意空链接到根结点的路径上的黑链接数量相同。</li>
-</ol>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-29/963151.jpg" alt=""></p>
-</li>
-<li><p>旋转</p>
-<p>在我们实现的某些操作中可能会出现红色右链接或者两条连续的红链接，但在操作完成前这些情况都会被小心地旋转并修复。</p>
-<p>（我们在这里不讨论旋转的几种情况，把红黑树看做2-3树，自然可以得到正确的旋转后结果）</p>
-</li>
-<li><p>插入</p>
-<p>在插入时我们可以使用旋转操作帮助我们保证2-3树和红黑树之间的一一对应关系，因为旋转操作可以保持红黑树的两个重要性质：有序性和完美平衡性。</p>
-</li>
-<li><p>构造过程</p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-29/64933751.jpg" alt=""></p>
-</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;本文参考自&lt;a href=&quot;http://my.csdn.net/yang_yulei&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;yang_yulei&lt;/a&gt;的&lt;a href=&quot;http://blog.csdn.net/yang_yulei/artic
-    
-    </summary>
-    
-    
-      <category term="算法" scheme="http://www.wowx.info/tags/%E7%AE%97%E6%B3%95/"/>
+      <category term="array" scheme="http://www.wowx.info/tags/array/"/>
     
   </entry>
   

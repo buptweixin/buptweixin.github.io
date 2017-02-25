@@ -4,7 +4,7 @@
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Title -->
     
     <title>
-        LeetCode 128 Longest Consecutive Sequence | 野原圆长的Blog
+        LeetCode 20170225 dp 516 | 野原圆长的Blog
     </title>
     
     <!-- Favicons -->
@@ -40,7 +40,7 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="http://www.wowx.info">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="LeetCode 128 Longest Consecutive Sequence | 野原圆长的Blog">
+    <meta property="og:title" content="LeetCode 20170225 dp 516 | 野原圆长的Blog">
     <meta property="og:description" content="null">
     
      <!--[if lte IE 9]>
@@ -215,7 +215,7 @@
 	<ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
 		for="post-toc-trigger-btn">
 			
-			<ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#解题思路"><span class="post-toc-number">1.</span> <span class="post-toc-text">解题思路</span></a></li></ol>
+			<ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#516-Longest-Palindromic-Subsequence"><span class="post-toc-number">1.</span> <span class="post-toc-text">516. Longest Palindromic Subsequence</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Problem-Description"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Problem Description</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Method"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Method</span></a></li></ol></li></ol>
 		
 <!--			<li class="mdl-menu__item">Some Action</li>-->
 	</ul>
@@ -237,7 +237,7 @@
 		<div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(http://ww4.sinaimg.cn/large/6425ef91jw1f9apllc7boj20ic0960v9.jpg)">
 	
         <p class="article-headline-p">
-            LeetCode 128 Longest Consecutive Sequence
+            LeetCode 20170225 dp 516
         </p>
     </div>
 
@@ -255,7 +255,7 @@
     <!-- Author Name & Date -->
     <div>
         <strong>Xin Wei</strong>
-        <span>11月 30, 2015</span>
+        <span>2月 25, 2017</span>
     </div>
     
     <div class="section-spacer"></div>
@@ -275,7 +275,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/array/">array</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/cpp/">cpp</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/hard/">hard</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/算法/">算法</a>
+        <a class="post_tag-link" href="/tags/cpp/">cpp</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/dp/">dp</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/string/">string</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/算法/">算法</a>
     </ul>
     
     <!-- Share -->
@@ -289,7 +289,7 @@
     <!-- Leancloud Views -->
     <a class="post_share-link" href="#">
         <li class="mdl-menu__item">
-            <span id="/posts/20151130233720/" class="leancloud-views_num" data-flag-title="LeetCode 128 Longest Consecutive Sequence">
+            <span id="/posts/20170225144631/" class="leancloud-views_num" data-flag-title="LeetCode 20170225 dp 516">
      &nbsp;浏览量
 </span>
         </li>
@@ -299,21 +299,21 @@
     
     
     <!-- Share Twitter -->
-    <a class="post_share-link" href="https://twitter.com/intent/tweet?text=LeetCode 128 Longest Consecutive Sequence&url=http://www.wowx.info//posts/20151130233720/index.html&via=Xin Wei" target="_blank">
+    <a class="post_share-link" href="https://twitter.com/intent/tweet?text=LeetCode 20170225 dp 516&url=http://www.wowx.info//posts/20170225144631/index.html&via=Xin Wei" target="_blank">
         <li class="mdl-menu__item">
             分享到 Twitter
         </li>
     </a>
     
     <!-- Share Google+ -->
-    <a class="post_share-link" href="https://plus.google.com/share?url=http://www.wowx.info//posts/20151130233720/index.html" target="_blank">
+    <a class="post_share-link" href="https://plus.google.com/share?url=http://www.wowx.info//posts/20170225144631/index.html" target="_blank">
         <li class="mdl-menu__item">
             分享到 Google+
         </li>
     </a>
     
     <!-- Share Weibo -->
-    <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=LeetCode 128 Longest Consecutive Sequence&url=http://www.wowx.info//posts/20151130233720/index.html&pic=&searchPic=false&style=simple" target="_blank">
+    <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=LeetCode 20170225 dp 516&url=http://www.wowx.info//posts/20170225144631/index.html&pic=&searchPic=false&style=simple" target="_blank">
         <li class="mdl-menu__item">
             分享到微博
         </li>
@@ -325,30 +325,20 @@
                 <!-- Post Content -->
                 <div id="post-content" class="markdown-Material mdl-color-text--grey-700 mdl-card__supporting-text fade out">
 	
-		<blockquote>
-<p>Given an unsorted array of integers, find the length of the longest consecutive elements sequence.</p>
-<p>For example,<br>Given <code>[100, 4, 200, 1, 3, 2]</code>,<br>The longest consecutive elements sequence is <code>[1, 2, 3, 4]</code>. Return its length: <code>4</code>.</p>
-<p>Your algorithm should run in O(<em>n</em>) complexity.</p>
+		<h2 id="516-Longest-Palindromic-Subsequence"><a href="#516-Longest-Palindromic-Subsequence" class="headerlink" title="516. Longest Palindromic Subsequence"></a>516. Longest Palindromic Subsequence</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
+<p>Given a string s, find the longest palindromic subsequence’s length in s. You may assume that the maximum length of s is 1000.</p>
+<p>Example 1:<br>Input:</p>
+<p>“bbbab”<br>Output:<br>4<br>One possible longest palindromic subsequence is “bbbb”.<br>Example 2:<br>Input:</p>
+<p>“cbbd”<br>Output:<br>2<br>One possible longest palindromic subsequence is “bb”.</p>
 </blockquote>
-<a id="more"></a>
-<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><ol>
-<li><p>采用unordered_set(<strong>set使用红黑树实现，它的find时间复杂度为$O(logN)$</strong>)</p>
+<p>给定一个字符串s，找出其所有回文子串中最长的一个并返回其长度</p>
+<h3 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h3><p>采用动态规划方法来解题</p>
 <ol>
-<li>将数字存入set关联容器nums_set($O(N)$)</li>
-<li>遍历set中的元素(<strong>set的find复杂度$O(1)$</strong>)<ol>
-<li>如果<code>num-1</code>不在set中，则开始对连续出现数字计数<ol>
-<li>初始化<code>int m=num+1</code></li>
-<li>在nums_set中寻找m，若找到，m+1</li>
-<li>如果没有找到则跳出循环</li>
-<li>更新最长序列为<code>max(longest, m - num)</code></li>
+<li>重新定义题目<br> 将字符串切分成短的子串，通过短子串的最长回文得到包含它的长串的回文长度</li>
+<li>定义状态<br> <code>dp[i][j]</code>表示子串<code>s[1,...,n]</code>的最长回文长度</li>
+<li>状态转移<br> 如果子串<code>s[i+1, ..., j-1]</code>两边的字符相等，则子串长度要加上这两个字符,<br> 如果俩字符不相等，则<code>s[i,...,j]</code>最长回文为<code>dp[i][j-1]</code>和<code>dp[i+1][j]</code>中最长的一个<br> 因为要求<code>dp[i][j]</code>需要先知道<code>dp[i+1][j-1]</code>和<code>dp[i][j-1],dp[i+1][j]</code>,所以求解过程中，<code>i</code>应该减,<code>j</code>应该递增</li>
 </ol>
-</li>
-</ol>
-</li>
-</ol>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">longestConsecutive</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</div><div class="line">        <span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt; nums_set;</div><div class="line">        <span class="comment">// 将vector元素复制到set中，方便查找</span></div><div class="line">        nums_set.insert(nums.begin(), nums.end());</div><div class="line">        <span class="keyword">int</span> longest = <span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> num : nums_set)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span> (nums_set.find(num<span class="number">-1</span>) == nums_set.end())</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">int</span> m = num + <span class="number">1</span>;</div><div class="line">                <span class="keyword">while</span> (nums_set.find(m) != nums_set.end())</div><div class="line">                    ++m;</div><div class="line">                longest = max(longest, m - num);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> longest;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-</li>
-</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">longestPalindromeSubseq</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</div><div class="line">        <span class="built_in">string</span>::size_type len = s.length();</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; dp(len, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(len, <span class="number">0</span>));</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = len - <span class="number">1</span>; i &gt;=<span class="number">0</span>; --i)</div><div class="line">        &#123;</div><div class="line">            dp[i][i] = <span class="number">1</span>;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i+<span class="number">1</span>; j &lt; len; ++j)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">if</span> (s[i] == s[j])</div><div class="line">                    dp[i][j] = dp[i+<span class="number">1</span>][j<span class="number">-1</span>] + <span class="number">2</span>;</div><div class="line">                <span class="keyword">else</span></div><div class="line">                    dp[i][j] = max(dp[i+<span class="number">1</span>][j], dp[i][j<span class="number">-1</span>]);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> dp[<span class="number">0</span>][len<span class="number">-1</span>];</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 
 	
 	
@@ -376,9 +366,9 @@
 <div id="comments">
     <!-- 多说评论框 start -->
         <div class="ds-thread" 
-            data-thread-key="posts/20151130233720/" 
-            data-url="http://www.wowx.info//posts/20151130233720/index.html"
-            data-title="LeetCode 128 Longest Consecutive Sequence"></div>
+            data-thread-key="posts/20170225144631/" 
+            data-url="http://www.wowx.info//posts/20170225144631/index.html"
+            data-title="LeetCode 20170225 dp 516"></div>
     <!-- 多说评论框 end -->
 </div>
 
@@ -391,21 +381,13 @@
     
     <!-- Prev Nav -->
     
-        <a href="/posts/20160615115359/" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            新篇
-        </a>
-    
 
     <!-- Section Spacer -->
     <div class="section-spacer"></div>
 
     <!-- Next Nav -->
     
-        <a href="/posts/20151130013320/" id="post_nav-older" class="next-content">
+        <a href="/posts/20170219193755/" id="post_nav-older" class="next-content">
             旧篇
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
