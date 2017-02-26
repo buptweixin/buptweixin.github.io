@@ -4,7 +4,7 @@
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Title -->
     
     <title>
-        LeetCode dp 413 | 野原圆长的Blog
+        LeetCode dp 413 139 | 野原圆长的Blog
     </title>
     
     <!-- Favicons -->
@@ -40,7 +40,7 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="http://www.wowx.info">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="LeetCode dp 413 | 野原圆长的Blog">
+    <meta property="og:title" content="LeetCode dp 413 139 | 野原圆长的Blog">
     <meta property="og:description" content="null">
     
      <!--[if lte IE 9]>
@@ -215,7 +215,7 @@
 	<ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
 		for="post-toc-trigger-btn">
 			
-			<ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#413-Arithmetic-Slices"><span class="post-toc-number">1.</span> <span class="post-toc-text">413. Arithmetic Slices</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Problem-Description"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Problem Description</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Method"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Method</span></a></li></ol></li></ol>
+			<ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#413-Arithmetic-Slices"><span class="post-toc-number">1.</span> <span class="post-toc-text">413. Arithmetic Slices</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Problem-Description"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Problem Description</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Method"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Method</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#139-Word-Break"><span class="post-toc-number">2.</span> <span class="post-toc-text">139. Word Break</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Problem-Description-1"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">Problem Description</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Method-1"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">Method</span></a></li></ol></li></ol>
 		
 <!--			<li class="mdl-menu__item">Some Action</li>-->
 	</ul>
@@ -237,7 +237,7 @@
 		<div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(http://ww4.sinaimg.cn/large/6425ef91jw1f9apllc7boj20ic0960v9.jpg)">
 	
         <p class="article-headline-p">
-            LeetCode dp 413
+            LeetCode dp 413 139
         </p>
     </div>
 
@@ -289,7 +289,7 @@
     <!-- Leancloud Views -->
     <a class="post_share-link" href="#">
         <li class="mdl-menu__item">
-            <span id="/posts/20170226162442/" class="leancloud-views_num" data-flag-title="LeetCode dp 413">
+            <span id="/posts/20170226162442/" class="leancloud-views_num" data-flag-title="LeetCode dp 413 139">
      &nbsp;浏览量
 </span>
         </li>
@@ -299,7 +299,7 @@
     
     
     <!-- Share Twitter -->
-    <a class="post_share-link" href="https://twitter.com/intent/tweet?text=LeetCode dp 413&url=http://www.wowx.info//posts/20170226162442/index.html&via=Xin Wei" target="_blank">
+    <a class="post_share-link" href="https://twitter.com/intent/tweet?text=LeetCode dp 413 139&url=http://www.wowx.info//posts/20170226162442/index.html&via=Xin Wei" target="_blank">
         <li class="mdl-menu__item">
             分享到 Twitter
         </li>
@@ -313,7 +313,7 @@
     </a>
     
     <!-- Share Weibo -->
-    <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=LeetCode dp 413&url=http://www.wowx.info//posts/20170226162442/index.html&pic=&searchPic=false&style=simple" target="_blank">
+    <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=LeetCode dp 413 139&url=http://www.wowx.info//posts/20170226162442/index.html&pic=&searchPic=false&style=simple" target="_blank">
         <li class="mdl-menu__item">
             分享到微博
         </li>
@@ -339,6 +339,14 @@
 </blockquote>
 <p>给出一个数组，求其中等差子数列的个数</p>
 <h3 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h3><p>本题和<a href="https://leetcode.com/problems/unique-substrings-in-wraparound-string" target="_blank" rel="external">467. Unique Substring in Wraparound String</a>类似，以某个数结尾的等差数列的子等差数列的个数等于其长度-2，因为可以允许子数列可以重复，因此不需要maxLen来记录最长数列的长度。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">numberOfArithmeticSlices</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; A)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (A.size() &lt; <span class="number">3</span>)</div><div class="line">            <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> len = <span class="number">2</span>;</div><div class="line">        <span class="keyword">int</span> d = A[<span class="number">1</span>] - A[<span class="number">0</span>];</div><div class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt; A.size(); ++i)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span> (A[i] - A[i<span class="number">-1</span>] == d)</div><div class="line">            &#123;</div><div class="line">                ++len;</div><div class="line">                res += len - <span class="number">2</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span></div><div class="line">            &#123;</div><div class="line">                len = <span class="number">2</span>;</div><div class="line">                d = A[i] - A[i<span class="number">-1</span>];</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<h2 id="139-Word-Break"><a href="#139-Word-Break" class="headerlink" title="139. Word Break"></a>139. Word Break</h2><h3 id="Problem-Description-1"><a href="#Problem-Description-1" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
+<p>Given a non-empty string s and a dictionary wordDict containing a list of non-empty words, determine if s can be segmented into a space-separated sequence of one or more dictionary words. You may assume the dictionary does not contain duplicate words.</p>
+<p>For example, given<br>s = “leetcode”,<br>dict = [“leet”, “code”].</p>
+<p>Return true because “leetcode” can be segmented as “leet code”.</p>
+</blockquote>
+<p>给出一个字符串和一个字符串数组，判断字符串是否能通过字符串数组拼接而成。</p>
+<h3 id="Method-1"><a href="#Method-1" class="headerlink" title="Method"></a>Method</h3><p>采用动态规划方法解题<br><code>dp[i]</code>表示子串<code>s[i,...,n]</code>能否通过字典拼接成。<br>如果子串<code>s[i,...,j]</code>在字典中且<code>dp[j+1]</code>为真，则<code>s[i,...,n]</code>能通过字典拼接得到，则<code>dp[i]=true</code></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">wordBreak</span><span class="params">(<span class="built_in">string</span> s, <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; wordDict)</span> </span>&#123;</div><div class="line">        <span class="comment">// 状态dp[i], s[i到n]是否满足条件</span></div><div class="line">        <span class="comment">// dp[i] = dp[j+1] and s[i到j] $\in$ wordDict</span></div><div class="line">        <span class="built_in">string</span>::size_type len = s.length();</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt; dp(len+<span class="number">1</span>, <span class="literal">false</span>);</div><div class="line">        dp[len] = <span class="literal">true</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = len - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--)</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i; j &lt; len; ++j)</div><div class="line">            &#123;</div><div class="line">                <span class="built_in">string</span> str = s.substr(i, j-i+<span class="number">1</span>);</div><div class="line">                <span class="keyword">if</span> (dp[j+<span class="number">1</span>] and find(wordDict.begin(), wordDict.end(), str) != wordDict.end())</div><div class="line">                &#123;</div><div class="line">                    dp[i] = <span class="literal">true</span>;</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        <span class="keyword">return</span> dp[<span class="number">0</span>];</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 
 	
 	
@@ -368,7 +376,7 @@
         <div class="ds-thread" 
             data-thread-key="posts/20170226162442/" 
             data-url="http://www.wowx.info//posts/20170226162442/index.html"
-            data-title="LeetCode dp 413"></div>
+            data-title="LeetCode dp 413 139"></div>
     <!-- 多说评论框 end -->
 </div>
 
