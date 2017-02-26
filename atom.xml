@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.wowx.info/"/>
-  <updated>2017-02-26T08:37:51.409Z</updated>
+  <updated>2017-02-26T08:38:58.449Z</updated>
   <id>http://www.wowx.info/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>LeetCode 20170226 dp 413</title>
+    <title>LeetCode dp 413</title>
     <link href="http://www.wowx.info/posts/20170226162442/"/>
     <id>http://www.wowx.info/posts/20170226162442/</id>
     <published>2017-02-26T08:24:42.000Z</published>
-    <updated>2017-02-26T08:37:51.409Z</updated>
+    <updated>2017-02-26T08:38:58.449Z</updated>
     
     <content type="html"><![CDATA[<h2 id="413-Arithmetic-Slices"><a href="#413-Arithmetic-Slices" class="headerlink" title="413. Arithmetic Slices"></a>413. Arithmetic Slices</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
 <p>A sequence of number is called arithmetic if it consists of at least three elements and if the difference between any two consecutive elements is the same.</p>
