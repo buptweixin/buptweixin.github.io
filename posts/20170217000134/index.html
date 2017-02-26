@@ -215,7 +215,7 @@
 	<ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
 		for="post-toc-trigger-btn">
 			
-			<ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#chapter2-线性代数-Linear-algebra"><span class="post-toc-number">1.</span> <span class="post-toc-text">chapter2 线性代数 Linear algebra</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Chapter-3-概率与信息论"><span class="post-toc-number">2.</span> <span class="post-toc-text">Chapter 3 概率与信息论</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Chapter-5-机器学习基础"><span class="post-toc-number">3.</span> <span class="post-toc-text">Chapter 5 机器学习基础</span></a></li></ol>
+			<ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#chapter2-线性代数-Linear-algebra"><span class="post-toc-number">1.</span> <span class="post-toc-text">chapter2 线性代数 Linear algebra</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Chapter-3-概率与信息论"><span class="post-toc-number">2.</span> <span class="post-toc-text">Chapter 3 概率与信息论</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Chapter-3-概率与信息论-1"><span class="post-toc-number">3.</span> <span class="post-toc-text">Chapter 3 概率与信息论</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Chapter-5-机器学习基础"><span class="post-toc-number">4.</span> <span class="post-toc-text">Chapter 5 机器学习基础</span></a></li></ol>
 		
 <!--			<li class="mdl-menu__item">Some Action</li>-->
 	</ul>
@@ -355,6 +355,67 @@
 </li>
 </ol>
 <h2 id="Chapter-3-概率与信息论"><a href="#Chapter-3-概率与信息论" class="headerlink" title="Chapter 3 概率与信息论"></a>Chapter 3 概率与信息论</h2><ol>
+<li><p>概率论和信息论的作用</p>
+<ol>
+<li>概率论：帮助我们做出不确定性的陈述以及不确定性存在情况下的推理</li>
+<li>信息论: 帮助我们量化概率分布中不确定性的总量</li>
+</ol>
+</li>
+<li><p>频率概率和贝叶斯概率</p>
+<ol>
+<li><p>频率概率:直接与事件发生的频率相关，比如抽牌抽到红桃A</p>
+</li>
+<li><p>贝叶斯概率:涉及到确定性水平，如病人患流感的概率，不能通过产生无数病人的副本让他们在不同潜在情况下产生相同的症状</p>
+</li>
+</ol>
+</li>
+<li><p>期望 方差和协方差</p>
+<p>   <img src="/blog/1487261297133.png" alt="1487261297133"></p>
+</li>
+</ol>
+<p>   <img src="/blog/1487261465455.png" alt="1487261465455"></p>
+<p>   <img src="/blog/1487261496640.png" alt="1487261496640"></p>
+<ol>
+<li><p>常用概率分布</p>
+<ol>
+<li><p>伯努利分布bernoulli</p>
+<p><img src="/blog/1487261729476.png" alt="1487261729476"></p>
+</li>
+<li><p>Multinoulli分布、分类分布</p>
+<p><img src="/blog/1487261833494.png" alt="1487261833494"></p>
+</li>
+<li><p>高斯分布</p>
+<p><img src="/blog/1487261948564.png" alt="1487261948564"></p>
+<p><img src="/blog/1487262030049.png" alt="1487262030049"></p>
+<p><img src="/blog/1487262073763.png" alt="1487262073763"></p>
+<p><img src="/blog/1487262104154.png" alt="1487262104154"></p>
+</li>
+</ol>
+</li>
+<li><p>指数和拉普拉斯</p>
+<p><img src="/blog/1487262245348.png" alt="1487262245348"></p>
+<ol>
+<li><p>分布混合</p>
+<p><img src="/blog/1487262354530.png" alt="1487262354530"></p>
+</li>
+<li><p>自信息 熵 KL散度</p>
+<ol>
+<li><p>自信息：$$I=-log(P(x))$$</p>
+</li>
+<li><p>熵<img src="/tmp/1487263017548.png" alt="1487263017548"><img src="/blog/1487262865579.png" alt="1487262865579"> </p>
+</li>
+<li><p>KL散度</p>
+<p><img src="/blog/1487263043790.png" alt="1487263043790"> </p>
+<p><img src="/blog/1487263262210.png" alt="1487263262210"></p>
+<p>​    <img src="/blog/1487263293440.png" alt="1487263293440"></p>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><strong>结构化概率模型</strong>，看书，很重要，它将概率分解为图的形式</li>
+</ol>
+<h2 id="Chapter-3-概率与信息论-1"><a href="#Chapter-3-概率与信息论-1" class="headerlink" title="Chapter 3 概率与信息论"></a>Chapter 3 概率与信息论</h2><ol>
 <li>概率论和信息论的作用<ol>
 <li>概率论：帮助我们做出不确定性的陈述以及不确定性存在情况下的推理</li>
 <li>信息论: 帮助我们量化概率分布中不确定性的总量</li>
@@ -367,14 +428,22 @@
 </li>
 </ol>
 <h2 id="Chapter-5-机器学习基础"><a href="#Chapter-5-机器学习基础" class="headerlink" title="Chapter 5 机器学习基础"></a>Chapter 5 机器学习基础</h2><ol>
-<li>容量：指模型拟合各种函数的能力，容量低可能难以拟合，容量高可能过拟合<br> 度量容量的最有名的方法：VC维，表示二元分类器能标记的点x的最大数量<br> 训练误差和泛化误差随着模型容量的增长而增长，但是随着训练样本增多而下降</li>
-<li>没有免费午餐定理<br> 如果在所有可能的数据分布上取平均，那么每个分类算法在未事先观测到的点上都有相同的错误率,没有一个机器学习算法总是比其他的好。但是，现实中，我们不必考虑所有的数据分布，我们可以设计在这些分布上效果好的算法。</li>
-<li>正则化<ul>
-<li>权重衰减<br>  $$J(\omega)=MSE_{train} + \lambda\omega^T\omega$$<br>  对于线性回归模型,权重衰减因子越大</li>
+<li><p>容量：指模型拟合各种函数的能力，容量低可能难以拟合，容量高可能过拟合<br>   度量容量的最有名的方法：VC维，表示二元分类器能标记的点x的最大数量<br>   训练误差和泛化误差随着模型容量的增长而增长，但是随着训练样本增多而下降</p>
+</li>
+<li><p>没有免费午餐定理<br>   如果在所有可能的数据分布上取平均，那么每个分类算法在未事先观测到的点上都有相同的错误率,没有一个机器学习算法总是比其他的好。但是，现实中，我们不必考虑所有的数据分布，我们可以设计在这些分布上效果好的算法。</p>
+</li>
+<li><p>正则化</p>
+<ul>
+<li><p>权重衰减<br>  $$J(\omega)=MSE_{train} + \lambda\omega^T\omega$$<br>  对于线性回归模型,权重衰减因子$\lambda$,控制正则化项$\omega^T\omega$改变泛化能力</p>
+<p><img src="/blog/1488037278096.png" alt="1488037278096"></p>
+</li>
 </ul>
 </li>
+<li><p>超参数和验证集</p>
+</li>
 </ol>
-
+<pre><code>超参数不是通过模型本身学习到的，而是用验证集上的效果调整得到的
+</code></pre>
 	
 	
 	
@@ -516,7 +585,7 @@
         </a>
         <ul class="dropdown-menu">
             <li>
-            <a class="sidebar_archives-link" href="/archives/2017/02/">二月 2017<span class="sidebar_archives-count">8</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/12/">十二月 2016<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">十一月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">十月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/07/">七月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/06/">六月 2016<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/07/">七月 2015<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/06/">六月 2015<span class="sidebar_archives-count">6</span></a>
+            <a class="sidebar_archives-link" href="/archives/2017/02/">二月 2017<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/12/">十二月 2016<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">十一月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">十月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/07/">七月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/06/">六月 2016<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/07/">七月 2015<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/06/">六月 2015<span class="sidebar_archives-count">6</span></a>
         </ul>
     </li>
 
@@ -549,7 +618,7 @@
     <li>
         <a href="/archives">
              文章总数
-             <span class="sidebar-badge">58</span>
+             <span class="sidebar-badge">59</span>
         </a>
     </li>
 </ul>

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.wowx.info/"/>
-  <updated>2017-02-25T09:19:45.422Z</updated>
+  <updated>2017-02-26T08:32:15.361Z</updated>
   <id>http://www.wowx.info/</id>
   
   <author>
@@ -16,11 +16,51 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>LeetCode 20170226 dp 413</title>
+    <link href="http://www.wowx.info/posts/20170226162442/"/>
+    <id>http://www.wowx.info/posts/20170226162442/</id>
+    <published>2017-02-26T08:24:42.000Z</published>
+    <updated>2017-02-26T08:32:15.361Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="413-Arithmetic-Slices"><a href="#413-Arithmetic-Slices" class="headerlink" title="413. Arithmetic Slices"></a>413. Arithmetic Slices</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
+<p>A sequence of number is called arithmetic if it consists of at least three elements and if the difference between any two consecutive elements is the same.</p>
+<p>For example, these are arithmetic sequence:</p>
+<p>1, 3, 5, 7, 9<br>7, 7, 7, 7<br>3, -1, -5, -9<br>The following sequence is not arithmetic.</p>
+<p>1, 1, 2, 5, 7</p>
+<p>A zero-indexed array A consisting of N numbers is given. A slice of that array is any pair of integers (P, Q) such that 0 &lt;= P &lt; Q &lt; N.</p>
+<p>A slice (P, Q) of array A is called arithmetic if the sequence:<br>A[P], A[p + 1], …, A[Q - 1], A[Q] is arithmetic. In particular, this means that P + 1 &lt; Q.</p>
+<p>The function should return the number of arithmetic slices in the array A.</p>
+<p>Example:</p>
+<p>A = [1, 2, 3, 4]</p>
+<p>return: 3, for 3 arithmetic slices in A: [1, 2, 3], [2, 3, 4] and [1, 2, 3, 4] itself.</p>
+</blockquote>
+<p>给出一个数组，求其中等差子数列的个数</p>
+<h3 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h3><p>本题和(467. Unique Substring in Wraparound String)[<a href="https://leetcode.com/problems/unique-substrings-in-wraparound-string]类似，以某个数结尾的等差数列的子等差数列的个数等于其长度-2，因为可以允许子数列可以重复，因此不需要maxLen来记录最长数列的长度。" target="_blank" rel="external">https://leetcode.com/problems/unique-substrings-in-wraparound-string]类似，以某个数结尾的等差数列的子等差数列的个数等于其长度-2，因为可以允许子数列可以重复，因此不需要maxLen来记录最长数列的长度。</a><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">numberOfArithmeticSlices</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; A)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (A.size() &lt; <span class="number">3</span>)</div><div class="line">            <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> len = <span class="number">2</span>;</div><div class="line">        <span class="keyword">int</span> d = A[<span class="number">1</span>] - A[<span class="number">0</span>];</div><div class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt; A.size(); ++i)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span> (A[i] - A[i<span class="number">-1</span>] == d)</div><div class="line">            &#123;</div><div class="line">                ++len;</div><div class="line">                res += len - <span class="number">2</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span></div><div class="line">            &#123;</div><div class="line">                len = <span class="number">2</span>;</div><div class="line">                d = A[i] - A[i<span class="number">-1</span>];</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;413-Arithmetic-Slices&quot;&gt;&lt;a href=&quot;#413-Arithmetic-Slices&quot; class=&quot;headerlink&quot; title=&quot;413. Arithmetic Slices&quot;&gt;&lt;/a&gt;413. Arithmetic Slices
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="http://www.wowx.info/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
+    
+      <category term="string" scheme="http://www.wowx.info/tags/string/"/>
+    
+      <category term="dp" scheme="http://www.wowx.info/tags/dp/"/>
+    
+  </entry>
+  
+  <entry>
     <title>LeetCode 20170225 dp 516 467 416</title>
     <link href="http://www.wowx.info/posts/20170225144631/"/>
     <id>http://www.wowx.info/posts/20170225144631/</id>
     <published>2017-02-25T06:46:31.000Z</published>
-    <updated>2017-02-25T09:19:45.422Z</updated>
+    <updated>2017-02-26T08:23:58.241Z</updated>
     
     <content type="html"><![CDATA[<h2 id="516-Longest-Palindromic-Subsequence"><a href="#516-Longest-Palindromic-Subsequence" class="headerlink" title="516. Longest Palindromic Subsequence"></a>516. Longest Palindromic Subsequence</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
 <p>Given a string s, find the longest palindromic subsequence’s length in s. You may assume that the maximum length of s is 1000.</p>
@@ -152,7 +192,7 @@
     <link href="http://www.wowx.info/posts/20170217000134/"/>
     <id>http://www.wowx.info/posts/20170217000134/</id>
     <published>2017-02-16T16:01:34.000Z</published>
-    <updated>2017-02-25T15:35:31.122Z</updated>
+    <updated>2017-02-25T17:01:13.365Z</updated>
     
     <content type="html"><![CDATA[<h2 id="chapter2-线性代数-Linear-algebra"><a href="#chapter2-线性代数-Linear-algebra" class="headerlink" title="chapter2 线性代数 Linear algebra"></a>chapter2 线性代数 Linear algebra</h2><ol>
 <li><p>张量：多于两维的量</p>
@@ -184,6 +224,67 @@
 </li>
 </ol>
 <h2 id="Chapter-3-概率与信息论"><a href="#Chapter-3-概率与信息论" class="headerlink" title="Chapter 3 概率与信息论"></a>Chapter 3 概率与信息论</h2><ol>
+<li><p>概率论和信息论的作用</p>
+<ol>
+<li>概率论：帮助我们做出不确定性的陈述以及不确定性存在情况下的推理</li>
+<li>信息论: 帮助我们量化概率分布中不确定性的总量</li>
+</ol>
+</li>
+<li><p>频率概率和贝叶斯概率</p>
+<ol>
+<li><p>频率概率:直接与事件发生的频率相关，比如抽牌抽到红桃A</p>
+</li>
+<li><p>贝叶斯概率:涉及到确定性水平，如病人患流感的概率，不能通过产生无数病人的副本让他们在不同潜在情况下产生相同的症状</p>
+</li>
+</ol>
+</li>
+<li><p>期望 方差和协方差</p>
+<p>   <img src="/blog/1487261297133.png" alt="1487261297133"></p>
+</li>
+</ol>
+<p>   <img src="/blog/1487261465455.png" alt="1487261465455"></p>
+<p>   <img src="/blog/1487261496640.png" alt="1487261496640"></p>
+<ol>
+<li><p>常用概率分布</p>
+<ol>
+<li><p>伯努利分布bernoulli</p>
+<p><img src="/blog/1487261729476.png" alt="1487261729476"></p>
+</li>
+<li><p>Multinoulli分布、分类分布</p>
+<p><img src="/blog/1487261833494.png" alt="1487261833494"></p>
+</li>
+<li><p>高斯分布</p>
+<p><img src="/blog/1487261948564.png" alt="1487261948564"></p>
+<p><img src="/blog/1487262030049.png" alt="1487262030049"></p>
+<p><img src="/blog/1487262073763.png" alt="1487262073763"></p>
+<p><img src="/blog/1487262104154.png" alt="1487262104154"></p>
+</li>
+</ol>
+</li>
+<li><p>指数和拉普拉斯</p>
+<p><img src="/blog/1487262245348.png" alt="1487262245348"></p>
+<ol>
+<li><p>分布混合</p>
+<p><img src="/blog/1487262354530.png" alt="1487262354530"></p>
+</li>
+<li><p>自信息 熵 KL散度</p>
+<ol>
+<li><p>自信息：$$I=-log(P(x))$$</p>
+</li>
+<li><p>熵<img src="/tmp/1487263017548.png" alt="1487263017548"><img src="/blog/1487262865579.png" alt="1487262865579"> </p>
+</li>
+<li><p>KL散度</p>
+<p><img src="/blog/1487263043790.png" alt="1487263043790"> </p>
+<p><img src="/blog/1487263262210.png" alt="1487263262210"></p>
+<p>​    <img src="/blog/1487263293440.png" alt="1487263293440"></p>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><strong>结构化概率模型</strong>，看书，很重要，它将概率分解为图的形式</li>
+</ol>
+<h2 id="Chapter-3-概率与信息论-1"><a href="#Chapter-3-概率与信息论-1" class="headerlink" title="Chapter 3 概率与信息论"></a>Chapter 3 概率与信息论</h2><ol>
 <li>概率论和信息论的作用<ol>
 <li>概率论：帮助我们做出不确定性的陈述以及不确定性存在情况下的推理</li>
 <li>信息论: 帮助我们量化概率分布中不确定性的总量</li>
@@ -196,14 +297,22 @@
 </li>
 </ol>
 <h2 id="Chapter-5-机器学习基础"><a href="#Chapter-5-机器学习基础" class="headerlink" title="Chapter 5 机器学习基础"></a>Chapter 5 机器学习基础</h2><ol>
-<li>容量：指模型拟合各种函数的能力，容量低可能难以拟合，容量高可能过拟合<br> 度量容量的最有名的方法：VC维，表示二元分类器能标记的点x的最大数量<br> 训练误差和泛化误差随着模型容量的增长而增长，但是随着训练样本增多而下降</li>
-<li>没有免费午餐定理<br> 如果在所有可能的数据分布上取平均，那么每个分类算法在未事先观测到的点上都有相同的错误率,没有一个机器学习算法总是比其他的好。但是，现实中，我们不必考虑所有的数据分布，我们可以设计在这些分布上效果好的算法。</li>
-<li>正则化<ul>
-<li>权重衰减<br>  $$J(\omega)=MSE_{train} + \lambda\omega^T\omega$$<br>  对于线性回归模型,权重衰减因子越大</li>
+<li><p>容量：指模型拟合各种函数的能力，容量低可能难以拟合，容量高可能过拟合<br>   度量容量的最有名的方法：VC维，表示二元分类器能标记的点x的最大数量<br>   训练误差和泛化误差随着模型容量的增长而增长，但是随着训练样本增多而下降</p>
+</li>
+<li><p>没有免费午餐定理<br>   如果在所有可能的数据分布上取平均，那么每个分类算法在未事先观测到的点上都有相同的错误率,没有一个机器学习算法总是比其他的好。但是，现实中，我们不必考虑所有的数据分布，我们可以设计在这些分布上效果好的算法。</p>
+</li>
+<li><p>正则化</p>
+<ul>
+<li><p>权重衰减<br>  $$J(\omega)=MSE_{train} + \lambda\omega^T\omega$$<br>  对于线性回归模型,权重衰减因子$\lambda$,控制正则化项$\omega^T\omega$改变泛化能力</p>
+<p><img src="/blog/1488037278096.png" alt="1488037278096"></p>
+</li>
 </ul>
 </li>
+<li><p>超参数和验证集</p>
+</li>
 </ol>
-]]></content>
+<pre><code>超参数不是通过模型本身学习到的，而是用验证集上的效果调整得到的
+</code></pre>]]></content>
     
     <summary type="html">
     
@@ -1451,73 +1560,6 @@
       <category term="array" scheme="http://www.wowx.info/tags/array/"/>
     
       <category term="leetcode" scheme="http://www.wowx.info/tags/leetcode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>leetcode best Time Buy and SellStock I</title>
-    <link href="http://www.wowx.info/posts//posts/20161202170711/"/>
-    <id>http://www.wowx.info/posts//posts/20161202170711/</id>
-    <published>2016-12-02T09:07:11.000Z</published>
-    <updated>2016-12-02T11:34:22.859Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Best-Time-to-Buy-and-Sell-Stock"><a href="#Best-Time-to-Buy-and-Sell-Stock" class="headerlink" title="Best Time to Buy and Sell Stock"></a>Best Time to Buy and Sell Stock</h2><blockquote>
-<p>Say you have an array for which the <em>i</em>th element is the price of a given stock on day <em>i</em>.</p>
-<p>If you were only permitted to complete at most one transaction (ie, buy one and sell one share of the stock), design an algorithm to find the maximum profit.</p>
-<p><strong>Example 1:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt; Input: [7, 1, 5, 3, 6, 4]</div><div class="line">&gt; Output: 5</div><div class="line">&gt;</div><div class="line">&gt; max. difference = 6-1 = 5 (not 7-1 = 6, as selling price needs to be larger than buying price)</div><div class="line">&gt;</div></pre></td></tr></table></figure>
-</blockquote>
-<p>&gt;</p>
-<blockquote>
-<p><strong>Example 2:</strong></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt; Input: [<span class="number">7</span>, <span class="number">6</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">1</span>]</div><div class="line">&gt; Output: <span class="number">0</span></div><div class="line">&gt;</div><div class="line">&gt; In <span class="keyword">this</span> <span class="keyword">case</span>, no transaction is done, i.e. max profit = <span class="number">0.</span></div><div class="line">&gt;</div></pre></td></tr></table></figure>
-</blockquote>
-<h3 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h3><p>假设有一个数组，它的第i个元素表示某只股票在第i天的股价，设计一个算法找出最大收益，要求最多能进行一次买卖操作。</p>
-<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>采用冬天规划的方法来解此题,动态规划最重要的两步是状态定义和状态转移方程的定义</p>
-<h4 id="状态定义"><a href="#状态定义" class="headerlink" title="状态定义"></a>状态定义</h4><p>在任意时间点，只能处于两种状态：股票已经买入，股票已经卖出</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">buy[i]:第i天处于已经买入股票的状态时最大资金</div><div class="line">sell[i]:第i天处于已经卖出股票的状态时最大资金</div></pre></td></tr></table></figure>
-<h4 id="状态转移方程的定义"><a href="#状态转移方程的定义" class="headerlink" title="状态转移方程的定义"></a>状态转移方程的定义</h4><ol>
-<li><p>buy[i]— 第i天已经处于买入股票状态</p>
-<p>因为只能买卖一次，所以状态转移只能是</p>
-<ol>
-<li><p>第i-1天已经处于买入股票状态，第i天不买卖股票，维持在买入状态:</p>
-<p><code>buy[i-1]-&gt;buy[i]</code></p>
-</li>
-</ol>
-</li>
-<li><p>sell[i]—第i天已经处于卖出股票的状态</p>
-<p>​</p>
-<ol>
-<li><p>第i-1天已经处于卖出股票状态，第i天不买卖，维持在卖出状态:</p>
-<p><code>sell[i-1]-&gt;sell[i]</code></p>
-</li>
-<li><p>第i-1天处于买入股票的状态，第i天将持有的股票卖出</p>
-<p><code>buy[i-1]-&gt;sell[i]</code></p>
-</li>
-</ol>
-</li>
-</ol>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sell[i]=max(buy[i<span class="number">-1</span>]+prices[i], sell[i<span class="number">-1</span>]);</div><div class="line">buy[i]=max(-prices[i], buy[i<span class="number">-1</span>]);</div></pre></td></tr></table></figure>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">class Solution &#123;</div><div class="line">  public:</div><div class="line">  	int maxProfit(vector&lt;int&gt;&amp; prices) &#123;</div><div class="line">		int buy(INT_MIN), sell(0);</div><div class="line">      	for(int price: prices)</div><div class="line">          &#123;</div><div class="line">            sell = max(buy + price, sell);</div><div class="line">          	buy = max(-price, buy);</div><div class="line">          &#125;</div><div class="line">      	return sell;</div><div class="line">  	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<hr>
-<a href="/posts//posts/201612021714/" title="leetcode Best Time to Buy and Sell Stock II">leetcode Best Time to Buy and Sell Stock II</a>
-<a href="/posts//posts/201612021917/" title="leetcode Best Time to Buy and Sell Stock III">leetcode Best Time to Buy and Sell Stock III</a>
-<a href="/posts//posts/201612021921/" title="leetcode Best Time to Buy and Sell Stock IV">leetcode Best Time to Buy and Sell Stock IV</a>
-<a href="/posts//posts/201612021923/" title="leetcode Best Time to Buy and Sell Stock with Cooldown">leetcode Best Time to Buy and Sell Stock with Cooldown</a>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Best-Time-to-Buy-and-Sell-Stock&quot;&gt;&lt;a href=&quot;#Best-Time-to-Buy-and-Sell-Stock&quot; class=&quot;headerlink&quot; title=&quot;Best Time to Buy and Sell Stoc
-    
-    </summary>
-    
-    
-      <category term="算法" scheme="http://www.wowx.info/tags/%E7%AE%97%E6%B3%95/"/>
-    
-      <category term="dp" scheme="http://www.wowx.info/tags/dp/"/>
-    
-      <category term="array" scheme="http://www.wowx.info/tags/array/"/>
     
   </entry>
   
