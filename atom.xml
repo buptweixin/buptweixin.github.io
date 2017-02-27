@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.wowx.info/"/>
-  <updated>2017-02-26T10:29:29.798Z</updated>
+  <updated>2017-02-27T03:51:52.101Z</updated>
   <id>http://www.wowx.info/</id>
   
   <author>
@@ -14,6 +14,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>LeetCode dp 304</title>
+    <link href="http://www.wowx.info/posts/20170227114327/"/>
+    <id>http://www.wowx.info/posts/20170227114327/</id>
+    <published>2017-02-27T03:43:27.000Z</published>
+    <updated>2017-02-27T03:51:52.101Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="304-Range-Sum-Query-2D-Immutable"><a href="#304-Range-Sum-Query-2D-Immutable" class="headerlink" title="304. Range Sum Query 2D-Immutable"></a>304. Range Sum Query 2D-Immutable</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><p>Given a 2D matrix matrix, find the sum of the elements inside the rectangle defined by its upper left corner (row1, col1) and lower right corner (row2, col2).</p>
+<p>Range Sum Query 2D<br><img src="https://leetcode.com/static/images/courses/range_sum_query_2d.png" alt="img"><br>The above rectangle (with the red border) is defined by (row1, col1) = (2, 1) and (row2, col2) = (4, 3), which contains sum = 8.</p>
+<p>Example:<br>Given matrix = [<br>  [3, 0, 1, 4, 2],<br>  [5, 6, 3, 2, 1],<br>  [1, 2, 0, 1, 5],<br>  [4, 1, 0, 1, 7],<br>  [1, 0, 3, 0, 5]<br>]</p>
+<p>sumRegion(2, 1, 4, 3) -&gt; 8<br>sumRegion(1, 1, 2, 2) -&gt; 11<br>sumRegion(1, 2, 2, 4) -&gt; 12<br>Note:<br>You may assume that the matrix does not change.<br>There are many calls to sumRegion function.<br>You may assume that row1 ≤ row2 and col1 ≤ col2.</p>
+<p>有一个二维数组表示的矩形，给出一个子矩形的左上角和右下角坐标，求子矩形框出的数的面积</p>
+<h3 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h3><p>采用动态规划的方法<br>状态<code>sums[i][j]</code>表示左上角到坐标<code>[i][j]</code>的面积，<code>sums[row2+1][col2+1] - sums[row2+1][col1] - sums[row1][col2+1] + sums[row1][col1];</code></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> NumMatrix &#123;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">    <span class="keyword">int</span> row, col;</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; sums;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    NumMatrix(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; matrix) &#123;</div><div class="line">        row = matrix.size();</div><div class="line">        col = row&gt;<span class="number">0</span> ? matrix[<span class="number">0</span>].size() : <span class="number">0</span>;</div><div class="line">        sums = <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;(row+<span class="number">1</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(col+<span class="number">1</span>, <span class="number">0</span>));</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=row; i++) &#123;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>; j&lt;=col; j++) &#123;</div><div class="line">                sums[i][j] = matrix[i<span class="number">-1</span>][j<span class="number">-1</span>] + </div><div class="line">                             sums[i<span class="number">-1</span>][j] + sums[i][j<span class="number">-1</span>] - sums[i<span class="number">-1</span>][j<span class="number">-1</span>] ;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">sumRegion</span><span class="params">(<span class="keyword">int</span> row1, <span class="keyword">int</span> col1, <span class="keyword">int</span> row2, <span class="keyword">int</span> col2)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> sums[row2+<span class="number">1</span>][col2+<span class="number">1</span>] - sums[row2+<span class="number">1</span>][col1] - sums[row1][col2+<span class="number">1</span>] + sums[row1][col1];</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Your NumMatrix object will be instantiated and called as such:</div><div class="line"> * NumMatrix obj = new NumMatrix(matrix);</div><div class="line"> * int param_1 = obj.sumRegion(row1,col1,row2,col2);</div><div class="line"> */</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;304-Range-Sum-Query-2D-Immutable&quot;&gt;&lt;a href=&quot;#304-Range-Sum-Query-2D-Immutable&quot; class=&quot;headerlink&quot; title=&quot;304. Range Sum Query 2D-Immu
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="http://www.wowx.info/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
+    
+      <category term="dp" scheme="http://www.wowx.info/tags/dp/"/>
+    
+  </entry>
   
   <entry>
     <title>LeetCode dp 413 139</title>
@@ -1502,70 +1533,6 @@
     <summary type="html">
     
       &lt;h2 id=&quot;Best-Time-to-Buy-and-Sell-Stock-III&quot;&gt;&lt;a href=&quot;#Best-Time-to-Buy-and-Sell-Stock-III&quot; class=&quot;headerlink&quot; title=&quot;Best Time to Buy and S
-    
-    </summary>
-    
-    
-      <category term="算法" scheme="http://www.wowx.info/tags/%E7%AE%97%E6%B3%95/"/>
-    
-      <category term="dp" scheme="http://www.wowx.info/tags/dp/"/>
-    
-      <category term="array" scheme="http://www.wowx.info/tags/array/"/>
-    
-      <category term="leetcode" scheme="http://www.wowx.info/tags/leetcode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>leetcode Best Time to Buy and Sell Stock II</title>
-    <link href="http://www.wowx.info/posts//posts/201612021714/"/>
-    <id>http://www.wowx.info/posts//posts/201612021714/</id>
-    <published>2016-12-02T09:14:42.000Z</published>
-    <updated>2016-12-02T11:30:24.547Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Best-Time-To-buy-and-sell-stock-II"><a href="#Best-Time-To-buy-and-sell-stock-II" class="headerlink" title="Best Time To buy and sell stock II"></a>Best Time To buy and sell stock II</h2><blockquote>
-<p>Say you have an array for which the <em>i</em>th element is the price of a given stock on day <em>i</em>.</p>
-<p>Design an algorithm to find the maximum profit. You may complete as many transactions as you like (ie, buy one and sell one share of the stock multiple times). However, you may not engage in multiple transactions at the same time (ie, you must sell the stock before you buy again).</p>
-</blockquote>
-<h3 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h3><p>假设有一个数组，它的第i个元素表示某只股票在第i天的股价，设计一个算法找出最大收益，可以进行任意次数的交易。</p>
-<h3 id="状态定义"><a href="#状态定义" class="headerlink" title="状态定义"></a>状态定义</h3><p>在任意时间点，只能处于两种状态：股票已经买入，股票已经卖出</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">buy[i]:第i天处于已经买入股票的状态时最大资金</div><div class="line">sell[i]:第i天处于已经卖出股票的状态时最大资金</div></pre></td></tr></table></figure>
-<h3 id="状态转移方程定义"><a href="#状态转移方程定义" class="headerlink" title="状态转移方程定义"></a>状态转移方程定义</h3><ol>
-<li><p>buy[i]— 第i天已经处于买入股票状态</p>
-<p>因为只能买卖一次，所以状态转移只能是</p>
-<ol>
-<li><p>第i-1天已经处于买入股票状态，第i天不买卖股票，维持在买入状态:</p>
-<p><code>buy[i-1]-&gt;buy[i]</code></p>
-</li>
-<li><p>第i-1天已经处于卖出股票状态，第i天再次买入股票，进入持有股票状态</p>
-<p><code>sell[i-1]-&gt;buy[i]</code></p>
-</li>
-</ol>
-</li>
-<li><p>sell[i]—第i天已经处于卖出股票的状态</p>
-<p>​</p>
-<ol>
-<li><p>第i-1天已经处于卖出股票状态，第i天不买卖，维持在卖出状态:</p>
-<p><code>sell[i-1]-&gt;sell[i]</code></p>
-</li>
-<li><p>第i-1天处于买入股票的状态，第i天将持有的股票卖出</p>
-<p><code>buy[i-1]-&gt;sell[i]</code></p>
-</li>
-</ol>
-</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sell[i]=max(buy[i-1]+prices[i], sell[i-1]);</div><div class="line">buy[i]=max(sell[i-1]-prices[i], buy[i-1]);</div></pre></td></tr></table></figure>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">class Solution &#123;</div><div class="line">  public:</div><div class="line">  	int maxProfit(vector&lt;int&gt;&amp; prices) &#123;</div><div class="line">		int buy(INT_MIN), sell(0), prev_sell;</div><div class="line">      	for(int price: prices)</div><div class="line">          &#123;</div><div class="line">          	prev_sell = sell;</div><div class="line">            sell = max(buy + price, prev_sell);</div><div class="line">          	buy = max(prev_sell-price, buy);</div><div class="line">          &#125;</div><div class="line">      	return sell;</div><div class="line">  	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<hr>
-<a href="/posts//posts/20161202170711/" title="leetcode best Time Buy and SellStock I">leetcode best Time Buy and SellStock I</a>
-<a href="/posts//posts/201612021917/" title="leetcode Best Time to Buy and Sell Stock III">leetcode Best Time to Buy and Sell Stock III</a>
-<a href="/posts//posts/201612021921/" title="leetcode Best Time to Buy and Sell Stock IV">leetcode Best Time to Buy and Sell Stock IV</a>
-<a href="/posts//posts/201612021923/" title="leetcode Best Time to Buy and Sell Stock with Cooldown">leetcode Best Time to Buy and Sell Stock with Cooldown</a>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Best-Time-To-buy-and-sell-stock-II&quot;&gt;&lt;a href=&quot;#Best-Time-To-buy-and-sell-stock-II&quot; class=&quot;headerlink&quot; title=&quot;Best Time To buy and sel
     
     </summary>
     
