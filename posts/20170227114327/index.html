@@ -4,7 +4,7 @@
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Title -->
     
     <title>
-        LeetCode dp 304 | 野原圆长的Blog
+        LeetCode dp 304 279 | 野原圆长的Blog
     </title>
     
     <!-- Favicons -->
@@ -40,7 +40,7 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="http://www.wowx.info">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="LeetCode dp 304 | 野原圆长的Blog">
+    <meta property="og:title" content="LeetCode dp 304 279 | 野原圆长的Blog">
     <meta property="og:description" content="null">
     
      <!--[if lte IE 9]>
@@ -215,7 +215,7 @@
 	<ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
 		for="post-toc-trigger-btn">
 			
-			<ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#304-Range-Sum-Query-2D-Immutable"><span class="post-toc-number">1.</span> <span class="post-toc-text">304. Range Sum Query 2D-Immutable</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Problem-Description"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Problem Description</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Method"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Method</span></a></li></ol></li></ol>
+			<ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#304-Range-Sum-Query-2D-Immutable"><span class="post-toc-number">1.</span> <span class="post-toc-text">304. Range Sum Query 2D-Immutable</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Problem-Description"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Problem Description</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Method"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Method</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#279-Perfect-Squares"><span class="post-toc-number">2.</span> <span class="post-toc-text">279. Perfect Squares</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Problem-Description-1"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">Problem Description</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Method-1"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">Method</span></a></li></ol></li></ol>
 		
 <!--			<li class="mdl-menu__item">Some Action</li>-->
 	</ul>
@@ -237,7 +237,7 @@
 		<div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(http://ww4.sinaimg.cn/large/6425ef91jw1f9apllc7boj20ic0960v9.jpg)">
 	
         <p class="article-headline-p">
-            LeetCode dp 304
+            LeetCode dp 304 279
         </p>
     </div>
 
@@ -289,7 +289,7 @@
     <!-- Leancloud Views -->
     <a class="post_share-link" href="#">
         <li class="mdl-menu__item">
-            <span id="/posts/20170227114327/" class="leancloud-views_num" data-flag-title="LeetCode dp 304">
+            <span id="/posts/20170227114327/" class="leancloud-views_num" data-flag-title="LeetCode dp 304 279">
      &nbsp;浏览量
 </span>
         </li>
@@ -299,7 +299,7 @@
     
     
     <!-- Share Twitter -->
-    <a class="post_share-link" href="https://twitter.com/intent/tweet?text=LeetCode dp 304&url=http://www.wowx.info//posts/20170227114327/index.html&via=Xin Wei" target="_blank">
+    <a class="post_share-link" href="https://twitter.com/intent/tweet?text=LeetCode dp 304 279&url=http://www.wowx.info//posts/20170227114327/index.html&via=Xin Wei" target="_blank">
         <li class="mdl-menu__item">
             分享到 Twitter
         </li>
@@ -313,7 +313,7 @@
     </a>
     
     <!-- Share Weibo -->
-    <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=LeetCode dp 304&url=http://www.wowx.info//posts/20170227114327/index.html&pic=&searchPic=false&style=simple" target="_blank">
+    <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=LeetCode dp 304 279&url=http://www.wowx.info//posts/20170227114327/index.html&pic=&searchPic=false&style=simple" target="_blank">
         <li class="mdl-menu__item">
             分享到微博
         </li>
@@ -331,7 +331,14 @@
 <p>sumRegion(2, 1, 4, 3) -&gt; 8<br>sumRegion(1, 1, 2, 2) -&gt; 11<br>sumRegion(1, 2, 2, 4) -&gt; 12<br>Note:<br>You may assume that the matrix does not change.<br>There are many calls to sumRegion function.<br>You may assume that row1 ≤ row2 and col1 ≤ col2.</p>
 <p>有一个二维数组表示的矩形，给出一个子矩形的左上角和右下角坐标，求子矩形框出的数的面积</p>
 <h3 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h3><p>采用动态规划的方法<br>状态<code>sums[i][j]</code>表示左上角到坐标<code>[i][j]</code>的面积，<code>sums[row2+1][col2+1] - sums[row2+1][col1] - sums[row1][col2+1] + sums[row1][col1];</code></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> NumMatrix &#123;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">    <span class="keyword">int</span> row, col;</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; sums;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    NumMatrix(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; matrix) &#123;</div><div class="line">        row = matrix.size();</div><div class="line">        col = row&gt;<span class="number">0</span> ? matrix[<span class="number">0</span>].size() : <span class="number">0</span>;</div><div class="line">        sums = <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;(row+<span class="number">1</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(col+<span class="number">1</span>, <span class="number">0</span>));</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=row; i++) &#123;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>; j&lt;=col; j++) &#123;</div><div class="line">                sums[i][j] = matrix[i<span class="number">-1</span>][j<span class="number">-1</span>] + </div><div class="line">                             sums[i<span class="number">-1</span>][j] + sums[i][j<span class="number">-1</span>] - sums[i<span class="number">-1</span>][j<span class="number">-1</span>] ;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">sumRegion</span><span class="params">(<span class="keyword">int</span> row1, <span class="keyword">int</span> col1, <span class="keyword">int</span> row2, <span class="keyword">int</span> col2)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> sums[row2+<span class="number">1</span>][col2+<span class="number">1</span>] - sums[row2+<span class="number">1</span>][col1] - sums[row1][col2+<span class="number">1</span>] + sums[row1][col1];</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Your NumMatrix object will be instantiated and called as such:</div><div class="line"> * NumMatrix obj = new NumMatrix(matrix);</div><div class="line"> * int param_1 = obj.sumRegion(row1,col1,row2,col2);</div><div class="line"> */</div></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> NumMatrix &#123;</div><div class="line"><span class="keyword">private</span>:</div><div class="line">    <span class="keyword">int</span> row, col;</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; sums;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    NumMatrix(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; matrix) &#123;</div><div class="line">        row = matrix.size();</div><div class="line">        col = row&gt;<span class="number">0</span> ? matrix[<span class="number">0</span>].size() : <span class="number">0</span>;</div><div class="line">        sums = <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;(row+<span class="number">1</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(col+<span class="number">1</span>, <span class="number">0</span>));</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=row; i++) &#123;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>; j&lt;=col; j++) &#123;</div><div class="line">                sums[i][j] = matrix[i<span class="number">-1</span>][j<span class="number">-1</span>] +</div><div class="line">                             sums[i<span class="number">-1</span>][j] + sums[i][j<span class="number">-1</span>] - sums[i<span class="number">-1</span>][j<span class="number">-1</span>] ;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">sumRegion</span><span class="params">(<span class="keyword">int</span> row1, <span class="keyword">int</span> col1, <span class="keyword">int</span> row2, <span class="keyword">int</span> col2)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> sums[row2+<span class="number">1</span>][col2+<span class="number">1</span>] - sums[row2+<span class="number">1</span>][col1] - sums[row1][col2+<span class="number">1</span>] + sums[row1][col1];</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Your NumMatrix object will be instantiated and called as such:</div><div class="line"> * NumMatrix obj = new NumMatrix(matrix);</div><div class="line"> * int param_1 = obj.sumRegion(row1,col1,row2,col2);</div><div class="line"> */</div></pre></td></tr></table></figure>
+<h2 id="279-Perfect-Squares"><a href="#279-Perfect-Squares" class="headerlink" title="279. Perfect Squares"></a>279. Perfect Squares</h2><h3 id="Problem-Description-1"><a href="#Problem-Description-1" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
+<p>Given a positive integer n, find the least number of perfect square numbers (for example, 1, 4, 9, 16, …) which sum to n.</p>
+<p>For example, given n = 12, return 3 because 12 = 4 + 4 + 4; given n = 13, return 2 because 13 = 4 + 9.</p>
+</blockquote>
+<p>给出一个数字<code>n</code>,求其最少可以由多少个平方数的和构成</p>
+<h3 id="Method-1"><a href="#Method-1" class="headerlink" title="Method"></a>Method</h3><p>采用动态规划方法, <code>dp[i]</code>表示数字i最少需要多少平方数构成，则<code>dp[i] = min(dp[i], dp[i-j*j]+1)</code></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">numSquares</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</div><div class="line">    <span class="comment">//     static vector&lt;int&gt; dp &#123;0&#125;;</span></div><div class="line">    <span class="comment">// int m = dp.size();</span></div><div class="line">    <span class="comment">// dp.resize(max(m, n+1), INT_MAX);</span></div><div class="line">    <span class="comment">// for (int i=1, i2; (i2 = i*i)&lt;=n; ++i)</span></div><div class="line">    <span class="comment">//     for (int j=max(m, i2); j&lt;=n; ++j)</span></div><div class="line">    <span class="comment">//         if (dp[j] &gt; dp[j-i2] + 1)</span></div><div class="line">    <span class="comment">//             dp[j] = dp[j-i2] + 1;</span></div><div class="line">    <span class="comment">// return dp[n];</span></div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dp(n+<span class="number">1</span>, n);</div><div class="line">        dp[<span class="number">0</span>] = <span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>, j2; (j2 = j*j) &lt;= i; ++j)</div><div class="line">                <span class="keyword">if</span> (dp[i] &gt; dp[i-j2])</div><div class="line">                    dp[i] = dp[i-j2] + <span class="number">1</span>;</div><div class="line">                <span class="comment">// p[i] = min(dp[i], dp[i-j*j] + 1);</span></div><div class="line">        <span class="keyword">return</span> dp[n];</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 
 	
 	
@@ -361,7 +368,7 @@
         <div class="ds-thread" 
             data-thread-key="posts/20170227114327/" 
             data-url="http://www.wowx.info//posts/20170227114327/index.html"
-            data-title="LeetCode dp 304"></div>
+            data-title="LeetCode dp 304 279"></div>
     <!-- 多说评论框 end -->
 </div>
 
