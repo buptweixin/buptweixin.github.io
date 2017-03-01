@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.wowx.info/"/>
-  <updated>2017-03-01T08:54:23.247Z</updated>
+  <updated>2017-03-01T09:17:37.191Z</updated>
   <id>http://www.wowx.info/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>LeetCode-20170301-dp-221</title>
+    <title>LeetCode dp 221</title>
     <link href="http://www.wowx.info/posts/201703011653/"/>
     <id>http://www.wowx.info/posts/201703011653/</id>
     <published>2017-03-01T08:53:03.000Z</published>
-    <updated>2017-03-01T08:54:23.247Z</updated>
+    <updated>2017-03-01T09:17:37.191Z</updated>
     
     <content type="html"><![CDATA[<h2 id="221-Maximal-Square"><a href="#221-Maximal-Square" class="headerlink" title="221. Maximal Square"></a>221. Maximal Square</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
 <p>Given a 2D binary matrix filled with 0’s and 1’s, find the largest square containing only 1’s and return its area.</p>
