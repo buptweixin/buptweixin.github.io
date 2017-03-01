@@ -263,7 +263,7 @@
     <link href="http://www.wowx.info/posts/20170217000134/"/>
     <id>http://www.wowx.info/posts/20170217000134/</id>
     <published>2017-02-16T16:01:34.000Z</published>
-    <updated>2017-03-01T02:26:07.295Z</updated>
+    <updated>2017-03-01T02:29:46.063Z</updated>
     
     <content type="html"><![CDATA[<h2 id="chapter2-线性代数-Linear-algebra"><a href="#chapter2-线性代数-Linear-algebra" class="headerlink" title="chapter2 线性代数 Linear algebra"></a>chapter2 线性代数 Linear algebra</h2><ol>
 <li><p>张量：多于两维的量</p>
@@ -313,41 +313,41 @@
 <p>   <img src="/img/blog/1487261297133.png" alt="1487261297133"></p>
 </li>
 </ol>
-<p>   <img src="/blog/1487261465455.png" alt="1487261465455"></p>
-<p>   <img src="/blog/1487261496640.png" alt="1487261496640"></p>
+<p>   <img src="/img/blog/1487261465455.png" alt="1487261465455"></p>
+<p>   <img src="/img/blog/1487261496640.png" alt="1487261496640"></p>
 <ol>
 <li><p>常用概率分布</p>
 <ol>
 <li><p>伯努利分布bernoulli</p>
-<p><img src="/blog/1487261729476.png" alt="1487261729476"></p>
+<p><img src="/img/blog/1487261729476.png" alt="1487261729476"></p>
 </li>
 <li><p>Multinoulli分布、分类分布</p>
-<p><img src="/blog/1487261833494.png" alt="1487261833494"></p>
+<p><img src="/img/blog/1487261833494.png" alt="1487261833494"></p>
 </li>
 <li><p>高斯分布</p>
-<p><img src="/blog/1487261948564.png" alt="1487261948564"></p>
-<p><img src="/blog/1487262030049.png" alt="1487262030049"></p>
-<p><img src="/blog/1487262073763.png" alt="1487262073763"></p>
-<p><img src="/blog/1487262104154.png" alt="1487262104154"></p>
+<p><img src="/img/blog/1487261948564.png" alt="1487261948564"></p>
+<p><img src="/img/blog/1487262030049.png" alt="1487262030049"></p>
+<p><img src="/img/blog/1487262073763.png" alt="1487262073763"></p>
+<p><img src="/img/blog/1487262104154.png" alt="1487262104154"></p>
 </li>
 </ol>
 </li>
 <li><p>指数和拉普拉斯</p>
-<p><img src="/blog/1487262245348.png" alt="1487262245348"></p>
+<p><img src="/img/blog/1487262245348.png" alt="1487262245348"></p>
 <ol>
 <li><p>分布混合</p>
-<p><img src="/blog/1487262354530.png" alt="1487262354530"></p>
+<p><img src="/img/blog/1487262354530.png" alt="1487262354530"></p>
 </li>
 <li><p>自信息 熵 KL散度</p>
 <ol>
 <li><p>自信息：$$I=-log(P(x))$$</p>
 </li>
-<li><p>熵<img src="/tmp/1487263017548.png" alt="1487263017548"><img src="/blog/1487262865579.png" alt="1487262865579"> </p>
+<li><p>熵<img src="/tmp/1487263017548.png" alt="1487263017548"><img src="/img/blog/1487262865579.png" alt="1487262865579"> </p>
 </li>
 <li><p>KL散度</p>
-<p><img src="/blog/1487263043790.png" alt="1487263043790"> </p>
-<p><img src="/blog/1487263262210.png" alt="1487263262210"></p>
-<p>​    <img src="/blog/1487263293440.png" alt="1487263293440"></p>
+<p><img src="/img/blog/1487263043790.png" alt="1487263043790"> </p>
+<p><img src="/img/blog/1487263262210.png" alt="1487263262210"></p>
+<p>​    <img src="/img/blog/1487263293440.png" alt="1487263293440"></p>
 </li>
 </ol>
 </li>
@@ -376,7 +376,7 @@
 <li><p>正则化</p>
 <ul>
 <li><p>权重衰减<br>  $$J(\omega)=MSE_{train} + \lambda\omega^T\omega$$<br>  对于线性回归模型,权重衰减因子$\lambda$,控制正则化项$\omega^T\omega$改变泛化能力</p>
-<p><img src="/blog/1488037278096.png" alt="1488037278096"></p>
+<p><img src="/img/blog/1488037278096.png" alt="1488037278096"></p>
 </li>
 </ul>
 </li>
@@ -386,13 +386,13 @@
 <pre><code>超参数不是通过模型本身学习到的，而是用验证集上的效果调整得到的
 </code></pre><ol>
 <li><p>最大似然估计</p>
-<p><img src="/blog/1488294267491.png" alt="1488294267491"></p>
+<p><img src="/img/blog/1488294267491.png" alt="1488294267491"></p>
 <p>为了防止乘积而出现数值下溢等情况，常对两边积分转化为和</p>
 </li>
 </ol>
-<p><img src="/blog/1488294322013.png" alt="1488294322013"></p>
-<p>​    <img src="/blog/1488295897993.png" alt="1488295897993"></p>
-<p>​    <img src="/blog/1488296178901.png" alt="1488296178901"></p>
+<p><img src="/img/blog/1488294322013.png" alt="1488294322013"></p>
+<p>​    <img src="/img/blog/1488295897993.png" alt="1488295897993"></p>
+<p>​    <img src="/img/blog/1488296178901.png" alt="1488296178901"></p>
 <p>​    最大似然的性质：</p>
 <p>​        当样本数目趋近于无穷大时，就收敛率而言最好的渐进估计，通常是机器学习中的<strong>首选估计</strong>,当训练样本数目小到会过拟合时，权重衰减等正则化方法可用于获得训练数据有限方差较小的最大似然有偏版本</p>
 <ol>
@@ -400,24 +400,24 @@
 <p>最大似然估计是基于估计单一$\theta$的估计方法，贝叶斯估计在预测时会考虑所有可能的$\theta$</p>
 <p>频率派：真是参数$\theta$是未知的定值，贝叶斯用概率反映只是状态的确定程度，数据集能观测得到因此不是随机的，真是参数是未知或不确定的，因此可以表示成随机变量。</p>
 <p>把观测到数据前，将$\theta$的已知知识表示成先验概率分布$p(\theta)$,许多先验偏向于更简单的解决方法，比如小幅度的系数、接近于常数的函数。</p>
-<p><img src="/blog/1488297087391.png" alt="1488297087391"></p>
+<p><img src="/img/blog/1488297087391.png" alt="1488297087391"></p>
 <p>​</p>
 <p>与最大似然估计的不同</p>
-<p><img src="/blog/1488297180533.png" alt="1488297180533"></p>
+<p><img src="/img/blog/1488297180533.png" alt="1488297180533"></p>
 </li>
 <li><p>最大后验估计</p>
 <p>提供直观的方法去设计复杂但可解释的正则化项</p>
-<p><img src="/blog/1488297261833.png" alt="1488297261833"></p>
-<p><img src="/blog/1488297811771.png" alt="1488297811771"></p>
+<p><img src="/img/blog/1488297261833.png" alt="1488297261833"></p>
+<p><img src="/img/blog/1488297811771.png" alt="1488297811771"></p>
 </li>
 <li><p>监督学习‘</p>
 <ol>
 <li><p>概率监督学习</p>
-<p><img src="/blog/1488298132780.png" alt="1488298132780"></p>
+<p><img src="/img/blog/1488298132780.png" alt="1488298132780"></p>
 </li>
 <li><p>支持向量机</p>
-<p><img src="/blog/1488298493359.png" alt="1488298493359"></p>
-<p><img src="/blog/1488298518191.png" alt="1488298518191"></p>
+<p><img src="/img/blog/1488298493359.png" alt="1488298493359"></p>
+<p><img src="/img/blog/1488298518191.png" alt="1488298518191"></p>
 <p>径向基函数(即高斯核RBF)$$k(u,v)=N(u-v,0,\sigma^2I)$$</p>
 </li>
 <li><p>k-近邻</p>
@@ -434,7 +434,7 @@
 </ol>
 </li>
 <li><p>随机梯度下降SGD</p>
-<p><img src="/blog/1488299260935.png" alt="1488299260935"></p>
+<p><img src="/img/blog/1488299260935.png" alt="1488299260935"></p>
 </li>
 <li><p>构建机器学习算法</p>
 <p>要素：</p>
