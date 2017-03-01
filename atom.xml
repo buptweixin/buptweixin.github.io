@@ -263,7 +263,7 @@
     <link href="http://www.wowx.info/posts/20170217000134/"/>
     <id>http://www.wowx.info/posts/20170217000134/</id>
     <published>2017-02-16T16:01:34.000Z</published>
-    <updated>2017-02-28T16:34:41.226Z</updated>
+    <updated>2017-03-01T02:26:07.295Z</updated>
     
     <content type="html"><![CDATA[<h2 id="chapter2-线性代数-Linear-algebra"><a href="#chapter2-线性代数-Linear-algebra" class="headerlink" title="chapter2 线性代数 Linear algebra"></a>chapter2 线性代数 Linear algebra</h2><ol>
 <li><p>张量：多于两维的量</p>
@@ -310,7 +310,7 @@
 </ol>
 </li>
 <li><p>期望 方差和协方差</p>
-<p>   <img src="/blog/1487261297133.png" alt="1487261297133"></p>
+<p>   <img src="/img/blog/1487261297133.png" alt="1487261297133"></p>
 </li>
 </ol>
 <p>   <img src="/blog/1487261465455.png" alt="1487261465455"></p>
