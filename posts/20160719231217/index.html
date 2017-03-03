@@ -433,21 +433,21 @@
 <li><p>Strings</p>
 <ul>
 <li><p>三种语法</p>
-<pre><code>s = &apos;Hello, how are you?&apos;
-s = &quot;Hi, what&apos;s up&quot;
-s = &apos;&apos;&apos;Hello,
-       how are you&apos;&apos;&apos;
+<pre><code>s = &#39;Hello, how are you?&#39;
+s = &quot;Hi, what&#39;s up&quot;
+s = &#39;&#39;&#39;Hello,
+       how are you&#39;&#39;&#39;
 s = &quot;&quot;&quot;Hi,
-what&apos;s up?&quot;&quot;&quot;
+what&#39;s up?&quot;&quot;&quot;
 </code></pre></li>
 <li><p>获取char<br>可以通过<code>[]</code>获取到string中的字符，但是不能改变他只能使用<code>replace</code>新建</p>
-<pre><code>In [55]: a.replace(&apos;l&apos;, &apos;z&apos;, 1) Out[55]: &apos;hezlo, world!&apos;
-In [56]: a.replace(&apos;l&apos;, &apos;z&apos;) Out[56]: &apos;hezzo, worzd!&apos;
+<pre><code>In [55]: a.replace(&#39;l&#39;, &#39;z&#39;, 1) Out[55]: &#39;hezlo, world!&#39;
+In [56]: a.replace(&#39;l&#39;, &#39;z&#39;) Out[56]: &#39;hezzo, worzd!&#39;
 </code></pre></li>
 <li><p>格式化字符串</p>
-<pre><code>print(&quot;I&apos;m %s. I&apos;m %d year old&quot; % (&apos;Vamei&apos;, 99))
+<pre><code>print(&quot;I&#39;m %s. I&#39;m %d year old&quot; % (&#39;Vamei&#39;, 99))
 
-print(&quot;I&apos;m %(name)s. I&apos;m %(age)d year old&quot; % {&apos;name&apos;:&apos;Vamei&apos;, &apos;age&apos;:99})
+print(&quot;I&#39;m %(name)s. I&#39;m %(age)d year old&quot; % {&#39;name&#39;:&#39;Vamei&#39;, &#39;age&#39;:99})
 </code></pre></li>
 </ul>
 </li>
@@ -473,16 +473,16 @@ Out[3]: [1, 2, 3]
 In [4]: b
 Out[4]: [1, 2, 3]
 In [5]: a is b Out[5]: True
-In [6]: b[1] = &apos;hi!&apos; 
+In [6]: b[1] = &#39;hi!&#39; 
 In [7]: a
-Out[7]: [1, &apos;hi!&apos;, 3]
+Out[7]: [1, &#39;hi!&#39;, 3]
 </code></pre></li>
 <li><p>使用indexing或slices操作在原地改变值</p>
 <pre><code>In [1]: a = [1, 2, 3]
 In [3]: a
 Out[3]: [1, 2, 3]
-In [4]: a = [&apos;a&apos;, &apos;b&apos;, &apos;c&apos;] # Creates another object. In [5]: a
-Out[5]: [&apos;a&apos;, &apos;b&apos;, &apos;c&apos;]
+In [4]: a = [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;] # Creates another object. In [5]: a
+Out[5]: [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]
 In [6]: id(a)
 Out[6]: 138641676
 In [7]: a[:] = [1, 2, 3] # Modifies object in place. In [8]: a
@@ -516,7 +516,7 @@ Out[9]: 138641676 # Same as in Out[6], yours will differ...
 <li><p>**kwargs:打包在字典中的任意数量参数</p>
 <pre><code>In [56]: arg(1,2,3,4,a=1,b=2,c=3)
 args: (1, 2, 3, 4)
-kwargs: {&apos;b&apos;: 2, &apos;a&apos;: 1, &apos;c&apos;: 3}
+kwargs: {&#39;b&#39;: 2, &#39;a&#39;: 1, &#39;c&#39;: 3}
 </code></pre></li>
 </ul>
 </li>
@@ -555,7 +555,7 @@ sys.path
 <p>使用<code>包名.__file__</code>可以得到包所在的路径,如</p>
 <pre><code>In [1]: import scipy 
 In [2]: scipy.__file__
-Out[2]: &apos;/usr/lib/python2.6/dist-packages/scipy/__init__.pyc&apos;
+Out[2]: &#39;/usr/lib/python2.6/dist-packages/scipy/__init__.pyc&#39;
 </code></pre><h3 id="输入和输出"><a href="#输入和输出" class="headerlink" title="输入和输出"></a>输入和输出</h3><ul>
 <li>文件模式<br>只读：r，只写：w，追加：a，读写：r+，二进制:b</li>
 </ul>
@@ -598,8 +598,8 @@ Out[2]: &apos;/usr/lib/python2.6/dist-packages/scipy/__init__.pyc&apos;
 </ul>
 <h4 id="glob-正则匹配文件"><a href="#glob-正则匹配文件" class="headerlink" title="glob:正则匹配文件"></a><strong>glob:正则匹配文件</strong></h4><p>比如，找出目录下所有txt文件</p>
 <pre><code>In [18]: import glob
-In [19]: glob.glob(&apos;*.txt&apos;)
-Out[19]: [&apos;holy_grail.txt&apos;, &apos;junk.txt&apos;, &apos;newfile.txt&apos;]
+In [19]: glob.glob(&#39;*.txt&#39;)
+Out[19]: [&#39;holy_grail.txt&#39;, &#39;junk.txt&#39;, &#39;newfile.txt&#39;]
 </code></pre><h4 id="sys-模块"><a href="#sys-模块" class="headerlink" title="sys 模块"></a>sys 模块</h4><blockquote>
 <p>和系统有关的python解释器信息，比如什么版本的python，解释器安装位置等</p>
 </blockquote>
@@ -611,9 +611,9 @@ Out[19]: [&apos;holy_grail.txt&apos;, &apos;junk.txt&apos;, &apos;newfile.txt&ap
 <li>sys.path:模块搜索路径，从PYTHONPATH环境变量获得</li>
 </ul>
 <h4 id="pickle：持久化模块"><a href="#pickle：持久化模块" class="headerlink" title="pickle：持久化模块"></a>pickle：持久化模块</h4><pre><code>In [1]: import pickle
-In [2]: l = [1, None, &apos;Stan&apos;]
-In [3]: pickle.dump(l, open(&apos;test.pkl&apos;, &apos;wb&apos;))
-In [4]: pickle.load(open(&apos;test.pkl&apos;,&apos;rb&apos;)) Out[4]: [1, None, &apos;Stan&apos;]
+In [2]: l = [1, None, &#39;Stan&#39;]
+In [3]: pickle.dump(l, open(&#39;test.pkl&#39;, &#39;wb&#39;))
+In [4]: pickle.load(open(&#39;test.pkl&#39;,&#39;rb&#39;)) Out[4]: [1, None, &#39;Stan&#39;]
 </code></pre><h3 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h3><ul>
 <li>try/except</li>
 <li>try/finally</li>
@@ -780,7 +780,7 @@ In [4]: pickle.load(open(&apos;test.pkl&apos;,&apos;rb&apos;)) Out[4]: [1, None,
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">二月 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/12/">十二月 2016<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">十一月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">十月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/07/">七月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/06/">六月 2016<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/07/">七月 2015<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/06/">六月 2015<span class="sidebar_archives-count">6</span></a>
+                <a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">二月 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/12/">十二月 2016<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">十一月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">十月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/07/">七月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/06/">六月 2016<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/07/">七月 2015<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/06/">六月 2015<span class="sidebar_archives-count">6</span></a>
             </ul>
         </li>
         

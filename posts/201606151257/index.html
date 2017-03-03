@@ -395,11 +395,11 @@
 <p>由于Boot2Docker的存在，造成了三层Mac-&gt;VirtualBox-&gt;Docker网络,这样就造成了如果我们即使在容器启动时使用<code>-p</code>参数暴露了相应端口宿主却仍然访问不了容器,这时候就需要手动修改宿主机到virtualbox的端口映射来解决这个问题。<br>由VirtualBox到Docker的映射可以通过run容器的时候指定-p参数实现，而从宿主机到VirtualBox端口映射需要通过下述方法实现:</p>
 <ol>
 <li><p>查询虚拟机网络：</p>
-<pre><code>$ VBoxManage list vms
+<pre><code> $ VBoxManage list vms
 </code></pre><p>查询虚拟机网络状态， 默认虚拟机名为’default’</p>
-<pre><code>$ VBoxManage showvminfo &quot;default&quot; | grep NIC
+<pre><code> $ VBoxManage showvminfo &quot;default&quot; | grep NIC
 </code></pre><p>2.关闭运行中的虚拟机<br> 由于Boot2Docker会自动运行VirtualBox中的虚拟机，所以在设置网络映射时必须先关闭运行中的虚拟机。否则，将出现The machine ‘boot2docker’ is already locked for a session (or being unlocked)的错误提示</p>
-<pre><code>$ VBoxManage controlvm &quot;default&quot; poweroff
+<pre><code> $ VBoxManage controlvm &quot;default&quot; poweroff
 </code></pre></li>
 <li><p>修改虚拟机与Mac系统的网络映射<br> 根据实际需要进行网络映射，其中</p>
 <ul>
@@ -417,13 +417,13 @@
 </li>
 <li><p>运行镜像</p>
 <p> 以wwj718提供的edX docker为例，运行其镜像</p>
-<pre><code>$ docker run -itd -p 8000:80 -p 8010:18010 --name edX wwj718/edx_cypress_docker:1.05
+<pre><code> $ docker run -itd -p 8000:80 -p 8010:18010 --name edX wwj718/edx_cypress_docker:1.05
 </code></pre></li>
 <li><p>查看容器运行状态</p>
-<pre><code>$ docker ps
+<pre><code> $ docker ps
 </code></pre></li>
 <li><p>其他 - 删除映射端口，也需要关闭虚拟机，删除命令如下</p>
-<pre><code>$ VBoxManage modifyvm &quot;boot2docker-vm&quot; --natpf1 delete
+<pre><code> $ VBoxManage modifyvm &quot;boot2docker-vm&quot; --natpf1 delete
 </code></pre></li>
 </ol>
 <p><a href="http://www.cnblogs.com/exnihilo/p/4891346.html" target="_blank" rel="external">阅读原文</a></p>
@@ -580,7 +580,7 @@
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">二月 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/12/">十二月 2016<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">十一月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">十月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/07/">七月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/06/">六月 2016<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/07/">七月 2015<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/06/">六月 2015<span class="sidebar_archives-count">6</span></a>
+                <a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">二月 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/12/">十二月 2016<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">十一月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">十月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/07/">七月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/06/">六月 2016<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/07/">七月 2015<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/06/">六月 2015<span class="sidebar_archives-count">6</span></a>
             </ul>
         </li>
         

@@ -406,9 +406,9 @@
 </li>
 </ol>
 <h1 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h1><ol>
-<li>安装image<pre><code>sudo docker pull ubuntu:12.04 
-</code></pre> 等价于<pre><code>sudo docker pull registery.hub.docker.com/ubuntu:12.04
-</code></pre> 即从默认仓库下载；但是，有时官方仓库下载较慢，可以使用下面的命令指定仓库：<pre><code>sudo docker pull dl.dockerpool.com:5000/ubuntu:12.04
+<li>安装image<pre><code> sudo docker pull ubuntu:12.04 
+</code></pre> 等价于<pre><code> sudo docker pull registery.hub.docker.com/ubuntu:12.04
+</code></pre> 即从默认仓库下载；但是，有时官方仓库下载较慢，可以使用下面的命令指定仓库：<pre><code> sudo docker pull dl.dockerpool.com:5000/ubuntu:12.04
 </code></pre></li>
 <li><p>docker run常用参数</p>
 <ul>
@@ -416,20 +416,20 @@
 <li><p>‘-t’:Allocate a pseudo-tty分配一个控制台同容器交互</p>
 <blockquote>
 <p>对于执行容器内的交互式操作，例如shell脚本。我们必须使用 -i -t来申请一个控制台同容器进行数据交互。但是当通过管道同容器进行交互时，就不能使用-t. 例如下面的命令</p>
-<pre><code>echo test | docker run -i busybox cat
+<pre><code> echo test | docker run -i busybox cat
 </code></pre></blockquote>
 </li>
 <li>‘-d’ 使容器在后台模式（detached mode）运行，当前终端窗口不再被容器监听，可以使用docker attach来重新挂载</li>
 <li><code>--rm</code>:容器终止后会立即删除</li>
 <li>‘-a=[]’指定容器挂载哪些流(‘STDIN’,’STDOUT’,’STDERR’)不带这个参数时全部挂载</li>
-<li>‘–name’:给容器命名 <pre><code>docker run --name wei -itd busybox
+<li>‘–name’:给容器命名 <pre><code> docker run --name wei -itd busybox
 </code></pre></li>
 </ul>
 </li>
 <li>docker ps 列出运行中docker容器<ul>
 <li>‘-a’ 列出所有容器</li>
 <li>‘-q’列出所有进程的CONTAINER ID， <ul>
-<li>作用：比如杀死所有进程<pre><code>docker kill $(docker ps -q)
+<li>作用：比如杀死所有进程<pre><code> docker kill $(docker ps -q)
 </code></pre></li>
 </ul>
 </li>
@@ -437,25 +437,25 @@
 </li>
 <li>Docker镜像<ol>
 <li>修改已有镜像<ol>
-<li>先使用下载的镜像启动容器<pre><code>sudo docker run -it training/sinatra /bin/bash
-</code></pre>记住容易id，在容器中添加json和gem两个应用<pre><code>root@0b2616b0e5a8:/#: gem install json
+<li>先使用下载的镜像启动容器<pre><code> sudo docker run -it training/sinatra /bin/bash
+</code></pre>记住容易id，在容器中添加json和gem两个应用<pre><code> root@0b2616b0e5a8:/#: gem install json
 </code></pre>使用exit退出后提交更新后的副本<br>   sudo docker commit -m “Add json gem” -a “Docker Newbee” 0b2616b0e5a8 ouruser/sinatra:test<br>‘-m’参数说明信息，’-a’指定更新的用户信息，之后是用来创建镜像的容器id，最后指定目标镜像仓库名和tag信息，创建后回返回这个镜像的id</li>
 </ol>
 </li>
 <li>使用Dockerfile创建镜像<ol>
 <li>新建目录和Dockerfile<br>   $ mkdir sinatra<br>   $ cd sinatra<br>   $ touch Dockerfile</li>
-<li>Dockerfile中每条指定都创建镜像的一层，<strong>最多127层</strong><pre><code># This is a comment
-FROM ubuntu:14.04
-MAINTAINER Docker Newbee &lt;newbee@docker.com&gt;# 作者
-RUN apt-get -qq update
-RUN apt-get -qqy install ruby ruby-dev
-RUN gem intall sinatra
-# put my local web site in myApp folder to /var/www
-ADD myApp /var/WWW
-# expose httpd port
-EXPOSE 80
-# the command to run
-CMD [&quot;/usr/sbin/appachectl&quot;, &quot;-D&quot;, &quot;FOREGROUND&quot;]
+<li>Dockerfile中每条指定都创建镜像的一层，<strong>最多127层</strong><pre><code> # This is a comment
+ FROM ubuntu:14.04
+ MAINTAINER Docker Newbee &lt;newbee@docker.com&gt;# 作者
+ RUN apt-get -qq update
+ RUN apt-get -qqy install ruby ruby-dev
+ RUN gem intall sinatra
+ # put my local web site in myApp folder to /var/www
+ ADD myApp /var/WWW
+ # expose httpd port
+ EXPOSE 80
+ # the command to run
+ CMD [&quot;/usr/sbin/appachectl&quot;, &quot;-D&quot;, &quot;FOREGROUND&quot;]
 </code></pre></li>
 <li>build 生成镜像<br>   sudo docker build -t=”ouruser/sinatra:v2”<br>‘-t’标记添加tag，指定新的镜像的用户信息</li>
 <li>用新的镜像启动容器<br>   sudo docker run -it ouruser/sinatra:v2 /bin/bash<br>   docker tag 5db5f8471261 ouruser/sinatra:devel<br>更改镜像标签</li>
@@ -467,34 +467,34 @@ CMD [&quot;/usr/sbin/appachectl&quot;, &quot;-D&quot;, &quot;FOREGROUND&quot;]
 <li>载入<br>   sudo docker load –input ubuntu_14.04.tar<br>或<br>   sudo docker load &lt; ubuntu_14.04.tar</li>
 </ol>
 </li>
-<li>移除<pre><code>docker rmi training/sinatra
+<li>移除<pre><code>  docker rmi training/sinatra
 </code></pre><strong>注意：</strong>在删除镜像之前应该先<code>docker rm</code>掉依赖于该镜像的所有容器</li>
 </ol>
 </li>
 <li>Docker 容器<ol>
-<li>新建并启动：docker run <pre><code>sudo docker run -it ubuntu:14.04 /bin/bash
+<li>新建并启动：docker run <pre><code>    sudo docker run -it ubuntu:14.04 /bin/bash
 </code></pre>启动一个bash终端，允许用户进行交互</li>
 <li>启动已终止程序：docker start</li>
-<li>守护态运行：’-d’<br>获取容器的输出信息：<pre><code>sudo docker logs insane_babbage
-</code></pre>进入守护态容器：<pre><code>docker attach container_name
+<li>守护态运行：’-d’<br>获取容器的输出信息：<pre><code>    sudo docker logs insane_babbage
+</code></pre>进入守护态容器：<pre><code>    docker attach container_name
 </code></pre></li>
-<li>终止容器：<pre><code>docker stop container_name
-</code></pre>重新启动容器：<pre><code>docker start container_name
-</code></pre>重启容器：<pre><code>docker restart container_name
+<li>终止容器：<pre><code>    docker stop container_name
+</code></pre>重新启动容器：<pre><code>    docker start container_name
+</code></pre>重启容器：<pre><code>    docker restart container_name
 </code></pre>  会将运行态的容器终止再重新启动</li>
 <li>导出和导入容器<ul>
-<li>导出容器快照到本地：<pre><code>docker export container_id &gt; container_name.tar
+<li>导出容器快照到本地：<pre><code>  docker export container_id &gt; container_name.tar
 </code></pre></li>
-<li>从本地快照导入容器：<pre><code>docker import container_path example/imagerepo
+<li>从本地快照导入容器：<pre><code>  docker import container_path example/imagerepo
 </code></pre></li>
 </ul>
 </li>
-<li>删除容器<pre><code>docker rm container_id 
+<li>删除容器<pre><code>    docker rm container_id 
 </code></pre>删除前容器需停止</li>
 </ol>
 </li>
 <li>Docker Hub<ol>
-<li>登录:<pre><code>docker login
+<li>登录:<pre><code>  docker login
 </code></pre>输入用户名和密码后，认证信息保存在本地用户目录的<code>.dockercfg</code>文件中</li>
 <li>基本操作<ul>
 <li>搜索镜像： <pre><code>docker search centos
@@ -528,9 +528,9 @@ CMD [&quot;/usr/sbin/appachectl&quot;, &quot;-D&quot;, &quot;FOREGROUND&quot;]
 <li>卷会一直存在，直到没有容器使用它</li>
 </ul>
 <ol>
-<li>创建数据卷<br>在使用<code>docker run</code>命令的时使用 <code>-v</code> 参数创建并挂载数据卷到容器里。在一次run中可以多次使用以挂载多个数据卷<pre><code>docker run -d -P --name web -v /webapp training/webapp python app.py
+<li>创建数据卷<br>在使用<code>docker run</code>命令的时使用 <code>-v</code> 参数创建并挂载数据卷到容器里。在一次run中可以多次使用以挂载多个数据卷<pre><code> docker run -d -P --name web -v /webapp training/webapp python app.py
 </code></pre><strong>注意：</strong>可以在Dockerfile中使用<code>VOLUME</code>来添加一个或多个新的卷到该镜像创建的容器中。</li>
-<li>挂载一个主机目录到容器<pre><code>docker run -d -P --name web -v /src/webapp:/opt/webapp python app.py
+<li>挂载一个主机目录到容器<pre><code> docker run -d -P --name web -v /src/webapp:/opt/webapp python app.py
 </code></pre>将主机的<code>/src/webapp</code>目录挂载到容器中得<code>/opt/wepapp</code><br>最后加上<code>:ro</code>挂载为只读<br><strong>Dockerfile</strong>不支持这个用法</li>
 <li>挂载一个主机文件到容器<br>略</li>
 </ol>
@@ -538,17 +538,17 @@ CMD [&quot;/usr/sbin/appachectl&quot;, &quot;-D&quot;, &quot;FOREGROUND&quot;]
 <li>数据卷容器<blockquote>
 <p>如果有一些持续更新的数据需要在容器之间共享，最好创建数据卷容器，数据卷容器是用来专门提供数据卷供其他容器使用的容器。</p>
 <ol>
-<li>创建：<pre><code>docker run -d -v /dbdata --name dbdata training/postgres echo Data-only Container
-#挂载
-docker run -d --volumes-from dbdata --name db1 training/postgres
+<li>创建：<pre><code> docker run -d -v /dbdata --name dbdata training/postgres echo Data-only Container
+ #挂载
+ docker run -d --volumes-from dbdata --name db1 training/postgres
 </code></pre></li>
 <li>删除<br>如果删除了挂载的容器(dbdata, db1)数据卷不会被自动删除，需要在删除最后一个还挂在着它的容器使用<code>docker rm -v</code></li>
-<li>备份<pre><code>docker run --volumes-from dbdata -v $(pwd):/backup ubuntu tar cvf /backup/backup.tar ...
+<li>备份<pre><code> docker run --volumes-from dbdata -v $(pwd):/backup ubuntu tar cvf /backup/backup.tar ...
 </code></pre></li>
-<li>恢复<pre><code># 创建带有数据卷的容器dbdata2
-docker run -v /dbdata --name dbdata2 ubuntu /bin/bash
-# 创建另一个容器，挂载dbdata2容器，并使用untar解压备份文件到挂载的容器卷中
-docker run --volumes-from dbdata2 -v $(pwd):/backup busybox tar xvf /backup/backup.tar
+<li>恢复<pre><code> # 创建带有数据卷的容器dbdata2
+ docker run -v /dbdata --name dbdata2 ubuntu /bin/bash
+ # 创建另一个容器，挂载dbdata2容器，并使用untar解压备份文件到挂载的容器卷中
+ docker run --volumes-from dbdata2 -v $(pwd):/backup busybox tar xvf /backup/backup.tar
 </code></pre></li>
 </ol>
 </blockquote>
@@ -559,15 +559,15 @@ docker run --volumes-from dbdata2 -v $(pwd):/backup busybox tar xvf /backup/back
 <li>外部访问容器<br>通过-P或-p参数来指定端口映射<ul>
 <li><code>-P</code>：随机映射一个49000-49900的端口到内部容器开放的网络端口</li>
 <li><code>-p</code>：指定端口，支持格式有<code>ip:hostPort:containerPort|ip::containerPort|hostPort:containerPort</code>还可使用udp标记来指定udp端口<code>-p 127.0.0.1:5000:5000/udp</code></li>
-<li>使用<code>docker port</code>来查看当前映射的端口配置<pre><code>docker port nostalgic_morse 5000
-&gt; 127.0.0.1:49155
+<li>使用<code>docker port</code>来查看当前映射的端口配置<pre><code>  docker port nostalgic_morse 5000
+  &gt; 127.0.0.1:49155
 </code></pre></li>
 </ul>
 </li>
-<li>容器互联<pre><code>#创建数据库容器
-docker run -d --name db training /postgres
-# 互联
-docker run -d -P --name web --link db:db training/webapp python app.py
+<li>容器互联<pre><code>    #创建数据库容器
+    docker run -d --name db training /postgres
+    # 互联
+    docker run -d -P --name web --link db:db training/webapp python app.py
 </code></pre>这样容器db和web容器建立互联关系, <code>--link</code>格式：<code>--link name:alias</code>, <code>name</code>是要链接的容器的名称，alias是这个链接的别名，连接的容器可以在<code>docker ps</code>中查看到<ul>
 <li>查看连接信息<ul>
 <li>环境变量<pre><code>docker run --rm --name web2 --link db:db training /webapp env
@@ -757,7 +757,7 @@ DB_PORT_5000_TCP=tcp://172.17.0.5:5432
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">二月 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/12/">十二月 2016<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">十一月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">十月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/07/">七月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/06/">六月 2016<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/07/">七月 2015<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/06/">六月 2015<span class="sidebar_archives-count">6</span></a>
+                <a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">二月 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/12/">十二月 2016<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">十一月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">十月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/07/">七月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/06/">六月 2016<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/07/">七月 2015<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/06/">六月 2015<span class="sidebar_archives-count">6</span></a>
             </ul>
         </li>
         

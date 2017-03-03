@@ -396,8 +396,9 @@
 <li>自己写的头文件要用<code>#include&quot;xxxx.h&quot;</code>的形式引用</li>
 <li>size_t定义在<code>cstddef</code>头文件中，不需要使用<code>using std::size_t</code></li>
 <li><p>分离式编译<br>假如<code>Chapter6.h</code>包含有函数的声明，<code>fact.cc</code>含有函数的定义，<code>factMain</code>包含使用了该函数的主函数，则使用下列命令编译他们</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ CC factMain.cc fact.cc #生成factMain.exe 或者 a.out</div><div class="line">$ CC factMain.cc fact.cc -o main # 生成main或者main.exe</div></pre></td></tr></table></figure>
-<p>以后如果我们修改了其中一个文件，只需要重新编译那个改动了的文件。这就是分离式编译机制，分离式编译机制会产生后缀名为<code>.obj</code>(windows)或<code>.o</code>(UNIX)的文件，含义是该文件包含对象的object code， 接下来编译器负责把对象链接在一起形成可执行文件。</p>
+<pre><code>$ CC factMain.cc fact.cc #生成factMain.exe 或者 a.out
+$ CC factMain.cc fact.cc -o main # 生成main或者main.exe
+</code></pre><p>以后如果我们修改了其中一个文件，只需要重新编译那个改动了的文件。这就是分离式编译机制，分离式编译机制会产生后缀名为<code>.obj</code>(windows)或<code>.o</code>(UNIX)的文件，含义是该文件包含对象的object code， 接下来编译器负责把对象链接在一起形成可执行文件。</p>
 <p>具体过程如下</p>
 <ol>
 <li><code>$ CC -c factMain.cc # 生成factMain.o</code></li>
@@ -423,15 +424,30 @@
 </ul>
 <h2 id="尽量使用常量引用"><a href="#尽量使用常量引用" class="headerlink" title="尽量使用常量引用"></a>尽量使用常量引用</h2><p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-23/63724431.jpg" alt=""></p>
 <h2 id="内联函数和constexpr-常量表达式函数"><a href="#内联函数和constexpr-常量表达式函数" class="headerlink" title="内联函数和constexpr(常量表达式函数)"></a>内联函数和constexpr(常量表达式函数)</h2><h3 id="inline"><a href="#inline" class="headerlink" title="inline"></a>inline</h3><p>对于规模较小的操作可以写入内联(inline)函数中，编译时会自动将内联函数展开。这样做可以从函数字面值而不是阅读源码理解操作的目的、需要修改操作只要修改一处地方就可以了并且利于重用。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">const</span> <span class="built_in">string</span> &amp; </span></div><div class="line"><span class="title">shorterString</span><span class="params">(<span class="keyword">const</span> <span class="built_in">string</span> &amp;s1, <span class="keyword">const</span> <span class="built_in">string</span> &amp;s2)</span></div><div class="line">&#123;</div><div class="line">  <span class="keyword">return</span> s1.size() &lt;= s2.size() ? s1 : s2;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="constexpr"><a href="#constexpr" class="headerlink" title="constexpr"></a>constexpr</h3><p>constexpr 函数是指用于常量表达式的函数，它的函数体只能包含不执行任何操作(空语句、类型别名、using声明等)并且有且只有一条返回语句。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">constexpr</span> <span class="keyword">int</span> <span class="title">new_sz</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> <span class="number">42</span>;&#125;</div><div class="line"><span class="function"><span class="keyword">constexpr</span> size_t <span class="title">scale</span><span class="params">(<span class="keyword">size_t</span> cnt)</span> </span>&#123; <span class="keyword">return</span> new_sz() * cnt;&#125;</div></pre></td></tr></table></figure></p>
+<pre class="line-numbers language-c++"><code class="language-c++">inline const string & 
+shorterString(const string &s1, const string &s2)
+{
+  return s1.size() <= s2.size() ? s1 : s2;
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="constexpr"><a href="#constexpr" class="headerlink" title="constexpr"></a>constexpr</h3><p>constexpr 函数是指用于常量表达式的函数，它的函数体只能包含不执行任何操作(空语句、类型别名、using声明等)并且有且只有一条返回语句。</p>
+<pre class="line-numbers language-c++"><code class="language-c++">constexpr int new_sz() { return 42;}
+constexpr size_t scale(size_t cnt) { return new_sz() * cnt;}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>如果<code>scale</code>函数的参数是常量表达式的话，它返回值也是常量表达式，正确，否则定义错误。</p>
 <p>constexpr隐含的被定义为inline。</p>
 <p><strong>inline和constexpr应该放在头文件中</strong></p>
 <h2 id="调试帮助"><a href="#调试帮助" class="headerlink" title="调试帮助"></a>调试帮助</h2><h3 id="assert预处理宏"><a href="#assert预处理宏" class="headerlink" title="assert预处理宏"></a>assert预处理宏</h3><p>定义<code>cassert</code>头文件中，因为它由预处理器管理所以我们可以直接使用预处理命令而不需要使用using声明。</p>
 <p><code>assert</code>一般用于检查<code>不能发生</code>的条件，比如<code>assert(word.size()&gt;threshold);</code>要求所有单词的长度都大于阈值。</p>
 <h3 id="NDEBUG预处理变量"><a href="#NDEBUG预处理变量" class="headerlink" title="NDEBUG预处理变量"></a>NDEBUG预处理变量</h3><p><code>assert</code>的状态由<code>NDEBUG</code>控制，如果定义了这个预处理变量则assert什么也不做(需要在引入<code>cassert</code>之前定义)，也可以使用编译器命令定义<code>$CC -D NDEBUG main.C</code></p>
-<p>也可以使用如下方法编写自己的条件调试代码<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> ia[], <span class="keyword">size_t</span> size)</span> </span></div><div class="line">&#123;</div><div class="line">  <span class="meta">#<span class="meta-keyword">ifndef</span> NDEBUG</span></div><div class="line">    <span class="built_in">cerr</span> &lt;&lt; __func__ &lt;&lt;<span class="string">": array size is "</span> &lt;&lt; size &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">  <span class="meta">#<span class="meta-keyword">endif</span></span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>也可以使用如下方法编写自己的条件调试代码</p>
+<pre class="line-numbers language-c++"><code class="language-c++">void print(const int ia[], size_t size) 
+{
+  #ifndef NDEBUG
+    cerr << __func__ <<": array size is " << size << endl;
+  #endif
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>其中<code>__func__</code>输出当前调试函数的名字，除此之外其他4个对于程序调试很有用的预定义的名字:</p>
 <ul>
 <li>`<strong>FILE</strong>:存放文件名的字符串字面值</li>
@@ -441,12 +457,27 @@
 </ul>
 </li>
 </ul>
-<p>例子<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (word.size() &lt; threshold)</div><div class="line">  <span class="built_in">cerr</span> &lt;&lt; <span class="string">"Error: "</span> &lt;&lt; __FILE__</div><div class="line">       &lt;&lt; <span class="string">": in function "</span> &lt;&lt; __func__</div><div class="line">       &lt;&lt; <span class="string">" at line "</span> &lt;&lt; __LINE__ &lt;&lt; <span class="built_in">endl</span></div><div class="line">       &lt;&lt; <span class="string">"compile on "</span> &lt;&lt; __DATE__</div><div class="line">       &lt;&lt; <span class="string">"at "</span> &lt;&lt; __TIME__ &lt;&lt; <span class="built_in">endl</span></div><div class="line">       &lt;&lt; <span class="string">"   word read was \""</span> &lt;&lt; word</div><div class="line">       &lt;&lt; <span class="string">"\": Length too short"</span> &lt;&lt; <span class="built_in">endl</span>;</div></pre></td></tr></table></figure></p>
+<p>例子</p>
+<pre class="line-numbers language-c++"><code class="language-c++">if (word.size() < threshold)
+  cerr << "Error: " << __FILE__
+       << ": in function " << __func__
+       << " at line " << __LINE__ << endl
+       << "compile on " << __DATE__
+       << "at " << __TIME__ << endl
+       << "   word read was \"" << word
+       << "\": Length too short" << endl;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="函数匹配"><a href="#函数匹配" class="headerlink" title="函数匹配"></a>函数匹配</h2><p>匹配那个最接近 最好不要进行类型转换的</p>
 <p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-28/84596709.jpg" alt=""></p>
-<h2 id="函数指针"><a href="#函数指针" class="headerlink" title="函数指针"></a>函数指针</h2><p>函数类型是由返回类型和形参共同确定的，如<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">lengthCompare</span><span class="params">(<span class="keyword">const</span> <span class="built_in">string</span> &amp;, <span class="keyword">const</span> <span class="built_in">string</span> &amp;)</span></span>;</div></pre></td></tr></table></figure></p>
-<p>类型是<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">bool</span>(<span class="keyword">const</span> <span class="built_in">string</span> &amp;, <span class="keyword">const</span> <span class="built_in">string</span> &amp;);</div></pre></td></tr></table></figure></p>
-<p>所以，可以通过下面的方式声明指向函数的指针<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">bool</span> (*pf)(<span class="keyword">const</span> <span class="built_in">string</span> &amp;, <span class="keyword">const</span> <span class="built_in">string</span> &amp;);</div></pre></td></tr></table></figure></p>
+<h2 id="函数指针"><a href="#函数指针" class="headerlink" title="函数指针"></a>函数指针</h2><p>函数类型是由返回类型和形参共同确定的，如</p>
+<pre class="line-numbers language-c++"><code class="language-c++">bool lengthCompare(const string &, const string &);
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>类型是</p>
+<pre class="line-numbers language-c++"><code class="language-c++">bool(const string &, const string &);
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>所以，可以通过下面的方式声明指向函数的指针</p>
+<pre class="line-numbers language-c++"><code class="language-c++">bool (*pf)(const string &, const string &);
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>上面的扩号不能少，否则变为返回bool型指针的函数。</p>
 <h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>若把函数名当做值使用，则它会自动转换为指针<br><code>pf = lengthCompare;</code>与<code>pf = &amp;lengthCompare;</code>等价，取地址符是可选的</p>
 <p>可以直接使用指向函数的指针调用函数，不需要解引用<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-28/88503807.jpg" alt=""></p>
@@ -607,7 +638,7 @@
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">二月 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/12/">十二月 2016<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">十一月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">十月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/07/">七月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/06/">六月 2016<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/07/">七月 2015<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/06/">六月 2015<span class="sidebar_archives-count">6</span></a>
+                <a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">二月 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/12/">十二月 2016<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">十一月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">十月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/07/">七月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/06/">六月 2016<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/07/">七月 2015<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/06/">六月 2015<span class="sidebar_archives-count">6</span></a>
             </ul>
         </li>
         

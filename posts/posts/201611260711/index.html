@@ -392,19 +392,40 @@
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
         <h3 id="make时出现hdf5-hpp-not-found-之类的问题"><a href="#make时出现hdf5-hpp-not-found-之类的问题" class="headerlink" title="make时出现hdf5.hpp not found`之类的问题"></a><code>make</code>时出现hdf5.hpp not found`之类的问题</h3><p>Ubuntu16.04中hdf5文件位置发生了变化，需要手工修改<br>首先，将Makefile.config中的</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include</div><div class="line">LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib</div></pre></td></tr></table></figure>
-<p>修改为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">INCLUDE_DIRS :=  $(PYTHON_INCLUDE) /usr/local/include /usr/include/hdf5/serial</div><div class="line">LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib /usr/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/hdf5/serial</div></pre></td></tr></table></figure>
-<p>然后在caffe根目录下执行下面的命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">cd $CAFFE_ROOT</div><div class="line">find . -type f -exec sed -i -e &apos;s^&quot;hdf5.h&quot;^&quot;hdf5/serial/hdf5.h&quot;^g&apos; -e &apos;s^&quot;hdf5_hl.h&quot;^&quot;hdf5/serial/hdf5_hl.h&quot;^g&apos; &apos;&#123;&#125;&apos; \;</div><div class="line">cd /usr/lib/x86_64-linux-gnu</div><div class="line">sudo ln -s libhdf5_serial.so.10.1.0 libhdf5.so</div><div class="line">sudo ln -s libhdf5_serial_hl.so.10.0.2 libhdf5_hl.so</div><div class="line">\\注意：这里的10.1.0和10.0.2根据不同的系统可能对应的数字会不同，比如在ubuntu15.10中其数字就是8.0.2.</div><div class="line">\\具体的数字可以在打开的文件中查看对应文件后面跟的数字</div></pre></td></tr></table></figure>
-<h3 id="使py-faster-rcnn等自带的老版本caffe支持GTX1080和cudnn-v5"><a href="#使py-faster-rcnn等自带的老版本caffe支持GTX1080和cudnn-v5" class="headerlink" title="使py-faster-rcnn等自带的老版本caffe支持GTX1080和cudnn v5"></a>使<a href="https://github.com/rbgirshick/py-faster-rcnn" target="_blank" rel="external">py-faster-rcnn</a>等自带的老版本caffe支持GTX1080和cudnn v5</h3><p>首先，进入caffe根目录添加官方caffe源到本地<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">cd caffe-faster-rcnn</div><div class="line">git remote add caffe https://github.com/BVLC/caffe.git  </div><div class="line">git fetch caffe  </div><div class="line">git merge caffe/master</div></pre></td></tr></table></figure></p>
-<p>merge步骤如果git提示本地修改没有保存不能合并的话,使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git stash</div></pre></td></tr></table></figure></p>
+<pre><code>INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include
+LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib
+</code></pre><p>修改为：</p>
+<pre><code>INCLUDE_DIRS :=  $(PYTHON_INCLUDE) /usr/local/include /usr/include/hdf5/serial
+LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib /usr/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/hdf5/serial
+</code></pre><p>然后在caffe根目录下执行下面的命令</p>
+<pre class="line-numbers language-shell"><code class="language-shell">cd $CAFFE_ROOT
+find . -type f -exec sed -i -e 's^"hdf5.h"^"hdf5/serial/hdf5.h"^g' -e 's^"hdf5_hl.h"^"hdf5/serial/hdf5_hl.h"^g' '{}' \;
+cd /usr/lib/x86_64-linux-gnu
+sudo ln -s libhdf5_serial.so.10.1.0 libhdf5.so
+sudo ln -s libhdf5_serial_hl.so.10.0.2 libhdf5_hl.so
+\\注意：这里的10.1.0和10.0.2根据不同的系统可能对应的数字会不同，比如在ubuntu15.10中其数字就是8.0.2.
+\\具体的数字可以在打开的文件中查看对应文件后面跟的数字
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="使py-faster-rcnn等自带的老版本caffe支持GTX1080和cudnn-v5"><a href="#使py-faster-rcnn等自带的老版本caffe支持GTX1080和cudnn-v5" class="headerlink" title="使py-faster-rcnn等自带的老版本caffe支持GTX1080和cudnn v5"></a>使<a href="https://github.com/rbgirshick/py-faster-rcnn" target="_blank" rel="external">py-faster-rcnn</a>等自带的老版本caffe支持GTX1080和cudnn v5</h3><p>首先，进入caffe根目录添加官方caffe源到本地</p>
+<pre class="line-numbers language-shell"><code class="language-shell">cd caffe-faster-rcnn
+git remote add caffe https://github.com/BVLC/caffe.git  
+git fetch caffe  
+git merge caffe/master
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>merge步骤如果git提示本地修改没有保存不能合并的话,使用</p>
+<pre class="line-numbers language-shell"><code class="language-shell">git stash
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>把本地修改暂存起来，再进行merge操作。<br>然后进入<code>$CAFFE_ROOT/include/caffe/layers/python_layer.hpp</code>找到<code>self_.attr(&quot;phase&quot;) = static_cast&lt;int&gt;(this-&gt;phase_);</code>这一行，将其注释掉。</p>
 <h3 id="Caffe运行速度很慢"><a href="#Caffe运行速度很慢" class="headerlink" title="Caffe运行速度很慢"></a>Caffe运行速度很慢</h3><p>配置完全相同的电脑，如果运行速度相差很多的话，一个可能是更快的那台机器采用了cudnn加速或cudnn的版本更高；另外一种情况是在Makefile.config中打开了debug选项，将其关闭就可以了。</p>
 <h3 id="build-release-lib-libcaffe-so：对‘google-protobuf-Message-DebugString-const’未定义的引用"><a href="#build-release-lib-libcaffe-so：对‘google-protobuf-Message-DebugString-const’未定义的引用" class="headerlink" title=".build_release/lib/libcaffe.so：对‘google::protobuf::Message::DebugString() const’未定义的引用"></a><code>.build_release/lib/libcaffe.so：对‘google::protobuf::Message::DebugString() const’未定义的引用</code></h3><p>可能是安装cuda的时候gcc和g++的版本被降低到了4.9以下，通过下列方法将他们改回来:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sudo rm /usr/bin/gcc</div><div class="line">sudo rm /usr/bin/g++</div><div class="line">sudo ln -s /usr/bin/gcc-5 /usr/bin/gcc</div><div class="line">sudo ln -s /usr/bin/g++-5 /usr/bin/g++</div></pre></td></tr></table></figure>
-<p>然后进入<code>sudo vim /usr/local/cuda/include/host_config.h</code>将115行的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">#error -- unsupported GNU version! gcc versions later than 5.3 are not supported!</div></pre></td></tr></table></figure></p>
-<p>注释掉</p>
+<pre class="line-numbers language-shell"><code class="language-shell">sudo rm /usr/bin/gcc
+sudo rm /usr/bin/g++
+sudo ln -s /usr/bin/gcc-5 /usr/bin/gcc
+sudo ln -s /usr/bin/g++-5 /usr/bin/g++
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>然后进入<code>sudo vim /usr/local/cuda/include/host_config.h</code>将115行的</p>
+<pre><code>#error -- unsupported GNU version! gcc versions later than 5.3 are not supported!
+</code></pre><p>注释掉</p>
 
     
 
@@ -558,7 +579,7 @@
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">二月 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/12/">十二月 2016<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">十一月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">十月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/07/">七月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/06/">六月 2016<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/07/">七月 2015<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/06/">六月 2015<span class="sidebar_archives-count">6</span></a>
+                <a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">二月 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/12/">十二月 2016<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">十一月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">十月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/07/">七月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/06/">六月 2016<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/07/">七月 2015<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/06/">六月 2015<span class="sidebar_archives-count">6</span></a>
             </ul>
         </li>
         

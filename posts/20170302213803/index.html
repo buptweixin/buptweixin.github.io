@@ -384,24 +384,24 @@
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
         <h2 id="MXNET-Expression-Template-Tutorial—MXNET-表达式模板笔记"><a href="#MXNET-Expression-Template-Tutorial—MXNET-表达式模板笔记" class="headerlink" title="MXNET: Expression Template Tutorial—MXNET 表达式模板笔记"></a>MXNET: Expression Template Tutorial—MXNET 表达式模板笔记</h2><p>假设我们要写一个如下的权值更新算法</p>
-<pre class=" language-cpp"><code class="language-cpp">weight <span class="token operator">=</span>  <span class="token operator">-</span> eta <span class="token operator">*</span> <span class="token punctuation">(</span>grad <span class="token operator">+</span> lambda <span class="token operator">*</span> weight<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<pre class="line-numbers language-cpp"><code class="language-cpp">weight <span class="token operator">=</span>  <span class="token operator">-</span> eta <span class="token operator">*</span> <span class="token punctuation">(</span>grad <span class="token operator">+</span> lambda <span class="token operator">*</span> weight<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>常见的实现算法是在执行前预先分配需要的内存，而在执行过程中不进行内存的分配</p>
-<pre class=" language-cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">UpdateWeight</span> <span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">float</span> <span class="token operator">*</span>grad<span class="token punctuation">,</span> <span class="token keyword">float</span> eta<span class="token punctuation">,</span> <span class="token keyword">float</span> lambda<span class="token punctuation">,</span>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">UpdateWeight</span> <span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">float</span> <span class="token operator">*</span>grad<span class="token punctuation">,</span> <span class="token keyword">float</span> eta<span class="token punctuation">,</span> <span class="token keyword">float</span> lambda<span class="token punctuation">,</span>
                    <span class="token keyword">int</span> n<span class="token punctuation">,</span> <span class="token keyword">float</span> <span class="token operator">*</span>weight<span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     weight<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span>  <span class="token operator">-</span> eta <span class="token operator">*</span> <span class="token punctuation">(</span>grad<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">+</span> lambda <span class="token operator">*</span> weight<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>因为需要预先分配内存，如果要更新的权重很多的话这个过程会变得很繁琐，能不能改写成下面这样的形式并且保持性能？</p>
-<pre class=" language-cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">UpdateWeight</span> <span class="token punctuation">(</span><span class="token keyword">const</span> Vec<span class="token operator">&amp;</span> grad<span class="token punctuation">,</span> <span class="token keyword">float</span> eta<span class="token punctuation">,</span> <span class="token keyword">float</span> lambda<span class="token punctuation">,</span> Vec<span class="token operator">&amp;</span> weight<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">UpdateWeight</span> <span class="token punctuation">(</span><span class="token keyword">const</span> Vec<span class="token operator">&amp;</span> grad<span class="token punctuation">,</span> <span class="token keyword">float</span> eta<span class="token punctuation">,</span> <span class="token keyword">float</span> lambda<span class="token punctuation">,</span> Vec<span class="token operator">&amp;</span> weight<span class="token punctuation">)</span> <span class="token punctuation">{</span>
   weight <span class="token operator">=</span> <span class="token operator">-</span>eta <span class="token operator">*</span> <span class="token punctuation">(</span>grad <span class="token operator">+</span> lambda <span class="token operator">*</span> weight<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>答案是有</p>
 <h3 id="A-Naive-Bad-Solution"><a href="#A-Naive-Bad-Solution" class="headerlink" title="A Naive Bad Solution"></a>A Naive Bad Solution</h3><p>最容易想到的方法如下所示，创建一个Vec类，在该类的构造函数中分配存储空间</p>
-<pre class=" language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">// Naive solution for vector operation overloading</span>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">// Naive solution for vector operation overloading</span>
 
 <span class="token keyword">struct</span> Vec <span class="token punctuation">{</span>
   <span class="token keyword">int</span> len<span class="token punctuation">;</span>
@@ -425,11 +425,11 @@
   <span class="token punctuation">}</span>
   <span class="token keyword">return</span> res<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>但是上面的实现有一个很大的问题，那就是计算过程需要创建和销毁临时变量，当操作很多时对性能影响很大。一个可能的改进是只实现<code>+= -=</code>等原地操作符，然而这将会大大限制类的使用。</p>
 <h3 id="Lazy-Evaluation-惰性求值"><a href="#Lazy-Evaluation-惰性求值" class="headerlink" title="Lazy Evaluation 惰性求值"></a>Lazy Evaluation 惰性求值</h3><p>我们仔细思考的话将会发现，我们之所以需要使用临时存储空间是因为不知道<code>+</code>的操作的结果最终的目标是什么，如果我们预先知道这个目标的话就可以免去临时空间分配的过程。</p>
 <p>下面的代码实现了一个简单的惰性求值</p>
-<pre class=" language-cpp"><code class="language-cpp">
+<pre class="line-numbers language-cpp"><code class="language-cpp">
 <span class="token comment" spellcheck="true">// Example Lazy evaluation code</span>
 <span class="token comment" spellcheck="true">// for simplicity, we use struct and make all members public</span>
 
@@ -476,10 +476,10 @@
   <span class="token punctuation">}</span>
   <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>上面的Vec类中不进行任何的分配和释放存储空间的操作，这些操作交给用户来完整，当对两个Vec变量执行<code>+</code>操作时，并不直接计算结果，而是将两个Vec引用存储在BinaryAddExp结构体中并将其返回，遇到<code>=</code>操作符号时，遍历BinaryAdd中的两个Vec引用计算结果并返回。</p>
 <p>然而这个惰性求值实现只能计算类似<code>A=B+C</code>的二元操作，面对更长的表达式时则需要将其拆分成很多个<code>=</code>操作，十分不便</p>
-<h3 id="More-Lengthy-Expressions-and-Expression-Template适用于任何长度表达式的表达式模板"><a href="#More-Lengthy-Expressions-and-Expression-Template适用于任何长度表达式的表达式模板" class="headerlink" title="More Lengthy Expressions and Expression Template适用于任何长度表达式的表达式模板"></a>More Lengthy Expressions and Expression Template适用于任何长度表达式的表达式模板</h3><pre class=" language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">// Example code, expression template, and more length equations</span>
+<h3 id="More-Lengthy-Expressions-and-Expression-Template适用于任何长度表达式的表达式模板"><a href="#More-Lengthy-Expressions-and-Expression-Template适用于任何长度表达式的表达式模板" class="headerlink" title="More Lengthy Expressions and Expression Template适用于任何长度表达式的表达式模板"></a>More Lengthy Expressions and Expression Template适用于任何长度表达式的表达式模板</h3><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">// Example code, expression template, and more length equations</span>
 <span class="token comment" spellcheck="true">// for simplicity, we use struct and make all members public</span>
 <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;cstdio></span></span>
 
@@ -556,10 +556,10 @@
   <span class="token punctuation">}</span>
   <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>因为<code>Eval</code>是内联的，所以在编译阶段<code>src.Eval[i]</code>会直接被替换成<code>B.dptr[i]+C.dptr[i]+C.dptr[i]</code></p>
 <h3 id="更灵活的惰性求值表达式模板"><a href="#更灵活的惰性求值表达式模板" class="headerlink" title="更灵活的惰性求值表达式模板"></a>更灵活的惰性求值表达式模板</h3><p>最后一个(也是最接近mshadow实现)版本可以允许我们自定义元素操作</p>
-<pre class=" language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">// Example code, expression template</span>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">// Example code, expression template</span>
 <span class="token comment" spellcheck="true">// with binary operator definition and extension</span>
 <span class="token comment" spellcheck="true">// for simplicity, we use struct and make all members public</span>
 <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;cstdio></span></span>
@@ -651,7 +651,7 @@
   <span class="token punctuation">}</span>
   <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-</code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ol>
 <li>惰性求值使得我们可以事先知道所有操作以及操作的目标</li>
 <li>模板构造和递归求值使得我们的元素级操作更加明了</li>
@@ -714,6 +714,14 @@
             <!-- Post Prev & Next Nav -->
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
+    
+        <a href="/posts/20170303131752/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
     
 
     <!-- Section Spacer -->
@@ -813,7 +821,7 @@
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">二月 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/12/">十二月 2016<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">十一月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">十月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/07/">七月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/06/">六月 2016<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/07/">七月 2015<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/06/">六月 2015<span class="sidebar_archives-count">6</span></a>
+                <a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">二月 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/12/">十二月 2016<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">十一月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">十月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/07/">七月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/06/">六月 2016<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/07/">七月 2015<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/06/">六月 2015<span class="sidebar_archives-count">6</span></a>
             </ul>
         </li>
         

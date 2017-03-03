@@ -397,13 +397,13 @@
 </blockquote>
 <ul>
 <li><p>查找</p>
-<pre><code>&gt;&gt;&gt; np.lookfor(&apos;create array&apos;)
-Search results for &apos;create array&apos;       
---------------------------------- 
-numpy.array
-    Create an array.
-numpy.memmap
-    Create a memory-map to an array stored in a *binary* file on disk.
+<pre><code>  &gt;&gt;&gt; np.lookfor(&#39;create array&#39;)
+  Search results for &#39;create array&#39;       
+  --------------------------------- 
+  numpy.array
+      Create an array.
+  numpy.memmap
+      Create a memory-map to an array stored in a *binary* file on disk.
 </code></pre></li>
 <li><p>创建数组</p>
 <ul>
@@ -441,12 +441,12 @@ numpy.memmap
 <li><p>dtype</p>
 <p>  int32,int64, float64, complex, bool, S7字符串,uint32, uint64等</p>
 </li>
-<li>可视化<pre><code>&gt;&gt;&gt; x = np.linspace(0, 3, 20)
-&gt;&gt;&gt; y = np.linspace(0, 9, 20)
-&gt;&gt;&gt; plt.plot(x, y) # line plot     
-[&lt;matplotlib.lines.Line2D object at ...&gt;] 
-&gt;&gt;&gt; plt.plot(x, y, &apos;o&apos;) # dot plot   
-[&lt;matplotlib.lines.Line2D object at ...&gt;]
+<li>可视化<pre><code>  &gt;&gt;&gt; x = np.linspace(0, 3, 20)
+  &gt;&gt;&gt; y = np.linspace(0, 9, 20)
+  &gt;&gt;&gt; plt.plot(x, y) # line plot     
+  [&lt;matplotlib.lines.Line2D object at ...&gt;] 
+  &gt;&gt;&gt; plt.plot(x, y, &#39;o&#39;) # dot plot   
+  [&lt;matplotlib.lines.Line2D object at ...&gt;]
 </code></pre></li>
 <li>读取元素<br>a[1, 1]第二行第二列</li>
 <li><p>切片</p>
@@ -562,16 +562,16 @@ array([[ 0, 1, 2],
 &gt;&gt;&gt; x.shape, y.shape
 ((5, 1), (1, 5))
 </code></pre><p>使用mgrid直接得到两个扩展矩阵</p>
-<pre><code>&gt;&gt;&gt; x, y = np.mgrid[0:4, 0:4] &gt;&gt;&gt; x
-array([[0, 0, 0, 0],
-       [1, 1, 1, 1],
-       [2, 2, 2, 2],
-       [3, 3, 3, 3]])
-&gt;&gt;&gt; y
-array([[0, 1, 2, 3],
-       [0, 1, 2, 3],
-       [0, 1, 2, 3],
-       [0, 1, 2, 3]])
+<pre><code>  &gt;&gt;&gt; x, y = np.mgrid[0:4, 0:4] &gt;&gt;&gt; x
+  array([[0, 0, 0, 0],
+         [1, 1, 1, 1],
+         [2, 2, 2, 2],
+         [3, 3, 3, 3]])
+  &gt;&gt;&gt; y
+  array([[0, 1, 2, 3],
+         [0, 1, 2, 3],
+         [0, 1, 2, 3],
+         [0, 1, 2, 3]])
 </code></pre><h3 id="矩阵形状操作"><a href="#矩阵形状操作" class="headerlink" title="矩阵形状操作"></a>矩阵形状操作</h3><ul>
 <li><p>使用ravel展开矩阵</p>
 <pre><code>&gt;&gt;&gt; a = np.array([[1, 2, 3], [4, 5, 6]]) 
@@ -823,7 +823,7 @@ array([-1.,  0.33333333])
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">二月 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/12/">十二月 2016<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">十一月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">十月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/07/">七月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/06/">六月 2016<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/07/">七月 2015<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/06/">六月 2015<span class="sidebar_archives-count">6</span></a>
+                <a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">二月 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/12/">十二月 2016<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">十一月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">十月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/07/">七月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/06/">六月 2016<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/07/">七月 2015<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/06/">六月 2015<span class="sidebar_archives-count">6</span></a>
             </ul>
         </li>
         

@@ -10,7 +10,7 @@
     
     <title>
         
-            LeetCode 4 Median of Two Sorted Arrays | 
+            LeetCode House Robber Series | 
         
         野原圆长的Blog
     </title>
@@ -27,7 +27,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="Xin Wei">
     <meta name="description" content="null">
-    <meta name="keywords" content="Blog deep_learging,算法,cpp,array,hard">
+    <meta name="keywords" content="Blog deep_learging,算法,cpp,dp">
 
     <!--iOS -->
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -48,9 +48,9 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="http://www.wowx.info">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="LeetCode 4 Median of Two Sorted Arrays | 野原圆长的Blog">
+    <meta property="og:title" content="LeetCode House Robber Series | 野原圆长的Blog">
     <meta property="og:description" content="null">
-    <meta property="og:article:tag" content="算法"> <meta property="og:article:tag" content="cpp"> <meta property="og:article:tag" content="array"> <meta property="og:article:tag" content="hard"> 
+    <meta property="og:article:tag" content="算法"> <meta property="og:article:tag" content="cpp"> <meta property="og:article:tag" content="dp"> 
 
     <!--[if lte IE 9]>
         <link rel="stylesheet" href="/css/ie-blocker.css">
@@ -235,7 +235,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#LeetCode-4-Median-of-Two-Sorted-Arrays"><span class="post-toc-number">1.</span> <span class="post-toc-text">[LeetCode]4:Median of Two Sorted Arrays</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#题目："><span class="post-toc-number">1.1.</span> <span class="post-toc-text">题目：</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#解题思路"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">解题思路</span></a></li></ol></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#198-House-Robber-I"><span class="post-toc-number">1.</span> <span class="post-toc-text">198. House Robber I</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Problem-Description"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Problem Description</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Method"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Method</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#213-House-Robber-II"><span class="post-toc-number">2.</span> <span class="post-toc-text">213. House Robber II</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Problem-Description-1"><span class="post-toc-number">3.</span> <span class="post-toc-text">Problem Description</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Method-1"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">Method</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#337-House-Robber-III"><span class="post-toc-number">4.</span> <span class="post-toc-text">337. House Robber III</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Problem-Description-2"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">Problem Description</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Method-2"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">Method</span></a></li></ol></li></ol>
 
         <!--
         <li class="mdl-menu__item">
@@ -263,7 +263,7 @@
         <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(http://ww4.sinaimg.cn/large/6425ef91jw1f9apllc7boj20ic0960v9.jpg)">
     
             <p class="article-headline-p">
-                LeetCode 4 Median of Two Sorted Arrays
+                LeetCode House Robber Series
             </p>
         </div>
 
@@ -282,7 +282,7 @@
     <!-- Author Name & Date -->
     <div>
         <strong>Xin Wei</strong>
-        <span>11月 30, 2015</span>
+        <span>3月 03, 2017</span>
     </div>
 
     <div class="section-spacer"></div>
@@ -306,7 +306,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/array/">array</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/cpp/">cpp</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/hard/">hard</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/算法/">算法</a>
+        <a class="post_tag-link" href="/tags/cpp/">cpp</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/dp/">dp</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/算法/">算法</a>
     </ul>
     
 
@@ -320,7 +320,7 @@
     <!-- Leancloud Views -->
         <a class="post_share-link" href="#">
             <li class="mdl-menu__item">
-                <span id="/posts/20151130013320/" class="leancloud-views_num" data-flag-title="LeetCode 4 Median of Two Sorted Arrays">
+                <span id="/posts/20170303131752/" class="leancloud-views_num" data-flag-title="LeetCode House Robber Series">
      &nbsp;浏览量
 </span>
 
@@ -332,7 +332,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=LeetCode 4 Median of Two Sorted Arrays&url=http://www.wowx.info//posts/20151130013320/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=LeetCode House Robber Series&url=http://www.wowx.info//posts/20170303131752/index.html&pic=&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 分享到微博
             </li>
@@ -341,7 +341,7 @@
 
     <!-- Share Twitter -->
     
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=LeetCode 4 Median of Two Sorted Arrays&url=http://www.wowx.info//posts/20151130013320/index.html&via=Xin Wei" target="_blank">
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=LeetCode House Robber Series&url=http://www.wowx.info//posts/20170303131752/index.html&via=Xin Wei" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Twitter
             </li>
@@ -350,7 +350,7 @@
 
     <!-- Share Facebook -->
     
-        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://www.wowx.info//posts/20151130013320/index.html" target="_blank">
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://www.wowx.info//posts/20170303131752/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Facebook
             </li>
@@ -359,7 +359,7 @@
 
     <!-- Share Google+ -->
     
-        <a class="post_share-link" href="https://plus.google.com/share?url=http://www.wowx.info//posts/20151130013320/index.html" target="_blank">
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://www.wowx.info//posts/20170303131752/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Google+
             </li>
@@ -383,97 +383,121 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <h1 id="LeetCode-4-Median-of-Two-Sorted-Arrays"><a href="#LeetCode-4-Median-of-Two-Sorted-Arrays" class="headerlink" title="[LeetCode]4:Median of Two Sorted Arrays"></a>[LeetCode]4:Median of Two Sorted Arrays</h1><h2 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h2><blockquote>
-<p>There are two sorted arrays <strong>nums1</strong> and <strong>nums2</strong> of size m and n respectively.</p>
-<p>Find the median of the two sorted arrays. The overall run time complexity should be O(log (m+n)).</p>
-<p><strong>Example 1:</strong></p>
-<pre><code>nums1 = [1, 3]
-nums2 = [2]
-
-The median is 2.0
-</code></pre><p><strong>Example 2:</strong></p>
-<pre><code>nums1 = [1, 2]
-nums2 = [3, 4]
-
-The median is (2 + 3)/2 = 2.5
-</code></pre></blockquote>
-<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>中间元素所在位置的特点是:</p>
-<ol>
-<li>左边元素个数等于右边元素个数</li>
-<li>左边最大元素不大于右边最小元素</li>
-</ol>
-<p>假设将nums1分为nums1[:i]和nums[i:],nums2分成nums2[:j]和nums2[j:],如果i+j（左半部分长度） == (m-i) + (n-j) if((m+n)%2 ==0)或 (m - i) + (n - j) + 1 if ((m+2)%2 == 1)(右半部分长度) ,则满足上面的条件一,另外 <code>0&lt;i&lt;m, 0&lt;j&lt;n,j=(m+n+1)/2-i</code> 推出<code>n&gt;=m</code>,所以如果<code>nums1.size() &gt; nums2.size()</code>则将他们调换；</p>
-<p>接下来，判断是否满足条件二，因为两个数组已经排过序了，即<code>nums1[i-1] &lt; nums[i], nums2[j-1]&lt;nums2[j]</code>,只需要考虑<code>nums1[i]</code>是否大于<code>nums2[j-1]</code>,<code>nums[j]</code>是否大于<code>nums[i-1]</code></p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
-<span class="token keyword">public</span><span class="token operator">:</span>
-    <span class="token keyword">double</span> <span class="token function">findMedianSortedArrays</span><span class="token punctuation">(</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token operator">&amp;</span> nums1<span class="token punctuation">,</span> vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token operator">&amp;</span> nums2<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">int</span> m <span class="token operator">=</span> nums1<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> n <span class="token operator">=</span> nums2<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>m <span class="token operator">></span> n<span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token function">findMedianSortedArrays</span><span class="token punctuation">(</span>nums2<span class="token punctuation">,</span> nums1<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">int</span> i<span class="token punctuation">,</span> j<span class="token punctuation">,</span> imin <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> imax <span class="token operator">=</span> m<span class="token punctuation">,</span> half <span class="token operator">=</span> <span class="token punctuation">(</span>m <span class="token operator">+</span> n <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">;</span>
-        <span class="token keyword">while</span> <span class="token punctuation">(</span>imin <span class="token operator">&lt;=</span> imax<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            i <span class="token operator">=</span> <span class="token punctuation">(</span>imin <span class="token operator">&amp;</span> imax<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>imin <span class="token operator">^</span> imax<span class="token punctuation">)</span> <span class="token operator">>></span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            j <span class="token operator">=</span> half <span class="token operator">-</span> i<span class="token punctuation">;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">></span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> j <span class="token operator">&lt;</span> n <span class="token operator">&amp;&amp;</span> nums1<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">></span> nums2<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span> imax <span class="token operator">=</span> i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span>
-            <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>j <span class="token operator">></span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> i <span class="token operator">&lt;</span> m <span class="token operator">&amp;&amp;</span> nums2<span class="token punctuation">[</span>j <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">></span> nums1<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span> imin <span class="token operator">=</span> i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
-            <span class="token keyword">else</span> <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <h2 id="198-House-Robber-I"><a href="#198-House-Robber-I" class="headerlink" title="198. House Robber I"></a>198. House Robber I</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
+<p>You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security system connected and it will automatically contact the police if two adjacent houses were broken into on the same night.</p>
+<p>Given a list of non-negative integers representing the amount of money of each house, determine the maximum amount of money you can rob tonight without alerting the police.</p>
+</blockquote>
+<p>假设有一个强盗抢劫一条街，这条街安装了防盗装置，只要任意相邻的房子被抢就会触发报警，给出一个数组其中存储着每间房子中的现金数量，求强盗最多能抢到多少钱。</p>
+<h3 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h3><p>采用动态规划方法<br>每间房子有两种状态，抢或不抢，如果一间房子能被抢那么它的前一间房子一定没有被抢,定义两个数，一个存储之前房子没有被抢(<code>exclude</code>)一个存储之前的房子已经被抢了(<code>include</code>),那么</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> i <span class="token operator">=</span> include<span class="token punctuation">,</span> <span class="token keyword">int</span> e <span class="token operator">=</span> exclude<span class="token punctuation">;</span>
+include <span class="token operator">=</span> exclude <span class="token operator">+</span> nums<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span>
+exclude <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">int</span> <span class="token function">rob</span><span class="token punctuation">(</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> nums<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> len <span class="token operator">=</span> nums<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> include <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> exclude <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> len<span class="token punctuation">;</span> <span class="token operator">++</span>j<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">int</span> i <span class="token operator">=</span> include<span class="token punctuation">,</span> e <span class="token operator">=</span> exclude<span class="token punctuation">;</span>
+            include <span class="token operator">=</span> exclude <span class="token operator">+</span> nums<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            exclude <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
-        <span class="token keyword">int</span> num1<span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>i<span class="token punctuation">)</span> num1 <span class="token operator">=</span> nums2<span class="token punctuation">[</span>j <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-        <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>j<span class="token punctuation">)</span> num1 <span class="token operator">=</span> nums1<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span> 
-        <span class="token keyword">else</span> num1 <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span>nums1<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> nums2<span class="token punctuation">[</span>j <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>m <span class="token operator">+</span> n<span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">return</span> num1<span class="token punctuation">;</span>
-        <span class="token keyword">int</span> num2<span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">==</span> m<span class="token punctuation">)</span> num2 <span class="token operator">=</span> nums2<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span>
-        <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>j <span class="token operator">==</span> n<span class="token punctuation">)</span> num2 <span class="token operator">=</span> nums1<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
-        <span class="token keyword">else</span> num2 <span class="token operator">=</span> <span class="token function">min</span><span class="token punctuation">(</span>nums1<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> nums2<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> <span class="token punctuation">(</span>num1 <span class="token operator">+</span> num2<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">2.0</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token function">max</span><span class="token punctuation">(</span>include<span class="token punctuation">,</span> exclude<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>另一种理解：<br>将房子编号为奇数和偶数</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">int</span> <span class="token function">rob</span><span class="token punctuation">(</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token operator">&amp;</span> nums<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> is_odd<span class="token punctuation">;</span>
+        vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">robs</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> nums<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            is_odd <span class="token operator">=</span> i <span class="token operator">%</span> <span class="token number">2</span><span class="token punctuation">;</span>
+            robs<span class="token punctuation">[</span>is_odd<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span>robs<span class="token punctuation">[</span>is_odd<span class="token punctuation">]</span> <span class="token operator">+</span> nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> robs<span class="token punctuation">[</span><span class="token number">1</span> <span class="token operator">-</span> is_odd<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">// if (i % 2 == 0)</span>
+            <span class="token comment" spellcheck="true">//     rob_even = max(rob_even + nums[i], rob_odd);</span>
+            <span class="token comment" spellcheck="true">// else</span>
+            <span class="token comment" spellcheck="true">//     rob_odd = max(rob_odd + nums[i], rob_even);</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token function">max</span><span class="token punctuation">(</span>robs<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> robs<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="213-House-Robber-II"><a href="#213-House-Robber-II" class="headerlink" title="213. House Robber II"></a>213. House Robber II</h2><h2 id="Problem-Description-1"><a href="#Problem-Description-1" class="headerlink" title="Problem Description"></a>Problem Description</h2><blockquote>
+<p>Note: This is an extension of House Robber.</p>
+<p>After robbing those houses on that street, the thief has found himself a new place for his thievery so that he will not get too much attention. This time, all houses at this place are arranged in a circle. That means the first house is the neighbor of the last one. Meanwhile, the security system for these houses remain the same as for those in the previous street.</p>
+<p>Given a list of non-negative integers representing the amount of money of each house, determine the maximum amount of money you can rob tonight without alerting the police.</p>
+</blockquote>
+<p>和上题类似，只是这次整个街区首尾相连形成了一个环形;</p>
+<h3 id="Method-1"><a href="#Method-1" class="headerlink" title="Method"></a>Method</h3><p>本题因为构成了环形，所以不但要考虑之前房子有没有被抢，还需要考虑后面的房子可不可以抢，初看起来问题很复杂，但是我们可以将这个问题转化为前面的线性街区的情况：以任何一间房子为分割点，比如第0间房子，如果这间房子被抢了，那么它前面的房子(n-1)一定不能被抢，则<code>[0, 1, 2,...,n-2]</code>可以当做线性情况看待，如果该房间没有被抢，那么<code>[1, 2, ..., n-1]</code>变成了线性情况。</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">int</span> <span class="token function">rob</span><span class="token punctuation">(</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token operator">&amp;</span> nums<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> len <span class="token operator">=</span> nums<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>len <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span>
+            <span class="token keyword">return</span> nums<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token function">max</span><span class="token punctuation">(</span><span class="token function">rob</span><span class="token punctuation">(</span>nums<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> len<span class="token number">-2</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">rob</span><span class="token punctuation">(</span>nums<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> len<span class="token number">-1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">int</span> <span class="token function">rob</span><span class="token punctuation">(</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token operator">&amp;</span> nums<span class="token punctuation">,</span> <span class="token keyword">int</span> lo<span class="token punctuation">,</span> <span class="token keyword">int</span> hi<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> include <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> exclude <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> lo<span class="token punctuation">;</span> j <span class="token operator">&lt;=</span> hi<span class="token punctuation">;</span> <span class="token operator">++</span>j<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">int</span> i <span class="token operator">=</span> include<span class="token punctuation">,</span> e <span class="token operator">=</span> exclude<span class="token punctuation">;</span>
+            include <span class="token operator">=</span> exclude <span class="token operator">+</span> nums<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            exclude <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token function">max</span><span class="token punctuation">(</span>include<span class="token punctuation">,</span> exclude<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="337-House-Robber-III"><a href="#337-House-Robber-III" class="headerlink" title="337. House Robber III"></a>337. House Robber III</h2><h3 id="Problem-Description-2"><a href="#Problem-Description-2" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
+<p>The thief has found himself a new place for his thievery again. There is only one entrance to this area, called the “root.” Besides the root, each house has one and only one parent house. After a tour, the smart thief realized that “all houses in this place forms a binary tree”. It will automatically contact the police if two directly-linked houses were broken into on the same night.</p>
+<p>Determine the maximum amount of money the thief can rob tonight without alerting the police.</p>
+<p>Example 1:<br>    3<br>   / \<br>  2   3<br>   \   \<br>    3   1<br>Maximum amount of money the thief can rob = 3 + 3 + 1 = 7.<br>Example 2:<br>    3<br>   / \<br>  4   5<br> / \   \<br>1   3   1<br>Maximum amount of money the thief can rob = 4 + 5 = 9.</p>
+</blockquote>
+<p>这次抢劫团伙又找到了一个抢劫地点，这个地点只有一个入口可以进入，然后每条路经过一个房子后分成两条路，不断重复，即这是一颗二叉树，如果某条路上两家同时被抢劫会触发报警装置，求强盗最多能抢多少钱</p>
+<h3 id="Method-2"><a href="#Method-2" class="headerlink" title="Method"></a>Method</h3><p>在每个结点上，强盗有两种选择，一是抢劫该结点，但是它的两个子节点不能被抢，二是不抢劫该节点，其两个子节点都可以抢</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */</span>
+<span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">int</span> <span class="token function">rob</span><span class="token punctuation">(</span>TreeNode<span class="token operator">*</span> root<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> res <span class="token operator">=</span> <span class="token function">robSub</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token function">max</span><span class="token punctuation">(</span>res<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> res<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<span class="token comment" spellcheck="true">//下面这个版本[1, 3] [2]不通过，下次再修改</span>
 
-<span class="token comment" spellcheck="true">// class Solution {</span>
-<span class="token comment" spellcheck="true">// public:</span>
-<span class="token comment" spellcheck="true">//     double findMedianSortedArrays(vector&lt;int>&amp; nums1, vector&lt;int>&amp; nums2) {</span>
-<span class="token comment" spellcheck="true">//         // 如果nums1的长度大于nums2的长度，将两者交换</span>
-<span class="token comment" spellcheck="true">//         if (nums1.size() > nums2.size()) return findMedianSortedArrays(nums2, nums1);</span>
-<span class="token comment" spellcheck="true">//         int m = nums1.size(), n = nums2.size();</span>
-<span class="token comment" spellcheck="true">//         // 如果m + n是偶数，j = (m + n) / 2 - i;否则j= (m + n + 1) / 2 - i;但是由于舍入规则，第一种情况和第二种情况一样</span>
-<span class="token comment" spellcheck="true">//         int i, j;</span>
-<span class="token comment" spellcheck="true">//         // i最终位置的上下边界</span>
-<span class="token comment" spellcheck="true">//         int m_left = 0, mid = (m + n + 1) / 2 ,m_right = m;</span>
-<span class="token comment" spellcheck="true">//         double left_max = 0, right_min = 0;</span>
-<span class="token comment" spellcheck="true">//         while (m_left &lt;= m_right)</span>
-<span class="token comment" spellcheck="true">//         {</span>
-<span class="token comment" spellcheck="true">//             i = m_left + (m_right - m_left) / 2;//0</span>
-<span class="token comment" spellcheck="true">//             j = mid - i;//2</span>
-<span class="token comment" spellcheck="true">//             if (i &lt; m &amp;&amp; j &lt; n &amp;&amp; nums1[i] &lt; nums2[j - 1])</span>
-<span class="token comment" spellcheck="true">//                 m_left = i + 1;</span>
-<span class="token comment" spellcheck="true">//             else if (i > 0 &amp;&amp; i &lt; m &amp;&amp; nums1[i - 1] > nums2[j])</span>
-<span class="token comment" spellcheck="true">//                 m_right = i - 1;</span>
-<span class="token comment" spellcheck="true">//             else</span>
-<span class="token comment" spellcheck="true">//             {</span>
-<span class="token comment" spellcheck="true">//                 break;</span>
-<span class="token comment" spellcheck="true">//             }</span>
-<span class="token comment" spellcheck="true">//         }</span>
-<span class="token comment" spellcheck="true">//         // double left_max = 0;</span>
-<span class="token comment" spellcheck="true">//         if (!i) left_max = nums2[j - 1];</span>
-<span class="token comment" spellcheck="true">//         else if (!j) left_max = nums1[i - 1];</span>
-<span class="token comment" spellcheck="true">//         else left_max = max(nums1[i - 1], nums2[j - 1]);</span>
-<span class="token comment" spellcheck="true">//         if ((m + n) % 2)</span>
-<span class="token comment" spellcheck="true">//             return left_max;</span>
+    <span class="token punctuation">}</span>
 
-<span class="token comment" spellcheck="true">//         // double right_min = 0;</span>
-<span class="token comment" spellcheck="true">//         if (i == m)</span>
-<span class="token comment" spellcheck="true">//             right_min = nums2[j];</span>
-<span class="token comment" spellcheck="true">//         else if (j == n)</span>
-<span class="token comment" spellcheck="true">//             right_min = nums1[i];</span>
-<span class="token comment" spellcheck="true">//         else</span>
-<span class="token comment" spellcheck="true">//             right_min = min(nums1[i], nums2[j]);</span>
-<span class="token comment" spellcheck="true">//         return (left_max + right_min) / 2.0;</span>
-<span class="token comment" spellcheck="true">//     }</span>
-<span class="token comment" spellcheck="true">// };</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">robSub</span><span class="token punctuation">(</span>TreeNode<span class="token operator">*</span> root<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>root <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+            <span class="token keyword">return</span> vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> left <span class="token operator">=</span> <span class="token function">robSub</span><span class="token punctuation">(</span>root<span class="token operator">-</span><span class="token operator">></span>left<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> right <span class="token operator">=</span> <span class="token function">robSub</span><span class="token punctuation">(</span>root<span class="token operator">-</span><span class="token operator">></span>right<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">res</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        res<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> root<span class="token operator">-</span><span class="token operator">></span>val <span class="token operator">+</span> left<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">+</span> right<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        res<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span>left<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> left<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token function">max</span><span class="token punctuation">(</span>right<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> right<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> res<span class="token punctuation">;</span>
+
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
     
 
@@ -502,9 +526,9 @@ The median is (2 + 3)/2 = 2.5
 <div id="comments">
     <!-- 多说评论框 start -->
     <div class="ds-thread"
-        data-thread-key="posts/20151130013320/"
-        data-url="http://www.wowx.info/posts/20151130013320/"
-        data-title="LeetCode 4 Median of Two Sorted Arrays">
+        data-thread-key="posts/20170303131752/"
+        data-url="http://www.wowx.info/posts/20170303131752/"
+        data-title="LeetCode House Robber Series">
     </div>
     <!-- 多说评论框 end -->
 </div>
@@ -521,21 +545,13 @@ The median is (2 + 3)/2 = 2.5
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
-        <a href="/posts/20151130233720/" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            新篇
-        </a>
-    
 
     <!-- Section Spacer -->
     <div class="section-spacer"></div>
 
     <!-- Next Nav -->
     
-        <a href="/posts/20151129203220/" id="post_nav-older" class="next-content">
+        <a href="/posts/20170302213803/" id="post_nav-older" class="next-content">
             旧篇
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">

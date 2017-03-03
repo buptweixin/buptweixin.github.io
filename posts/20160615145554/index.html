@@ -457,14 +457,14 @@
 </table>
 <p>默认的层级是WARNING，即只追踪警告及其以上的事件发生，比如下面的简单的例子：</p>
 <pre><code>import logging
-logging.warning(&apos;Watch out!&apos;) # 将会在终端打印信息
-logging.info(&apos;I told you so&apos;) # 不会打印任何信息
+logging.warning(&#39;Watch out!&#39;) # 将会在终端打印信息
+logging.info(&#39;I told you so&#39;) # 不会打印任何信息
 </code></pre><p>运行结果：<br><code>WARNING:root:Watch out!</code></p>
 <h3 id="3-将日志记录到文件中"><a href="#3-将日志记录到文件中" class="headerlink" title="3.将日志记录到文件中"></a>3.将日志记录到文件中</h3><pre><code>import logging
-logging.basicConfig(filename=&apos;example.log&apos;,level=logging.DEBUG)
-logging.debug(&apos;This message should go to the log file&apos;)
-logging.info(&apos;So should this&apos;)
-logging.warning(&apos;And this, too&apos;)
+logging.basicConfig(filename=&#39;example.log&#39;,level=logging.DEBUG)
+logging.debug(&#39;This message should go to the log file&#39;)
+logging.info(&#39;So should this&#39;)
+logging.warning(&#39;And this, too&#39;)
 </code></pre><p>执行上面的代码，然后打开<code>example.log</code>文件，将会看到下面的内容：</p>
 <pre><code>DEBUG:root:This message should go to the log file
 INFO:root:So should this
@@ -472,53 +472,53 @@ WARNING:root:And this, too
 </code></pre><p>这段代码也对如何设置日志层级进行了说明。其实，也可以通过命令行的方式设置：<br><code>--log=INFO</code><br>然后加入下面的代码读到设置好的层级信息：</p>
 <pre><code>numeric_level = getattr(logging, loglevel.upper(), None)
 if not isinstance(numeric_level, int):
-          raise ValueError(&apos;Invalid log level: %s&apos; % loglevel)
+          raise ValueError(&#39;Invalid log level: %s&#39; % loglevel)
 logging.basicConfig(level=numeric_level, ...)
 </code></pre><p>如果不断运行上面的程序，新的日志将追加到旧的日志之后，这会变得越来越庞大，可以通过下面的方法使新的日志覆盖旧的日志：</p>
-<pre><code>logging.basicConfig(filename=&apos;example.log&apos;, filemode=&apos;w&apos;, level=logging.DEBUG)
+<pre><code>logging.basicConfig(filename=&#39;example.log&#39;, filemode=&#39;w&#39;, level=logging.DEBUG)
 </code></pre><h3 id="4-从多个模块收集日志信息"><a href="#4-从多个模块收集日志信息" class="headerlink" title="4.从多个模块收集日志信息"></a>4.从多个模块收集日志信息</h3><p>下面的代码演示了当你的程序由多个模块组成时管理日志的方法：<br><code># myapp.py</code></p>
 <pre><code>import logging
 import mylib
 
 def main():
-    logging.basicConfig(filename=&apos;myapp.log&apos;, level=logging.INFO)
-    logging.info(&apos;Started&apos;)
+    logging.basicConfig(filename=&#39;myapp.log&#39;, level=logging.INFO)
+    logging.info(&#39;Started&#39;)
     mylib.do_something()
-    logging.info(&apos;Finished&apos;)
+    logging.info(&#39;Finished&#39;)
 
-if __name__ == &apos;__main__&apos;:
+if __name__ == &#39;__main__&#39;:
     main()
 </code></pre><p><code># mylib.py</code></p>
 <pre><code>    import logging
 def do_something():
-    logging.info(&apos;Doing something&apos;)
+    logging.info(&#39;Doing something&#39;)
 </code></pre><p>运行<code>myapp.py</code>的结果：</p>
 <pre><code>INFO:root:Started
 INFO:root:Doing something
 INFO:root:Finished
 </code></pre><h3 id="5-记录变量信息"><a href="#5-记录变量信息" class="headerlink" title="5. 记录变量信息"></a>5. 记录变量信息</h3><p>可以使用格式化字符串的方法记录变量：</p>
 <pre><code>import logging
-logging.warning(&apos;%s before you %s&apos;, &apos;Look&apos;, &apos;leap!&apos;)
+logging.warning(&#39;%s before you %s&#39;, &#39;Look&#39;, &#39;leap!&#39;)
 </code></pre><p>除了上面的方法外，也可以使用str.format()和string.Template方法。</p>
 <h3 id="6-改变日志格式"><a href="#6-改变日志格式" class="headerlink" title="6.改变日志格式"></a>6.改变日志格式</h3><pre><code>import logging
-logging.basicConfig(format=&apos;%(levelname)s:%(message)s&apos;, level=logging.DEBUG)
-logging.debug(&apos;This message should appear on the console&apos;)
-logging.info(&apos;So should this&apos;)
-logging.warning(&apos;And this, too&apos;)
+logging.basicConfig(format=&#39;%(levelname)s:%(message)s&#39;, level=logging.DEBUG)
+logging.debug(&#39;This message should appear on the console&#39;)
+logging.info(&#39;So should this&#39;)
+logging.warning(&#39;And this, too&#39;)
 </code></pre><p>输出：</p>
 <pre><code>DEBUG:This message should appear on the console
 INFO:So should this
 WARNING:And this, too
 </code></pre><h3 id="7-显示日期时间"><a href="#7-显示日期时间" class="headerlink" title="7. 显示日期时间"></a>7. 显示日期时间</h3><p>在格式化输出信息中引入<code>(asctime)s</code>来显示时间：</p>
 <pre><code>import logging
-logging.basicConfig(format=&apos;%(asctime)s %(message)s&apos;)
-logging.warning(&apos;is when this event was logged.&apos;)
+logging.basicConfig(format=&#39;%(asctime)s %(message)s&#39;)
+logging.warning(&#39;is when this event was logged.&#39;)
 </code></pre><p>输出：</p>
 <pre><code>2010-12-12 11:41:42,612 is when this event was logged.
 </code></pre><p>默认的日期格式是ISO8601，你也可以在<code>basicConfig</code>中进行改变：</p>
 <pre><code>import logging
-logging.basicConfig(format=&apos;%(asctime)s %(message)s&apos;, datefmt=&apos;%m/%d/%Y %I:%M:%S %p&apos;)
-logging.warning(&apos;is when this event was logged.&apos;)
+logging.basicConfig(format=&#39;%(asctime)s %(message)s&#39;, datefmt=&#39;%m/%d/%Y %I:%M:%S %p&#39;)
+logging.warning(&#39;is when this event was logged.&#39;)
 </code></pre><p>输出：</p>
 <pre><code>12/12/2010 11:46:36 AM is when this event was logged.
 </code></pre><p>除此之外，还可以使用<code>time.strftime()</code>来改变时间格式。</p>
@@ -677,7 +677,7 @@ logging.warning(&apos;is when this event was logged.&apos;)
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">二月 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/12/">十二月 2016<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">十一月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">十月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/07/">七月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/06/">六月 2016<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/07/">七月 2015<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/06/">六月 2015<span class="sidebar_archives-count">6</span></a>
+                <a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">二月 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/12/">十二月 2016<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">十一月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">十月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/07/">七月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/06/">六月 2016<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/07/">七月 2015<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/06/">六月 2015<span class="sidebar_archives-count">6</span></a>
             </ul>
         </li>
         
