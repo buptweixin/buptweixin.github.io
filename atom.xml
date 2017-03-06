@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.wowx.info/"/>
-  <updated>2017-03-03T05:19:06.542Z</updated>
+  <updated>2017-03-06T01:46:46.973Z</updated>
   <id>http://www.wowx.info/</id>
   
   <author>
@@ -14,6 +14,81 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>LeetCode 447[HashTable]</title>
+    <link href="http://www.wowx.info/posts/20170306094212/"/>
+    <id>http://www.wowx.info/posts/20170306094212/</id>
+    <published>2017-03-06T01:42:12.000Z</published>
+    <updated>2017-03-06T01:46:46.973Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="447-Number-of-Boomerangs-EASY"><a href="#447-Number-of-Boomerangs-EASY" class="headerlink" title="447. Number of Boomerangs[EASY]"></a>447. Number of Boomerangs[EASY]</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><pre class="line-numbers language-cpp"><code class="language-cpp">Given n points in the plane that are all pairwise distinct<span class="token punctuation">,</span> a <span class="token string">"boomerang"</span> is a tuple of <span class="token function">points</span> <span class="token punctuation">(</span>i<span class="token punctuation">,</span> j<span class="token punctuation">,</span> k<span class="token punctuation">)</span> such that the distance between i <span class="token operator">and</span> j equals the distance between i <span class="token operator">and</span> <span class="token function">k</span> <span class="token punctuation">(</span>the order of the tuple matters<span class="token punctuation">)</span><span class="token punctuation">.</span>
+
+Find the number of boomerangs<span class="token punctuation">.</span> You may assume that n will be at most <span class="token number">500</span> <span class="token operator">and</span> coordinates of points are all in the range <span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">10000</span><span class="token punctuation">,</span> <span class="token number">10000</span><span class="token punctuation">]</span> <span class="token punctuation">(</span>inclusive<span class="token punctuation">)</span><span class="token punctuation">.</span>
+
+Example<span class="token operator">:</span>
+Input<span class="token operator">:</span>
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+
+Output<span class="token operator">:</span>
+<span class="token number">2</span>
+
+Explanation<span class="token operator">:</span>
+The two boomerangs are <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">and</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>给出一组坐标值，找出有多少种三点组合<code>[i, j, k]</code>使得i与k距离和i与j距离相等</p>
+<h3 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h3><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">int</span> <span class="token function">numberOfBoomerangs</span><span class="token punctuation">(</span>vector<span class="token operator">&lt;</span>pair<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">>></span><span class="token operator">&amp;</span> points<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        unordered_map<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">></span> dist_map<span class="token punctuation">;</span>
+        <span class="token keyword">int</span> res <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> points<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> points<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">++</span>j<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">==</span> j<span class="token punctuation">)</span>
+                    <span class="token keyword">continue</span><span class="token punctuation">;</span>
+                <span class="token keyword">int</span> d <span class="token operator">=</span> <span class="token function">getDistance</span><span class="token punctuation">(</span>points<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> points<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>dist_map<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span>d<span class="token punctuation">)</span> <span class="token operator">!=</span> dist_map<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                    dist_map<span class="token punctuation">[</span>d<span class="token punctuation">]</span> <span class="token operator">+</span><span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+                <span class="token keyword">else</span>
+                    dist_map<span class="token punctuation">[</span>d<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span> it <span class="token operator">=</span> dist_map<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> it <span class="token operator">!=</span> dist_map<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">++</span>it<span class="token punctuation">)</span>
+                res <span class="token operator">+</span><span class="token operator">=</span> it<span class="token operator">-</span><span class="token operator">></span>second <span class="token operator">*</span> <span class="token punctuation">(</span>it<span class="token operator">-</span><span class="token operator">></span>second <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            dist_map<span class="token punctuation">.</span><span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> res<span class="token punctuation">;</span>
+
+    <span class="token punctuation">}</span>
+
+<span class="token keyword">private</span><span class="token operator">:</span>
+    <span class="token keyword">int</span> <span class="token function">getDistance</span><span class="token punctuation">(</span>pair<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">></span> <span class="token operator">&amp;</span>point1<span class="token punctuation">,</span> pair<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">></span> <span class="token operator">&amp;</span>point2<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> dx <span class="token operator">=</span> point1<span class="token punctuation">.</span>first <span class="token operator">-</span> point2<span class="token punctuation">.</span>first<span class="token punctuation">;</span>
+        <span class="token keyword">int</span> dy <span class="token operator">=</span> point1<span class="token punctuation">.</span>second <span class="token operator">-</span> point2<span class="token punctuation">.</span>second<span class="token punctuation">;</span>
+        <span class="token keyword">return</span> dx <span class="token operator">*</span> dx <span class="token operator">+</span> dy <span class="token operator">*</span> dy<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;447-Number-of-Boomerangs-EASY&quot;&gt;&lt;a href=&quot;#447-Number-of-Boomerangs-EASY&quot; class=&quot;headerlink&quot; title=&quot;447. Number of Boomerangs[EASY]&quot;&gt;&lt;
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="http://www.wowx.info/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
+    
+      <category term="hashtable" scheme="http://www.wowx.info/tags/hashtable/"/>
+    
+  </entry>
   
   <entry>
     <title>LeetCode House Robber Series</title>
@@ -3519,217 +3594,6 @@ canConstruct(&quot;aa&quot;, &quot;aab&quot;) -&gt; true
       <category term="string" scheme="http://www.wowx.info/tags/string/"/>
     
       <category term="easy" scheme="http://www.wowx.info/tags/easy/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>cmake note</title>
-    <link href="http://www.wowx.info/posts//posts/20161210021807/"/>
-    <id>http://www.wowx.info/posts//posts/20161210021807/</id>
-    <published>2016-12-09T18:18:07.000Z</published>
-    <updated>2016-12-21T15:48:24.670Z</updated>
-    
-    <content type="html"><![CDATA[<p>本文是<a href="http://sewm.pku.edu.cn/src/paradise/reference/CMake%20Practice.pdf" target="_blank" rel="external">cmake实践</a>的笔记</p>
-<h2 id="基本构建"><a href="#基本构建" class="headerlink" title="基本构建"></a>基本构建</h2><pre class="line-numbers language-cmake"><code class="language-cmake">PROJECT (HELLO)
-SET(SRC_LIST main.c)
-MESSAGE(STATUS "This is BINARY dir " ${HELLO_BINARY_DIR}) 
-MESSAGE(STATUS "This is SOURCE dir "${HELLO_SOURCE_DIR}) 
-ADD_EXECUTABLE(hello ${SRC_LIST})
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<ol>
-<li><code>PROJECT(projectname [CXX] [C] [Java])</code>:工程名</li>
-<li><code>SET (VAR [VALUE] [CACHE TYPE DOCSTRING [FORCE]])</code>：设定变量</li>
-<li><p><code>MESSAGE([SEND_ERROR | STATUS | FATAL_ERROR] &quot;message to display&quot; ...)</code></p>
-<p><code>SEND_ERROR</code>:产生错误，生成过程被跳过<br><code>STATUS</code>: 输出前缀为<code>--</code>的信息<br><code>FATAL_ERROR</code>:立即终止所有cmake过程</p>
-</li>
-<li><code>ADD_EXECUTABLE(hello ${SRC_LIST})</code>:定义了这个工程会生成一个文件名为 hello的可执行文件,相关的源文件是 SRC_LIST 中定义的源文件列表</li>
-<li>cmake 中除了在if中之外，引用变量需要用<code>${VAR}</code>括起来</li>
-</ol>
-<h2 id="工程构建"><a href="#工程构建" class="headerlink" title="工程构建"></a>工程构建</h2><h3 id="文件结构"><a href="#文件结构" class="headerlink" title="文件结构"></a>文件结构</h3><pre><code>.
-├── CMakeLists.txt
-├── COPYRIGHT
-├── README
-├── doc
-│   └── hello.txt
-├── runhello.sh
-└── src
-    ├── CMakeLists.txt
-    └── main.cpp
-</code></pre><h3 id="CMakeLists-txt"><a href="#CMakeLists-txt" class="headerlink" title="CMakeLists.txt"></a>CMakeLists.txt</h3><p>工程CMakeLists.txt</p>
-<pre><code>PROJECT (HELLO CXX)
-MESSAGE(STATUS &quot;This is Binary dir&quot; ${HELLO_BINARY_DIR})
-MESSAGE(STATUS &quot;This is SOURCE dir&quot; ${HELLO_SOURCE_DIR})
-install(FILES COPYRIGHT README DESTINATION share/doc/cmake/t2)
-INSTALL(PROGRAMS runhello.sh DESTINATION bin)
-install(DIRECTORY doc/ DESTINATION share/doc/cmake/t2)
-ADD_SUBDIRECTORY(src bin)
-</code></pre><p>src下的CMakeLists.txt</p>
-<pre><code>set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
-ADD_EXECUTABLE(hello main.cpp)
-INSTALL(TARGETS hello
-    RUNTIME DESTINATION bin
-    )
-</code></pre><h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-12-9/24651252.jpg" alt=""></p>
-<ol>
-<li><code>ADD_SUBDIRECTORY(source_dir [binary_dir] [EXCLUDE_FROM_ALL])</code>:这个指令用于向当前工程添加存放源文件的子目录,并可以指定中间二进制和目标二进制存放的位置。EXCLUDE_FROM_ALL 参数的含义是将这个目录从编译过程中排除.指定 bin 目录后,相当于在编译时 将 src 重命名为 bin,所有的中间结果和目标二进制都将存放在 bin 目录。</li>
-<li><code>SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)</code>:换个位置保存目标二进制</li>
-<li><p><code>SET(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)</code></p>
-<p>问题是,我应该把这两条指令写在工程的 CMakeLists.txt 还是 src 目录下的 CMakeLists.txt,把握一个简单的原则,在哪里 ADD_EXECUTABLE 或 ADD_LIBRARY, 如果需要改变目标存放路径,就在哪里加入上述的定义。</p>
-</li>
-</ol>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>安装前缀在通过<code>-DCMAKE_INSTALL_PREFIX</code>指定，如:<code>cmake -DCMAKE_INSTALL_PREFIX=/share/usr ..</code>如果没有指定前缀，默认安装到<code>/usr/local</code>,<br>在<code>CMakeLists.txt</code>中使用<code>DESTINATION</code>指代它</p>
-<ol>
-<li>目标可执行文件的安装</li>
-</ol>
-<pre class="line-numbers language-cmake"><code class="language-cmake">  INSTALL(TARGETS targets...
-            [[ARCHIVE|LIBRARY|RUNTIME]
-                        [DESTINATION <dir>]
-                        [PERMISSIONS permissions...]
-                        [CONFIGURATIONS
-          [Debug|Release|...]]
-                        [COMPONENT <component>]
-                        [OPTIONAL]
-                       ] [...])
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>  例子</p>
-<pre class="line-numbers language-cmake"><code class="language-cmake">  INSTALL(TARGETS myrun mylib mystaticlib
-     RUNTIME DESTINATION bin
-     LIBRARY DESTINATION lib
-     ARCHIVE DESTINATION libstatic
-  )
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>  其中myrun为<code>add_executable</code>中添加的可执行文件变量</p>
-<ol>
-<li>普通文件的安装</li>
-</ol>
-<pre class="line-numbers language-cmake"><code class="language-cmake">  INSTALL(FILES files... DESTINATION <dir>
-            [PERMISSIONS permissions...]
-            [CONFIGURATIONS [Debug|Release|...]]
-            [COMPONENT <component>]
-            [RENAME <name>] [OPTIONAL])
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>  默认权限为644</p>
-<ol>
-<li>非目标文件的可执行文件安装(比如shell脚本之类)</li>
-</ol>
-<pre class="line-numbers language-cmake"><code class="language-cmake">  INSTALL(PROGRAMS files... DESTINATION <dir>
-            [PERMISSIONS permissions...]
-            [CONFIGURATIONS [Debug|Release|...]]
-            [COMPONENT <component>]
-            [RENAME <name>] [OPTIONAL])
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>  默认755权限</p>
-<ol>
-<li><p>目录的安装</p>
-<pre><code>INSTALL(DIRECTORY dirs... DESTINATION &lt;dir&gt;
-         [FILE_PERMISSIONS permissions...]
-         [DIRECTORY_PERMISSIONS permissions...]
-         [USE_SOURCE_PERMISSIONS]
-         [CONFIGURATIONS [Debug|Release|...]]
-         [COMPONENT &lt;component&gt;]
-         [[PATTERN &lt;pattern&gt; | REGEX &lt;regex&gt;]
-          [EXCLUDE] [PERMISSIONS permissions...]] [...])
-</code></pre><p>如果dirs以<code>/</code>结尾，则安装dirs下的所有文件，否则连同父目录一同安装<br>使用PATTERN可以使用正则表达式过滤</p>
-<pre><code>
-INSTALL(DIRECTORY icons scripts/ DESTINATION share/myproj
-PATTERN &quot;CVS&quot; EXCLUDE
-         PATTERN &quot;scripts/*&quot;
-         PERMISSIONS OWNER_EXECUTE OWNER_WRITE OWNER_READ
-                 GROUP_EXECUTE GROUP_READ)
-</code></pre></li>
-<li><p>安装时CMAKE脚本执行</p>
-<pre><code>安装时 CMAKE 脚本的执行:
-INSTALL([[SCRIPT &lt;file&gt;] [CODE &lt;code&gt;]] [...])
-SCRIPT 参数用于在安装时调用 cmake 脚本文件(也就是&lt;abc&gt;.cmake 文件) CODE 参数用于执行 CMAKE 指令,必须以双引号括起来。比如: INSTALL(CODE &quot;MESSAGE(\&quot;Sample install message.\&quot;)&quot;)
-</code></pre></li>
-</ol>
-<h2 id="静态库和动态库的构建"><a href="#静态库和动态库的构建" class="headerlink" title="静态库和动态库的构建"></a>静态库和动态库的构建</h2><h3 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h3><pre><code>.
-├── CMakeLists.txt
-├── build
-└── lib
-    ├── CMakeLists.txt
-    ├── hello.cpp
-    └── hello.h
-</code></pre><h3 id="CMakeLists-txt-1"><a href="#CMakeLists-txt-1" class="headerlink" title="CMakeLists.txt"></a>CMakeLists.txt</h3><h4 id="工程CMakeLists-txt"><a href="#工程CMakeLists-txt" class="headerlink" title="工程CMakeLists.txt"></a>工程CMakeLists.txt</h4><pre><code>PROJECT(HELLOLIB)
-ADD_SUBDIRECTORY(lib)
-</code></pre><h4 id="lib-CMakeLists-txt"><a href="#lib-CMakeLists-txt" class="headerlink" title="lib/CMakeLists.txt"></a>lib/CMakeLists.txt</h4><pre><code>SET(LIB_SRC hello.cpp)
-ADD_LIBRARY(hello SHARED ${LIB_SRC})
-ADD_LIBRARY(hello_static STATIC ${LIB_SRC})
-SET_TARGET_PROPERTIES(hello_static PROPERTIES OUTPUT_NAME hello)
-GET_TARGET_PROPERTY(OUTPUT_VALUE hello_static OUTPUT_NAME)
-MESSAGE(STATUS &quot;The output name of hello_static is:&quot; ${OUTPUT_VALUE})
-SET_TARGET_PROPERTIES(hello PROPERTIES CLEAN_DIRECT 1)
-SET_TARGET_PROPERTIES(hello_static PROPERTIES CLEAN_DIRECT 1)
-SET_TARGET_PROPERTIES(hello PROPERTIES VERSION 1.1 SOVERSION 1)
-
-INSTALL(TARGETS hello hello_static
-    LIBRARY DESTINATION lib
-    ARCHIVE DESTINATION lib
-    )
-
-INSTALL(FILES hello.h DESTINATION include)
-</code></pre><h3 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h3><ol>
-<li><p><code>ADD_LIBRARY</code></p>
-<pre><code>ADD_LIBRARY(libname    [SHARED|STATIC|MODULE]
-       [EXCLUDE_FROM_ALL]
-             source1 source2 ... sourceN)
-</code></pre><p>SHARED: 动态链接库<br>STATIC: 静态链接库<br>MODULE: 在使用 dyld 的系统有效,如果不支持 dyld,则被当作 SHARED 对待<br>EXCLUDE_FROM_ALL 参数的意思是这个库不会被默认构建,除非有其他的组件依赖或者手 工构建。</p>
-</li>
-<li><p><code>SET_TARGET_PROPERTIES</code></p>
-<pre><code>SET_TARGET_PROPERTIES,其基本语法是: SET_TARGET_PROPERTIES(target1 target2 ...
-                   PROPERTIES prop1 value1
-                   prop2 value2 ...)
-</code></pre></li>
-<li><p>版本号</p>
-<p><code>SET_TARGET_PROPERTIES(hello PROPERTIES VERSION 1.2 SOVERSION 1)</code></p>
-</li>
-</ol>
-<ul>
-<li><code>VERSION</code>: 动态库版本</li>
-<li><code>SOVERSION</code>: API版本</li>
-</ul>
-<h2 id="使用外部共享库和头文件"><a href="#使用外部共享库和头文件" class="headerlink" title="使用外部共享库和头文件"></a>使用外部共享库和头文件</h2><h3 id="文件结构-1"><a href="#文件结构-1" class="headerlink" title="文件结构"></a>文件结构</h3><pre><code>.
-├── CMakeLists.txt
-├── build
-└── src
-    ├── CMakeLists.txt
-    └── main.cpp
-</code></pre><h3 id="CMakeLists-txt-2"><a href="#CMakeLists-txt-2" class="headerlink" title="CMakeLists.txt"></a>CMakeLists.txt</h3><h4 id="工程"><a href="#工程" class="headerlink" title="工程"></a>工程</h4><pre><code>PROJECT(NEWHELLO)
-ADD_SUBDIRECTORY(src bin)
-</code></pre><h4 id="src-CMakeLists-txt"><a href="#src-CMakeLists-txt" class="headerlink" title="src/CMakeLists.txt"></a>src/CMakeLists.txt</h4><pre><code>SET(SRC_CPP main.cpp)
-ADD_EXECUTABLE(main ${SRC_CPP})
-INCLUDE_DIRECTORIES(/Users/weixin/workspace/test/cmake/include)
-TARGET_LINK_LIBRARIES(main /Users/weixin/workspace/test/cmake/lib/libhello.dylib)
-</code></pre><h4 id="头文件添加"><a href="#头文件添加" class="headerlink" title="头文件添加"></a>头文件添加</h4><p>如果共享库头文件不在标准搜索路径<code>/usr/include /usr/local/include</code>则需要手动添加</p>
-<ol>
-<li><code>INCLUDE_DIRECTORIES([AFTER|BEFORE] [SYSTEM] dir1 dir2 ...)</code><br><code>SET(CMAKE_INCLUDE_DIRECTORIES_BEFORE on)</code>:将添加的头文件路径放在已有路径前面<br><code>INCLUDE_DIRECTORIES(/usr/include/hello)</code></li>
-<li><p>通过设置环境变量</p>
-<p><code>export CMAKE_INCLUDE_PATH=/usr/include/hello</code><br>然后将<code>INCLUDE_DIRECTORIES(/usr/include/hello)</code>替换为</p>
-<pre><code>FIND_PATH(myHeader hello.h)
-IF(myHeader)
-INCLUDE_DIRECTORIES(${myHeader})
-ENDIF(myHeader)
-</code></pre><p>FIND_PATH格式:<code>FIND_PATH(myHeader NAMES hello.h PATHS /usr/include
-/usr/include/hello)</code></p>
-</li>
-</ol>
-<h2 id="其他命令"><a href="#其他命令" class="headerlink" title="其他命令"></a>其他命令</h2><h3 id="添加预定义宏"><a href="#添加预定义宏" class="headerlink" title="添加预定义宏"></a>添加预定义宏</h3><p><code>ADD_DEFINITIONS(-DCPU_ONLY)</code></p>
-<h3 id="在cmake中添加LD-LIBRARY-PATH"><a href="#在cmake中添加LD-LIBRARY-PATH" class="headerlink" title="在cmake中添加LD_LIBRARY_PATH"></a>在cmake中添加LD_LIBRARY_PATH</h3><p><code>SET(CMAKE_EXE_LINKER_FLAGS &quot;${CMAKE_EXE_LINKER_FLAGS} -wl, -rpath -Wl, /home/wx/workspace/caffes/py-faster-rcnn/caffe-fast-rcnn/build/lib&quot;)</code></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;本文是&lt;a href=&quot;http://sewm.pku.edu.cn/src/paradise/reference/CMake%20Practice.pdf&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;cmake实践&lt;/a&gt;的笔记&lt;/p&gt;
-&lt;h2 id=
-    
-    </summary>
-    
-    
-      <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
-    
-      <category term="tools" scheme="http://www.wowx.info/tags/tools/"/>
-    
-      <category term="cmake" scheme="http://www.wowx.info/tags/cmake/"/>
     
   </entry>
   
