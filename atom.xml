@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.wowx.info/"/>
-  <updated>2017-03-06T02:56:35.023Z</updated>
+  <updated>2017-03-06T03:15:31.171Z</updated>
   <id>http://www.wowx.info/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>LeetCode 447[HashTable] 401[Backtracking]</title>
+    <title>LeetCode 447[HashTable] 401[Backtracking] 409[HashTable]</title>
     <link href="http://www.wowx.info/posts/20170306094212/"/>
     <id>http://www.wowx.info/posts/20170306094212/</id>
     <published>2017-03-06T01:42:12.000Z</published>
-    <updated>2017-03-06T02:56:35.023Z</updated>
+    <updated>2017-03-06T03:15:31.171Z</updated>
     
     <content type="html"><![CDATA[<h2 id="447-Number-of-Boomerangs-EASY"><a href="#447-Number-of-Boomerangs-EASY" class="headerlink" title="447. Number of Boomerangs[EASY]"></a>447. Number of Boomerangs[EASY]</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><pre class="line-numbers language-cpp"><code class="language-cpp">Given n points in the plane that are all pairwise distinct<span class="token punctuation">,</span> a <span class="token string">"boomerang"</span> is a tuple of <span class="token function">points</span> <span class="token punctuation">(</span>i<span class="token punctuation">,</span> j<span class="token punctuation">,</span> k<span class="token punctuation">)</span> such that the distance between i <span class="token operator">and</span> j equals the distance between i <span class="token operator">and</span> <span class="token function">k</span> <span class="token punctuation">(</span>the order of the tuple matters<span class="token punctuation">)</span><span class="token punctuation">.</span>
 
@@ -127,6 +127,41 @@ The two boomerangs are <span class="token punctuation">[</span><span class="toke
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="409-Longest-Palindrome"><a href="#409-Longest-Palindrome" class="headerlink" title="409. Longest Palindrome"></a>409. Longest Palindrome</h2><h3 id="Problem-Description-2"><a href="#Problem-Description-2" class="headerlink" title="Problem Description"></a>Problem Description</h3><p>ven a string which consists of lowercase or uppercase letters, find the length of the longest palindromes that can be built with those letters.</p>
+<p>This is case sensitive, for example “Aa” is not considered a palindrome here.</p>
+<p>Note:<br>Assume the length of given string will not exceed 1,010.</p>
+<p>Example:</p>
+<p>Input:<br>“abccccdd”</p>
+<p>Output:<br>7</p>
+<p>Explanation:<br>One longest palindrome that can be built is “dccaccd”, whose length is 7.</p>
+<p>给出一个由大写字母和小写字母组成的字符串，求由该字符串中的字符最长能构成的回文长度</p>
+<h3 id="Method-2"><a href="#Method-2" class="headerlink" title="Method"></a>Method</h3><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">int</span> <span class="token function">longestPalindrome</span><span class="token punctuation">(</span>string s<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">chars</span><span class="token punctuation">(</span><span class="token number">52</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">char</span> ch <span class="token operator">:</span> s<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>ch <span class="token operator">&lt;</span> <span class="token string">'a'</span><span class="token punctuation">)</span>
+                chars<span class="token punctuation">[</span>ch<span class="token operator">-</span><span class="token string">'A'</span><span class="token punctuation">]</span><span class="token operator">++</span><span class="token punctuation">;</span>
+            <span class="token keyword">else</span>
+                chars<span class="token punctuation">[</span><span class="token number">26</span><span class="token operator">+</span>ch<span class="token operator">-</span><span class="token string">'a'</span><span class="token punctuation">]</span><span class="token operator">++</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">int</span> res <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">bool</span> hasOdd <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> len <span class="token operator">:</span> chars<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>len <span class="token operator">%</span> <span class="token number">2</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+                res <span class="token operator">+</span><span class="token operator">=</span> len<span class="token punctuation">;</span>
+            <span class="token keyword">else</span>
+            <span class="token punctuation">{</span>
+                res <span class="token operator">+</span><span class="token operator">=</span> len <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span>
+                hasOdd <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> res <span class="token operator">+</span> <span class="token punctuation">(</span>hasOdd <span class="token operator">?</span> <span class="token number">1</span> <span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 ]]></content>
     
     <summary type="html">
