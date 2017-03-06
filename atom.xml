@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.wowx.info/"/>
-  <updated>2017-03-06T03:15:31.171Z</updated>
+  <updated>2017-03-06T03:35:55.806Z</updated>
   <id>http://www.wowx.info/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>LeetCode 447[HashTable] 401[Backtracking] 409[HashTable]</title>
+    <title>LeetCode 447[HashTable] 401[Backtracking] 409[HashTable] 387[HashTable]</title>
     <link href="http://www.wowx.info/posts/20170306094212/"/>
     <id>http://www.wowx.info/posts/20170306094212/</id>
     <published>2017-03-06T01:42:12.000Z</published>
-    <updated>2017-03-06T03:15:31.171Z</updated>
+    <updated>2017-03-06T03:35:55.806Z</updated>
     
     <content type="html"><![CDATA[<h2 id="447-Number-of-Boomerangs-EASY"><a href="#447-Number-of-Boomerangs-EASY" class="headerlink" title="447. Number of Boomerangs[EASY]"></a>447. Number of Boomerangs[EASY]</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><pre class="line-numbers language-cpp"><code class="language-cpp">Given n points in the plane that are all pairwise distinct<span class="token punctuation">,</span> a <span class="token string">"boomerang"</span> is a tuple of <span class="token function">points</span> <span class="token punctuation">(</span>i<span class="token punctuation">,</span> j<span class="token punctuation">,</span> k<span class="token punctuation">)</span> such that the distance between i <span class="token operator">and</span> j equals the distance between i <span class="token operator">and</span> <span class="token function">k</span> <span class="token punctuation">(</span>the order of the tuple matters<span class="token punctuation">)</span><span class="token punctuation">.</span>
 
@@ -162,6 +162,26 @@ The two boomerangs are <span class="token punctuation">[</span><span class="toke
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="387-First-Unique-Character-in-a-String"><a href="#387-First-Unique-Character-in-a-String" class="headerlink" title="387. First Unique Character in a String"></a>387. First Unique Character in a String</h2><h3 id="Problem-Description-3"><a href="#Problem-Description-3" class="headerlink" title="Problem Description"></a>Problem Description</h3><p>Given a string, find the first non-repeating character in it and return it’s index. If it doesn’t exist, return -1.</p>
+<p>Examples:</p>
+<p>s = “leetcode”<br>return 0.</p>
+<p>s = “loveleetcode”,<br>return 2.<br>Note: You may assume the string contain only lowercase letters.</p>
+<h3 id="Method-3"><a href="#Method-3" class="headerlink" title="Method"></a>Method</h3><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">int</span> <span class="token function">firstUniqChar</span><span class="token punctuation">(</span>string s<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">chars</span><span class="token punctuation">(</span><span class="token number">26</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">char</span> ch <span class="token operator">:</span> s<span class="token punctuation">)</span>
+            chars<span class="token punctuation">[</span>ch<span class="token operator">-</span><span class="token string">'a'</span><span class="token punctuation">]</span><span class="token operator">++</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> s<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>chars<span class="token punctuation">[</span>s<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">-</span><span class="token string">'a'</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span>
+                <span class="token keyword">return</span> i<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 ]]></content>
     
     <summary type="html">
@@ -176,6 +196,8 @@ The two boomerangs are <span class="token punctuation">[</span><span class="toke
       <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
     
       <category term="hashtable" scheme="http://www.wowx.info/tags/hashtable/"/>
+    
+      <category term="Backtracking" scheme="http://www.wowx.info/tags/Backtracking/"/>
     
   </entry>
   
