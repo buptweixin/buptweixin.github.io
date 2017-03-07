@@ -133,8 +133,13 @@
 <!-- Theme Background Related-->
 
     <style>
-      body{
-        background-image: url(/img/bg.jpg);
+      body {
+        background-color: undefined;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text {
+        background-color: #fff;
       }
     </style>
 
@@ -178,6 +183,13 @@
     
 
     <!-- Bing Background -->
+    
+        <script type="text/javascript">
+            queue.offer(function(){
+                $('body').attr('data-original', 'https://api.i-meto.com/bing?new | color=white | type=nature');
+                $('body.lazy').lazyload();
+            });
+        </script>
     
 
     <!-- Custom Head -->
