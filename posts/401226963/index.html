@@ -16,9 +16,9 @@
     </title>
 
     <!-- Favicons -->
-    <link rel="icon shortcut" type="image/ico" href="/img/wx.png">
-    <link rel="icon" sizes="192x192" href="/img/wx.png">
-    <link rel="apple-touch-icon" href="/img/wx.png">
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
 
     <!-- Meta & Info -->
     <meta charset="utf-8">
@@ -27,7 +27,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="Xin Wei">
     <meta name="description" content="null">
-    <meta name="keywords" content="Blog deep_learging,机器学习,深度学习,cs231n">
+    <meta name="keywords" content="null,机器学习,深度学习,cs231n">
 
     <!--iOS -->
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -192,7 +192,7 @@
 
 
     
-        <body id="scheme-paradox" class="lazy">
+        <body id="scheme-Paradox" class="lazy">
             <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="material-layout  mdl-js-layout has-drawer is-upgraded">
                 
 
@@ -203,10 +203,47 @@
                     <div id="top"></div>
 
                     
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
 
                     <!-- Post TOC -->
 
     
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#基本梯度下降算法"><span class="post-toc-number">1.</span> <span class="post-toc-text">基本梯度下降算法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#批量梯度下降-Batch-graduebt-descent"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">批量梯度下降(Batch graduebt descent)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#随机梯度下降-Stochatic-gradient-decent，-SGD"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">随机梯度下降(Stochatic gradient decent， SGD)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#小批量梯度下降-mini-batch-gradient-descent"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">小批量梯度下降(mini-batch gradient descent)</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#挑战"><span class="post-toc-number">2.</span> <span class="post-toc-text">挑战</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#梯度下降优化算法"><span class="post-toc-number">3.</span> <span class="post-toc-text">梯度下降优化算法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#冲量-Momentum"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">冲量(Momentum)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Nesterov-accelerated-gradient"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">Nesterov accelerated gradient</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Adagrad"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">Adagrad</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Adadelta"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">Adadelta</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#RMSprop"><span class="post-toc-number">3.5.</span> <span class="post-toc-text">RMSprop</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Adam"><span class="post-toc-number">3.6.</span> <span class="post-toc-text">Adam</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#效果"><span class="post-toc-number">4.</span> <span class="post-toc-text">效果</span></a></li></ol>
+
+        <!--
+        <li class="mdl-menu__item">
+            Some Action
+        </li>
+        -->
+    </ul>
+
 
 
 
@@ -220,14 +257,213 @@
 
                 <!-- Post Header(Thumbnail & Title) -->
                 
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script>
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').css('background-image', 'url(' + '/img/random/material-' + randomNum + '.png' + ')');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                梯度下降优化方法总结
+            </p>
+        </div>
+
 
 
 
 
                 
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>Xin Wei</strong>
+        <span>10月 07, 2016</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/cs231n/">cs231n</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/机器学习/">机器学习</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/深度学习/">深度学习</a>
+    </ul>
+    
+
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=梯度下降优化方法总结&url=http://www.wowx.info//posts/401226963/index.html&pic=&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=梯度下降优化方法总结&url=http://www.wowx.info//posts/401226963/index.html&via=Xin Wei" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://www.wowx.info//posts/401226963/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://www.wowx.info//posts/401226963/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+</div>
+
+                
 
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-7/66166948.jpg" width="720px"><br><a id="more"></a><br>参考并翻译自Sebastian Ruder博士的总结文章<a href="http://sebastianruder.com/optimizing-gradient-descent/index.html" target="_blank" rel="external">An overview of gradient descent optimization algorithms</a>。</p>
+<hr>
+<p>梯度下降方法是目前最流行的神经网络优化方法，现在主流的深度学习框架(caffe,keras,MXNET等)都包含了若干种梯度下降算法。虽然我们可以把它们看成黑盒直接使用，但是在不同场合下相同的算法可能有着很大的性能差异，因此，了解这些算法各自内在的原理可以帮助我们更好地训练网络。</p>
+<h2 id="基本梯度下降算法"><a href="#基本梯度下降算法" class="headerlink" title="基本梯度下降算法"></a>基本梯度下降算法</h2><p>有三种基本的梯度下降算法，他们的主要区别在于用于计算一次目标函数梯度的样本数量。</p>
+<h3 id="批量梯度下降-Batch-graduebt-descent"><a href="#批量梯度下降-Batch-graduebt-descent" class="headerlink" title="批量梯度下降(Batch graduebt descent)"></a>批量梯度下降(Batch graduebt descent)</h3><p>批量梯度下降算法使用整个训练集计算目标函数的梯度并更新参数$\theta$,具体公式为<br>$$\theta=\theta-\eta\nabla_\theta{J(\theta)}$$</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>nb_epochs<span class="token punctuation">)</span><span class="token punctuation">:</span>
+  params_grad <span class="token operator">=</span> evaluate_gradient<span class="token punctuation">(</span>loss_function<span class="token punctuation">,</span> data<span class="token punctuation">,</span> params<span class="token punctuation">)</span>
+  params <span class="token operator">=</span> params <span class="token operator">-</span> learning_rate <span class="token operator">*</span> params_grad
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>因为每更新一次参数就需要计算整个数据集，所以批量梯度下降算法十分缓慢而且难以存放在内存中计算，更致命的是，使用批量梯度下降的算法无法在线更新。</p>
+<h3 id="随机梯度下降-Stochatic-gradient-decent，-SGD"><a href="#随机梯度下降-Stochatic-gradient-decent，-SGD" class="headerlink" title="随机梯度下降(Stochatic gradient decent， SGD)"></a>随机梯度下降(Stochatic gradient decent， SGD)</h3><p>与批量梯度下降方法不同，随机梯度下降方法一次只使用一个样本进行目标函数梯度计算，它的公式为</p>
+<p>$$\theta=\theta-\eta\nabla_\theta{J(\theta;x^{(i)},y^{(i)})}$$</p>
+<p>因为每次只计算一个样本，所以SGD计算非常快并且适合线上更新模型。但是，频繁地更新参数也使得目标函数抖动非常厉害。<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-6/58710139.jpg" alt=""><br>SGD频繁地参数更新可以使算法跳出局部最优点，更可能寻找到接近全局最优的解。<br>SGD代码如下：</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>nb_epochs<span class="token punctuation">)</span><span class="token punctuation">:</span>
+  np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>shuffle<span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+  <span class="token keyword">for</span> example <span class="token keyword">in</span> data<span class="token punctuation">:</span>
+    params_grad <span class="token operator">=</span> evaluate_gradient<span class="token punctuation">(</span>loss_function<span class="token punctuation">,</span> example<span class="token punctuation">,</span> params<span class="token punctuation">)</span>
+    patams <span class="token operator">=</span> params <span class="token operator">-</span> learning_rate <span class="token operator">*</span> params_grad
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>注意，上面的代码在每个epoch都对训练数据进行了打乱操作，这样可以保证不同epoch学习到的特征和训练样本的出现顺序没有关系。</p>
+<h3 id="小批量梯度下降-mini-batch-gradient-descent"><a href="#小批量梯度下降-mini-batch-gradient-descent" class="headerlink" title="小批量梯度下降(mini-batch gradient descent)"></a>小批量梯度下降(mini-batch gradient descent)</h3><p>小批量梯度下降结合了批量梯度下降和随机梯度下降的优点，它一次以小批量的训练数据计算目标函数的权重并更新参数。公式如下：</p>
+<p>$$\theta=\theta-\eta\nabla_\theta{J(\theta;x^{(i:i+n)};y^{(i:i+n)})}$$</p>
+<p>其中，n为每批训练集的数量，一般设为50到256。<br>这个算法有下面几个方面的优点：</p>
+<ol>
+<li>相比较SGD增加了一次更新使用的训练数据量，使得目标函数收敛得更加平稳；</li>
+<li>可以使用矩阵操作对每批数据进行计算，大大提升了算法的效率。</li>
+</ol>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>nb_epochs<span class="token punctuation">)</span><span class="token punctuation">:</span>
+  np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>shuffle<span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+  <span class="token keyword">for</span> batch <span class="token keyword">in</span> get_batches<span class="token punctuation">(</span>data<span class="token punctuation">,</span> batch_size<span class="token operator">=</span><span class="token number">50</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    params_grad <span class="token operator">=</span> evaluate_gradient<span class="token punctuation">(</span>loss_function<span class="token punctuation">,</span> batch<span class="token punctuation">,</span> params<span class="token punctuation">)</span>
+    params <span class="token operator">=</span> params <span class="token operator">-</span> learning_rate <span class="token operator">*</span> params_grad
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="挑战"><a href="#挑战" class="headerlink" title="挑战"></a>挑战</h2><p>mini-batch gradient descent 虽然相较于批量梯度下降和随机梯度下降方法效果有所改善但是任然存在许多挑战：</p>
+<ol>
+<li>难以选择合适的学习速率：如果学习速率选择过小会造成网络收敛太慢，但是设得太大可能使得损失函数在最小点周围不断摇摆而永远达不到最小点；</li>
+<li>可以在训练开始时设置一个较大地学习率然后每训练若干个周期后按比例降低学习率，虽然这个方法有一些作用，但是由于降低学习率的周期是人为事先设定的，所以它不能很好地适应数据内在的规律；</li>
+<li>另一方面，我们对特征向量中的所有的特征都采用了相同的学习率，如果训练数据十分稀疏并且不同特征的变化频率差别很大，这时候对变化频率慢得特征采用大的学习率而对变化频率快的特征采用小的学习率是更好的选择。</li>
+<li>这些梯度下降方法难以逃脱”鞍点”, 如下图所示，鞍点既不是最大点也不是最小点，在这个点附近，所有方向上的梯度都接近于0，这些梯度下降算法很难逃离它。<img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-6/49626041.jpg" alt="鞍点"></li>
+</ol>
+<h2 id="梯度下降优化算法"><a href="#梯度下降优化算法" class="headerlink" title="梯度下降优化算法"></a>梯度下降优化算法</h2><p>下文我们将介绍常用的能够解决上述挑战的一些算法。</p>
+<h3 id="冲量-Momentum"><a href="#冲量-Momentum" class="headerlink" title="冲量(Momentum)"></a>冲量(Momentum)</h3><p>实际中，我们遇到的目标函数往往在不同的维度上梯度相差很大，比如在下面的函数等高线图中可以看出函数在纵向上要比横向陡峭得多。<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-6/54928422.jpg" alt=""><br>然而SGD等基本梯度下降算法并不知道这些，因为y方向梯度大x方向梯度小所以它们会在y方向上不断摇摆而沿x方向缓慢移动，但是我们知道在y方向的震荡是无用的只有x方向的才在不断接近最优点。</p>
+<p>冲量方法在SGD的基础上，加上了上一步的梯度：</p>
+<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-7/44299763.jpg" alt=""><br>其中$\gamma$通常设为0.9。</p>
+<p>由于目标函数在y方向上摇摆，所以前后两次计算的梯度在y方向上相反，所以相加后相互抵消，而x方向上梯度方向不变，所以x方向的梯度是累加的，其效果就是损失函数在y方向上的震荡减小了，而更加迅速地从x方向接近最优点。</p>
+<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-6/2017898.jpg" alt=""></p>
+<p>也可以把这个过程和在斜坡放一个球让其滚下类比：当从斜坡顶端释放一个小球时，由于重力的作用小球滚下的速度会越来越快；与此类似，冲量的作用会使相同方向的梯度不断累加，不同方向的梯度相互抵消，其效果就是逼近最优点的速度不断加快。</p>
+<p>知乎上这篇文章<a href="https://zhuanlan.zhihu.com/p/21486826" target="_blank" rel="external">解释</a>得挺详细的。</p>
+<h3 id="Nesterov-accelerated-gradient"><a href="#Nesterov-accelerated-gradient" class="headerlink" title="Nesterov accelerated gradient"></a>Nesterov accelerated gradient</h3><p>想象小球从山坡上滑落，它的速度沿着山坡不断加快，然而这并不是令我们满意的结果，当小球接近山谷(最优点)时，它已经有了很大的速度，很可能会再次冲向山谷的另一边，而错过了最优点。我们需要一颗更加“聪明”的小球，它能够感知坡度的变化，从而在它再次冲上山坡之前减速而避免错过山谷。</p>
+<p>Nesterov accelerated gradient(NAG)就是一种让小球变“聪明”的方法。NAG不但增加了动量项，并且计算参数的梯度时，在损失函数中减去了梯度项将其作为下一次参数所在位置的预估：</p>
+<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-7/59700971.jpg" alt=""></p>
+<p>同样，上式中的$\gamma$一般设为0.9。<br>如下图所示，蓝色的是动量方法的更新路径，首先计算一次梯度更新一小步，然后在下一次累加上一次计算的梯度从而更新一大步。而NAG算法每一步更新过程由两个步骤组成：第一步($\gamma{v_{t-1}}$, 图中棕色)使用之前计算的梯度移动一大步，第二步在移动后的位置计算的梯度方向移动一小步(图中红色线)进行修正，经过这样的两步合成了最终的绿线部分。</p>
+<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-6/2896856.jpg" alt=""></p>
+<p>分析上面的原理可知，当“小球”将要冲上山坡的另一面时，红色线表示的预测梯度方向发生改变，从而将棕色向量往回拉达到了“减速”的效果。</p>
+<p>通过NAG方法，我们使参数更新速率能够自适应“坡度”的变化，另一方面，我们希望每个单独的参数能够自适应各自的变化频率，比如，稀疏特征采用高的更新速率，其他特征采用相对较低的更新速率。下面介绍几种常用的方法。</p>
+<h3 id="Adagrad"><a href="#Adagrad" class="headerlink" title="Adagrad"></a>Adagrad</h3><p>Adagrad是一种适合处理稀疏特征的梯度更新算法，它对稀疏特征采用高的更新速率，而对其他特征采用相对较低的更新速率。<a href="http://blog.csdn.net/heyongluoyao8/article/details/52478715#reference_4" target="_blank" rel="external">Dean</a>等人发现Adagrad能很好地提高SGD的鲁棒性，它已经被谷歌用来训练大规模的神经网络。</p>
+<p>与之前我们使用相同的学习速率$\eta$来更新所有的参数不同，Adagrad对每个参数使用不同的参数进行更新。我们用$g_{t,i}$来表示参数$\theta_i$在第t次更新时的梯度，即</p>
+<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-7/4086375.jpg" alt=""></p>
+<p>按照这个约定，SGD的更新规则可以写作：</p>
+<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-7/73833668.jpg" alt="$$\theta_{t+1,i}=\theta_{t,i}-\eta{g_{t,i}}$$"></p>
+<p>而Adagrad的更新规则可以表示为：</p>
+<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-7/54119088.jpg" alt="$$\theta_{t+1,i}=\theta_{t,i}-\frac{\eta}{\sqrt{G_{t,ii}+\epsilon}}g_{t,i}$$"></p>
+<p>其中，$G_{t,ii}$是一个$\mathbb{R}^{d\times{d}}$维的对角矩阵，其第i行第i列的元素为过去到当前第i个参数的梯度平方和，$\epsilon$是为了防止分母为0的平滑项。进一步，可以将上式向量化如下：</p>
+<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-7/91696471.jpg" alt="$$\theta_{t+1}=\theta_t-\frac{\eta}{\sqrt{G_t+\epsilon}}\bigodot{g_t}$$"></p>
+<p>其中，$\bigodot$表示矩阵和向量的乘法。</p>
+<p>这样，利用Adagrad就可以自动根据每个特征的稀疏性来设置不同的学习率。</p>
+<p>Adagrad主要缺点是$G_t$累加了参数的历史梯度的平方，所以到后期学习率会越来越小，最后无法再学习到新的信息。下面介绍的算法就是来解决这个问题的。</p>
+<h3 id="Adadelta"><a href="#Adadelta" class="headerlink" title="Adadelta"></a>Adadelta</h3><p>Adadelta主要解决了Adagrad算法中学习率衰减过快的问题，它不再累加参数所有的历史梯度平方和，转而设定一个窗口w，只求前w个历史梯度平方的平均数$E[g^2]_t$,$E[g^2]_t$可以通过之前的梯度平方的平均和当前梯度的平方计算得到：</p>
+<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-7/1108012.jpg" alt="$$E[g^2]_t=\gamma{E[g^2]_{t-1}}+(1-\gamma)g_t^2$$"></p>
+<p>其中，$\gamma$相似于冲量参数$\gamma$.</p>
+<p>Adadelta更新规则可以写作：</p>
+<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-7/81630582.jpg" alt="$$\Delta\theta_t=-\frac{\eta}{\sqrt{E[g^2]_t+\epsilon}}\bigodot{g_t}$$"><br>或者<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-7/38586086.jpg" alt="$$\Delta\theta_t=-\frac{\eta}{RMS[g]_t}\bigodot{g_t}$$"></p>
+<h3 id="RMSprop"><a href="#RMSprop" class="headerlink" title="RMSprop"></a>RMSprop</h3><p>RMSprop由Hinton提出，实际上是Adadelta的一种特殊形式。</p>
+<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-7/26348078.jpg" alt="$$E[g^2]_t=0.9E[g^2]_{t-1}+0.1g_t^2\\\theta_{t+1}=\theta_t-\frac{\eta}{\sqrt{E[g^2]_t}+\epsilon}\bigodot{g_t}$$"></p>
+<h3 id="Adam"><a href="#Adam" class="headerlink" title="Adam"></a>Adam</h3><p>Adam的全称是Adaptive Moment Estimation, 它也是一种自适应学习率方法，与Adadelta和RMSprop类似，它将每个参数的历史梯度平方均值存于$v_t$中，不同的是，Adam还使用了类似冲量的衰减项$m_t$:</p>
+<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-7/81118386.jpg" alt="$$m_t=\beta_1{m_{t-1}}+(1-\beta_1)g_t\\v_t=\beta_2{v_{t-1}}+(1-\beta_2)g_t^2$$"></p>
+<p>$m_t,v_t$分别是梯度的带权平均和带权有偏方差，由于当$\beta_1,\beta_2$接近于1时，这两项接近于0，作者对他们进行了偏差修正：</p>
+<p>$$\hat{m}_t=\frac{m_t}{1-\beta_1^t}\\hat{v}_t=\frac{v_t}{1-\beta_2^t}$$</p>
+<p>最终更新方程为：</p>
+<p>$$\theta_{t+1}=\theta_t-\frac{\eta}{\sqrt{\bar{\hat{v}_t}}+\epsilon}\bigodot{\hat{m}_t}$$</p>
+<p>建议将$\beta_1$设为0.9,$\beta_2$设为0.999, $\epsilon$设为$10^{-8}$</p>
+<h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><p>图a中，所有方法都从相同位置出发，经历不同的路径到达了最小点，其中Adagrad、Adadelta和RMSprop一开始就朝向正确的方向并且迅速收敛，而冲量、NAG则会冲向错误的方向，但是由于NAG会向前多“看”一步所以能很快找到正确的方向。<br><img src="http://img.blog.csdn.net/20160909001731629" alt=""><br>图b显示了这些方法逃离鞍点的能力，鞍点有部分方向有正梯度另一些方向有负梯度，SGD方法逃离能力最差，冲量和NAG方法也不尽如人意，而Adagrad、RMSprop、Adadelta很快就能从鞍点逃离出来。<br><img src="http://img.blog.csdn.net/20160909001936276" alt=""><br><!-- indicate-the-source --></p>
+
     
 
     
@@ -239,30 +475,6 @@
                 <!-- Post Comments -->
                 
                     
-    <!-- 使用多说评论 -->
-    <link rel="stylesheet" href="/css/duoshuo.min.css">
-<style>
-    #ds-thread #ds-reset .ds-post-button{
-        background-color: #0097A7 !important;
-    }
-    #ds-wrapper #ds-reset .ds-icons-32{
-        background-color: #0097A7 !important;
-    }
-    #ds-reset .ds-highlight {
-        color: #0097A7 !important;
-    }
-</style>
-<div id="comments">
-    <!-- 多说评论框 start -->
-    <div class="ds-thread"
-        data-thread-key="posts/401226963/"
-        data-url="http://www.wowx.info/posts/401226963/"
-        data-title="梯度下降优化方法总结">
-    </div>
-    <!-- 多说评论框 end -->
-</div>
-
-
 
 
 
@@ -304,11 +516,243 @@
 
 
                     
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="Xin Wei's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        youremail@email.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="#" target="_blank" title="Email Me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/" target="_self">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">二月 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/12/">十二月 2016<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">十一月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">十月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/07/">七月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/06/">六月 2016<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/07/">七月 2015<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/06/">六月 2015<span class="sidebar_archives-count">6</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+
+    <!-- Pages  -->
+    
+
+    <!-- Article Number  -->
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+    <a href="https://github.com/viosey/hexo-theme-material"  class="sidebar-footer-text-a" target="_blank">
+        <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+            主题 - Material
+            <span class="sidebar-badge badge-circle">i</span>
+        </div>
+    </a>
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
 
                     
 
                     <!--Footer-->
 <footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+        <a href="https://twitter.com/twitter" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-twitter.png);">
+                <span class="visuallyhidden">Twitter</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Facebook -->
+    
+        <a href="https://www.facebook.com/facebook" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-facebook.png);">
+                <span class="visuallyhidden">Facebook</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Google + -->
+    
+        <a href="https://www.google.com/" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-gplus.png);">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©&nbsp;
+            <script type="text/javascript">
+                var fd = new Date();
+                document.write(fd.getFullYear());
+            </script>
+            &nbsp;野原圆长的Blog
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
     
 </footer>
 
@@ -343,113 +787,9 @@
 
 
 
-    <!-- Leancloud -->
-    <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
-    <script>
-        AV.initialize('1wCxBs3gRuLUAR1VDMEUFx3N-gzGzoHsz', '6sT0Kp8aE2lG69USPb4k0cAb');
-    </script>
-    <script>
-    function showTime(Counter) {
-        var query = new AV.Query(Counter);
-        $('.leancloud-views_num').each(function() {
-            var url = $(this).attr('id').trim();
-            query.equalTo('url', url);
-            query.find({
-                success: function(results) {
-                    if (results.length === 0) {
-                        var content = '0 ' + $(document.getElementById(url)).text();
-                        $(document.getElementById(url)).text(content);
-                        return;
-                    }
-                    for (var i = 0; i < results.length; i++) {
-                        var object = results[i];
-                        var content = object.get('time') + ' ' + $(document.getElementById(url)).text();
-                        $(document.getElementById(url)).text(content);
-                    }
-                },
-                error: function(object, error) {
-                    console.log('Error: ' + error.code + ' ' + error.message);
-                }
-            });
-        });
-    }
-
-    function addCount(Counter) {
-      var Counter = AV.Object.extend('Counter');
-      url = $('.leancloud-views_num').attr('id').trim();
-      title = $('.leancloud-views_num').attr('data-flag-title').trim();
-      var query = new AV.Query(Counter);
-      query.equalTo('url', url);
-      query.find({
-          success: function(results) {
-            if (results.length > 0) {
-                var counter = results[0];
-                counter.fetchWhenSave(true);
-                counter.increment('time');
-                counter.save(null, {
-                    success: function(counter) {
-                        var content =  counter.get('time') + ' ' + $(document.getElementById(url)).text();
-                        $(document.getElementById(url)).text(content);
-                    },
-                    error: function(counter, error) {
-                        console.log('Failed to save Visitor num, with error message: ' + error.message);
-                    }
-                });
-            } else {
-              var newcounter = new Counter();
-              newcounter.set('title', title);
-              newcounter.set('url', url);
-              newcounter.set('time', 1);
-              newcounter.save(null, {
-                  success: function(newcounter) {
-                      console.log('newcounter.get(\'time\')='+newcounter.get('time'));
-                      var content = newcounter.get('time') + ' ' + $(document.getElementById(url)).text();
-                      $(document.getElementById(url)).text(content);
-                  },
-                  error: function(newcounter, error) {
-                      console.log('Failed to create');
-                  }
-              });
-            }
-        },
-        error: function(error) {
-            console.log('Error:' + error.code + ' ' + error.message);
-        }
-      });
-    }
-    $(function() {
-        var Counter = AV.Object.extend('Counter');
-        if ($('.leancloud-views_num').length === 1) {
-            addCount(Counter);
-        } else if ($('.post-title-link').length > 1) {
-            showTime(Counter);
-        }
-    });
-</script>
 
 
 
-
-
-
-    <!-- 多说公共 js 代码 start -->
-    <script type="text/javascript">
-        queue.offer(function(){
-            var duoshuoQuery = {
-                short_name: 'buptweixin'
-            };
-            (function() {
-                var ds = document.createElement('script');
-                ds.type = 'text/javascript';
-                ds.async = true;
-                ds.src = 'https://static.duoshuo.com/embed.js';
-                ds.charset = 'UTF-8';
-                (document.getElementsByTagName('head')[0]
-                 || document.getElementsByTagName('body')[0]).appendChild(ds);
-            })();
-        });
-    </script>
-    <!-- 多说公共 js 代码 end -->
 
 
 

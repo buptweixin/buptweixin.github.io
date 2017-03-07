@@ -16,9 +16,9 @@
     </title>
 
     <!-- Favicons -->
-    <link rel="icon shortcut" type="image/ico" href="/img/wx.png">
-    <link rel="icon" sizes="192x192" href="/img/wx.png">
-    <link rel="apple-touch-icon" href="/img/wx.png">
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
 
     <!-- Meta & Info -->
     <meta charset="utf-8">
@@ -27,7 +27,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="Xin Wei">
     <meta name="description" content="null">
-    <meta name="keywords" content="Blog deep_learging,机器学习,深度学习">
+    <meta name="keywords" content="null,机器学习,深度学习">
 
     <!--iOS -->
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -192,7 +192,7 @@
 
 
     
-        <body id="scheme-paradox" class="lazy">
+        <body id="scheme-Paradox" class="lazy">
             <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="material-layout  mdl-js-layout has-drawer is-upgraded">
                 
 
@@ -203,10 +203,47 @@
                     <div id="top"></div>
 
                     
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
 
                     <!-- Post TOC -->
 
     
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Machine-Learning-Yearning"><span class="post-toc-number">1.</span> <span class="post-toc-text">Machine Learning Yearning</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#why-machine-learning-stratregy"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">why machine learning stratregy</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#常用改善网络性能的方法"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">常用改善网络性能的方法</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#开发和测试集"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">开发和测试集</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#训练集和测试集需要来自同一个分布"><span class="post-toc-number">1.2.0.1.</span> <span class="post-toc-text">训练集和测试集需要来自同一个分布</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#验证集和测试集的大小选择"><span class="post-toc-number">1.2.0.2.</span> <span class="post-toc-text">验证集和测试集的大小选择</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#建立用于优化的单值评价指标"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">建立用于优化的单值评价指标</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#优化和满意度指标"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">优化和满意度指标</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#拥有验证集和评价指标显著加快开发迭代速度"><span class="post-toc-number">1.2.3.</span> <span class="post-toc-text">拥有验证集和评价指标显著加快开发迭代速度</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#何时应该改变验证集-训练集和评价指标"><span class="post-toc-number">1.2.4.</span> <span class="post-toc-text">何时应该改变验证集/训练集和评价指标</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#错误分析"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">错误分析</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#同时进行多个错误分析"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">同时进行多个错误分析</span></a></li></ol></li></ol></li></ol>
+
+        <!--
+        <li class="mdl-menu__item">
+            Some Action
+        </li>
+        -->
+    </ul>
+
 
 
 
@@ -220,14 +257,231 @@
 
                 <!-- Post Header(Thumbnail & Title) -->
                 
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script>
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').css('background-image', 'url(' + '/img/random/material-' + randomNum + '.png' + ')');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                Note of Machine Learning Yearning
+            </p>
+        </div>
+
 
 
 
 
                 
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>Xin Wei</strong>
+        <span>12月 26, 2016</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/机器学习/">机器学习</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/深度学习/">深度学习</a>
+    </ul>
+    
+
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Note of Machine Learning Yearning&url=http://www.wowx.info//posts/posts/20161226233803/index.html&pic=&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Note of Machine Learning Yearning&url=http://www.wowx.info//posts/posts/20161226233803/index.html&via=Xin Wei" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://www.wowx.info//posts/posts/20161226233803/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://www.wowx.info//posts/posts/20161226233803/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+</div>
+
+                
 
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <h1 id="Machine-Learning-Yearning"><a href="#Machine-Learning-Yearning" class="headerlink" title="Machine Learning Yearning"></a>Machine Learning Yearning</h1><h2 id="why-machine-learning-stratregy"><a href="#why-machine-learning-stratregy" class="headerlink" title="why machine learning stratregy"></a>why machine learning stratregy</h2><h3 id="常用改善网络性能的方法"><a href="#常用改善网络性能的方法" class="headerlink" title="常用改善网络性能的方法"></a>常用改善网络性能的方法</h3><ul>
+<li>获得更多的数据</li>
+<li>采用覆盖更多情况的训练集，比如不同位置不同角度的猫</li>
+<li>通过增加梯度下降迭代次数训练更多步</li>
+<li>尝试更大的网络(更多的层、隐单元和参数)</li>
+<li>尝试更小的网络</li>
+<li>尝试增加正则项</li>
+<li>改变网络结构</li>
+<li>…</li>
+</ul>
+<p>本书目的就是指导大家如何调整网络使得网络具有更好的性能</p>
+<h2 id="开发和测试集"><a href="#开发和测试集" class="headerlink" title="开发和测试集"></a>开发和测试集</h2><p>传统机器学习中往往把数据集按$\frac{70%}{30%}$的比例分为训练集和测试集，但是在深度学习中，我们通常把数据集分成三个部分:</p>
+<ul>
+<li>训练集: 用于训练算法</li>
+<li>开发集: 用于调整参数、选择特征等</li>
+<li>测试集：评估速算法，但是千万别根据它来对算法、参数等进行调整</li>
+</ul>
+<p>测试集的选择要尽量和实际相贴近，而不是简单地随机取$30%$</p>
+<h4 id="训练集和测试集需要来自同一个分布"><a href="#训练集和测试集需要来自同一个分布" class="headerlink" title="训练集和测试集需要来自同一个分布"></a>训练集和测试集需要来自同一个分布</h4><h4 id="验证集和测试集的大小选择"><a href="#验证集和测试集的大小选择" class="headerlink" title="验证集和测试集的大小选择"></a>验证集和测试集的大小选择</h4><ul>
+<li><p>验证集</p>
+<p>验证集的大小至少需要达到能检测算法指定精度的差异的程度，比如，如果分类器A的准确度是<code>90.0%</code>分类器B的准确度是<code>90.1%</code>,那么，如果验证集只有100个样本将不能检测出这<code>0.1%</code>的差异。在大公司，<code>0.01%</code>的性能提升都能带来巨大收益，这时使用超过一万张的验证集都不为过。</p>
+</li>
+<li><p>测试集</p>
+<p>测试集大小需满足足够说明你的系统总体性能。传统机器学习选择<code>30%</code>的样本作为测试集，但是对于深度学习动辄上百万的数据量来说，选择这么大的比例有些浪费。</p>
+</li>
+</ul>
+<h3 id="建立用于优化的单值评价指标"><a href="#建立用于优化的单值评价指标" class="headerlink" title="建立用于优化的单值评价指标"></a>建立用于优化的单值评价指标</h3><p><code>accuracy</code>等单值评价指标能明确地反映模型性能，而多值指标就不是那么直观了，比如</p>
+<table>
+<thead>
+<tr>
+<th>Classifer</th>
+<th>Precision</th>
+<th>Recall</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>95%</td>
+<td>90%</td>
+</tr>
+<tr>
+<td>B</td>
+<td>98%</td>
+<td>85%</td>
+</tr>
+</tbody>
+</table>
+<p>我们不能马上判断模型的好坏。</p>
+<p>所以采用单值度量指标能更好地帮助我们判断模型的好坏，指导我们优化。</p>
+<p>如果确实关心精度(所有标记为猫的样本数中正确的比率)和召回率(正确分类为猫的样本数占所有猫的比例)，可以将两者结合起来形成单值指标(比如取他们的平均值)，更好的方法是采用F1指标,他是加权平均值$$F_1=2\times\frac{1}{\frac{1}{recall}+\frac{1}{precision}}=2\times\frac{precision\times{recall}}{precision+recall}$$</p>
+<table>
+<thead>
+<tr>
+<th>Classifier</th>
+<th>Precision</th>
+<th>Recall</th>
+<th>F1 score</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>95%</td>
+<td>90%</td>
+<td>92.4%</td>
+</tr>
+<tr>
+<td>B</td>
+<td>98%</td>
+<td>85%</td>
+<td>91.0%</td>
+</tr>
+</tbody>
+</table>
+<h3 id="优化和满意度指标"><a href="#优化和满意度指标" class="headerlink" title="优化和满意度指标"></a>优化和满意度指标</h3><p><img src="http://ww2.sinaimg.cn/large/6425ef91jw1fb4kyienfuj20n805p3z4.jpg" alt=""></p>
+<p>对于直接数学运算没有明显实际意义的多个指标，可以使用满意度和优化方法结合在一起，比如上面的情况，可以将运行时间作为满意度指标，只要它符合我们预期的100ms以内就认为满意，在这个基础上将精度作为优化目标。</p>
+<h3 id="拥有验证集和评价指标显著加快开发迭代速度"><a href="#拥有验证集和评价指标显著加快开发迭代速度" class="headerlink" title="拥有验证集和评价指标显著加快开发迭代速度"></a>拥有验证集和评价指标显著加快开发迭代速度</h3><p>开发迭代循环包括</p>
+<ol>
+<li>想出一些有可能改进算法的点子</li>
+<li>用代码实现他们</li>
+<li>检查实验结果，判断这些想法是否可行，然后基于它产生更多的想法，重复这个迭代过程</li>
+</ol>
+<p><img src="http://ww4.sinaimg.cn/large/6425ef91jw1fb4l5bhgx7j20fd083aad.jpg" alt=""></p>
+<p>在上面这个过程中，如果没有验证集和评价指标，我们每次优化算法后需要手工的主观测试其是否有用(比如检测猫的手机应用，需要去下载一堆图片，人工判断分类器效果)这将严重减慢我们的开发速度。如果有了验证集和评价指标我们可以快速知道结果并指定下一步计划。上面的<strong>循环进行的越迅速，你的进步将越快！</strong></p>
+<h3 id="何时应该改变验证集-训练集和评价指标"><a href="#何时应该改变验证集-训练集和评价指标" class="headerlink" title="何时应该改变验证集/训练集和评价指标"></a>何时应该改变验证集/训练集和评价指标</h3><p>当开始新的项目时，应该花最少的时间挑选最初的验证集/测试集(少于一周时间)，然后马上将他们应用到算法中去，如果发现以下情况，就去更换验证集/训练集或评价指标</p>
+<ol>
+<li><p>算法实际应用场景中的数据分布和验证集/训练集不一样</p>
+<p>比如我们使用成年猫训练分类器，但是用户却用的是猫宝宝来测试我们的分类器，这时应该马上将猫宝宝的图片加入分类器，扩增验证集。</p>
+</li>
+<li><p>和验证集过拟合</p>
+<p>如果算法在验证集上的效果远好于测试集，就说明算法在验证集上发生了过拟合，这时候就应该<strong>更换测试集</strong>了</p>
+</li>
+<li><p>优化目标发生了改变</p>
+<p>如果随着训练的进行，你的优化目标发生了改变，现有的评价指标已经不满足你的需求，这时候就应该<strong>更换新的评价</strong>指标了。</p>
+</li>
+</ol>
+<h2 id="错误分析"><a href="#错误分析" class="headerlink" title="错误分析"></a>错误分析</h2><p>错误分析可以评估模型在某种错分类情况下的最大可提升空间，比如现有模型会把一些狗分类为猫，假设在所有错分类样本种，有<code>5%</code>是由于错分类为狗造成的，而现在模型的准确度为<code>90%</code>，那么，通过解决错分狗问题，最大可以提升到<code>90.5%</code>；若<code>50%</code>是由于错分类为狗造成的，解决狗的问题最大可以达到的精度为<code>95%</code>。通过这个步骤，可以考察是否值应该花费时间在解决狗的错分类问题上还是花在其他更紧要的事情上。</p>
+<h3 id="同时进行多个错误分析"><a href="#同时进行多个错误分析" class="headerlink" title="同时进行多个错误分析"></a>同时进行多个错误分析</h3><p><img src="http://ww4.sinaimg.cn/large/6425ef91jw1fb4m599u38j21180akq4h.jpg" alt=""></p>
+<p>假如同事们提出了多种错误，那么将他们分别列出来，并估算每种错误最大精度提升能力，重点放在效果最大的那个部分是不错的选择。</p>
+
     
 
     
@@ -239,30 +493,6 @@
                 <!-- Post Comments -->
                 
                     
-    <!-- 使用多说评论 -->
-    <link rel="stylesheet" href="/css/duoshuo.min.css">
-<style>
-    #ds-thread #ds-reset .ds-post-button{
-        background-color: #0097A7 !important;
-    }
-    #ds-wrapper #ds-reset .ds-icons-32{
-        background-color: #0097A7 !important;
-    }
-    #ds-reset .ds-highlight {
-        color: #0097A7 !important;
-    }
-</style>
-<div id="comments">
-    <!-- 多说评论框 start -->
-    <div class="ds-thread"
-        data-thread-key="posts//posts/20161226233803/"
-        data-url="http://www.wowx.info/posts//posts/20161226233803/"
-        data-title="Note of Machine Learning Yearning">
-    </div>
-    <!-- 多说评论框 end -->
-</div>
-
-
 
 
 
@@ -304,11 +534,243 @@
 
 
                     
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="Xin Wei's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        youremail@email.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="#" target="_blank" title="Email Me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/" target="_self">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">二月 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/12/">十二月 2016<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">十一月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">十月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/07/">七月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/06/">六月 2016<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/07/">七月 2015<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/06/">六月 2015<span class="sidebar_archives-count">6</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+
+    <!-- Pages  -->
+    
+
+    <!-- Article Number  -->
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+    <a href="https://github.com/viosey/hexo-theme-material"  class="sidebar-footer-text-a" target="_blank">
+        <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+            主题 - Material
+            <span class="sidebar-badge badge-circle">i</span>
+        </div>
+    </a>
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
 
                     
 
                     <!--Footer-->
 <footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+        <a href="https://twitter.com/twitter" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-twitter.png);">
+                <span class="visuallyhidden">Twitter</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Facebook -->
+    
+        <a href="https://www.facebook.com/facebook" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-facebook.png);">
+                <span class="visuallyhidden">Facebook</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Google + -->
+    
+        <a href="https://www.google.com/" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-gplus.png);">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©&nbsp;
+            <script type="text/javascript">
+                var fd = new Date();
+                document.write(fd.getFullYear());
+            </script>
+            &nbsp;野原圆长的Blog
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
     
 </footer>
 
@@ -343,113 +805,9 @@
 
 
 
-    <!-- Leancloud -->
-    <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
-    <script>
-        AV.initialize('1wCxBs3gRuLUAR1VDMEUFx3N-gzGzoHsz', '6sT0Kp8aE2lG69USPb4k0cAb');
-    </script>
-    <script>
-    function showTime(Counter) {
-        var query = new AV.Query(Counter);
-        $('.leancloud-views_num').each(function() {
-            var url = $(this).attr('id').trim();
-            query.equalTo('url', url);
-            query.find({
-                success: function(results) {
-                    if (results.length === 0) {
-                        var content = '0 ' + $(document.getElementById(url)).text();
-                        $(document.getElementById(url)).text(content);
-                        return;
-                    }
-                    for (var i = 0; i < results.length; i++) {
-                        var object = results[i];
-                        var content = object.get('time') + ' ' + $(document.getElementById(url)).text();
-                        $(document.getElementById(url)).text(content);
-                    }
-                },
-                error: function(object, error) {
-                    console.log('Error: ' + error.code + ' ' + error.message);
-                }
-            });
-        });
-    }
-
-    function addCount(Counter) {
-      var Counter = AV.Object.extend('Counter');
-      url = $('.leancloud-views_num').attr('id').trim();
-      title = $('.leancloud-views_num').attr('data-flag-title').trim();
-      var query = new AV.Query(Counter);
-      query.equalTo('url', url);
-      query.find({
-          success: function(results) {
-            if (results.length > 0) {
-                var counter = results[0];
-                counter.fetchWhenSave(true);
-                counter.increment('time');
-                counter.save(null, {
-                    success: function(counter) {
-                        var content =  counter.get('time') + ' ' + $(document.getElementById(url)).text();
-                        $(document.getElementById(url)).text(content);
-                    },
-                    error: function(counter, error) {
-                        console.log('Failed to save Visitor num, with error message: ' + error.message);
-                    }
-                });
-            } else {
-              var newcounter = new Counter();
-              newcounter.set('title', title);
-              newcounter.set('url', url);
-              newcounter.set('time', 1);
-              newcounter.save(null, {
-                  success: function(newcounter) {
-                      console.log('newcounter.get(\'time\')='+newcounter.get('time'));
-                      var content = newcounter.get('time') + ' ' + $(document.getElementById(url)).text();
-                      $(document.getElementById(url)).text(content);
-                  },
-                  error: function(newcounter, error) {
-                      console.log('Failed to create');
-                  }
-              });
-            }
-        },
-        error: function(error) {
-            console.log('Error:' + error.code + ' ' + error.message);
-        }
-      });
-    }
-    $(function() {
-        var Counter = AV.Object.extend('Counter');
-        if ($('.leancloud-views_num').length === 1) {
-            addCount(Counter);
-        } else if ($('.post-title-link').length > 1) {
-            showTime(Counter);
-        }
-    });
-</script>
 
 
 
-
-
-
-    <!-- 多说公共 js 代码 start -->
-    <script type="text/javascript">
-        queue.offer(function(){
-            var duoshuoQuery = {
-                short_name: 'buptweixin'
-            };
-            (function() {
-                var ds = document.createElement('script');
-                ds.type = 'text/javascript';
-                ds.async = true;
-                ds.src = 'https://static.duoshuo.com/embed.js';
-                ds.charset = 'UTF-8';
-                (document.getElementsByTagName('head')[0]
-                 || document.getElementsByTagName('body')[0]).appendChild(ds);
-            })();
-        });
-    </script>
-    <!-- 多说公共 js 代码 end -->
 
 
 

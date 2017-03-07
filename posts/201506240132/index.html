@@ -16,9 +16,9 @@
     </title>
 
     <!-- Favicons -->
-    <link rel="icon shortcut" type="image/ico" href="/img/wx.png">
-    <link rel="icon" sizes="192x192" href="/img/wx.png">
-    <link rel="apple-touch-icon" href="/img/wx.png">
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
 
     <!-- Meta & Info -->
     <meta charset="utf-8">
@@ -27,7 +27,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="Xin Wei">
     <meta name="description" content="null">
-    <meta name="keywords" content="Blog deep_learging,cpp,language">
+    <meta name="keywords" content="null,cpp,language">
 
     <!--iOS -->
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -192,7 +192,7 @@
 
 
     
-        <body id="scheme-paradox" class="lazy">
+        <body id="scheme-Paradox" class="lazy">
             <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="material-layout  mdl-js-layout has-drawer is-upgraded">
                 
 
@@ -203,10 +203,47 @@
                     <div id="top"></div>
 
                     
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
 
                     <!-- Post TOC -->
 
     
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#定义抽象数据类型"><span class="post-toc-number">1.</span> <span class="post-toc-text">定义抽象数据类型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#构造函数"><span class="post-toc-number">2.</span> <span class="post-toc-text">构造函数</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#默认构造函数"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">默认构造函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#构造函数的初始值有时必不可少"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">构造函数的初始值有时必不可少</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#成员初始化顺序"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">成员初始化顺序</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#委托构造函数"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">委托构造函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#隐式类型转换"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">隐式类型转换</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#explicit抑制隐式类型转换"><span class="post-toc-number">2.6.</span> <span class="post-toc-text">explicit抑制隐式类型转换</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用static-cast显式类型转换"><span class="post-toc-number">2.7.</span> <span class="post-toc-text">使用static_cast显式类型转换</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#标准库中含有显式构造函数的类"><span class="post-toc-number">2.8.</span> <span class="post-toc-text">标准库中含有显式构造函数的类</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#为Sales-data定义构造函数"><span class="post-toc-number">2.9.</span> <span class="post-toc-text">为Sales_data定义构造函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#拷贝、赋值和析构"><span class="post-toc-number">2.10.</span> <span class="post-toc-text">拷贝、赋值和析构</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#聚合类"><span class="post-toc-number">2.11.</span> <span class="post-toc-text">聚合类</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#字面值常量类"><span class="post-toc-number">2.12.</span> <span class="post-toc-text">字面值常量类</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#constexpr构造函数"><span class="post-toc-number">2.12.1.</span> <span class="post-toc-text">constexpr构造函数</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#访问控制和封装"><span class="post-toc-number">3.</span> <span class="post-toc-text">访问控制和封装</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用class关键字"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">使用class关键字</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#友元"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">友元</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#其他类作为友元"><span class="post-toc-number">3.2.1.</span> <span class="post-toc-text">其他类作为友元</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#其他类的成员函数作为友元"><span class="post-toc-number">3.2.2.</span> <span class="post-toc-text">其他类的成员函数作为友元</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#类型成员"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">类型成员</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#令成员函数为内联函数"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">令成员函数为内联函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#可变数据成员"><span class="post-toc-number">3.5.</span> <span class="post-toc-text">可变数据成员</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#基于const重载"><span class="post-toc-number">3.6.</span> <span class="post-toc-text">基于const重载</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#类的声明"><span class="post-toc-number">3.7.</span> <span class="post-toc-text">类的声明</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#类的作用域"><span class="post-toc-number">4.</span> <span class="post-toc-text">类的作用域</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#作用域和定义在类外部的成员"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">作用域和定义在类外部的成员</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#类的定义过程"><span class="post-toc-number">4.1.1.</span> <span class="post-toc-text">类的定义过程</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#类的静态成员"><span class="post-toc-number">5.</span> <span class="post-toc-text">类的静态成员</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#类外部定义静态成员"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">类外部定义静态成员</span></a></li></ol></li></ol>
+
+        <!--
+        <li class="mdl-menu__item">
+            Some Action
+        </li>
+        -->
+    </ul>
+
 
 
 
@@ -220,14 +257,433 @@
 
                 <!-- Post Header(Thumbnail & Title) -->
                 
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script>
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').css('background-image', 'url(' + '/img/random/material-' + randomNum + '.png' + ')');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                C++ primer笔记 — 类
+            </p>
+        </div>
+
 
 
 
 
                 
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>Xin Wei</strong>
+        <span>6月 24, 2015</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/cpp/">cpp</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/language/">language</a>
+    </ul>
+    
+
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=C++ primer笔记 — 类&url=http://www.wowx.info//posts/201506240132/index.html&pic=&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=C++ primer笔记 — 类&url=http://www.wowx.info//posts/201506240132/index.html&via=Xin Wei" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://www.wowx.info//posts/201506240132/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://www.wowx.info//posts/201506240132/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+</div>
+
+                
 
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p><img src="http://ww3.sinaimg.cn/large/6425ef91jw1f9aa7pkr9wj20e80e8t97.jpg" width="420px"><br><a id="more"></a></p>
+<p>[TOC]</p>
+<h2 id="定义抽象数据类型"><a href="#定义抽象数据类型" class="headerlink" title="定义抽象数据类型"></a>定义抽象数据类型</h2><ol>
+<li><p>非静态成员函数的参数列表后面加const表示成员函数的this指针为const指针，即在该成员函数中修改它所在类的成员的操作是不被允许的</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">  <span class="token keyword">struct</span> Sales_data
+  <span class="token punctuation">{</span>
+    std<span class="token operator">::</span>string <span class="token function">isbn</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token punctuation">{</span><span class="token keyword">return</span> bookNo<span class="token punctuation">;</span><span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<pre><code>   这样的成员函数称为常量成员函数
+</code></pre></li>
+<li><p>成员函数  </p>
+<p>类的成员函数必须在类内声明，但是可以在类内或者类外定义，如果定义在类内则该成员函数是隐式的inline函数。</p>
+<p>  类外定义的成员函数：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">  <span class="token keyword">double</span> Sales_data<span class="token operator">::</span><span class="token function">avg_price</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>units_sold<span class="token punctuation">)</span>
+      <span class="token keyword">return</span> revenue<span class="token operator">/</span>units_sold<span class="token punctuation">;</span>
+    <span class="token keyword">else</span>
+      <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+</ol>
+<ol>
+<li><p>this</p>
+<p>成员函数中有一个隐式变量<code>this</code>,它指向当前的对象，可以通过<code>this.xxx</code>调用类成员或者<code>return *this;</code>返回当前对象。</p>
+</li>
+</ol>
+<ol>
+<li><p>定义类相关的非成员函数</p>
+<p>如果函数在概念上属于类但是不定义在类中，则它一般与类声明(不是定义)在同一个文件中</p>
+</li>
+</ol>
+<h2 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h2><p>构造函数名和类名一致，没有返回类型，它控制着类的初始化过程。</p>
+<p>构造函数不能声明为const，当我们创建一个类的const对象时，直到构造函数完成初始化过程，对象才真正取得常量属性。所以，构造函数在const对象的构造过程中可以向其写值。</p>
+<h3 id="默认构造函数"><a href="#默认构造函数" class="headerlink" title="默认构造函数"></a>默认构造函数</h3><p>当我们没有显式地声明构造函数时，编译器会通过<strong>默认构造函数</strong>来初始化，这个默认构造函数也叫作<strong>合成构造函数</strong>，如果存在类内初始值(如Sales_data中的bookNo等)则用它来初始化成员，否则默认初始化成员。</p>
+<p>如果一个构造函数为所有参数都提供了默认实参，则它实际上也定义了默认构造函数</p>
+<h3 id="构造函数的初始值有时必不可少"><a href="#构造函数的初始值有时必不可少" class="headerlink" title="构造函数的初始值有时必不可少"></a>构造函数的初始值有时必不可少</h3><p>如果成员是const、引用或属于某种没有定义默认构造函数的类类型的话，我们必须对其初始化：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">ConstRef</span> <span class="token punctuation">{</span>
+  <span class="token keyword">public</span><span class="token operator">:</span>
+      <span class="token function">ConstRef</span><span class="token punctuation">(</span><span class="token keyword">int</span> ii<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+         i <span class="token operator">=</span> ii<span class="token punctuation">;</span>
+          ci <span class="token operator">=</span> ii<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//错误，不能给const赋值</span>
+          ri <span class="token operator">=</span> ii<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//错误，ri没有被初始化</span>
+    <span class="token punctuation">}</span>
+  <span class="token keyword">private</span><span class="token operator">:</span>
+      <span class="token keyword">int</span> i<span class="token punctuation">;</span>
+      <span class="token keyword">const</span> <span class="token keyword">int</span> ci<span class="token punctuation">;</span>
+      <span class="token keyword">int</span> <span class="token operator">&amp;</span>ri<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>初始化const、引用的唯一机会是通过构造函数初始值：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token function">ConstRef</span><span class="token punctuation">(</span><span class="token keyword">int</span> ii<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token function">i</span><span class="token punctuation">(</span>ii<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">ci</span><span class="token punctuation">(</span>ii<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">ri</span><span class="token punctuation">(</span>ii<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="成员初始化顺序"><a href="#成员初始化顺序" class="headerlink" title="成员初始化顺序"></a>成员初始化顺序</h3><p>不管构造函数初始值顺序是怎么样的，实际上初始化的顺序和成员声明出现的顺序一致：</p>
+<pre><code>Class X {
+  int i;
+  int j;
+ public:
+     // 未定义的: i在j之前被初始化
+     X(int val): j(val), i(j) {}
+}
+</code></pre><h3 id="委托构造函数"><a href="#委托构造函数" class="headerlink" title="委托构造函数"></a>委托构造函数</h3><p>使用所属类的其他构造函数执行自己的初始化过程</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Sales_data</span> <span class="token punctuation">{</span>
+  <span class="token keyword">public</span><span class="token operator">:</span>
+      <span class="token comment" spellcheck="true">// 非委托构造函数</span>
+    <span class="token function">Sales_data</span><span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token operator">::</span>string <span class="token operator">&amp;</span>s<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token keyword">unsigned</span> n<span class="token punctuation">,</span> <span class="token keyword">double</span> p<span class="token punctuation">)</span><span class="token operator">:</span>
+        <span class="token function">bookNo</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">units_sold</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">revenue</span><span class="token punctuation">(</span>n <span class="token operator">*</span> p<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+      <span class="token comment" spellcheck="true">// 委托构造函数</span>
+      <span class="token function">Sales_data</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token function">Sales_data</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+      <span class="token function">Sales_data</span><span class="token punctuation">(</span>string s<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token function">Sales_data</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token function">Sales_data</span><span class="token punctuation">(</span>std<span class="token operator">::</span>istream <span class="token operator">&amp;</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token function">Sales_data</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token function">read</span><span class="token punctuation">(</span>is<span class="token punctuation">,</span> <span class="token operator">*</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">}</span> <span class="token comment" spellcheck="true">// 外部定义的构造函数</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="隐式类型转换"><a href="#隐式类型转换" class="headerlink" title="隐式类型转换"></a>隐式类型转换</h3><p>如果构造函数只接受一个实参，则它实际上定义了将实参类型转换成类类型的隐式转换，比如我们可以使用string或istream替代Sales_data</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">string null_book <span class="token operator">=</span> <span class="token string">"9-999-9999-9"</span><span class="token punctuation">;</span>
+item<span class="token punctuation">.</span><span class="token function">combine</span><span class="token punctuation">(</span>null_book<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>如果不想要这种隐式类型转换，可以使用<code>explicit</code>抑制它</p>
+<h3 id="explicit抑制隐式类型转换"><a href="#explicit抑制隐式类型转换" class="headerlink" title="explicit抑制隐式类型转换"></a><code>explicit</code>抑制隐式类型转换</h3><p><code>explicit</code>只能在类内声明构造函数时使用。</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Sales_data</span> <span class="token punctuation">{</span>
+  <span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token function">Sales_data</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token keyword">default</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//指定保留默认构造函数</span>
+    <span class="token keyword">explicit</span> <span class="token function">Sales_data</span><span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token operator">::</span>string <span class="token operator">&amp;</span>s<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token function">bookNo</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token function">Sales_data</span><span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token operator">::</span>string <span class="token operator">&amp;</span>s<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token keyword">unsigned</span> n<span class="token punctuation">,</span> <span class="token keyword">double</span> p<span class="token punctuation">)</span><span class="token operator">:</span>
+        <span class="token function">bookNo</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">units_sold</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">revenue</span><span class="token punctuation">(</span>n <span class="token operator">*</span> p<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token keyword">explicit</span> <span class="token function">Sales_data</span><span class="token punctuation">(</span>std<span class="token operator">::</span>istream <span class="token operator">&amp;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 外部定义的构造函数</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="使用static-cast显式类型转换"><a href="#使用static-cast显式类型转换" class="headerlink" title="使用static_cast显式类型转换"></a>使用static_cast显式类型转换</h3><p>可以使用static_cast 使用explicit抑制的类型转换</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">item<span class="token punctuation">.</span><span class="token function">combine</span><span class="token punctuation">(</span><span class="token keyword">static_cast</span><span class="token operator">&lt;</span>Sales_data<span class="token operator">></span> <span class="token punctuation">(</span>cin<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="标准库中含有显式构造函数的类"><a href="#标准库中含有显式构造函数的类" class="headerlink" title="标准库中含有显式构造函数的类"></a>标准库中含有显式构造函数的类</h3><ul>
+<li>接受一个const char*的string构造函数，不是explicit的</li>
+<li>接受一个容器参数的vector,是explicit的</li>
+</ul>
+<h3 id="为Sales-data定义构造函数"><a href="#为Sales-data定义构造函数" class="headerlink" title="为Sales_data定义构造函数"></a>为Sales_data定义构造函数</h3><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">struct</span> Sales_data <span class="token punctuation">{</span>
+    <span class="token function">Sales_data</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token keyword">default</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//指定保留默认构造函数</span>
+    <span class="token function">Sales_data</span><span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token operator">::</span>string <span class="token operator">&amp;</span>s<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token function">bookNo</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token function">Sales_data</span><span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token operator">::</span>string <span class="token operator">&amp;</span>s<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token keyword">unsigned</span> n<span class="token punctuation">,</span> <span class="token keyword">double</span> p<span class="token punctuation">)</span><span class="token operator">:</span>
+        <span class="token function">bookNo</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">units_sold</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">revenue</span><span class="token punctuation">(</span>n <span class="token operator">*</span> p<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token function">Sales_data</span><span class="token punctuation">(</span>std<span class="token operator">::</span>istream <span class="token operator">&amp;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 外部定义的构造函数</span>
+<span class="token punctuation">}</span>
+
+Sales_data<span class="token operator">::</span><span class="token function">Sales_data</span><span class="token punctuation">(</span>std<span class="token operator">::</span>istream <span class="token operator">&amp;</span>is<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">read</span><span class="token punctuation">(</span>is<span class="token punctuation">,</span> <span class="token operator">*</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="拷贝、赋值和析构"><a href="#拷贝、赋值和析构" class="headerlink" title="拷贝、赋值和析构"></a>拷贝、赋值和析构</h3><p>类中 如果包含vector或string成员则其拷贝、赋值和销毁的合成版本能够正常工作否则需要自己定义。</p>
+<h3 id="聚合类"><a href="#聚合类" class="headerlink" title="聚合类"></a>聚合类</h3><p>满足下列条件:</p>
+<ul>
+<li>所有成员都是public的</li>
+<li>没有定义任何构造函数</li>
+<li>没有类内初始值</li>
+<li>没有基类、virtual函数</li>
+</ul>
+<p>则它是聚合类，用户可以直接访问它的成员并且使用<code>{}</code>的初始化语法。</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">struct</span> Data <span class="token punctuation">{</span>
+  <span class="token keyword">int</span> ival<span class="token punctuation">;</span>
+  string s<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+Data val1 <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token string">"Annel"</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="字面值常量类"><a href="#字面值常量类" class="headerlink" title="字面值常量类"></a>字面值常量类</h3><h4 id="constexpr构造函数"><a href="#constexpr构造函数" class="headerlink" title="constexpr构造函数"></a>constexpr构造函数</h4><h2 id="访问控制和封装"><a href="#访问控制和封装" class="headerlink" title="访问控制和封装"></a>访问控制和封装</h2><ul>
+<li><p>public</p>
+<p>程序内可访问, 用于定义类的接口</p>
+</li>
+<li><p>private</p>
+<p>类内可访问，封装(隐藏)类的实现细节。</p>
+</li>
+</ul>
+<p><strong>封装的优点:</strong></p>
+<ol>
+<li>确保用户代码不会无意间破坏封装对象的状态；</li>
+<li>被封装的类的具体实现细节可以随时改变而无需调整用户级别代码。</li>
+</ol>
+<h3 id="使用class关键字"><a href="#使用class关键字" class="headerlink" title="使用class关键字"></a>使用class关键字</h3><p>class和struct仅仅形式化有所不同，另外<strong>struct默认访问权限是public，而class是private的</strong></p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Sales_data</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token function">Sales_data</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token keyword">default</span><span class="token punctuation">;</span>
+    <span class="token function">Sales_data</span><span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token operator">::</span>string <span class="token operator">&amp;</span>s<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token function">bookNo</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token function">Sales_data</span><span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token operator">::</span>string <span class="token operator">&amp;</span>s<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token keyword">unsigned</span> n<span class="token punctuation">,</span> <span class="token keyword">double</span> p<span class="token punctuation">)</span><span class="token operator">:</span>
+        <span class="token function">bookNo</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">units_sold</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">revenue</span><span class="token punctuation">(</span>n <span class="token operator">*</span> p<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token function">Sales_data</span><span class="token punctuation">(</span>std<span class="token operator">::</span>istream <span class="token operator">&amp;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    string <span class="token function">isbn</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> bookNo<span class="token punctuation">;</span><span class="token punctuation">}</span>
+    Sales_data<span class="token operator">&amp;</span> <span class="token function">combine</span><span class="token punctuation">(</span><span class="token keyword">const</span> Sales_data<span class="token operator">&amp;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">private</span><span class="token operator">:</span>
+    string bookNo<span class="token punctuation">;</span>
+    <span class="token keyword">unsigned</span> units_sold <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">double</span> revenue <span class="token operator">=</span> <span class="token number">0.0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+Sales_data <span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">const</span> Sales_data <span class="token operator">&amp;</span>lhs<span class="token punctuation">,</span> <span class="token keyword">const</span> Sales_data <span class="token operator">&amp;</span>rhs<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    Sales_data sum  <span class="token operator">=</span> lhs<span class="token punctuation">;</span>
+    sum<span class="token punctuation">.</span><span class="token function">combine</span><span class="token punctuation">(</span>rhs<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> sum<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+std<span class="token operator">::</span>istream <span class="token operator">&amp;</span><span class="token function">read</span><span class="token punctuation">(</span>std<span class="token operator">::</span>istream <span class="token operator">&amp;</span>is<span class="token punctuation">,</span> Sales_data <span class="token operator">&amp;</span>item<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">double</span> price <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    is <span class="token operator">>></span> item<span class="token punctuation">.</span>bookNo <span class="token operator">>></span> item<span class="token punctuation">.</span>units_sold <span class="token operator">>></span> price<span class="token punctuation">;</span>
+    item<span class="token punctuation">.</span>revenue <span class="token operator">=</span> price <span class="token operator">*</span> item<span class="token punctuation">.</span>units_sold<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> is<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+std<span class="token operator">::</span>ostream <span class="token operator">&amp;</span><span class="token function">print</span><span class="token punctuation">(</span>std<span class="token operator">::</span>ostream <span class="token operator">&amp;</span>os<span class="token punctuation">,</span> <span class="token keyword">const</span> Sales_data <span class="token operator">&amp;</span>item<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    os <span class="token operator">&lt;&lt;</span> item<span class="token punctuation">.</span><span class="token function">isbn</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span> <span class="token operator">&lt;&lt;</span> item<span class="token punctuation">.</span>units_sold <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span> <span class="token operator">&lt;&lt;</span> item<span class="token punctuation">.</span>revenue<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> os<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+Sales_data<span class="token operator">&amp;</span> Sales_data<span class="token operator">::</span><span class="token function">combine</span><span class="token punctuation">(</span><span class="token keyword">const</span> Sales_data<span class="token operator">&amp;</span> rhs<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    units_sold <span class="token operator">+</span><span class="token operator">=</span> rhs<span class="token punctuation">.</span>units_sold<span class="token punctuation">;</span>
+    revenue <span class="token operator">+</span><span class="token operator">=</span> rhs<span class="token punctuation">.</span>revenue<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token operator">*</span><span class="token keyword">this</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="友元"><a href="#友元" class="headerlink" title="友元"></a>友元</h3><p>在Sales_data的例子中，read、print、add函数虽然是接口的一部分但不是类的成员，这样他们就无法访问声明为<code>private</code>的数据成员而造成无法编译，为了解决这个问题，需要使用”友元”。</p>
+<p>可以在类内部通过<code>friend</code>关键字声明友元</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Sales_data</span> <span class="token punctuation">{</span>
+<span class="token keyword">friend</span> Sales_data <span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">const</span> Sales_data <span class="token operator">&amp;</span><span class="token punctuation">,</span> <span class="token keyword">const</span> Sales_data <span class="token operator">&amp;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">friend</span> std<span class="token operator">::</span>istream <span class="token operator">&amp;</span><span class="token function">read</span><span class="token punctuation">(</span>std<span class="token operator">::</span>istream <span class="token operator">&amp;</span>is<span class="token punctuation">,</span> Sales_data <span class="token operator">&amp;</span>item<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">friend</span> std<span class="token operator">::</span>ostream <span class="token operator">&amp;</span><span class="token function">print</span><span class="token punctuation">(</span>std<span class="token operator">::</span>ostream <span class="token operator">&amp;</span>os<span class="token punctuation">,</span> <span class="token keyword">const</span> Sales_data <span class="token operator">&amp;</span>item<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token function">Sales_data</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token keyword">default</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="其他类作为友元"><a href="#其他类作为友元" class="headerlink" title="其他类作为友元"></a>其他类作为友元</h4><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Screen</span> <span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true">// Window_mgr 的成员可以访问Screen类的私有部分</span>
+  <span class="token keyword">friend</span> <span class="token keyword">class</span> <span class="token class-name">Window_mgr</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="其他类的成员函数作为友元"><a href="#其他类的成员函数作为友元" class="headerlink" title="其他类的成员函数作为友元"></a>其他类的成员函数作为友元</h4><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Screen</span> <span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true">// Window_mgr::clear 可以访问Screen类的私有部分,必须在Screen类之前被声明</span>
+  <span class="token keyword">friend</span> <span class="token keyword">void</span> Window_mgr<span class="token operator">::</span><span class="token function">clear</span><span class="token punctuation">(</span>ScreenIndex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="类型成员"><a href="#类型成员" class="headerlink" title="类型成员"></a>类型成员</h3><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Screen</span> <span class="token punctuation">{</span>
+  <span class="token keyword">public</span><span class="token operator">:</span>
+      <span class="token comment" spellcheck="true">// 类型成员</span>
+      <span class="token keyword">typedef</span> std<span class="token operator">::</span>string<span class="token operator">::</span>size_type pos<span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">// 或using pos = std::string::size_type;</span>
+  <span class="token keyword">private</span><span class="token operator">:</span>
+      pos cursor <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+      pos height <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> width <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+      std<span class="token operator">::</span>string contents<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="令成员函数为内联函数"><a href="#令成员函数为内联函数" class="headerlink" title="令成员函数为内联函数"></a>令成员函数为内联函数</h3><p>定义在类中的成员函数是隐式内联的， 而对于定义在类外的成员函数只要在定义的地方使用<code>inline</code>关键字就能声明为内联的，且应该和类定义在一个头文件中。</p>
+<h3 id="可变数据成员"><a href="#可变数据成员" class="headerlink" title="可变数据成员"></a>可变数据成员</h3><p>有时我们会希望在const成员函数中也能修改某个数据成员，这可以通过给数据成员添加<code>mutable</code>关键字实现，一个mutable数据成员永远不会是const，即使它是const对象的成员。</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Screen</span> <span class="token punctuation">{</span>
+  <span class="token keyword">public</span><span class="token operator">:</span>
+      <span class="token comment" spellcheck="true">// 统计函数被调用的次数</span>
+      <span class="token keyword">void</span> <span class="token function">some_member</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span><span class="token punctuation">;</span>
+  <span class="token keyword">private</span><span class="token operator">:</span>
+      <span class="token keyword">mutable</span> size_t access_ctr<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> Screen<span class="token operator">::</span><span class="token function">some_member</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span>
+  <span class="token punctuation">{</span>
+    <span class="token operator">++</span>access_ctr<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="基于const重载"><a href="#基于const重载" class="headerlink" title="基于const重载"></a>基于const重载</h3><p>因为非常量版本的函数对于常量版本对象时不可用的，所以我们只能在常量对象上调用const成员函数，另外，虽然非常量对象可以调用常量和非常量版本，但是，显然调用非常量版本是更好的匹配。</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Screen</span> <span class="token punctuation">{</span>
+  <span class="token keyword">public</span><span class="token operator">:</span>
+      <span class="token comment" spellcheck="true">// 根据对象是否是const重载display 函数</span>
+      Screen <span class="token operator">&amp;</span><span class="token function">display</span><span class="token punctuation">(</span>std<span class="token operator">::</span>ostream <span class="token operator">&amp;</span>os<span class="token punctuation">)</span>
+      <span class="token punctuation">{</span> <span class="token function">do_display</span><span class="token punctuation">(</span>os<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token keyword">return</span> <span class="token operator">*</span><span class="token keyword">this</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+      <span class="token keyword">const</span> Screen <span class="token operator">&amp;</span><span class="token function">display</span><span class="token punctuation">(</span>std<span class="token operator">::</span>ostream <span class="token operator">&amp;</span>os<span class="token punctuation">)</span> <span class="token keyword">const</span>
+      <span class="token punctuation">{</span> <span class="token function">do_display</span><span class="token punctuation">(</span>os<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token keyword">return</span> <span class="token operator">*</span><span class="token keyword">this</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+  <span class="token keyword">private</span><span class="token operator">:</span>
+      <span class="token keyword">void</span> <span class="token function">do_display</span><span class="token punctuation">(</span>std<span class="token operator">::</span>ostream <span class="token operator">&amp;</span>os<span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token punctuation">{</span>os <span class="token operator">&lt;&lt;</span> contents<span class="token punctuation">;</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="类的声明"><a href="#类的声明" class="headerlink" title="类的声明"></a>类的声明</h3><p>我们可以仅仅声明类而暂时不使用他们</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Screen</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>一个类的名字出现后，它就被认为是声明过了,因此，类允许包含指向它自身类型的引用或指针：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Link_screen</span> <span class="token punctuation">{</span>
+  Screen window<span class="token punctuation">;</span>
+  Link_screen <span class="token operator">*</span>next<span class="token punctuation">;</span>
+  Link_screen <span class="token operator">*</span>prev<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>通过先声明一个类，可以让两个类互相指向：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Y</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">X</span> <span class="token punctuation">{</span>
+    Y <span class="token operator">*</span>y_ptr<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Y</span> <span class="token punctuation">{</span>
+    X <span class="token operator">*</span>x_ptr<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="类的作用域"><a href="#类的作用域" class="headerlink" title="类的作用域"></a>类的作用域</h2><h3 id="作用域和定义在类外部的成员"><a href="#作用域和定义在类外部的成员" class="headerlink" title="作用域和定义在类外部的成员"></a>作用域和定义在类外部的成员</h3><p>一旦遇到了类名，定义的剩余部分就在类的作用域之内了。如：</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">void</span> Window_mgr<span class="token operator">::</span><span class="token function">clear</span><span class="token punctuation">(</span>ScreenIndex i<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  Screen <span class="token operator">&amp;</span>s <span class="token operator">=</span> screens<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+  s<span class="token punctuation">.</span>contents <span class="token operator">=</span> <span class="token function">string</span><span class="token punctuation">(</span>s<span class="token punctuation">.</span>height <span class="token operator">*</span> s<span class="token punctuation">.</span>width<span class="token punctuation">,</span> <span class="token string">' '</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>编译器在处理函数之前已经知道了剩余部分在类的作用域之内了，所以不必专门说明<code>ScreenIndex</code>是<code>Window_mgr</code>类定义的了。但是返回类型在函数名之前出现，所以还要专门指出返回类型在该类中定义。</p>
+<h4 id="类的定义过程"><a href="#类的定义过程" class="headerlink" title="类的定义过程"></a>类的定义过程</h4><p>类的定义分两步</p>
+<ol>
+<li>编译成员声明</li>
+<li>直到类全部可见才编译函数体</li>
+</ol>
+<p>即编译器<strong>处理完类中的所有声明后才会处理成员函数的定义</strong>，即成员函数可以使用类中定义的任何位置的名字。</p>
+<p>上面的两阶段的处理方式只适用于类的成员函数中使用的声明，声明中使用的名字还是需要确保在使用前可见，否则会到外层作用域中取寻找。</p>
+<p>类型名的定义一般要出现在类的开始处，因为编译器只会从声明中名字出现的地方的前面去寻找。</p>
+<h2 id="类的静态成员"><a href="#类的静态成员" class="headerlink" title="类的静态成员"></a>类的静态成员</h2><p>通过加上<code>static</code>关键字声明静态成员，它存在于任何对象之外。静态成员函数也不和任何对象绑定在一起，并且不包含this指针。</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Account</span> <span class="token punctuation">{</span>
+  <span class="token keyword">public</span><span class="token operator">:</span>
+      <span class="token comment" spellcheck="true">// 成员函数不用通过作用域运算符就能使用静态成员</span>
+      <span class="token keyword">void</span> <span class="token function">calculate</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>amount <span class="token operator">+</span><span class="token operator">=</span> amount <span class="token operator">*</span> interestRate<span class="token punctuation">;</span><span class="token punctuation">}</span>
+      <span class="token keyword">static</span> <span class="token keyword">double</span> <span class="token function">rate</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token keyword">return</span> interestRate<span class="token punctuation">;</span><span class="token punctuation">}</span>
+      <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">rate</span><span class="token punctuation">(</span><span class="token keyword">double</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">private</span><span class="token operator">:</span>
+      std<span class="token operator">::</span>string owner<span class="token punctuation">;</span>
+      <span class="token keyword">double</span> amount<span class="token punctuation">;</span>
+      <span class="token keyword">static</span> <span class="token keyword">double</span> interestRate<span class="token punctuation">;</span>
+      <span class="token keyword">static</span> <span class="token keyword">double</span> <span class="token function">initRate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">double</span> r<span class="token punctuation">;</span>
+r <span class="token operator">=</span> Account<span class="token operator">::</span><span class="token function">rate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+Account ac1<span class="token punctuation">;</span>
+Account <span class="token operator">*</span>ac2 <span class="token operator">=</span> <span class="token operator">&amp;</span>ac1<span class="token punctuation">;</span>
+r <span class="token operator">=</span> ac1<span class="token punctuation">.</span><span class="token function">rate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+r <span class="token operator">=</span> ac2<span class="token operator">-</span><span class="token operator">></span><span class="token function">rate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="类外部定义静态成员"><a href="#类外部定义静态成员" class="headerlink" title="类外部定义静态成员"></a>类外部定义静态成员</h3><p>当在类外部定义静态成员时，不应该出现<code>static</code>关键字，它只能出现在类内部声明语句。</p>
+
     
 
     
@@ -239,30 +695,6 @@
                 <!-- Post Comments -->
                 
                     
-    <!-- 使用多说评论 -->
-    <link rel="stylesheet" href="/css/duoshuo.min.css">
-<style>
-    #ds-thread #ds-reset .ds-post-button{
-        background-color: #0097A7 !important;
-    }
-    #ds-wrapper #ds-reset .ds-icons-32{
-        background-color: #0097A7 !important;
-    }
-    #ds-reset .ds-highlight {
-        color: #0097A7 !important;
-    }
-</style>
-<div id="comments">
-    <!-- 多说评论框 start -->
-    <div class="ds-thread"
-        data-thread-key="posts/201506240132/"
-        data-url="http://www.wowx.info/posts/201506240132/"
-        data-title="C++ primer笔记 — 类">
-    </div>
-    <!-- 多说评论框 end -->
-</div>
-
-
 
 
 
@@ -304,11 +736,243 @@
 
 
                     
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="Xin Wei's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        youremail@email.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="#" target="_blank" title="Email Me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/" target="_self">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">二月 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/12/">十二月 2016<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">十一月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">十月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/07/">七月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/06/">六月 2016<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/07/">七月 2015<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/06/">六月 2015<span class="sidebar_archives-count">6</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+
+    <!-- Pages  -->
+    
+
+    <!-- Article Number  -->
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+    <a href="https://github.com/viosey/hexo-theme-material"  class="sidebar-footer-text-a" target="_blank">
+        <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+            主题 - Material
+            <span class="sidebar-badge badge-circle">i</span>
+        </div>
+    </a>
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
 
                     
 
                     <!--Footer-->
 <footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+        <a href="https://twitter.com/twitter" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-twitter.png);">
+                <span class="visuallyhidden">Twitter</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Facebook -->
+    
+        <a href="https://www.facebook.com/facebook" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-facebook.png);">
+                <span class="visuallyhidden">Facebook</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Google + -->
+    
+        <a href="https://www.google.com/" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-gplus.png);">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©&nbsp;
+            <script type="text/javascript">
+                var fd = new Date();
+                document.write(fd.getFullYear());
+            </script>
+            &nbsp;野原圆长的Blog
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
     
 </footer>
 
@@ -343,113 +1007,9 @@
 
 
 
-    <!-- Leancloud -->
-    <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
-    <script>
-        AV.initialize('1wCxBs3gRuLUAR1VDMEUFx3N-gzGzoHsz', '6sT0Kp8aE2lG69USPb4k0cAb');
-    </script>
-    <script>
-    function showTime(Counter) {
-        var query = new AV.Query(Counter);
-        $('.leancloud-views_num').each(function() {
-            var url = $(this).attr('id').trim();
-            query.equalTo('url', url);
-            query.find({
-                success: function(results) {
-                    if (results.length === 0) {
-                        var content = '0 ' + $(document.getElementById(url)).text();
-                        $(document.getElementById(url)).text(content);
-                        return;
-                    }
-                    for (var i = 0; i < results.length; i++) {
-                        var object = results[i];
-                        var content = object.get('time') + ' ' + $(document.getElementById(url)).text();
-                        $(document.getElementById(url)).text(content);
-                    }
-                },
-                error: function(object, error) {
-                    console.log('Error: ' + error.code + ' ' + error.message);
-                }
-            });
-        });
-    }
-
-    function addCount(Counter) {
-      var Counter = AV.Object.extend('Counter');
-      url = $('.leancloud-views_num').attr('id').trim();
-      title = $('.leancloud-views_num').attr('data-flag-title').trim();
-      var query = new AV.Query(Counter);
-      query.equalTo('url', url);
-      query.find({
-          success: function(results) {
-            if (results.length > 0) {
-                var counter = results[0];
-                counter.fetchWhenSave(true);
-                counter.increment('time');
-                counter.save(null, {
-                    success: function(counter) {
-                        var content =  counter.get('time') + ' ' + $(document.getElementById(url)).text();
-                        $(document.getElementById(url)).text(content);
-                    },
-                    error: function(counter, error) {
-                        console.log('Failed to save Visitor num, with error message: ' + error.message);
-                    }
-                });
-            } else {
-              var newcounter = new Counter();
-              newcounter.set('title', title);
-              newcounter.set('url', url);
-              newcounter.set('time', 1);
-              newcounter.save(null, {
-                  success: function(newcounter) {
-                      console.log('newcounter.get(\'time\')='+newcounter.get('time'));
-                      var content = newcounter.get('time') + ' ' + $(document.getElementById(url)).text();
-                      $(document.getElementById(url)).text(content);
-                  },
-                  error: function(newcounter, error) {
-                      console.log('Failed to create');
-                  }
-              });
-            }
-        },
-        error: function(error) {
-            console.log('Error:' + error.code + ' ' + error.message);
-        }
-      });
-    }
-    $(function() {
-        var Counter = AV.Object.extend('Counter');
-        if ($('.leancloud-views_num').length === 1) {
-            addCount(Counter);
-        } else if ($('.post-title-link').length > 1) {
-            showTime(Counter);
-        }
-    });
-</script>
 
 
 
-
-
-
-    <!-- 多说公共 js 代码 start -->
-    <script type="text/javascript">
-        queue.offer(function(){
-            var duoshuoQuery = {
-                short_name: 'buptweixin'
-            };
-            (function() {
-                var ds = document.createElement('script');
-                ds.type = 'text/javascript';
-                ds.async = true;
-                ds.src = 'https://static.duoshuo.com/embed.js';
-                ds.charset = 'UTF-8';
-                (document.getElementsByTagName('head')[0]
-                 || document.getElementsByTagName('body')[0]).appendChild(ds);
-            })();
-        });
-    </script>
-    <!-- 多说公共 js 代码 end -->
 
 
 
