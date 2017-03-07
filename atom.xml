@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.wowx.info/"/>
-  <updated>2017-03-07T03:12:20.845Z</updated>
+  <updated>2017-03-07T03:17:07.093Z</updated>
   <id>http://www.wowx.info/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://www.wowx.info/posts/20170307094529/"/>
     <id>http://www.wowx.info/posts/20170307094529/</id>
     <published>2017-03-07T01:45:29.000Z</published>
-    <updated>2017-03-07T03:12:20.845Z</updated>
+    <updated>2017-03-07T03:17:07.093Z</updated>
     
     <content type="html"><![CDATA[<h2 id="415-Add-Strings"><a href="#415-Add-Strings" class="headerlink" title="415. Add Strings"></a>415. Add Strings</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
 <p>Given two non-negative integers num1 and num2 represented as string, return the sum of num1 and num2.</p>
@@ -144,8 +144,8 @@
     
     </summary>
     
+      <category term="algorithm" scheme="http://www.wowx.info/categories/algorithm/"/>
     
-      <category term="算法" scheme="http://www.wowx.info/tags/%E7%AE%97%E6%B3%95/"/>
     
       <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
     
@@ -155,6 +155,8 @@
     
       <category term="BST" scheme="http://www.wowx.info/tags/BST/"/>
     
+      <category term="algorithm" scheme="http://www.wowx.info/tags/algorithm/"/>
+    
   </entry>
   
   <entry>
@@ -162,7 +164,7 @@
     <link href="http://www.wowx.info/posts/20170306094212/"/>
     <id>http://www.wowx.info/posts/20170306094212/</id>
     <published>2017-03-06T01:42:12.000Z</published>
-    <updated>2017-03-06T03:35:55.806Z</updated>
+    <updated>2017-03-07T03:17:02.161Z</updated>
     
     <content type="html"><![CDATA[<h2 id="447-Number-of-Boomerangs-EASY"><a href="#447-Number-of-Boomerangs-EASY" class="headerlink" title="447. Number of Boomerangs[EASY]"></a>447. Number of Boomerangs[EASY]</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><pre class="line-numbers language-cpp"><code class="language-cpp">Given n points in the plane that are all pairwise distinct<span class="token punctuation">,</span> a <span class="token string">"boomerang"</span> is a tuple of <span class="token function">points</span> <span class="token punctuation">(</span>i<span class="token punctuation">,</span> j<span class="token punctuation">,</span> k<span class="token punctuation">)</span> such that the distance between i <span class="token operator">and</span> j equals the distance between i <span class="token operator">and</span> <span class="token function">k</span> <span class="token punctuation">(</span>the order of the tuple matters<span class="token punctuation">)</span><span class="token punctuation">.</span>
 
@@ -332,14 +334,16 @@ The two boomerangs are <span class="token punctuation">[</span><span class="toke
     
     </summary>
     
+      <category term="algorithm" scheme="http://www.wowx.info/categories/algorithm/"/>
     
-      <category term="算法" scheme="http://www.wowx.info/tags/%E7%AE%97%E6%B3%95/"/>
     
       <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
     
       <category term="hashtable" scheme="http://www.wowx.info/tags/hashtable/"/>
     
       <category term="Backtracking" scheme="http://www.wowx.info/tags/Backtracking/"/>
+    
+      <category term="algorighm" scheme="http://www.wowx.info/tags/algorighm/"/>
     
   </entry>
   
@@ -348,7 +352,7 @@ The two boomerangs are <span class="token punctuation">[</span><span class="toke
     <link href="http://www.wowx.info/posts/20170303131752/"/>
     <id>http://www.wowx.info/posts/20170303131752/</id>
     <published>2017-03-03T05:17:52.000Z</published>
-    <updated>2017-03-03T05:19:06.542Z</updated>
+    <updated>2017-03-07T03:18:17.377Z</updated>
     
     <content type="html"><![CDATA[<h2 id="198-House-Robber-I"><a href="#198-House-Robber-I" class="headerlink" title="198. House Robber I"></a>198. House Robber I</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
 <p>You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security system connected and it will automatically contact the police if two adjacent houses were broken into on the same night.</p>
@@ -473,12 +477,14 @@ exclude <span class="token operator">=</span> <span class="token function">max</
     
     </summary>
     
+      <category term="algorithm" scheme="http://www.wowx.info/categories/algorithm/"/>
     
-      <category term="算法" scheme="http://www.wowx.info/tags/%E7%AE%97%E6%B3%95/"/>
     
       <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
     
       <category term="dp" scheme="http://www.wowx.info/tags/dp/"/>
+    
+      <category term="algorighm" scheme="http://www.wowx.info/tags/algorighm/"/>
     
   </entry>
   
@@ -794,7 +800,7 @@ exclude <span class="token operator">=</span> <span class="token function">max</
     <link href="http://www.wowx.info/posts/201703011653/"/>
     <id>http://www.wowx.info/posts/201703011653/</id>
     <published>2017-03-01T08:53:03.000Z</published>
-    <updated>2017-03-03T05:16:54.226Z</updated>
+    <updated>2017-03-07T03:16:52.689Z</updated>
     
     <content type="html"><![CDATA[<h2 id="221-Maximal-Square"><a href="#221-Maximal-Square" class="headerlink" title="221. Maximal Square"></a>221. Maximal Square</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
 <p>Given a 2D binary matrix filled with 0’s and 1’s, find the largest square containing only 1’s and return its area.</p>
@@ -1028,12 +1034,14 @@ exclude <span class="token operator">=</span> <span class="token function">max</
     
     </summary>
     
+      <category term="algorithm" scheme="http://www.wowx.info/categories/algorithm/"/>
     
-      <category term="算法" scheme="http://www.wowx.info/tags/%E7%AE%97%E6%B3%95/"/>
     
       <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
     
       <category term="dp" scheme="http://www.wowx.info/tags/dp/"/>
+    
+      <category term="algorighm" scheme="http://www.wowx.info/tags/algorighm/"/>
     
   </entry>
   
@@ -1042,7 +1050,7 @@ exclude <span class="token operator">=</span> <span class="token function">max</
     <link href="http://www.wowx.info/posts/20170227114327/"/>
     <id>http://www.wowx.info/posts/20170227114327/</id>
     <published>2017-02-27T03:43:27.000Z</published>
-    <updated>2017-02-28T04:46:19.884Z</updated>
+    <updated>2017-03-07T03:16:45.277Z</updated>
     
     <content type="html"><![CDATA[<h2 id="304-Range-Sum-Query-2D-Immutable"><a href="#304-Range-Sum-Query-2D-Immutable" class="headerlink" title="304. Range Sum Query 2D-Immutable"></a>304. Range Sum Query 2D-Immutable</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><p>Given a 2D matrix matrix, find the sum of the elements inside the rectangle defined by its upper left corner (row1, col1) and lower right corner (row2, col2).</p>
 <p>Range Sum Query 2D<br><img src="https://leetcode.com/static/images/courses/range_sum_query_2d.png" alt="img"><br>The above rectangle (with the red border) is defined by (row1, col1) = (2, 1) and (row2, col2) = (4, 3), which contains sum = 8.</p>
@@ -1175,12 +1183,14 @@ exclude <span class="token operator">=</span> <span class="token function">max</
     
     </summary>
     
+      <category term="algorithm" scheme="http://www.wowx.info/categories/algorithm/"/>
     
-      <category term="算法" scheme="http://www.wowx.info/tags/%E7%AE%97%E6%B3%95/"/>
     
       <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
     
       <category term="dp" scheme="http://www.wowx.info/tags/dp/"/>
+    
+      <category term="algorighm" scheme="http://www.wowx.info/tags/algorighm/"/>
     
   </entry>
   
@@ -1189,7 +1199,7 @@ exclude <span class="token operator">=</span> <span class="token function">max</
     <link href="http://www.wowx.info/posts/20170226162442/"/>
     <id>http://www.wowx.info/posts/20170226162442/</id>
     <published>2017-02-26T08:24:42.000Z</published>
-    <updated>2017-02-26T10:29:29.798Z</updated>
+    <updated>2017-03-07T03:16:37.181Z</updated>
     
     <content type="html"><![CDATA[<h2 id="413-Arithmetic-Slices"><a href="#413-Arithmetic-Slices" class="headerlink" title="413. Arithmetic Slices"></a>413. Arithmetic Slices</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
 <p>A sequence of number is called arithmetic if it consists of at least three elements and if the difference between any two consecutive elements is the same.</p>
@@ -1292,14 +1302,16 @@ exclude <span class="token operator">=</span> <span class="token function">max</
     
     </summary>
     
+      <category term="algorithm" scheme="http://www.wowx.info/categories/algorithm/"/>
     
-      <category term="算法" scheme="http://www.wowx.info/tags/%E7%AE%97%E6%B3%95/"/>
     
       <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
     
       <category term="string" scheme="http://www.wowx.info/tags/string/"/>
     
       <category term="dp" scheme="http://www.wowx.info/tags/dp/"/>
+    
+      <category term="algorighm" scheme="http://www.wowx.info/tags/algorighm/"/>
     
   </entry>
   
@@ -1308,7 +1320,7 @@ exclude <span class="token operator">=</span> <span class="token function">max</
     <link href="http://www.wowx.info/posts/20170225144631/"/>
     <id>http://www.wowx.info/posts/20170225144631/</id>
     <published>2017-02-25T06:46:31.000Z</published>
-    <updated>2017-02-26T08:23:58.241Z</updated>
+    <updated>2017-03-07T03:16:27.969Z</updated>
     
     <content type="html"><![CDATA[<h2 id="516-Longest-Palindromic-Subsequence"><a href="#516-Longest-Palindromic-Subsequence" class="headerlink" title="516. Longest Palindromic Subsequence"></a>516. Longest Palindromic Subsequence</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
 <p>Given a string s, find the longest palindromic subsequence’s length in s. You may assume that the maximum length of s is 1000.</p>
@@ -1416,14 +1428,16 @@ exclude <span class="token operator">=</span> <span class="token function">max</
     
     </summary>
     
+      <category term="algorithm" scheme="http://www.wowx.info/categories/algorithm/"/>
     
-      <category term="算法" scheme="http://www.wowx.info/tags/%E7%AE%97%E6%B3%95/"/>
     
       <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
     
       <category term="string" scheme="http://www.wowx.info/tags/string/"/>
     
       <category term="dp" scheme="http://www.wowx.info/tags/dp/"/>
+    
+      <category term="algorighm" scheme="http://www.wowx.info/tags/algorighm/"/>
     
   </entry>
   
@@ -1702,7 +1716,7 @@ exclude <span class="token operator">=</span> <span class="token function">max</
     <link href="http://www.wowx.info/posts/20170215164726/"/>
     <id>http://www.wowx.info/posts/20170215164726/</id>
     <published>2017-02-15T08:47:26.000Z</published>
-    <updated>2017-03-01T03:21:50.469Z</updated>
+    <updated>2017-03-07T03:18:10.377Z</updated>
     
     <content type="html"><![CDATA[<h2 id="计算子序列和的问题"><a href="#计算子序列和的问题" class="headerlink" title="计算子序列和的问题"></a>计算子序列和的问题</h2><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给出一个数组，和一个目标数字，找出有多少种子序列的和为目标数字<br>相关问题:<br><a href="https://leetcode.com/problems/target-sum/" target="_blank" rel="external">target sum</a><br><a href="https://leetcode.com/problems/partition-equal-subset-sum/" target="_blank" rel="external">Partition Equal Subset Sum</a><br><a href="https://leetcode.com/problems/coin-change/?tab=Description" target="_blank" rel="external">Coin Change</a></p>
 <h3 id="解题方法"><a href="#解题方法" class="headerlink" title="解题方法"></a>解题方法</h3><p>使用动态规划，假如数组为nums, 目标和为target,首先确立状态，这里以dp[i]表示和为i的nums子数组的个数。接下来确定状态转移，假如现在有数字num,和所有以小于i的数为目标的组合数，则dp[i] = dp[i] + dp[i-num]</p>
@@ -1905,12 +1919,14 @@ case: j - i = 2, 即有三个可能取值，当最开始选i时，最大损失�
     
     </summary>
     
+      <category term="algorithm" scheme="http://www.wowx.info/categories/algorithm/"/>
     
-      <category term="算法" scheme="http://www.wowx.info/tags/%E7%AE%97%E6%B3%95/"/>
     
       <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
     
       <category term="string" scheme="http://www.wowx.info/tags/string/"/>
+    
+      <category term="algorighm" scheme="http://www.wowx.info/tags/algorighm/"/>
     
   </entry>
   
@@ -1919,7 +1935,7 @@ case: j - i = 2, 即有三个可能取值，当最开始选i时，最大损失�
     <link href="http://www.wowx.info/posts/20170215164353/"/>
     <id>http://www.wowx.info/posts/20170215164353/</id>
     <published>2017-02-15T08:43:53.000Z</published>
-    <updated>2017-02-20T16:49:40.939Z</updated>
+    <updated>2017-03-07T03:16:13.169Z</updated>
     
     <content type="html"><![CDATA[<h1 id="2017-02-25-String-DP-65-494-300-386"><a href="#2017-02-25-String-DP-65-494-300-386" class="headerlink" title="2017-02-25 String DP 65  494 300 386"></a>2017-02-25 String DP 65  494 300 386</h1><h2 id="65-Valid-Number"><a href="#65-Valid-Number" class="headerlink" title="65. Valid Number"></a>65. Valid Number</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
 <p>Validate if a given string is numeric.</p>
@@ -2169,11 +2185,11 @@ import java<span class="token punctuation">.</span>lang<span class="token punctu
     </summary>
     
     
-      <category term="算法" scheme="http://www.wowx.info/tags/%E7%AE%97%E6%B3%95/"/>
-    
       <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
     
       <category term="string" scheme="http://www.wowx.info/tags/string/"/>
+    
+      <category term="algorighm" scheme="http://www.wowx.info/tags/algorighm/"/>
     
   </entry>
   
@@ -2182,7 +2198,7 @@ import java<span class="token punctuation">.</span>lang<span class="token punctu
     <link href="http://www.wowx.info/posts/20170213235935/"/>
     <id>http://www.wowx.info/posts/20170213235935/</id>
     <published>2017-02-14T15:59:35.000Z</published>
-    <updated>2017-02-14T16:21:52.061Z</updated>
+    <updated>2017-03-07T03:15:29.381Z</updated>
     
     <content type="html"><![CDATA[<h1 id="2017-02-13-127-126-115-97"><a href="#2017-02-13-127-126-115-97" class="headerlink" title="2017-02-13 127 126 115 97"></a>2017-02-13 127 126 115 97</h1><h2 id="127-Word-Ladder"><a href="#127-Word-Ladder" class="headerlink" title="127 Word Ladder"></a>127 Word Ladder</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
 <p>Given two words (<em>beginWord</em> and <em>endWord</em>), and a dictionary’s word list, find the length of shortest transformation sequence from <em>beginWord</em> to <em>endWord</em>, such that:</p>
@@ -2507,12 +2523,14 @@ import java<span class="token punctuation">.</span>lang<span class="token punctu
     
     </summary>
     
+      <category term="algorithm" scheme="http://www.wowx.info/categories/algorithm/"/>
     
-      <category term="算法" scheme="http://www.wowx.info/tags/%E7%AE%97%E6%B3%95/"/>
     
       <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
     
       <category term="string" scheme="http://www.wowx.info/tags/string/"/>
+    
+      <category term="algorithm" scheme="http://www.wowx.info/tags/algorithm/"/>
     
   </entry>
   
@@ -2812,7 +2830,7 @@ import java<span class="token punctuation">.</span>lang<span class="token punctu
     <link href="http://www.wowx.info/posts/20170207004639/"/>
     <id>http://www.wowx.info/posts/20170207004639/</id>
     <published>2017-02-06T16:46:39.000Z</published>
-    <updated>2017-02-06T16:48:22.953Z</updated>
+    <updated>2017-03-07T03:15:14.141Z</updated>
     
     <content type="html"><![CDATA[<h2 id="10-Regular-Expression-Matching"><a href="#10-Regular-Expression-Matching" class="headerlink" title="10. Regular Expression Matching"></a>10. Regular Expression Matching</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
 <p>Implement regular expression matching with support for ‘.’ and ‘*’.</p>
@@ -3012,12 +3030,14 @@ import java<span class="token punctuation">.</span>lang<span class="token punctu
     
     </summary>
     
+      <category term="algorithm" scheme="http://www.wowx.info/categories/algorithm/"/>
     
-      <category term="算法" scheme="http://www.wowx.info/tags/%E7%AE%97%E6%B3%95/"/>
     
       <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
     
       <category term="string" scheme="http://www.wowx.info/tags/string/"/>
+    
+      <category term="algorithm" scheme="http://www.wowx.info/tags/algorithm/"/>
     
   </entry>
   
@@ -3026,7 +3046,7 @@ import java<span class="token punctuation">.</span>lang<span class="token punctu
     <link href="http://www.wowx.info/posts/20170131191915/"/>
     <id>http://www.wowx.info/posts/20170131191915/</id>
     <published>2017-01-31T11:19:15.000Z</published>
-    <updated>2017-02-06T11:21:02.742Z</updated>
+    <updated>2017-03-07T03:15:03.885Z</updated>
     
     <content type="html"><![CDATA[<h2 id="91-Decode-Ways"><a href="#91-Decode-Ways" class="headerlink" title="91. Decode Ways"></a>91. Decode Ways</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
 <p>A message containing letters from A-Z is being encoded to numbers using the following mapping:</p>
@@ -3211,12 +3231,14 @@ import java<span class="token punctuation">.</span>lang<span class="token punctu
     
     </summary>
     
+      <category term="algorithm" scheme="http://www.wowx.info/categories/algorithm/"/>
     
-      <category term="算法" scheme="http://www.wowx.info/tags/%E7%AE%97%E6%B3%95/"/>
     
       <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
     
       <category term="string" scheme="http://www.wowx.info/tags/string/"/>
+    
+      <category term="algorithm" scheme="http://www.wowx.info/tags/algorithm/"/>
     
   </entry>
   
@@ -3225,7 +3247,7 @@ import java<span class="token punctuation">.</span>lang<span class="token punctu
     <link href="http://www.wowx.info/posts/20170130233720/"/>
     <id>http://www.wowx.info/posts/20170130233720/</id>
     <published>2017-01-30T17:01:51.000Z</published>
-    <updated>2017-01-30T17:03:56.256Z</updated>
+    <updated>2017-03-07T03:14:54.477Z</updated>
     
     <content type="html"><![CDATA[<h2 id="151-Reverse-Words-in-a-String"><a href="#151-Reverse-Words-in-a-String" class="headerlink" title="151 Reverse Words in a String"></a>151 Reverse Words in a String</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
 <p>Given an input string, reverse the string word by word.</p>
@@ -3375,12 +3397,14 @@ import java<span class="token punctuation">.</span>lang<span class="token punctu
     
     </summary>
     
+      <category term="algorithm" scheme="http://www.wowx.info/categories/algorithm/"/>
     
-      <category term="算法" scheme="http://www.wowx.info/tags/%E7%AE%97%E6%B3%95/"/>
     
       <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
     
       <category term="string" scheme="http://www.wowx.info/tags/string/"/>
+    
+      <category term="algorithm" scheme="http://www.wowx.info/tags/algorithm/"/>
     
   </entry>
   
@@ -3389,7 +3413,7 @@ import java<span class="token punctuation">.</span>lang<span class="token punctu
     <link href="http://www.wowx.info/posts/20170129233720/"/>
     <id>http://www.wowx.info/posts/20170129233720/</id>
     <published>2017-01-29T06:33:12.000Z</published>
-    <updated>2017-01-30T06:36:35.211Z</updated>
+    <updated>2017-03-07T03:14:42.493Z</updated>
     
     <content type="html"><![CDATA[<h2 id="93-Restore-IP-Addresses"><a href="#93-Restore-IP-Addresses" class="headerlink" title="93 Restore IP Addresses"></a>93 Restore IP Addresses</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
 <p>Given a string containing only digits, restore it by returning all possible valid IP address combinations.</p>
@@ -3563,12 +3587,14 @@ import java<span class="token punctuation">.</span>lang<span class="token punctu
     
     </summary>
     
+      <category term="algorithm" scheme="http://www.wowx.info/categories/algorithm/"/>
     
-      <category term="算法" scheme="http://www.wowx.info/tags/%E7%AE%97%E6%B3%95/"/>
     
       <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
     
       <category term="string" scheme="http://www.wowx.info/tags/string/"/>
+    
+      <category term="algorithm" scheme="http://www.wowx.info/tags/algorithm/"/>
     
   </entry>
   
