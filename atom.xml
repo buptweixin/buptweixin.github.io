@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.wowx.info/"/>
-  <updated>2017-03-07T03:17:07.093Z</updated>
+  <updated>2017-03-07T06:11:44.559Z</updated>
   <id>http://www.wowx.info/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://www.wowx.info/posts/20170307094529/"/>
     <id>http://www.wowx.info/posts/20170307094529/</id>
     <published>2017-03-07T01:45:29.000Z</published>
-    <updated>2017-03-07T03:17:07.093Z</updated>
+    <updated>2017-03-07T06:11:44.559Z</updated>
     
     <content type="html"><![CDATA[<h2 id="415-Add-Strings"><a href="#415-Add-Strings" class="headerlink" title="415. Add Strings"></a>415. Add Strings</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
 <p>Given two non-negative integers num1 and num2 represented as string, return the sum of num1 and num2.</p>
@@ -101,13 +101,25 @@
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="530-Minimum-Absolute-Difference-in-BST"><a href="#530-Minimum-Absolute-Difference-in-BST" class="headerlink" title="530. Minimum Absolute Difference in BST"></a>530. Minimum Absolute Difference in BST</h2><h3 id="Problem-Description-3"><a href="#Problem-Description-3" class="headerlink" title="Problem Description"></a>Problem Description</h3><p>Given a binary search tree with non-negative values, find the minimum absolute difference between values of any two nodes.</p>
-<p>Example:</p>
-<p>Input:</p>
-<p>   1<br>    \<br>     3<br>    /<br>   2</p>
-<p>Output:<br>1</p>
-<p>Explanation:<br>The minimum absolute difference is 1, which is the difference between 2 and 1 (or between 2 and 3).<br>Note: There are at least two nodes in this BST.</p>
-<p>给出一颗二叉查找树，找出其中最小的节点值的差值</p>
+<h2 id="530-Minimum-Absolute-Difference-in-BST"><a href="#530-Minimum-Absolute-Difference-in-BST" class="headerlink" title="530. Minimum Absolute Difference in BST"></a>530. Minimum Absolute Difference in BST</h2><h3 id="Problem-Description-3"><a href="#Problem-Description-3" class="headerlink" title="Problem Description"></a>Problem Description</h3><pre><code>Given a binary search tree with non-negative values, find the minimum absolute difference between values of any two nodes.
+
+Example:
+
+Input:
+
+   1
+    \
+     3
+    /
+   2
+
+Output:
+1
+
+Explanation:
+The minimum absolute difference is 1, which is the difference between 2 and 1 (or between 2 and 3).
+Note: There are at least two nodes in this BST.
+</code></pre><p>给出一颗二叉查找树，找出其中最小的节点值的差值</p>
 <h3 id="Method-3"><a href="#Method-3" class="headerlink" title="Method"></a>Method</h3><p>采用中序遍历这棵树，得到的是已经排好序的节点值，将每个节点和之前的节点对比找到最小差值</p>
 <pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">/**
  * Definition for a binary tree node.
@@ -149,13 +161,13 @@
     
       <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
     
+      <category term="algorithm" scheme="http://www.wowx.info/tags/algorithm/"/>
+    
       <category term="math" scheme="http://www.wowx.info/tags/math/"/>
     
       <category term="greedy" scheme="http://www.wowx.info/tags/greedy/"/>
     
       <category term="BST" scheme="http://www.wowx.info/tags/BST/"/>
-    
-      <category term="algorithm" scheme="http://www.wowx.info/tags/algorithm/"/>
     
   </entry>
   
@@ -339,11 +351,11 @@ The two boomerangs are <span class="token punctuation">[</span><span class="toke
     
       <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
     
+      <category term="algorighm" scheme="http://www.wowx.info/tags/algorighm/"/>
+    
       <category term="hashtable" scheme="http://www.wowx.info/tags/hashtable/"/>
     
       <category term="Backtracking" scheme="http://www.wowx.info/tags/Backtracking/"/>
-    
-      <category term="algorighm" scheme="http://www.wowx.info/tags/algorighm/"/>
     
   </entry>
   
@@ -482,9 +494,9 @@ exclude <span class="token operator">=</span> <span class="token function">max</
     
       <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
     
-      <category term="dp" scheme="http://www.wowx.info/tags/dp/"/>
-    
       <category term="algorighm" scheme="http://www.wowx.info/tags/algorighm/"/>
+    
+      <category term="dp" scheme="http://www.wowx.info/tags/dp/"/>
     
   </entry>
   
@@ -1039,9 +1051,9 @@ exclude <span class="token operator">=</span> <span class="token function">max</
     
       <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
     
-      <category term="dp" scheme="http://www.wowx.info/tags/dp/"/>
-    
       <category term="algorighm" scheme="http://www.wowx.info/tags/algorighm/"/>
+    
+      <category term="dp" scheme="http://www.wowx.info/tags/dp/"/>
     
   </entry>
   
@@ -1188,9 +1200,9 @@ exclude <span class="token operator">=</span> <span class="token function">max</
     
       <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
     
-      <category term="dp" scheme="http://www.wowx.info/tags/dp/"/>
-    
       <category term="algorighm" scheme="http://www.wowx.info/tags/algorighm/"/>
+    
+      <category term="dp" scheme="http://www.wowx.info/tags/dp/"/>
     
   </entry>
   
@@ -1309,9 +1321,9 @@ exclude <span class="token operator">=</span> <span class="token function">max</
     
       <category term="string" scheme="http://www.wowx.info/tags/string/"/>
     
-      <category term="dp" scheme="http://www.wowx.info/tags/dp/"/>
-    
       <category term="algorighm" scheme="http://www.wowx.info/tags/algorighm/"/>
+    
+      <category term="dp" scheme="http://www.wowx.info/tags/dp/"/>
     
   </entry>
   
@@ -1435,9 +1447,9 @@ exclude <span class="token operator">=</span> <span class="token function">max</
     
       <category term="string" scheme="http://www.wowx.info/tags/string/"/>
     
-      <category term="dp" scheme="http://www.wowx.info/tags/dp/"/>
-    
       <category term="algorighm" scheme="http://www.wowx.info/tags/algorighm/"/>
+    
+      <category term="dp" scheme="http://www.wowx.info/tags/dp/"/>
     
   </entry>
   
