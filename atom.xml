@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.wowx.info/"/>
-  <updated>2017-03-07T02:39:40.669Z</updated>
+  <updated>2017-03-07T03:12:20.845Z</updated>
   <id>http://www.wowx.info/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>LeetCode 415[Math] 453[Math] 455[Greedy]</title>
+    <title>LeetCode 415[Math] 453[Math] 455[Greedy] 530[BST]</title>
     <link href="http://www.wowx.info/posts/20170307094529/"/>
     <id>http://www.wowx.info/posts/20170307094529/</id>
     <published>2017-03-07T01:45:29.000Z</published>
-    <updated>2017-03-07T02:39:40.669Z</updated>
+    <updated>2017-03-07T03:12:20.845Z</updated>
     
     <content type="html"><![CDATA[<h2 id="415-Add-Strings"><a href="#415-Add-Strings" class="headerlink" title="415. Add Strings"></a>415. Add Strings</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
 <p>Given two non-negative integers num1 and num2 represented as string, return the sum of num1 and num2.</p>
@@ -101,6 +101,41 @@
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="530-Minimum-Absolute-Difference-in-BST"><a href="#530-Minimum-Absolute-Difference-in-BST" class="headerlink" title="530. Minimum Absolute Difference in BST"></a>530. Minimum Absolute Difference in BST</h2><h3 id="Problem-Description-3"><a href="#Problem-Description-3" class="headerlink" title="Problem Description"></a>Problem Description</h3><p>Given a binary search tree with non-negative values, find the minimum absolute difference between values of any two nodes.</p>
+<p>Example:</p>
+<p>Input:</p>
+<p>   1<br>    \<br>     3<br>    /<br>   2</p>
+<p>Output:<br>1</p>
+<p>Explanation:<br>The minimum absolute difference is 1, which is the difference between 2 and 1 (or between 2 and 3).<br>Note: There are at least two nodes in this BST.</p>
+<p>给出一颗二叉查找树，找出其中最小的节点值的差值</p>
+<h3 id="Method-3"><a href="#Method-3" class="headerlink" title="Method"></a>Method</h3><p>采用中序遍历这棵树，得到的是已经排好序的节点值，将每个节点和之前的节点对比找到最小差值</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */</span>
+<span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
+<span class="token keyword">private</span><span class="token operator">:</span>
+    <span class="token keyword">int</span> min_val <span class="token operator">=</span> INT_MAX<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> pre <span class="token operator">=</span> INT_MIN<span class="token punctuation">;</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">int</span> <span class="token function">getMinimumDifference</span><span class="token punctuation">(</span>TreeNode<span class="token operator">*</span> root<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>root <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+            <span class="token keyword">return</span> min_val<span class="token punctuation">;</span>
+        <span class="token function">getMinimumDifference</span><span class="token punctuation">(</span>root<span class="token operator">-</span><span class="token operator">></span>left<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>pre <span class="token operator">></span> INT_MIN<span class="token punctuation">)</span>
+            min_val <span class="token operator">=</span> <span class="token function">min</span><span class="token punctuation">(</span>min_val<span class="token punctuation">,</span> root<span class="token operator">-</span><span class="token operator">></span>val <span class="token operator">-</span> pre<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        pre <span class="token operator">=</span> root<span class="token operator">-</span><span class="token operator">></span>val<span class="token punctuation">;</span>
+        <span class="token function">getMinimumDifference</span><span class="token punctuation">(</span>root<span class="token operator">-</span><span class="token operator">></span>right<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> min_val<span class="token punctuation">;</span>
+
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 ]]></content>
     
     <summary type="html">
@@ -117,6 +152,8 @@
       <category term="math" scheme="http://www.wowx.info/tags/math/"/>
     
       <category term="greedy" scheme="http://www.wowx.info/tags/greedy/"/>
+    
+      <category term="BST" scheme="http://www.wowx.info/tags/BST/"/>
     
   </entry>
   

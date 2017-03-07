@@ -10,7 +10,7 @@
     
     <title>
         
-            LeetCode 415[Math] 453[Math] 455[Greedy] | 
+            LeetCode 415[Math] 453[Math] 455[Greedy] 530[BST] | 
         
         野原圆长的Blog
     </title>
@@ -27,7 +27,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="Xin Wei">
     <meta name="description" content="null">
-    <meta name="keywords" content="Blog deep_learging,算法,cpp,math,greedy">
+    <meta name="keywords" content="Blog deep_learging,算法,cpp,math,greedy,BST">
 
     <!--iOS -->
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -48,9 +48,9 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="http://www.wowx.info">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="LeetCode 415[Math] 453[Math] 455[Greedy] | 野原圆长的Blog">
+    <meta property="og:title" content="LeetCode 415[Math] 453[Math] 455[Greedy] 530[BST] | 野原圆长的Blog">
     <meta property="og:description" content="null">
-    <meta property="og:article:tag" content="算法"> <meta property="og:article:tag" content="cpp"> <meta property="og:article:tag" content="math"> <meta property="og:article:tag" content="greedy"> 
+    <meta property="og:article:tag" content="算法"> <meta property="og:article:tag" content="cpp"> <meta property="og:article:tag" content="math"> <meta property="og:article:tag" content="greedy"> <meta property="og:article:tag" content="BST"> 
 
     <!--[if lte IE 9]>
         <link rel="stylesheet" href="/css/ie-blocker.css">
@@ -235,7 +235,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#415-Add-Strings"><span class="post-toc-number">1.</span> <span class="post-toc-text">415. Add Strings</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Problem-Description"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Problem Description</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Method"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Method</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#453-Mininum-Moves-to-Equal-Array-Elements"><span class="post-toc-number">2.</span> <span class="post-toc-text">453. Mininum Moves to Equal Array Elements</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Problem-Description-1"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">Problem Description</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Method-1"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">Method</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#455-Assign-Cookies"><span class="post-toc-number">3.</span> <span class="post-toc-text">455. Assign Cookies</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Problem-Description-2"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">Problem Description</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Method-2"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">Method</span></a></li></ol></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#415-Add-Strings"><span class="post-toc-number">1.</span> <span class="post-toc-text">415. Add Strings</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Problem-Description"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Problem Description</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Method"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Method</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#453-Mininum-Moves-to-Equal-Array-Elements"><span class="post-toc-number">2.</span> <span class="post-toc-text">453. Mininum Moves to Equal Array Elements</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Problem-Description-1"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">Problem Description</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Method-1"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">Method</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#455-Assign-Cookies"><span class="post-toc-number">3.</span> <span class="post-toc-text">455. Assign Cookies</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Problem-Description-2"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">Problem Description</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Method-2"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">Method</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#530-Minimum-Absolute-Difference-in-BST"><span class="post-toc-number">4.</span> <span class="post-toc-text">530. Minimum Absolute Difference in BST</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Problem-Description-3"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">Problem Description</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Method-3"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">Method</span></a></li></ol></li></ol>
 
         <!--
         <li class="mdl-menu__item">
@@ -263,7 +263,7 @@
         <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(http://ww4.sinaimg.cn/large/6425ef91jw1f9apllc7boj20ic0960v9.jpg)">
     
             <p class="article-headline-p">
-                LeetCode 415[Math] 453[Math] 455[Greedy]
+                LeetCode 415[Math] 453[Math] 455[Greedy] 530[BST]
             </p>
         </div>
 
@@ -306,7 +306,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/cpp/">cpp</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/greedy/">greedy</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/math/">math</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/算法/">算法</a>
+        <a class="post_tag-link" href="/tags/BST/">BST</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/cpp/">cpp</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/greedy/">greedy</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/math/">math</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/算法/">算法</a>
     </ul>
     
 
@@ -320,7 +320,7 @@
     <!-- Leancloud Views -->
         <a class="post_share-link" href="#">
             <li class="mdl-menu__item">
-                <span id="/posts/20170307094529/" class="leancloud-views_num" data-flag-title="LeetCode 415[Math] 453[Math] 455[Greedy]">
+                <span id="/posts/20170307094529/" class="leancloud-views_num" data-flag-title="LeetCode 415[Math] 453[Math] 455[Greedy] 530[BST]">
      &nbsp;浏览量
 </span>
 
@@ -332,7 +332,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=LeetCode 415[Math] 453[Math] 455[Greedy]&url=http://www.wowx.info//posts/20170307094529/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=LeetCode 415[Math] 453[Math] 455[Greedy] 530[BST]&url=http://www.wowx.info//posts/20170307094529/index.html&pic=&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 分享到微博
             </li>
@@ -341,7 +341,7 @@
 
     <!-- Share Twitter -->
     
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=LeetCode 415[Math] 453[Math] 455[Greedy]&url=http://www.wowx.info//posts/20170307094529/index.html&via=Xin Wei" target="_blank">
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=LeetCode 415[Math] 453[Math] 455[Greedy] 530[BST]&url=http://www.wowx.info//posts/20170307094529/index.html&via=Xin Wei" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Twitter
             </li>
@@ -462,6 +462,41 @@
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="530-Minimum-Absolute-Difference-in-BST"><a href="#530-Minimum-Absolute-Difference-in-BST" class="headerlink" title="530. Minimum Absolute Difference in BST"></a>530. Minimum Absolute Difference in BST</h2><h3 id="Problem-Description-3"><a href="#Problem-Description-3" class="headerlink" title="Problem Description"></a>Problem Description</h3><p>Given a binary search tree with non-negative values, find the minimum absolute difference between values of any two nodes.</p>
+<p>Example:</p>
+<p>Input:</p>
+<p>   1<br>    \<br>     3<br>    /<br>   2</p>
+<p>Output:<br>1</p>
+<p>Explanation:<br>The minimum absolute difference is 1, which is the difference between 2 and 1 (or between 2 and 3).<br>Note: There are at least two nodes in this BST.</p>
+<p>给出一颗二叉查找树，找出其中最小的节点值的差值</p>
+<h3 id="Method-3"><a href="#Method-3" class="headerlink" title="Method"></a>Method</h3><p>采用中序遍历这棵树，得到的是已经排好序的节点值，将每个节点和之前的节点对比找到最小差值</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */</span>
+<span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
+<span class="token keyword">private</span><span class="token operator">:</span>
+    <span class="token keyword">int</span> min_val <span class="token operator">=</span> INT_MAX<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> pre <span class="token operator">=</span> INT_MIN<span class="token punctuation">;</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">int</span> <span class="token function">getMinimumDifference</span><span class="token punctuation">(</span>TreeNode<span class="token operator">*</span> root<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>root <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+            <span class="token keyword">return</span> min_val<span class="token punctuation">;</span>
+        <span class="token function">getMinimumDifference</span><span class="token punctuation">(</span>root<span class="token operator">-</span><span class="token operator">></span>left<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>pre <span class="token operator">></span> INT_MIN<span class="token punctuation">)</span>
+            min_val <span class="token operator">=</span> <span class="token function">min</span><span class="token punctuation">(</span>min_val<span class="token punctuation">,</span> root<span class="token operator">-</span><span class="token operator">></span>val <span class="token operator">-</span> pre<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        pre <span class="token operator">=</span> root<span class="token operator">-</span><span class="token operator">></span>val<span class="token punctuation">;</span>
+        <span class="token function">getMinimumDifference</span><span class="token punctuation">(</span>root<span class="token operator">-</span><span class="token operator">></span>right<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> min_val<span class="token punctuation">;</span>
+
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
     
 
@@ -492,7 +527,7 @@
     <div class="ds-thread"
         data-thread-key="posts/20170307094529/"
         data-url="http://www.wowx.info/posts/20170307094529/"
-        data-title="LeetCode 415[Math] 453[Math] 455[Greedy]">
+        data-title="LeetCode 415[Math] 453[Math] 455[Greedy] 530[BST]">
     </div>
     <!-- 多说评论框 end -->
 </div>
