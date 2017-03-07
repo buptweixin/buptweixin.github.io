@@ -10,7 +10,7 @@
     
     <title>
         
-            LeetCode 415[Math] 453[Math] | 
+            LeetCode 415[Math] 453[Math] 455[Greedy] | 
         
         野原圆长的Blog
     </title>
@@ -27,7 +27,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="Xin Wei">
     <meta name="description" content="null">
-    <meta name="keywords" content="Blog deep_learging,算法,cpp,math">
+    <meta name="keywords" content="Blog deep_learging,算法,cpp,math,greedy">
 
     <!--iOS -->
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -48,9 +48,9 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="http://www.wowx.info">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="LeetCode 415[Math] 453[Math] | 野原圆长的Blog">
+    <meta property="og:title" content="LeetCode 415[Math] 453[Math] 455[Greedy] | 野原圆长的Blog">
     <meta property="og:description" content="null">
-    <meta property="og:article:tag" content="算法"> <meta property="og:article:tag" content="cpp"> <meta property="og:article:tag" content="math"> 
+    <meta property="og:article:tag" content="算法"> <meta property="og:article:tag" content="cpp"> <meta property="og:article:tag" content="math"> <meta property="og:article:tag" content="greedy"> 
 
     <!--[if lte IE 9]>
         <link rel="stylesheet" href="/css/ie-blocker.css">
@@ -235,7 +235,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#415-Add-Strings"><span class="post-toc-number">1.</span> <span class="post-toc-text">415. Add Strings</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Problem-Description"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Problem Description</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Method"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Method</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#453-Mininum-Moves-to-Equal-Array-Elements"><span class="post-toc-number">2.</span> <span class="post-toc-text">453. Mininum Moves to Equal Array Elements</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Problem-Description-1"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">Problem Description</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Method-1"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">Method</span></a></li></ol></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#415-Add-Strings"><span class="post-toc-number">1.</span> <span class="post-toc-text">415. Add Strings</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Problem-Description"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Problem Description</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Method"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Method</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#453-Mininum-Moves-to-Equal-Array-Elements"><span class="post-toc-number">2.</span> <span class="post-toc-text">453. Mininum Moves to Equal Array Elements</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Problem-Description-1"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">Problem Description</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Method-1"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">Method</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#455-Assign-Cookies"><span class="post-toc-number">3.</span> <span class="post-toc-text">455. Assign Cookies</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Problem-Description-2"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">Problem Description</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Method-2"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">Method</span></a></li></ol></li></ol>
 
         <!--
         <li class="mdl-menu__item">
@@ -263,7 +263,7 @@
         <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(http://ww4.sinaimg.cn/large/6425ef91jw1f9apllc7boj20ic0960v9.jpg)">
     
             <p class="article-headline-p">
-                LeetCode 415[Math] 453[Math]
+                LeetCode 415[Math] 453[Math] 455[Greedy]
             </p>
         </div>
 
@@ -306,7 +306,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/cpp/">cpp</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/math/">math</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/算法/">算法</a>
+        <a class="post_tag-link" href="/tags/cpp/">cpp</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/greedy/">greedy</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/math/">math</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/算法/">算法</a>
     </ul>
     
 
@@ -320,7 +320,7 @@
     <!-- Leancloud Views -->
         <a class="post_share-link" href="#">
             <li class="mdl-menu__item">
-                <span id="/posts/20170307094529/" class="leancloud-views_num" data-flag-title="LeetCode 415[Math] 453[Math]">
+                <span id="/posts/20170307094529/" class="leancloud-views_num" data-flag-title="LeetCode 415[Math] 453[Math] 455[Greedy]">
      &nbsp;浏览量
 </span>
 
@@ -332,7 +332,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=LeetCode 415[Math] 453[Math]&url=http://www.wowx.info//posts/20170307094529/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=LeetCode 415[Math] 453[Math] 455[Greedy]&url=http://www.wowx.info//posts/20170307094529/index.html&pic=&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 分享到微博
             </li>
@@ -341,7 +341,7 @@
 
     <!-- Share Twitter -->
     
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=LeetCode 415[Math] 453[Math]&url=http://www.wowx.info//posts/20170307094529/index.html&via=Xin Wei" target="_blank">
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=LeetCode 415[Math] 453[Math] 455[Greedy]&url=http://www.wowx.info//posts/20170307094529/index.html&via=Xin Wei" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Twitter
             </li>
@@ -434,6 +434,34 @@
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="455-Assign-Cookies"><a href="#455-Assign-Cookies" class="headerlink" title="455. Assign Cookies"></a>455. Assign Cookies</h2><h3 id="Problem-Description-2"><a href="#Problem-Description-2" class="headerlink" title="Problem Description"></a>Problem Description</h3><p>Assume you are an aw&gt;esome parent and want to give your children some cookies. But, you should give each child at most one cookie. Each child i has a greed factor gi, which is the minimum size of a cookie that the child will be content with; and each cookie j has a size sj. If sj &gt;= gi, we can assign the cookie j to the child i, and the child i will be content. Your goal is to maximize the number of your content children and output the maximum number.<br>&gt;</p>
+<blockquote>
+<p>Note:<br>You may assume the greed factor is always positive.<br>You cannot assign more than one cookie to one child.</p>
+<p>Example 1:<br>Input: [1,2,3], [1,1]</p>
+<p>Output: 1</p>
+<p>Explanation: You have 3 children and 2 cookies. The greed factors of 3 children are 1, 2, 3.<br>And even though you have 2 cookies, since their size is both 1, you could only make the child whose greed factor is 1 content.<br>You need to output 1.<br>Example 2:<br>Input: [1,2], [1,2,3]</p>
+<p>Output: 2</p>
+<p>Explanation: You have 2 children and 3 cookies. The greed factors of 2 children are 1, 2.<br>You have 3 cookies and their sizes are big enough to gratify all of the children,<br>You need to output 2.</p>
+</blockquote>
+<p>假设你有g个孩子和s个饼干，每个饼干的尺寸为$s_i$, 若孩子分到的饼干尺寸大于$g_i$时它将知足，每个孩子最多分配到1个饼干，求最多能让多少孩子满意。</p>
+<h3 id="Method-2"><a href="#Method-2" class="headerlink" title="Method"></a>Method</h3><p>使用贪心算法，尽量以最小的饼干满足孩子</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">int</span> <span class="token function">findContentChildren</span><span class="token punctuation">(</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token operator">&amp;</span> g<span class="token punctuation">,</span> vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token operator">&amp;</span> s<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">sort</span><span class="token punctuation">(</span>g<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> g<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">sort</span><span class="token punctuation">(</span>s<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> s<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> sum <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>i <span class="token operator">&lt;</span> g<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">and</span> j <span class="token operator">&lt;</span> s<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            sum <span class="token operator">+</span><span class="token operator">=</span> s<span class="token punctuation">[</span>j<span class="token operator">++</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>g<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">&lt;=</span> sum<span class="token punctuation">)</span>
+                i<span class="token operator">++</span><span class="token punctuation">;</span>
+            sum <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> i<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
     
 
@@ -464,7 +492,7 @@
     <div class="ds-thread"
         data-thread-key="posts/20170307094529/"
         data-url="http://www.wowx.info/posts/20170307094529/"
-        data-title="LeetCode 415[Math] 453[Math]">
+        data-title="LeetCode 415[Math] 453[Math] 455[Greedy]">
     </div>
     <!-- 多说评论框 end -->
 </div>
