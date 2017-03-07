@@ -192,112 +192,8 @@
 
 
     
-        <body id="scheme-Isolation" class="lazy">
+        <body id="scheme-paradox" class="lazy">
             <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="material-layout  mdl-js-layout has-drawer is-upgraded">
-                
-                    <!-- Isolation Header -->
-                    <header class="header">
-    <div class="header-wrapper">
-        <!-- Header Copyright -->
-        <div class="header-copyright">
-            <div class="header-site">
-                ©&nbsp;
-                <script type="text/javascript">
-                    var fd = new Date();
-                    document.write(fd.getFullYear());
-                </script>
-                &nbsp;野原圆长的Blog
-            </div>
-            <!--
-            I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright.
-            It will not impact the appearance and can give developers a lot of support :)
-
-            很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
-            它不会影响美观并可以给开发者很大的支持。 :)
-            -->
-            <div>
-                Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a>
-                <br>
-                Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a>
-            </div>
-        </div>
-
-        <!-- Header Title -->
-        <span class="header-title header-item">
-            <a href="/" title="野原圆长的Blog">
-                野原圆长的Blog
-            </a>
-        </span>
-
-        <p class="header-slogan header-item">
-            Hi, nice to meet you
-        </p>
-
-        <!-- Header Nav -->
-        <nav class="header-nav header-item">
-            <span class="header-nav-item">
-                <a href="/" title="Home">
-                    <span>主页</span>
-                </a>
-            </span>
-
-          <!-- Independent Pages -->
-          
-        </nav>
-
-        <!-- Header SNS -->
-        <div class="header-item header-sns_list">
-    <!-- Twitter -->
-    
-        <a href="https://twitter.com/twitter" target="_blank">
-            <i class="fa fa-twitter fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- Facebook -->
-    
-        <a href="https://www.facebook.com/facebook" target="_blank">
-            <i class="fa fa-facebook fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- Google + -->
-    
-        <a href="https://www.google.com/" target="_blank">
-            <i class="fa fa-google-plus fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- Weibo -->
-    
-        <a href="http://weibo.com/buptweixin" target="_blank">
-            <i class="fa fa-weibo fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- Instagram -->
-    
-
-    <!-- Tumblr -->
-    
-
-    <!-- Github -->
-    
-        <a href="https://github.com/buptweixin" target="_blank">
-            <i class="fa fa-github fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- LinkedIn -->
-    
-
-    <!-- Telegram -->
-    
-</div>
-
-    </div>
-</header>
-
                 
 
                 <!-- Main Container -->
@@ -326,21 +222,6 @@
                 
 
 
-    <!-- Isolation Post Header -->
-    <!-- Post thumbnail -->
-    
-        <!-- Post Header Info -->
-        <div class="post-header_info without-thumbnail">
-            <!-- Author Avatar & Name -->
-            <img src="/img/avatar.png" class="avatar-img" width="44px" height="44px" alt="Xin Wei's avatar">
-            <span class="name-span">Xin Wei</span>
-        </div>
-
-        <!-- Null Thumbnail -->
-        <div class="post_thumbnail-null">
-    
-        </div>
-
 
 
                 
@@ -350,27 +231,9 @@
     
 
     
-        <div class="post-content_wrapper">
-            <p class="post-title">
-                机器学习笔记1_3 广义线性模型(GLM, Generalized Linear Models)
-            </p>
-            <p><img src="http://img2.imgtn.bdimg.com/it/u=4288980725,4019769355&amp;fm=21&amp;gp=0.jpg" alt=""><br><a id="more"></a><br>这一节我们粗略了解一下广义线性模型,广义线性模型是一个很重要的机器学习模型，许多我们熟知都模型都源自于它，比如最大熵模型、逻辑回归和softmax等。</p>
-<h1 id="广义线性模型"><a href="#广义线性模型" class="headerlink" title="广义线性模型"></a>广义线性模型</h1><ol>
-<li>形式：<br> <img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/29689208.jpg" alt=""><br> $\eta$称为自然参数(natural parameter), T(y)是充分统计量（通常T(y)=y）,$a(\eta)$称为log partition function，上式中$e^{-a(\eta)}$作为归一化参数。通过改变$\eta$可以得到不同的分布<ul>
-<li>伯努利分布（对应逻辑回归）：<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/87755533.jpg" alt=""><br>上式中$\eta=log(\frac{\phi}{1-\phi})$,有趣的是，如果我们反解出$\phi$会得到$\phi=\frac{1}{1+e^{-\eta}}$,正好是sigmoid函数<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/41184129.jpg" alt=""></li>
-<li>高斯分布(对应线性回归)<br>为了简便起见，令$\sigma^2=1$得到<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/3441285.jpg" alt=""><br>其中：<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/7657473.jpg" alt=""></li>
-</ul>
-</li>
-</ol>
-
-        </div>
-    
 </div>
 
 
-                
-                    <!-- Paradox Post Info -->
-                    
                 
 
                 <!-- Post Comments -->

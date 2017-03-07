@@ -192,112 +192,8 @@
 
 
     
-        <body id="scheme-Isolation" class="lazy">
+        <body id="scheme-paradox" class="lazy">
             <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="material-layout  mdl-js-layout has-drawer is-upgraded">
-                
-                    <!-- Isolation Header -->
-                    <header class="header">
-    <div class="header-wrapper">
-        <!-- Header Copyright -->
-        <div class="header-copyright">
-            <div class="header-site">
-                ©&nbsp;
-                <script type="text/javascript">
-                    var fd = new Date();
-                    document.write(fd.getFullYear());
-                </script>
-                &nbsp;野原圆长的Blog
-            </div>
-            <!--
-            I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright.
-            It will not impact the appearance and can give developers a lot of support :)
-
-            很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
-            它不会影响美观并可以给开发者很大的支持。 :)
-            -->
-            <div>
-                Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a>
-                <br>
-                Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a>
-            </div>
-        </div>
-
-        <!-- Header Title -->
-        <span class="header-title header-item">
-            <a href="/" title="野原圆长的Blog">
-                野原圆长的Blog
-            </a>
-        </span>
-
-        <p class="header-slogan header-item">
-            Hi, nice to meet you
-        </p>
-
-        <!-- Header Nav -->
-        <nav class="header-nav header-item">
-            <span class="header-nav-item">
-                <a href="/" title="Home">
-                    <span>主页</span>
-                </a>
-            </span>
-
-          <!-- Independent Pages -->
-          
-        </nav>
-
-        <!-- Header SNS -->
-        <div class="header-item header-sns_list">
-    <!-- Twitter -->
-    
-        <a href="https://twitter.com/twitter" target="_blank">
-            <i class="fa fa-twitter fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- Facebook -->
-    
-        <a href="https://www.facebook.com/facebook" target="_blank">
-            <i class="fa fa-facebook fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- Google + -->
-    
-        <a href="https://www.google.com/" target="_blank">
-            <i class="fa fa-google-plus fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- Weibo -->
-    
-        <a href="http://weibo.com/buptweixin" target="_blank">
-            <i class="fa fa-weibo fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- Instagram -->
-    
-
-    <!-- Tumblr -->
-    
-
-    <!-- Github -->
-    
-        <a href="https://github.com/buptweixin" target="_blank">
-            <i class="fa fa-github fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- LinkedIn -->
-    
-
-    <!-- Telegram -->
-    
-</div>
-
-    </div>
-</header>
-
                 
 
                 <!-- Main Container -->
@@ -326,21 +222,6 @@
                 
 
 
-    <!-- Isolation Post Header -->
-    <!-- Post thumbnail -->
-    
-        <!-- Post Header Info -->
-        <div class="post-header_info without-thumbnail">
-            <!-- Author Avatar & Name -->
-            <img src="/img/avatar.png" class="avatar-img" width="44px" height="44px" alt="Xin Wei's avatar">
-            <span class="name-span">Xin Wei</span>
-        </div>
-
-        <!-- Null Thumbnail -->
-        <div class="post_thumbnail-null">
-    
-        </div>
-
 
 
                 
@@ -350,51 +231,9 @@
     
 
     
-        <div class="post-content_wrapper">
-            <p class="post-title">
-                C++ 中的四种类型转换
-            </p>
-            <p><img src="http://ww3.sinaimg.cn/large/6425ef91jw1f9aa7pkr9wj20e80e8t97.jpg" width="420px"><br><a id="more"></a></p>
-<h2 id="static-cast-静态类型转换"><a href="#static-cast-静态类型转换" class="headerlink" title="static_cast 静态类型转换"></a>static_cast 静态类型转换</h2><p>用语言内建的规则(如<code>int</code> 转为<code>float</code>，<code>char*</code>转为<code>string</code>等)或程序员定义的操作(如类中单参数的构造函数实现的隐式转换)转换一个对象：</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">float</span> x<span class="token punctuation">;</span>
-<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-cout <span class="token operator">&lt;&lt;</span> <span class="token keyword">static_cast</span><span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// print x as int</span>
-<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-<span class="token function">f</span><span class="token punctuation">(</span><span class="token keyword">static_cast</span><span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token string">"hello"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//使用string而不是char*调用f()</span>
-
-<span class="token keyword">class</span> <span class="token class-name">Stack</span> <span class="token punctuation">{</span>
-  <span class="token keyword">explicit</span> <span class="token function">Stack</span><span class="token punctuation">(</span><span class="token keyword">int</span> Size<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span class="token keyword">static_cast</span><span class="token operator">&lt;</span>Stack<span class="token operator">></span><span class="token punctuation">(</span><span class="token number">32</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//强制类型转换</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="dynamic-cast-动态类型转换"><a href="#dynamic-cast-动态类型转换" class="headerlink" title="dynamic_cast 动态类型转换"></a>dynamic_cast 动态类型转换</h2><p>将多态类别向下转换为其实际的静态类别（父类转换为具体子类），在四种转换中，它是唯一在执行期间进行检查的转换动作。</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Class</span><span class="token punctuation">;</span>
-<span class="token keyword">class</span> <span class="token class-name">Cabriolet</span><span class="token operator">:</span> <span class="token keyword">public</span> Car <span class="token punctuation">{</span>
-  <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span class="token keyword">class</span> <span class="token class-name">Limousine</span><span class="token operator">:</span> <span class="token keyword">public</span> Car <span class="token punctuation">{</span>
-  <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-
-<span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span>Car<span class="token operator">*</span> cp<span class="token punctuation">)</span>
-  <span class="token punctuation">{</span>
-    Cabriolet<span class="token operator">*</span> p <span class="token operator">=</span> <span class="token keyword">dynamic_cast</span><span class="token operator">&lt;</span>Cariolet<span class="token operator">*</span><span class="token operator">></span><span class="token punctuation">(</span>cp<span class="token punctuation">)</span><span class="token punctuation">;</span>
-      <span class="token keyword">if</span> <span class="token punctuation">(</span>p <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-      <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-      <span class="token punctuation">}</span>
-  <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="const-cast"><a href="#const-cast" class="headerlink" title="const_cast"></a>const_cast</h2><p>去除对象的常数(<code>const</code>)性或<code>volatile</code>性</p>
-<h2 id="reinterpret-cast"><a href="#reinterpret-cast" class="headerlink" title="reinterpret_cast"></a>reinterpret_cast</h2><p>具体行为由具体编译器定义，可能重新解释<code>bits</code>的意义，使用这种转换操作会使得程序不可移植。</p>
-
-        </div>
-    
 </div>
 
 
-                
-                    <!-- Paradox Post Info -->
-                    
                 
 
                 <!-- Post Comments -->

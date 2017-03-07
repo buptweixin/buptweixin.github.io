@@ -192,112 +192,8 @@
 
 
     
-        <body id="scheme-Isolation" class="lazy">
+        <body id="scheme-paradox" class="lazy">
             <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="material-layout  mdl-js-layout has-drawer is-upgraded">
-                
-                    <!-- Isolation Header -->
-                    <header class="header">
-    <div class="header-wrapper">
-        <!-- Header Copyright -->
-        <div class="header-copyright">
-            <div class="header-site">
-                ©&nbsp;
-                <script type="text/javascript">
-                    var fd = new Date();
-                    document.write(fd.getFullYear());
-                </script>
-                &nbsp;野原圆长的Blog
-            </div>
-            <!--
-            I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright.
-            It will not impact the appearance and can give developers a lot of support :)
-
-            很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
-            它不会影响美观并可以给开发者很大的支持。 :)
-            -->
-            <div>
-                Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a>
-                <br>
-                Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a>
-            </div>
-        </div>
-
-        <!-- Header Title -->
-        <span class="header-title header-item">
-            <a href="/" title="野原圆长的Blog">
-                野原圆长的Blog
-            </a>
-        </span>
-
-        <p class="header-slogan header-item">
-            Hi, nice to meet you
-        </p>
-
-        <!-- Header Nav -->
-        <nav class="header-nav header-item">
-            <span class="header-nav-item">
-                <a href="/" title="Home">
-                    <span>主页</span>
-                </a>
-            </span>
-
-          <!-- Independent Pages -->
-          
-        </nav>
-
-        <!-- Header SNS -->
-        <div class="header-item header-sns_list">
-    <!-- Twitter -->
-    
-        <a href="https://twitter.com/twitter" target="_blank">
-            <i class="fa fa-twitter fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- Facebook -->
-    
-        <a href="https://www.facebook.com/facebook" target="_blank">
-            <i class="fa fa-facebook fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- Google + -->
-    
-        <a href="https://www.google.com/" target="_blank">
-            <i class="fa fa-google-plus fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- Weibo -->
-    
-        <a href="http://weibo.com/buptweixin" target="_blank">
-            <i class="fa fa-weibo fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- Instagram -->
-    
-
-    <!-- Tumblr -->
-    
-
-    <!-- Github -->
-    
-        <a href="https://github.com/buptweixin" target="_blank">
-            <i class="fa fa-github fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- LinkedIn -->
-    
-
-    <!-- Telegram -->
-    
-</div>
-
-    </div>
-</header>
-
                 
 
                 <!-- Main Container -->
@@ -326,21 +222,6 @@
                 
 
 
-    <!-- Isolation Post Header -->
-    <!-- Post thumbnail -->
-    
-        <!-- Post Header Info -->
-        <div class="post-header_info without-thumbnail">
-            <!-- Author Avatar & Name -->
-            <img src="/img/avatar.png" class="avatar-img" width="44px" height="44px" alt="Xin Wei's avatar">
-            <span class="name-span">Xin Wei</span>
-        </div>
-
-        <!-- Null Thumbnail -->
-        <div class="post_thumbnail-null">
-    
-        </div>
-
 
 
                 
@@ -350,74 +231,9 @@
     
 
     
-        <div class="post-content_wrapper">
-            <p class="post-title">
-                HIVEQL的简单介绍
-            </p>
-            <p><img src="http://img5.imgtn.bdimg.com/it/u=551134512,989074037&amp;fm=21&amp;gp=0.jpg" alt=""><br><a id="more"></a><br>接下来，我们将一起学习HIVEQL的一些基本用法。</p>
-<ol>
-<li>查询语句<br> <img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-24/57495929.jpg" alt=""><br> 上面两个语句是等价的，只是下面的用到了表的别名。<br> 对于集合类型，Hive会以JSON形式输出，对于数组可以使用<code>name[0]</code>的形式引用，如<br> <img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-24/39017432.jpg" alt=""><br> 同理，对于MAP元素，可以使用<code>map[&#39;name&#39;]</code>引用，可以使用<code>.</code>点符号引用STRUCT类型。</li>
-<li>使用正则表达式指定列<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-24/23990177.jpg" alt=""></li>
-<li>使用列值进行计算<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-24/31216629.jpg" alt=""></li>
-<li>算术运算符<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-24/74512506.jpg" alt=""></li>
-<li><p>内置函数</p>
-<ul>
-<li>数学函数：<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-24/58229227.jpg" alt=""><br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-24/64465194.jpg" alt=""><br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-24/33168214.jpg" alt=""></li>
-<li>聚合函数<br>聚合函数是比较特殊的函数，它们对多行进行计算，然后得到一个结果值，如<br><code>hive &gt; SELECT count(*), avg(salary) FROM employees;</code>计算employees表有多少雇员及平均薪水。，后面讨论<code>GROUP BY</code>时将会看到其他例子。<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-24/69090170.jpg" alt=""><br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-24/78471034.jpg" alt=""><br>可以通过设置<code>SET hive.map.aggr=true</code>来提高聚合的性能。</li>
-<li><p>表生成函数<br>与聚合函数相反，表生成函数，可以将单列扩展成多列或多行.例如，将employees中每行记录的subordinates(下属)字段内容扩展成0个或多个记录行：<code>SELECT explode(subordinates) AS sub FROM employees;</code></p>
-<pre><code> select id, name, explode(address) as address from user_info;
-</code></pre><p>这样做是不对的， <code>UDTF&#39;s are not supported outside the SELECT clause, nor nested in expressions</code></p>
-<p>所以我们需要这样做：</p>
-<pre><code> select id, name, add from user_info ui lateral view explode(ui.address) adtable as add;
-</code></pre><p>当使用表生成函数时,Hive要求使用列别名<br>解析URL：<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-24/58265225.jpg" alt=""><br>内置生成函数：<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-24/28510485.jpg" alt=""></p>
-</li>
-</ul>
-</li>
-<li>其他内置函数<br> <img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-24/33974571.jpg" alt=""><br> <img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-24/64030026.jpg" alt=""><br> <img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-24/29614980.jpg" alt=""><br> <img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-24/52658757.jpg" alt=""><br> <img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-24/19804990.jpg" alt=""></li>
-<li>LIMIT:限制返回的行数<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-24/87202691.jpg" alt=""></li>
-<li>列别名<br>有时候对查询结果进行某些操作后，其与原列已经不同，有必要给其取一个别名<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-24/53881027.jpg" alt=""></li>
-<li>嵌套查询<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-24/71751303.jpg" alt=""><br>可以看出，取别名在嵌套查询中是十分必要的。</li>
-<li>CASE..WHEN…THEN<br>和if语句类似<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-24/58441128.jpg" alt=""></li>
-<li>什么情况Hive可以避免MapReduce<br><code>SELECT * FROM employees;</code><br>这种情况Hive会简单的读取employees对应的存储目录<br>对于过滤条件只是分区字段的情况，也无需MapReduce过程<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-24/23471565.jpg" alt=""><br>记住，设置<code>set hive.exec.mode.local.auto=true</code>到<code>$HOME/.hiverc</code>配置文件中。</li>
-<li>WHERE 语句<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-24/75954485.jpg" alt=""><br>WHERE语句中不能使用别名：<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-24/15886527.jpg" alt=""><br>但是可以通过嵌套查询语句来解决：<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-24/5368270.jpg" alt=""></li>
-<li>谓词操作符<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-24/28868034.jpg" alt=""><br>这些操作符可以用于<code>JOIN...ON</code>和<code>HAVING</code>语句中</li>
-<li>浮点数比较<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-24/35533158.jpg" alt=""><br>为什么会出现0.2? 因为我们定义的deductions为FLOAT型，在IEEE标准中FLOAT其表示为’0.200001’，但Hive中浮点数默认为DOUBLE型，这里的0.2实为<code>0.20000000000000001</code><br>通过强制类型转换解决<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-24/39178325.jpg" alt=""></li>
-<li>LIKE和RLIKE<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-24/78699654.jpg" alt=""><br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-24/54431506.jpg" alt=""></li>
-<li>GROUP BY语句<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-24/99571998.jpg" alt=""></li>
-<li>HAVING语句<br>允许用户通过简单的语法完成原本需要通过查询才能对GROUP BY产生的分组进行条件过滤的任务：<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-24/33956772.jpg" alt=""><br>原本需要如下嵌套查询：<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-24/51198301.jpg" alt=""></li>
-<li><p>JOIN语句<br>Hive只支持等值连接，不支持在ON语句中使用OR</p>
-<ul>
-<li>内连接（INNER JOIN）:只有连接两端都满足条件的行才会保留下来。<br>  <img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-24/67126150.jpg" alt=""></li>
-<li>JOIN优化<br>Hive会假定查询中最后一张表是最大的一张表，在对记录进行连接操作时，它会尝试将其他表缓存起来，然后扫描最后一张表进行计算。因此，用户需要保证连续查询中的表的大小从左到右是依次递增的。<br>也可以通过标记来告诉Hive哪张表最大：<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-24/60371857.jpg" alt=""></li>
-<li>LEFT OUTER JOIN<br>会返回左边表的所有符合WHERE的记录，右边表如果没有符合ON后面条件的记录的话，右边指定表的列的值将会是NULL：<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-24/11462657.jpg" alt=""></li>
-<li><p>LEFT SEMI-JOIN<br>Hive会返回左边表的的记录，前提是其记录对于右边表满足ON语句中的判定条件。<br>Hive不支持<code>IN...EXISTS</code>结构，如：<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-26/50664348.jpg" alt=""><br>但是可以给通过LEFT SEMI JOIN来达到同样效果。</p>
-</li>
-<li><p>RIGHT OUTRT JOIN<br>类似左外连接</p>
-</li>
-<li>OUTER JOIN<br>返回左表和右表的所有行，如果其中一张表没有另一张表对应行，则该行NULL</li>
-<li>笛卡尔积JOIN<br><code>SELECT * FROM stocks JOIN dividends;</code>左边的表的行数，乘以右边的表的行数等于笛卡尔积的大小</li>
-<li>map-side JOIN<br>如果只有一张表是小表，那么在最大表通过mapper的时候将小表完全放到内存中，Hive可以和在内存中小表进行逐一匹配，从而省略常规操作的reduce过程，通过设置<code>set</code>来启动这个优化：<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-24/37197538.jpg" alt=""></li>
-</ul>
-</li>
-<li>ORDER BY 和 SORT BY<br>  <img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-24/42364342.jpg" alt=""></li>
-<li>含有SORT BY的DISTRIBUTE BY</li>
-<li>CLUSTER BY<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-24/89127189.jpg" alt=""></li>
-<li>类型转换：cast函数<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-24/49718994.jpg" alt=""></li>
-<li>抽样查询<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-24/67666766.jpg" alt=""><ul>
-<li>按数据块抽样<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-24/8672572.jpg" alt=""></li>
-</ul>
-</li>
-<li>UNION ALL<br>将两个或多个表进行合并<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-24/950850.jpg" alt=""></li>
-</ol>
-
-        </div>
-    
 </div>
 
 
-                
-                    <!-- Paradox Post Info -->
-                    
                 
 
                 <!-- Post Comments -->

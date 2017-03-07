@@ -192,112 +192,8 @@
 
 
     
-        <body id="scheme-Isolation" class="lazy">
+        <body id="scheme-paradox" class="lazy">
             <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="material-layout  mdl-js-layout has-drawer is-upgraded">
-                
-                    <!-- Isolation Header -->
-                    <header class="header">
-    <div class="header-wrapper">
-        <!-- Header Copyright -->
-        <div class="header-copyright">
-            <div class="header-site">
-                ©&nbsp;
-                <script type="text/javascript">
-                    var fd = new Date();
-                    document.write(fd.getFullYear());
-                </script>
-                &nbsp;野原圆长的Blog
-            </div>
-            <!--
-            I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright.
-            It will not impact the appearance and can give developers a lot of support :)
-
-            很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
-            它不会影响美观并可以给开发者很大的支持。 :)
-            -->
-            <div>
-                Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a>
-                <br>
-                Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a>
-            </div>
-        </div>
-
-        <!-- Header Title -->
-        <span class="header-title header-item">
-            <a href="/" title="野原圆长的Blog">
-                野原圆长的Blog
-            </a>
-        </span>
-
-        <p class="header-slogan header-item">
-            Hi, nice to meet you
-        </p>
-
-        <!-- Header Nav -->
-        <nav class="header-nav header-item">
-            <span class="header-nav-item">
-                <a href="/" title="Home">
-                    <span>主页</span>
-                </a>
-            </span>
-
-          <!-- Independent Pages -->
-          
-        </nav>
-
-        <!-- Header SNS -->
-        <div class="header-item header-sns_list">
-    <!-- Twitter -->
-    
-        <a href="https://twitter.com/twitter" target="_blank">
-            <i class="fa fa-twitter fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- Facebook -->
-    
-        <a href="https://www.facebook.com/facebook" target="_blank">
-            <i class="fa fa-facebook fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- Google + -->
-    
-        <a href="https://www.google.com/" target="_blank">
-            <i class="fa fa-google-plus fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- Weibo -->
-    
-        <a href="http://weibo.com/buptweixin" target="_blank">
-            <i class="fa fa-weibo fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- Instagram -->
-    
-
-    <!-- Tumblr -->
-    
-
-    <!-- Github -->
-    
-        <a href="https://github.com/buptweixin" target="_blank">
-            <i class="fa fa-github fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- LinkedIn -->
-    
-
-    <!-- Telegram -->
-    
-</div>
-
-    </div>
-</header>
-
                 
 
                 <!-- Main Container -->
@@ -326,21 +222,6 @@
                 
 
 
-    <!-- Isolation Post Header -->
-    <!-- Post thumbnail -->
-    
-        <!-- Post Header Info -->
-        <div class="post-header_info without-thumbnail">
-            <!-- Author Avatar & Name -->
-            <img src="/img/avatar.png" class="avatar-img" width="44px" height="44px" alt="Xin Wei's avatar">
-            <span class="name-span">Xin Wei</span>
-        </div>
-
-        <!-- Null Thumbnail -->
-        <div class="post_thumbnail-null">
-    
-        </div>
-
 
 
                 
@@ -350,37 +231,9 @@
     
 
     
-        <div class="post-content_wrapper">
-            <p class="post-title">
-                机器学习算法笔记1_2:分类和逻辑回归(Classification and Logistic regression)
-            </p>
-            <p><img src="http://img2.imgtn.bdimg.com/it/u=4288980725,4019769355&amp;fm=21&amp;gp=0.jpg" alt=""><br><a id="more"></a></p>
-<h1 id="逻辑回归："><a href="#逻辑回归：" class="headerlink" title="逻辑回归："></a>逻辑回归：</h1><p>虽然逻辑回归的名字为<code>回归</code>，实际上它的作用是通过计算不同样本为不同类别的概率来预测其所属的类别，即它是一种分类算法。</p>
-<ol>
-<li><p>形式</p>
-<p> 逻辑回归的形式为：</p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/33256912.jpg" alt=""></p>
-<p>它采用sigmoid函数：$$g(z)=\frac{1}{1+e^{-z}}$$<br>其函数图形如下：<br><img src="http://a.hiphotos.baidu.com/baike/c0%3Dbaike80%2C5%2C5%2C80%2C26/sign=95100fc203087bf469e15fbb93ba3c49/77c6a7efce1b9d16757faae8f2deb48f8d5464fa.jpg" alt=""></p>
-<p>它可以将输入映射为<code>[0,1]</code>区间上的”概率”。<br>sigmoid函数有一个非常好的性质：它的导数形式为$g^\prime(z)=(1-g(z))g(z)$，这样我们可以直接通过$g(z)$求得$g^\prime(z)$。</p>
-</li>
-<li><p>逻辑回归</p>
-<p>假设：<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/3452462.jpg" alt=""><br>即：<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/15493701.jpg" alt=""><br>若有m个样本，则似然函数形式是：<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/46449563.jpg" alt=""><br>对数形式：<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/77798218.jpg" alt=""><br>采用梯度上升法求其最大值<br>求导：<br>  <img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/86076883.jpg" alt=""><br>更新规则为：<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/96742367.jpg" alt=""><br>可以发现，则个规则形式上和LMS更新规则是一样的，然而，他们的分界函数$h_\theta(x)$却完全不相同了（逻辑回归中h(x)是非线性函数）。关于这部分内容在GLM部分解释。<br>注意：若h(x)不是sigmoid函数而是阈值函数：<br>  <img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/48803505.jpg" alt=""><br>  这个算法称为感知学习算法。虽然得到更新准则虽然相似，但与逻辑回归完全不是一个算法了。</p>
-</li>
-<li>另一种最大化似然函数的方法–牛顿逼近法<ul>
-<li>原理：假设我们想得到一个函数的过零点$f(\theta)=0$,可以通过一下方法不断更新$\theta$来得到：<br>  <img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/67155830.jpg" alt=""><br>  其直观解释如下图：<br>  <img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/3954882.jpg" alt=""><br>  给定一个初始点$\theta_0$,如果$f(\theta_0)$和其导数同号说明过零点在初始点左边，否则在初始点右边，将初始点更新过该店的切线的过零点继续上述步骤，得到的切线过零点会不断逼近最终所要求的函数过零点。</li>
-<li>应用： 在逻辑回归中，我们要求似然函数的最大(最小)值，即似然函数导数为0， 因此可以利用牛顿逼近法：<br>  <img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/7125742.jpg" alt=""><br>  由于lr算法中$\theta$是一个向量，上式改写为：<br>  <img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/33301254.jpg" alt=""><br>  其中<strong>H</strong>为Hessian矩阵:<br>  <img src="http://7xkyov.com1.z0.glb.clouddn.com/16-4-15/26633663.jpg" alt=""><br>  牛顿法往往比(批处理)梯度下降法更快收敛。</li>
-</ul>
-</li>
-</ol>
-
-        </div>
-    
 </div>
 
 
-                
-                    <!-- Paradox Post Info -->
-                    
                 
 
                 <!-- Post Comments -->

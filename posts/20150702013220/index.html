@@ -192,112 +192,8 @@
 
 
     
-        <body id="scheme-Isolation" class="lazy">
+        <body id="scheme-paradox" class="lazy">
             <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="material-layout  mdl-js-layout has-drawer is-upgraded">
-                
-                    <!-- Isolation Header -->
-                    <header class="header">
-    <div class="header-wrapper">
-        <!-- Header Copyright -->
-        <div class="header-copyright">
-            <div class="header-site">
-                ©&nbsp;
-                <script type="text/javascript">
-                    var fd = new Date();
-                    document.write(fd.getFullYear());
-                </script>
-                &nbsp;野原圆长的Blog
-            </div>
-            <!--
-            I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright.
-            It will not impact the appearance and can give developers a lot of support :)
-
-            很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
-            它不会影响美观并可以给开发者很大的支持。 :)
-            -->
-            <div>
-                Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a>
-                <br>
-                Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a>
-            </div>
-        </div>
-
-        <!-- Header Title -->
-        <span class="header-title header-item">
-            <a href="/" title="野原圆长的Blog">
-                野原圆长的Blog
-            </a>
-        </span>
-
-        <p class="header-slogan header-item">
-            Hi, nice to meet you
-        </p>
-
-        <!-- Header Nav -->
-        <nav class="header-nav header-item">
-            <span class="header-nav-item">
-                <a href="/" title="Home">
-                    <span>主页</span>
-                </a>
-            </span>
-
-          <!-- Independent Pages -->
-          
-        </nav>
-
-        <!-- Header SNS -->
-        <div class="header-item header-sns_list">
-    <!-- Twitter -->
-    
-        <a href="https://twitter.com/twitter" target="_blank">
-            <i class="fa fa-twitter fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- Facebook -->
-    
-        <a href="https://www.facebook.com/facebook" target="_blank">
-            <i class="fa fa-facebook fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- Google + -->
-    
-        <a href="https://www.google.com/" target="_blank">
-            <i class="fa fa-google-plus fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- Weibo -->
-    
-        <a href="http://weibo.com/buptweixin" target="_blank">
-            <i class="fa fa-weibo fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- Instagram -->
-    
-
-    <!-- Tumblr -->
-    
-
-    <!-- Github -->
-    
-        <a href="https://github.com/buptweixin" target="_blank">
-            <i class="fa fa-github fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- LinkedIn -->
-    
-
-    <!-- Telegram -->
-    
-</div>
-
-    </div>
-</header>
-
                 
 
                 <!-- Main Container -->
@@ -326,21 +222,6 @@
                 
 
 
-    <!-- Isolation Post Header -->
-    <!-- Post thumbnail -->
-    
-        <!-- Post Header Info -->
-        <div class="post-header_info without-thumbnail">
-            <!-- Author Avatar & Name -->
-            <img src="/img/avatar.png" class="avatar-img" width="44px" height="44px" alt="Xin Wei's avatar">
-            <span class="name-span">Xin Wei</span>
-        </div>
-
-        <!-- Null Thumbnail -->
-        <div class="post_thumbnail-null">
-    
-        </div>
-
 
 
                 
@@ -350,91 +231,9 @@
     
 
     
-        <div class="post-content_wrapper">
-            <p class="post-title">
-                C++ primer笔记 -- 标准库--顺序容器
-            </p>
-            <h1 id="SLT-—-顺序容器"><a href="#SLT-—-顺序容器" class="headerlink" title="SLT — 顺序容器"></a>SLT — 顺序容器</h1><ul>
-<li><p>顺序容器</p>
-<p>顺序容器中的顺序与其加入容器的时的位置相对应</p>
-</li>
-<li><p>关联容器</p>
-<p>关联容器中元素的位置由元素相关联的关键字决定</p>
-</li>
-</ul>
-<h2 id="顺序容器概述"><a href="#顺序容器概述" class="headerlink" title="顺序容器概述"></a>顺序容器概述</h2><table>
-<thead>
-<tr>
-<th>容器</th>
-<th>随机访问</th>
-<th>顺序访问</th>
-<th>特点</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>vector</td>
-<td>√</td>
-<td>√</td>
-<td>尾部之外的位置插入或删除可能很慢</td>
-</tr>
-<tr>
-<td>deque</td>
-<td>√</td>
-<td>√</td>
-<td>在头尾位置插入删除很快</td>
-</tr>
-<tr>
-<td>list</td>
-<td>×</td>
-<td>双向</td>
-<td>在任何位置进行插入删除操作速度都很快，额外内存开销很大</td>
-</tr>
-<tr>
-<td>forward_list</td>
-<td>×</td>
-<td>单向</td>
-<td>在链表任何位置删除插入速度都很快，额外内存开销很大，和最好的手写单向列表相当的性能，没有size操作</td>
-</tr>
-<tr>
-<td>array</td>
-<td>√</td>
-<td>√</td>
-<td>不能添加或删除元素</td>
-</tr>
-<tr>
-<td>string</td>
-<td></td>
-<td></td>
-<td>与vector相似，但专门用来保存字符</td>
-</tr>
-</tbody>
-</table>
-<p><strong>每个容器都定义在类型名相同的头文件中，且均为模板类</strong></p>
-<h2 id="选择容器技巧"><a href="#选择容器技巧" class="headerlink" title="选择容器技巧"></a>选择容器技巧</h2><ol>
-<li><strong>通常，选择vector是最好的选择，除非你有很好的理由选择其他容器。</strong></li>
-<li>有很多小元素且空间开销很重要，则<strong>不要使用list或forward_list</strong></li>
-<li>如果要求随机访问，应使用vector或deque</li>
-<li>如果要求在中间插入元素，应该使用list或forward_list</li>
-<li>如果程序需要头尾插入元素但不会从中间插入，则选择deque</li>
-<li>如果程序只有在输入时需要向中间位置插入元素，随后需要随机访问元素，则<ul>
-<li>确定是否真的需要中间插入，比如顺序读入到vector，之后调用sort排序，从而避免中间读入</li>
-<li>必须中间插入时，在输入阶段使用list，输入完成时将list拷贝到vector中</li>
-</ul>
-</li>
-</ol>
-<h2 id="顺序容器操作"><a href="#顺序容器操作" class="headerlink" title="顺序容器操作"></a>顺序容器操作</h2><p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-11-2/23224620.jpg" alt=""></p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-11-2/22762192.jpg" alt=""></p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-11-2/15404661.jpg" alt=""></p>
-
-        </div>
-    
 </div>
 
 
-                
-                    <!-- Paradox Post Info -->
-                    
                 
 
                 <!-- Post Comments -->

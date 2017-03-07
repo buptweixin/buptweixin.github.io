@@ -192,112 +192,8 @@
 
 
     
-        <body id="scheme-Isolation" class="lazy">
+        <body id="scheme-paradox" class="lazy">
             <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="material-layout  mdl-js-layout has-drawer is-upgraded">
-                
-                    <!-- Isolation Header -->
-                    <header class="header">
-    <div class="header-wrapper">
-        <!-- Header Copyright -->
-        <div class="header-copyright">
-            <div class="header-site">
-                ©&nbsp;
-                <script type="text/javascript">
-                    var fd = new Date();
-                    document.write(fd.getFullYear());
-                </script>
-                &nbsp;野原圆长的Blog
-            </div>
-            <!--
-            I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright.
-            It will not impact the appearance and can give developers a lot of support :)
-
-            很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
-            它不会影响美观并可以给开发者很大的支持。 :)
-            -->
-            <div>
-                Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a>
-                <br>
-                Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a>
-            </div>
-        </div>
-
-        <!-- Header Title -->
-        <span class="header-title header-item">
-            <a href="/" title="野原圆长的Blog">
-                野原圆长的Blog
-            </a>
-        </span>
-
-        <p class="header-slogan header-item">
-            Hi, nice to meet you
-        </p>
-
-        <!-- Header Nav -->
-        <nav class="header-nav header-item">
-            <span class="header-nav-item">
-                <a href="/" title="Home">
-                    <span>主页</span>
-                </a>
-            </span>
-
-          <!-- Independent Pages -->
-          
-        </nav>
-
-        <!-- Header SNS -->
-        <div class="header-item header-sns_list">
-    <!-- Twitter -->
-    
-        <a href="https://twitter.com/twitter" target="_blank">
-            <i class="fa fa-twitter fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- Facebook -->
-    
-        <a href="https://www.facebook.com/facebook" target="_blank">
-            <i class="fa fa-facebook fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- Google + -->
-    
-        <a href="https://www.google.com/" target="_blank">
-            <i class="fa fa-google-plus fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- Weibo -->
-    
-        <a href="http://weibo.com/buptweixin" target="_blank">
-            <i class="fa fa-weibo fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- Instagram -->
-    
-
-    <!-- Tumblr -->
-    
-
-    <!-- Github -->
-    
-        <a href="https://github.com/buptweixin" target="_blank">
-            <i class="fa fa-github fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- LinkedIn -->
-    
-
-    <!-- Telegram -->
-    
-</div>
-
-    </div>
-</header>
-
                 
 
                 <!-- Main Container -->
@@ -326,22 +222,6 @@
                 
 
 
-    <!-- Isolation Post Header -->
-    <!-- Post thumbnail -->
-    
-        <!-- Post Header Info -->
-        <div class="post-header_info with-thumbnail">
-            <!-- Author Avatar & Name -->
-            <img src="/img/avatar.png" class="avatar-img" width="44px" height="44px" alt="Xin Wei's avatar">
-            <span class="name-span">Xin Wei</span>
-        </div>
-
-        <!-- Custom thumbnail -->
-        <div class="post_thumbnail-custom">
-            <img src="http://ww4.sinaimg.cn/large/6425ef91jw1f9apllc7boj20ic0960v9.jpg">
-    
-        </div>
-
 
 
                 
@@ -351,56 +231,9 @@
     
 
     
-        <div class="post-content_wrapper">
-            <p class="post-title">
-                leetcode Best Time to Buy and Sell Stock III
-            </p>
-            <h2 id="Best-Time-to-Buy-and-Sell-Stock-III"><a href="#Best-Time-to-Buy-and-Sell-Stock-III" class="headerlink" title="Best Time to Buy and Sell Stock III"></a>Best Time to Buy and Sell Stock III</h2><blockquote>
-<p>Say you have an array for which the <em>i</em>th element is the price of a given stock on day <em>i</em>.</p>
-<p>Design an algorithm to find the maximum profit. You may complete at most <em>two</em> transactions.</p>
-<p><strong>Note:</strong><br>You may not engage in multiple transactions at the same time (ie, you must sell the stock before you buy again).</p>
-</blockquote>
-<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>假设有一个数组，它的第i个元素表示某只股票在第i天的股价，设计一个算法找出最大收益，要求最多能进行两次买卖操作。</p>
-<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>假设初始资金为0，建立四个变量<code>buy1st</code>,<code>sold1st</code>,<code>buy2nd</code>,<code>sold2nd</code>分别保存第一次买入后的资金，第一次卖出后的资金，第二次买入后的资金，第二次卖出后的资金。</p>
-<p>依次遍历股价数组，</p>
-<p>如果在当前价格第一次买入，耗费资金<code>prices[i]</code>,则第一次买入后剩余资金为<code>buy1st=-prices[i]</code>,</p>
-<p>如果之前已经购买过股票，且当前为第一次卖出,则卖出获利<code>prices[i]</code>,卖出后资金为<code>sold1st=buy1st + prices[i]</code></p>
-<p>如果当前为第二次买卖行为，在操作之前的资金为第一次卖出后的资金<code>sold1st</code>,所以，若在当前价格再次买入，耗费资金<code>prices[i]</code>,则买入后剩余资金变为<code>buy2nd=sold1st - prices[i]</code></p>
-<p>如果之前已经进行过第二次的买入行为，要在本次进行第二次卖出活动，卖出后将获得<code>prices[i]</code>,资金变为<code>buy2nd+prices[i]</code></p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
-<span class="token keyword">public</span><span class="token operator">:</span>
-    <span class="token keyword">int</span> <span class="token function">maxProfit</span><span class="token punctuation">(</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token operator">&amp;</span> prices<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token comment" spellcheck="true">// 假设起始资金为0，</span>
-        <span class="token comment" spellcheck="true">// 使用4个变量分别表示第一次买入后的资金,第一次卖出后的资金，第二次买入后的资金，第二次卖出后的资金</span>
-        <span class="token keyword">int</span> buy1st <span class="token operator">=</span> INT_MIN<span class="token punctuation">,</span> sold1st <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> buy2nd <span class="token operator">=</span> INT_MIN<span class="token punctuation">,</span> sold2nd <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-        <span class="token comment" spellcheck="true">// 为了保证获利最大化，需要保证每次的资金量最大</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> price <span class="token operator">:</span> prices<span class="token punctuation">)</span>
-        <span class="token punctuation">{</span>
-            <span class="token comment" spellcheck="true">// 为了防止本次买入操作覆盖之前的买入操作，应该先计算卖出再计算买入；</span>
-            <span class="token comment" spellcheck="true">// 同理，因为第二次的操作需要在第一次操作的基础上进行，应该先计算第二次的操作以防止覆盖</span>
-            sold2nd <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span>sold2nd<span class="token punctuation">,</span> buy2nd <span class="token operator">+</span> price<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            buy2nd <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span>buy2nd<span class="token punctuation">,</span> sold1st <span class="token operator">-</span> price<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            sold1st <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span>sold1st<span class="token punctuation">,</span> buy1st <span class="token operator">+</span> price<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            buy1st <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span>buy1st<span class="token punctuation">,</span> <span class="token operator">-</span>price<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> sold2nd<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<hr>
-<a href="/posts//posts/20161202170711/" title="leetcode best Time Buy and SellStock I">leetcode best Time Buy and SellStock I</a>
-<a href="/posts//posts/201612021714/" title="leetcode Best Time to Buy and Sell Stock II">leetcode Best Time to Buy and Sell Stock II</a>
-<a href="/posts//posts/201612021921/" title="leetcode Best Time to Buy and Sell Stock IV">leetcode Best Time to Buy and Sell Stock IV</a>
-<a href="/posts//posts/201612021923/" title="leetcode Best Time to Buy and Sell Stock with Cooldown">leetcode Best Time to Buy and Sell Stock with Cooldown</a>
-
-        </div>
-    
 </div>
 
 
-                
-                    <!-- Paradox Post Info -->
-                    
                 
 
                 <!-- Post Comments -->

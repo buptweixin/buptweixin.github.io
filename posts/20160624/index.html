@@ -192,112 +192,8 @@
 
 
     
-        <body id="scheme-Isolation" class="lazy">
+        <body id="scheme-paradox" class="lazy">
             <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="material-layout  mdl-js-layout has-drawer is-upgraded">
-                
-                    <!-- Isolation Header -->
-                    <header class="header">
-    <div class="header-wrapper">
-        <!-- Header Copyright -->
-        <div class="header-copyright">
-            <div class="header-site">
-                ©&nbsp;
-                <script type="text/javascript">
-                    var fd = new Date();
-                    document.write(fd.getFullYear());
-                </script>
-                &nbsp;野原圆长的Blog
-            </div>
-            <!--
-            I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright.
-            It will not impact the appearance and can give developers a lot of support :)
-
-            很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
-            它不会影响美观并可以给开发者很大的支持。 :)
-            -->
-            <div>
-                Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a>
-                <br>
-                Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a>
-            </div>
-        </div>
-
-        <!-- Header Title -->
-        <span class="header-title header-item">
-            <a href="/" title="野原圆长的Blog">
-                野原圆长的Blog
-            </a>
-        </span>
-
-        <p class="header-slogan header-item">
-            Hi, nice to meet you
-        </p>
-
-        <!-- Header Nav -->
-        <nav class="header-nav header-item">
-            <span class="header-nav-item">
-                <a href="/" title="Home">
-                    <span>主页</span>
-                </a>
-            </span>
-
-          <!-- Independent Pages -->
-          
-        </nav>
-
-        <!-- Header SNS -->
-        <div class="header-item header-sns_list">
-    <!-- Twitter -->
-    
-        <a href="https://twitter.com/twitter" target="_blank">
-            <i class="fa fa-twitter fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- Facebook -->
-    
-        <a href="https://www.facebook.com/facebook" target="_blank">
-            <i class="fa fa-facebook fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- Google + -->
-    
-        <a href="https://www.google.com/" target="_blank">
-            <i class="fa fa-google-plus fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- Weibo -->
-    
-        <a href="http://weibo.com/buptweixin" target="_blank">
-            <i class="fa fa-weibo fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- Instagram -->
-    
-
-    <!-- Tumblr -->
-    
-
-    <!-- Github -->
-    
-        <a href="https://github.com/buptweixin" target="_blank">
-            <i class="fa fa-github fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- LinkedIn -->
-    
-
-    <!-- Telegram -->
-    
-</div>
-
-    </div>
-</header>
-
                 
 
                 <!-- Main Container -->
@@ -326,22 +222,6 @@
                 
 
 
-    <!-- Isolation Post Header -->
-    <!-- Post thumbnail -->
-    
-        <!-- Post Header Info -->
-        <div class="post-header_info with-thumbnail">
-            <!-- Author Avatar & Name -->
-            <img src="/img/avatar.png" class="avatar-img" width="44px" height="44px" alt="Xin Wei's avatar">
-            <span class="name-span">Xin Wei</span>
-        </div>
-
-        <!-- Custom thumbnail -->
-        <div class="post_thumbnail-custom">
-            <img src="http://image.sowm.cn/3aQjqa.jpg">
-    
-        </div>
-
 
 
                 
@@ -351,64 +231,9 @@
     
 
     
-        <div class="post-content_wrapper">
-            <p class="post-title">
-                几种常用激活函数介绍
-            </p>
-            <p>由于线性模型的表达能力不够（甚至不能表达异或），需要使用激活函数(activation function)引入非线性因素，常用的激活函数有sigmoid函数、tanh函数、ReLu函数及其改进函数和Maxout等。<br><a id="more"></a></p>
-<h3 id="sigmod激活函数"><a href="#sigmod激活函数" class="headerlink" title="sigmod激活函数"></a>sigmod激活函数</h3><p>$$sigmoid(x)=\frac{1}{1+e^{-x}}$$</p>
-<h4 id="函数图像"><a href="#函数图像" class="headerlink" title="函数图像"></a>函数图像</h4><p>sigmoid 函数图像是一条光滑的”S”型曲线，</p>
-<p><img src="http://images0.cnblogs.com/blog/760242/201505/211727262911982.png" alt=""></p>
-<h4 id="函数性质"><a href="#函数性质" class="headerlink" title="函数性质"></a>函数性质</h4><ol>
-<li>当输入趋近于负无穷时，sigmoid函数取值趋近于0，反之，当输入趋近于正无穷时其取值趋近于1；</li>
-<li>整个曲线都是光滑(可微)的，且任何一点的导数都大于零；</li>
-<li>导数形式简单，为$$sigmoid^\prime(x)=sigmoid(x)(1-sigmoid(x))$$<br> 这个性质很重要，因为只要在正向传播中计算了$sigmoid(x)$,反向传播求导时就可以很方便的通过$sigmoid(x)$求出$sigmoid^\prime(x)$</li>
-</ol>
-<h4 id="应用状况"><a href="#应用状况" class="headerlink" title="应用状况"></a>应用状况</h4><p>由于sigmoid函数的取值区间[0, 1]可以用来表示概率这一 性质，所以在过去很长一段时间其被广泛使用，然而，随着考虑到sigmoid函数同时具有如下的两个问题，近些年其逐渐被冷落。</p>
-<ol>
-<li>梯度消失问题：神经网络的反向传播过程是通过链式法则实现的，然而我们看sigmoid函数图像可知，当输入很大或者很小时，其导数是接近于0的，这在网络层数较少时可能不是问题，然而深度学习中网络层数动辄几十上百层，这样很可能造成梯度的消失；</li>
-<li>输出的中心不是0:上级神经元的输出中心非零会造成下层神经元的输入中心非0。</li>
-</ol>
-<h3 id="tanh激活函数"><a href="#tanh激活函数" class="headerlink" title="tanh激活函数"></a>tanh激活函数</h3><p>tanh函数形式如下所示：$$tanh(x)=\frac{e^x-e^{-x}}{e^x+e^{-x}}$$，它和sigmoid函数关系为$$tanh(x)=2sigmoid(2x)-1$$</p>
-<h4 id="函数图像-1"><a href="#函数图像-1" class="headerlink" title="函数图像"></a>函数图像</h4><p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-6-23/56765549.jpg" alt=""></p>
-<p>tanh函数图像和sigmoid函数很相似，但是其值域为(-1,1)，且其输出中心为0，这样就能避免上面提到的sigmoid存在的第二个问题。</p>
-<h4 id="函数性质-1"><a href="#函数性质-1" class="headerlink" title="函数性质"></a>函数性质</h4><ol>
-<li>当输入趋近于负无穷时，tanh函数取值趋近于-1，反之，当输入趋近于正无穷时其取值趋近于1；</li>
-<li>整个曲线都是光滑(可微)的，且任何一点的导数都大于零；</li>
-<li>导数形式为$$tanh^\prime(x)=1-[tanh(x)]^2$$</li>
-<li>输出以0为中心</li>
-</ol>
-<h4 id="应用状况-1"><a href="#应用状况-1" class="headerlink" title="应用状况"></a>应用状况</h4><p>和sigmoid函数一样，tanh函数也存在梯度消失的问题，但是他的输出中心为0，所以他比sigmoid函数更常用。</p>
-<h3 id="ReLu激活函数"><a href="#ReLu激活函数" class="headerlink" title="ReLu激活函数"></a>ReLu激活函数</h3><p>sigmoid函数和tanh函数的输出不具备稀疏性，因此需要加入惩罚因子(正则项)来训练出接近0的系数，而ReLu(Rectified Linear Unite)是对其的线性修正，它的公式为$$ReLu(x)=max(0,x)$$</p>
-<h4 id="函数图像-2"><a href="#函数图像-2" class="headerlink" title="函数图像"></a>函数图像</h4><p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-6-24/2147013.jpg" alt=""></p>
-<p>从上图可以看到，当输入小于0时，输出为0，即神经元是被抑制的，当输入大于0时，输出和输入成正比例关系。</p>
-<h4 id="函数性质-2"><a href="#函数性质-2" class="headerlink" title="函数性质"></a>函数性质</h4><p>优点</p>
-<ol>
-<li>收敛速度快：和sigmoid函数、tanh函数相比，ReLu具有更快的收敛速度</li>
-<li>计算简单： ReLu计算只需要使用简单的max操作</li>
-<li>能产生大量稀疏解： 因为左半部分是被抑制的，所以使用ReLu作为激活函数训练出来的网络参数有很大一部分都是0。</li>
-</ol>
-<p>缺点：</p>
-<p>如果一个很大的梯度流过了ReLu某个神经元，因为ReLU输入小于0时梯度为0 ，会造成这个神经元将不会再更新，造成神经元“死亡”现象，具体的可以看评论栏第一条(感谢@tg提醒，之前理解错了)。</p>
-<h4 id="改进"><a href="#改进" class="headerlink" title="改进"></a>改进</h4><p>为了避免神经元“死亡”现象，研究人员提出了Leak ReLu的改进函数，其把当x小于0时的输出由0变为很小的负数。</p>
-<h3 id="Maxout激活函数"><a href="#Maxout激活函数" class="headerlink" title="Maxout激活函数"></a>Maxout激活函数</h3><p>Maxout其实是改变了神经元的形式，它将每个神经元由原来一次训练一组参数扩展为同时训练多组参数，然后选择激活值最大的作为下一层的激活值，比如同时训练3组参数：$$max(w_1^Tx+b_1, w_2^Tx+b_2, w_3^Tx+b_3)$$</p>
-<p>可以看出ReLu为Maxout同时训练两组参数且$w_2,b_2$取0时的情形，因此maxout拥有ReLu的所有优点同时避免了神经元“死亡”的现象；但是，由于需要多训练了几组参数，网络的效率也大大降低了。</p>
-<h3 id="该如何选择"><a href="#该如何选择" class="headerlink" title="该如何选择"></a>该如何选择</h3><ol>
-<li>不要使用sigmoid；</li>
-<li>可以考虑使用tanh；</li>
-<li>使用ReLU激活函数的话，注意不要把学习率设得太高，避免产生结点”死亡”现象；</li>
-<li>最好使用Maxout或者Leaky ReLU， 他们的效果比tanh好。</li>
-</ol>
-<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><p><a href="http://cs231n.github.io/neural-networks-1/" target="_blank" rel="external">CS231n Convolutional Neural Networks for Visual Recognition</a></p>
-
-        </div>
-    
 </div>
 
 
-                
-                    <!-- Paradox Post Info -->
-                    
                 
 
                 <!-- Post Comments -->

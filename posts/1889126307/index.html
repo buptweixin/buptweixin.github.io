@@ -192,112 +192,8 @@
 
 
     
-        <body id="scheme-Isolation" class="lazy">
+        <body id="scheme-paradox" class="lazy">
             <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="material-layout  mdl-js-layout has-drawer is-upgraded">
-                
-                    <!-- Isolation Header -->
-                    <header class="header">
-    <div class="header-wrapper">
-        <!-- Header Copyright -->
-        <div class="header-copyright">
-            <div class="header-site">
-                ©&nbsp;
-                <script type="text/javascript">
-                    var fd = new Date();
-                    document.write(fd.getFullYear());
-                </script>
-                &nbsp;野原圆长的Blog
-            </div>
-            <!--
-            I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright.
-            It will not impact the appearance and can give developers a lot of support :)
-
-            很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
-            它不会影响美观并可以给开发者很大的支持。 :)
-            -->
-            <div>
-                Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a>
-                <br>
-                Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a>
-            </div>
-        </div>
-
-        <!-- Header Title -->
-        <span class="header-title header-item">
-            <a href="/" title="野原圆长的Blog">
-                野原圆长的Blog
-            </a>
-        </span>
-
-        <p class="header-slogan header-item">
-            Hi, nice to meet you
-        </p>
-
-        <!-- Header Nav -->
-        <nav class="header-nav header-item">
-            <span class="header-nav-item">
-                <a href="/" title="Home">
-                    <span>主页</span>
-                </a>
-            </span>
-
-          <!-- Independent Pages -->
-          
-        </nav>
-
-        <!-- Header SNS -->
-        <div class="header-item header-sns_list">
-    <!-- Twitter -->
-    
-        <a href="https://twitter.com/twitter" target="_blank">
-            <i class="fa fa-twitter fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- Facebook -->
-    
-        <a href="https://www.facebook.com/facebook" target="_blank">
-            <i class="fa fa-facebook fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- Google + -->
-    
-        <a href="https://www.google.com/" target="_blank">
-            <i class="fa fa-google-plus fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- Weibo -->
-    
-        <a href="http://weibo.com/buptweixin" target="_blank">
-            <i class="fa fa-weibo fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- Instagram -->
-    
-
-    <!-- Tumblr -->
-    
-
-    <!-- Github -->
-    
-        <a href="https://github.com/buptweixin" target="_blank">
-            <i class="fa fa-github fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- LinkedIn -->
-    
-
-    <!-- Telegram -->
-    
-</div>
-
-    </div>
-</header>
-
                 
 
                 <!-- Main Container -->
@@ -326,21 +222,6 @@
                 
 
 
-    <!-- Isolation Post Header -->
-    <!-- Post thumbnail -->
-    
-        <!-- Post Header Info -->
-        <div class="post-header_info without-thumbnail">
-            <!-- Author Avatar & Name -->
-            <img src="/img/avatar.png" class="avatar-img" width="44px" height="44px" alt="Xin Wei's avatar">
-            <span class="name-span">Xin Wei</span>
-        </div>
-
-        <!-- Null Thumbnail -->
-        <div class="post_thumbnail-null">
-    
-        </div>
-
 
 
                 
@@ -350,88 +231,9 @@
     
 
     
-        <div class="post-content_wrapper">
-            <p class="post-title">
-                CS231n assignment1 multi svm -- 矩阵乘法的几何意义
-            </p>
-            <p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-9-24/82257381.jpg" width="720px"><br><a id="more"></a></p>
-<h2 id="问题引入"><a href="#问题引入" class="headerlink" title="问题引入"></a>问题引入</h2><p>在cs231n的assignment1多类svm部分中，需要采用完全向量法求解损失函数对权重的梯度$dW$,$$\nabla<em>{w</em>{y_i}}L<em>i=-\left(\sum</em>{j\neq{y_i}}1(w_j^Tx<em>i-w</em>{y_i}^Tx_i+\Delta&gt;0)\right)x<em>i\\nabla</em>{w_j}L_i = 1\left(w_j^Tx<em>i-w</em>{y_i}^T+\Delta\right)x_i$$(<a href="http://cs231n.github.io/optimization-1/" target="_blank" rel="external">详细推导</a>),即给出输入$x_i$，假设正确类别是$y_i$,则权重的$y_i$列的梯度为满足$w_j^Tx<em>i-w</em>{y_i}^Tx_i+\Delta&gt;0$的列数量乘输入’$-x_i$’，其他列的梯度为当$w_j^Tx<em>i-w</em>{y_i}^Tx_i+\Delta&gt;0$等于$x_i$,否则为0.如何用矩阵方法解决得到答案呢？</p>
-<h2 id="矩阵相乘的意义"><a href="#矩阵相乘的意义" class="headerlink" title="矩阵相乘的意义"></a>矩阵相乘的意义</h2><p>假设有$2\times{3}$矩阵A和$3\times{2}$矩阵B相乘，我们知道结果如下：</p>
-<p>$$\left[\begin{array}{ccc}x11 &amp; x12 &amp; x13 \x21 &amp; x22 &amp; x23\end{array}\right] \times\left[\begin{array}{cc}y11 &amp; y12 \y21 &amp; y22 \y31 &amp; y32\end{array}\right]=\left[\begin{array}{cc}x<em>{11}y</em>{11}+x<em>{12}y</em>{21}+x<em>{13}y</em>{31} &amp; x<em>{11}y</em>{12}+x<em>{12}y</em>{22}+x<em>{13}y</em>{32} \x<em>{21}y</em>{11}+x<em>{22}y</em>{21}+x<em>{23}y</em>{31} &amp; x<em>{21}y</em>{12}+x<em>{22}y</em>{22}+x<em>{23}y</em>{32}\end{array}\right]$$</p>
-<p>那么它的意义是什么呢？</p>
-<p>我们仔细观察等式右边的每列，会发现同一列的B矩阵元素$y<em>{ij}$都是相等的<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-9-24/43625942.jpg" alt=""><br>$$\left[\begin{array}{cc}\left[\begin{array}{c}x</em>{11} \x<em>{21}\end{array}\right]y</em>{11}+\left[\begin{array}{c}x<em>{12} \x</em>{22}\end{array}\right]y<em>{21}+\left[\begin{array}{c}x</em>{13} \x<em>{23}\end{array}\right]y</em>{31} &amp; \left[\begin{array}{c}x<em>{11} \x</em>{21}\end{array}\right]y<em>{12}+\left[\begin{array}{c}x</em>{12} \x<em>{22}\end{array}\right]y</em>{22}+\left[\begin{array}{c}x<em>{13} \x</em>{23}\end{array}\right]y_{32}\end{array}\right]$$</p>
-<p>这就是说，对于矩阵$A\times{B}$,结果的第j列相当于矩阵$A$的每一列分别乘以矩阵$B$第j列第一到最后一个元素然后相加。</p>
-<h2 id="所以？"><a href="#所以？" class="headerlink" title="所以？"></a>所以？</h2><p>我们将$-x_i$乘以margin大于0的数量用来累加$x_i$正确类别对应的权重梯度，其他列根据margin是否大于0来累加，若大于0，累加对应列的梯度，否则不累加。</p>
-<p>具体步骤:</p>
-<ol>
-<li>使用包含n个D维数据的矩阵乘D行c列(c为分类类别数)权重W得到每个样本分成每一个类别的分数(第i行第j个元素代表第i个样本被分类到第j类的分数)；</li>
-<li>将每个数据的所有类别的分数都减去正确类别的分数再加上$\Delta$,并把正确类别对应项置为0得到margin；</li>
-<li>判断margin是否大于0，计算每一个输入数据得到的大于0的margin的数量</li>
-<li>将输入转置，每列代表一个数据，我们需要通过右边的矩阵指定每个数据累加的次数。</li>
-</ol>
-<p><a href="http://blog.csdn.net/zengdong_1991/article/details/51346201" target="_blank" rel="external">博文</a>给出的代码如下：</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">svm_loss_vectorized</span><span class="token punctuation">(</span>W<span class="token punctuation">,</span> X<span class="token punctuation">,</span> y<span class="token punctuation">,</span> reg<span class="token punctuation">)</span><span class="token punctuation">:</span>
-  <span class="token triple-quoted-string string">"""
-  Structured SVM loss function, vectorized implementation.
-
-  Inputs and outputs are the same as svm_loss_naive.
-  """</span>
-  loss <span class="token operator">=</span> <span class="token number">0.0</span>
-  dW <span class="token operator">=</span> np<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span>W<span class="token punctuation">.</span>shape<span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># initialize the gradient as zero</span>
-
-  <span class="token comment" spellcheck="true">#print(type(W))</span>
-  <span class="token comment" spellcheck="true">#print(type(X))</span>
-
-  num_classes <span class="token operator">=</span> W<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
-  num_train <span class="token operator">=</span> X<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
-
-  scores <span class="token operator">=</span> X<span class="token punctuation">.</span>dot<span class="token punctuation">(</span>W<span class="token punctuation">)</span>
-  correct_class_score <span class="token operator">=</span> scores<span class="token punctuation">[</span>np<span class="token punctuation">.</span>arange<span class="token punctuation">(</span>num_train<span class="token punctuation">)</span><span class="token punctuation">,</span> y<span class="token punctuation">]</span>
-
-  <span class="token comment" spellcheck="true">#print(scores.shape)</span>
-  <span class="token comment" spellcheck="true">#print(correct_class_score.shape)</span>
-  <span class="token comment" spellcheck="true">#print(type(scores))</span>
-  <span class="token comment" spellcheck="true">#print(type(correct_class_score))</span>
-
-  tmpMat <span class="token operator">=</span> scores<span class="token punctuation">.</span>T <span class="token operator">-</span> correct_class_score <span class="token operator">+</span> <span class="token number">1</span>
-  tmpMat <span class="token operator">=</span> tmpMat<span class="token punctuation">.</span>T
-  tmpMat<span class="token punctuation">[</span>np<span class="token punctuation">.</span>arange<span class="token punctuation">(</span>num_train<span class="token punctuation">)</span><span class="token punctuation">,</span> y<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span>
-
-  margin <span class="token operator">=</span> np<span class="token punctuation">.</span>maximum<span class="token punctuation">(</span>tmpMat<span class="token punctuation">,</span> np<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span><span class="token punctuation">(</span>num_train<span class="token punctuation">,</span> num_classes<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-
-  <span class="token comment" spellcheck="true">#print(margin.shape)</span>
-  loss <span class="token operator">=</span> np<span class="token punctuation">.</span>sum<span class="token punctuation">(</span>margin<span class="token punctuation">)</span>
-  loss <span class="token operator">/=</span> num_train
-  loss <span class="token operator">+=</span> <span class="token number">0.5</span><span class="token operator">*</span>reg<span class="token operator">*</span>np<span class="token punctuation">.</span>sum<span class="token punctuation">(</span>W<span class="token operator">*</span>W<span class="token punctuation">)</span>
-
-  <span class="token comment" spellcheck="true"># Binarize into integers</span>
-  binary <span class="token operator">=</span> margin
-  binary<span class="token punctuation">[</span>margin <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span>
-
-  <span class="token comment" spellcheck="true"># Perform the two operations simultaneously</span>
-  <span class="token comment" spellcheck="true"># (1) for all j: dW[j,:] = sum_{i, j produces positive margin with i} X[:,i].T</span>
-  <span class="token comment" spellcheck="true"># (2) for all i: dW[y[i],:] = sum_{j != y_i, j produces positive margin with i} -X[:,i].T</span>
-  col_sum <span class="token operator">=</span> np<span class="token punctuation">.</span>sum<span class="token punctuation">(</span>binary<span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
-  binary<span class="token punctuation">[</span>np<span class="token punctuation">.</span>arange<span class="token punctuation">(</span>num_train<span class="token punctuation">)</span><span class="token punctuation">,</span> y<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token operator">-</span>col_sum<span class="token punctuation">[</span>range<span class="token punctuation">(</span>num_train<span class="token punctuation">)</span><span class="token punctuation">]</span>
-  dW <span class="token operator">=</span> np<span class="token punctuation">.</span>dot<span class="token punctuation">(</span>X<span class="token punctuation">.</span>T<span class="token punctuation">,</span> binary<span class="token punctuation">)</span>
-
-  <span class="token comment" spellcheck="true"># Divide</span>
-  dW <span class="token operator">/=</span> num_train
-
-  <span class="token comment" spellcheck="true"># Regularize</span>
-  dW <span class="token operator">+=</span> reg<span class="token operator">*</span>W
-
-  <span class="token keyword">return</span> loss<span class="token punctuation">,</span> dW
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-        </div>
-    
 </div>
 
 
-                
-                    <!-- Paradox Post Info -->
-                    
                 
 
                 <!-- Post Comments -->

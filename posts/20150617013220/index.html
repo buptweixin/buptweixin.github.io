@@ -192,112 +192,8 @@
 
 
     
-        <body id="scheme-Isolation" class="lazy">
+        <body id="scheme-paradox" class="lazy">
             <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="material-layout  mdl-js-layout has-drawer is-upgraded">
-                
-                    <!-- Isolation Header -->
-                    <header class="header">
-    <div class="header-wrapper">
-        <!-- Header Copyright -->
-        <div class="header-copyright">
-            <div class="header-site">
-                ©&nbsp;
-                <script type="text/javascript">
-                    var fd = new Date();
-                    document.write(fd.getFullYear());
-                </script>
-                &nbsp;野原圆长的Blog
-            </div>
-            <!--
-            I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright.
-            It will not impact the appearance and can give developers a lot of support :)
-
-            很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
-            它不会影响美观并可以给开发者很大的支持。 :)
-            -->
-            <div>
-                Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a>
-                <br>
-                Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a>
-            </div>
-        </div>
-
-        <!-- Header Title -->
-        <span class="header-title header-item">
-            <a href="/" title="野原圆长的Blog">
-                野原圆长的Blog
-            </a>
-        </span>
-
-        <p class="header-slogan header-item">
-            Hi, nice to meet you
-        </p>
-
-        <!-- Header Nav -->
-        <nav class="header-nav header-item">
-            <span class="header-nav-item">
-                <a href="/" title="Home">
-                    <span>主页</span>
-                </a>
-            </span>
-
-          <!-- Independent Pages -->
-          
-        </nav>
-
-        <!-- Header SNS -->
-        <div class="header-item header-sns_list">
-    <!-- Twitter -->
-    
-        <a href="https://twitter.com/twitter" target="_blank">
-            <i class="fa fa-twitter fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- Facebook -->
-    
-        <a href="https://www.facebook.com/facebook" target="_blank">
-            <i class="fa fa-facebook fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- Google + -->
-    
-        <a href="https://www.google.com/" target="_blank">
-            <i class="fa fa-google-plus fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- Weibo -->
-    
-        <a href="http://weibo.com/buptweixin" target="_blank">
-            <i class="fa fa-weibo fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- Instagram -->
-    
-
-    <!-- Tumblr -->
-    
-
-    <!-- Github -->
-    
-        <a href="https://github.com/buptweixin" target="_blank">
-            <i class="fa fa-github fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- LinkedIn -->
-    
-
-    <!-- Telegram -->
-    
-</div>
-
-    </div>
-</header>
-
                 
 
                 <!-- Main Container -->
@@ -326,21 +222,6 @@
                 
 
 
-    <!-- Isolation Post Header -->
-    <!-- Post thumbnail -->
-    
-        <!-- Post Header Info -->
-        <div class="post-header_info without-thumbnail">
-            <!-- Author Avatar & Name -->
-            <img src="/img/avatar.png" class="avatar-img" width="44px" height="44px" alt="Xin Wei's avatar">
-            <span class="name-span">Xin Wei</span>
-        </div>
-
-        <!-- Null Thumbnail -->
-        <div class="post_thumbnail-null">
-    
-        </div>
-
 
 
                 
@@ -350,78 +231,9 @@
     
 
     
-        <div class="post-content_wrapper">
-            <p class="post-title">
-                C++ primer笔记 — 字符串向量和数组
-            </p>
-            <p><img src="http://ww3.sinaimg.cn/large/6425ef91jw1f9aa7pkr9wj20e80e8t97.jpg" width="420px"><br><a id="more"></a></p>
-<h2 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h2><pre class="line-numbers language-c++"><code class="language-c++">using std::cin; \\ 以后直接用cin代替std::cin
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p><strong>头文件不应该包含using声明</strong></p>
-<h2 id="string"><a href="#string" class="headerlink" title="string"></a>string</h2><pre class="line-numbers language-c++"><code class="language-c++">#include <string>
-using std::string;
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-9/47651321.jpg" alt=""><br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-9/60672171.jpg" alt=""></p>
-<h3 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h3><p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-9/68709475.jpg" alt=""></p>
-<h3 id="读写string"><a href="#读写string" class="headerlink" title="读写string"></a>读写string</h3><p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-9/68632926.jpg" alt=""><br>读取未知数量的string<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-9/42664914.jpg" alt=""><br>getline读入一整行知道遇到换行符，(存入string的行信息去掉了换行符)<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-9/35968297.jpg" alt=""></p>
-<p>获取string的长度<br><code>auto len = line.size(); //len的类型是string::size_type</code></p>
-<h3 id="改变字符特性"><a href="#改变字符特性" class="headerlink" title="改变字符特性"></a>改变字符特性</h3><p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-9/24752202.jpg" alt=""></p>
-<h3 id="处理每个字符"><a href="#处理每个字符" class="headerlink" title="处理每个字符"></a>处理每个字符</h3><pre class="line-numbers language-c++"><code class="language-c++">for (declaration: expression)
-  statement
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-9/75332491.jpg" alt=""></p>
-<p>获得类型<code>decltype(s.size()) punct_cnt</code></p>
-<p><strong>改变字符串本身，需要使用引用类型</strong><br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-9/33883660.jpg" alt=""></p>
-<h1 id="vector"><a href="#vector" class="headerlink" title="vector"></a>vector</h1><p><code>#include&lt;vector&gt;</code></p>
-<h2 id="定义-初始化"><a href="#定义-初始化" class="headerlink" title="定义 初始化"></a>定义 初始化</h2><p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-11/41474282.jpg" alt=""></p>
-<h2 id="操作-1"><a href="#操作-1" class="headerlink" title="操作"></a>操作</h2><p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-11/45286995.jpg" alt=""></p>
-<p><strong>如果循环体内部含有向vector对象添加元素的语句，则不应该使用范围for循环</strong><br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-11/6202701.jpg" alt=""><br><strong>不能用下标形式添加元素</strong></p>
-<h1 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h1><p>容器都支持迭代器，string严格说不是容器但也支持迭代器<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-11/31845949.jpg" alt=""><br>如果begin和end相等，即都指向尾元素的下一个位置，则表示容器为空的</p>
-<h2 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h2><p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-11/64564000.jpg" alt=""><br>由于end并不实际指向某个元素，所以不能对它使用自增等操作</p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-11/72917725.jpg" alt=""></p>
-<p>迭代器类型<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-11/78567527.jpg" alt=""><br>c++11中引入了两个操作<code>cbegin</code>和<code>cend</code>返回常数类型的迭代器<br><code>auto it3=v.cbegin; //it3类型是vector&lt;int&gt;::const_iterator</code></p>
-<h2 id="结合解引用和成员访问操作"><a href="#结合解引用和成员访问操作" class="headerlink" title="结合解引用和成员访问操作"></a>结合解引用和成员访问操作</h2><p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-11/19815903.jpg" alt=""></p>
-<p>为了防止出错，应该使用<code>-&gt;</code>操作符<br><code>it-&gt;empty()</code></p>
-<h2 id="失效"><a href="#失效" class="headerlink" title="失效"></a>失效</h2><p><strong>但凡使用了迭代器的循环体，都不要向迭代器所属的容器添加元素，这有可能会使迭代器失效</strong></p>
-<h2 id="迭代器运算"><a href="#迭代器运算" class="headerlink" title="迭代器运算"></a>迭代器运算</h2><p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-11/95013214.jpg" alt=""><br>两个迭代器的距离的类型是<code>difference_type</code><br>用迭代器实现二分搜索<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-11/43128769.jpg" alt=""></p>
-<h1 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h1><p>数组大小固定，效率高，灵活性低。初始数组的维度必须是常量表达式<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-11/59155339.jpg" alt=""><br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-11/97128739.jpg" alt=""><br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-11/42564395.jpg" alt=""></p>
-<h2 id="复杂数组声明"><a href="#复杂数组声明" class="headerlink" title="复杂数组声明"></a>复杂数组声明</h2><p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-11/77026173.jpg" alt=""><br>理解ptrs使用从右向左的顺序，首先，ptrs[10]是一个大小为10的数组,然后数组存放的是int型指针。<br>Parray需要从内向外来理解，圆括号部分说明Parray是一个指针，然后这个指针指向长度为10的数组。</p>
-<h2 id="访问数组元素"><a href="#访问数组元素" class="headerlink" title="访问数组元素"></a>访问数组元素</h2><p>数组下标应该定义为<code>size_t</code>类型，它在<cstddef>头文件中定义。</cstddef></p>
-<p>指针也是迭代器</p>
-<p>c++11中对数组也定义了<code>begin</code>和<code>end</code>函数，不过他们不是成员函数<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-11/53728018.jpg" alt=""><br>同样的，尾后指针不能解引用和递增操作。</p>
-<h2 id="C风格字符串（最好不要使用他们）"><a href="#C风格字符串（最好不要使用他们）" class="headerlink" title="C风格字符串（最好不要使用他们）"></a>C风格字符串（最好不要使用他们）</h2><p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-11/68250376.jpg" alt=""></p>
-<h2 id="使用数组初始化vector对象"><a href="#使用数组初始化vector对象" class="headerlink" title="使用数组初始化vector对象"></a>使用数组初始化vector对象</h2><p>拷贝首尾地址<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-11/52311198.jpg" alt=""></p>
-<p><code>std::begin(), std::end()</code></p>
-<p><strong>指针和数组很容易出错，现代C++程序应该尽量使用vector；尽量使用string而不是c风格字符串</strong></p>
-<h1 id="多维数组"><a href="#多维数组" class="headerlink" title="多维数组"></a>多维数组</h1><p>严格来说c++没有多维数组，其实际上就是数组的数组。</p>
-<h2 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h2><p>使用auto简化操作<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-11/60020681.jpg" alt=""><br>或者<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-11/53492138.jpg" alt=""></p>
-<p>类型别名简化多维数组的指针<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-11/61455275.jpg" alt=""></p>
-<h1 id="表达式"><a href="#表达式" class="headerlink" title="表达式"></a>表达式</h1><h2 id="递增递减运算符"><a href="#递增递减运算符" class="headerlink" title="递增递减运算符"></a>递增递减运算符</h2><p>除非必须，否则不用递增递减运算符的后置版本(<code>i++</code>),因为如果我们不需要修改前的值，那么后置操作就是一种浪费。</p>
-<h2 id="显式类型转换"><a href="#显式类型转换" class="headerlink" title="显式类型转换"></a>显式类型转换</h2><p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-11/94878254.jpg" alt=""><br>主要有三种<code>static_cast</code>,<code>dynamic_cast</code>，<code>reinterpret_cast</code>和<code>const_cast</code></p>
-<ul>
-<li><p><code>static_const</code></p>
-<ul>
-<li>把一个较大地算数类型赋值给一个较小的类型</li>
-<li>找回类型，消除警告<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-11/66293835.jpg" alt=""></li>
-</ul>
-</li>
-<li><p><code>const_cast</code><br>将常量转换为非常量</p>
-</li>
-<li><p><code>reinterpret_cast</code></p>
-</li>
-</ul>
-<h1 id="语句"><a href="#语句" class="headerlink" title="语句"></a>语句</h1><h2 id="switch"><a href="#switch" class="headerlink" title="switch"></a>switch</h2><p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-11/57066067.jpg" alt=""></p>
-<h2 id="try…-catch"><a href="#try…-catch" class="headerlink" title="try… catch.."></a>try… catch..</h2><p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-11/51257382.jpg" alt=""></p>
-<h3 id="标准异常"><a href="#标准异常" class="headerlink" title="标准异常"></a>标准异常</h3><p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-10-11/49282471.jpg" alt=""></p>
-
-        </div>
-    
 </div>
 
 
-                
-                    <!-- Paradox Post Info -->
-                    
                 
 
                 <!-- Post Comments -->

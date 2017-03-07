@@ -192,112 +192,8 @@
 
 
     
-        <body id="scheme-Isolation" class="lazy">
+        <body id="scheme-paradox" class="lazy">
             <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="material-layout  mdl-js-layout has-drawer is-upgraded">
-                
-                    <!-- Isolation Header -->
-                    <header class="header">
-    <div class="header-wrapper">
-        <!-- Header Copyright -->
-        <div class="header-copyright">
-            <div class="header-site">
-                ©&nbsp;
-                <script type="text/javascript">
-                    var fd = new Date();
-                    document.write(fd.getFullYear());
-                </script>
-                &nbsp;野原圆长的Blog
-            </div>
-            <!--
-            I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright.
-            It will not impact the appearance and can give developers a lot of support :)
-
-            很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
-            它不会影响美观并可以给开发者很大的支持。 :)
-            -->
-            <div>
-                Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a>
-                <br>
-                Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a>
-            </div>
-        </div>
-
-        <!-- Header Title -->
-        <span class="header-title header-item">
-            <a href="/" title="野原圆长的Blog">
-                野原圆长的Blog
-            </a>
-        </span>
-
-        <p class="header-slogan header-item">
-            Hi, nice to meet you
-        </p>
-
-        <!-- Header Nav -->
-        <nav class="header-nav header-item">
-            <span class="header-nav-item">
-                <a href="/" title="Home">
-                    <span>主页</span>
-                </a>
-            </span>
-
-          <!-- Independent Pages -->
-          
-        </nav>
-
-        <!-- Header SNS -->
-        <div class="header-item header-sns_list">
-    <!-- Twitter -->
-    
-        <a href="https://twitter.com/twitter" target="_blank">
-            <i class="fa fa-twitter fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- Facebook -->
-    
-        <a href="https://www.facebook.com/facebook" target="_blank">
-            <i class="fa fa-facebook fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- Google + -->
-    
-        <a href="https://www.google.com/" target="_blank">
-            <i class="fa fa-google-plus fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- Weibo -->
-    
-        <a href="http://weibo.com/buptweixin" target="_blank">
-            <i class="fa fa-weibo fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- Instagram -->
-    
-
-    <!-- Tumblr -->
-    
-
-    <!-- Github -->
-    
-        <a href="https://github.com/buptweixin" target="_blank">
-            <i class="fa fa-github fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- LinkedIn -->
-    
-
-    <!-- Telegram -->
-    
-</div>
-
-    </div>
-</header>
-
                 
 
                 <!-- Main Container -->
@@ -326,21 +222,6 @@
                 
 
 
-    <!-- Isolation Post Header -->
-    <!-- Post thumbnail -->
-    
-        <!-- Post Header Info -->
-        <div class="post-header_info without-thumbnail">
-            <!-- Author Avatar & Name -->
-            <img src="/img/avatar.png" class="avatar-img" width="44px" height="44px" alt="Xin Wei's avatar">
-            <span class="name-span">Xin Wei</span>
-        </div>
-
-        <!-- Null Thumbnail -->
-        <div class="post_thumbnail-null">
-    
-        </div>
-
 
 
                 
@@ -350,55 +231,9 @@
     
 
     
-        <div class="post-content_wrapper">
-            <p class="post-title">
-                Docker虚拟机与宿主机端口映射(Mac)
-            </p>
-            <p><img src="http://www.kankanews.com/ICkengine/wp-content/plugins/wp-o-matic/cache/34a4feb39d_14061019117836.png" alt=""><br><a id="more"></a></p>
-<p>由于Boot2Docker的存在，造成了三层Mac-&gt;VirtualBox-&gt;Docker网络,这样就造成了如果我们即使在容器启动时使用<code>-p</code>参数暴露了相应端口宿主却仍然访问不了容器,这时候就需要手动修改宿主机到virtualbox的端口映射来解决这个问题。<br>由VirtualBox到Docker的映射可以通过run容器的时候指定-p参数实现，而从宿主机到VirtualBox端口映射需要通过下述方法实现:</p>
-<ol>
-<li><p>查询虚拟机网络：</p>
-<pre><code> $ VBoxManage list vms
-</code></pre><p>查询虚拟机网络状态， 默认虚拟机名为’default’</p>
-<pre><code> $ VBoxManage showvminfo &quot;default&quot; | grep NIC
-</code></pre><p>2.关闭运行中的虚拟机<br> 由于Boot2Docker会自动运行VirtualBox中的虚拟机，所以在设置网络映射时必须先关闭运行中的虚拟机。否则，将出现The machine ‘boot2docker’ is already locked for a session (or being unlocked)的错误提示</p>
-<pre><code> $ VBoxManage controlvm &quot;default&quot; poweroff
-</code></pre></li>
-<li><p>修改虚拟机与Mac系统的网络映射<br> 根据实际需要进行网络映射，其中</p>
-<ul>
-<li>rulename: 自定义规则名称</li>
-<li>hostip: Mac访问地址，可不填</li>
-<li>hostport: Mac映射端口</li>
-<li>guestip: 虚拟机访问地址，可不填</li>
-<li><p>guestport: 虚拟机映射端口</p>
-<pre><code>$ VBoxManage modifyvm &quot;dufault&quot; --natpf1 &quot;&lt;Rule Name&gt;,&lt;tcp|udp&gt;,&lt;Host IP&gt;,&lt;Host Port&gt;,&lt;Guest IP&gt;,&lt;Guest Port&gt;&quot;
-</code></pre></li>
-</ul>
-</li>
-<li><p>启动虚拟机</p>
-<p> 设置完成后重新启动虚拟机 $ VBoxManage startvm “default”</p>
-</li>
-<li><p>运行镜像</p>
-<p> 以wwj718提供的edX docker为例，运行其镜像</p>
-<pre><code> $ docker run -itd -p 8000:80 -p 8010:18010 --name edX wwj718/edx_cypress_docker:1.05
-</code></pre></li>
-<li><p>查看容器运行状态</p>
-<pre><code> $ docker ps
-</code></pre></li>
-<li><p>其他 - 删除映射端口，也需要关闭虚拟机，删除命令如下</p>
-<pre><code> $ VBoxManage modifyvm &quot;boot2docker-vm&quot; --natpf1 delete
-</code></pre></li>
-</ol>
-<p><a href="http://www.cnblogs.com/exnihilo/p/4891346.html" target="_blank" rel="external">阅读原文</a></p>
-
-        </div>
-    
 </div>
 
 
-                
-                    <!-- Paradox Post Info -->
-                    
                 
 
                 <!-- Post Comments -->

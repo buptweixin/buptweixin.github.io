@@ -192,112 +192,8 @@
 
 
     
-        <body id="scheme-Isolation" class="lazy">
+        <body id="scheme-paradox" class="lazy">
             <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="material-layout  mdl-js-layout has-drawer is-upgraded">
-                
-                    <!-- Isolation Header -->
-                    <header class="header">
-    <div class="header-wrapper">
-        <!-- Header Copyright -->
-        <div class="header-copyright">
-            <div class="header-site">
-                ©&nbsp;
-                <script type="text/javascript">
-                    var fd = new Date();
-                    document.write(fd.getFullYear());
-                </script>
-                &nbsp;野原圆长的Blog
-            </div>
-            <!--
-            I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright.
-            It will not impact the appearance and can give developers a lot of support :)
-
-            很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
-            它不会影响美观并可以给开发者很大的支持。 :)
-            -->
-            <div>
-                Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a>
-                <br>
-                Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a>
-            </div>
-        </div>
-
-        <!-- Header Title -->
-        <span class="header-title header-item">
-            <a href="/" title="野原圆长的Blog">
-                野原圆长的Blog
-            </a>
-        </span>
-
-        <p class="header-slogan header-item">
-            Hi, nice to meet you
-        </p>
-
-        <!-- Header Nav -->
-        <nav class="header-nav header-item">
-            <span class="header-nav-item">
-                <a href="/" title="Home">
-                    <span>主页</span>
-                </a>
-            </span>
-
-          <!-- Independent Pages -->
-          
-        </nav>
-
-        <!-- Header SNS -->
-        <div class="header-item header-sns_list">
-    <!-- Twitter -->
-    
-        <a href="https://twitter.com/twitter" target="_blank">
-            <i class="fa fa-twitter fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- Facebook -->
-    
-        <a href="https://www.facebook.com/facebook" target="_blank">
-            <i class="fa fa-facebook fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- Google + -->
-    
-        <a href="https://www.google.com/" target="_blank">
-            <i class="fa fa-google-plus fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- Weibo -->
-    
-        <a href="http://weibo.com/buptweixin" target="_blank">
-            <i class="fa fa-weibo fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- Instagram -->
-    
-
-    <!-- Tumblr -->
-    
-
-    <!-- Github -->
-    
-        <a href="https://github.com/buptweixin" target="_blank">
-            <i class="fa fa-github fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- LinkedIn -->
-    
-
-    <!-- Telegram -->
-    
-</div>
-
-    </div>
-</header>
-
                 
 
                 <!-- Main Container -->
@@ -326,21 +222,6 @@
                 
 
 
-    <!-- Isolation Post Header -->
-    <!-- Post thumbnail -->
-    
-        <!-- Post Header Info -->
-        <div class="post-header_info without-thumbnail">
-            <!-- Author Avatar & Name -->
-            <img src="/img/avatar.png" class="avatar-img" width="44px" height="44px" alt="Xin Wei's avatar">
-            <span class="name-span">Xin Wei</span>
-        </div>
-
-        <!-- Null Thumbnail -->
-        <div class="post_thumbnail-null">
-    
-        </div>
-
 
 
                 
@@ -350,97 +231,9 @@
     
 
     
-        <div class="post-content_wrapper">
-            <p class="post-title">
-                二叉树、二叉查找树、2-3树及红黑树
-            </p>
-            <p>本文参考自<a href="http://my.csdn.net/yang_yulei" target="_blank" rel="external">yang_yulei</a>的<a href="http://blog.csdn.net/yang_yulei/article/details/26066409" target="_blank" rel="external">博客</a></p>
-<h1 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h1><h2 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h2><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><p>适用于静态表(不允许插入)，效率很高</p>
-<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><p>不能同时支持任意插入、删除同时兼顾查找</p>
-<h2 id="二叉查找树"><a href="#二叉查找树" class="headerlink" title="二叉查找树"></a>二叉查找树</h2><ul>
-<li><p>特点</p>
-<p>左子树任意元素小于根节点，右子树任意元素大于根节点</p>
-</li>
-</ul>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-29/57653207.jpg" alt=""></p>
-<ul>
-<li><p>投影</p>
-<p>将其所有元素投影到直线上，保证一个结点的左子树中的键出现在它的右边，右子树中的键出现在它的右边，那么我们一定可以得到一条有序的键列。</p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-29/92888508.jpg" alt=""></p>
-</li>
-<li><p>优点</p>
-<p>相较于二分查找，能高效实现插入和删除操作</p>
-</li>
-<li><p>缺点</p>
-<p>树有可能是不平衡的，最糟糕情况下时间复杂度退化为$O(N)$,如下所示:</p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-29/29355175.jpg" alt=""></p>
-</li>
-<li><p><strong>与快速排序的类比</strong></p>
-<p>树的根结点就是快速排序中的第一个切分元素（左侧的键都比它小，右侧的键都比它大），而这对于所有的子树同样适用，这和快速排序中对于子数组的递归排序完全对应。</p>
-</li>
-</ul>
-<h3 id="平衡查找树"><a href="#平衡查找树" class="headerlink" title="平衡查找树"></a>平衡查找树</h3><p>限定树的高度约等于$\log{N}$,以保证查找在$\log{N}$次比较内结束</p>
-<h3 id="2-3查找树"><a href="#2-3查找树" class="headerlink" title="2-3查找树"></a>2-3查找树</h3><p>顾名思义，2-3查找树即为即有2-结点又有3-结点的树，它的结构如下</p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-29/32088768.jpg" alt=""></p>
-<p>一个3-结点内有两个键，左子树的键都比左键小，右子树的元素都比右键小，而中子树的元素介于两者之间。一个完美2-3树的所有空节点到根的距离都是相同的。</p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-29/32088768.jpg" alt=""></p>
-<ul>
-<li><p>查找</p>
-<p>2-3树的查找比较简单，和二叉树类似</p>
-</li>
-<li><p>插入</p>
-<p>2-3树的插入涉及到了3-结点的展开</p>
-<p>3-结点的展开如下所示</p>
-<p>​    <img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-29/33755704.jpg" alt=""></p>
-<ul>
-<li><p>向父结点为2结点的3-结点插入</p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-29/34357326.jpg" alt=""></p>
-</li>
-<li><p>向父结点是3-结点插入</p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-29/70658742.jpg" alt=""></p>
-<p>2-3树插入算法的根本在于这些变换都是局部的：除了相关的结点和链接之外不必修改或者检查树的其他部分。每次变换中，变更的链接数量不会超过一个很小的常数。所有局部变换都不会影响整棵树的有序性和平衡性。</p>
-</li>
-</ul>
-</li>
-<li><p>优点</p>
-<p>2-3树在最坏情况下仍有较好的性能。每个操作中处理每个结点的时间都不会超过一个很小的常数，且这两个操作都只会访问一条路径上的结点，所以任何查找或插入的成本都不会超过对数级别</p>
-</li>
-<li><p>缺点</p>
-<p>维护两种操作需要大量代码，产生的额外开销可能比标准二叉查找树更慢。</p>
-</li>
-</ul>
-<h3 id="红黑树-1"><a href="#红黑树-1" class="headerlink" title="红黑树"></a>红黑树</h3><p>红黑树就是用红链表示3-节点的2-3树</p>
-<p>3-结点和红链的转化规则如下：</p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-29/76753789.jpg" alt=""></p>
-<ul>
-<li><p>另一种定义</p>
-<ol>
-<li>红链接均为左链接。</li>
-<li>没有任何一个结点同时和两条红链接相连。</li>
-<li>该树是完美黑色平衡的，即任意空链接到根结点的路径上的黑链接数量相同。</li>
-</ol>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-29/963151.jpg" alt=""></p>
-</li>
-<li><p>旋转</p>
-<p>在我们实现的某些操作中可能会出现红色右链接或者两条连续的红链接，但在操作完成前这些情况都会被小心地旋转并修复。</p>
-<p>（我们在这里不讨论旋转的几种情况，把红黑树看做2-3树，自然可以得到正确的旋转后结果）</p>
-</li>
-<li><p>插入</p>
-<p>在插入时我们可以使用旋转操作帮助我们保证2-3树和红黑树之间的一一对应关系，因为旋转操作可以保持红黑树的两个重要性质：有序性和完美平衡性。</p>
-</li>
-<li><p>构造过程</p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-29/64933751.jpg" alt=""></p>
-</li>
-</ul>
-
-        </div>
-    
 </div>
 
 
-                
-                    <!-- Paradox Post Info -->
-                    
                 
 
                 <!-- Post Comments -->

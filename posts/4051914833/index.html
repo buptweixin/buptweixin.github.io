@@ -192,112 +192,8 @@
 
 
     
-        <body id="scheme-Isolation" class="lazy">
+        <body id="scheme-paradox" class="lazy">
             <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="material-layout  mdl-js-layout has-drawer is-upgraded">
-                
-                    <!-- Isolation Header -->
-                    <header class="header">
-    <div class="header-wrapper">
-        <!-- Header Copyright -->
-        <div class="header-copyright">
-            <div class="header-site">
-                ©&nbsp;
-                <script type="text/javascript">
-                    var fd = new Date();
-                    document.write(fd.getFullYear());
-                </script>
-                &nbsp;野原圆长的Blog
-            </div>
-            <!--
-            I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright.
-            It will not impact the appearance and can give developers a lot of support :)
-
-            很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
-            它不会影响美观并可以给开发者很大的支持。 :)
-            -->
-            <div>
-                Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a>
-                <br>
-                Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a>
-            </div>
-        </div>
-
-        <!-- Header Title -->
-        <span class="header-title header-item">
-            <a href="/" title="野原圆长的Blog">
-                野原圆长的Blog
-            </a>
-        </span>
-
-        <p class="header-slogan header-item">
-            Hi, nice to meet you
-        </p>
-
-        <!-- Header Nav -->
-        <nav class="header-nav header-item">
-            <span class="header-nav-item">
-                <a href="/" title="Home">
-                    <span>主页</span>
-                </a>
-            </span>
-
-          <!-- Independent Pages -->
-          
-        </nav>
-
-        <!-- Header SNS -->
-        <div class="header-item header-sns_list">
-    <!-- Twitter -->
-    
-        <a href="https://twitter.com/twitter" target="_blank">
-            <i class="fa fa-twitter fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- Facebook -->
-    
-        <a href="https://www.facebook.com/facebook" target="_blank">
-            <i class="fa fa-facebook fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- Google + -->
-    
-        <a href="https://www.google.com/" target="_blank">
-            <i class="fa fa-google-plus fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- Weibo -->
-    
-        <a href="http://weibo.com/buptweixin" target="_blank">
-            <i class="fa fa-weibo fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- Instagram -->
-    
-
-    <!-- Tumblr -->
-    
-
-    <!-- Github -->
-    
-        <a href="https://github.com/buptweixin" target="_blank">
-            <i class="fa fa-github fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- LinkedIn -->
-    
-
-    <!-- Telegram -->
-    
-</div>
-
-    </div>
-</header>
-
                 
 
                 <!-- Main Container -->
@@ -326,21 +222,6 @@
                 
 
 
-    <!-- Isolation Post Header -->
-    <!-- Post thumbnail -->
-    
-        <!-- Post Header Info -->
-        <div class="post-header_info without-thumbnail">
-            <!-- Author Avatar & Name -->
-            <img src="/img/avatar.png" class="avatar-img" width="44px" height="44px" alt="Xin Wei's avatar">
-            <span class="name-span">Xin Wei</span>
-        </div>
-
-        <!-- Null Thumbnail -->
-        <div class="post_thumbnail-null">
-    
-        </div>
-
 
 
                 
@@ -350,34 +231,9 @@
     
 
     
-        <div class="post-content_wrapper">
-            <p class="post-title">
-                神经网络引入循环不变性
-            </p>
-            <p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-9-10/38358535.jpg" width="720px"><br><a id="more"></a></p>
-<p>由于实际中的数据会以各种各样的形式出现，所以我们在挑选神经网络的训练数据集时需要尽可能的覆盖到所有的情况。比如要训练一个网络来根据病人的x光判断手掌骨骼是否出现畸形，我们会希望用于训练的照片中手掌的位置、方向要尽可能与实际情况吻合，这样可以降低过拟合情况的发生。</p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-9-10/987196.jpg" alt=""></p>
-<p>我们通常会采取两个方法来试图解决这个问题，一是在采集样本过程中尽量考虑各种情况，二是人为的对现有的图像做旋转、平移等操作增加样本空间位置信息；然而，很多时候采集新样本的成本很高，第一个方法很难实施，而旋转图像增加样本的方法往往会造成信息的冗余使网络训练速度减慢。为此，Google DeepMind团队在ICML2016论文 <em>Exploiting Cyclic Symmetry in Convolutional Neural Networks</em> 中提出了将循环不变性编码进神经网络方法，这个方法将网络对图像的处理分成四个路径，每个路径处理不同角度的图片，这样就可以学习到图像的各个角度信息从而对旋转不敏感，也即题目中的”旋转不变性”。</p>
-<h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><p>为了实现这样的网络，作者提出了四种操作：Slice、Roll、Poll和Stack。<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-9-10/72030550.jpg" alt=""></p>
-<h3 id="Cycle-slice"><a href="#Cycle-slice" class="headerlink" title="Cycle slice"></a>Cycle slice</h3><p>Slice 操作将原始图像复制四份分别旋转0°、90°、180°和270°，作为网络四条独立路径的输入，如下如所示：</p>
-<p>  <img src="http://7xkyov.com1.z0.glb.clouddn.com/16-9-10/61482297.jpg" alt=""></p>
-<p>至于为什么选择0°、90°、180°和270°这四个角度旋转是因为这几个操作只需要使用简单的矩阵转置就能实现而且是只有这几个旋转操作不需要插值，效率很高。同时，这4个角度效果已经很好了，作者尝试了八角度的旋转，然而对结果的提升不大却大大降低了训练速度。</p>
-<h3 id="Cycle-roll，-Cycle-Stack"><a href="#Cycle-roll，-Cycle-Stack" class="headerlink" title="Cycle roll， Cycle Stack"></a>Cycle roll， Cycle Stack</h3><p>进行完Slice操作后，可以获得四条独立的路径，每条路径上都包含不同角度图片的feature map，为了更进一步提高后续层能够使用的信息，在几次卷积之后可以把四条路径的feature map综合在一起：<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-9-10/613856.jpg" alt=""><br>如上图所示，每条路径的都和其他三条路径的feature map综合在了一起，然后使用Stack操作将每个路径上的四个feature map拼接在一起形成一个大的feature map，由于只需要简单地将其他路径上的feature map复制在一起所以这一步的计算量很小。</p>
-<p>注意， 虽然每条路径都是相同的四个feature map，但是他们的组合顺序是不一样的，所以每条路径都是不同的。</p>
-<h3 id="Cycle-Pool"><a href="#Cycle-Pool" class="headerlink" title="Cycle Pool"></a>Cycle Pool</h3><p>Pool操作是Slice 的对偶操作，它在最后的全连接之前把四条路径的feature map重新组合在一起，这样网络学习到的特征就综合在一起了。</p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-9-10/27629001.jpg" alt=""></p>
-<h2 id="循环不变网络"><a href="#循环不变网络" class="headerlink" title="循环不变网络"></a>循环不变网络</h2><p>四个操作在网路中的位置如图所示。<br><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-9-10/54519667.jpg" alt=""><br>作者在所有四条路径中每次使用的filter都是相同的，这样就和未加入循环不变性的网络的参数数量基本保持了一致。注意，虽然用的filter是一样的，但是每条路径feature map和filter的相对位置是不一样的。</p>
-<h2 id="使用效果"><a href="#使用效果" class="headerlink" title="使用效果"></a>使用效果</h2><p>作者使用这种网络获得了kaggle nbsb（National Data Science Bowl）项目的冠军，具体的请查阅<a href="http://benanne.github.io/2015/03/17/plankton.html" target="_blank" rel="external">Classifying plankton with deep neural networks<br>MARCH 17, 2015</a></p>
-<p>代码见<a href="https://github.com/benanne/kaggle-ndsb" target="_blank" rel="external">kaggle-ndsb</a>.</p>
-
-        </div>
-    
 </div>
 
 
-                
-                    <!-- Paradox Post Info -->
-                    
                 
 
                 <!-- Post Comments -->

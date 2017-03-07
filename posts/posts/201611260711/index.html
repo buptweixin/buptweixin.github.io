@@ -192,112 +192,8 @@
 
 
     
-        <body id="scheme-Isolation" class="lazy">
+        <body id="scheme-paradox" class="lazy">
             <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="material-layout  mdl-js-layout has-drawer is-upgraded">
-                
-                    <!-- Isolation Header -->
-                    <header class="header">
-    <div class="header-wrapper">
-        <!-- Header Copyright -->
-        <div class="header-copyright">
-            <div class="header-site">
-                ©&nbsp;
-                <script type="text/javascript">
-                    var fd = new Date();
-                    document.write(fd.getFullYear());
-                </script>
-                &nbsp;野原圆长的Blog
-            </div>
-            <!--
-            I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright.
-            It will not impact the appearance and can give developers a lot of support :)
-
-            很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
-            它不会影响美观并可以给开发者很大的支持。 :)
-            -->
-            <div>
-                Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a>
-                <br>
-                Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a>
-            </div>
-        </div>
-
-        <!-- Header Title -->
-        <span class="header-title header-item">
-            <a href="/" title="野原圆长的Blog">
-                野原圆长的Blog
-            </a>
-        </span>
-
-        <p class="header-slogan header-item">
-            Hi, nice to meet you
-        </p>
-
-        <!-- Header Nav -->
-        <nav class="header-nav header-item">
-            <span class="header-nav-item">
-                <a href="/" title="Home">
-                    <span>主页</span>
-                </a>
-            </span>
-
-          <!-- Independent Pages -->
-          
-        </nav>
-
-        <!-- Header SNS -->
-        <div class="header-item header-sns_list">
-    <!-- Twitter -->
-    
-        <a href="https://twitter.com/twitter" target="_blank">
-            <i class="fa fa-twitter fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- Facebook -->
-    
-        <a href="https://www.facebook.com/facebook" target="_blank">
-            <i class="fa fa-facebook fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- Google + -->
-    
-        <a href="https://www.google.com/" target="_blank">
-            <i class="fa fa-google-plus fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- Weibo -->
-    
-        <a href="http://weibo.com/buptweixin" target="_blank">
-            <i class="fa fa-weibo fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- Instagram -->
-    
-
-    <!-- Tumblr -->
-    
-
-    <!-- Github -->
-    
-        <a href="https://github.com/buptweixin" target="_blank">
-            <i class="fa fa-github fa-lg" aria-hidden="true"></i>
-        </a>
-    
-
-    <!-- LinkedIn -->
-    
-
-    <!-- Telegram -->
-    
-</div>
-
-    </div>
-</header>
-
                 
 
                 <!-- Main Container -->
@@ -326,21 +222,6 @@
                 
 
 
-    <!-- Isolation Post Header -->
-    <!-- Post thumbnail -->
-    
-        <!-- Post Header Info -->
-        <div class="post-header_info without-thumbnail">
-            <!-- Author Avatar & Name -->
-            <img src="/img/avatar.png" class="avatar-img" width="44px" height="44px" alt="Xin Wei's avatar">
-            <span class="name-span">Xin Wei</span>
-        </div>
-
-        <!-- Null Thumbnail -->
-        <div class="post_thumbnail-null">
-    
-        </div>
-
 
 
                 
@@ -350,54 +231,9 @@
     
 
     
-        <div class="post-content_wrapper">
-            <p class="post-title">
-                Caffe 问题总结『不定期更新』
-            </p>
-            <h3 id="make时出现hdf5-hpp-not-found-之类的问题"><a href="#make时出现hdf5-hpp-not-found-之类的问题" class="headerlink" title="make时出现hdf5.hpp not found`之类的问题"></a><code>make</code>时出现hdf5.hpp not found`之类的问题</h3><p>Ubuntu16.04中hdf5文件位置发生了变化，需要手工修改<br>首先，将Makefile.config中的</p>
-<pre><code>INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include
-LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib
-</code></pre><p>修改为：</p>
-<pre><code>INCLUDE_DIRS :=  $(PYTHON_INCLUDE) /usr/local/include /usr/include/hdf5/serial
-LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib /usr/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/hdf5/serial
-</code></pre><p>然后在caffe根目录下执行下面的命令</p>
-<pre class="line-numbers language-shell"><code class="language-shell">cd $CAFFE_ROOT
-find . -type f -exec sed -i -e 's^"hdf5.h"^"hdf5/serial/hdf5.h"^g' -e 's^"hdf5_hl.h"^"hdf5/serial/hdf5_hl.h"^g' '{}' \;
-cd /usr/lib/x86_64-linux-gnu
-sudo ln -s libhdf5_serial.so.10.1.0 libhdf5.so
-sudo ln -s libhdf5_serial_hl.so.10.0.2 libhdf5_hl.so
-\\注意：这里的10.1.0和10.0.2根据不同的系统可能对应的数字会不同，比如在ubuntu15.10中其数字就是8.0.2.
-\\具体的数字可以在打开的文件中查看对应文件后面跟的数字
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="使py-faster-rcnn等自带的老版本caffe支持GTX1080和cudnn-v5"><a href="#使py-faster-rcnn等自带的老版本caffe支持GTX1080和cudnn-v5" class="headerlink" title="使py-faster-rcnn等自带的老版本caffe支持GTX1080和cudnn v5"></a>使<a href="https://github.com/rbgirshick/py-faster-rcnn" target="_blank" rel="external">py-faster-rcnn</a>等自带的老版本caffe支持GTX1080和cudnn v5</h3><p>首先，进入caffe根目录添加官方caffe源到本地</p>
-<pre class="line-numbers language-shell"><code class="language-shell">cd caffe-faster-rcnn
-git remote add caffe https://github.com/BVLC/caffe.git  
-git fetch caffe  
-git merge caffe/master
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>merge步骤如果git提示本地修改没有保存不能合并的话,使用</p>
-<pre class="line-numbers language-shell"><code class="language-shell">git stash
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>把本地修改暂存起来，再进行merge操作。<br>然后进入<code>$CAFFE_ROOT/include/caffe/layers/python_layer.hpp</code>找到<code>self_.attr(&quot;phase&quot;) = static_cast&lt;int&gt;(this-&gt;phase_);</code>这一行，将其注释掉。</p>
-<h3 id="Caffe运行速度很慢"><a href="#Caffe运行速度很慢" class="headerlink" title="Caffe运行速度很慢"></a>Caffe运行速度很慢</h3><p>配置完全相同的电脑，如果运行速度相差很多的话，一个可能是更快的那台机器采用了cudnn加速或cudnn的版本更高；另外一种情况是在Makefile.config中打开了debug选项，将其关闭就可以了。</p>
-<h3 id="build-release-lib-libcaffe-so：对‘google-protobuf-Message-DebugString-const’未定义的引用"><a href="#build-release-lib-libcaffe-so：对‘google-protobuf-Message-DebugString-const’未定义的引用" class="headerlink" title=".build_release/lib/libcaffe.so：对‘google::protobuf::Message::DebugString() const’未定义的引用"></a><code>.build_release/lib/libcaffe.so：对‘google::protobuf::Message::DebugString() const’未定义的引用</code></h3><p>可能是安装cuda的时候gcc和g++的版本被降低到了4.9以下，通过下列方法将他们改回来:</p>
-<pre class="line-numbers language-shell"><code class="language-shell">sudo rm /usr/bin/gcc
-sudo rm /usr/bin/g++
-sudo ln -s /usr/bin/gcc-5 /usr/bin/gcc
-sudo ln -s /usr/bin/g++-5 /usr/bin/g++
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>然后进入<code>sudo vim /usr/local/cuda/include/host_config.h</code>将115行的</p>
-<pre><code>#error -- unsupported GNU version! gcc versions later than 5.3 are not supported!
-</code></pre><p>注释掉</p>
-
-        </div>
-    
 </div>
 
 
-                
-                    <!-- Paradox Post Info -->
-                    
                 
 
                 <!-- Post Comments -->
