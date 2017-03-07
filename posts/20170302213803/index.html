@@ -1,496 +1,526 @@
 <!DOCTYPE html>
-<html lang="zh">
-    <head>
-    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- 
-        © Material Theme
-        https://github.com/viosey/hexo-theme-material
-        Version: 1.3.0 -->
+<html>
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+  <title>MXNET: Expression Template Tutorial—MXNET 表达式模板笔记 | 野原圆长的Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="MXNET: Expression Template Tutorial—MXNET 表达式模板笔记假设我们要写一个如下的权值更新算法
+weight =  - eta * (grad + lambda * weight);
 
-    <!-- Title -->
-    
-    <title>
-        
-            MXNET: Expression Template Tutorial—MXNET 表达式模板笔记 | 
-        
-        野原圆长的Blog
-    </title>
+常见的实现算法是在执行前预先分配需要的内存，而在执行过程中不进行内存的分配
+void UpdateWeight (const float *grad, float eta, f">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MXNET: Expression Template Tutorial—MXNET 表达式模板笔记">
+<meta property="og:url" content="http://www.wowx.info/posts/20170302213803/index.html">
+<meta property="og:site_name" content="野原圆长的Blog">
+<meta property="og:description" content="MXNET: Expression Template Tutorial—MXNET 表达式模板笔记假设我们要写一个如下的权值更新算法
+weight =  - eta * (grad + lambda * weight);
 
-    <!-- Favicons -->
-    <link rel="icon shortcut" type="image/ico" href="/img/wx.png">
-    <link rel="icon" sizes="192x192" href="/img/wx.png">
-    <link rel="apple-touch-icon" href="/img/wx.png">
+常见的实现算法是在执行前预先分配需要的内存，而在执行过程中不进行内存的分配
+void UpdateWeight (const float *grad, float eta, f">
+<meta property="og:updated_time" content="2017-03-02T15:06:57.539Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MXNET: Expression Template Tutorial—MXNET 表达式模板笔记">
+<meta name="twitter:description" content="MXNET: Expression Template Tutorial—MXNET 表达式模板笔记假设我们要写一个如下的权值更新算法
+weight =  - eta * (grad + lambda * weight);
 
-    <!-- Meta & Info -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#0097A7">
-    <meta name="author" content="Xin Wei">
-    <meta name="description" content="null">
-    <meta name="keywords" content="Blog deep_learging,深度学习,MXNET">
+常见的实现算法是在执行前预先分配需要的内存，而在执行过程中不进行内存的分配
+void UpdateWeight (const float *grad, float eta, f">
+  
+    <link rel="alternate" href="/atom.xml" title="野原圆长的Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
 
-    <!--iOS -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <meta name="apple-mobile-web-app-title" content="Title">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="MobileOptimized" content="480">
-
-    <!-- Add to homescreen for Chrome on Android -->
-    <meta name="mobile-web-app-capable" content="yes">
-
-    <!-- Add to homescreen for Safari on iOS -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="野原圆长的Blog">
-
-    <!-- The Open Graph protocol -->
-    <meta property="og:url" content="http://www.wowx.info">
-    <meta property="og:type" content="blog">
-    <meta property="og:title" content="MXNET: Expression Template Tutorial—MXNET 表达式模板笔记 | 野原圆长的Blog">
-    <meta property="og:description" content="null">
-    <meta property="og:article:tag" content="深度学习"> <meta property="og:article:tag" content="MXNET"> 
-
-    <!--[if lte IE 9]>
-        <link rel="stylesheet" href="/css/ie-blocker.css">
-
-        
-            <script src="/js/ie-blocker.zhCN.js"></script>
-        
-    <![endif]-->
-
-    <!-- Import CSS -->
-    <link rel="stylesheet" href="/css/material.min.css">
-    <link rel="stylesheet" href="/css/style.min.css">
-    <!-- Config CSS -->
-
-
-<!-- Other Styles -->
-<style>
-  body, html {
-    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
-  }
-
-  a {
-    color: #00838F;
-  }
-
-  .mdl-card__media,
-  #search-label,
-  #search-form-label:after,
-  #scheme-Paradox .hot_tags-count,
-  #scheme-Paradox .sidebar_archives-count,
-  #scheme-Paradox .sidebar-colored .sidebar-header,
-  #scheme-Paradox .sidebar-colored .sidebar-badge{
-    background-color: #0097A7 !important;
-  }
-
-  /* Sidebar User Drop Down Menu Text Color */
-  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
-  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
-    color: #0097A7 !important;
-  }
-
-  #post_entry-right-info,
-  .sidebar-colored .sidebar-nav li:hover > a,
-  .sidebar-colored .sidebar-nav li:hover > a i,
-  .sidebar-colored .sidebar-nav li > a:hover,
-  .sidebar-colored .sidebar-nav li > a:hover i,
-  .sidebar-colored .sidebar-nav li > a:focus i,
-  .sidebar-colored .sidebar-nav > .open > a,
-  .sidebar-colored .sidebar-nav > .open > a:hover,
-  .sidebar-colored .sidebar-nav > .open > a:focus,
-  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
-    color: #0097A7 !important;
-  }
-
-  .toTop {
-    background: #757575 !important;
-  }
-
-  .material-layout .material-post>.material-nav,
-  .material-layout .material-index>.material-nav,
-  .material-nav a {
-    color: #757575;
-  }
-
-  #scheme-Paradox .MD-burger-layer {
-    background-color: #757575;
-  }
-
-  #scheme-Paradox #post-toc-trigger-btn {
-    color: #757575;
-  }
-
-  .post-toc a:hover {
-    color: #00838F;
-    text-decoration: underline;
-  }
-</style>
-
-
-<!-- Theme Background Related-->
-
-    <style>
-      body{
-        background-color: #F5F5F5;
-      }
-
-      /* blog_info bottom background */
-      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
-        background-color: #fff;
-      }
-    </style>
-
-
-
-
-<!-- Fade Effect -->
-
-    <style>
-      .fade {
-        transition: all 800ms linear;
-        -webkit-transform: translate3d(0,0,0);
-        -moz-transform: translate3d(0,0,0);
-        -ms-transform: translate3d(0,0,0);
-        -o-transform: translate3d(0,0,0);
-        transform: translate3d(0,0,0);
-        opacity: 1;
-      }
-
-      .fade.out{
-        opacity: 0;
-      }
-    </style>
-
-
-
-    <script src="/js/jquery.min.js"></script>
-    <script src="/js/queue.js"></script>
-
-    <!-- UC Browser Compatible -->
-    <script>
-        var agent = navigator.userAgent.toLowerCase();
-        if(agent.indexOf('ucbrowser')>0) {
-            document.write("<link rel=\"stylesheet\" href=\"/css/uc.css\">");
-            alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
-        }
-    </script>
-
-    
-
-    
-
-    <!-- Bing Background -->
-    
-
-    <!-- Custom Head -->
-    
 <link rel="stylesheet" href="/css/prism.css" type="text/css">
 <link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
-
-    
-        <body id="scheme-paradox" class="lazy">
-            <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="material-layout  mdl-js-layout has-drawer is-upgraded">
-                
-
-                <!-- Main Container -->
-                <main class="material-layout__content" id="main">
-
-                    <!-- Top Anchor -->
-                    <div id="top"></div>
-
-                    
-
-                    <!-- Post TOC -->
-
-    
-
-
-
-<!-- Layouts -->
-
-    <!-- Post Module -->
-    <div class="material-post_container">
-
-        <div class="material-post mdl-grid">
-            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
-
-                <!-- Post Header(Thumbnail & Title) -->
-                
-
-
-
-
-                
-
-                <!-- Post Content -->
-                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
-    
-
-    
-</div>
-
-
-                
-
-                <!-- Post Comments -->
-                
-                    
-    <!-- 使用多说评论 -->
-    <link rel="stylesheet" href="/css/duoshuo.min.css">
-<style>
-    #ds-thread #ds-reset .ds-post-button{
-        background-color: #0097A7 !important;
-    }
-    #ds-wrapper #ds-reset .ds-icons-32{
-        background-color: #0097A7 !important;
-    }
-    #ds-reset .ds-highlight {
-        color: #0097A7 !important;
-    }
-</style>
-<div id="comments">
-    <!-- 多说评论框 start -->
-    <div class="ds-thread"
-        data-thread-key="posts/20170302213803/"
-        data-url="http://www.wowx.info/posts/20170302213803/"
-        data-title="MXNET: Expression Template Tutorial—MXNET 表达式模板笔记">
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">野原圆长的Blog</a>
+      </h1>
+      
     </div>
-    <!-- 多说评论框 end -->
-</div>
-
-
-
-
-
-
-                
-            </div>
-
-            <!-- Post Prev & Next Nav -->
-            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
-    <!-- Prev Nav -->
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://www.wowx.info"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-mxnet-mshadow-expressiontemplatetutorial" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/posts/20170302213803/" class="article-date">
+  <time datetime="2017-03-02T13:38:03.000Z" itemprop="datePublished">2017-03-02</time>
+</a>
     
-        <a href="/posts/20170303131752/" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            新篇
-        </a>
+  </div>
+  <div class="article-inner">
     
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      MXNET: Expression Template Tutorial—MXNET 表达式模板笔记
+    </h1>
+  
 
-    <!-- Section Spacer -->
-    <div class="section-spacer"></div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="MXNET-Expression-Template-Tutorial—MXNET-表达式模板笔记"><a href="#MXNET-Expression-Template-Tutorial—MXNET-表达式模板笔记" class="headerlink" title="MXNET: Expression Template Tutorial—MXNET 表达式模板笔记"></a>MXNET: Expression Template Tutorial—MXNET 表达式模板笔记</h2><p>假设我们要写一个如下的权值更新算法</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">weight <span class="token operator">=</span>  <span class="token operator">-</span> eta <span class="token operator">*</span> <span class="token punctuation">(</span>grad <span class="token operator">+</span> lambda <span class="token operator">*</span> weight<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>常见的实现算法是在执行前预先分配需要的内存，而在执行过程中不进行内存的分配</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">UpdateWeight</span> <span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">float</span> <span class="token operator">*</span>grad<span class="token punctuation">,</span> <span class="token keyword">float</span> eta<span class="token punctuation">,</span> <span class="token keyword">float</span> lambda<span class="token punctuation">,</span>
+                   <span class="token keyword">int</span> n<span class="token punctuation">,</span> <span class="token keyword">float</span> <span class="token operator">*</span>weight<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    weight<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span>  <span class="token operator">-</span> eta <span class="token operator">*</span> <span class="token punctuation">(</span>grad<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">+</span> lambda <span class="token operator">*</span> weight<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>因为需要预先分配内存，如果要更新的权重很多的话这个过程会变得很繁琐，能不能改写成下面这样的形式并且保持性能？</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">UpdateWeight</span> <span class="token punctuation">(</span><span class="token keyword">const</span> Vec<span class="token operator">&amp;</span> grad<span class="token punctuation">,</span> <span class="token keyword">float</span> eta<span class="token punctuation">,</span> <span class="token keyword">float</span> lambda<span class="token punctuation">,</span> Vec<span class="token operator">&amp;</span> weight<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  weight <span class="token operator">=</span> <span class="token operator">-</span>eta <span class="token operator">*</span> <span class="token punctuation">(</span>grad <span class="token operator">+</span> lambda <span class="token operator">*</span> weight<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>答案是有</p>
+<h3 id="A-Naive-Bad-Solution"><a href="#A-Naive-Bad-Solution" class="headerlink" title="A Naive Bad Solution"></a>A Naive Bad Solution</h3><p>最容易想到的方法如下所示，创建一个Vec类，在该类的构造函数中分配存储空间</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">// Naive solution for vector operation overloading</span>
 
-    <!-- Next Nav -->
+<span class="token keyword">struct</span> Vec <span class="token punctuation">{</span>
+  <span class="token keyword">int</span> len<span class="token punctuation">;</span>
+  <span class="token keyword">float</span><span class="token operator">*</span> dptr<span class="token punctuation">;</span>
+  <span class="token function">Vec</span><span class="token punctuation">(</span><span class="token keyword">int</span> len<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">len</span><span class="token punctuation">(</span>len<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    dptr <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">float</span><span class="token punctuation">[</span>len<span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token function">Vec</span><span class="token punctuation">(</span><span class="token keyword">const</span> Vec<span class="token operator">&amp;</span> src<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">len</span><span class="token punctuation">(</span>src<span class="token punctuation">.</span>len<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    dptr <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">float</span><span class="token punctuation">[</span>len<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token function">memcpy</span><span class="token punctuation">(</span>dptr<span class="token punctuation">,</span> src<span class="token punctuation">.</span>dptr<span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">float</span><span class="token punctuation">)</span><span class="token operator">*</span>len <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token operator">~</span><span class="token function">Vec</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">delete</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> dptr<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">inline</span> Vec <span class="token keyword">operator</span><span class="token operator">+</span><span class="token punctuation">(</span><span class="token keyword">const</span> Vec <span class="token operator">&amp;</span>lhs<span class="token punctuation">,</span> <span class="token keyword">const</span> Vec <span class="token operator">&amp;</span>rhs<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  Vec <span class="token function">res</span><span class="token punctuation">(</span>lhs<span class="token punctuation">.</span>len<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> lhs<span class="token punctuation">.</span>len<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    res<span class="token punctuation">.</span>dptr<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> lhs<span class="token punctuation">.</span>dptr<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">+</span> rhs<span class="token punctuation">.</span>dptr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">return</span> res<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>但是上面的实现有一个很大的问题，那就是计算过程需要创建和销毁临时变量，当操作很多时对性能影响很大。一个可能的改进是只实现<code>+= -=</code>等原地操作符，然而这将会大大限制类的使用。</p>
+<h3 id="Lazy-Evaluation-惰性求值"><a href="#Lazy-Evaluation-惰性求值" class="headerlink" title="Lazy Evaluation 惰性求值"></a>Lazy Evaluation 惰性求值</h3><p>我们仔细思考的话将会发现，我们之所以需要使用临时存储空间是因为不知道<code>+</code>的操作的结果最终的目标是什么，如果我们预先知道这个目标的话就可以免去临时空间分配的过程。</p>
+<p>下面的代码实现了一个简单的惰性求值</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">
+<span class="token comment" spellcheck="true">// Example Lazy evaluation code</span>
+<span class="token comment" spellcheck="true">// for simplicity, we use struct and make all members public</span>
+
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;cstdio></span></span>
+<span class="token keyword">struct</span> Vec<span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// expression structure holds the expression</span>
+<span class="token keyword">struct</span> BinaryAddExp <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> Vec <span class="token operator">&amp;</span>lhs<span class="token punctuation">;</span>
+  <span class="token keyword">const</span> Vec <span class="token operator">&amp;</span>rhs<span class="token punctuation">;</span>
+  <span class="token function">BinaryAddExp</span><span class="token punctuation">(</span><span class="token keyword">const</span> Vec <span class="token operator">&amp;</span>lhs<span class="token punctuation">,</span> <span class="token keyword">const</span> Vec <span class="token operator">&amp;</span>rhs<span class="token punctuation">)</span>
+  <span class="token operator">:</span> <span class="token function">lhs</span><span class="token punctuation">(</span>lhs<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">rhs</span><span class="token punctuation">(</span>rhs<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// no constructor and destructor to allocate and de-allocate memory,</span>
+<span class="token comment" spellcheck="true">//  allocation done by user</span>
+<span class="token keyword">struct</span> Vec <span class="token punctuation">{</span>
+  <span class="token keyword">int</span> len<span class="token punctuation">;</span>
+  <span class="token keyword">float</span><span class="token operator">*</span> dptr<span class="token punctuation">;</span>
+  <span class="token function">Vec</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+  <span class="token function">Vec</span><span class="token punctuation">(</span><span class="token keyword">float</span> <span class="token operator">*</span>dptr<span class="token punctuation">,</span> <span class="token keyword">int</span> len<span class="token punctuation">)</span>
+      <span class="token operator">:</span> <span class="token function">len</span><span class="token punctuation">(</span>len<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">dptr</span><span class="token punctuation">(</span>dptr<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+  <span class="token comment" spellcheck="true">// here is where evaluation happens</span>
+  <span class="token keyword">inline</span> Vec <span class="token operator">&amp;</span><span class="token keyword">operator</span><span class="token operator">=</span><span class="token punctuation">(</span><span class="token keyword">const</span> BinaryAddExp <span class="token operator">&amp;</span>src<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> len<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      dptr<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> src<span class="token punctuation">.</span>lhs<span class="token punctuation">.</span>dptr<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">+</span> src<span class="token punctuation">.</span>rhs<span class="token punctuation">.</span>dptr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token operator">*</span><span class="token keyword">this</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// no evaluation happens here</span>
+<span class="token keyword">inline</span> BinaryAddExp <span class="token keyword">operator</span><span class="token operator">+</span><span class="token punctuation">(</span><span class="token keyword">const</span> Vec <span class="token operator">&amp;</span>lhs<span class="token punctuation">,</span> <span class="token keyword">const</span> Vec <span class="token operator">&amp;</span>rhs<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token function">BinaryAddExp</span><span class="token punctuation">(</span>lhs<span class="token punctuation">,</span> rhs<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">const</span> <span class="token keyword">int</span> n <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">float</span> sa<span class="token punctuation">[</span>n<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token keyword">float</span> sb<span class="token punctuation">[</span>n<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token keyword">float</span> sc<span class="token punctuation">[</span>n<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+  Vec <span class="token function">A</span><span class="token punctuation">(</span>sa<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">B</span><span class="token punctuation">(</span>sb<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">C</span><span class="token punctuation">(</span>sc<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// run expression</span>
+  A <span class="token operator">=</span> B <span class="token operator">+</span> C<span class="token punctuation">;</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d:%f==%f+%f\n"</span><span class="token punctuation">,</span> i<span class="token punctuation">,</span> A<span class="token punctuation">.</span>dptr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> B<span class="token punctuation">.</span>dptr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> C<span class="token punctuation">.</span>dptr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>上面的Vec类中不进行任何的分配和释放存储空间的操作，这些操作交给用户来完整，当对两个Vec变量执行<code>+</code>操作时，并不直接计算结果，而是将两个Vec引用存储在BinaryAddExp结构体中并将其返回，遇到<code>=</code>操作符号时，遍历BinaryAdd中的两个Vec引用计算结果并返回。</p>
+<p>然而这个惰性求值实现只能计算类似<code>A=B+C</code>的二元操作，面对更长的表达式时则需要将其拆分成很多个<code>=</code>操作，十分不便</p>
+<h3 id="More-Lengthy-Expressions-and-Expression-Template适用于任何长度表达式的表达式模板"><a href="#More-Lengthy-Expressions-and-Expression-Template适用于任何长度表达式的表达式模板" class="headerlink" title="More Lengthy Expressions and Expression Template适用于任何长度表达式的表达式模板"></a>More Lengthy Expressions and Expression Template适用于任何长度表达式的表达式模板</h3><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">// Example code, expression template, and more length equations</span>
+<span class="token comment" spellcheck="true">// for simplicity, we use struct and make all members public</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;cstdio></span></span>
+
+<span class="token comment" spellcheck="true">// this is expression, all expressions must inheritate it,</span>
+<span class="token comment" spellcheck="true">//  and put their type in subtype</span>
+<span class="token comment" spellcheck="true">// Exp是所有其他表达式地基类</span>
+<span class="token keyword">template</span><span class="token operator">&lt;</span><span class="token keyword">typename</span> SubType<span class="token operator">></span>
+<span class="token keyword">struct</span> Exp <span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true">// returns const reference of the actual type of this expression</span>
+  <span class="token comment" spellcheck="true">// 返回该表达式的真实类的常量引用</span>
+  <span class="token keyword">inline</span> <span class="token keyword">const</span> SubType<span class="token operator">&amp;</span> <span class="token function">self</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token operator">*</span><span class="token keyword">static_cast</span><span class="token operator">&lt;</span><span class="token keyword">const</span> SubType<span class="token operator">*</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// binary add expression</span>
+<span class="token comment" spellcheck="true">// note how it is inheritates from Exp</span>
+<span class="token comment" spellcheck="true">// and put its own type into the template argument</span>
+<span class="token comment" spellcheck="true">// 相加操作表达式，使用BinaryAddExp&lt;TLhs, TRhs> 类本身实例化Exp</span>
+<span class="token keyword">template</span><span class="token operator">&lt;</span><span class="token keyword">typename</span> TLhs<span class="token punctuation">,</span> <span class="token keyword">typename</span> TRhs<span class="token operator">></span>
+<span class="token keyword">struct</span> BinaryAddExp<span class="token operator">:</span> <span class="token keyword">public</span> Exp<span class="token operator">&lt;</span>BinaryAddExp<span class="token operator">&lt;</span>TLhs<span class="token punctuation">,</span> TRhs<span class="token operator">></span> <span class="token operator">></span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> TLhs <span class="token operator">&amp;</span>lhs<span class="token punctuation">;</span>
+  <span class="token keyword">const</span> TRhs <span class="token operator">&amp;</span>rhs<span class="token punctuation">;</span>
+  <span class="token function">BinaryAddExp</span><span class="token punctuation">(</span><span class="token keyword">const</span> TLhs<span class="token operator">&amp;</span> lhs<span class="token punctuation">,</span> <span class="token keyword">const</span> TRhs<span class="token operator">&amp;</span> rhs<span class="token punctuation">)</span>
+      <span class="token operator">:</span> <span class="token function">lhs</span><span class="token punctuation">(</span>lhs<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">rhs</span><span class="token punctuation">(</span>rhs<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+  <span class="token comment" spellcheck="true">// evaluation function, evaluate this expression at position i</span>
+  <span class="token comment" spellcheck="true">// eval函数执行真正的计算</span>
+  <span class="token keyword">inline</span> <span class="token keyword">float</span> <span class="token function">Eval</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> lhs<span class="token punctuation">.</span><span class="token function">Eval</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token operator">+</span> rhs<span class="token punctuation">.</span><span class="token function">Eval</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// no constructor and destructor to allocate</span>
+<span class="token comment" spellcheck="true">// and de-allocate memory, allocation done by user</span>
+<span class="token keyword">struct</span> Vec<span class="token operator">:</span> <span class="token keyword">public</span> Exp<span class="token operator">&lt;</span>Vec<span class="token operator">></span> <span class="token punctuation">{</span>
+  <span class="token keyword">int</span> len<span class="token punctuation">;</span>
+  <span class="token keyword">float</span><span class="token operator">*</span> dptr<span class="token punctuation">;</span>
+  <span class="token function">Vec</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+  <span class="token function">Vec</span><span class="token punctuation">(</span><span class="token keyword">float</span> <span class="token operator">*</span>dptr<span class="token punctuation">,</span> <span class="token keyword">int</span> len<span class="token punctuation">)</span>
+      <span class="token operator">:</span><span class="token function">len</span><span class="token punctuation">(</span>len<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">dptr</span><span class="token punctuation">(</span>dptr<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+  <span class="token comment" spellcheck="true">// here is where evaluation happens</span>
+  <span class="token comment" spellcheck="true">// 遇到赋值时执行真正的计算</span>
+  <span class="token keyword">template</span><span class="token operator">&lt;</span><span class="token keyword">typename</span> EType<span class="token operator">></span>
+  <span class="token keyword">inline</span> Vec<span class="token operator">&amp;</span> <span class="token keyword">operator</span><span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">const</span> Exp<span class="token operator">&lt;</span>EType<span class="token operator">></span><span class="token operator">&amp;</span> src_<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> EType <span class="token operator">&amp;</span>src <span class="token operator">=</span> src_<span class="token punctuation">.</span><span class="token function">self</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> len<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      dptr<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> src<span class="token punctuation">.</span><span class="token function">Eval</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token operator">*</span><span class="token keyword">this</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment" spellcheck="true">// evaluation function, evaluate this expression at position i</span>
+  <span class="token keyword">inline</span> <span class="token keyword">float</span> <span class="token function">Eval</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> dptr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// template add, works for any expressions</span>
+<span class="token keyword">template</span><span class="token operator">&lt;</span><span class="token keyword">typename</span> TLhs<span class="token punctuation">,</span> <span class="token keyword">typename</span> TRhs<span class="token operator">></span>
+<span class="token keyword">inline</span> BinaryAddExp<span class="token operator">&lt;</span>TLhs<span class="token punctuation">,</span> TRhs<span class="token operator">></span>
+<span class="token keyword">operator</span><span class="token operator">+</span><span class="token punctuation">(</span><span class="token keyword">const</span> Exp<span class="token operator">&lt;</span>TLhs<span class="token operator">></span> <span class="token operator">&amp;</span>lhs<span class="token punctuation">,</span> <span class="token keyword">const</span> Exp<span class="token operator">&lt;</span>TRhs<span class="token operator">></span> <span class="token operator">&amp;</span>rhs<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> BinaryAddExp<span class="token operator">&lt;</span>TLhs<span class="token punctuation">,</span> TRhs<span class="token operator">></span><span class="token punctuation">(</span>lhs<span class="token punctuation">.</span><span class="token function">self</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> rhs<span class="token punctuation">.</span><span class="token function">self</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">const</span> <span class="token keyword">int</span> n <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">float</span> sa<span class="token punctuation">[</span>n<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token keyword">float</span> sb<span class="token punctuation">[</span>n<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token keyword">float</span> sc<span class="token punctuation">[</span>n<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+  Vec <span class="token function">A</span><span class="token punctuation">(</span>sa<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">B</span><span class="token punctuation">(</span>sb<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">C</span><span class="token punctuation">(</span>sc<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// run expression, this expression is longer:)</span>
+  A <span class="token operator">=</span> B <span class="token operator">+</span> C <span class="token operator">+</span> C<span class="token punctuation">;</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d:%f == %f + %f + %f\n"</span><span class="token punctuation">,</span> i<span class="token punctuation">,</span>
+           A<span class="token punctuation">.</span>dptr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> B<span class="token punctuation">.</span>dptr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span>
+           C<span class="token punctuation">.</span>dptr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> C<span class="token punctuation">.</span>dptr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>因为<code>Eval</code>是内联的，所以在编译阶段<code>src.Eval[i]</code>会直接被替换成<code>B.dptr[i]+C.dptr[i]+C.dptr[i]</code></p>
+<h3 id="更灵活的惰性求值表达式模板"><a href="#更灵活的惰性求值表达式模板" class="headerlink" title="更灵活的惰性求值表达式模板"></a>更灵活的惰性求值表达式模板</h3><p>最后一个(也是最接近mshadow实现)版本可以允许我们自定义元素操作</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">// Example code, expression template</span>
+<span class="token comment" spellcheck="true">// with binary operator definition and extension</span>
+<span class="token comment" spellcheck="true">// for simplicity, we use struct and make all members public</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;cstdio></span></span>
+
+<span class="token comment" spellcheck="true">// this is expression, all expressions must inheritate it,</span>
+<span class="token comment" spellcheck="true">// and put their type in subtype</span>
+<span class="token keyword">template</span><span class="token operator">&lt;</span><span class="token keyword">typename</span> SubType<span class="token operator">></span>
+<span class="token keyword">struct</span> Exp<span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true">// returns const reference of the actual type of this expression</span>
+  <span class="token keyword">inline</span> <span class="token keyword">const</span> SubType<span class="token operator">&amp;</span> <span class="token function">self</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token operator">*</span><span class="token keyword">static_cast</span><span class="token operator">&lt;</span><span class="token keyword">const</span> SubType<span class="token operator">*</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// binary operators</span>
+<span class="token keyword">struct</span> mul<span class="token punctuation">{</span>
+  <span class="token keyword">inline</span> <span class="token keyword">static</span> <span class="token keyword">float</span> <span class="token function">Map</span><span class="token punctuation">(</span><span class="token keyword">float</span> a<span class="token punctuation">,</span> <span class="token keyword">float</span> b<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> a <span class="token operator">*</span> b<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// binary add expression</span>
+<span class="token comment" spellcheck="true">// note how it is inheritates from Exp</span>
+<span class="token comment" spellcheck="true">// and put its own type into the template argument</span>
+<span class="token keyword">template</span><span class="token operator">&lt;</span><span class="token keyword">typename</span> OP<span class="token punctuation">,</span> <span class="token keyword">typename</span> TLhs<span class="token punctuation">,</span> <span class="token keyword">typename</span> TRhs<span class="token operator">></span>
+<span class="token keyword">struct</span> BinaryMapExp<span class="token operator">:</span> <span class="token keyword">public</span> Exp<span class="token operator">&lt;</span>BinaryMapExp<span class="token operator">&lt;</span>OP<span class="token punctuation">,</span> TLhs<span class="token punctuation">,</span> TRhs<span class="token operator">></span> <span class="token operator">></span><span class="token punctuation">{</span>
+  <span class="token keyword">const</span> TLhs<span class="token operator">&amp;</span> lhs<span class="token punctuation">;</span>
+  <span class="token keyword">const</span> TRhs<span class="token operator">&amp;</span> rhs<span class="token punctuation">;</span>
+  <span class="token function">BinaryMapExp</span><span class="token punctuation">(</span><span class="token keyword">const</span> TLhs<span class="token operator">&amp;</span> lhs<span class="token punctuation">,</span> <span class="token keyword">const</span> TRhs<span class="token operator">&amp;</span> rhs<span class="token punctuation">)</span>
+      <span class="token operator">:</span><span class="token function">lhs</span><span class="token punctuation">(</span>lhs<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">rhs</span><span class="token punctuation">(</span>rhs<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+  <span class="token comment" spellcheck="true">// evaluation function, evaluate this expression at position i</span>
+  <span class="token keyword">inline</span> <span class="token keyword">float</span> <span class="token function">Eval</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> OP<span class="token operator">::</span><span class="token function">Map</span><span class="token punctuation">(</span>lhs<span class="token punctuation">.</span><span class="token function">Eval</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">,</span> rhs<span class="token punctuation">.</span><span class="token function">Eval</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// no constructor and destructor to allocate and de-allocate memory</span>
+<span class="token comment" spellcheck="true">// allocation done by user</span>
+<span class="token keyword">struct</span> Vec<span class="token operator">:</span> <span class="token keyword">public</span> Exp<span class="token operator">&lt;</span>Vec<span class="token operator">></span><span class="token punctuation">{</span>
+  <span class="token keyword">int</span> len<span class="token punctuation">;</span>
+  <span class="token keyword">float</span><span class="token operator">*</span> dptr<span class="token punctuation">;</span>
+  <span class="token function">Vec</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+  <span class="token function">Vec</span><span class="token punctuation">(</span><span class="token keyword">float</span> <span class="token operator">*</span>dptr<span class="token punctuation">,</span> <span class="token keyword">int</span> len<span class="token punctuation">)</span>
+      <span class="token operator">:</span> <span class="token function">len</span><span class="token punctuation">(</span>len<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">dptr</span><span class="token punctuation">(</span>dptr<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+  <span class="token comment" spellcheck="true">// here is where evaluation happens</span>
+  <span class="token keyword">template</span><span class="token operator">&lt;</span><span class="token keyword">typename</span> EType<span class="token operator">></span>
+  <span class="token keyword">inline</span> Vec<span class="token operator">&amp;</span> <span class="token keyword">operator</span><span class="token operator">=</span><span class="token punctuation">(</span><span class="token keyword">const</span> Exp<span class="token operator">&lt;</span>EType<span class="token operator">></span><span class="token operator">&amp;</span> src_<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> EType <span class="token operator">&amp;</span>src <span class="token operator">=</span> src_<span class="token punctuation">.</span><span class="token function">self</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> len<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      dptr<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> src<span class="token punctuation">.</span><span class="token function">Eval</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token operator">*</span><span class="token keyword">this</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment" spellcheck="true">// evaluation function, evaluate this expression at position i</span>
+  <span class="token keyword">inline</span> <span class="token keyword">float</span> <span class="token function">Eval</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> dptr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// template add, works for any expressions</span>
+<span class="token keyword">template</span><span class="token operator">&lt;</span><span class="token keyword">typename</span> OP<span class="token punctuation">,</span> <span class="token keyword">typename</span> TLhs<span class="token punctuation">,</span> <span class="token keyword">typename</span> TRhs<span class="token operator">></span>
+<span class="token keyword">inline</span> BinaryMapExp<span class="token operator">&lt;</span>OP<span class="token punctuation">,</span> TLhs<span class="token punctuation">,</span> TRhs<span class="token operator">></span>
+<span class="token function">F</span><span class="token punctuation">(</span><span class="token keyword">const</span> Exp<span class="token operator">&lt;</span>TLhs<span class="token operator">></span><span class="token operator">&amp;</span> lhs<span class="token punctuation">,</span> <span class="token keyword">const</span> Exp<span class="token operator">&lt;</span>TRhs<span class="token operator">></span><span class="token operator">&amp;</span> rhs<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> BinaryMapExp<span class="token operator">&lt;</span>OP<span class="token punctuation">,</span> TLhs<span class="token punctuation">,</span> TRhs<span class="token operator">></span><span class="token punctuation">(</span>lhs<span class="token punctuation">.</span><span class="token function">self</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> rhs<span class="token punctuation">.</span><span class="token function">self</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">template</span><span class="token operator">&lt;</span><span class="token keyword">typename</span> TLhs<span class="token punctuation">,</span> <span class="token keyword">typename</span> TRhs<span class="token operator">></span>
+<span class="token keyword">inline</span> BinaryMapExp<span class="token operator">&lt;</span>mul<span class="token punctuation">,</span> TLhs<span class="token punctuation">,</span> TRhs<span class="token operator">></span>
+<span class="token keyword">operator</span><span class="token operator">*</span><span class="token punctuation">(</span><span class="token keyword">const</span> Exp<span class="token operator">&lt;</span>TLhs<span class="token operator">></span><span class="token operator">&amp;</span> lhs<span class="token punctuation">,</span> <span class="token keyword">const</span> Exp<span class="token operator">&lt;</span>TRhs<span class="token operator">></span><span class="token operator">&amp;</span> rhs<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> F<span class="token operator">&lt;</span>mul<span class="token operator">></span><span class="token punctuation">(</span>lhs<span class="token punctuation">,</span> rhs<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">// user defined operation</span>
+<span class="token keyword">struct</span> maximum<span class="token punctuation">{</span>
+  <span class="token keyword">inline</span> <span class="token keyword">static</span> <span class="token keyword">float</span> <span class="token function">Map</span><span class="token punctuation">(</span><span class="token keyword">float</span> a<span class="token punctuation">,</span> <span class="token keyword">float</span> b<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> a <span class="token operator">></span> b <span class="token operator">?</span> a <span class="token operator">:</span> b<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token keyword">int</span> n <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">float</span> sa<span class="token punctuation">[</span>n<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token keyword">float</span> sb<span class="token punctuation">[</span>n<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token keyword">float</span> sc<span class="token punctuation">[</span>n<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+  Vec <span class="token function">A</span><span class="token punctuation">(</span>sa<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">B</span><span class="token punctuation">(</span>sb<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">C</span><span class="token punctuation">(</span>sc<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// run expression, this expression is longer:)</span>
+  A <span class="token operator">=</span> B <span class="token operator">*</span> F<span class="token operator">&lt;</span>maximum<span class="token operator">></span><span class="token punctuation">(</span>C<span class="token punctuation">,</span> B<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d:%f == %f * max(%f, %f)\n"</span><span class="token punctuation">,</span>
+           i<span class="token punctuation">,</span> A<span class="token punctuation">.</span>dptr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> B<span class="token punctuation">.</span>dptr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> C<span class="token punctuation">.</span>dptr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> B<span class="token punctuation">.</span>dptr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ol>
+<li>惰性求值使得我们可以事先知道所有操作以及操作的目标</li>
+<li>模板构造和递归求值使得我们的元素级操作更加明了</li>
+<li>由于模板和内联函数，使得使用表达式和直接通过循环实现一样搞笑</li>
+</ol>
+<h3 id="MShadow中的表达式模板"><a href="#MShadow中的表达式模板" class="headerlink" title="MShadow中的表达式模板"></a>MShadow中的表达式模板</h3><p>mshadow中的表达式模板原理和上面讲的一样，主要有几个不同点</p>
+<ol>
+<li>mshadow将求值代码和表达式构建代码相隔离<ol>
+<li>根据表达式创建Plan类并使用其求值</li>
+<li>这样使得我们只需要在Plan中保存少量变量，比如，不需要保存array的长度</li>
+<li>另一个重要的原因是CUDA不能使用常量引用</li>
+</ol>
+</li>
+<li>惰性求值支持矩阵乘法等复杂的表达式，这里的惰性求值同样没有使用任何额外的存储空间</li>
+<li>类型检查和长度检查</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.wowx.info/posts/20170302213803/" data-id="cizz6gvkd004wqbewndlh750f" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MXNET/">MXNET</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/深度学习/">深度学习</a></li></ul>
+
+    </footer>
+  </div>
+  
     
-        <a href="/posts/201703011653/" id="post_nav-older" class="next-content">
-            旧篇
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_forward</i>
-            </button>
-        </a>
-    
+<nav id="article-nav">
+  
+    <a href="/posts/20170303131752/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          LeetCode House Robber Series
+        
+      </div>
+    </a>
+  
+  
+    <a href="/posts/201703011653/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">LeetCode dp 221 213 House Robber</div>
+    </a>
+  
 </nav>
 
-        </div>
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/algorithm/">algorithm</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/big-data/">big data</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/language/">language</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/机器学习/">机器学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程语言/">编程语言</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/论文/">论文</a></li></ul>
     </div>
+  </div>
 
 
-
-                    
-
-                    
-
-                    <!--Footer-->
-<footer class="mdl-mini-footer" id="bottom">
+  
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BST/">BST</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Backtracking/">Backtracking</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Caffe/">Caffe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deep-Learning/">Deep Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MXNET/">MXNET</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorighm/">algorighm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/big-data/">big data</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmake/">cmake</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cpp/">cpp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cs231n/">cs231n</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dp/">dp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/easy/">easy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/greedy/">greedy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hard/">hard</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hashtable/">hashtable</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/language/">language</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/math/">math</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/string/">string</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大数据处理工具/">大数据处理工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大数据工具/">大数据工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/推荐系统/">推荐系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/深度学习/">深度学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/BST/" style="font-size: 10px;">BST</a> <a href="/tags/Backtracking/" style="font-size: 10px;">Backtracking</a> <a href="/tags/Caffe/" style="font-size: 10px;">Caffe</a> <a href="/tags/Deep-Learning/" style="font-size: 10px;">Deep Learning</a> <a href="/tags/MXNET/" style="font-size: 10px;">MXNET</a> <a href="/tags/Python/" style="font-size: 13.33px;">Python</a> <a href="/tags/algorighm/" style="font-size: 18.89px;">algorighm</a> <a href="/tags/algorithm/" style="font-size: 15.56px;">algorithm</a> <a href="/tags/array/" style="font-size: 15.56px;">array</a> <a href="/tags/big-data/" style="font-size: 10px;">big data</a> <a href="/tags/cmake/" style="font-size: 10px;">cmake</a> <a href="/tags/cpp/" style="font-size: 20px;">cpp</a> <a href="/tags/cs231n/" style="font-size: 11.11px;">cs231n</a> <a href="/tags/dp/" style="font-size: 16.67px;">dp</a> <a href="/tags/easy/" style="font-size: 10px;">easy</a> <a href="/tags/greedy/" style="font-size: 10px;">greedy</a> <a href="/tags/hard/" style="font-size: 13.33px;">hard</a> <a href="/tags/hashtable/" style="font-size: 10px;">hashtable</a> <a href="/tags/language/" style="font-size: 17.78px;">language</a> <a href="/tags/leetcode/" style="font-size: 13.33px;">leetcode</a> <a href="/tags/math/" style="font-size: 10px;">math</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/string/" style="font-size: 17.78px;">string</a> <a href="/tags/tools/" style="font-size: 11.11px;">tools</a> <a href="/tags/大数据处理工具/" style="font-size: 10px;">大数据处理工具</a> <a href="/tags/大数据工具/" style="font-size: 12.22px;">大数据工具</a> <a href="/tags/推荐系统/" style="font-size: 10px;">推荐系统</a> <a href="/tags/机器学习/" style="font-size: 16.67px;">机器学习</a> <a href="/tags/深度学习/" style="font-size: 14.44px;">深度学习</a> <a href="/tags/算法/" style="font-size: 13.33px;">算法</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">六月 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/posts/20170307094529/">LeetCode 415[Math] 453[Math] 455[Greedy] 530[BST]</a>
+          </li>
+        
+          <li>
+            <a href="/posts/20170306094212/">LeetCode 447[HashTable] 401[Backtracking] 409[HashTable] 387[HashTable]</a>
+          </li>
+        
+          <li>
+            <a href="/posts/20170303131752/">LeetCode House Robber Series</a>
+          </li>
+        
+          <li>
+            <a href="/posts/20170302213803/">MXNET: Expression Template Tutorial—MXNET 表达式模板笔记</a>
+          </li>
+        
+          <li>
+            <a href="/posts/201703011653/">LeetCode dp 221 213 House Robber</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Xin Wei<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
 </footer>
-
-
-                    <!-- Import File -->
-<script src="/js/lazyload.min.js"></script>
-<script src="/js/js.min.js"></script>
-<script src="/js/nprogress.js"></script>
-
-<script type="text/javascript">
-    NProgress.configure({
-        showSpinner: true
-    });
-    NProgress.start();
-    $('#nprogress .bar').css({
-        'background': '#29d'
-    });
-    $('#nprogress .peg').css({
-        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
-    });
-    $('#nprogress .spinner-icon').css({
-        'border-top-color': '#29d',
-        'border-left-color': '#29d'
-    });
-    setTimeout(function() {
-        NProgress.done();
-        $('.fade').removeClass('out');
-    }, 800);
-</script>
-
-
-
-
-
-    <!-- Leancloud -->
-    <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
-    <script>
-        AV.initialize('1wCxBs3gRuLUAR1VDMEUFx3N-gzGzoHsz', '6sT0Kp8aE2lG69USPb4k0cAb');
-    </script>
-    <script>
-    function showTime(Counter) {
-        var query = new AV.Query(Counter);
-        $('.leancloud-views_num').each(function() {
-            var url = $(this).attr('id').trim();
-            query.equalTo('url', url);
-            query.find({
-                success: function(results) {
-                    if (results.length === 0) {
-                        var content = '0 ' + $(document.getElementById(url)).text();
-                        $(document.getElementById(url)).text(content);
-                        return;
-                    }
-                    for (var i = 0; i < results.length; i++) {
-                        var object = results[i];
-                        var content = object.get('time') + ' ' + $(document.getElementById(url)).text();
-                        $(document.getElementById(url)).text(content);
-                    }
-                },
-                error: function(object, error) {
-                    console.log('Error: ' + error.code + ' ' + error.message);
-                }
-            });
-        });
-    }
-
-    function addCount(Counter) {
-      var Counter = AV.Object.extend('Counter');
-      url = $('.leancloud-views_num').attr('id').trim();
-      title = $('.leancloud-views_num').attr('data-flag-title').trim();
-      var query = new AV.Query(Counter);
-      query.equalTo('url', url);
-      query.find({
-          success: function(results) {
-            if (results.length > 0) {
-                var counter = results[0];
-                counter.fetchWhenSave(true);
-                counter.increment('time');
-                counter.save(null, {
-                    success: function(counter) {
-                        var content =  counter.get('time') + ' ' + $(document.getElementById(url)).text();
-                        $(document.getElementById(url)).text(content);
-                    },
-                    error: function(counter, error) {
-                        console.log('Failed to save Visitor num, with error message: ' + error.message);
-                    }
-                });
-            } else {
-              var newcounter = new Counter();
-              newcounter.set('title', title);
-              newcounter.set('url', url);
-              newcounter.set('time', 1);
-              newcounter.save(null, {
-                  success: function(newcounter) {
-                      console.log('newcounter.get(\'time\')='+newcounter.get('time'));
-                      var content = newcounter.get('time') + ' ' + $(document.getElementById(url)).text();
-                      $(document.getElementById(url)).text(content);
-                  },
-                  error: function(newcounter, error) {
-                      console.log('Failed to create');
-                  }
-              });
-            }
-        },
-        error: function(error) {
-            console.log('Error:' + error.code + ' ' + error.message);
-        }
-      });
-    }
-    $(function() {
-        var Counter = AV.Object.extend('Counter');
-        if ($('.leancloud-views_num').length === 1) {
-            addCount(Counter);
-        } else if ($('.post-title-link').length > 1) {
-            showTime(Counter);
-        }
-    });
-</script>
-
-
-
-
-
-
-    <!-- 多说公共 js 代码 start -->
-    <script type="text/javascript">
-        queue.offer(function(){
-            var duoshuoQuery = {
-                short_name: 'buptweixin'
-            };
-            (function() {
-                var ds = document.createElement('script');
-                ds.type = 'text/javascript';
-                ds.async = true;
-                ds.src = 'https://static.duoshuo.com/embed.js';
-                ds.charset = 'UTF-8';
-                (document.getElementsByTagName('head')[0]
-                 || document.getElementsByTagName('body')[0]).appendChild(ds);
-            })();
-        });
-    </script>
-    <!-- 多说公共 js 代码 end -->
-
-
-
-
-
-<!-- Swiftye -->
-
-
-<!-- Local Search-->
-
-
-<!-- Window Load-->
-<script>
-    $(window).load(function() {
-        // Post_Toc parent position fixed
-        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
-    });
-</script>
-
-<!-- MathJax Load-->
-
-
-                </main>
-            </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config("");
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="custom_mathjax_source">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
-        </body>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
     
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</body>
 </html>
