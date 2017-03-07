@@ -1,279 +1,479 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-  
-  <title>几种常用激活函数介绍 | 野原圆长的Blog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="由于线性模型的表达能力不够（甚至不能表达异或），需要使用激活函数(activation function)引入非线性因素，常用的激活函数有sigmoid函数、tanh函数、ReLu函数及其改进函数和Maxout等。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="几种常用激活函数介绍">
-<meta property="og:url" content="http://www.wowx.info/posts/20160624/index.html">
-<meta property="og:site_name" content="野原圆长的Blog">
-<meta property="og:description" content="由于线性模型的表达能力不够（甚至不能表达异或），需要使用激活函数(activation function)引入非线性因素，常用的激活函数有sigmoid函数、tanh函数、ReLu函数及其改进函数和Maxout等。">
-<meta property="og:image" content="http://images0.cnblogs.com/blog/760242/201505/211727262911982.png">
-<meta property="og:image" content="http://7xkyov.com1.z0.glb.clouddn.com/16-6-23/56765549.jpg">
-<meta property="og:image" content="http://7xkyov.com1.z0.glb.clouddn.com/16-6-24/2147013.jpg">
-<meta property="og:updated_time" content="2016-12-02T08:18:05.309Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="几种常用激活函数介绍">
-<meta name="twitter:description" content="由于线性模型的表达能力不够（甚至不能表达异或），需要使用激活函数(activation function)引入非线性因素，常用的激活函数有sigmoid函数、tanh函数、ReLu函数及其改进函数和Maxout等。">
-<meta name="twitter:image" content="http://images0.cnblogs.com/blog/760242/201505/211727262911982.png">
-  
-    <link rel="alternate" href="/atom.xml" title="野原圆长的Blog" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-  <link rel="stylesheet" href="/css/style.css">
-  
+<html lang="zh">
+    <head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- 
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.3.0 -->
 
+    <!-- Title -->
+    
+    <title>
+        
+            几种常用激活函数介绍 | 
+        
+        野原圆长的Blog
+    </title>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/wx.png">
+    <link rel="icon" sizes="192x192" href="/img/wx.png">
+    <link rel="apple-touch-icon" href="/img/wx.png">
+
+    <!-- Meta & Info -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="Xin Wei">
+    <meta name="description" content="null">
+    <meta name="keywords" content="Blog deep_learging,机器学习">
+
+    <!--iOS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="野原圆长的Blog">
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://www.wowx.info">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="几种常用激活函数介绍 | 野原圆长的Blog">
+    <meta property="og:description" content="null">
+    <meta property="og:article:tag" content="机器学习"> 
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    <link rel="stylesheet" href="/css/material.min.css">
+    <link rel="stylesheet" href="/css/style.min.css">
+    <!-- Config CSS -->
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/queue.js"></script>
+
+    <!-- UC Browser Compatible -->
+    <script>
+        var agent = navigator.userAgent.toLowerCase();
+        if(agent.indexOf('ucbrowser')>0) {
+            document.write("<link rel=\"stylesheet\" href=\"/css/uc.css\">");
+            alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+        }
+    </script>
+
+    
+
+    
+
+    <!-- Bing Background -->
+    
+
+    <!-- Custom Head -->
+    
 <link rel="stylesheet" href="/css/prism.css" type="text/css">
 <link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
-<body>
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">野原圆长的Blog</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://www.wowx.info"></form>
-      </div>
-    </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main"><article id="post-activation-functions" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/posts/20160624/" class="article-date">
-  <time datetime="2016-06-23T16:34:28.000Z" itemprop="datePublished">2016-06-24</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      几种常用激活函数介绍
-    </h1>
-  
 
-      </header>
     
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>由于线性模型的表达能力不够（甚至不能表达异或），需要使用激活函数(activation function)引入非线性因素，常用的激活函数有sigmoid函数、tanh函数、ReLu函数及其改进函数和Maxout等。<br><a id="more"></a></p>
-<h3 id="sigmod激活函数"><a href="#sigmod激活函数" class="headerlink" title="sigmod激活函数"></a>sigmod激活函数</h3><p>$$sigmoid(x)=\frac{1}{1+e^{-x}}$$</p>
-<h4 id="函数图像"><a href="#函数图像" class="headerlink" title="函数图像"></a>函数图像</h4><p>sigmoid 函数图像是一条光滑的”S”型曲线，</p>
-<p><img src="http://images0.cnblogs.com/blog/760242/201505/211727262911982.png" alt=""></p>
-<h4 id="函数性质"><a href="#函数性质" class="headerlink" title="函数性质"></a>函数性质</h4><ol>
-<li>当输入趋近于负无穷时，sigmoid函数取值趋近于0，反之，当输入趋近于正无穷时其取值趋近于1；</li>
-<li>整个曲线都是光滑(可微)的，且任何一点的导数都大于零；</li>
-<li>导数形式简单，为$$sigmoid^\prime(x)=sigmoid(x)(1-sigmoid(x))$$<br> 这个性质很重要，因为只要在正向传播中计算了$sigmoid(x)$,反向传播求导时就可以很方便的通过$sigmoid(x)$求出$sigmoid^\prime(x)$</li>
-</ol>
-<h4 id="应用状况"><a href="#应用状况" class="headerlink" title="应用状况"></a>应用状况</h4><p>由于sigmoid函数的取值区间[0, 1]可以用来表示概率这一 性质，所以在过去很长一段时间其被广泛使用，然而，随着考虑到sigmoid函数同时具有如下的两个问题，近些年其逐渐被冷落。</p>
-<ol>
-<li>梯度消失问题：神经网络的反向传播过程是通过链式法则实现的，然而我们看sigmoid函数图像可知，当输入很大或者很小时，其导数是接近于0的，这在网络层数较少时可能不是问题，然而深度学习中网络层数动辄几十上百层，这样很可能造成梯度的消失；</li>
-<li>输出的中心不是0:上级神经元的输出中心非零会造成下层神经元的输入中心非0。</li>
-</ol>
-<h3 id="tanh激活函数"><a href="#tanh激活函数" class="headerlink" title="tanh激活函数"></a>tanh激活函数</h3><p>tanh函数形式如下所示：$$tanh(x)=\frac{e^x-e^{-x}}{e^x+e^{-x}}$$，它和sigmoid函数关系为$$tanh(x)=2sigmoid(2x)-1$$</p>
-<h4 id="函数图像-1"><a href="#函数图像-1" class="headerlink" title="函数图像"></a>函数图像</h4><p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-6-23/56765549.jpg" alt=""></p>
-<p>tanh函数图像和sigmoid函数很相似，但是其值域为(-1,1)，且其输出中心为0，这样就能避免上面提到的sigmoid存在的第二个问题。</p>
-<h4 id="函数性质-1"><a href="#函数性质-1" class="headerlink" title="函数性质"></a>函数性质</h4><ol>
-<li>当输入趋近于负无穷时，tanh函数取值趋近于-1，反之，当输入趋近于正无穷时其取值趋近于1；</li>
-<li>整个曲线都是光滑(可微)的，且任何一点的导数都大于零；</li>
-<li>导数形式为$$tanh^\prime(x)=1-[tanh(x)]^2$$</li>
-<li>输出以0为中心</li>
-</ol>
-<h4 id="应用状况-1"><a href="#应用状况-1" class="headerlink" title="应用状况"></a>应用状况</h4><p>和sigmoid函数一样，tanh函数也存在梯度消失的问题，但是他的输出中心为0，所以他比sigmoid函数更常用。</p>
-<h3 id="ReLu激活函数"><a href="#ReLu激活函数" class="headerlink" title="ReLu激活函数"></a>ReLu激活函数</h3><p>sigmoid函数和tanh函数的输出不具备稀疏性，因此需要加入惩罚因子(正则项)来训练出接近0的系数，而ReLu(Rectified Linear Unite)是对其的线性修正，它的公式为$$ReLu(x)=max(0,x)$$</p>
-<h4 id="函数图像-2"><a href="#函数图像-2" class="headerlink" title="函数图像"></a>函数图像</h4><p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-6-24/2147013.jpg" alt=""></p>
-<p>从上图可以看到，当输入小于0时，输出为0，即神经元是被抑制的，当输入大于0时，输出和输入成正比例关系。</p>
-<h4 id="函数性质-2"><a href="#函数性质-2" class="headerlink" title="函数性质"></a>函数性质</h4><p>优点</p>
-<ol>
-<li>收敛速度快：和sigmoid函数、tanh函数相比，ReLu具有更快的收敛速度</li>
-<li>计算简单： ReLu计算只需要使用简单的max操作</li>
-<li>能产生大量稀疏解： 因为左半部分是被抑制的，所以使用ReLu作为激活函数训练出来的网络参数有很大一部分都是0。</li>
-</ol>
-<p>缺点：</p>
-<p>如果一个很大的梯度流过了ReLu某个神经元，因为ReLU输入小于0时梯度为0 ，会造成这个神经元将不会再更新，造成神经元“死亡”现象，具体的可以看评论栏第一条(感谢@tg提醒，之前理解错了)。</p>
-<h4 id="改进"><a href="#改进" class="headerlink" title="改进"></a>改进</h4><p>为了避免神经元“死亡”现象，研究人员提出了Leak ReLu的改进函数，其把当x小于0时的输出由0变为很小的负数。</p>
-<h3 id="Maxout激活函数"><a href="#Maxout激活函数" class="headerlink" title="Maxout激活函数"></a>Maxout激活函数</h3><p>Maxout其实是改变了神经元的形式，它将每个神经元由原来一次训练一组参数扩展为同时训练多组参数，然后选择激活值最大的作为下一层的激活值，比如同时训练3组参数：$$max(w_1^Tx+b_1, w_2^Tx+b_2, w_3^Tx+b_3)$$</p>
-<p>可以看出ReLu为Maxout同时训练两组参数且$w_2,b_2$取0时的情形，因此maxout拥有ReLu的所有优点同时避免了神经元“死亡”的现象；但是，由于需要多训练了几组参数，网络的效率也大大降低了。</p>
-<h3 id="该如何选择"><a href="#该如何选择" class="headerlink" title="该如何选择"></a>该如何选择</h3><ol>
-<li>不要使用sigmoid；</li>
-<li>可以考虑使用tanh；</li>
-<li>使用ReLU激活函数的话，注意不要把学习率设得太高，避免产生结点”死亡”现象；</li>
-<li>最好使用Maxout或者Leaky ReLU， 他们的效果比tanh好。</li>
-</ol>
-<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><p><a href="http://cs231n.github.io/neural-networks-1/" target="_blank" rel="external">CS231n Convolutional Neural Networks for Visual Recognition</a></p>
+        <body id="scheme-paradox" class="lazy">
+            <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
 
-      
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+
+                    <!-- Post TOC -->
+
+    
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+
+
+
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+    <!-- 使用多说评论 -->
+    <link rel="stylesheet" href="/css/duoshuo.min.css">
+<style>
+    #ds-thread #ds-reset .ds-post-button{
+        background-color: #0097A7 !important;
+    }
+    #ds-wrapper #ds-reset .ds-icons-32{
+        background-color: #0097A7 !important;
+    }
+    #ds-reset .ds-highlight {
+        color: #0097A7 !important;
+    }
+</style>
+<div id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread"
+        data-thread-key="posts/20160624/"
+        data-url="http://www.wowx.info/posts/20160624/"
+        data-title="几种常用激活函数介绍">
     </div>
-    <footer class="article-footer">
-      <a data-url="http://www.wowx.info/posts/20160624/" data-id="cizz6u8bk001d4gewwtrtoywq" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器学习/">机器学习</a></li></ul>
+    <!-- 多说评论框 end -->
+</div>
 
-    </footer>
-  </div>
-  
+
+
+
+
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
     
-<nav id="article-nav">
-  
-    <a href="/posts/20160719225917/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          使用Python统计处理基础篇--前言
-        
-      </div>
-    </a>
-  
-  
-    <a href="/posts/20160618/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">大数据基础设施综述</div>
-    </a>
-  
+        <a href="/posts/20160719225917/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/posts/20160618/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
 </nav>
 
-  
-</article>
+        </div>
+    </div>
 
-</section>
-        
-          <aside id="sidebar">
-  
+
+
+                    
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">分类</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/algorithm/">algorithm</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/big-data/">big data</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/language/">language</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/机器学习/">机器学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程语言/">编程语言</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/论文/">论文</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签</h3>
-    <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BST/">BST</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Backtracking/">Backtracking</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Caffe/">Caffe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deep-Learning/">Deep Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MXNET/">MXNET</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorighm/">algorighm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/big-data/">big data</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmake/">cmake</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cpp/">cpp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cs231n/">cs231n</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dp/">dp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/easy/">easy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/greedy/">greedy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hard/">hard</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hashtable/">hashtable</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/language/">language</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/math/">math</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/string/">string</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大数据处理工具/">大数据处理工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/大数据工具/">大数据工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/推荐系统/">推荐系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/深度学习/">深度学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签云</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/BST/" style="font-size: 10px;">BST</a> <a href="/tags/Backtracking/" style="font-size: 10px;">Backtracking</a> <a href="/tags/Caffe/" style="font-size: 10px;">Caffe</a> <a href="/tags/Deep-Learning/" style="font-size: 10px;">Deep Learning</a> <a href="/tags/MXNET/" style="font-size: 10px;">MXNET</a> <a href="/tags/Python/" style="font-size: 13.33px;">Python</a> <a href="/tags/algorighm/" style="font-size: 18.89px;">algorighm</a> <a href="/tags/algorithm/" style="font-size: 15.56px;">algorithm</a> <a href="/tags/array/" style="font-size: 15.56px;">array</a> <a href="/tags/big-data/" style="font-size: 10px;">big data</a> <a href="/tags/cmake/" style="font-size: 10px;">cmake</a> <a href="/tags/cpp/" style="font-size: 20px;">cpp</a> <a href="/tags/cs231n/" style="font-size: 11.11px;">cs231n</a> <a href="/tags/dp/" style="font-size: 16.67px;">dp</a> <a href="/tags/easy/" style="font-size: 10px;">easy</a> <a href="/tags/greedy/" style="font-size: 10px;">greedy</a> <a href="/tags/hard/" style="font-size: 13.33px;">hard</a> <a href="/tags/hashtable/" style="font-size: 10px;">hashtable</a> <a href="/tags/language/" style="font-size: 17.78px;">language</a> <a href="/tags/leetcode/" style="font-size: 13.33px;">leetcode</a> <a href="/tags/math/" style="font-size: 10px;">math</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/string/" style="font-size: 17.78px;">string</a> <a href="/tags/tools/" style="font-size: 11.11px;">tools</a> <a href="/tags/大数据处理工具/" style="font-size: 10px;">大数据处理工具</a> <a href="/tags/大数据工具/" style="font-size: 12.22px;">大数据工具</a> <a href="/tags/推荐系统/" style="font-size: 10px;">推荐系统</a> <a href="/tags/机器学习/" style="font-size: 16.67px;">机器学习</a> <a href="/tags/深度学习/" style="font-size: 14.44px;">深度学习</a> <a href="/tags/算法/" style="font-size: 13.33px;">算法</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">六月 2015</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/posts/20170307094529/">LeetCode 415[Math] 453[Math] 455[Greedy] 530[BST]</a>
-          </li>
-        
-          <li>
-            <a href="/posts/20170306094212/">LeetCode 447[HashTable] 401[Backtracking] 409[HashTable] 387[HashTable]</a>
-          </li>
-        
-          <li>
-            <a href="/posts/20170303131752/">LeetCode House Robber Series</a>
-          </li>
-        
-          <li>
-            <a href="/posts/20170302213803/">MXNET: Expression Template Tutorial—MXNET 表达式模板笔记</a>
-          </li>
-        
-          <li>
-            <a href="/posts/201703011653/">LeetCode dp 221 213 House Robber</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2017 Xin Wei<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
 </footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+                    <!-- Import File -->
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/js.min.js"></script>
+<script src="/js/nprogress.js"></script>
+
+<script type="text/javascript">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
 
 
-<script src="/js/script.js"></script>
 
-  </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+
+
+    <!-- Leancloud -->
+    <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+    <script>
+        AV.initialize('1wCxBs3gRuLUAR1VDMEUFx3N-gzGzoHsz', '6sT0Kp8aE2lG69USPb4k0cAb');
+    </script>
+    <script>
+    function showTime(Counter) {
+        var query = new AV.Query(Counter);
+        $('.leancloud-views_num').each(function() {
+            var url = $(this).attr('id').trim();
+            query.equalTo('url', url);
+            query.find({
+                success: function(results) {
+                    if (results.length === 0) {
+                        var content = '0 ' + $(document.getElementById(url)).text();
+                        $(document.getElementById(url)).text(content);
+                        return;
+                    }
+                    for (var i = 0; i < results.length; i++) {
+                        var object = results[i];
+                        var content = object.get('time') + ' ' + $(document.getElementById(url)).text();
+                        $(document.getElementById(url)).text(content);
+                    }
+                },
+                error: function(object, error) {
+                    console.log('Error: ' + error.code + ' ' + error.message);
+                }
+            });
+        });
+    }
+
+    function addCount(Counter) {
+      var Counter = AV.Object.extend('Counter');
+      url = $('.leancloud-views_num').attr('id').trim();
+      title = $('.leancloud-views_num').attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+      query.equalTo('url', url);
+      query.find({
+          success: function(results) {
+            if (results.length > 0) {
+                var counter = results[0];
+                counter.fetchWhenSave(true);
+                counter.increment('time');
+                counter.save(null, {
+                    success: function(counter) {
+                        var content =  counter.get('time') + ' ' + $(document.getElementById(url)).text();
+                        $(document.getElementById(url)).text(content);
+                    },
+                    error: function(counter, error) {
+                        console.log('Failed to save Visitor num, with error message: ' + error.message);
+                    }
+                });
+            } else {
+              var newcounter = new Counter();
+              newcounter.set('title', title);
+              newcounter.set('url', url);
+              newcounter.set('time', 1);
+              newcounter.save(null, {
+                  success: function(newcounter) {
+                      console.log('newcounter.get(\'time\')='+newcounter.get('time'));
+                      var content = newcounter.get('time') + ' ' + $(document.getElementById(url)).text();
+                      $(document.getElementById(url)).text(content);
+                  },
+                  error: function(newcounter, error) {
+                      console.log('Failed to create');
+                  }
+              });
+            }
+        },
+        error: function(error) {
+            console.log('Error:' + error.code + ' ' + error.message);
+        }
+      });
+    }
+    $(function() {
+        var Counter = AV.Object.extend('Counter');
+        if ($('.leancloud-views_num').length === 1) {
+            addCount(Counter);
+        } else if ($('.post-title-link').length > 1) {
+            showTime(Counter);
+        }
+    });
+</script>
+
+
+
+
+
+
+    <!-- 多说公共 js 代码 start -->
+    <script type="text/javascript">
+        queue.offer(function(){
+            var duoshuoQuery = {
+                short_name: 'buptweixin'
+            };
+            (function() {
+                var ds = document.createElement('script');
+                ds.type = 'text/javascript';
+                ds.async = true;
+                ds.src = 'https://static.duoshuo.com/embed.js';
+                ds.charset = 'UTF-8';
+                (document.getElementsByTagName('head')[0]
+                 || document.getElementsByTagName('body')[0]).appendChild(ds);
+            })();
+        });
+    </script>
+    <!-- 多说公共 js 代码 end -->
+
+
+
+
+
+<!-- Swiftye -->
+
+
+<!-- Local Search-->
+
+
+<!-- Window Load-->
+<script>
+    $(window).load(function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+</script>
+
+<!-- MathJax Load-->
+
+
+                </main>
+            </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config("");
 </script>
@@ -291,5 +491,6 @@
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
-</body>
+        </body>
+    
 </html>
