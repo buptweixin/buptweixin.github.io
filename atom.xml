@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.wowx.info/"/>
-  <updated>2017-03-06T03:35:55.806Z</updated>
+  <updated>2017-03-07T01:48:08.510Z</updated>
   <id>http://www.wowx.info/</id>
   
   <author>
@@ -14,6 +14,56 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>LeetCode 415[Math]</title>
+    <link href="http://www.wowx.info/posts/20170307094529/"/>
+    <id>http://www.wowx.info/posts/20170307094529/</id>
+    <published>2017-03-07T01:45:29.000Z</published>
+    <updated>2017-03-07T01:48:08.510Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="415-Add-Strings"><a href="#415-Add-Strings" class="headerlink" title="415. Add Strings"></a>415. Add Strings</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><p>Given two non-negative integers num1 and num2 represented as string, return the sum of num1 and num2.</p>
+<p>Note:</p>
+<p>The length of both num1 and num2 is &lt; 5100.<br>Both num1 and num2 contains only digits 0-9.<br>Both num1 and num2 does not contain any leading zero.<br>You must not use any built-in BigInteger library or convert the inputs to integer directly.</p>
+<p>给出两个用字符串表示的数字，求字符串形式的和</p>
+<h3 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h3><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    string <span class="token function">addStrings</span><span class="token punctuation">(</span>string num1<span class="token punctuation">,</span> string num2<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        string res <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> i <span class="token operator">=</span> num1<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> j <span class="token operator">=</span> num2<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> carry <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>i <span class="token operator">>=</span> <span class="token number">0</span> <span class="token operator">||</span> j <span class="token operator">>=</span> <span class="token number">0</span> <span class="token operator">||</span> carry<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">int</span> sum <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">>=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+                sum <span class="token operator">+</span><span class="token operator">=</span> num1<span class="token punctuation">[</span>i<span class="token operator">--</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token string">'0'</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>j <span class="token operator">>=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+                sum <span class="token operator">+</span><span class="token operator">=</span> num2<span class="token punctuation">[</span>j<span class="token operator">--</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token string">'0'</span><span class="token punctuation">;</span>
+            sum <span class="token operator">+</span><span class="token operator">=</span> carry<span class="token punctuation">;</span>
+            carry <span class="token operator">=</span> sum <span class="token operator">/</span> <span class="token number">10</span><span class="token punctuation">;</span>
+            sum <span class="token operator">=</span> sum <span class="token operator">%</span> <span class="token number">10</span><span class="token punctuation">;</span>
+            res <span class="token operator">+</span><span class="token operator">=</span> <span class="token function">to_string</span><span class="token punctuation">(</span>sum<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token function">reverse</span><span class="token punctuation">(</span>res<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> res<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> res<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;415-Add-Strings&quot;&gt;&lt;a href=&quot;#415-Add-Strings&quot; class=&quot;headerlink&quot; title=&quot;415. Add Strings&quot;&gt;&lt;/a&gt;415. Add Strings&lt;/h2&gt;&lt;h3 id=&quot;Problem-Des
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="http://www.wowx.info/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
+    
+      <category term="math" scheme="http://www.wowx.info/tags/math/"/>
+    
+  </entry>
   
   <entry>
     <title>LeetCode 447[HashTable] 401[Backtracking] 409[HashTable] 387[HashTable]</title>
@@ -3648,63 +3698,6 @@ Explanation: It&#39;s the substring &quot;abc&quot; four times. (And the substri
       <category term="array" scheme="http://www.wowx.info/tags/array/"/>
     
       <category term="hard" scheme="http://www.wowx.info/tags/hard/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>leetcode: 383 ransom note</title>
-    <link href="http://www.wowx.info/posts//posts/20161222234842/"/>
-    <id>http://www.wowx.info/posts//posts/20161222234842/</id>
-    <published>2016-12-22T15:48:42.000Z</published>
-    <updated>2016-12-22T15:51:53.653Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="LeetCote-string-383-Ransom-Note"><a href="#LeetCote-string-383-Ransom-Note" class="headerlink" title="LeetCote_string_383_Ransom Note"></a>LeetCote_string_383_Ransom Note</h2><h3 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h3><p>Given an arbitrary ransom note string and another string containing letters from all the magazines, write a function that will return true if the ransom note can be constructed from the magazines ; otherwise, it will return false.</p>
-<p>Each letter in the magazine string can only be used once in your ransom note.</p>
-<p><strong>Note:</strong><br>You may assume that both strings contain only lowercase letters.</p>
-<pre><code>canConstruct(&quot;a&quot;, &quot;b&quot;) -&gt; false
-canConstruct(&quot;aa&quot;, &quot;ab&quot;) -&gt; false
-canConstruct(&quot;aa&quot;, &quot;aab&quot;) -&gt; true
-</code></pre><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>用一个计数器数组统计<code>magzine</code>中每个字母出现的次数，然后统计<code>ransomNote</code>中字母，计算两个字符串的对应字母出现次数的差值，若小于0说明<code>ransomNote</code>要构成<code>magzine</code>还缺少该字母</p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
-<span class="token keyword">public</span><span class="token operator">:</span>
-    <span class="token keyword">bool</span> <span class="token function">canConstruct</span><span class="token punctuation">(</span>string ransomNote<span class="token punctuation">,</span> string magazine<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">count</span><span class="token punctuation">(</span><span class="token number">26</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">char</span> ch <span class="token operator">:</span> magazine<span class="token punctuation">)</span>
-            <span class="token operator">++</span>count<span class="token punctuation">[</span>ch <span class="token operator">-</span> <span class="token string">'a'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">char</span> ch <span class="token operator">:</span> ransomNote<span class="token punctuation">)</span>
-        <span class="token punctuation">{</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>count<span class="token punctuation">[</span>ch <span class="token operator">-</span> <span class="token string">'a'</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
-                <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-            <span class="token operator">--</span>count<span class="token punctuation">[</span>ch <span class="token operator">-</span> <span class="token string">'a'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h3><ul>
-<li><p>时间复杂度</p>
-<p>$O(N) + O(M)$,N, M分别为<code>magzine</code>和<code>ransomNote</code>的长度</p>
-</li>
-<li><p>空间复杂度</p>
-<p>$O(1)$,只要一个长度为26的数组即可</p>
-</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;LeetCote-string-383-Ransom-Note&quot;&gt;&lt;a href=&quot;#LeetCote-string-383-Ransom-Note&quot; class=&quot;headerlink&quot; title=&quot;LeetCote_string_383_Ransom Not
-    
-    </summary>
-    
-    
-      <category term="算法" scheme="http://www.wowx.info/tags/%E7%AE%97%E6%B3%95/"/>
-    
-      <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
-    
-      <category term="string" scheme="http://www.wowx.info/tags/string/"/>
-    
-      <category term="easy" scheme="http://www.wowx.info/tags/easy/"/>
     
   </entry>
   
