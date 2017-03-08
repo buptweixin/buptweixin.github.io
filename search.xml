@@ -112,6 +112,19 @@
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="476-Number-Complement"><a href="#476-Number-Complement" class="headerlink" title="476. Number Complement"></a>476. Number Complement</h2><h3 id="Problem-Description-2"><a href="#Problem-Description-2" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
+<p>Given a positive integer, output its complement number. The complement strategy is to flip the bits of its binary representation.</p>
+<p>Note:<br>The given integer is guaranteed to fit within the range of a 32-bit signed integer.<br>You could assume no leading zero bit in the integer’s binary representation.<br>Example 1:<br>Input: 5<br>Output: 2<br>Explanation: The binary representation of 5 is 101 (no leading zero bits), and its complement is 010. So you need to output 2.<br>Example 2:<br>Input: 1<br>Output: 0<br>Explanation: The binary representation of 1 is 1 (no leading zero bits), and its complement is 0. So you need to output 0.</p>
+</blockquote>
+<p>给出一个数字，求其反码对应数字</p>
+<h3 id="Method-2"><a href="#Method-2" class="headerlink" title="Method"></a>Method</h3><p>首先求<code>num</code>的反码，然后只取不包括符号位的所有位</p>
+<pre class="line-numbers language-c++"><code class="language-c++">class Solution {
+public:
+    int findComplement(int num) {
+        return ~num & ((1 <<(int)log2(num))-1);
+    }
+};
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 ]]></content>
       
         <categories>

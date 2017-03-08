@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.wowx.info/"/>
-  <updated>2017-03-08T03:05:27.908Z</updated>
+  <updated>2017-03-08T03:56:05.069Z</updated>
   <id>http://www.wowx.info/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://www.wowx.info/posts/20170308102951/"/>
     <id>http://www.wowx.info/posts/20170308102951/</id>
     <published>2017-03-08T02:29:51.000Z</published>
-    <updated>2017-03-08T03:05:27.908Z</updated>
+    <updated>2017-03-08T03:56:05.069Z</updated>
     
     <content type="html"><![CDATA[<h2 id="506-Relative-Ranks"><a href="#506-Relative-Ranks" class="headerlink" title="506. Relative Ranks"></a>506. Relative Ranks</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><p>Given scores of N athletes, find their relative ranks&gt; and the people with the top three highest scores, who will be awarded medals: “Gold Medal”, “Silver Medal” and “Bronze Medal”.<br>&gt;</p>
 <blockquote>
@@ -128,6 +128,19 @@
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="476-Number-Complement"><a href="#476-Number-Complement" class="headerlink" title="476. Number Complement"></a>476. Number Complement</h2><h3 id="Problem-Description-2"><a href="#Problem-Description-2" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
+<p>Given a positive integer, output its complement number. The complement strategy is to flip the bits of its binary representation.</p>
+<p>Note:<br>The given integer is guaranteed to fit within the range of a 32-bit signed integer.<br>You could assume no leading zero bit in the integer’s binary representation.<br>Example 1:<br>Input: 5<br>Output: 2<br>Explanation: The binary representation of 5 is 101 (no leading zero bits), and its complement is 010. So you need to output 2.<br>Example 2:<br>Input: 1<br>Output: 0<br>Explanation: The binary representation of 1 is 1 (no leading zero bits), and its complement is 0. So you need to output 0.</p>
+</blockquote>
+<p>给出一个数字，求其反码对应数字</p>
+<h3 id="Method-2"><a href="#Method-2" class="headerlink" title="Method"></a>Method</h3><p>首先求<code>num</code>的反码，然后只取不包括符号位的所有位</p>
+<pre class="line-numbers language-c++"><code class="language-c++">class Solution {
+public:
+    int findComplement(int num) {
+        return ~num & ((1 <<(int)log2(num))-1);
+    }
+};
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 ]]></content>
     
     <summary type="html">
