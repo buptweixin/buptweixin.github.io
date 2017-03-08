@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.wowx.info/"/>
-  <updated>2017-03-08T02:59:43.312Z</updated>
+  <updated>2017-03-08T03:00:34.264Z</updated>
   <id>http://www.wowx.info/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://www.wowx.info/posts/20170308102951/"/>
     <id>http://www.wowx.info/posts/20170308102951/</id>
     <published>2017-03-08T02:29:51.000Z</published>
-    <updated>2017-03-08T02:59:43.312Z</updated>
+    <updated>2017-03-08T03:00:34.264Z</updated>
     
     <content type="html"><![CDATA[<h2 id="506-Relative-Ranks"><a href="#506-Relative-Ranks" class="headerlink" title="506. Relative Ranks"></a>506. Relative Ranks</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><p>Given scores of N athletes, find their relative ranks&gt; and the people with the top three highest scores, who will be awarded medals: “Gold Medal”, “Silver Medal” and “Bronze Medal”.<br>&gt;</p>
 <blockquote>
@@ -83,7 +83,7 @@
 <h2 id="461-Hanmming-Distance"><a href="#461-Hanmming-Distance" class="headerlink" title="461. Hanmming Distance"></a>461. Hanmming Distance</h2><h3 id="Problem-Description-1"><a href="#Problem-Description-1" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
 <p>The Hamming distance between two integers is the number of positions at which the corresponding bits are different.</p>
 <p>Given two integers x and y, calculate the Hamming distance.</p>
-<p>Note:<br><!-- >$0 \leqslant{x}, y < 2^{31}$. --></p>
+<p>Note:<br>0 $\leqslant{x}$, y &lt; $2^{31}$</p>
 <p>Example:</p>
 <p>Input: x = 1, y = 4</p>
 <p>Output: 2</p>
