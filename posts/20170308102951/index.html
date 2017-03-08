@@ -10,7 +10,7 @@
     
     <title>
         
-            leetcode best Time Buy and SellStock I | 
+            LeetCode 506[sord] | 
         
         野原圆长的Blog
     </title>
@@ -27,7 +27,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="Xin Wei">
     <meta name="description" content="null">
-    <meta name="keywords" content="Blog deep_learging,algorighm,dp,array">
+    <meta name="keywords" content="Blog deep_learging,cpp,algorithm,sort">
 
     <!--iOS -->
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -48,9 +48,9 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="http://www.wowx.info">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="leetcode best Time Buy and SellStock I | 野原圆长的Blog">
+    <meta property="og:title" content="LeetCode 506[sord] | 野原圆长的Blog">
     <meta property="og:description" content="null">
-    <meta property="og:article:tag" content="algorighm"> <meta property="og:article:tag" content="dp"> <meta property="og:article:tag" content="array"> 
+    <meta property="og:article:tag" content="cpp"> <meta property="og:article:tag" content="algorithm"> <meta property="og:article:tag" content="sort"> 
 
     <!--[if lte IE 9]>
         <link rel="stylesheet" href="/css/ie-blocker.css">
@@ -235,7 +235,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Best-Time-to-Buy-and-Sell-Stock"><span class="post-toc-number">1.</span> <span class="post-toc-text">Best Time to Buy and Sell Stock</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#题意"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">题意</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#解题思路"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">解题思路</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#状态定义"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">状态定义</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#状态转移方程的定义"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">状态转移方程的定义</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#实现"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">实现</span></a></li></ol></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#506-Relative-Ranks"><span class="post-toc-number">1.</span> <span class="post-toc-text">506. Relative Ranks</span></a></li></ol>
 
         <!--
         <li class="mdl-menu__item">
@@ -263,7 +263,7 @@
         <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(http://ww4.sinaimg.cn/large/6425ef91jw1f9apllc7boj20ic0960v9.jpg)">
     
             <p class="article-headline-p">
-                leetcode best Time Buy and SellStock I
+                LeetCode 506[sord]
             </p>
         </div>
 
@@ -282,7 +282,7 @@
     <!-- Author Name & Date -->
     <div>
         <strong>Xin Wei</strong>
-        <span>12月 02, 2016</span>
+        <span>3月 08, 2017</span>
     </div>
 
     <div class="section-spacer"></div>
@@ -303,7 +303,7 @@
         </button>
         <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
             <li class="mdl-menu__item">在其它设备中阅读本文章</li>
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACXUlEQVR42u3aUW7jMAwFwNz/0t0LNNpH0mbcYPRVFLGsUQCJIfn6+erxwsPDw8PDw8PDexjvFY9fJnrz//Nn8rf01oaHh4e3w+st8TzDeebzxo3WhoeHh7fIe3fgnjHvPn9mn9/SWxseHh7ek3nnpZw3Jb9I8PDw8L6Jl8/QSzHg4eHh/RVe8oO/d2300hYfyLXg4eHhxbzJYX3336v1PTw8PLyAVx3VloLq0n/GAw8PD+9uXn4QJynXajFscjHg4eHhfYo3OfoTTBKg55tSTuPi4eHhLfLySauYvJkguTyaFwMeHh7emDcJheeNBfk8zTQuHh4e3g28HDlpzJqka/Nn8fDw8O7mVY/mSRksT0lUG1jx8PDwNnl5uiEBV9MHva35z7N4eHh4K7wkeL3s4A6aEvIrBw8PD++zvF54fdUl0Qvfm2lcPDw8vIt4d7y+FyJX0xZ4eHh4m7y8RSAviSWLyK+cPFjHw8PD2+FdG0yfA+jqFlSvHzw8PLwdXq9ZqlyUKobp1RIdHh4e3j6vELCO2wsmTVfRV4KHh4e3wstbBCbJiPPW5MmR5r2Hh4eHdwMvT+lWE7u9QlqzbQsPDw/vAbw8UM4ZPWS56QoPDw/vBl515GFxr5Q1advCw8PD2+H1WqbyolePPUlY4OHh4e3wrroMkuJZnt697GLAw8PDu43XK1ZNjvjqFkRfBh4eHt7jeTksTxZPCmx4eHh4f4VXPcSrzVv5zwA8PDy8TV6SjKg+Nd+OPGGBh4eHt8nLX1xtzOqVwXrz4OHh4e3wvm/g4eHh4eHh4eE9YPwD7eDOShysotYAAAAASUVORK5CYII=">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACa0lEQVR42u3aS27DMAwFQN//0ukBiriPpCSnwXgVIB9rvBCZJ16vr74uPDw8PDw8PDy8D+Nd8fX7W+9eJ5/P71JeGx4eHt4R3h9b7e1y75eSfz65b7Q2PDw8vIO8ZHHv3s2/VX0E+V3w8PDwPpn3botPNv28SODh4eF9E+/+BtVG/B/UPTw8PLzBH/6kMEweRPL5jVkLHh4eXszLD5nOvz56voeHh4cX8MojTcVlVQcIHp4pw8PDwwt4O8ahyvFB/AvJg8DDw8N7ipfEBzmgN3ZQHe3Cw8PDO8nrbc3323TvQGse7+Lh4eHt5t1vxPOQIi8q1ba7EOPi4eHhbeAlS++1v/mQQbUdX5ZS4+Hh4bV4k+OrSbxbDSmid/Hw8PCO8KqhbfX4Py8Sebj89rt4eHh4R3iT2+TRbd5eJ4Wh2VLj4eHhjXm9BnreLlePuwqRBx4eHt5mXjMqDbb1VWFHtYnHw8PDO8nrtdH5Yf8kpBgNXeHh4eFt4+Wx7GSLTwateg8LDw8P7wyv2rb2YotXcCUlpDx0hYeHh7eNV21e5+1yL4yI7oKHh4d3kHcVrzzI6D2IamCBh4eH9xRv1RBANciYjAvg4eHhPcWrtr+9iDaPj3u/iYeHh7ebV716A1XVuLbarOPh4eGd5K2NHvKmOSlC+WABHh4e3nleXgx6x1S9Y7BlhQEPDw9vGy/foHvbd/X3F2cteHh4eB/Amxxf5eMC90dxGwsDHh4e3lJeL3SoNsrJ+MKWwoCHh4e3NOecNL55kZg8Pjw8PLwzvOpy15aNXgNdCCPw8PDwlvK+78LDw8PDw8PDw/uA6wc+C4aSNKbRJQAAAABJRU5ErkJggg==">
         </ul>
     
 
@@ -315,7 +315,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/algorighm/">algorighm</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/array/">array</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/dp/">dp</a>
+        <a class="post_tag-link" href="/tags/algorithm/">algorithm</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/cpp/">cpp</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/sort/">sort</a>
     </ul>
     
 
@@ -329,7 +329,7 @@
     <!-- Leancloud Views -->
         <a class="post_share-link" href="#">
             <li class="mdl-menu__item">
-                <span id="/posts/posts/20161202170711/" class="leancloud-views_num" data-flag-title="leetcode best Time Buy and SellStock I">
+                <span id="/posts/20170308102951/" class="leancloud-views_num" data-flag-title="LeetCode 506[sord]">
      &nbsp;浏览量
 </span>
 
@@ -341,7 +341,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=leetcode best Time Buy and SellStock I&url=http://www.wowx.info//posts/posts/20161202170711/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=LeetCode 506[sord]&url=http://www.wowx.info//posts/20170308102951/index.html&pic=&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 分享到微博
             </li>
@@ -350,7 +350,7 @@
 
     <!-- Share Twitter -->
     
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=leetcode best Time Buy and SellStock I&url=http://www.wowx.info//posts/posts/20161202170711/index.html&via=Xin Wei" target="_blank">
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=LeetCode 506[sord]&url=http://www.wowx.info//posts/20170308102951/index.html&via=Xin Wei" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Twitter
             </li>
@@ -359,7 +359,7 @@
 
     <!-- Share Facebook -->
     
-        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://www.wowx.info//posts/posts/20161202170711/index.html" target="_blank">
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://www.wowx.info//posts/20170308102951/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Facebook
             </li>
@@ -368,7 +368,7 @@
 
     <!-- Share Google+ -->
     
-        <a class="post_share-link" href="https://plus.google.com/share?url=http://www.wowx.info//posts/posts/20161202170711/index.html" target="_blank">
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://www.wowx.info//posts/20170308102951/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Google+
             </li>
@@ -392,69 +392,64 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <h2 id="Best-Time-to-Buy-and-Sell-Stock"><a href="#Best-Time-to-Buy-and-Sell-Stock" class="headerlink" title="Best Time to Buy and Sell Stock"></a>Best Time to Buy and Sell Stock</h2><blockquote>
-<p>Say you have an array for which the <em>i</em>th element is the price of a given stock on day <em>i</em>.</p>
-<p>If you were only permitted to complete at most one transaction (ie, buy one and sell one share of the stock), design an algorithm to find the maximum profit.</p>
-<p><strong>Example 1:</strong></p>
-<pre><code>Input: [7, 1, 5, 3, 6, 4]
-Output: 5
-
-max. difference = 6-1 = 5 (not 7-1 = 6, as selling price needs to be larger than buying price)
-</code></pre><p><strong>Example 2:</strong></p>
-<pre class="line-numbers language-cpp"><code class="language-cpp">Input<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span>
-Output<span class="token operator">:</span> <span class="token number">0</span>
-
-In <span class="token keyword">this</span> <span class="token keyword">case</span><span class="token punctuation">,</span> no transaction is done<span class="token punctuation">,</span> i<span class="token punctuation">.</span>e<span class="token punctuation">.</span> max profit <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">.</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+        <h2 id="506-Relative-Ranks"><a href="#506-Relative-Ranks" class="headerlink" title="506. Relative Ranks"></a>506. Relative Ranks</h2><p>Given scores of N athletes, find their relative ranks&gt; and the people with the top three highest scores, who will be awarded medals: “Gold Medal”, “Silver Medal” and “Bronze Medal”.<br>&gt;</p>
+<blockquote>
+<p>Example 1:<br>Input: [5, 4, 3, 2, 1]<br>Output: [“Gold Medal”, “Silver Medal”, “Bronze Medal”, “4”, “5”]<br>Explanation: The first three athletes got the top three highest scores, so they got “Gold Medal”, “Silver Medal” and “Bronze Medal”.<br>For the left two athletes, you just need to output their relative ranks according to their scores.<br>Note:<br>N is a positive integer and won’t exceed 10,000.<br>All the scores of athletes are guaranteed to be unique.</p>
 </blockquote>
-<h3 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h3><p>假设有一个数组，它的第i个元素表示某只股票在第i天的股价，设计一个算法找出最大收益，要求最多能进行一次买卖操作。</p>
-<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>采用冬天规划的方法来解此题,动态规划最重要的两步是状态定义和状态转移方程的定义</p>
-<h4 id="状态定义"><a href="#状态定义" class="headerlink" title="状态定义"></a>状态定义</h4><p>在任意时间点，只能处于两种状态：股票已经买入，股票已经卖出</p>
-<pre class="line-numbers language-shell"><code class="language-shell">buy[i]:第i天处于已经买入股票的状态时最大资金
-sell[i]:第i天处于已经卖出股票的状态时最大资金
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<h4 id="状态转移方程的定义"><a href="#状态转移方程的定义" class="headerlink" title="状态转移方程的定义"></a>状态转移方程的定义</h4><ol>
-<li><p>buy[i]— 第i天已经处于买入股票状态</p>
-<p>因为只能买卖一次，所以状态转移只能是</p>
-<ol>
-<li><p>第i-1天已经处于买入股票状态，第i天不买卖股票，维持在买入状态:</p>
-<p><code>buy[i-1]-&gt;buy[i]</code></p>
-</li>
-</ol>
-</li>
-<li><p>sell[i]—第i天已经处于卖出股票的状态</p>
-<p>​</p>
-<ol>
-<li><p>第i-1天已经处于卖出股票状态，第i天不买卖，维持在卖出状态:</p>
-<p><code>sell[i-1]-&gt;sell[i]</code></p>
-</li>
-<li><p>第i-1天处于买入股票的状态，第i天将持有的股票卖出</p>
-<p><code>buy[i-1]-&gt;sell[i]</code></p>
-</li>
-</ol>
-</li>
-</ol>
-<pre class="line-numbers language-cpp"><code class="language-cpp">sell<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">=</span><span class="token function">max</span><span class="token punctuation">(</span>buy<span class="token punctuation">[</span>i<span class="token number">-1</span><span class="token punctuation">]</span><span class="token operator">+</span>prices<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> sell<span class="token punctuation">[</span>i<span class="token number">-1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-buy<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">=</span><span class="token function">max</span><span class="token punctuation">(</span><span class="token operator">-</span>prices<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> buy<span class="token punctuation">[</span>i<span class="token number">-1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
-  <span class="token keyword">public</span><span class="token operator">:</span>
-      <span class="token keyword">int</span> <span class="token function">maxProfit</span><span class="token punctuation">(</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token operator">&amp;</span> prices<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">int</span> <span class="token function">buy</span><span class="token punctuation">(</span>INT_MIN<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">sell</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-          <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> price<span class="token operator">:</span> prices<span class="token punctuation">)</span>
-          <span class="token punctuation">{</span>
-            sell <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span>buy <span class="token operator">+</span> price<span class="token punctuation">,</span> sell<span class="token punctuation">)</span><span class="token punctuation">;</span>
-              buy <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span><span class="token operator">-</span>price<span class="token punctuation">,</span> buy<span class="token punctuation">)</span><span class="token punctuation">;</span>
-          <span class="token punctuation">}</span>
-          <span class="token keyword">return</span> sell<span class="token punctuation">;</span>
-      <span class="token punctuation">}</span>
+<p>实现arg_sort</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    vector<span class="token operator">&lt;</span>string<span class="token operator">></span> <span class="token function">findRelativeRanks</span><span class="token punctuation">(</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token operator">&amp;</span> nums<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        size_t len <span class="token operator">=</span> nums<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        vector<span class="token operator">&lt;</span>string<span class="token operator">></span> <span class="token function">res</span><span class="token punctuation">(</span>len<span class="token punctuation">,</span> <span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">idx</span><span class="token punctuation">(</span>len<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> len<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
+            idx<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> i<span class="token punctuation">;</span>
+        <span class="token function">argSort</span><span class="token punctuation">(</span>nums<span class="token punctuation">,</span> idx<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> len <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> len<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
+            res<span class="token punctuation">[</span>idx<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">to_string</span><span class="token punctuation">(</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> len<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>res<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">"1"</span><span class="token punctuation">)</span>
+                res<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"Gold Medal"</span><span class="token punctuation">;</span>
+            <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>res<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">"2"</span><span class="token punctuation">)</span>
+                res<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"Silver Medal"</span><span class="token punctuation">;</span>
+            <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>res<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">"3"</span><span class="token punctuation">)</span>
+                res<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"Bronze Medal"</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> res<span class="token punctuation">;</span>
+
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">void</span> <span class="token function">argSort</span><span class="token punctuation">(</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token operator">&amp;</span>nums<span class="token punctuation">,</span> vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token operator">&amp;</span>idx<span class="token punctuation">,</span> <span class="token keyword">int</span> l<span class="token punctuation">,</span> <span class="token keyword">int</span> r<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>l <span class="token operator">>=</span> r<span class="token punctuation">)</span>
+            <span class="token keyword">return</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> X <span class="token operator">=</span> nums<span class="token punctuation">[</span>l<span class="token punctuation">]</span><span class="token punctuation">,</span> ii <span class="token operator">=</span> idx<span class="token punctuation">[</span>l<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> i <span class="token operator">=</span> l<span class="token punctuation">,</span> j <span class="token operator">=</span> r<span class="token punctuation">;</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>i <span class="token operator">&lt;</span> j<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">while</span> <span class="token punctuation">(</span>i <span class="token operator">&lt;</span> j <span class="token operator">&amp;&amp;</span> nums<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">&lt;=</span> X<span class="token punctuation">)</span>
+                <span class="token operator">--</span>j<span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">&lt;</span> j<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> nums<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span>
+                idx<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> idx<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">while</span> <span class="token punctuation">(</span>i <span class="token operator">&lt;</span> j <span class="token operator">&amp;&amp;</span> nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">></span> X<span class="token punctuation">)</span>
+                <span class="token operator">++</span>i<span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">&lt;</span> j<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                nums<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+                idx<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> idx<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> X<span class="token punctuation">;</span>
+        idx<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> ii<span class="token punctuation">;</span>
+        <span class="token function">argSort</span><span class="token punctuation">(</span>nums<span class="token punctuation">,</span> idx<span class="token punctuation">,</span> l<span class="token punctuation">,</span> i<span class="token number">-1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">argSort</span><span class="token punctuation">(</span>nums<span class="token punctuation">,</span> idx<span class="token punctuation">,</span> i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span> r<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<hr>
-<a href="/posts//posts/201612021714/" title="leetcode Best Time to Buy and Sell Stock II">leetcode Best Time to Buy and Sell Stock II</a>
-<a href="/posts//posts/201612021917/" title="leetcode Best Time to Buy and Sell Stock III">leetcode Best Time to Buy and Sell Stock III</a>
-<a href="/posts//posts/201612021921/" title="leetcode Best Time to Buy and Sell Stock IV">leetcode Best Time to Buy and Sell Stock IV</a>
-<a href="/posts//posts/201612021923/" title="leetcode Best Time to Buy and Sell Stock with Cooldown">leetcode Best Time to Buy and Sell Stock with Cooldown</a>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
     
 
@@ -483,9 +478,9 @@ buy<span class="token punctuation">[</span>i<span class="token punctuation">]</s
 <div id="comments">
     <!-- 多说评论框 start -->
     <div class="ds-thread"
-        data-thread-key="posts//posts/20161202170711/"
-        data-url="http://www.wowx.info/posts//posts/20161202170711/"
-        data-title="leetcode best Time Buy and SellStock I">
+        data-thread-key="posts/20170308102951/"
+        data-url="http://www.wowx.info/posts/20170308102951/"
+        data-title="LeetCode 506[sord]">
     </div>
     <!-- 多说评论框 end -->
 </div>
@@ -502,21 +497,13 @@ buy<span class="token punctuation">[</span>i<span class="token punctuation">]</s
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
-        <a href="/posts//posts/201612021714/" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            新篇
-        </a>
-    
 
     <!-- Section Spacer -->
     <div class="section-spacer"></div>
 
     <!-- Next Nav -->
     
-        <a href="/posts/201606112921/" id="post_nav-older" class="next-content">
+        <a href="/posts/20170307094529/" id="post_nav-older" class="next-content">
             旧篇
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
