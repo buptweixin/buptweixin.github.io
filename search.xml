@@ -71,8 +71,11 @@
 <p>Example:</p>
 <p>Input: x = 1, y = 4</p>
 <p>Output: 2</p>
-<p>Explanation:<br>1   (0 0 0 1)<br>4   (0 1 0 0)<br>      ↑   ↑</p>
-<p>The above arrows point to positions where the corresponding bits are different.</p>
+<pre><code>Explanation:
+1   (0 0 0 1)
+4   (0 1 0 0)
+       ↑   ↑
+</code></pre><p>The above arrows point to positions where the corresponding bits are different.</p>
 </blockquote>
 <p>求两个数的汉明距离(有多少个比特位不同)</p>
 <h3 id="Method-1"><a href="#Method-1" class="headerlink" title="Method"></a>Method</h3><p>有两种办法，一种是不断对两个数对2取余数，比较余数是否相等</p>

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.wowx.info/"/>
-  <updated>2017-03-08T03:00:34.264Z</updated>
+  <updated>2017-03-08T03:05:27.908Z</updated>
   <id>http://www.wowx.info/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://www.wowx.info/posts/20170308102951/"/>
     <id>http://www.wowx.info/posts/20170308102951/</id>
     <published>2017-03-08T02:29:51.000Z</published>
-    <updated>2017-03-08T03:00:34.264Z</updated>
+    <updated>2017-03-08T03:05:27.908Z</updated>
     
     <content type="html"><![CDATA[<h2 id="506-Relative-Ranks"><a href="#506-Relative-Ranks" class="headerlink" title="506. Relative Ranks"></a>506. Relative Ranks</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><p>Given scores of N athletes, find their relative ranks&gt; and the people with the top three highest scores, who will be awarded medals: “Gold Medal”, “Silver Medal” and “Bronze Medal”.<br>&gt;</p>
 <blockquote>
@@ -87,8 +87,11 @@
 <p>Example:</p>
 <p>Input: x = 1, y = 4</p>
 <p>Output: 2</p>
-<p>Explanation:<br>1   (0 0 0 1)<br>4   (0 1 0 0)<br>      ↑   ↑</p>
-<p>The above arrows point to positions where the corresponding bits are different.</p>
+<pre><code>Explanation:
+1   (0 0 0 1)
+4   (0 1 0 0)
+       ↑   ↑
+</code></pre><p>The above arrows point to positions where the corresponding bits are different.</p>
 </blockquote>
 <p>求两个数的汉明距离(有多少个比特位不同)</p>
 <h3 id="Method-1"><a href="#Method-1" class="headerlink" title="Method"></a>Method</h3><p>有两种办法，一种是不断对两个数对2取余数，比较余数是否相等</p>
