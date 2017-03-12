@@ -4,6 +4,47 @@
   
     
     <entry>
+      <title><![CDATA[DEEP LEARNING TUTORIAL Chapter 8 Optimization for Training Deep Models]]></title>
+      <url>http://www.wowx.info/posts/201703122350/</url>
+      <content type="html"><![CDATA[<h1 id="第九章-优化问题"><a href="#第九章-优化问题" class="headerlink" title="第九章 优化问题"></a>第九章 优化问题</h1><h2 id="梯度更新算法"><a href="#梯度更新算法" class="headerlink" title="梯度更新算法"></a>梯度更新算法</h2><ol>
+<li><p>SGD</p>
+<p><img src="/img/blog/1489333212126.png" alt="1489333212126"></p>
+</li>
+<li><p>冲量算法</p>
+<p><img src="/img/blog/1489333283747.png" alt="1489333283747"></p>
+</li>
+<li><p>Nesterov 动量</p>
+<p><img src="/img/blog/1489333314874.png" alt="1489333314874"></p>
+</li>
+</ol>
+<p>自适应方法</p>
+<ol>
+<li><p>AdaGrad </p>
+<p>不常用，可能会使学习率过早过量衰减，不常用</p>
+<p><img src="/img/blog/1489333432891.png" alt="1489333432891"></p>
+</li>
+<li><p>RMSProp</p>
+<p>是adagrad的变种有普通版和Nesterov动量版本，较为常用</p>
+<p><img src="/img/blog/1489333472659.png" alt="1489333472659"></p>
+<p>Nesterov动量形式</p>
+<p><img src="/img/blog/1489333502150.png" alt="1489333502150"></p>
+</li>
+<li><p>Adam</p>
+<p><img src="/img/blog/1489333550022.png" alt="1489333550022"></p>
+</li>
+</ol>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> 深度学习 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[LeetCode 506[sord] 461[bit]]]></title>
       <url>http://www.wowx.info/posts/20170308102951/</url>
       <content type="html"><![CDATA[<h2 id="506-Relative-Ranks"><a href="#506-Relative-Ranks" class="headerlink" title="506. Relative Ranks"></a>506. Relative Ranks</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><p>Given scores of N athletes, find their relative ranks&gt; and the people with the top three highest scores, who will be awarded medals: “Gold Medal”, “Silver Medal” and “Bronze Medal”.<br>&gt;</p>

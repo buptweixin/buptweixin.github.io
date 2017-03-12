@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.wowx.info/"/>
-  <updated>2017-03-08T03:56:05.069Z</updated>
+  <updated>2017-03-12T15:50:28.301Z</updated>
   <id>http://www.wowx.info/</id>
   
   <author>
@@ -14,6 +14,53 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>DEEP LEARNING TUTORIAL Chapter 8 Optimization for Training Deep Models</title>
+    <link href="http://www.wowx.info/posts/201703122350/"/>
+    <id>http://www.wowx.info/posts/201703122350/</id>
+    <published>2017-03-11T16:01:34.000Z</published>
+    <updated>2017-03-12T15:50:28.301Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="第九章-优化问题"><a href="#第九章-优化问题" class="headerlink" title="第九章 优化问题"></a>第九章 优化问题</h1><h2 id="梯度更新算法"><a href="#梯度更新算法" class="headerlink" title="梯度更新算法"></a>梯度更新算法</h2><ol>
+<li><p>SGD</p>
+<p><img src="/img/blog/1489333212126.png" alt="1489333212126"></p>
+</li>
+<li><p>冲量算法</p>
+<p><img src="/img/blog/1489333283747.png" alt="1489333283747"></p>
+</li>
+<li><p>Nesterov 动量</p>
+<p><img src="/img/blog/1489333314874.png" alt="1489333314874"></p>
+</li>
+</ol>
+<p>自适应方法</p>
+<ol>
+<li><p>AdaGrad </p>
+<p>不常用，可能会使学习率过早过量衰减，不常用</p>
+<p><img src="/img/blog/1489333432891.png" alt="1489333432891"></p>
+</li>
+<li><p>RMSProp</p>
+<p>是adagrad的变种有普通版和Nesterov动量版本，较为常用</p>
+<p><img src="/img/blog/1489333472659.png" alt="1489333472659"></p>
+<p>Nesterov动量形式</p>
+<p><img src="/img/blog/1489333502150.png" alt="1489333502150"></p>
+</li>
+<li><p>Adam</p>
+<p><img src="/img/blog/1489333550022.png" alt="1489333550022"></p>
+</li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;第九章-优化问题&quot;&gt;&lt;a href=&quot;#第九章-优化问题&quot; class=&quot;headerlink&quot; title=&quot;第九章 优化问题&quot;&gt;&lt;/a&gt;第九章 优化问题&lt;/h1&gt;&lt;h2 id=&quot;梯度更新算法&quot;&gt;&lt;a href=&quot;#梯度更新算法&quot; class=&quot;headerli
+    
+    </summary>
+    
+    
+      <category term="深度学习" scheme="http://www.wowx.info/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
   
   <entry>
     <title>LeetCode 506[sord] 461[bit]</title>
@@ -3754,130 +3801,6 @@ import java<span class="token punctuation">.</span>lang<span class="token punctu
       <category term="string" scheme="http://www.wowx.info/tags/string/"/>
     
       <category term="algorithm" scheme="http://www.wowx.info/tags/algorithm/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Note of Machine Learning Yearning</title>
-    <link href="http://www.wowx.info/posts//posts/20161226233803/"/>
-    <id>http://www.wowx.info/posts//posts/20161226233803/</id>
-    <published>2016-12-26T15:38:03.000Z</published>
-    <updated>2016-12-26T15:41:05.805Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Machine-Learning-Yearning"><a href="#Machine-Learning-Yearning" class="headerlink" title="Machine Learning Yearning"></a>Machine Learning Yearning</h1><h2 id="why-machine-learning-stratregy"><a href="#why-machine-learning-stratregy" class="headerlink" title="why machine learning stratregy"></a>why machine learning stratregy</h2><h3 id="常用改善网络性能的方法"><a href="#常用改善网络性能的方法" class="headerlink" title="常用改善网络性能的方法"></a>常用改善网络性能的方法</h3><ul>
-<li>获得更多的数据</li>
-<li>采用覆盖更多情况的训练集，比如不同位置不同角度的猫</li>
-<li>通过增加梯度下降迭代次数训练更多步</li>
-<li>尝试更大的网络(更多的层、隐单元和参数)</li>
-<li>尝试更小的网络</li>
-<li>尝试增加正则项</li>
-<li>改变网络结构</li>
-<li>…</li>
-</ul>
-<p>本书目的就是指导大家如何调整网络使得网络具有更好的性能</p>
-<h2 id="开发和测试集"><a href="#开发和测试集" class="headerlink" title="开发和测试集"></a>开发和测试集</h2><p>传统机器学习中往往把数据集按$\frac{70%}{30%}$的比例分为训练集和测试集，但是在深度学习中，我们通常把数据集分成三个部分:</p>
-<ul>
-<li>训练集: 用于训练算法</li>
-<li>开发集: 用于调整参数、选择特征等</li>
-<li>测试集：评估速算法，但是千万别根据它来对算法、参数等进行调整</li>
-</ul>
-<p>测试集的选择要尽量和实际相贴近，而不是简单地随机取$30%$</p>
-<h4 id="训练集和测试集需要来自同一个分布"><a href="#训练集和测试集需要来自同一个分布" class="headerlink" title="训练集和测试集需要来自同一个分布"></a>训练集和测试集需要来自同一个分布</h4><h4 id="验证集和测试集的大小选择"><a href="#验证集和测试集的大小选择" class="headerlink" title="验证集和测试集的大小选择"></a>验证集和测试集的大小选择</h4><ul>
-<li><p>验证集</p>
-<p>验证集的大小至少需要达到能检测算法指定精度的差异的程度，比如，如果分类器A的准确度是<code>90.0%</code>分类器B的准确度是<code>90.1%</code>,那么，如果验证集只有100个样本将不能检测出这<code>0.1%</code>的差异。在大公司，<code>0.01%</code>的性能提升都能带来巨大收益，这时使用超过一万张的验证集都不为过。</p>
-</li>
-<li><p>测试集</p>
-<p>测试集大小需满足足够说明你的系统总体性能。传统机器学习选择<code>30%</code>的样本作为测试集，但是对于深度学习动辄上百万的数据量来说，选择这么大的比例有些浪费。</p>
-</li>
-</ul>
-<h3 id="建立用于优化的单值评价指标"><a href="#建立用于优化的单值评价指标" class="headerlink" title="建立用于优化的单值评价指标"></a>建立用于优化的单值评价指标</h3><p><code>accuracy</code>等单值评价指标能明确地反映模型性能，而多值指标就不是那么直观了，比如</p>
-<table>
-<thead>
-<tr>
-<th>Classifer</th>
-<th>Precision</th>
-<th>Recall</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>A</td>
-<td>95%</td>
-<td>90%</td>
-</tr>
-<tr>
-<td>B</td>
-<td>98%</td>
-<td>85%</td>
-</tr>
-</tbody>
-</table>
-<p>我们不能马上判断模型的好坏。</p>
-<p>所以采用单值度量指标能更好地帮助我们判断模型的好坏，指导我们优化。</p>
-<p>如果确实关心精度(所有标记为猫的样本数中正确的比率)和召回率(正确分类为猫的样本数占所有猫的比例)，可以将两者结合起来形成单值指标(比如取他们的平均值)，更好的方法是采用F1指标,他是加权平均值$$F_1=2\times\frac{1}{\frac{1}{recall}+\frac{1}{precision}}=2\times\frac{precision\times{recall}}{precision+recall}$$</p>
-<table>
-<thead>
-<tr>
-<th>Classifier</th>
-<th>Precision</th>
-<th>Recall</th>
-<th>F1 score</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>A</td>
-<td>95%</td>
-<td>90%</td>
-<td>92.4%</td>
-</tr>
-<tr>
-<td>B</td>
-<td>98%</td>
-<td>85%</td>
-<td>91.0%</td>
-</tr>
-</tbody>
-</table>
-<h3 id="优化和满意度指标"><a href="#优化和满意度指标" class="headerlink" title="优化和满意度指标"></a>优化和满意度指标</h3><p><img src="http://ww2.sinaimg.cn/large/6425ef91jw1fb4kyienfuj20n805p3z4.jpg" alt=""></p>
-<p>对于直接数学运算没有明显实际意义的多个指标，可以使用满意度和优化方法结合在一起，比如上面的情况，可以将运行时间作为满意度指标，只要它符合我们预期的100ms以内就认为满意，在这个基础上将精度作为优化目标。</p>
-<h3 id="拥有验证集和评价指标显著加快开发迭代速度"><a href="#拥有验证集和评价指标显著加快开发迭代速度" class="headerlink" title="拥有验证集和评价指标显著加快开发迭代速度"></a>拥有验证集和评价指标显著加快开发迭代速度</h3><p>开发迭代循环包括</p>
-<ol>
-<li>想出一些有可能改进算法的点子</li>
-<li>用代码实现他们</li>
-<li>检查实验结果，判断这些想法是否可行，然后基于它产生更多的想法，重复这个迭代过程</li>
-</ol>
-<p><img src="http://ww4.sinaimg.cn/large/6425ef91jw1fb4l5bhgx7j20fd083aad.jpg" alt=""></p>
-<p>在上面这个过程中，如果没有验证集和评价指标，我们每次优化算法后需要手工的主观测试其是否有用(比如检测猫的手机应用，需要去下载一堆图片，人工判断分类器效果)这将严重减慢我们的开发速度。如果有了验证集和评价指标我们可以快速知道结果并指定下一步计划。上面的<strong>循环进行的越迅速，你的进步将越快！</strong></p>
-<h3 id="何时应该改变验证集-训练集和评价指标"><a href="#何时应该改变验证集-训练集和评价指标" class="headerlink" title="何时应该改变验证集/训练集和评价指标"></a>何时应该改变验证集/训练集和评价指标</h3><p>当开始新的项目时，应该花最少的时间挑选最初的验证集/测试集(少于一周时间)，然后马上将他们应用到算法中去，如果发现以下情况，就去更换验证集/训练集或评价指标</p>
-<ol>
-<li><p>算法实际应用场景中的数据分布和验证集/训练集不一样</p>
-<p>比如我们使用成年猫训练分类器，但是用户却用的是猫宝宝来测试我们的分类器，这时应该马上将猫宝宝的图片加入分类器，扩增验证集。</p>
-</li>
-<li><p>和验证集过拟合</p>
-<p>如果算法在验证集上的效果远好于测试集，就说明算法在验证集上发生了过拟合，这时候就应该<strong>更换测试集</strong>了</p>
-</li>
-<li><p>优化目标发生了改变</p>
-<p>如果随着训练的进行，你的优化目标发生了改变，现有的评价指标已经不满足你的需求，这时候就应该<strong>更换新的评价</strong>指标了。</p>
-</li>
-</ol>
-<h2 id="错误分析"><a href="#错误分析" class="headerlink" title="错误分析"></a>错误分析</h2><p>错误分析可以评估模型在某种错分类情况下的最大可提升空间，比如现有模型会把一些狗分类为猫，假设在所有错分类样本种，有<code>5%</code>是由于错分类为狗造成的，而现在模型的准确度为<code>90%</code>，那么，通过解决错分狗问题，最大可以提升到<code>90.5%</code>；若<code>50%</code>是由于错分类为狗造成的，解决狗的问题最大可以达到的精度为<code>95%</code>。通过这个步骤，可以考察是否值应该花费时间在解决狗的错分类问题上还是花在其他更紧要的事情上。</p>
-<h3 id="同时进行多个错误分析"><a href="#同时进行多个错误分析" class="headerlink" title="同时进行多个错误分析"></a>同时进行多个错误分析</h3><p><img src="http://ww4.sinaimg.cn/large/6425ef91jw1fb4m599u38j21180akq4h.jpg" alt=""></p>
-<p>假如同事们提出了多种错误，那么将他们分别列出来，并估算每种错误最大精度提升能力，重点放在效果最大的那个部分是不错的选择。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Machine-Learning-Yearning&quot;&gt;&lt;a href=&quot;#Machine-Learning-Yearning&quot; class=&quot;headerlink&quot; title=&quot;Machine Learning Yearning&quot;&gt;&lt;/a&gt;Machine Lea
-    
-    </summary>
-    
-      <category term="机器学习" scheme="http://www.wowx.info/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="机器学习" scheme="http://www.wowx.info/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="深度学习" scheme="http://www.wowx.info/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
