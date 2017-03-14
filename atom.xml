@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.wowx.info/"/>
-  <updated>2017-03-12T15:50:28.301Z</updated>
+  <updated>2017-03-14T02:12:36.385Z</updated>
   <id>http://www.wowx.info/</id>
   
   <author>
@@ -14,6 +14,66 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>LeetCode 500</title>
+    <link href="http://www.wowx.info/posts/20170314100838/"/>
+    <id>http://www.wowx.info/posts/20170314100838/</id>
+    <published>2017-03-14T02:08:38.000Z</published>
+    <updated>2017-03-14T02:12:36.385Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="500-KeyboardRow"><a href="#500-KeyboardRow" class="headerlink" title="500. KeyboardRow"></a>500. KeyboardRow</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
+<p>Given a List of words, return the words that can be typed using letters of alphabet on only one row’s of American keyboard like the image below.</p>
+</blockquote>
+<p><img src="https://leetcode.com/static/images/problemset/keyboard.png" alt=""></p>
+<blockquote>
+<p>Example 1:<br>Input: [“Hello”, “Alaska”, “Dad”, “Peace”]<br>Output: [“Alaska”, “Dad”]<br>Note:<br>You may use one character in the keyboard more than once.<br>You may assume the input string will only contain letters of alphabet.</p>
+</blockquote>
+<p>给出一组字符串，找出满足所有字母在键盘上同一行条件的字符串</p>
+<h3 id="METHOD"><a href="#METHOD" class="headerlink" title="METHOD"></a>METHOD</h3><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    vector<span class="token operator">&lt;</span>string<span class="token operator">></span> <span class="token function">findWords</span><span class="token punctuation">(</span>vector<span class="token operator">&lt;</span>string<span class="token operator">></span><span class="token operator">&amp;</span> words<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">keydict</span><span class="token punctuation">(</span><span class="token number">123</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        vector<span class="token operator">&lt;</span>string<span class="token operator">></span> <span class="token function">rows</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token string">"qwertyuiopQWERTYUIOP"</span><span class="token punctuation">,</span> <span class="token string">"asdfghjklASDFGHJKL"</span><span class="token punctuation">,</span> <span class="token string">"zxcvbnmZXCVBNM"</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> rows<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">char</span> ch <span class="token operator">:</span> rows<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+                keydict<span class="token punctuation">[</span>ch<span class="token punctuation">]</span> <span class="token operator">=</span> i<span class="token punctuation">;</span>
+        vector<span class="token operator">&lt;</span>string<span class="token operator">></span> rst<span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span>string word <span class="token operator">:</span> words<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">int</span> i <span class="token operator">=</span> keydict<span class="token punctuation">[</span>word<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token keyword">bool</span> flag <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">char</span> ch <span class="token operator">:</span> word<span class="token punctuation">)</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>keydict<span class="token punctuation">[</span>ch<span class="token punctuation">]</span> <span class="token operator">!=</span> i<span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    flag <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>flag<span class="token punctuation">)</span>
+                rst<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>word<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> rst<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;500-KeyboardRow&quot;&gt;&lt;a href=&quot;#500-KeyboardRow&quot; class=&quot;headerlink&quot; title=&quot;500. KeyboardRow&quot;&gt;&lt;/a&gt;500. KeyboardRow&lt;/h2&gt;&lt;h3 id=&quot;Problem-Des
+    
+    </summary>
+    
+      <category term="algorithm" scheme="http://www.wowx.info/categories/algorithm/"/>
+    
+    
+      <category term="algorithm" scheme="http://www.wowx.info/tags/algorithm/"/>
+    
+      <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
+    
+      <category term="hash table" scheme="http://www.wowx.info/tags/hash-table/"/>
+    
+  </entry>
   
   <entry>
     <title>DEEP LEARNING TUTORIAL Chapter 8 Optimization for Training Deep Models</title>
@@ -199,9 +259,9 @@ public:
       <category term="algorithm" scheme="http://www.wowx.info/categories/algorithm/"/>
     
     
-      <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
-    
       <category term="algorithm" scheme="http://www.wowx.info/tags/algorithm/"/>
+    
+      <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
     
       <category term="sort" scheme="http://www.wowx.info/tags/sort/"/>
     
@@ -353,9 +413,9 @@ Note: There are at least two nodes in this BST.
       <category term="algorithm" scheme="http://www.wowx.info/categories/algorithm/"/>
     
     
-      <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
-    
       <category term="algorithm" scheme="http://www.wowx.info/tags/algorithm/"/>
+    
+      <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
     
       <category term="math" scheme="http://www.wowx.info/tags/math/"/>
     
@@ -2732,11 +2792,11 @@ import java<span class="token punctuation">.</span>lang<span class="token punctu
       <category term="algorithm" scheme="http://www.wowx.info/categories/algorithm/"/>
     
     
+      <category term="algorithm" scheme="http://www.wowx.info/tags/algorithm/"/>
+    
       <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
     
       <category term="string" scheme="http://www.wowx.info/tags/string/"/>
-    
-      <category term="algorithm" scheme="http://www.wowx.info/tags/algorithm/"/>
     
   </entry>
   
@@ -3239,11 +3299,11 @@ import java<span class="token punctuation">.</span>lang<span class="token punctu
       <category term="algorithm" scheme="http://www.wowx.info/categories/algorithm/"/>
     
     
+      <category term="algorithm" scheme="http://www.wowx.info/tags/algorithm/"/>
+    
       <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
     
       <category term="string" scheme="http://www.wowx.info/tags/string/"/>
-    
-      <category term="algorithm" scheme="http://www.wowx.info/tags/algorithm/"/>
     
   </entry>
   
@@ -3440,11 +3500,11 @@ import java<span class="token punctuation">.</span>lang<span class="token punctu
       <category term="algorithm" scheme="http://www.wowx.info/categories/algorithm/"/>
     
     
+      <category term="algorithm" scheme="http://www.wowx.info/tags/algorithm/"/>
+    
       <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
     
       <category term="string" scheme="http://www.wowx.info/tags/string/"/>
-    
-      <category term="algorithm" scheme="http://www.wowx.info/tags/algorithm/"/>
     
   </entry>
   
@@ -3606,201 +3666,11 @@ import java<span class="token punctuation">.</span>lang<span class="token punctu
       <category term="algorithm" scheme="http://www.wowx.info/categories/algorithm/"/>
     
     
-      <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
-    
-      <category term="string" scheme="http://www.wowx.info/tags/string/"/>
-    
       <category term="algorithm" scheme="http://www.wowx.info/tags/algorithm/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode string 93 385 3 30</title>
-    <link href="http://www.wowx.info/posts/20170129233720/"/>
-    <id>http://www.wowx.info/posts/20170129233720/</id>
-    <published>2017-01-29T06:33:12.000Z</published>
-    <updated>2017-03-07T03:14:42.493Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="93-Restore-IP-Addresses"><a href="#93-Restore-IP-Addresses" class="headerlink" title="93 Restore IP Addresses"></a>93 Restore IP Addresses</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
-<p>Given a string containing only digits, restore it by returning all possible valid IP address combinations.</p>
-<p>For example:<br>Given “25525511135”,</p>
-<p>return [“255.255.11.135”, “255.255.111.35”]. (Order does not matter)</p>
-</blockquote>
-<p>给出一个由数字组成的字符串，解码出所有可能的ip地址。</p>
-<h3 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h3><h4 id="直接遍历所有情况"><a href="#直接遍历所有情况" class="headerlink" title="直接遍历所有情况"></a>直接遍历所有情况</h4><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
-<span class="token keyword">public</span><span class="token operator">:</span>
-    vector<span class="token operator">&lt;</span>string<span class="token operator">></span> <span class="token function">restoreIpAddresses</span><span class="token punctuation">(</span>string s<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        vector<span class="token operator">&lt;</span>string<span class="token operator">></span> ips<span class="token punctuation">;</span>
-        string ip<span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> a <span class="token operator">&lt;</span> <span class="token number">4</span><span class="token punctuation">;</span> <span class="token operator">++</span>a<span class="token punctuation">)</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> b <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> b <span class="token operator">&lt;</span> <span class="token number">4</span><span class="token punctuation">;</span> <span class="token operator">++</span>b<span class="token punctuation">)</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> c <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> c <span class="token operator">&lt;</span> <span class="token number">4</span><span class="token punctuation">;</span> <span class="token operator">++</span>c<span class="token punctuation">)</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> d <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> d <span class="token operator">&lt;</span> <span class="token number">4</span><span class="token punctuation">;</span> <span class="token operator">++</span>d<span class="token punctuation">)</span>
-        <span class="token punctuation">{</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>a <span class="token operator">+</span> b <span class="token operator">+</span> c <span class="token operator">+</span> d <span class="token operator">==</span> s<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-            <span class="token punctuation">{</span>
-                <span class="token keyword">int</span> part1 <span class="token operator">=</span> <span class="token function">stoi</span><span class="token punctuation">(</span>s<span class="token punctuation">.</span><span class="token function">substr</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> a<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token keyword">int</span> part2 <span class="token operator">=</span> <span class="token function">stoi</span><span class="token punctuation">(</span>s<span class="token punctuation">.</span><span class="token function">substr</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token keyword">int</span> part3 <span class="token operator">=</span> <span class="token function">stoi</span><span class="token punctuation">(</span>s<span class="token punctuation">.</span><span class="token function">substr</span><span class="token punctuation">(</span>a<span class="token operator">+</span>b<span class="token punctuation">,</span> c<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token keyword">int</span> part4 <span class="token operator">=</span> <span class="token function">stoi</span><span class="token punctuation">(</span>s<span class="token punctuation">.</span><span class="token function">substr</span><span class="token punctuation">(</span>a<span class="token operator">+</span>b<span class="token operator">+</span>c<span class="token punctuation">,</span> d<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token keyword">if</span> <span class="token punctuation">(</span>part1 <span class="token operator">&lt;=</span> <span class="token number">255</span> <span class="token operator">&amp;&amp;</span> part2 <span class="token operator">&lt;=</span> <span class="token number">255</span> <span class="token operator">&amp;&amp;</span> part3 <span class="token operator">&lt;=</span> <span class="token number">255</span> <span class="token operator">&amp;&amp;</span> part4 <span class="token operator">&lt;=</span> <span class="token number">255</span><span class="token punctuation">)</span>
-                <span class="token punctuation">{</span>
-                    ip <span class="token operator">=</span> <span class="token function">to_string</span><span class="token punctuation">(</span>part1<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"."</span> <span class="token operator">+</span> <span class="token function">to_string</span><span class="token punctuation">(</span>part2<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"."</span> <span class="token operator">+</span> <span class="token function">to_string</span><span class="token punctuation">(</span>part3<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"."</span> <span class="token operator">+</span> <span class="token function">to_string</span><span class="token punctuation">(</span>part4<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    <span class="token keyword">if</span> <span class="token punctuation">(</span>ip<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> s<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">3</span><span class="token punctuation">)</span>
-                        ips<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>ip<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token punctuation">}</span>
-            <span class="token punctuation">}</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> ips<span class="token punctuation">;</span>
-
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h4 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h4><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
-<span class="token keyword">public</span><span class="token operator">:</span>
-    vector<span class="token operator">&lt;</span>string<span class="token operator">></span> <span class="token function">restoreIpAddresses</span><span class="token punctuation">(</span>string s<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        vector<span class="token operator">&lt;</span>string<span class="token operator">></span> res<span class="token punctuation">;</span>
-        <span class="token function">restoreIP</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span> res<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token string">""</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> res<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-<span class="token keyword">private</span><span class="token operator">:</span>
-    <span class="token keyword">void</span> <span class="token function">restoreIP</span><span class="token punctuation">(</span>string<span class="token operator">&amp;</span> s<span class="token punctuation">,</span> vector<span class="token operator">&lt;</span>string<span class="token operator">></span><span class="token operator">&amp;</span> solution<span class="token punctuation">,</span> <span class="token keyword">int</span> idx<span class="token punctuation">,</span> string restored<span class="token punctuation">,</span> \
-            <span class="token keyword">int</span> count<span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>count <span class="token operator">></span> <span class="token number">4</span><span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>count <span class="token operator">==</span> <span class="token number">4</span> <span class="token operator">&amp;&amp;</span> idx <span class="token operator">==</span> s<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> solution<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>restored<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">4</span><span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
-        <span class="token punctuation">{</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>idx <span class="token operator">+</span> i <span class="token operator">></span> s<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">break</span><span class="token punctuation">;</span>
-            string substring <span class="token operator">=</span> s<span class="token punctuation">.</span><span class="token function">substr</span><span class="token punctuation">(</span>idx<span class="token punctuation">,</span> i<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>substring<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'0'</span> <span class="token operator">&amp;&amp;</span> substring<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">||</span> \
-                    <span class="token punctuation">(</span>i <span class="token operator">==</span> <span class="token number">3</span> <span class="token operator">&amp;&amp;</span> <span class="token function">stoi</span><span class="token punctuation">(</span>substring<span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">255</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-                <span class="token keyword">continue</span><span class="token punctuation">;</span>
-            <span class="token function">restoreIP</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span> solution<span class="token punctuation">,</span> idx <span class="token operator">+</span> i<span class="token punctuation">,</span> restored <span class="token operator">+</span> substring <span class="token operator">+</span> <span class="token punctuation">(</span>count <span class="token operator">==</span> <span class="token number">3</span> <span class="token operator">?</span> <span class="token string">""</span> <span class="token operator">:</span> <span class="token string">"."</span><span class="token punctuation">)</span><span class="token punctuation">,</span>\
-                    count <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="385-Mini-Parser"><a href="#385-Mini-Parser" class="headerlink" title="385 Mini Parser"></a>385 Mini Parser</h2><h3 id="Problem-Description-1"><a href="#Problem-Description-1" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
-<p>Given a nested list of integers represented as a string, implement a parser to deserialize it.</p>
-<p>Each element is either an integer, or a list – whose elements may also be integers or other lists.</p>
-<p>Note: You may assume that the string is well-formed:</p>
-<p>String is non-empty.<br>String does not contain white spaces.<br>String contains only digits 0-9, [, - ,, ].<br>Example 1:</p>
-<p>Given s = “324”,</p>
-<p>You should return a NestedInteger object which contains a single integer 324.<br>Example 2:</p>
-<p>Given s = “[123,[456,[789]]]”,</p>
-<p>Return a NestedInteger object containing a nested list with 2 elements:</p>
-<ol>
-<li>An integer containing value 123.</li>
-<li>A nested list containing two elements:<br>i.  An integer containing value 456.<br>ii. A nested list with one element:<pre><code> a. An integer containing value 789.
-</code></pre>Subscribe to see which companies asked this question</li>
-</ol>
-</blockquote>
-<h3 id="Method-1"><a href="#Method-1" class="headerlink" title="Method"></a>Method</h3><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
-<span class="token keyword">public</span><span class="token operator">:</span>
-    NestedInteger <span class="token function">deserialize</span><span class="token punctuation">(</span>string s<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        istringstream <span class="token function">in</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> <span class="token function">deserialize</span><span class="token punctuation">(</span>in<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token keyword">private</span><span class="token operator">:</span>
-    NestedInteger <span class="token function">deserialize</span><span class="token punctuation">(</span>istringstream <span class="token operator">&amp;</span>in<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">int</span> num<span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>in <span class="token operator">>></span> num<span class="token punctuation">)</span>
-            <span class="token keyword">return</span> <span class="token function">NestedInteger</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        in<span class="token punctuation">.</span><span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        in<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        NestedInteger list<span class="token punctuation">;</span>
-        <span class="token keyword">while</span><span class="token punctuation">(</span>in<span class="token punctuation">.</span><span class="token function">peek</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token string">']'</span><span class="token punctuation">)</span>
-        <span class="token punctuation">{</span>
-            list<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token function">deserialize</span><span class="token punctuation">(</span>in<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>in<span class="token punctuation">.</span><span class="token function">peek</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token string">','</span><span class="token punctuation">)</span>
-                in<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        in<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> list<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="3-Longest-Substring-Without-Repeating-Characters"><a href="#3-Longest-Substring-Without-Repeating-Characters" class="headerlink" title="3 Longest Substring Without Repeating Characters"></a>3 Longest Substring Without Repeating Characters</h2><h3 id="Problem-Description-2"><a href="#Problem-Description-2" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
-<p>Given a string, find the length of the longest substring without repeating characters.</p>
-<p>Examples:</p>
-<p>Given “abcabcbb”, the answer is “abc”, which the length is 3.</p>
-<p>Given “bbbbb”, the answer is “b”, with the length of 1.</p>
-<p>Given “pwwkew”, the answer is “wke”, with the length of 3. Note that the answer must be a substring, “pwke” is a subsequence and not a substring.</p>
-<p>Subscribe to see which companies asked this question</p>
-</blockquote>
-<h3 id="Method-2"><a href="#Method-2" class="headerlink" title="Method"></a>Method</h3><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
-<span class="token keyword">public</span><span class="token operator">:</span>
-    <span class="token keyword">int</span> <span class="token function">lengthOfLongestSubstring</span><span class="token punctuation">(</span>string s<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">alphatable</span><span class="token punctuation">(</span><span class="token number">256</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">int</span> start <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> maxlen <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> s<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>alphatable<span class="token punctuation">[</span>s<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">></span> start<span class="token punctuation">)</span>
-                start <span class="token operator">=</span> alphatable<span class="token punctuation">[</span>s<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-            alphatable<span class="token punctuation">[</span>s<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">=</span> i<span class="token punctuation">;</span>
-            maxlen <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span>maxlen<span class="token punctuation">,</span> i <span class="token operator">-</span> start<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> maxlen<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="30-Substring-with-Concatenation-of-All-Words"><a href="#30-Substring-with-Concatenation-of-All-Words" class="headerlink" title="30. Substring with Concatenation of All Words"></a>30. Substring with Concatenation of All Words</h2><h3 id="Problem-Description-3"><a href="#Problem-Description-3" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
-<p>You are given a string, s, and a list of words, words, that are all of the same length. Find all starting indices of substring(s) in s that is a concatenation of each word in words exactly once and without any intervening characters.</p>
-<p>For example, given:<br>s: “barfoothefoobarman”<br>words: [“foo”, “bar”]</p>
-<p>You should return the indices: [0,9].<br>(order does not matter).</p>
-</blockquote>
-<p>给出一个字符串s和一个等长单词构成的单词数组words，找出words中所有单词任意拼接(每个单词最多出现一次)在s中出现的位置。</p>
-<h3 id="Method-3"><a href="#Method-3" class="headerlink" title="Method"></a>Method</h3><p>用一个<code>unordered_map&lt;string, int&gt; words</code>存储words中每个单词出现的次数，另一个<code>unordered_map&lt;string, int&gt; seen</code>存储s中每个单词出现的次数，如果seen中对应单词数大于words中单词数则退出进入下一次比较</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
-<span class="token keyword">public</span><span class="token operator">:</span>
-    vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">findSubstring</span><span class="token punctuation">(</span>string s<span class="token punctuation">,</span> vector<span class="token operator">&lt;</span>string<span class="token operator">></span><span class="token operator">&amp;</span> words<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        unordered_map<span class="token operator">&lt;</span>string<span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">></span> counts<span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span>string word <span class="token operator">:</span> words<span class="token punctuation">)</span>
-            counts<span class="token punctuation">[</span>word<span class="token punctuation">]</span><span class="token operator">++</span><span class="token punctuation">;</span>
-        <span class="token keyword">int</span> n <span class="token operator">=</span> s<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> num <span class="token operator">=</span> words<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> len <span class="token operator">=</span> words<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> indexes<span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n <span class="token operator">-</span> num <span class="token operator">*</span> len <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
-        <span class="token punctuation">{</span>
-            unordered_map<span class="token operator">&lt;</span>string<span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">></span> seen<span class="token punctuation">;</span>
-            <span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> num<span class="token punctuation">;</span> <span class="token operator">++</span>j<span class="token punctuation">)</span>
-            <span class="token punctuation">{</span>
-                string substring <span class="token operator">=</span> s<span class="token punctuation">.</span><span class="token function">substr</span><span class="token punctuation">(</span>i <span class="token operator">+</span> len <span class="token operator">*</span> j<span class="token punctuation">,</span> len<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token keyword">if</span> <span class="token punctuation">(</span>counts<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span>substring<span class="token punctuation">)</span> <span class="token operator">!=</span> counts<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-                <span class="token punctuation">{</span>
-                    seen<span class="token punctuation">[</span>substring<span class="token punctuation">]</span><span class="token operator">++</span><span class="token punctuation">;</span>
-                    <span class="token keyword">if</span> <span class="token punctuation">(</span>seen<span class="token punctuation">[</span>substring<span class="token punctuation">]</span> <span class="token operator">></span> counts<span class="token punctuation">[</span>substring<span class="token punctuation">]</span><span class="token punctuation">)</span>
-                        <span class="token keyword">break</span><span class="token punctuation">;</span>
-                <span class="token punctuation">}</span>
-                <span class="token keyword">else</span>
-                    <span class="token keyword">break</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>j <span class="token operator">==</span> num<span class="token punctuation">)</span> indexes<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> indexes<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;93-Restore-IP-Addresses&quot;&gt;&lt;a href=&quot;#93-Restore-IP-Addresses&quot; class=&quot;headerlink&quot; title=&quot;93 Restore IP Addresses&quot;&gt;&lt;/a&gt;93 Restore IP Add
-    
-    </summary>
-    
-      <category term="algorithm" scheme="http://www.wowx.info/categories/algorithm/"/>
-    
     
       <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
     
       <category term="string" scheme="http://www.wowx.info/tags/string/"/>
-    
-      <category term="algorithm" scheme="http://www.wowx.info/tags/algorithm/"/>
     
   </entry>
   

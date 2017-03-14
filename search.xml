@@ -4,6 +4,64 @@
   
     
     <entry>
+      <title><![CDATA[LeetCode 500]]></title>
+      <url>http://www.wowx.info/posts/20170314100838/</url>
+      <content type="html"><![CDATA[<h2 id="500-KeyboardRow"><a href="#500-KeyboardRow" class="headerlink" title="500. KeyboardRow"></a>500. KeyboardRow</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
+<p>Given a List of words, return the words that can be typed using letters of alphabet on only one row’s of American keyboard like the image below.</p>
+</blockquote>
+<p><img src="https://leetcode.com/static/images/problemset/keyboard.png" alt=""></p>
+<blockquote>
+<p>Example 1:<br>Input: [“Hello”, “Alaska”, “Dad”, “Peace”]<br>Output: [“Alaska”, “Dad”]<br>Note:<br>You may use one character in the keyboard more than once.<br>You may assume the input string will only contain letters of alphabet.</p>
+</blockquote>
+<p>给出一组字符串，找出满足所有字母在键盘上同一行条件的字符串</p>
+<h3 id="METHOD"><a href="#METHOD" class="headerlink" title="METHOD"></a>METHOD</h3><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    vector<span class="token operator">&lt;</span>string<span class="token operator">></span> <span class="token function">findWords</span><span class="token punctuation">(</span>vector<span class="token operator">&lt;</span>string<span class="token operator">></span><span class="token operator">&amp;</span> words<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">keydict</span><span class="token punctuation">(</span><span class="token number">123</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        vector<span class="token operator">&lt;</span>string<span class="token operator">></span> <span class="token function">rows</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token string">"qwertyuiopQWERTYUIOP"</span><span class="token punctuation">,</span> <span class="token string">"asdfghjklASDFGHJKL"</span><span class="token punctuation">,</span> <span class="token string">"zxcvbnmZXCVBNM"</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> rows<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">char</span> ch <span class="token operator">:</span> rows<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+                keydict<span class="token punctuation">[</span>ch<span class="token punctuation">]</span> <span class="token operator">=</span> i<span class="token punctuation">;</span>
+        vector<span class="token operator">&lt;</span>string<span class="token operator">></span> rst<span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span>string word <span class="token operator">:</span> words<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">int</span> i <span class="token operator">=</span> keydict<span class="token punctuation">[</span>word<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token keyword">bool</span> flag <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">char</span> ch <span class="token operator">:</span> word<span class="token punctuation">)</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>keydict<span class="token punctuation">[</span>ch<span class="token punctuation">]</span> <span class="token operator">!=</span> i<span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    flag <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>flag<span class="token punctuation">)</span>
+                rst<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>word<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> rst<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+]]></content>
+      
+        <categories>
+            
+            <category> algorithm </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> algorithm </tag>
+            
+            <tag> cpp </tag>
+            
+            <tag> hash table </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[DEEP LEARNING TUTORIAL Chapter 8 Optimization for Training Deep Models]]></title>
       <url>http://www.wowx.info/posts/201703122350/</url>
       <content type="html"><![CDATA[<h1 id="第九章-优化问题"><a href="#第九章-优化问题" class="headerlink" title="第九章 优化问题"></a>第九章 优化问题</h1><h2 id="梯度更新算法"><a href="#梯度更新算法" class="headerlink" title="梯度更新算法"></a>梯度更新算法</h2><ol>
@@ -177,9 +235,9 @@ public:
         
         <tags>
             
-            <tag> cpp </tag>
-            
             <tag> algorithm </tag>
+            
+            <tag> cpp </tag>
             
             <tag> sort </tag>
             
@@ -329,9 +387,9 @@ Note: There are at least two nodes in this BST.
         
         <tags>
             
-            <tag> cpp </tag>
-            
             <tag> algorithm </tag>
+            
+            <tag> cpp </tag>
             
             <tag> math </tag>
             
@@ -2668,11 +2726,11 @@ import java<span class="token punctuation">.</span>lang<span class="token punctu
         
         <tags>
             
+            <tag> algorithm </tag>
+            
             <tag> cpp </tag>
             
             <tag> string </tag>
-            
-            <tag> algorithm </tag>
             
         </tags>
         
@@ -3167,11 +3225,11 @@ import java<span class="token punctuation">.</span>lang<span class="token punctu
         
         <tags>
             
+            <tag> algorithm </tag>
+            
             <tag> cpp </tag>
             
             <tag> string </tag>
-            
-            <tag> algorithm </tag>
             
         </tags>
         
@@ -3366,11 +3424,11 @@ import java<span class="token punctuation">.</span>lang<span class="token punctu
         
         <tags>
             
+            <tag> algorithm </tag>
+            
             <tag> cpp </tag>
             
             <tag> string </tag>
-            
-            <tag> algorithm </tag>
             
         </tags>
         
@@ -3530,11 +3588,11 @@ import java<span class="token punctuation">.</span>lang<span class="token punctu
         
         <tags>
             
+            <tag> algorithm </tag>
+            
             <tag> cpp </tag>
             
             <tag> string </tag>
-            
-            <tag> algorithm </tag>
             
         </tags>
         
@@ -3718,11 +3776,11 @@ import java<span class="token punctuation">.</span>lang<span class="token punctu
         
         <tags>
             
+            <tag> algorithm </tag>
+            
             <tag> cpp </tag>
             
             <tag> string </tag>
-            
-            <tag> algorithm </tag>
             
         </tags>
         
@@ -3842,9 +3900,9 @@ import java<span class="token punctuation">.</span>lang<span class="token punctu
         
         <tags>
             
-            <tag> 机器学习 </tag>
-            
             <tag> 深度学习 </tag>
+            
+            <tag> 机器学习 </tag>
             
         </tags>
         
@@ -4738,7 +4796,16 @@ sudo ln -s /usr/bin/g++-5 /usr/bin/g++
 <p>然后进入<code>sudo vim /usr/local/cuda/include/host_config.h</code>将115行的</p>
 <pre><code>#error -- unsupported GNU version! gcc versions later than 5.3 are not supported!
 </code></pre><p>注释掉</p>
-]]></content>
+<h3 id="使用多个版本的cudnn"><a href="#使用多个版本的cudnn" class="headerlink" title="使用多个版本的cudnn"></a>使用多个版本的cudnn</h3><p>我们机器上可能存在多个版本的caffe，每个版本可能使用不同的cudnn库，不断替换<code>/usr/local/cuda</code>中的文件很不方便，我肯可以使用下面的方法来迅速的切换我们正在使用的cudnn库<br>首先，从<code>/usr/local/cuda</code>目录中移除cudnn文件</p>
+<pre><code>sudo rm /usr/local/cuda/libcudnn*
+sudo rm /usr/local/include/cudnn.h
+</code></pre><p>新建一个目录集中管理各个版本的cudnn库,比如<code>~/cudnn/cudnn_v3</code>存放第三版，<code>~/cudnn/cudnn_v5</code>存放第五版</p>
+<p>修改caffe根目录下的<code>Makefile.config</code>的<code>INCLUDE_DIRS</code>,添加对应版本的cudnn的<code>include</code>目录，添加lib64目录到<code>LIBRARY_DIRS</code></p>
+<p>最后，修改<code>.bashrc</code>文件,添加对应版本cudnn目录下的64</p>
+<pre><code>export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/wx/cudnn/cudnn_v5/lib64
+</code></pre><p>刷新</p>
+<pre><code>source ~/.bashrc
+</code></pre>]]></content>
       
         
         <tags>
@@ -4847,9 +4914,9 @@ sudo ln -s /usr/bin/g++-5 /usr/bin/g++
         
         <tags>
             
-            <tag> 机器学习 </tag>
-            
             <tag> 深度学习 </tag>
+            
+            <tag> 机器学习 </tag>
             
             <tag> cs231n </tag>
             
@@ -5543,9 +5610,9 @@ classes <span class="token operator">=</span> <span class="token punctuation">[<
         
         <tags>
             
-            <tag> 机器学习 </tag>
-            
             <tag> 深度学习 </tag>
+            
+            <tag> 机器学习 </tag>
             
         </tags>
         
@@ -5634,9 +5701,9 @@ classes <span class="token operator">=</span> <span class="token punctuation">[<
         
         <tags>
             
-            <tag> 机器学习 </tag>
-            
             <tag> 深度学习 </tag>
+            
+            <tag> 机器学习 </tag>
             
             <tag> cs231n </tag>
             
@@ -7643,9 +7710,9 @@ binary_PositionDepth, binary_QueryTokens</code></p>
         
         <tags>
             
-            <tag> cpp </tag>
-            
             <tag> algorithm </tag>
+            
+            <tag> cpp </tag>
             
             <tag> array </tag>
             
@@ -7760,9 +7827,9 @@ The median is (2 + 3)/2 = 2.5
         
         <tags>
             
-            <tag> cpp </tag>
-            
             <tag> algorithm </tag>
+            
+            <tag> cpp </tag>
             
             <tag> array </tag>
             
@@ -7818,9 +7885,9 @@ The median is (2 + 3)/2 = 2.5
         
         <tags>
             
-            <tag> cpp </tag>
-            
             <tag> algorithm </tag>
+            
+            <tag> cpp </tag>
             
             <tag> array </tag>
             
