@@ -4,6 +4,92 @@
   
     
     <entry>
+      <title><![CDATA[LeetCode: Next Greater Element I and II]]></title>
+      <url>http://www.wowx.info/posts/20170318144202/</url>
+      <content type="html"><![CDATA[<h2 id="503-Next-Greater-Next-I"><a href="#503-Next-Greater-Next-I" class="headerlink" title="503. Next Greater Next I"></a>503. Next Greater Next I</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><p>You are given two arrays (without duplicates) nums1 and &gt;nums2 where nums1’s elements are subset of nums2. Find all the next greater numbers for nums1’s elements in the corresponding places of nums2.<br>&gt;</p>
+<blockquote>
+<p>The Next Greater Number of a number x in nums1 is the first greater number to its right in nums2. If it does not exist, output -1 for this number.</p>
+<p>Example 1:<br>Input: nums1 = [4,1,2], nums2 = [1,3,4,2].<br>Output: [-1,3,-1]<br>Explanation:<br>   For number 4 in the first array, you cannot find the next greater number for it in the second array, so output -1.<br>   For number 1 in the first array, the next greater number for it in the second array is 3.<br>   For number 2 in the first array, there is no next greater number for it in the second array, so output -1.<br>Example 2:<br>Input: nums1 = [2,4], nums2 = [1,2,3,4].<br>Output: [3,-1]<br>Explanation:<br>   For number 2 in the first array, the next greater number for it in the second array is 3.<br>   For number 4 in the first array, there is no next greater number for it in the second array, so output -1.<br>Note:<br>All elements in nums1 and nums2 are unique.</p>
+<h2 id="The-length-of-both-nums1-and-nums2-would-not-exceed-1000"><a href="#The-length-of-both-nums1-and-nums2-would-not-exceed-1000" class="headerlink" title="The length of both nums1 and nums2 would not exceed 1000."></a>The length of both nums1 and nums2 would not exceed 1000.</h2><p>给出两个数组<code>findNums</code>和<code>nums</code>, 在<code>nums</code>中找出比<code>findNums</code>大的元素</p>
+</blockquote>
+<h3 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h3><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">nextGreaterElement</span><span class="token punctuation">(</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token operator">&amp;</span> findNums<span class="token punctuation">,</span> vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token operator">&amp;</span> nums<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>findNums<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">or</span> nums<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token keyword">return</span> vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        stack<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> tmp<span class="token punctuation">;</span>
+        unordered_map<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">></span> nextmap<span class="token punctuation">;</span>
+        tmp<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>nums<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> nums<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+                <span class="token keyword">while</span><span class="token punctuation">(</span>tmp<span class="token punctuation">.</span><span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    nextmap<span class="token punctuation">[</span>tmp<span class="token punctuation">.</span><span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token operator">=</span> nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+                    tmp<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>tmp<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                        <span class="token keyword">break</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                tmp<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token operator">!</span>tmp<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            nextmap<span class="token punctuation">[</span>tmp<span class="token punctuation">.</span><span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+            tmp<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> res<span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> num <span class="token operator">:</span> findNums<span class="token punctuation">)</span>
+            res<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>nextmap<span class="token punctuation">[</span>num<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">return</span> res<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="Next-Greater-Number-II"><a href="#Next-Greater-Number-II" class="headerlink" title="Next Greater Number II"></a>Next Greater Number II</h2><h3 id="Problem-Description-1"><a href="#Problem-Description-1" class="headerlink" title="Problem Description"></a>Problem Description</h3><pre><code>Given a circular array (the next element of the last element is the first element of the array), print the Next Greater Number for every element. The Next Greater Number of a number x is the first greater number to its traversing-order next in the array, which means you could search circularly to find its next greater number. If it doesn&#39;t exist, output -1 for this number.
+
+Example 1:
+Input: [1,2,1]
+Output: [2,-1,2]
+Explanation: The first 1&#39;s next greater number is 2;
+The number 2 can&#39;t find next greater number;
+The second 1&#39;s next greater number needs to search circularly, which is also 2.
+Note: The length of given array won&#39;t exceed 10000.
+</code></pre><p>将上题中的数组改成循环数组，求下一个更大元素</p>
+<h3 id="Method-1"><a href="#Method-1" class="headerlink" title="Method"></a>Method</h3><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">nextGreaterElements</span><span class="token punctuation">(</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token operator">&amp;</span> nums<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> n <span class="token operator">=</span> nums<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">next</span><span class="token punctuation">(</span>n<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        stack<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> s<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// index stack</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">int</span> num <span class="token operator">=</span> nums<span class="token punctuation">[</span>i <span class="token operator">%</span> n<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>s<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> nums<span class="token punctuation">[</span>s<span class="token punctuation">.</span><span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token operator">&lt;</span> num<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                next<span class="token punctuation">[</span>s<span class="token punctuation">.</span><span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token operator">=</span> num<span class="token punctuation">;</span>
+                s<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">&lt;</span> n<span class="token punctuation">)</span> s<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> next<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> cpp </tag>
+            
+            <tag> algorithm </tag>
+            
+            <tag> stack </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[LeetCode 500]]></title>
       <url>http://www.wowx.info/posts/20170314100838/</url>
       <content type="html"><![CDATA[<h2 id="500-KeyboardRow"><a href="#500-KeyboardRow" class="headerlink" title="500. KeyboardRow"></a>500. KeyboardRow</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
@@ -51,9 +137,9 @@
         
         <tags>
             
-            <tag> algorithm </tag>
-            
             <tag> cpp </tag>
+            
+            <tag> algorithm </tag>
             
             <tag> hash table </tag>
             
@@ -235,9 +321,9 @@ public:
         
         <tags>
             
-            <tag> algorithm </tag>
-            
             <tag> cpp </tag>
+            
+            <tag> algorithm </tag>
             
             <tag> sort </tag>
             
@@ -387,9 +473,9 @@ Note: There are at least two nodes in this BST.
         
         <tags>
             
-            <tag> algorithm </tag>
-            
             <tag> cpp </tag>
+            
+            <tag> algorithm </tag>
             
             <tag> math </tag>
             
@@ -2726,11 +2812,11 @@ import java<span class="token punctuation">.</span>lang<span class="token punctu
         
         <tags>
             
-            <tag> algorithm </tag>
-            
             <tag> cpp </tag>
             
             <tag> string </tag>
+            
+            <tag> algorithm </tag>
             
         </tags>
         
@@ -3225,11 +3311,11 @@ import java<span class="token punctuation">.</span>lang<span class="token punctu
         
         <tags>
             
-            <tag> algorithm </tag>
-            
             <tag> cpp </tag>
             
             <tag> string </tag>
+            
+            <tag> algorithm </tag>
             
         </tags>
         
@@ -3424,11 +3510,11 @@ import java<span class="token punctuation">.</span>lang<span class="token punctu
         
         <tags>
             
-            <tag> algorithm </tag>
-            
             <tag> cpp </tag>
             
             <tag> string </tag>
+            
+            <tag> algorithm </tag>
             
         </tags>
         
@@ -3588,11 +3674,11 @@ import java<span class="token punctuation">.</span>lang<span class="token punctu
         
         <tags>
             
-            <tag> algorithm </tag>
-            
             <tag> cpp </tag>
             
             <tag> string </tag>
+            
+            <tag> algorithm </tag>
             
         </tags>
         
@@ -3776,11 +3862,11 @@ import java<span class="token punctuation">.</span>lang<span class="token punctu
         
         <tags>
             
-            <tag> algorithm </tag>
-            
             <tag> cpp </tag>
             
             <tag> string </tag>
+            
+            <tag> algorithm </tag>
             
         </tags>
         
@@ -3900,9 +3986,9 @@ import java<span class="token punctuation">.</span>lang<span class="token punctu
         
         <tags>
             
-            <tag> 深度学习 </tag>
-            
             <tag> 机器学习 </tag>
+            
+            <tag> 深度学习 </tag>
             
         </tags>
         
@@ -4914,9 +5000,9 @@ sudo rm /usr/local/include/cudnn.h
         
         <tags>
             
-            <tag> 深度学习 </tag>
-            
             <tag> 机器学习 </tag>
+            
+            <tag> 深度学习 </tag>
             
             <tag> cs231n </tag>
             
@@ -5610,9 +5696,9 @@ classes <span class="token operator">=</span> <span class="token punctuation">[<
         
         <tags>
             
-            <tag> 深度学习 </tag>
-            
             <tag> 机器学习 </tag>
+            
+            <tag> 深度学习 </tag>
             
         </tags>
         
@@ -5701,9 +5787,9 @@ classes <span class="token operator">=</span> <span class="token punctuation">[<
         
         <tags>
             
-            <tag> 深度学习 </tag>
-            
             <tag> 机器学习 </tag>
+            
+            <tag> 深度学习 </tag>
             
             <tag> cs231n </tag>
             
@@ -7710,9 +7796,9 @@ binary_PositionDepth, binary_QueryTokens</code></p>
         
         <tags>
             
-            <tag> algorithm </tag>
-            
             <tag> cpp </tag>
+            
+            <tag> algorithm </tag>
             
             <tag> array </tag>
             
@@ -7827,9 +7913,9 @@ The median is (2 + 3)/2 = 2.5
         
         <tags>
             
-            <tag> algorithm </tag>
-            
             <tag> cpp </tag>
+            
+            <tag> algorithm </tag>
             
             <tag> array </tag>
             
@@ -7885,9 +7971,9 @@ The median is (2 + 3)/2 = 2.5
         
         <tags>
             
-            <tag> algorithm </tag>
-            
             <tag> cpp </tag>
+            
+            <tag> algorithm </tag>
             
             <tag> array </tag>
             

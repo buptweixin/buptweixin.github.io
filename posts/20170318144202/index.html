@@ -10,7 +10,7 @@
     
     <title>
         
-            LeetCode 154 Find Minimum in Rotated Sorted Array II | 
+            LeetCode: Next Greater Element I and II | 
         
         野原圆长的Blog
     </title>
@@ -27,7 +27,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="Xin Wei">
     <meta name="description" content="null">
-    <meta name="keywords" content="Blog deep_learging,cpp,algorithm,array,hard">
+    <meta name="keywords" content="Blog deep_learging,cpp,algorithm,stack">
 
     <!--iOS -->
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -48,9 +48,9 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="http://www.wowx.info">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="LeetCode 154 Find Minimum in Rotated Sorted Array II | 野原圆长的Blog">
+    <meta property="og:title" content="LeetCode: Next Greater Element I and II | 野原圆长的Blog">
     <meta property="og:description" content="null">
-    <meta property="og:article:tag" content="cpp"> <meta property="og:article:tag" content="algorithm"> <meta property="og:article:tag" content="array"> <meta property="og:article:tag" content="hard"> 
+    <meta property="og:article:tag" content="cpp"> <meta property="og:article:tag" content="algorithm"> <meta property="og:article:tag" content="stack"> 
 
     <!--[if lte IE 9]>
         <link rel="stylesheet" href="/css/ie-blocker.css">
@@ -235,7 +235,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#解题思路"><span class="post-toc-number">1.</span> <span class="post-toc-text">解题思路</span></a></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#503-Next-Greater-Next-I"><span class="post-toc-number">1.</span> <span class="post-toc-text">503. Next Greater Next I</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Problem-Description"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Problem Description</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#The-length-of-both-nums1-and-nums2-would-not-exceed-1000"><span class="post-toc-number">2.</span> <span class="post-toc-text">The length of both nums1 and nums2 would not exceed 1000.</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Method"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">Method</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Next-Greater-Number-II"><span class="post-toc-number">3.</span> <span class="post-toc-text">Next Greater Number II</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Problem-Description-1"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">Problem Description</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Method-1"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">Method</span></a></li></ol></li></ol>
 
         <!--
         <li class="mdl-menu__item">
@@ -263,7 +263,7 @@
         <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(http://ww4.sinaimg.cn/large/6425ef91jw1f9apllc7boj20ic0960v9.jpg)">
     
             <p class="article-headline-p">
-                LeetCode 154 Find Minimum in Rotated Sorted Array II
+                LeetCode: Next Greater Element I and II
             </p>
         </div>
 
@@ -282,7 +282,7 @@
     <!-- Author Name & Date -->
     <div>
         <strong>Xin Wei</strong>
-        <span>11月 29, 2015</span>
+        <span>3月 18, 2017</span>
     </div>
 
     <div class="section-spacer"></div>
@@ -303,7 +303,7 @@
         </button>
         <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
             <li class="mdl-menu__item">在其它设备中阅读本文章</li>
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACZ0lEQVR42u3aQZLiMBAEQP7/6ZkHbOCpaskyS6RPBAGy0gdJru7Xz1dfLzw8PDw8PDw8vA/jveLr33+9+5z8Pr9LPTc8PDy8I7w/lto3v0km/W6E6ymuzA0PDw/vJC+ZXD7RdjNotxM8PDy8/4uXf3M96ZUHhIeHh/dNvGShz7ccPDw8vE/mJS/818v69fd5qPFY1oKHh4cX8/Ii0/nPR+t7eHh4eAGvbmmKF/pZA8HDPWV4eHh4AW+9HaoNc9sYt30QeHh4eHfzVuKDHDB7BMmDKI7UeHh4eEd4s0msFLRWjvJ4eHh4T/HWg4k/bl8e3NvwAg8PD+9u3vpUZm2pu6JhPDw8vPO82UBtWNA2vOYhct06gIeHh7eVl4e2Sdww2yTykbe9MeDh4eGNePmxuC5HjRqzZmPi4eHhneHNAoL1Zqw2FC4iDzw8PLybeflL/q4D8azcVWwbeHh4eEd4+RD58h2V+UdxxvCNAQ8PD28rL1922xvn7EM9ZXh4eHib+jnbslayPSSLeHtMH/aU4eHh4R1vVx3GqW2zVHyvOqXGw8PDu403w7TxxCz2zdl4eHh4J3lJ8WnWQJAckVc2ITw8PLyneG0ZbCWibaPeonkLDw8P72Zee81iiDauXYpF8PDw8G7mtcvxSmSQFLfymKOu7+Hh4eFt5eWbwfXxenaAXtkY8PDw8J7l5Qv0bDvZNf5S1oKHh4f3KG9WBpu1IyyFEXh4eHgfwMubAGaH9SQKGbYO4OHh4W3ltUWvNpi4oz0LDw8P7yleGwHs3TbyEYZhBB4eHt5W3vddeHh4eHh4eHh4H3D9AuwtNQB/VooxAAAAAElFTkSuQmCC">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACXElEQVR42u3aS3ICMQwFQO5/aXKAVIYny79Q7RUFw9jthayS9Xp/9Xjh4eHh4eHh4eFdxnvF4/e//vqcPJ/PUl4bHh4e3hbeh1D7uNznpeTPJ/NGa8PDw8PbyEsW99ev+b+qW5DPgoeHh3czL0mgk/S6s0F4eHh4/4tXLVjkof+icw8PDw9vUjHiOaw/f58UHZLnF9Za8PDw8GJefsm0//PW+z08PDy8gFduaWoXKZILs2M9ZXh4eHgBr98O1bkYS56sbgQeHh7eal7eONVpsRrbgmprFx4eHt49vA6meqE1VkrGw8PDO8t7Ds3J5daH6YeaDyaUcfHw8PCm8vLktX8wVFuvku3Gw8PDO8UbK8uObcfcufDw8PD286pFhLEUPA/0eRtWuTMCDw8PbxIvSXb7jVb5jNXNwsPDw9vJGysQ9NPlWYfBh5QaDw8PbwGvGpQ7CXR1Q5MiBR4eHt5+XnUpebvAWHJcPTailBoPDw9vGW/sYOi0WHVatfDw8PBu4CVXYmNtAe9gVBtk8fDw8M7y8mBdfTIP7p0jCg8PD28/rwqeVXKtNihERwgeHh7eBbzONVWeQHeaX/Hw8PDO8nLkuhJt5514eHh4q3nV0QnonaCflyrw8PDwVvOq4TgvEBRCeRD6W01XeHh4eAt41daBPPkeS9YnHwx4eHh4y3hjATq/oMrfv6TWgoeHh3eU12mZyt9QbVbAw8PDu5lXTbvzZL3a8rXw3MPDw8ObVIyoBuu8kDF25YaHh4d3ilctAXQAY8l0qxiBh4eHN5X3fQMPDw8PDw8PD++C8QP1UD7awO4VmgAAAABJRU5ErkJggg==">
         </ul>
     
 
@@ -315,7 +315,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/algorithm/">algorithm</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/array/">array</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/cpp/">cpp</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/hard/">hard</a>
+        <a class="post_tag-link" href="/tags/algorithm/">algorithm</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/cpp/">cpp</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/stack/">stack</a>
     </ul>
     
 
@@ -329,7 +329,7 @@
     <!-- Leancloud Views -->
         <a class="post_share-link" href="#">
             <li class="mdl-menu__item">
-                <span id="/posts/20151129203220/" class="leancloud-views_num" data-flag-title="LeetCode 154 Find Minimum in Rotated Sorted Array II">
+                <span id="/posts/20170318144202/" class="leancloud-views_num" data-flag-title="LeetCode: Next Greater Element I and II">
      &nbsp;浏览量
 </span>
 
@@ -341,7 +341,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=LeetCode 154 Find Minimum in Rotated Sorted Array II&url=http://www.wowx.info//posts/20151129203220/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=LeetCode: Next Greater Element I and II&url=http://www.wowx.info//posts/20170318144202/index.html&pic=&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 分享到微博
             </li>
@@ -350,7 +350,7 @@
 
     <!-- Share Twitter -->
     
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=LeetCode 154 Find Minimum in Rotated Sorted Array II&url=http://www.wowx.info//posts/20151129203220/index.html&via=Xin Wei" target="_blank">
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=LeetCode: Next Greater Element I and II&url=http://www.wowx.info//posts/20170318144202/index.html&via=Xin Wei" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Twitter
             </li>
@@ -359,7 +359,7 @@
 
     <!-- Share Facebook -->
     
-        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://www.wowx.info//posts/20151129203220/index.html" target="_blank">
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://www.wowx.info//posts/20170318144202/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Facebook
             </li>
@@ -368,7 +368,7 @@
 
     <!-- Share Google+ -->
     
-        <a class="post_share-link" href="https://plus.google.com/share?url=http://www.wowx.info//posts/20151129203220/index.html" target="_blank">
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://www.wowx.info//posts/20170318144202/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Google+
             </li>
@@ -392,38 +392,74 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <blockquote>
-<p>Suppose a sorted array is rotated at some pivot unknown to you beforehand.</p>
-<p>(i.e., <code>0 1 2 4 5 6 7</code> might become <code>4 5 6 7 0 1 2</code>).</p>
-<p>Find the minimum element.</p>
-<p>The array may contain duplicates.</p>
+        <h2 id="503-Next-Greater-Next-I"><a href="#503-Next-Greater-Next-I" class="headerlink" title="503. Next Greater Next I"></a>503. Next Greater Next I</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><p>You are given two arrays (without duplicates) nums1 and &gt;nums2 where nums1’s elements are subset of nums2. Find all the next greater numbers for nums1’s elements in the corresponding places of nums2.<br>&gt;</p>
+<blockquote>
+<p>The Next Greater Number of a number x in nums1 is the first greater number to its right in nums2. If it does not exist, output -1 for this number.</p>
+<p>Example 1:<br>Input: nums1 = [4,1,2], nums2 = [1,3,4,2].<br>Output: [-1,3,-1]<br>Explanation:<br>   For number 4 in the first array, you cannot find the next greater number for it in the second array, so output -1.<br>   For number 1 in the first array, the next greater number for it in the second array is 3.<br>   For number 2 in the first array, there is no next greater number for it in the second array, so output -1.<br>Example 2:<br>Input: nums1 = [2,4], nums2 = [1,2,3,4].<br>Output: [3,-1]<br>Explanation:<br>   For number 2 in the first array, the next greater number for it in the second array is 3.<br>   For number 4 in the first array, there is no next greater number for it in the second array, so output -1.<br>Note:<br>All elements in nums1 and nums2 are unique.</p>
+<h2 id="The-length-of-both-nums1-and-nums2-would-not-exceed-1000"><a href="#The-length-of-both-nums1-and-nums2-would-not-exceed-1000" class="headerlink" title="The length of both nums1 and nums2 would not exceed 1000."></a>The length of both nums1 and nums2 would not exceed 1000.</h2><p>给出两个数组<code>findNums</code>和<code>nums</code>, 在<code>nums</code>中找出比<code>findNums</code>大的元素</p>
 </blockquote>
-<a id="more"></a>
-<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><ol>
-<li><p>二分法，时间复杂度O(log(N))或O(N)</p>
-<p>主要考虑的问题是nums[mid] == nums[hi]这种情况，此时不能确定最小元素在mid的左边还是右边，那么，直接让hi不断减1直到于nums[mid]不相等</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
+<h3 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h3><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
 <span class="token keyword">public</span><span class="token operator">:</span>
-    <span class="token keyword">int</span> <span class="token function">findMin</span><span class="token punctuation">(</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token operator">&amp;</span> nums<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">int</span> lo <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> hi <span class="token operator">=</span> nums<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span>
-        <span class="token keyword">while</span> <span class="token punctuation">(</span>lo <span class="token operator">&lt;</span> hi<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token keyword">int</span> mid <span class="token operator">=</span> lo <span class="token operator">+</span> <span class="token punctuation">(</span>hi <span class="token operator">-</span> lo<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>nums<span class="token punctuation">[</span>mid<span class="token punctuation">]</span> <span class="token operator">&lt;</span> nums<span class="token punctuation">[</span>hi<span class="token punctuation">]</span><span class="token punctuation">)</span>
-                hi <span class="token operator">=</span> mid<span class="token punctuation">;</span>
-            <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>nums<span class="token punctuation">[</span>mid<span class="token punctuation">]</span> <span class="token operator">></span> nums<span class="token punctuation">[</span>hi<span class="token punctuation">]</span><span class="token punctuation">)</span>
-                lo <span class="token operator">=</span> mid <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
-            <span class="token keyword">else</span>
-            <span class="token punctuation">{</span>
-                hi<span class="token operator">--</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> nums<span class="token punctuation">[</span>hi<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">nextGreaterElement</span><span class="token punctuation">(</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token operator">&amp;</span> findNums<span class="token punctuation">,</span> vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token operator">&amp;</span> nums<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>findNums<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">or</span> nums<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token keyword">return</span> vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        stack<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> tmp<span class="token punctuation">;</span>
+        unordered_map<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">></span> nextmap<span class="token punctuation">;</span>
+        tmp<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>nums<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> nums<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+                <span class="token keyword">while</span><span class="token punctuation">(</span>tmp<span class="token punctuation">.</span><span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    nextmap<span class="token punctuation">[</span>tmp<span class="token punctuation">.</span><span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token operator">=</span> nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+                    tmp<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>tmp<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                        <span class="token keyword">break</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                tmp<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token operator">!</span>tmp<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            nextmap<span class="token punctuation">[</span>tmp<span class="token punctuation">.</span><span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+            tmp<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> res<span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> num <span class="token operator">:</span> findNums<span class="token punctuation">)</span>
+            res<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>nextmap<span class="token punctuation">[</span>num<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">return</span> res<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
-</ol>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="Next-Greater-Number-II"><a href="#Next-Greater-Number-II" class="headerlink" title="Next Greater Number II"></a>Next Greater Number II</h2><h3 id="Problem-Description-1"><a href="#Problem-Description-1" class="headerlink" title="Problem Description"></a>Problem Description</h3><pre><code>Given a circular array (the next element of the last element is the first element of the array), print the Next Greater Number for every element. The Next Greater Number of a number x is the first greater number to its traversing-order next in the array, which means you could search circularly to find its next greater number. If it doesn&#39;t exist, output -1 for this number.
+
+Example 1:
+Input: [1,2,1]
+Output: [2,-1,2]
+Explanation: The first 1&#39;s next greater number is 2;
+The number 2 can&#39;t find next greater number;
+The second 1&#39;s next greater number needs to search circularly, which is also 2.
+Note: The length of given array won&#39;t exceed 10000.
+</code></pre><p>将上题中的数组改成循环数组，求下一个更大元素</p>
+<h3 id="Method-1"><a href="#Method-1" class="headerlink" title="Method"></a>Method</h3><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">nextGreaterElements</span><span class="token punctuation">(</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token operator">&amp;</span> nums<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> n <span class="token operator">=</span> nums<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">next</span><span class="token punctuation">(</span>n<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        stack<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> s<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// index stack</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">int</span> num <span class="token operator">=</span> nums<span class="token punctuation">[</span>i <span class="token operator">%</span> n<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>s<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> nums<span class="token punctuation">[</span>s<span class="token punctuation">.</span><span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token operator">&lt;</span> num<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                next<span class="token punctuation">[</span>s<span class="token punctuation">.</span><span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token operator">=</span> num<span class="token punctuation">;</span>
+                s<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">&lt;</span> n<span class="token punctuation">)</span> s<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> next<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
     
 
@@ -452,9 +488,9 @@
 <div id="comments">
     <!-- 多说评论框 start -->
     <div class="ds-thread"
-        data-thread-key="posts/20151129203220/"
-        data-url="http://www.wowx.info/posts/20151129203220/"
-        data-title="LeetCode 154 Find Minimum in Rotated Sorted Array II">
+        data-thread-key="posts/20170318144202/"
+        data-url="http://www.wowx.info/posts/20170318144202/"
+        data-title="LeetCode: Next Greater Element I and II">
     </div>
     <!-- 多说评论框 end -->
 </div>
@@ -471,21 +507,13 @@
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
-        <a href="/posts/20151130013320/" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            新篇
-        </a>
-    
 
     <!-- Section Spacer -->
     <div class="section-spacer"></div>
 
     <!-- Next Nav -->
     
-        <a href="/posts/20151030013220/" id="post_nav-older" class="next-content">
+        <a href="/posts/20170314100838/" id="post_nav-older" class="next-content">
             旧篇
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
