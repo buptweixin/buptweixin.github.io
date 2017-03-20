@@ -166,7 +166,7 @@
     </entry>
     
     <entry>
-      <title><![CDATA[LeetCode 419]]></title>
+      <title><![CDATA[LeetCode 419 513]]></title>
       <url>http://www.wowx.info/posts/20170329131842/</url>
       <content type="html"><![CDATA[<h2 id="419-Battleships-in-a-Board"><a href="#419-Battleships-in-a-Board" class="headerlink" title="419. Battleships in a Board"></a>419. Battleships in a Board</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
 <p>You receive a valid board, made of only battleships or empty slots.<br>Battleships can only be placed horizontally or vertically. In other words, they can only be made of the shape 1xN (1 row, N columns) or Nx1 (N rows, 1 co&gt;lumn), where N can be of any size.<br>At least one horizontal or vertical cell separates between two battleships - there are no adjacent battleships.<br>Example:<br>X..X<br>…X<br>…X<br>In the above board there are 2 battleships.<br>Invalid Example:<br>…X<br>XXXX<br>…X<br>This is an invalid board that you will not receive - as battleships will always have a cell separating between them.<br>Follow up:<br>Could you do it in one-pass, using only O(1) extra memory and without modifying the value of the board?</p>
@@ -174,8 +174,83 @@
 <hr>
 <p>给出一个只含有<code>.</code>和<code>X</code>的二维数组，其中<code>X</code>表示舰船的一部分，<code>.</code>表示空白海域，舰船只能是横的或竖直的，并且舰船间至少有一格空水域间隔，求整个水域有多少艘舰船，要求只遍历二维数组一次，空间复杂度为<code>O(1)</code></p>
 <h3 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h3><p>为了唯一区分一艘舰船，以舰船的头作为计数基准，所谓舰船头即当前位置为<code>X</code>且上方和左方都是<code>.</code>的情况</p>
-<p><code>`cpp</code><br>class Solution {<br>public:<br>    int countBattleships(vector<vector<char>&gt;&amp; board) {<br>        if (board.empty())<br>            return 0;<br>        int m = board.size(), n = board[0].size();<br>        int count = 0;<br>        for (int i = 0; i &lt; m; ++i)<br>            for (int j = 0; j &lt; n; ++j)<br>            {<br>                if (board[i][j] == ‘.’) continue;<br>                if (i &gt; 0 and board[i-1][j] == ‘X’) continue;<br>                if (j &gt; 0 and board[i][j-1] == ‘X’) continue;<br>                ++count;<br>            }<br>        return count;<br>    }<br>};<br>```</vector<char></p>
-]]></content>
+<p><code>`cpp</code><br>class Solution {<br>public:<br>    int countBattleships(vector<vector<char>&gt;&amp; board) {<br>        if (board.empty())<br>            return 0;<br>        int m = board.size(), n = board[0].size();<br>        int count = 0;<br>        for (int i = 0; i &lt; m; ++i)<br>            for (int j = 0; j &lt; n; ++j)<br>            {<br>                if (board[i][j] == ‘.’) continue;<br>                if (i &gt; 0 and board[i-1][j] == ‘X’) continue;<br>                if (j &gt; 0 and board[i][j-1] == ‘X’) continue;<br>                ++count;<br>            }<br>        return count;<br>    }<br>};</vector<char></p>
+<pre><code>
+## 513. Find Bottom Left Tree Value
+### Problem Description
+&gt;Given a binary tree, find the leftmost value in the last row of the tree.
+&gt;
+&gt;Example 1:
+&gt;Input:
+&gt;
+&gt;    2
+&gt;   / \
+&gt;  1   3
+&gt;
+&gt;Output:
+&gt;1
+&gt;Example 2:
+&gt;Input:
+&gt;
+&gt;        1
+&gt;       / \
+&gt;      2   3
+&gt;     /   / \
+&gt;    4   5   6
+&gt;       /
+&gt;      7
+&gt;
+&gt;Output:
+&gt;7
+&gt;Note: You may assume the tree (i.e., the given root node) is not NULL.
+
+给出一个二叉树，找出最深一行节点中最左边的那个
+
+### Method
+
+先序遍历二叉树的同时记录当前所在位置的深度，如果该深度大于最大当前遍历到的最大深度，则更新最大深度值和该位置节点值，由于同一深度只会更新一次，所以记录到的就是最左值
+```cpp
+class Solution {
+
+public:
+
+    int findBottomLeftValue(TreeNode* root) {
+
+        vector&lt;int&gt; rst({0, 0});
+
+        helper(root, 1, rst);
+
+        return rst[0];
+
+
+
+    }
+
+
+
+    // rst 第一元素存储当前最左值，第二个元素存储对应的深度
+
+    void helper(TreeNode* root, int deepth, vector&lt;int&gt;&amp; rst)
+
+    {
+
+        if (deepth &gt; rst[1])
+
+        {
+
+            rst[0] = root-&gt;val;
+
+            rst[1] = deepth;
+
+        }
+
+        if (root-&gt;left != NULL) helper(root-&gt;left, deepth+1, rst);
+
+        if (root-&gt;right != NULL) helper(root-&gt;right, deepth+1, rst);
+    }
+
+};
+</code></pre>]]></content>
       
         
         <tags>
@@ -183,6 +258,8 @@
             <tag> cpp </tag>
             
             <tag> algorithm </tag>
+            
+            <tag> tree </tag>
             
         </tags>
         
