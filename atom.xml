@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.wowx.info/"/>
-  <updated>2017-03-21T05:23:26.108Z</updated>
+  <updated>2017-03-21T14:48:30.289Z</updated>
   <id>http://www.wowx.info/</id>
   
   <author>
@@ -14,6 +14,39 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Deeplearing Book Chapter 10</title>
+    <link href="http://www.wowx.info/posts/20170321220240/"/>
+    <id>http://www.wowx.info/posts/20170321220240/</id>
+    <published>2017-03-21T14:02:40.000Z</published>
+    <updated>2017-03-21T14:48:30.289Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="建议设计流程"><a href="#建议设计流程" class="headerlink" title="建议设计流程"></a>建议设计流程</h2><ol>
+<li>确定目标<br> 确定误差度量，并为此误差度量指定目标值<br> 对于某些任务，不是简单的计算正确率就可以的，比如邮件垃圾拦截系统将正常邮件拦截的情况应该比漏拦截垃圾邮件的情况严重，又比如疾病检测系统，对于发生情况非常低(比如<code>0.0001%</code>)的疾病，正确率不能很好的度量，这时候需要使用准确率和召回率。我们以y轴表示精度，x轴表示召回率，通过给模型设置不同的阈值会得到<strong>PR曲线</strong>。用数值表示的话使用f-score</li>
+<li>尽快建立端到端工作流程<br> 包括合适的性能估计<br> 首先建立基准模型，如果输入是固定向量，则使用全连接网络，如果输入是语音图像等已知拓扑结构则使用卷积网络。<br> 具有衰减学习率(常用的有线性衰减、指数衰减、遇到验证误差高峰就衰减2-10倍等方法)的动量SGD是一个合理的优化算法选择，Adam方法也是一个值得尝试的方法。<br> 如果数据集没有数以千万的样本就应该加入正则化，可以使用提前终止，优化出现问题时应该立即使用batch normalization,<strong>应为batch normalizaiton有时也能降低泛化误差,因为标准化每个变量的统计估计而带来的噪声，可以省略Dropout</strong><br> 自然语言处理中也应该使用环境中加入无监督学习</li>
+<li><p>搭建系统<br> 确定性能瓶颈，确定哪部分差于预期，是否是因为欠拟合、过拟合或者数据或软件缺陷造成的</p>
+</li>
+<li><p>根据观察重复改动<br> 如收集新数据，调整超参数或改进算法</p>
+</li>
+</ol>
+<h2 id="是否增加数据集"><a href="#是否增加数据集" class="headerlink" title="是否增加数据集"></a>是否增加数据集</h2><p>增加数据集的前提是确定模型在训练集上的性能是否可接受，如果在训练集上性能都不好，更应该增加更多更多的层或层中增加更多的隐藏单元增加模型规模<br>如果训练集上效果很好，但是测试集上效果很差，增加数据集是最有效的方法之一。</p>
+<h2 id="选择超参数"><a href="#选择超参数" class="headerlink" title="选择超参数"></a>选择超参数</h2><h3 id="手动选择"><a href="#手动选择" class="headerlink" title="手动选择"></a>手动选择</h3><p>必须了解超参数以及其与训练误差、泛化误差和计算资源的关系，学习率可能是最重要的超参数<br><img src="http://ww1.sinaimg.cn/large/6425ef91ly1fduu97pjrvj219u0zygyc.jpg" alt=""></p>
+<h3 id="自动选择"><a href="#自动选择" class="headerlink" title="自动选择"></a>自动选择</h3><h4 id="网格搜索"><a href="#网格搜索" class="headerlink" title="网格搜索"></a>网格搜索</h4><p>适用于只有三个或更少的参数的情况,一般会在对数尺度搜索，比如学习率<code>[0.1, 0.01, $10^{-3}$, $10^{-4}$ $10^{-4}$]</code>,隐藏单元数的取值<code>[50 100 200 500 1000 2000]</code></p>
+<p>####随机搜索</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;建议设计流程&quot;&gt;&lt;a href=&quot;#建议设计流程&quot; class=&quot;headerlink&quot; title=&quot;建议设计流程&quot;&gt;&lt;/a&gt;建议设计流程&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;确定目标&lt;br&gt; 确定误差度量，并为此误差度量指定目标值&lt;br&gt; 对于某些任务，不是简单的计算正
+    
+    </summary>
+    
+    
+      <category term="深度学习" scheme="http://www.wowx.info/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
   
   <entry>
     <title>Greedy Algorithm</title>
@@ -52,9 +85,9 @@
     </summary>
     
     
-      <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
-    
       <category term="algorithm" scheme="http://www.wowx.info/tags/algorithm/"/>
+    
+      <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
     
       <category term="greedy" scheme="http://www.wowx.info/tags/greedy/"/>
     
@@ -222,9 +255,9 @@
     </summary>
     
     
-      <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
-    
       <category term="algorithm" scheme="http://www.wowx.info/tags/algorithm/"/>
+    
+      <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
     
   </entry>
   
@@ -326,9 +359,9 @@ public:
     </summary>
     
     
-      <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
-    
       <category term="algorithm" scheme="http://www.wowx.info/tags/algorithm/"/>
+    
+      <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
     
       <category term="tree" scheme="http://www.wowx.info/tags/tree/"/>
     
@@ -418,9 +451,9 @@ Note: The length of given array won&#39;t exceed 10000.
     </summary>
     
     
-      <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
-    
       <category term="algorithm" scheme="http://www.wowx.info/tags/algorithm/"/>
+    
+      <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
     
       <category term="stack" scheme="http://www.wowx.info/tags/stack/"/>
     
@@ -478,9 +511,9 @@ Note: The length of given array won&#39;t exceed 10000.
       <category term="algorithm" scheme="http://www.wowx.info/categories/algorithm/"/>
     
     
-      <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
-    
       <category term="algorithm" scheme="http://www.wowx.info/tags/algorithm/"/>
+    
+      <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
     
       <category term="hash table" scheme="http://www.wowx.info/tags/hash-table/"/>
     
@@ -670,9 +703,9 @@ public:
       <category term="algorithm" scheme="http://www.wowx.info/categories/algorithm/"/>
     
     
-      <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
-    
       <category term="algorithm" scheme="http://www.wowx.info/tags/algorithm/"/>
+    
+      <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
     
       <category term="sort" scheme="http://www.wowx.info/tags/sort/"/>
     
@@ -824,9 +857,9 @@ Note: There are at least two nodes in this BST.
       <category term="algorithm" scheme="http://www.wowx.info/categories/algorithm/"/>
     
     
-      <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
-    
       <category term="algorithm" scheme="http://www.wowx.info/tags/algorithm/"/>
+    
+      <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
     
       <category term="math" scheme="http://www.wowx.info/tags/math/"/>
     
@@ -2867,347 +2900,6 @@ import java<span class="token punctuation">.</span>lang<span class="token punctu
       <category term="string" scheme="http://www.wowx.info/tags/string/"/>
     
       <category term="algorighm" scheme="http://www.wowx.info/tags/algorighm/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode string 127 126 115 97 87</title>
-    <link href="http://www.wowx.info/posts/20170213235935/"/>
-    <id>http://www.wowx.info/posts/20170213235935/</id>
-    <published>2017-02-14T15:59:35.000Z</published>
-    <updated>2017-03-07T03:15:29.381Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="2017-02-13-127-126-115-97"><a href="#2017-02-13-127-126-115-97" class="headerlink" title="2017-02-13 127 126 115 97"></a>2017-02-13 127 126 115 97</h1><h2 id="127-Word-Ladder"><a href="#127-Word-Ladder" class="headerlink" title="127 Word Ladder"></a>127 Word Ladder</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
-<p>Given two words (<em>beginWord</em> and <em>endWord</em>), and a dictionary’s word list, find the length of shortest transformation sequence from <em>beginWord</em> to <em>endWord</em>, such that:</p>
-<ol>
-<li>Only one letter can be changed at a time.</li>
-<li>Each transformed word must exist in the word list. Note that <em>beginWord</em> is <em>not</em> a transformed word.</li>
-</ol>
-<p>For example,</p>
-<p>Given:</p>
-<p><em>beginWord</em> = <code>&quot;hit&quot;</code></p>
-<p><em>endWord</em> = <code>&quot;cog&quot;</code><br><em>wordList</em> = <code>[&quot;hot&quot;,&quot;dot&quot;,&quot;dog&quot;,&quot;lot&quot;,&quot;log&quot;,&quot;cog&quot;]</code></p>
-<p>As one shortest transformation is <code>&quot;hit&quot; -&gt; &quot;hot&quot; -&gt; &quot;dot&quot; -&gt; &quot;dog&quot; -&gt; &quot;cog&quot;</code>,<br>return its length <code>5</code>.</p>
-<p><strong>Note:</strong></p>
-<ul>
-<li>Return 0 if there is no such transformation sequence.</li>
-<li>All words have the same length.</li>
-<li>All words contain only lowercase alphabetic characters.</li>
-<li>You may assume no duplicates in the word list.</li>
-<li>You may assume <em>beginWord</em> and <em>endWord</em> are non-empty and are not the same.</li>
-</ul>
-<p><strong>UPDATE (2017/1/20):</strong><br>The <em>wordList</em> parameter had been changed to a list of strings (instead of a set of strings). Please reload the code definition to get the latest changes.</p>
-</blockquote>
-<p>给出起点、终点单词以及中间单词列表，每次通过改变一个字母，使起点单词最终变为终点单词，要求中间单词必须出现在中间单词列表中。</p>
-<h3 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h3><p>采用双端广度优先搜索算法(BFS),使用一个数组<code>beginVec&lt;string&gt;</code>存储左边的搜索空间，其初始存储<code>beginWord</code>,使用另一个<code>vector&lt;string&gt;</code>数组存储右边的搜索空间，其初始存储的是<code>endWord</code>。正式开始搜索时，因为以左边空间为字母替换搜索依据，所以为了减少搜索量，当<code>beginVec</code>比<code>endVec</code>长时交换两个数组。然后，只要两个数组都不为空，那么遍历<code>beginVec</code>中的单词，在依次对单词的每一位用<code>a-z</code>来替换</p>
-<ol>
-<li>如果替换一位字符后的单词出现在了<code>endVec</code>中，那么已经找到了变换路径，返回<code>len+1</code>;</li>
-<li>若替换一位后的单词不在<code>endVec</code>中，但是在<code>WordList</code>中，则该单词可能是路径中间单词，将其存入下一次的左边搜索空间(<code>tmp</code>)中, 同时将该单词从<code>wordList</code>中删除，避免重复使用。</li>
-</ol>
-<p>遍历完<code>beginVec</code>中的所有单词后，将下次的左边搜索空间赋给<code>beginVec</code>然后重复这个过程。</p>
-<p>如果不存在变换路径，则在某一步<code>tmp</code>为空，此时<code>beginVec=tmp</code>也变为空，<code>while</code>循环不满足条件，退出，返回0；否则必然在某次<code>while</code>循环中，变换一个字母的<code>word</code>会出现在<code>endVec</code>中。</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
-<span class="token keyword">public</span><span class="token operator">:</span>
-    <span class="token keyword">int</span> <span class="token function">ladderLength</span><span class="token punctuation">(</span>string beginWord<span class="token punctuation">,</span> string endWord<span class="token punctuation">,</span> vector<span class="token operator">&lt;</span>string<span class="token operator">></span><span class="token operator">&amp;</span> wordList<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        string<span class="token operator">::</span>size_type len <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span> strLen <span class="token operator">=</span> beginWord<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        vector<span class="token operator">&lt;</span>string<span class="token operator">></span> <span class="token function">beginVec</span><span class="token punctuation">(</span><span class="token punctuation">{</span>beginWord<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">endVec</span><span class="token punctuation">(</span><span class="token punctuation">{</span>endWord<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">while</span> <span class="token punctuation">(</span>beginVec<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">0</span> <span class="token operator">and</span> endVec<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span>
-        <span class="token punctuation">{</span>
-            <span class="token comment" spellcheck="true">// 以较长的vector作为beginVec，能有效减少比较的次数</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>beginVec<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">></span> endVec<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-                beginVec<span class="token punctuation">.</span><span class="token function">swap</span><span class="token punctuation">(</span>endVec<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-            vector<span class="token operator">&lt;</span>string<span class="token operator">></span> tmp<span class="token punctuation">;</span>
-            <span class="token keyword">for</span> <span class="token punctuation">(</span>string word <span class="token operator">:</span> beginVec<span class="token punctuation">)</span>
-            <span class="token punctuation">{</span>
-                <span class="token keyword">for</span> <span class="token punctuation">(</span>string<span class="token operator">::</span>size_type i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> word<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
-                <span class="token punctuation">{</span>
-                    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">char</span> ch <span class="token operator">=</span> <span class="token string">'a'</span><span class="token punctuation">;</span> ch <span class="token operator">&lt;=</span> <span class="token string">'z'</span><span class="token punctuation">;</span> <span class="token operator">++</span>ch<span class="token punctuation">)</span>
-                    <span class="token punctuation">{</span>
-                        <span class="token keyword">char</span> old <span class="token operator">=</span> word<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
-                        <span class="token keyword">if</span> <span class="token punctuation">(</span>ch <span class="token operator">==</span> old<span class="token punctuation">)</span>
-                            <span class="token keyword">continue</span><span class="token punctuation">;</span>
-                        word<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> ch<span class="token punctuation">;</span>
-
-                        <span class="token keyword">auto</span> posWordList <span class="token operator">=</span> <span class="token function">find</span><span class="token punctuation">(</span>wordList<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> wordList<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> word<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                        <span class="token comment" spellcheck="true">// 如果替换一个字符后的word存在于endWord，说明已经找到路径了，直接返回路径长度</span>
-                        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">find</span><span class="token punctuation">(</span>endVec<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> endVec<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> word<span class="token punctuation">)</span> <span class="token operator">!=</span> endVec<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-                            <span class="token keyword">return</span> len <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
-                        <span class="token comment" spellcheck="true">// 如果替换一个字符后的word不在endWord中，但在wordList中，则将该word存入下次的beginVec(tmp)中</span>
-                        <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span> posWordList <span class="token operator">!=</span> wordList<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-                        <span class="token punctuation">{</span>
-                            tmp<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>word<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                            wordList<span class="token punctuation">.</span><span class="token function">erase</span><span class="token punctuation">(</span>posWordList<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                        <span class="token punctuation">}</span>
-                        word<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> old<span class="token punctuation">;</span>
-                    <span class="token punctuation">}</span>
-
-                <span class="token punctuation">}</span>
-            <span class="token punctuation">}</span>
-            beginVec <span class="token operator">=</span> tmp<span class="token punctuation">;</span>
-            <span class="token operator">++</span>len<span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="126-Word-Ladder-II"><a href="#126-Word-Ladder-II" class="headerlink" title="126 Word Ladder II"></a>126 Word Ladder II</h2><h3 id="Problem-Description-1"><a href="#Problem-Description-1" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
-<p>Given two words (<em>beginWord</em> and <em>endWord</em>), and a dictionary’s word list, find all shortest transformation sequence(s) from <em>beginWord</em> to <em>endWord</em>, such that:</p>
-<ol>
-<li>Only one letter can be changed at a time</li>
-<li>Each transformed word must exist in the word list. Note that <em>beginWord</em> is <em>not</em> a transformed word.</li>
-</ol>
-<p>For example,</p>
-<p>Given:<br><em>beginWord</em> = <code>&quot;hit&quot;</code><br><em>endWord</em> = <code>&quot;cog&quot;</code><br><em>wordList</em> = <code>[&quot;hot&quot;,&quot;dot&quot;,&quot;dog&quot;,&quot;lot&quot;,&quot;log&quot;,&quot;cog&quot;]</code></p>
-<p>Return</p>
-<pre><code> [
-   [&quot;hit&quot;,&quot;hot&quot;,&quot;dot&quot;,&quot;dog&quot;,&quot;cog&quot;],
-   [&quot;hit&quot;,&quot;hot&quot;,&quot;lot&quot;,&quot;log&quot;,&quot;cog&quot;]
- ]
-</code></pre><p><strong>Note:</strong></p>
-<ul>
-<li>Return an empty list if there is no such transformation sequence.</li>
-<li>All words have the same length.</li>
-<li>All words contain only lowercase alphabetic characters.</li>
-<li>You may assume no duplicates in the word list.</li>
-<li>You may assume <em>beginWord</em> and <em>endWord</em> are non-empty and are not the same.</li>
-</ul>
-<p><strong>UPDATE (2017/1/20):</strong><br>The <em>wordList</em> parameter had been changed to a list of strings (instead of a set of strings). Please reload the code definition to get the latest changes.</p>
-</blockquote>
-<p>给定起始单词、结束单词和过度单词列表，每次只能改变一个字母的情况下，找出所有起始单词到过度单词的路径。</p>
-<h3 id="Method-1"><a href="#Method-1" class="headerlink" title="Method"></a>Method</h3><p>首先使用一个map，找出每个单词到下一个可到达单词，然后从起始单词开始，从这个map中不断搜索，直到到达结束单词。</p>
-<p>注意，因为为了减少搜索复杂度，当起始单词数组长度大于结束单词数组时，将两个数组交换，使用<code>flip</code>来记录是否发生了这种交换。当没有发生交换时，以<code>origin_word</code>为键，wordList中单词<code>word</code>为值存储，否则以<code>word</code>为键，<code>origin_word</code>为值存储，这样，保证了从起始单词到结束单词的路径创建过程中，不会出现循环路径。</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
-<span class="token keyword">public</span><span class="token operator">:</span>
-    vector<span class="token operator">&lt;</span>vector<span class="token operator">&lt;</span>string<span class="token operator">>></span> <span class="token function">findLadders</span><span class="token punctuation">(</span>string beginWord<span class="token punctuation">,</span> string endWord<span class="token punctuation">,</span> vector<span class="token operator">&lt;</span>string<span class="token operator">></span><span class="token operator">&amp;</span> wordList<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        vector<span class="token operator">&lt;</span>string<span class="token operator">></span> <span class="token function">path</span><span class="token punctuation">(</span><span class="token punctuation">{</span>beginWord<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        vector<span class="token operator">&lt;</span>vector<span class="token operator">&lt;</span>string<span class="token operator">>></span> res<span class="token punctuation">;</span>
-        unordered_map<span class="token operator">&lt;</span>string<span class="token punctuation">,</span> vector<span class="token operator">&lt;</span>string<span class="token operator">>></span> forest<span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">findLadders</span><span class="token punctuation">(</span>beginWord<span class="token punctuation">,</span> endWord<span class="token punctuation">,</span> wordList<span class="token punctuation">,</span> forest<span class="token punctuation">)</span><span class="token punctuation">)</span>
-            <span class="token function">getLadders</span><span class="token punctuation">(</span>beginWord<span class="token punctuation">,</span> endWord<span class="token punctuation">,</span> forest<span class="token punctuation">,</span> path<span class="token punctuation">,</span> res<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> res<span class="token punctuation">;</span>
-
-    <span class="token punctuation">}</span>
-
-    <span class="token keyword">bool</span> <span class="token function">findLadders</span><span class="token punctuation">(</span>string start<span class="token punctuation">,</span> string end<span class="token punctuation">,</span> vector<span class="token operator">&lt;</span>string<span class="token operator">></span> <span class="token operator">&amp;</span>wordList<span class="token punctuation">,</span> unordered_map<span class="token operator">&lt;</span>string<span class="token punctuation">,</span> vector<span class="token operator">&lt;</span>string<span class="token operator">>></span> <span class="token operator">&amp;</span>forest<span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-        vector<span class="token operator">&lt;</span>string<span class="token operator">></span> <span class="token function">beginVec</span><span class="token punctuation">(</span><span class="token punctuation">{</span>start<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">endVec</span><span class="token punctuation">(</span><span class="token punctuation">{</span>end<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">bool</span> flip <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">,</span> found <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-        <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>beginVec<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">and</span> <span class="token operator">!</span>endVec<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-        <span class="token punctuation">{</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>beginVec<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">></span> endVec<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-            <span class="token punctuation">{</span>
-                flip <span class="token operator">=</span> <span class="token operator">!</span>flip<span class="token punctuation">;</span>
-                beginVec<span class="token punctuation">.</span><span class="token function">swap</span><span class="token punctuation">(</span>endVec<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-            vector<span class="token operator">&lt;</span>string<span class="token operator">></span> tmp<span class="token punctuation">;</span>
-            <span class="token keyword">for</span> <span class="token punctuation">(</span>string word <span class="token operator">:</span> beginVec<span class="token punctuation">)</span>
-            <span class="token punctuation">{</span>
-                string originWord <span class="token operator">=</span> word<span class="token punctuation">;</span>
-                <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> word<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
-                <span class="token punctuation">{</span>
-                    <span class="token keyword">char</span> old <span class="token operator">=</span> word<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
-                    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">char</span> ch <span class="token operator">=</span> <span class="token string">'a'</span><span class="token punctuation">;</span> ch <span class="token operator">&lt;=</span> <span class="token string">'z'</span><span class="token punctuation">;</span> <span class="token operator">++</span>ch<span class="token punctuation">)</span>
-                    <span class="token punctuation">{</span>
-                        <span class="token keyword">if</span> <span class="token punctuation">(</span>ch <span class="token operator">==</span> old<span class="token punctuation">)</span>
-                            <span class="token keyword">continue</span><span class="token punctuation">;</span>
-                        word<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> ch<span class="token punctuation">;</span>
-                        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">find</span><span class="token punctuation">(</span>endVec<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> endVec<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> word<span class="token punctuation">)</span> <span class="token operator">!=</span> endVec<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-                        <span class="token punctuation">{</span>
-                            flip <span class="token operator">?</span> forest<span class="token punctuation">[</span>word<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>originWord<span class="token punctuation">)</span> <span class="token operator">:</span> forest<span class="token punctuation">[</span>originWord<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>word<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                            found <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-                        <span class="token punctuation">}</span>
-                        <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">find</span><span class="token punctuation">(</span>wordList<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> wordList<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> word<span class="token punctuation">)</span> <span class="token operator">!=</span> wordList<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-                        <span class="token punctuation">{</span>
-                            flip <span class="token operator">?</span> forest<span class="token punctuation">[</span>word<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>originWord<span class="token punctuation">)</span> <span class="token operator">:</span> forest<span class="token punctuation">[</span>originWord<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>word<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                            tmp<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>word<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                        <span class="token punctuation">}</span>
-                    <span class="token punctuation">}</span>
-                    word<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> old<span class="token punctuation">;</span>
-                <span class="token punctuation">}</span>
-            <span class="token punctuation">}</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>found<span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-            <span class="token keyword">for</span> <span class="token punctuation">(</span>string word <span class="token operator">:</span> tmp<span class="token punctuation">)</span>
-                wordList<span class="token punctuation">.</span><span class="token function">erase</span><span class="token punctuation">(</span><span class="token function">find</span><span class="token punctuation">(</span>wordList<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> wordList<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> word<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            beginVec <span class="token operator">=</span> tmp<span class="token punctuation">;</span>
-
-        <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token keyword">void</span> <span class="token function">getLadders</span><span class="token punctuation">(</span>string begin<span class="token punctuation">,</span> string end<span class="token punctuation">,</span> unordered_map<span class="token operator">&lt;</span>string<span class="token punctuation">,</span> vector<span class="token operator">&lt;</span>string<span class="token operator">>></span> <span class="token operator">&amp;</span>nexts<span class="token punctuation">,</span> \
-    vector<span class="token operator">&lt;</span>string<span class="token operator">></span> <span class="token operator">&amp;</span>path<span class="token punctuation">,</span> vector<span class="token operator">&lt;</span>vector<span class="token operator">&lt;</span>string<span class="token operator">>></span> res<span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>begin <span class="token operator">==</span> end<span class="token punctuation">)</span>
-        <span class="token punctuation">{</span>
-            res<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">return</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span>string str <span class="token operator">:</span> nexts<span class="token punctuation">[</span>begin<span class="token punctuation">]</span><span class="token punctuation">)</span>
-        <span class="token punctuation">{</span>
-            path<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token function">getLadders</span><span class="token punctuation">(</span>str<span class="token punctuation">,</span> end<span class="token punctuation">,</span> nexts<span class="token punctuation">,</span> path<span class="token punctuation">,</span> res<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            path<span class="token punctuation">.</span><span class="token function">pop_back</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="115-Distinct-Subsequences"><a href="#115-Distinct-Subsequences" class="headerlink" title="115. Distinct Subsequences"></a>115. Distinct Subsequences</h2><h3 id="Problem-Description-2"><a href="#Problem-Description-2" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
-<p>Given a string <strong>S</strong> and a string <strong>T</strong>, count the number of distinct subsequences of <strong>T</strong> in <strong>S</strong>.</p>
-<p>A subsequence of a string is a new string which is formed from the original string by deleting some (can be none) of the characters without disturbing the relative positions of the remaining characters. (ie, <code>&quot;ACE&quot;</code> is a subsequence of <code>&quot;ABCDE&quot;</code> while <code>&quot;AEC&quot;</code> is not).</p>
-<p>Here is an example:</p>
-<p><strong>S</strong> = <code>&quot;rabbbit&quot;</code>, <strong>T</strong> = <code>&quot;rabbit&quot;</code></p>
-<p>Return <code>3</code>.</p>
-</blockquote>
-<p>给出一个字符串s和t，如果只能删除s中字符，有多少种删除方式可以使s变为t(包括不删除任何字符)。</p>
-<h3 id="Method-2"><a href="#Method-2" class="headerlink" title="Method"></a>Method</h3><p>此题应该使用动态规划的方法来完成，假设s和t的长度分别为m和n，构造一个<code>(m+1)*(n+1)</code>大小的二维数组dp，其中<code>dp[i][j]</code>表示字符串<code>s[0,...,i-1]</code>转换为<code>t[0,...,j-1]</code>的方法数。首先来分析两种最基本情况：</p>
-<ol>
-<li>如果<code>i&gt;0 and j==0</code>即s子串长度大于0,t子串长度为0，这时只有把s子串中所有字符删除才能变换为t子串，故这种情况下<code>dp[i][j]=dp[i][0]=1</code></li>
-<li>如果<code>i &lt; j</code>,这时s子串已经比t的子串要短了，不可能通过删除字符的方法将s的子串转换为t的子串，故<code>dp[i][j]=0</code></li>
-</ol>
-<p>接下来讨论一般情况，即<code>i&gt;=j&gt;0</code>,这时需要考虑当前字符<code>s[i-1]</code>是否等于<code>t[j-1]</code></p>
-<ol>
-<li><p><code>s[i-1]==t[j-1]</code>:这时有两种情况:</p>
-<ol>
-<li><p><code>s[0,...,i-1]</code>转换到<code>t[0,...,j-1]</code>的过程中把<code>s[i-1]</code>删除了，此时相当于要把<code>s[0,...,i-2]</code>转换为<code>t[0,...,i-1]</code>,即<code>dp[i][j]=dp[i-1][j]</code></p>
-</li>
-<li><p><code>s[0,...,i-1]</code>转换到<code>t[0,...,j-1]</code>的过程保留了<code>s[i-1]</code>,这时，因为<code>s[i-1]</code>已经和<code>t[j-1]</code>对应上了，这对字符不起作用，所以<code>dp[i][j]=dp[i-1][j-1]</code></p>
-<p>因此，结合上面两种情况<code>dp[i][j]=dp[i-1][j]+dp[i-1][j-1]</code></p>
-</li>
-</ol>
-</li>
-<li><p><code>s[i-1]!=t[j-1]</code></p>
-<p>此时，若保留<code>s[i-1]</code>，两个串必定对不上，所以应该将其删除，因此<code>dp[i][j]=dp[i-1][j]</code></p>
-</li>
-</ol>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
-<span class="token keyword">public</span><span class="token operator">:</span>
-    <span class="token keyword">int</span> <span class="token function">numDistinct</span><span class="token punctuation">(</span>string s<span class="token punctuation">,</span> string t<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">int</span> m <span class="token operator">=</span> s<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> n <span class="token operator">=</span> t<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-        vector<span class="token operator">&lt;</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">>></span> <span class="token function">dp</span><span class="token punctuation">(</span>m<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span> vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token punctuation">(</span>n<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> m<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
-            dp<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-
-        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> m<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
-            <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> j <span class="token operator">&lt;=</span> n <span class="token punctuation">;</span> <span class="token operator">++</span>j<span class="token punctuation">)</span>
-            <span class="token punctuation">{</span>
-                dp<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> dp<span class="token punctuation">[</span>i<span class="token number">-1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span>
-                <span class="token keyword">if</span><span class="token punctuation">(</span>s<span class="token punctuation">[</span>i<span class="token number">-1</span><span class="token punctuation">]</span> <span class="token operator">==</span> t<span class="token punctuation">[</span>j<span class="token number">-1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-                    dp<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">+</span><span class="token operator">=</span> dp<span class="token punctuation">[</span>i<span class="token number">-1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token number">-1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> dp<span class="token punctuation">[</span>m<span class="token punctuation">]</span><span class="token punctuation">[</span>n<span class="token punctuation">]</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>这个有个只需要O(N)空间复杂度的<a href="https://discuss.leetcode.com/topic/19778/7-10-lines-c-solutions-with-detailed-explanations-o-m-n-time-and-o-m-space/2" target="_blank" rel="external">算法</a></p>
-<h2 id="97-Interleaving-String"><a href="#97-Interleaving-String" class="headerlink" title="97 Interleaving String"></a>97 Interleaving String</h2><h3 id="Problem-Description-3"><a href="#Problem-Description-3" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
-<p>Given <em>s1</em>, <em>s2</em>, <em>s3</em>, find whether <em>s3</em> is formed by the interleaving of <em>s1</em> and <em>s2</em>.</p>
-<p>For example,</p>
-<p>Given:</p>
-<p><em>s1</em> = <code>&quot;aabcc&quot;</code>,</p>
-<p><em>s2</em> = <code>&quot;dbbca&quot;</code>,</p>
-<p>When <em>s3</em> = <code>&quot;aadbbcbcac&quot;</code>, return true.</p>
-<p>When <em>s3</em> = <code>&quot;aadbbbaccc&quot;</code>, return false.</p>
-</blockquote>
-<p>给出三个字符串<code>s1</code> <code>s2</code> 和<code>s3</code>， 判断<code>s3</code>是否是通过<code>s1</code>和<code>s2</code>混合得到的(<code>s3</code>中<code>s1</code>和<code>s2</code>的字母相对位置不发生改变)</p>
-<h3 id="Method-3"><a href="#Method-3" class="headerlink" title="Method"></a>Method</h3><p>采用动态规划算法，m和n分别是两个s1和s2的长度，用大小为<code>(m+1)*(n+1)</code>的二维数组<code>dp</code>来存储中间结果，<code>dp[i][j]</code>表示<code>s1[0,...,i-1]</code>和<code>s[0,...,j-1]</code>是否能够合成<code>s3[0,...,i+j-1]</code>,下面来分析状态转移方式。</p>
-<ol>
-<li>若果<code>i==0 and j==0</code>,则两个空串必然能构成另一个空串，<code>dp[0][0]=true</code></li>
-<li>假如<code>i==0</code>或<code>j==0</code>,则<code>s3[0,...,i+j-1]</code>只能由另外一个非空字符串构成，<code>dp[i][0]=dp[i-1][0] &amp;&amp; s1[i-1] == s3[i-1]</code>或<code>dp[i][0]=dp[0][j-1] &amp;&amp; s2[j-1] == s3[j-1]</code></li>
-<li>其他情况下，<code>s3</code>新增加的字符要么来自于<code>s1</code>要么来自于<code>s2</code>,如果来自于<code>s1</code>的话<code>dp[i-1][j] &amp;&amp; (s1[i-1] == s3[i - 1 +j]</code>，如果来自于<code>s2</code>的话<code>dp[i][j-1] &amp;&amp; (s2[j-1] == s3[i + j -1])</code></li>
-</ol>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
-<span class="token keyword">public</span><span class="token operator">:</span>
-    <span class="token keyword">bool</span> <span class="token function">isInterleave</span><span class="token punctuation">(</span>string s1<span class="token punctuation">,</span> string s2<span class="token punctuation">,</span> string s3<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        string<span class="token operator">::</span>size_type len1 <span class="token operator">=</span> s1<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> len2 <span class="token operator">=</span> s2<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>s3<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">!=</span> len1 <span class="token operator">+</span> len2<span class="token punctuation">)</span>
-            <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-        vector<span class="token operator">&lt;</span>vector<span class="token operator">&lt;</span><span class="token keyword">bool</span><span class="token operator">>></span> <span class="token function">dp</span><span class="token punctuation">(</span>len1<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span> vector<span class="token operator">&lt;</span><span class="token keyword">bool</span><span class="token operator">></span><span class="token punctuation">(</span>len2<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> len1<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
-            <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;=</span> len2<span class="token punctuation">;</span> <span class="token operator">++</span>j<span class="token punctuation">)</span>
-            <span class="token punctuation">{</span>
-                <span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">and</span> j <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
-                    dp<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-                <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
-                    dp<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> dp<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token number">-1</span><span class="token punctuation">]</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>s2<span class="token punctuation">[</span>j<span class="token number">-1</span><span class="token punctuation">]</span> <span class="token operator">==</span> s3<span class="token punctuation">[</span>j<span class="token number">-1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>j <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
-                    dp<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> dp<span class="token punctuation">[</span>i<span class="token number">-1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>s1<span class="token punctuation">[</span>i<span class="token number">-1</span><span class="token punctuation">]</span> <span class="token operator">==</span> s3<span class="token punctuation">[</span>i<span class="token number">-1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token keyword">else</span>
-                <span class="token comment" spellcheck="true">// s3的当前字符要么来自s1要么来自s2</span>
-                    dp<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">(</span>dp<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token number">-1</span><span class="token punctuation">]</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>s2<span class="token punctuation">[</span>j<span class="token number">-1</span><span class="token punctuation">]</span> <span class="token operator">==</span> s3<span class="token punctuation">[</span>i <span class="token operator">+</span> j <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token punctuation">(</span>dp<span class="token punctuation">[</span>i<span class="token number">-1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>s1<span class="token punctuation">[</span>i<span class="token number">-1</span><span class="token punctuation">]</span> <span class="token operator">==</span> s3<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span> <span class="token operator">+</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> dp<span class="token punctuation">[</span>len1<span class="token punctuation">]</span><span class="token punctuation">[</span>len2<span class="token punctuation">]</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="87-Scramble-String"><a href="#87-Scramble-String" class="headerlink" title="87. Scramble String"></a>87. Scramble String</h2><h3 id="Problem-Description-4"><a href="#Problem-Description-4" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
-<p>Given a string s1, we may represent it as a binary tree by partitioning it to two non-empty substrings recursively.</p>
-<p>Below is one possible representation of s1 = “great”:</p>
-</blockquote>
-<pre><code>great
-</code></pre><p>   /    \<br>  gr    eat<br> / \    /  \<br>g   r  e   at<br>           / \<br>          a   t</p>
-<blockquote>
-<p>To scramble the string, we may choose any non-leaf node and swap its two children.</p>
-<p>For example, if we choose the node “gr” and swap its two children, it produces a scrambled string “rgeat”.</p>
-</blockquote>
-<pre><code>rgeat
-</code></pre><p>   /    \<br>  rg    eat<br> / \    /  \<br>r   g  e   at<br>           / \<br>          a   t</p>
-<blockquote>
-<p>We say that “rgeat” is a scrambled string of “great”.</p>
-<p>Similarly, if we continue to swap the children of nodes “eat” and “at”, it produces a scrambled string “rgtae”.</p>
-</blockquote>
-<pre><code>rgtae
-</code></pre><p>   /    \<br>  rg    tae<br> / \    /  \<br>r   g  ta  e<br>       / \<br>      t   a</p>
-<blockquote>
-<p>We say that “rgtae” is a scrambled string of “great”.</p>
-<p>Given two strings s1 and s2 of the same length, determine if s2 is a scrambled string of s1.</p>
-</blockquote>
-<p>给定两个字符串<code>s1</code>和<code>s2</code>,判断<code>s2</code>是否是由<code>s1</code>经过树形交换得到</p>
-<h3 id="Method-4"><a href="#Method-4" class="headerlink" title="Method"></a>Method</h3><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
-<span class="token keyword">public</span><span class="token operator">:</span>
-    <span class="token keyword">bool</span> <span class="token function">isScramble</span><span class="token punctuation">(</span>string s1<span class="token punctuation">,</span> string s2<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>s1 <span class="token operator">==</span> s2<span class="token punctuation">)</span>
-            <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-        <span class="token comment" spellcheck="true">// 判断两个字符串每个字符数是否相等</span>
-        vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">table</span><span class="token punctuation">(</span><span class="token number">26</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">char</span> ch <span class="token operator">:</span> s1<span class="token punctuation">)</span>
-            table<span class="token punctuation">[</span>ch <span class="token operator">-</span> <span class="token string">'a'</span><span class="token punctuation">]</span><span class="token operator">++</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">char</span> ch <span class="token operator">:</span> s2<span class="token punctuation">)</span>
-            table<span class="token punctuation">[</span>ch <span class="token operator">-</span> <span class="token string">'a'</span><span class="token punctuation">]</span><span class="token operator">--</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> num <span class="token operator">:</span> table<span class="token punctuation">)</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>num <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span>
-                <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-        string<span class="token operator">::</span>size_type len <span class="token operator">=</span> s1<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> len<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
-        <span class="token punctuation">{</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">isScramble</span><span class="token punctuation">(</span>s1<span class="token punctuation">.</span><span class="token function">substr</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> i<span class="token punctuation">)</span><span class="token punctuation">,</span> s2<span class="token punctuation">.</span><span class="token function">substr</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> i<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">and</span> <span class="token function">isScramble</span><span class="token punctuation">(</span>s1<span class="token punctuation">.</span><span class="token function">substr</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">,</span> s2<span class="token punctuation">.</span><span class="token function">substr</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-                <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">isScramble</span><span class="token punctuation">(</span>s1<span class="token punctuation">.</span><span class="token function">substr</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> i<span class="token punctuation">)</span><span class="token punctuation">,</span> s2<span class="token punctuation">.</span><span class="token function">substr</span><span class="token punctuation">(</span>len <span class="token operator">-</span> i<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">and</span> <span class="token function">isScramble</span><span class="token punctuation">(</span>s1<span class="token punctuation">.</span><span class="token function">substr</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">,</span> s2<span class="token punctuation">.</span><span class="token function">substr</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> len <span class="token operator">-</span> i<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-                <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;2017-02-13-127-126-115-97&quot;&gt;&lt;a href=&quot;#2017-02-13-127-126-115-97&quot; class=&quot;headerlink&quot; title=&quot;2017-02-13 127 126 115 97&quot;&gt;&lt;/a&gt;2017-02-13 
-    
-    </summary>
-    
-      <category term="algorithm" scheme="http://www.wowx.info/categories/algorithm/"/>
-    
-    
-      <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
-    
-      <category term="string" scheme="http://www.wowx.info/tags/string/"/>
-    
-      <category term="algorithm" scheme="http://www.wowx.info/tags/algorithm/"/>
     
   </entry>
   

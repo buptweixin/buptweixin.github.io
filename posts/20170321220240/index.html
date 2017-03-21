@@ -10,6 +10,8 @@
     
     <title>
         
+            Deeplearing Book Chapter 10 | 
+        
         野原圆长的Blog
     </title>
 
@@ -25,7 +27,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="Xin Wei">
     <meta name="description" content="null">
-    <meta name="keywords" content="Blog deep_learging">
+    <meta name="keywords" content="Blog deep_learging,深度学习">
 
     <!--iOS -->
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -46,9 +48,9 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="http://www.wowx.info">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="野原圆长的Blog">
+    <meta property="og:title" content="Deeplearing Book Chapter 10 | 野原圆长的Blog">
     <meta property="og:description" content="null">
-    
+    <meta property="og:article:tag" content="深度学习"> 
 
     <!--[if lte IE 9]>
         <link rel="stylesheet" href="/css/ie-blocker.css">
@@ -207,228 +209,267 @@
                         </button>
                     
 
-                    <!-- Index Module -->
-<div class="material-index mdl-grid">
-    
-    <div class="locate-thumbnail-symbol"></div>
+                    <!-- Post TOC -->
 
-    <!-- Pin on top -->
     
-
-    <!-- Normal Post -->
-    
-        
-        
-            <!-- Paradox Thumbnail -->
-            <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/posts/20150617013220/">C++ primer笔记 — 字符串向量和数组</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/posts/20150617013220/" target="_self">继续阅读</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="Xin Wei's avatar">
-            </div>
-            <div>
-                <strong>Xin Wei</strong>
-                <span>6月 17, 2015</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
-                <a class="post_category-link" href="/categories/language/">language</a>
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
             </span>
-
-            
-                <!-- Comment Number -->
-                &nbsp;|&nbsp;
-                <span class="post_entry-comment" >
-                        <span class="ds-thread-count" data-thread-key="posts/20150617013220/" data-count-type="comments"></span>
-                </span>
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
+        </a>
     </div>
-</div>
+    -->
 
-        
-        
-        
-    
-        
-        
-            <!-- Paradox Thumbnail -->
-            <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
 
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/posts/20150615013220/">C++ primer笔记 — 变量和基本类型</a></p>
-    </div>
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#建议设计流程"><span class="post-toc-number">1.</span> <span class="post-toc-text">建议设计流程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#是否增加数据集"><span class="post-toc-number">2.</span> <span class="post-toc-text">是否增加数据集</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#选择超参数"><span class="post-toc-number">3.</span> <span class="post-toc-text">选择超参数</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#手动选择"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">手动选择</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#自动选择"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">自动选择</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#网格搜索"><span class="post-toc-number">3.2.1.</span> <span class="post-toc-text">网格搜索</span></a></li></ol></li></ol></li></ol>
 
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/posts/20150615013220/" target="_self">继续阅读</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="Xin Wei's avatar">
-            </div>
-            <div>
-                <strong>Xin Wei</strong>
-                <span>6月 15, 2015</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
-                <a class="post_category-link" href="/categories/language/">language</a>
-            </span>
+        <!--
+        <li class="mdl-menu__item">
+            Some Action
+        </li>
+        -->
+    </ul>
 
-            
-                <!-- Comment Number -->
-                &nbsp;|&nbsp;
-                <span class="post_entry-comment" >
-                        <span class="ds-thread-count" data-thread-key="posts/20150615013220/" data-count-type="comments"></span>
-                </span>
-            
 
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
 
-        
-        
-        
-    
-        
-        
-            <!-- Paradox Thumbnail -->
-            <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
     
         <!-- Custom Thumbnail -->
-        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(http://ww3.sinaimg.cn/large/6425ef91jw1f9aa7pkr9wj20e80e8t97.jpg)">
+        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(http://image.sowm.cn/3aQjqa.jpg)">
+    
+            <p class="article-headline-p">
+                Deeplearing Book Chapter 10
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>Xin Wei</strong>
+        <span>3月 21, 2017</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+        <button id="article-functions-qrcode-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+            <i class="material-icons" role="presentation">devices other</i>
+            <span class="visuallyhidden">devices other</span>
+        </button>
+        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
+            <li class="mdl-menu__item">在其它设备中阅读本文章</li>
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACXklEQVR42u3aQXLjMAwEQP//08kDttYZACSiuFonVyJbbB0A1hCvr4++Xnh4eHh4eHh4eA/jveLr32/973Nyf/6U8trw8PDwVng/lNq3y32/lPz+5LnR2vDw8PAWecnikhLfawbVdoKHh4f3t3iTop/fj4eHh/d5vLys56X/QY0BDw8P71AYkdyft5Bky76ateDh4eHFvPyQaf/z6vkeHh4eXsArjzTFhb43QHB46AoPDw/vAm8+DpX8pRf75uvBw8PD2+Tlg1OTEaveK6iOduHh4eHt8PIAooepHmjNo2Q8PDy827zqYf/84Kq6cS9/Cw8PD+8yLy/K1RA2iTDm0XAha8HDw8M7xOs1ickB/yQCjv6Lh4eHt8jrjQLksW9e6HthBx4eHt4mr/eY3sb6wBFXNcbFw8PDO8qrRqj54t7/pRoKFyIPPDw8vBVeOSptbaB7L7QcH+Ph4eGt8JKtc/LgeyHFgZkyPDw8vKO83rLyV5MfjCWtCA8PD+85vOr2dxI99LbpB2bK8PDw8A7xqgFEdSNeDWSrd+Lh4eHt86qMU5FrL/744dfw8PDw1nl5w0hi3HwDPRkXwMPDw3sarzpcNY9oJ7EvHh4e3m1e9erFENW4NmlC0dAVHh4e3gVetRxXkVEpjwe5mltqPDw8vAu8pBnkoepkfOpKY8DDw8O7xssLdD6Y1WsAV7IWPDw8vIfxJhFw9TjtFxoDHh4e3piXjxGc3axHv4mHh4e3yEsWkbyI/NXMx7Pw8PDwfotXjQDyg//qqEEvwsDDw8Pb5H3ehYeHh4eHh4eH94DrGzuUXclGD4pZAAAAAElFTkSuQmCC">
+        </ul>
     
 
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/posts/20150614013220/">C++ primer笔记 — 开始</a></p>
-    </div>
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/深度学习/">深度学习</a>
+    </ul>
+    
 
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/posts/20150614013220/" target="_self">继续阅读</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="Xin Wei's avatar">
-            </div>
-            <div>
-                <strong>Xin Wei</strong>
-                <span>6月 14, 2015</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
-                <a class="post_category-link" href="/categories/language/">language</a>
-            </span>
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+    <!-- Leancloud Views -->
+        <a class="post_share-link" href="#">
+            <li class="mdl-menu__item">
+                <span id="/posts/20170321220240/" class="leancloud-views_num" data-flag-title="Deeplearing Book Chapter 10">
+     &nbsp;浏览量
+</span>
 
-            
-                <!-- Comment Number -->
-                &nbsp;|&nbsp;
-                <span class="post_entry-comment" >
-                        <span class="ds-thread-count" data-thread-key="posts/20150614013220/" data-count-type="comments"></span>
-                </span>
-            
+            </li>
+        </a>
+    
 
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Deeplearing Book Chapter 10&url=http://www.wowx.info//posts/20170321220240/index.html&pic=&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Deeplearing Book Chapter 10&url=http://www.wowx.info//posts/20170321220240/index.html&via=Xin Wei" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://www.wowx.info//posts/20170321220240/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://www.wowx.info//posts/20170321220240/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
 </div>
 
-        
-        
-        
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <h2 id="建议设计流程"><a href="#建议设计流程" class="headerlink" title="建议设计流程"></a>建议设计流程</h2><ol>
+<li>确定目标<br> 确定误差度量，并为此误差度量指定目标值<br> 对于某些任务，不是简单的计算正确率就可以的，比如邮件垃圾拦截系统将正常邮件拦截的情况应该比漏拦截垃圾邮件的情况严重，又比如疾病检测系统，对于发生情况非常低(比如<code>0.0001%</code>)的疾病，正确率不能很好的度量，这时候需要使用准确率和召回率。我们以y轴表示精度，x轴表示召回率，通过给模型设置不同的阈值会得到<strong>PR曲线</strong>。用数值表示的话使用f-score</li>
+<li>尽快建立端到端工作流程<br> 包括合适的性能估计<br> 首先建立基准模型，如果输入是固定向量，则使用全连接网络，如果输入是语音图像等已知拓扑结构则使用卷积网络。<br> 具有衰减学习率(常用的有线性衰减、指数衰减、遇到验证误差高峰就衰减2-10倍等方法)的动量SGD是一个合理的优化算法选择，Adam方法也是一个值得尝试的方法。<br> 如果数据集没有数以千万的样本就应该加入正则化，可以使用提前终止，优化出现问题时应该立即使用batch normalization,<strong>应为batch normalizaiton有时也能降低泛化误差,因为标准化每个变量的统计估计而带来的噪声，可以省略Dropout</strong><br> 自然语言处理中也应该使用环境中加入无监督学习</li>
+<li><p>搭建系统<br> 确定性能瓶颈，确定哪部分差于预期，是否是因为欠拟合、过拟合或者数据或软件缺陷造成的</p>
+</li>
+<li><p>根据观察重复改动<br> 如收集新数据，调整超参数或改进算法</p>
+</li>
+</ol>
+<h2 id="是否增加数据集"><a href="#是否增加数据集" class="headerlink" title="是否增加数据集"></a>是否增加数据集</h2><p>增加数据集的前提是确定模型在训练集上的性能是否可接受，如果在训练集上性能都不好，更应该增加更多更多的层或层中增加更多的隐藏单元增加模型规模<br>如果训练集上效果很好，但是测试集上效果很差，增加数据集是最有效的方法之一。</p>
+<h2 id="选择超参数"><a href="#选择超参数" class="headerlink" title="选择超参数"></a>选择超参数</h2><h3 id="手动选择"><a href="#手动选择" class="headerlink" title="手动选择"></a>手动选择</h3><p>必须了解超参数以及其与训练误差、泛化误差和计算资源的关系，学习率可能是最重要的超参数<br><img src="http://ww1.sinaimg.cn/large/6425ef91ly1fduu97pjrvj219u0zygyc.jpg" alt=""></p>
+<h3 id="自动选择"><a href="#自动选择" class="headerlink" title="自动选择"></a>自动选择</h3><h4 id="网格搜索"><a href="#网格搜索" class="headerlink" title="网格搜索"></a>网格搜索</h4><p>适用于只有三个或更少的参数的情况,一般会在对数尺度搜索，比如学习率<code>[0.1, 0.01, $10^{-3}$, $10^{-4}$ $10^{-4}$]</code>,隐藏单元数的取值<code>[50 100 200 500 1000 2000]</code></p>
+<p>####随机搜索</p>
+
     
 
     
-    <!-- Index nav -->
-        <nav class="material-nav mdl-cell mdl-cell--12-col">
-            <a class="extend prev" rel="prev" href="/page/7/"><button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"><i class="material-icons" role="presentation">arrow_back</i></button></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span>
-        </nav>
-    
+</div>
 
-    
-        <script>
-    var randomNum;
 
-    var locatePost = $('.locate-thumbnail-symbol').next();
-    for(var i = 0; i < 10; i++) {
-        randomNum = Math.floor(Math.random() * 19 + 1);
+                
 
-        locatePost.children('.post_thumbnail-random').attr('id', 'random_thumbnail-'+randomNum);
-        locatePost.children('.post_thumbnail-random').css('background-image', 'url(' + '/img/random/material-' + randomNum + '.png' + ')')
-
-        locatePost = locatePost.next();
+                <!-- Post Comments -->
+                
+                    
+    <!-- 使用多说评论 -->
+    <link rel="stylesheet" href="/css/duoshuo.min.css">
+<style>
+    #ds-thread #ds-reset .ds-post-button{
+        background-color: #0097A7 !important;
     }
-</script>
-
-    
+    #ds-wrapper #ds-reset .ds-icons-32{
+        background-color: #0097A7 !important;
+    }
+    #ds-reset .ds-highlight {
+        color: #0097A7 !important;
+    }
+</style>
+<div id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread"
+        data-thread-key="posts/20170321220240/"
+        data-url="http://www.wowx.info/posts/20170321220240/"
+        data-title="Deeplearing Book Chapter 10">
+    </div>
+    <!-- 多说评论框 end -->
 </div>
+
+
+
+
+
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/posts/20170321130349/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
 
 
                     

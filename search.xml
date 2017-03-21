@@ -4,6 +4,32 @@
   
     
     <entry>
+      <title><![CDATA[Deeplearing Book Chapter 10]]></title>
+      <url>http://www.wowx.info/posts/20170321220240/</url>
+      <content type="html"><![CDATA[<h2 id="建议设计流程"><a href="#建议设计流程" class="headerlink" title="建议设计流程"></a>建议设计流程</h2><ol>
+<li>确定目标<br> 确定误差度量，并为此误差度量指定目标值<br> 对于某些任务，不是简单的计算正确率就可以的，比如邮件垃圾拦截系统将正常邮件拦截的情况应该比漏拦截垃圾邮件的情况严重，又比如疾病检测系统，对于发生情况非常低(比如<code>0.0001%</code>)的疾病，正确率不能很好的度量，这时候需要使用准确率和召回率。我们以y轴表示精度，x轴表示召回率，通过给模型设置不同的阈值会得到<strong>PR曲线</strong>。用数值表示的话使用f-score</li>
+<li>尽快建立端到端工作流程<br> 包括合适的性能估计<br> 首先建立基准模型，如果输入是固定向量，则使用全连接网络，如果输入是语音图像等已知拓扑结构则使用卷积网络。<br> 具有衰减学习率(常用的有线性衰减、指数衰减、遇到验证误差高峰就衰减2-10倍等方法)的动量SGD是一个合理的优化算法选择，Adam方法也是一个值得尝试的方法。<br> 如果数据集没有数以千万的样本就应该加入正则化，可以使用提前终止，优化出现问题时应该立即使用batch normalization,<strong>应为batch normalizaiton有时也能降低泛化误差,因为标准化每个变量的统计估计而带来的噪声，可以省略Dropout</strong><br> 自然语言处理中也应该使用环境中加入无监督学习</li>
+<li><p>搭建系统<br> 确定性能瓶颈，确定哪部分差于预期，是否是因为欠拟合、过拟合或者数据或软件缺陷造成的</p>
+</li>
+<li><p>根据观察重复改动<br> 如收集新数据，调整超参数或改进算法</p>
+</li>
+</ol>
+<h2 id="是否增加数据集"><a href="#是否增加数据集" class="headerlink" title="是否增加数据集"></a>是否增加数据集</h2><p>增加数据集的前提是确定模型在训练集上的性能是否可接受，如果在训练集上性能都不好，更应该增加更多更多的层或层中增加更多的隐藏单元增加模型规模<br>如果训练集上效果很好，但是测试集上效果很差，增加数据集是最有效的方法之一。</p>
+<h2 id="选择超参数"><a href="#选择超参数" class="headerlink" title="选择超参数"></a>选择超参数</h2><h3 id="手动选择"><a href="#手动选择" class="headerlink" title="手动选择"></a>手动选择</h3><p>必须了解超参数以及其与训练误差、泛化误差和计算资源的关系，学习率可能是最重要的超参数<br><img src="http://ww1.sinaimg.cn/large/6425ef91ly1fduu97pjrvj219u0zygyc.jpg" alt=""></p>
+<h3 id="自动选择"><a href="#自动选择" class="headerlink" title="自动选择"></a>自动选择</h3><h4 id="网格搜索"><a href="#网格搜索" class="headerlink" title="网格搜索"></a>网格搜索</h4><p>适用于只有三个或更少的参数的情况,一般会在对数尺度搜索，比如学习率<code>[0.1, 0.01, $10^{-3}$, $10^{-4}$ $10^{-4}$]</code>,隐藏单元数的取值<code>[50 100 200 500 1000 2000]</code></p>
+<p>####随机搜索</p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> 深度学习 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[Greedy Algorithm]]></title>
       <url>http://www.wowx.info/posts/20170321130349/</url>
       <content type="html"><![CDATA[<h1 id="2017-03-21"><a href="#2017-03-21" class="headerlink" title="2017-03-21"></a>2017-03-21</h1><h2 id="406-Queue-Reconstruction-by-Height"><a href="#406-Queue-Reconstruction-by-Height" class="headerlink" title="406. Queue Reconstruction by Height"></a>406. Queue Reconstruction by Height</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
@@ -32,9 +58,9 @@
         
         <tags>
             
-            <tag> cpp </tag>
-            
             <tag> algorithm </tag>
+            
+            <tag> cpp </tag>
             
             <tag> greedy </tag>
             
@@ -196,9 +222,9 @@
         
         <tags>
             
-            <tag> cpp </tag>
-            
             <tag> algorithm </tag>
+            
+            <tag> cpp </tag>
             
         </tags>
         
@@ -294,9 +320,9 @@ public:
         
         <tags>
             
-            <tag> cpp </tag>
-            
             <tag> algorithm </tag>
+            
+            <tag> cpp </tag>
             
             <tag> tree </tag>
             
@@ -380,9 +406,9 @@ Note: The length of given array won&#39;t exceed 10000.
         
         <tags>
             
-            <tag> cpp </tag>
-            
             <tag> algorithm </tag>
+            
+            <tag> cpp </tag>
             
             <tag> stack </tag>
             
@@ -438,9 +464,9 @@ Note: The length of given array won&#39;t exceed 10000.
         
         <tags>
             
-            <tag> cpp </tag>
-            
             <tag> algorithm </tag>
+            
+            <tag> cpp </tag>
             
             <tag> hash table </tag>
             
@@ -622,9 +648,9 @@ public:
         
         <tags>
             
-            <tag> cpp </tag>
-            
             <tag> algorithm </tag>
+            
+            <tag> cpp </tag>
             
             <tag> sort </tag>
             
@@ -774,9 +800,9 @@ Note: There are at least two nodes in this BST.
         
         <tags>
             
-            <tag> cpp </tag>
-            
             <tag> algorithm </tag>
+            
+            <tag> cpp </tag>
             
             <tag> math </tag>
             
@@ -3113,11 +3139,11 @@ import java<span class="token punctuation">.</span>lang<span class="token punctu
         
         <tags>
             
+            <tag> algorithm </tag>
+            
             <tag> cpp </tag>
             
             <tag> string </tag>
-            
-            <tag> algorithm </tag>
             
         </tags>
         
@@ -3398,9 +3424,9 @@ import java<span class="token punctuation">.</span>lang<span class="token punctu
         
         <tags>
             
-            <tag> 算法 </tag>
-            
             <tag> cpp </tag>
+            
+            <tag> 算法 </tag>
             
             <tag> string </tag>
             
@@ -3612,11 +3638,11 @@ import java<span class="token punctuation">.</span>lang<span class="token punctu
         
         <tags>
             
+            <tag> algorithm </tag>
+            
             <tag> cpp </tag>
             
             <tag> string </tag>
-            
-            <tag> algorithm </tag>
             
         </tags>
         
@@ -3811,11 +3837,11 @@ import java<span class="token punctuation">.</span>lang<span class="token punctu
         
         <tags>
             
+            <tag> algorithm </tag>
+            
             <tag> cpp </tag>
             
             <tag> string </tag>
-            
-            <tag> algorithm </tag>
             
         </tags>
         
@@ -3975,11 +4001,11 @@ import java<span class="token punctuation">.</span>lang<span class="token punctu
         
         <tags>
             
+            <tag> algorithm </tag>
+            
             <tag> cpp </tag>
             
             <tag> string </tag>
-            
-            <tag> algorithm </tag>
             
         </tags>
         
@@ -4163,11 +4189,11 @@ import java<span class="token punctuation">.</span>lang<span class="token punctu
         
         <tags>
             
+            <tag> algorithm </tag>
+            
             <tag> cpp </tag>
             
             <tag> string </tag>
-            
-            <tag> algorithm </tag>
             
         </tags>
         
@@ -4287,9 +4313,9 @@ import java<span class="token punctuation">.</span>lang<span class="token punctu
         
         <tags>
             
-            <tag> 深度学习 </tag>
-            
             <tag> 机器学习 </tag>
+            
+            <tag> 深度学习 </tag>
             
         </tags>
         
@@ -4374,9 +4400,9 @@ Explanation: It&#39;s the substring &quot;abc&quot; four times. (And the substri
         
         <tags>
             
-            <tag> 算法 </tag>
-            
             <tag> cpp </tag>
+            
+            <tag> 算法 </tag>
             
             <tag> array </tag>
             
@@ -5301,9 +5327,9 @@ sudo rm /usr/local/include/cudnn.h
         
         <tags>
             
-            <tag> 深度学习 </tag>
-            
             <tag> 机器学习 </tag>
+            
+            <tag> 深度学习 </tag>
             
             <tag> cs231n </tag>
             
@@ -5997,9 +6023,9 @@ classes <span class="token operator">=</span> <span class="token punctuation">[<
         
         <tags>
             
-            <tag> 深度学习 </tag>
-            
             <tag> 机器学习 </tag>
+            
+            <tag> 深度学习 </tag>
             
         </tags>
         
@@ -6088,9 +6114,9 @@ classes <span class="token operator">=</span> <span class="token punctuation">[<
         
         <tags>
             
-            <tag> 深度学习 </tag>
-            
             <tag> 机器学习 </tag>
+            
+            <tag> 深度学习 </tag>
             
             <tag> cs231n </tag>
             
@@ -8097,9 +8123,9 @@ binary_PositionDepth, binary_QueryTokens</code></p>
         
         <tags>
             
-            <tag> cpp </tag>
-            
             <tag> algorithm </tag>
+            
+            <tag> cpp </tag>
             
             <tag> array </tag>
             
@@ -8214,9 +8240,9 @@ The median is (2 + 3)/2 = 2.5
         
         <tags>
             
-            <tag> cpp </tag>
-            
             <tag> algorithm </tag>
+            
+            <tag> cpp </tag>
             
             <tag> array </tag>
             
@@ -8272,9 +8298,9 @@ The median is (2 + 3)/2 = 2.5
         
         <tags>
             
-            <tag> cpp </tag>
-            
             <tag> algorithm </tag>
+            
+            <tag> cpp </tag>
             
             <tag> array </tag>
             
@@ -8332,109 +8358,6 @@ Count Value
         <tags>
             
             <tag> 算法 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[C++ primer笔记 -- 标准库--泛型算法]]></title>
-      <url>http://www.wowx.info/posts/20150717013220/</url>
-      <content type="html"><![CDATA[<h1 id="12章动态内存"><a href="#12章动态内存" class="headerlink" title="12章动态内存"></a>12章动态内存</h1><ul>
-<li><p>静态内存：保存static对象、类static成员和定义在任何函数之外的变量</p>
-</li>
-<li><p>栈内存：保存定义在函数之内的非静态对象</p>
-<p><strong>静态内存和栈内存中的对象由编译器自动创建和销毁</strong></p>
-</li>
-<li><p>堆(自由空间)：存储动态对象—存储程序运行时分配的对象</p>
-</li>
-</ul>
-<h2 id="动态内存和智能指针"><a href="#动态内存和智能指针" class="headerlink" title="动态内存和智能指针"></a>动态内存和智能指针</h2><p>智能指针(定义在<code>&lt;memory&gt;</code>头文件中)</p>
-<pre><code>1. shared_ptr: 允许多个指针指向同一个对象，标准库中还定义了弱引用伴随类`weak_ptr`
-2. unique_ptr:独占所指向的对象
-</code></pre><h3 id="shared-ptr"><a href="#shared-ptr" class="headerlink" title="shared_ptr"></a>shared_ptr</h3><p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-16/13890543.jpg" alt=""></p>
-<p><strong>如果将<code>shared_ptr</code>存放在一个容器中，而后不需要全部元素，要记得使用<code>erase</code>删除不再需要的那些元素</strong>。</p>
-<p>使用动态内存的原因</p>
-<ul>
-<li><p>程序不知道自己需要使用多少对象</p>
-<p>例子：容器</p>
-</li>
-<li><p>程序不知道所需对象的准确类型</p>
-<p>  第十五章</p>
-</li>
-<li><p>程序需要在多个对象间共享数据</p>
-<p>  <img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-16/20322205.jpg" alt=""></p>
-<p>  <img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-16/49284576.jpg" alt=""></p>
-<p>  <img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-16/61573562.jpg" alt=""></p>
-<p>  <img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-16/95506408.jpg" alt=""></p>
-<p>  <img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-16/48867816.jpg" alt=""><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-16/89528836.jpg" alt=""></p>
-</li>
-</ul>
-<h3 id="直接内存管理"><a href="#直接内存管理" class="headerlink" title="直接内存管理"></a>直接内存管理</h3><ul>
-<li>创建</li>
-</ul>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token operator">*</span>pi <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//默认初始化(默认构造函数)    </span>
-<span class="token keyword">int</span> <span class="token operator">*</span>pi <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//直接初始化</span>
-vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token operator">*</span>ps <span class="token operator">=</span> <span class="token keyword">new</span> vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">}</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//列表初始化</span>
-string <span class="token operator">*</span>ps <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">string</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//值初始化为空string</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<ul>
-<li><p>释放</p>
-<p><code>delete p</code></p>
-</li>
-<li><p>空悬指针</p>
-</li>
-</ul>
-<h3 id="结合使用shared和new"><a href="#结合使用shared和new" class="headerlink" title="结合使用shared和new"></a>结合使用shared和new</h3><p><code>shared_ptr&lt;int&gt; p2(new int(42));//p2指向一个值为42的int</code></p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-16/33460178.jpg" alt=""><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-16/23890908.jpg" alt=""></p>
-<h3 id="智能指针和异常"><a href="#智能指针和异常" class="headerlink" title="智能指针和异常"></a>智能指针和异常</h3><p>发生异常时智能指针管理的内存会被自动释放而内置指针不会</p>
-<h3 id="使用我们自己的释放操作"><a href="#使用我们自己的释放操作" class="headerlink" title="使用我们自己的释放操作"></a>使用我们自己的释放操作</h3><p>默认使用<code>delete</code>来释放，但是我们可以使用自己的释放操作：</p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-16/74284995.jpg" alt=""></p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-16/34331793.jpg" alt=""></p>
-<h3 id="unique-ptr"><a href="#unique-ptr" class="headerlink" title="unique_ptr"></a>unique_ptr</h3><p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-16/76709670.jpg" alt=""></p>
-<p>需要使用内置指针直接初始化</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp">unique_ptr<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">p2</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">(</span><span class="token number">42</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>因为<code>unique_ptr</code>“拥有”对象，所以他们不支持普通拷贝和赋值操作</p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-16/97894777.jpg" alt=""></p>
-<h4 id="向unique-ptr传递删除器"><a href="#向unique-ptr传递删除器" class="headerlink" title="向unique_ptr传递删除器"></a>向unique_ptr传递删除器</h4><p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-16/35751345.jpg" alt=""></p>
-<h3 id="weak-ptr"><a href="#weak-ptr" class="headerlink" title="weak_ptr"></a>weak_ptr</h3><p><strong>不会改变共享指针的引用计数</strong></p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-16/1690421.jpg" alt=""></p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-16/2100842.jpg" alt=""></p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-16/71986557.jpg" alt=""></p>
-<h2 id="动态数组"><a href="#动态数组" class="headerlink" title="动态数组"></a>动态数组</h2><h3 id="new-和数组"><a href="#new-和数组" class="headerlink" title="new 和数组"></a>new 和数组</h3><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token operator">*</span>pia <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token function">get_size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//pia指向第一个int</span>
-<span class="token keyword">typedef</span> <span class="token keyword">int</span> arrT<span class="token punctuation">[</span><span class="token number">42</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token keyword">int</span> <span class="token operator">*</span>p <span class="token operator">=</span> <span class="token keyword">new</span> arrT<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//分配一个42个int的数组，p指向第一个</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p><strong>动态数组不是数组类型，所以不能使用<code>begin</code>和<code>end</code>,也不能使用for语句来处理动态数组中的元素</strong></p>
-<h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token operator">*</span>pia1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//10个未初始化的int</span>
-<span class="token keyword">int</span> <span class="token operator">*</span>pia2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//10个值初始化的int</span>
-string <span class="token operator">*</span>psa <span class="token operator">=</span> <span class="token keyword">new</span> string<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//10个未初始化的string</span>
-string <span class="token operator">*</span>psa2 <span class="token operator">=</span> <span class="token keyword">new</span> string<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//10个未初始化的string</span>
-<span class="token keyword">int</span> <span class="token operator">*</span>pia3 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token number">9</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
-string <span class="token operator">*</span>psa3 <span class="token operator">=</span> <span class="token keyword">new</span> string<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">{</span><span class="token string">"a"</span><span class="token punctuation">,</span><span class="token string">"b"</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h4 id="释放"><a href="#释放" class="headerlink" title="释放"></a>释放</h4><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">delete</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> psa<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h4 id="动态数组和智能指针"><a href="#动态数组和智能指针" class="headerlink" title="动态数组和智能指针"></a>动态数组和智能指针</h4><p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-16/4751314.jpg" alt=""></p>
-<h3 id="allocator"><a href="#allocator" class="headerlink" title="allocator"></a>allocator</h3><p>allocator类也定义在<code>&lt;memory&gt;</code>头文件中，它可以将内存分配和对象构造分开。</p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-16/70461985.jpg" alt=""><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-16/98894955.jpg" alt=""></p>
-<p>构造</p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-16/96908397.jpg" alt=""><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-16/57479045.jpg" alt=""></p>
-]]></content>
-      
-        <categories>
-            
-            <category> language </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> cpp </tag>
-            
-            <tag> language </tag>
             
         </tags>
         
@@ -8631,6 +8554,109 @@ cout <span class="token operator">&lt;&lt;</span> <span class="token function">f
 <h2 id="特定容器算法"><a href="#特定容器算法" class="headerlink" title="特定容器算法"></a>特定容器算法</h2><p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-10/31070943.jpg" alt=""></p>
 <p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-10/25389735.jpg" alt=""></p>
 <p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-10/46323980.jpg" alt=""></p>
+]]></content>
+      
+        <categories>
+            
+            <category> language </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> cpp </tag>
+            
+            <tag> language </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[C++ primer笔记 -- 标准库--泛型算法]]></title>
+      <url>http://www.wowx.info/posts/20150717013220/</url>
+      <content type="html"><![CDATA[<h1 id="12章动态内存"><a href="#12章动态内存" class="headerlink" title="12章动态内存"></a>12章动态内存</h1><ul>
+<li><p>静态内存：保存static对象、类static成员和定义在任何函数之外的变量</p>
+</li>
+<li><p>栈内存：保存定义在函数之内的非静态对象</p>
+<p><strong>静态内存和栈内存中的对象由编译器自动创建和销毁</strong></p>
+</li>
+<li><p>堆(自由空间)：存储动态对象—存储程序运行时分配的对象</p>
+</li>
+</ul>
+<h2 id="动态内存和智能指针"><a href="#动态内存和智能指针" class="headerlink" title="动态内存和智能指针"></a>动态内存和智能指针</h2><p>智能指针(定义在<code>&lt;memory&gt;</code>头文件中)</p>
+<pre><code>1. shared_ptr: 允许多个指针指向同一个对象，标准库中还定义了弱引用伴随类`weak_ptr`
+2. unique_ptr:独占所指向的对象
+</code></pre><h3 id="shared-ptr"><a href="#shared-ptr" class="headerlink" title="shared_ptr"></a>shared_ptr</h3><p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-16/13890543.jpg" alt=""></p>
+<p><strong>如果将<code>shared_ptr</code>存放在一个容器中，而后不需要全部元素，要记得使用<code>erase</code>删除不再需要的那些元素</strong>。</p>
+<p>使用动态内存的原因</p>
+<ul>
+<li><p>程序不知道自己需要使用多少对象</p>
+<p>例子：容器</p>
+</li>
+<li><p>程序不知道所需对象的准确类型</p>
+<p>  第十五章</p>
+</li>
+<li><p>程序需要在多个对象间共享数据</p>
+<p>  <img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-16/20322205.jpg" alt=""></p>
+<p>  <img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-16/49284576.jpg" alt=""></p>
+<p>  <img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-16/61573562.jpg" alt=""></p>
+<p>  <img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-16/95506408.jpg" alt=""></p>
+<p>  <img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-16/48867816.jpg" alt=""><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-16/89528836.jpg" alt=""></p>
+</li>
+</ul>
+<h3 id="直接内存管理"><a href="#直接内存管理" class="headerlink" title="直接内存管理"></a>直接内存管理</h3><ul>
+<li>创建</li>
+</ul>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token operator">*</span>pi <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//默认初始化(默认构造函数)    </span>
+<span class="token keyword">int</span> <span class="token operator">*</span>pi <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">(</span><span class="token number">1024</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//直接初始化</span>
+vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token operator">*</span>ps <span class="token operator">=</span> <span class="token keyword">new</span> vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">}</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//列表初始化</span>
+string <span class="token operator">*</span>ps <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">string</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//值初始化为空string</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li><p>释放</p>
+<p><code>delete p</code></p>
+</li>
+<li><p>空悬指针</p>
+</li>
+</ul>
+<h3 id="结合使用shared和new"><a href="#结合使用shared和new" class="headerlink" title="结合使用shared和new"></a>结合使用shared和new</h3><p><code>shared_ptr&lt;int&gt; p2(new int(42));//p2指向一个值为42的int</code></p>
+<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-16/33460178.jpg" alt=""><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-16/23890908.jpg" alt=""></p>
+<h3 id="智能指针和异常"><a href="#智能指针和异常" class="headerlink" title="智能指针和异常"></a>智能指针和异常</h3><p>发生异常时智能指针管理的内存会被自动释放而内置指针不会</p>
+<h3 id="使用我们自己的释放操作"><a href="#使用我们自己的释放操作" class="headerlink" title="使用我们自己的释放操作"></a>使用我们自己的释放操作</h3><p>默认使用<code>delete</code>来释放，但是我们可以使用自己的释放操作：</p>
+<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-16/74284995.jpg" alt=""></p>
+<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-16/34331793.jpg" alt=""></p>
+<h3 id="unique-ptr"><a href="#unique-ptr" class="headerlink" title="unique_ptr"></a>unique_ptr</h3><p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-16/76709670.jpg" alt=""></p>
+<p>需要使用内置指针直接初始化</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp">unique_ptr<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">p2</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">(</span><span class="token number">42</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>因为<code>unique_ptr</code>“拥有”对象，所以他们不支持普通拷贝和赋值操作</p>
+<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-16/97894777.jpg" alt=""></p>
+<h4 id="向unique-ptr传递删除器"><a href="#向unique-ptr传递删除器" class="headerlink" title="向unique_ptr传递删除器"></a>向unique_ptr传递删除器</h4><p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-16/35751345.jpg" alt=""></p>
+<h3 id="weak-ptr"><a href="#weak-ptr" class="headerlink" title="weak_ptr"></a>weak_ptr</h3><p><strong>不会改变共享指针的引用计数</strong></p>
+<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-16/1690421.jpg" alt=""></p>
+<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-16/2100842.jpg" alt=""></p>
+<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-16/71986557.jpg" alt=""></p>
+<h2 id="动态数组"><a href="#动态数组" class="headerlink" title="动态数组"></a>动态数组</h2><h3 id="new-和数组"><a href="#new-和数组" class="headerlink" title="new 和数组"></a>new 和数组</h3><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token operator">*</span>pia <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token function">get_size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//pia指向第一个int</span>
+<span class="token keyword">typedef</span> <span class="token keyword">int</span> arrT<span class="token punctuation">[</span><span class="token number">42</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token operator">*</span>p <span class="token operator">=</span> <span class="token keyword">new</span> arrT<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//分配一个42个int的数组，p指向第一个</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p><strong>动态数组不是数组类型，所以不能使用<code>begin</code>和<code>end</code>,也不能使用for语句来处理动态数组中的元素</strong></p>
+<h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token operator">*</span>pia1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//10个未初始化的int</span>
+<span class="token keyword">int</span> <span class="token operator">*</span>pia2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//10个值初始化的int</span>
+string <span class="token operator">*</span>psa <span class="token operator">=</span> <span class="token keyword">new</span> string<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//10个未初始化的string</span>
+string <span class="token operator">*</span>psa2 <span class="token operator">=</span> <span class="token keyword">new</span> string<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//10个未初始化的string</span>
+<span class="token keyword">int</span> <span class="token operator">*</span>pia3 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token number">9</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+string <span class="token operator">*</span>psa3 <span class="token operator">=</span> <span class="token keyword">new</span> string<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">{</span><span class="token string">"a"</span><span class="token punctuation">,</span><span class="token string">"b"</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="释放"><a href="#释放" class="headerlink" title="释放"></a>释放</h4><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">delete</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> psa<span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="动态数组和智能指针"><a href="#动态数组和智能指针" class="headerlink" title="动态数组和智能指针"></a>动态数组和智能指针</h4><p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-16/4751314.jpg" alt=""></p>
+<h3 id="allocator"><a href="#allocator" class="headerlink" title="allocator"></a>allocator</h3><p>allocator类也定义在<code>&lt;memory&gt;</code>头文件中，它可以将内存分配和对象构造分开。</p>
+<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-16/70461985.jpg" alt=""><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-16/98894955.jpg" alt=""></p>
+<p>构造</p>
+<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-16/96908397.jpg" alt=""><img src="http://7xkyov.com1.z0.glb.clouddn.com/public/16-11-16/57479045.jpg" alt=""></p>
 ]]></content>
       
         <categories>
