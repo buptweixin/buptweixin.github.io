@@ -235,7 +235,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#399-Evaluate-Division"><span class="post-toc-number">1.</span> <span class="post-toc-text">399. Evaluate Division</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Problem-Description"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Problem Description</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#The-input-is-always-valid-You-may-assume-that-evaluating-the-queries-will-result-in-no-division-by-zero-and-there-is-no-contradiction"><span class="post-toc-number">2.</span> <span class="post-toc-text">The input is always valid. You may assume that evaluating the queries will result in no division by zero and there is no contradiction.</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Method"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">Method</span></a></li></ol></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#BFS-Breadth-firth-traversal-广度优先遍历"><span class="post-toc-number">1.</span> <span class="post-toc-text">BFS  Breadth firth traversal 广度优先遍历</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#399-Evaluate-Division"><span class="post-toc-number">2.</span> <span class="post-toc-text">399. Evaluate Division</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Problem-Description"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">Problem Description</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#The-input-is-always-valid-You-may-assume-that-evaluating-the-queries-will-result-in-no-division-by-zero-and-there-is-no-contradiction"><span class="post-toc-number">3.</span> <span class="post-toc-text">The input is always valid. You may assume that evaluating the queries will result in no division by zero and there is no contradiction.</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Method"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">Method</span></a></li></ol></li></ol>
 
         <!--
         <li class="mdl-menu__item">
@@ -392,7 +392,86 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <h2 id="399-Evaluate-Division"><a href="#399-Evaluate-Division" class="headerlink" title="399. Evaluate Division"></a>399. Evaluate Division</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
+        <h2 id="BFS-Breadth-firth-traversal-广度优先遍历"><a href="#BFS-Breadth-firth-traversal-广度优先遍历" class="headerlink" title="BFS  Breadth firth traversal 广度优先遍历"></a>BFS  Breadth firth traversal 广度优先遍历</h2><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;unordered_map></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;vector></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;list></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;queue></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;climits></span></span>
+
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Graph</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span><span class="token operator">:</span>
+        <span class="token comment" spellcheck="true">// 使用一个整数V存储图中节点数</span>
+        <span class="token keyword">int</span> V<span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 邻接矩阵</span>
+        list<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token operator">*</span>adj<span class="token punctuation">;</span>
+    <span class="token keyword">public</span><span class="token operator">:</span>
+        <span class="token comment" spellcheck="true">// 构造函数</span>
+        <span class="token function">Graph</span><span class="token punctuation">(</span><span class="token keyword">int</span> V<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 添加边</span>
+        <span class="token keyword">void</span> <span class="token function">addEdge</span><span class="token punctuation">(</span><span class="token keyword">int</span> v<span class="token punctuation">,</span> <span class="token keyword">int</span> w<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">void</span> <span class="token function">BFS</span><span class="token punctuation">(</span><span class="token keyword">int</span> s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+Graph<span class="token operator">::</span><span class="token function">Graph</span><span class="token punctuation">(</span><span class="token keyword">int</span> V<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token operator">-</span><span class="token operator">></span>V <span class="token operator">=</span> V<span class="token punctuation">;</span>
+    adj <span class="token operator">=</span> <span class="token keyword">new</span> list<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token punctuation">[</span>V<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> Graph<span class="token operator">::</span><span class="token function">addEdge</span><span class="token punctuation">(</span><span class="token keyword">int</span> v<span class="token punctuation">,</span> <span class="token keyword">int</span> w<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    adj<span class="token punctuation">[</span>v<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>w<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> Graph<span class="token operator">::</span><span class="token function">BFS</span><span class="token punctuation">(</span><span class="token keyword">int</span> s<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">color</span><span class="token punctuation">(</span>V<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">d</span><span class="token punctuation">(</span>V<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">pi</span><span class="token punctuation">(</span>V<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> V<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        d<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> INT_MAX<span class="token punctuation">;</span>
+        pi<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    color<span class="token punctuation">[</span>s<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    d<span class="token punctuation">[</span>s<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    pi<span class="token punctuation">[</span>s<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+    std<span class="token operator">::</span>queue<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> queue<span class="token punctuation">;</span>
+    queue<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>queue<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> u <span class="token operator">=</span> queue<span class="token punctuation">.</span><span class="token function">front</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        cout <span class="token operator">&lt;&lt;</span> u <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+        queue<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> v <span class="token operator">:</span> adj<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>color<span class="token punctuation">[</span>v<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                color<span class="token punctuation">[</span>v<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+                d<span class="token punctuation">[</span>v<span class="token punctuation">]</span> <span class="token operator">=</span> d<span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+                pi<span class="token punctuation">[</span>v<span class="token punctuation">]</span>  <span class="token operator">=</span> u<span class="token punctuation">;</span>
+                queue<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        color<span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    Graph <span class="token function">graph</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    graph<span class="token punctuation">.</span><span class="token function">addEdge</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    graph<span class="token punctuation">.</span><span class="token function">addEdge</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    graph<span class="token punctuation">.</span><span class="token function">addEdge</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    graph<span class="token punctuation">.</span><span class="token function">addEdge</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    graph<span class="token punctuation">.</span><span class="token function">addEdge</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    graph<span class="token punctuation">.</span><span class="token function">addEdge</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    graph<span class="token punctuation">.</span><span class="token function">BFS</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="399-Evaluate-Division"><a href="#399-Evaluate-Division" class="headerlink" title="399. Evaluate Division"></a>399. Evaluate Division</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
 <p>Equations are given in the format A / B = k, where A and B are variables represented as strings, and k is a real number (floating point number). Given some queries, return the answers. If the answer does not exist, return -1.0.</p>
 <p>Example:<br>Given a / b = 2.0, b / c = 3.0.<br>queries are: a / c = ?, b / a = ?, a / e = ?, a / a = ?, x / x = ? .<br>return [6.0, 0.5, -1.0, 1.0, -1.0 ].</p>
 <p>The input is: vector<pair<string, string="">&gt; equations, vector<double>&amp; values, vector<pair<string, string="">&gt; queries , where equations.size() == values.size(), and the values are positive. This represents the equations. Return vector<double>.</double></pair<string,></double></pair<string,></p>
