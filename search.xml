@@ -5317,7 +5317,7 @@ sudo rm /usr/local/include/cudnn.h
 <pre><code>export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/wx/cudnn/cudnn_v5/lib64
 </code></pre><p>刷新</p>
 <pre><code>source ~/.bashrc
-</code></pre>]]></content>
+</code></pre><h3 id="caffe-中卷基层输出大小是向下取整，pooling层输出大小是向上取整"><a href="#caffe-中卷基层输出大小是向下取整，pooling层输出大小是向上取整" class="headerlink" title="caffe 中卷基层输出大小是向下取整，pooling层输出大小是向上取整"></a>caffe 中卷基层输出大小是向下取整，pooling层输出大小是向上取整</h3>]]></content>
       
         
         <tags>

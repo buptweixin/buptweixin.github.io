@@ -235,7 +235,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#make时出现hdf5-hpp-not-found-之类的问题"><span class="post-toc-number">1.</span> <span class="post-toc-text">make时出现hdf5.hpp not found`之类的问题</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使py-faster-rcnn等自带的老版本caffe支持GTX1080和cudnn-v5"><span class="post-toc-number">2.</span> <span class="post-toc-text">使py-faster-rcnn等自带的老版本caffe支持GTX1080和cudnn v5</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Caffe运行速度很慢"><span class="post-toc-number">3.</span> <span class="post-toc-text">Caffe运行速度很慢</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#build-release-lib-libcaffe-so：对‘google-protobuf-Message-DebugString-const’未定义的引用"><span class="post-toc-number">4.</span> <span class="post-toc-text">.build_release/lib/libcaffe.so：对‘google::protobuf::Message::DebugString() const’未定义的引用</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用多个版本的cudnn"><span class="post-toc-number">5.</span> <span class="post-toc-text">使用多个版本的cudnn</span></a></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#make时出现hdf5-hpp-not-found-之类的问题"><span class="post-toc-number">1.</span> <span class="post-toc-text">make时出现hdf5.hpp not found`之类的问题</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使py-faster-rcnn等自带的老版本caffe支持GTX1080和cudnn-v5"><span class="post-toc-number">2.</span> <span class="post-toc-text">使py-faster-rcnn等自带的老版本caffe支持GTX1080和cudnn v5</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Caffe运行速度很慢"><span class="post-toc-number">3.</span> <span class="post-toc-text">Caffe运行速度很慢</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#build-release-lib-libcaffe-so：对‘google-protobuf-Message-DebugString-const’未定义的引用"><span class="post-toc-number">4.</span> <span class="post-toc-text">.build_release/lib/libcaffe.so：对‘google::protobuf::Message::DebugString() const’未定义的引用</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用多个版本的cudnn"><span class="post-toc-number">5.</span> <span class="post-toc-text">使用多个版本的cudnn</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#caffe-中卷基层输出大小是向下取整，pooling层输出大小是向上取整"><span class="post-toc-number">6.</span> <span class="post-toc-text">caffe 中卷基层输出大小是向下取整，pooling层输出大小是向上取整</span></a></li></ol>
 
         <!--
         <li class="mdl-menu__item">
@@ -444,7 +444,7 @@ sudo rm /usr/local/include/cudnn.h
 <pre><code>export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/wx/cudnn/cudnn_v5/lib64
 </code></pre><p>刷新</p>
 <pre><code>source ~/.bashrc
-</code></pre>
+</code></pre><h3 id="caffe-中卷基层输出大小是向下取整，pooling层输出大小是向上取整"><a href="#caffe-中卷基层输出大小是向下取整，pooling层输出大小是向上取整" class="headerlink" title="caffe 中卷基层输出大小是向下取整，pooling层输出大小是向上取整"></a>caffe 中卷基层输出大小是向下取整，pooling层输出大小是向上取整</h3>
     
 
     
