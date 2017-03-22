@@ -10,7 +10,7 @@
     
     <title>
         
-            LeetCode 154 Find Minimum in Rotated Sorted Array II | 
+            LeetCode Graph | 
         
         野原圆长的Blog
     </title>
@@ -27,7 +27,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="Xin Wei">
     <meta name="description" content="null">
-    <meta name="keywords" content="Blog deep_learging,cpp,algorithm,array,hard">
+    <meta name="keywords" content="Blog deep_learging,cpp,algorithm,graph">
 
     <!--iOS -->
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -48,9 +48,9 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="http://www.wowx.info">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="LeetCode 154 Find Minimum in Rotated Sorted Array II | 野原圆长的Blog">
+    <meta property="og:title" content="LeetCode Graph | 野原圆长的Blog">
     <meta property="og:description" content="null">
-    <meta property="og:article:tag" content="cpp"> <meta property="og:article:tag" content="algorithm"> <meta property="og:article:tag" content="array"> <meta property="og:article:tag" content="hard"> 
+    <meta property="og:article:tag" content="cpp"> <meta property="og:article:tag" content="algorithm"> <meta property="og:article:tag" content="graph"> 
 
     <!--[if lte IE 9]>
         <link rel="stylesheet" href="/css/ie-blocker.css">
@@ -235,7 +235,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#解题思路"><span class="post-toc-number">1.</span> <span class="post-toc-text">解题思路</span></a></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#399-Evaluate-Division"><span class="post-toc-number">1.</span> <span class="post-toc-text">399. Evaluate Division</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Problem-Description"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Problem Description</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#The-input-is-always-valid-You-may-assume-that-evaluating-the-queries-will-result-in-no-division-by-zero-and-there-is-no-contradiction"><span class="post-toc-number">2.</span> <span class="post-toc-text">The input is always valid. You may assume that evaluating the queries will result in no division by zero and there is no contradiction.</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Method"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">Method</span></a></li></ol></li></ol>
 
         <!--
         <li class="mdl-menu__item">
@@ -263,7 +263,7 @@
         <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(http://ww4.sinaimg.cn/large/6425ef91jw1f9apllc7boj20ic0960v9.jpg)">
     
             <p class="article-headline-p">
-                LeetCode 154 Find Minimum in Rotated Sorted Array II
+                LeetCode Graph
             </p>
         </div>
 
@@ -282,7 +282,7 @@
     <!-- Author Name & Date -->
     <div>
         <strong>Xin Wei</strong>
-        <span>11月 29, 2015</span>
+        <span>3月 22, 2017</span>
     </div>
 
     <div class="section-spacer"></div>
@@ -303,7 +303,7 @@
         </button>
         <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
             <li class="mdl-menu__item">在其它设备中阅读本文章</li>
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACZ0lEQVR42u3aQZLiMBAEQP7/6ZkHbOCpaskyS6RPBAGy0gdJru7Xz1dfLzw8PDw8PDw8vA/jveLr33+9+5z8Pr9LPTc8PDy8I7w/lto3v0km/W6E6ymuzA0PDw/vJC+ZXD7RdjNotxM8PDy8/4uXf3M96ZUHhIeHh/dNvGShz7ccPDw8vE/mJS/818v69fd5qPFY1oKHh4cX8/Ii0/nPR+t7eHh4eAGvbmmKF/pZA8HDPWV4eHh4AW+9HaoNc9sYt30QeHh4eHfzVuKDHDB7BMmDKI7UeHh4eEd4s0msFLRWjvJ4eHh4T/HWg4k/bl8e3NvwAg8PD+9u3vpUZm2pu6JhPDw8vPO82UBtWNA2vOYhct06gIeHh7eVl4e2Sdww2yTykbe9MeDh4eGNePmxuC5HjRqzZmPi4eHhneHNAoL1Zqw2FC4iDzw8PLybeflL/q4D8azcVWwbeHh4eEd4+RD58h2V+UdxxvCNAQ8PD28rL1922xvn7EM9ZXh4eHib+jnbslayPSSLeHtMH/aU4eHh4R1vVx3GqW2zVHyvOqXGw8PDu403w7TxxCz2zdl4eHh4J3lJ8WnWQJAckVc2ITw8PLyneG0ZbCWibaPeonkLDw8P72Zee81iiDauXYpF8PDw8G7mtcvxSmSQFLfymKOu7+Hh4eFt5eWbwfXxenaAXtkY8PDw8J7l5Qv0bDvZNf5S1oKHh4f3KG9WBpu1IyyFEXh4eHgfwMubAGaH9SQKGbYO4OHh4W3ltUWvNpi4oz0LDw8P7yleGwHs3TbyEYZhBB4eHt5W3vddeHh4eHh4eHh4H3D9AuwtNQB/VooxAAAAAElFTkSuQmCC">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACY0lEQVR42u3aQY7jMAwEwPz/07sPWCTbTdn0TFA+BZjEVvkgcZp8/fnq64WHh4eHh4eHh/fDeK/4+vdX7z4n38+fUq8NDw8Pb4X3n63244M/LyW5w7s1DNeGh4eHt8hLFjcjJdt6e5zg4eHhfQcv2fTzQwIPDw/vm3gnhXgSauDh4eH9Fl6y0Dw4SJaSHDyrWQseHh5ezMubTPufV/t7eHh4eAGvHmmKBwVmAwQPz5Th4eHhBbzzcah8mGAW47YvAg8PD+9u3iw+aAGzV5C8iKKkxsPDw7uI1x4D+TY9a2jNWmV4eHh4m7zhLU4eH4fFw3IfDw8Pb4V3sqCTYYJ2NCEaJsDDw8Nb4bURw6z4Po+Ao7/i4eHhLfLa27UBbr7RRwfAu9/i4eHhrfDaMakkkpiVyHmsXP/HgIeHh3cRbxYQnJfLeYhct8rw8PDwVnhtVDoroGeHUNIGw8PDw3uKl2zls8XtNMnw8PDw9nl5+XtOTV5i3vTCw8PD2+S1pXO+xLyVlbfELhi6wsPDwzvm5Y/Pg9rZ5j6LbuswAg8PD+8GXtu8P4lcT46TaOgKDw8Pb4WXBxP5AEF7/7Zwx8PDw3uK1xa1s4j2M/X8nnh4eHh382aRbjtY0Ma1bZSMh4eHt8lrt+OTQyUp35NhgrqkxsPDw7uB144O5G2tHHPjwYCHh4d3Gy/foGfbd3v/W7IWPDw8vEd55xFwW6CvHgx4eHh4l/LOR6baI6GIifHw8PAWeckiks19VmTP4l08PDy8p3htBJA3/pPFzQroIozAw8PDu5T3fRceHh4eHh4eHt4PuP4CT2KlgWZ+r5gAAAAASUVORK5CYII=">
         </ul>
     
 
@@ -315,7 +315,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/algorithm/">algorithm</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/array/">array</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/cpp/">cpp</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/hard/">hard</a>
+        <a class="post_tag-link" href="/tags/algorithm/">algorithm</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/cpp/">cpp</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/graph/">graph</a>
     </ul>
     
 
@@ -329,7 +329,7 @@
     <!-- Leancloud Views -->
         <a class="post_share-link" href="#">
             <li class="mdl-menu__item">
-                <span id="/posts/20151129203220/" class="leancloud-views_num" data-flag-title="LeetCode 154 Find Minimum in Rotated Sorted Array II">
+                <span id="/posts/20170322191759/" class="leancloud-views_num" data-flag-title="LeetCode Graph">
      &nbsp;浏览量
 </span>
 
@@ -341,7 +341,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=LeetCode 154 Find Minimum in Rotated Sorted Array II&url=http://www.wowx.info//posts/20151129203220/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=LeetCode Graph&url=http://www.wowx.info//posts/20170322191759/index.html&pic=&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 分享到微博
             </li>
@@ -350,7 +350,7 @@
 
     <!-- Share Twitter -->
     
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=LeetCode 154 Find Minimum in Rotated Sorted Array II&url=http://www.wowx.info//posts/20151129203220/index.html&via=Xin Wei" target="_blank">
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=LeetCode Graph&url=http://www.wowx.info//posts/20170322191759/index.html&via=Xin Wei" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Twitter
             </li>
@@ -359,7 +359,7 @@
 
     <!-- Share Facebook -->
     
-        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://www.wowx.info//posts/20151129203220/index.html" target="_blank">
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://www.wowx.info//posts/20170322191759/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Facebook
             </li>
@@ -368,7 +368,7 @@
 
     <!-- Share Google+ -->
     
-        <a class="post_share-link" href="https://plus.google.com/share?url=http://www.wowx.info//posts/20151129203220/index.html" target="_blank">
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://www.wowx.info//posts/20170322191759/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Google+
             </li>
@@ -392,38 +392,81 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <blockquote>
-<p>Suppose a sorted array is rotated at some pivot unknown to you beforehand.</p>
-<p>(i.e., <code>0 1 2 4 5 6 7</code> might become <code>4 5 6 7 0 1 2</code>).</p>
-<p>Find the minimum element.</p>
-<p>The array may contain duplicates.</p>
+        <h2 id="399-Evaluate-Division"><a href="#399-Evaluate-Division" class="headerlink" title="399. Evaluate Division"></a>399. Evaluate Division</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
+<p>Equations are given in the format A / B = k, where A and B are variables represented as strings, and k is a real number (floating point number). Given some queries, return the answers. If the answer does not exist, return -1.0.</p>
+<p>Example:<br>Given a / b = 2.0, b / c = 3.0.<br>queries are: a / c = ?, b / a = ?, a / e = ?, a / a = ?, x / x = ? .<br>return [6.0, 0.5, -1.0, 1.0, -1.0 ].</p>
+<p>The input is: vector<pair<string, string="">&gt; equations, vector<double>&amp; values, vector<pair<string, string="">&gt; queries , where equations.size() == values.size(), and the values are positive. This represents the equations. Return vector<double>.</double></pair<string,></double></pair<string,></p>
+<p>According to the example above:</p>
+<p>equations = [ [“a”, “b”], [“b”, “c”] ],<br>values = [2.0, 3.0],<br>queries = [ [“a”, “c”], [“b”, “a”], [“a”, “e”], [“a”, “a”], [“x”, “x”] ].</p>
+<h2 id="The-input-is-always-valid-You-may-assume-that-evaluating-the-queries-will-result-in-no-division-by-zero-and-there-is-no-contradiction"><a href="#The-input-is-always-valid-You-may-assume-that-evaluating-the-queries-will-result-in-no-division-by-zero-and-there-is-no-contradiction" class="headerlink" title="The input is always valid. You may assume that evaluating the queries will result in no division by zero and there is no contradiction."></a>The input is always valid. You may assume that evaluating the queries will result in no division by zero and there is no contradiction.</h2><p>给出一串公式，每个公式的操作符用字母表示，并给出与之对应的数值结果，然后给出一组公式，根据前面给出的信息求结果,比如，给出<br><code>a / b = 2.0, b / c = 3.0</code>求<code>a/c, b/a, a/e, a/a</code></p>
 </blockquote>
-<a id="more"></a>
-<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><ol>
-<li><p>二分法，时间复杂度O(log(N))或O(N)</p>
-<p>主要考虑的问题是nums[mid] == nums[hi]这种情况，此时不能确定最小元素在mid的左边还是右边，那么，直接让hi不断减1直到于nums[mid]不相等</p>
+<h3 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h3><p>这个问题可以转化成图构建问题。要构建的图是这样的一种图，对于每条有向边中父节点为除数,子节点为被除数，子节点除以父节点即得到对应的数值。<br>构建过程中遍历公式数组，这时会遇到三种情况:</p>
+<ol>
+<li>第一种情况除号两边的数字都没有发现过<br> 直接新建两个新节点，除数设为1，被除数设为公式的结果并将被除数的parent设为除数</li>
+<li>左边的符数字没有发现过<br> 新建一个被除数节点，值设为除数的值乘公式结果</li>
+<li>右边的符号没有发现过<br> 新建一个除数节点, 值设为被除数除以公式结果</li>
+<li>除数和被除数都被发现过<br> 这种情况发生在除法链断开的情况下,比如遇到<code>a/b</code>和<code>c/d</code>后又遇到<code>a/d</code>的情况,这时，要做的是将他们拼接起来，左边链的每个数值都按<code>d-&gt;value * num / a-&gt;value</code>缩放，然后将b和c连接起来。</li>
+</ol>
 <pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// date: 2016-09-12     location: Santa Clara City Library</span>
 <span class="token keyword">public</span><span class="token operator">:</span>
-    <span class="token keyword">int</span> <span class="token function">findMin</span><span class="token punctuation">(</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token operator">&amp;</span> nums<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">int</span> lo <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> hi <span class="token operator">=</span> nums<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span>
-        <span class="token keyword">while</span> <span class="token punctuation">(</span>lo <span class="token operator">&lt;</span> hi<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token keyword">int</span> mid <span class="token operator">=</span> lo <span class="token operator">+</span> <span class="token punctuation">(</span>hi <span class="token operator">-</span> lo<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>nums<span class="token punctuation">[</span>mid<span class="token punctuation">]</span> <span class="token operator">&lt;</span> nums<span class="token punctuation">[</span>hi<span class="token punctuation">]</span><span class="token punctuation">)</span>
-                hi <span class="token operator">=</span> mid<span class="token punctuation">;</span>
-            <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>nums<span class="token punctuation">[</span>mid<span class="token punctuation">]</span> <span class="token operator">></span> nums<span class="token punctuation">[</span>hi<span class="token punctuation">]</span><span class="token punctuation">)</span>
-                lo <span class="token operator">=</span> mid <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
-            <span class="token keyword">else</span>
-            <span class="token punctuation">{</span>
-                hi<span class="token operator">--</span><span class="token punctuation">;</span>
+    vector<span class="token operator">&lt;</span><span class="token keyword">double</span><span class="token operator">></span> <span class="token function">calcEquation</span><span class="token punctuation">(</span>vector<span class="token operator">&lt;</span>pair<span class="token operator">&lt;</span>string<span class="token punctuation">,</span> string<span class="token operator">>></span> equations<span class="token punctuation">,</span> vector<span class="token operator">&lt;</span><span class="token keyword">double</span><span class="token operator">></span><span class="token operator">&amp;</span> values<span class="token punctuation">,</span> vector<span class="token operator">&lt;</span>pair<span class="token operator">&lt;</span>string<span class="token punctuation">,</span> string<span class="token operator">>></span> queries<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        unordered_map<span class="token operator">&lt;</span>string<span class="token punctuation">,</span> Node<span class="token operator">*</span><span class="token operator">></span> map<span class="token punctuation">;</span>
+        vector<span class="token operator">&lt;</span><span class="token keyword">double</span><span class="token operator">></span> res<span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> equations<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i <span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            string s1 <span class="token operator">=</span> equations<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>first<span class="token punctuation">,</span> s2 <span class="token operator">=</span> equations<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>second<span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>map<span class="token punctuation">.</span><span class="token function">count</span><span class="token punctuation">(</span>s1<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> map<span class="token punctuation">.</span><span class="token function">count</span><span class="token punctuation">(</span>s2<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                map<span class="token punctuation">[</span>s1<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">Node</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                map<span class="token punctuation">[</span>s2<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">Node</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                map<span class="token punctuation">[</span>s1<span class="token punctuation">]</span> <span class="token operator">-</span><span class="token operator">></span> value <span class="token operator">=</span> values<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+                map<span class="token punctuation">[</span>s2<span class="token punctuation">]</span> <span class="token operator">-</span><span class="token operator">></span> value <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+                map<span class="token punctuation">[</span>s1<span class="token punctuation">]</span> <span class="token operator">-</span><span class="token operator">></span> parent <span class="token operator">=</span> map<span class="token punctuation">[</span>s2<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>map<span class="token punctuation">.</span><span class="token function">count</span><span class="token punctuation">(</span>s1<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                map<span class="token punctuation">[</span>s1<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">Node</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                map<span class="token punctuation">[</span>s1<span class="token punctuation">]</span> <span class="token operator">-</span><span class="token operator">></span> value <span class="token operator">=</span> map<span class="token punctuation">[</span>s2<span class="token punctuation">]</span> <span class="token operator">-</span><span class="token operator">></span> value <span class="token operator">*</span> values<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+                map<span class="token punctuation">[</span>s1<span class="token punctuation">]</span> <span class="token operator">-</span><span class="token operator">></span> parent <span class="token operator">=</span> map<span class="token punctuation">[</span>s2<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>map<span class="token punctuation">.</span><span class="token function">count</span><span class="token punctuation">(</span>s2<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                map<span class="token punctuation">[</span>s2<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">Node</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                map<span class="token punctuation">[</span>s2<span class="token punctuation">]</span> <span class="token operator">-</span><span class="token operator">></span> value <span class="token operator">=</span> map<span class="token punctuation">[</span>s1<span class="token punctuation">]</span> <span class="token operator">-</span><span class="token operator">></span> value <span class="token operator">/</span> values<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+                map<span class="token punctuation">[</span>s2<span class="token punctuation">]</span> <span class="token operator">-</span><span class="token operator">></span> parent <span class="token operator">=</span> map<span class="token punctuation">[</span>s1<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+                <span class="token function">unionNodes</span><span class="token punctuation">(</span>map<span class="token punctuation">[</span>s1<span class="token punctuation">]</span><span class="token punctuation">,</span> map<span class="token punctuation">[</span>s2<span class="token punctuation">]</span><span class="token punctuation">,</span> values<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> map<span class="token punctuation">)</span><span class="token punctuation">;</span>
             <span class="token punctuation">}</span>
         <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> nums<span class="token punctuation">[</span>hi<span class="token punctuation">]</span><span class="token punctuation">;</span>
 
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span> query <span class="token operator">:</span> queries<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>map<span class="token punctuation">.</span><span class="token function">count</span><span class="token punctuation">(</span>query<span class="token punctuation">.</span>first<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">||</span> map<span class="token punctuation">.</span><span class="token function">count</span><span class="token punctuation">(</span>query<span class="token punctuation">.</span>second<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">||</span> <span class="token function">findParent</span><span class="token punctuation">(</span>map<span class="token punctuation">[</span>query<span class="token punctuation">.</span>first<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token function">findParent</span><span class="token punctuation">(</span>map<span class="token punctuation">[</span>query<span class="token punctuation">.</span>second<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                res<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">else</span>
+                res<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>map<span class="token punctuation">[</span>query<span class="token punctuation">.</span>first<span class="token punctuation">]</span> <span class="token operator">-</span><span class="token operator">></span> value <span class="token operator">/</span> map<span class="token punctuation">[</span>query<span class="token punctuation">.</span>second<span class="token punctuation">]</span> <span class="token operator">-</span><span class="token operator">></span> value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> res<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+<span class="token keyword">private</span><span class="token operator">:</span>
+    <span class="token keyword">struct</span> Node <span class="token punctuation">{</span>
+        Node<span class="token operator">*</span> parent<span class="token punctuation">;</span>
+        <span class="token keyword">double</span> value <span class="token operator">=</span> <span class="token number">0.0</span><span class="token punctuation">;</span>
+        <span class="token function">Node</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token punctuation">{</span>parent <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">void</span> <span class="token function">unionNodes</span><span class="token punctuation">(</span>Node<span class="token operator">*</span> node1<span class="token punctuation">,</span> Node<span class="token operator">*</span> node2<span class="token punctuation">,</span> <span class="token keyword">double</span> num<span class="token punctuation">,</span> unordered_map<span class="token operator">&lt;</span>string<span class="token punctuation">,</span> Node<span class="token operator">*</span><span class="token operator">></span><span class="token operator">&amp;</span> map<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Node<span class="token operator">*</span> parent1 <span class="token operator">=</span> <span class="token function">findParent</span><span class="token punctuation">(</span>node1<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token operator">*</span>parent2 <span class="token operator">=</span> <span class="token function">findParent</span><span class="token punctuation">(</span>node2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">double</span> ratio <span class="token operator">=</span> node2 <span class="token operator">-</span><span class="token operator">></span> value <span class="token operator">*</span> num <span class="token operator">/</span> node1 <span class="token operator">-</span><span class="token operator">></span> value<span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span> it <span class="token operator">=</span> map<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> it <span class="token operator">!=</span> map<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> it <span class="token operator">++</span><span class="token punctuation">)</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">findParent</span><span class="token punctuation">(</span>it <span class="token operator">-</span><span class="token operator">></span> second<span class="token punctuation">)</span> <span class="token operator">==</span> parent1<span class="token punctuation">)</span>
+                it <span class="token operator">-</span><span class="token operator">></span> second <span class="token operator">-</span><span class="token operator">></span> value <span class="token operator">*</span><span class="token operator">=</span> ratio<span class="token punctuation">;</span>
+        parent1 <span class="token operator">-</span><span class="token operator">></span> parent <span class="token operator">=</span> parent2<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    Node<span class="token operator">*</span> <span class="token function">findParent</span><span class="token punctuation">(</span>Node<span class="token operator">*</span> node<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>node <span class="token operator">-</span><span class="token operator">></span> parent <span class="token operator">==</span> node<span class="token punctuation">)</span>
+            <span class="token keyword">return</span> node<span class="token punctuation">;</span>
+        node <span class="token operator">-</span><span class="token operator">></span> parent <span class="token operator">=</span> <span class="token function">findParent</span><span class="token punctuation">(</span>node <span class="token operator">-</span><span class="token operator">></span> parent<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> node <span class="token operator">-</span><span class="token operator">></span> parent<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
-</ol>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
     
 
@@ -452,9 +495,9 @@
 <div id="comments">
     <!-- 多说评论框 start -->
     <div class="ds-thread"
-        data-thread-key="posts/20151129203220/"
-        data-url="http://www.wowx.info/posts/20151129203220/"
-        data-title="LeetCode 154 Find Minimum in Rotated Sorted Array II">
+        data-thread-key="posts/20170322191759/"
+        data-url="http://www.wowx.info/posts/20170322191759/"
+        data-title="LeetCode Graph">
     </div>
     <!-- 多说评论框 end -->
 </div>
@@ -471,21 +514,13 @@
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
-        <a href="/posts/20151130013320/" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            新篇
-        </a>
-    
 
     <!-- Section Spacer -->
     <div class="section-spacer"></div>
 
     <!-- Next Nav -->
     
-        <a href="/posts/20151030013220/" id="post_nav-older" class="next-content">
+        <a href="/posts/20170321220240/" id="post_nav-older" class="next-content">
             旧篇
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">

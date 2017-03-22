@@ -4,6 +4,105 @@
   
     
     <entry>
+      <title><![CDATA[LeetCode Graph]]></title>
+      <url>http://www.wowx.info/posts/20170322191759/</url>
+      <content type="html"><![CDATA[<h2 id="399-Evaluate-Division"><a href="#399-Evaluate-Division" class="headerlink" title="399. Evaluate Division"></a>399. Evaluate Division</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
+<p>Equations are given in the format A / B = k, where A and B are variables represented as strings, and k is a real number (floating point number). Given some queries, return the answers. If the answer does not exist, return -1.0.</p>
+<p>Example:<br>Given a / b = 2.0, b / c = 3.0.<br>queries are: a / c = ?, b / a = ?, a / e = ?, a / a = ?, x / x = ? .<br>return [6.0, 0.5, -1.0, 1.0, -1.0 ].</p>
+<p>The input is: vector<pair<string, string="">&gt; equations, vector<double>&amp; values, vector<pair<string, string="">&gt; queries , where equations.size() == values.size(), and the values are positive. This represents the equations. Return vector<double>.</double></pair<string,></double></pair<string,></p>
+<p>According to the example above:</p>
+<p>equations = [ [“a”, “b”], [“b”, “c”] ],<br>values = [2.0, 3.0],<br>queries = [ [“a”, “c”], [“b”, “a”], [“a”, “e”], [“a”, “a”], [“x”, “x”] ].</p>
+<h2 id="The-input-is-always-valid-You-may-assume-that-evaluating-the-queries-will-result-in-no-division-by-zero-and-there-is-no-contradiction"><a href="#The-input-is-always-valid-You-may-assume-that-evaluating-the-queries-will-result-in-no-division-by-zero-and-there-is-no-contradiction" class="headerlink" title="The input is always valid. You may assume that evaluating the queries will result in no division by zero and there is no contradiction."></a>The input is always valid. You may assume that evaluating the queries will result in no division by zero and there is no contradiction.</h2><p>给出一串公式，每个公式的操作符用字母表示，并给出与之对应的数值结果，然后给出一组公式，根据前面给出的信息求结果,比如，给出<br><code>a / b = 2.0, b / c = 3.0</code>求<code>a/c, b/a, a/e, a/a</code></p>
+</blockquote>
+<h3 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h3><p>这个问题可以转化成图构建问题。要构建的图是这样的一种图，对于每条有向边中父节点为除数,子节点为被除数，子节点除以父节点即得到对应的数值。<br>构建过程中遍历公式数组，这时会遇到三种情况:</p>
+<ol>
+<li>第一种情况除号两边的数字都没有发现过<br> 直接新建两个新节点，除数设为1，被除数设为公式的结果并将被除数的parent设为除数</li>
+<li>左边的符数字没有发现过<br> 新建一个被除数节点，值设为除数的值乘公式结果</li>
+<li>右边的符号没有发现过<br> 新建一个除数节点, 值设为被除数除以公式结果</li>
+<li>除数和被除数都被发现过<br> 这种情况发生在除法链断开的情况下,比如遇到<code>a/b</code>和<code>c/d</code>后又遇到<code>a/d</code>的情况,这时，要做的是将他们拼接起来，左边链的每个数值都按<code>d-&gt;value * num / a-&gt;value</code>缩放，然后将b和c连接起来。</li>
+</ol>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// date: 2016-09-12     location: Santa Clara City Library</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    vector<span class="token operator">&lt;</span><span class="token keyword">double</span><span class="token operator">></span> <span class="token function">calcEquation</span><span class="token punctuation">(</span>vector<span class="token operator">&lt;</span>pair<span class="token operator">&lt;</span>string<span class="token punctuation">,</span> string<span class="token operator">>></span> equations<span class="token punctuation">,</span> vector<span class="token operator">&lt;</span><span class="token keyword">double</span><span class="token operator">></span><span class="token operator">&amp;</span> values<span class="token punctuation">,</span> vector<span class="token operator">&lt;</span>pair<span class="token operator">&lt;</span>string<span class="token punctuation">,</span> string<span class="token operator">>></span> queries<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        unordered_map<span class="token operator">&lt;</span>string<span class="token punctuation">,</span> Node<span class="token operator">*</span><span class="token operator">></span> map<span class="token punctuation">;</span>
+        vector<span class="token operator">&lt;</span><span class="token keyword">double</span><span class="token operator">></span> res<span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> equations<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i <span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            string s1 <span class="token operator">=</span> equations<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>first<span class="token punctuation">,</span> s2 <span class="token operator">=</span> equations<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>second<span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>map<span class="token punctuation">.</span><span class="token function">count</span><span class="token punctuation">(</span>s1<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> map<span class="token punctuation">.</span><span class="token function">count</span><span class="token punctuation">(</span>s2<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                map<span class="token punctuation">[</span>s1<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">Node</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                map<span class="token punctuation">[</span>s2<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">Node</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                map<span class="token punctuation">[</span>s1<span class="token punctuation">]</span> <span class="token operator">-</span><span class="token operator">></span> value <span class="token operator">=</span> values<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+                map<span class="token punctuation">[</span>s2<span class="token punctuation">]</span> <span class="token operator">-</span><span class="token operator">></span> value <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+                map<span class="token punctuation">[</span>s1<span class="token punctuation">]</span> <span class="token operator">-</span><span class="token operator">></span> parent <span class="token operator">=</span> map<span class="token punctuation">[</span>s2<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>map<span class="token punctuation">.</span><span class="token function">count</span><span class="token punctuation">(</span>s1<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                map<span class="token punctuation">[</span>s1<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">Node</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                map<span class="token punctuation">[</span>s1<span class="token punctuation">]</span> <span class="token operator">-</span><span class="token operator">></span> value <span class="token operator">=</span> map<span class="token punctuation">[</span>s2<span class="token punctuation">]</span> <span class="token operator">-</span><span class="token operator">></span> value <span class="token operator">*</span> values<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+                map<span class="token punctuation">[</span>s1<span class="token punctuation">]</span> <span class="token operator">-</span><span class="token operator">></span> parent <span class="token operator">=</span> map<span class="token punctuation">[</span>s2<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>map<span class="token punctuation">.</span><span class="token function">count</span><span class="token punctuation">(</span>s2<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                map<span class="token punctuation">[</span>s2<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">Node</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                map<span class="token punctuation">[</span>s2<span class="token punctuation">]</span> <span class="token operator">-</span><span class="token operator">></span> value <span class="token operator">=</span> map<span class="token punctuation">[</span>s1<span class="token punctuation">]</span> <span class="token operator">-</span><span class="token operator">></span> value <span class="token operator">/</span> values<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+                map<span class="token punctuation">[</span>s2<span class="token punctuation">]</span> <span class="token operator">-</span><span class="token operator">></span> parent <span class="token operator">=</span> map<span class="token punctuation">[</span>s1<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+                <span class="token function">unionNodes</span><span class="token punctuation">(</span>map<span class="token punctuation">[</span>s1<span class="token punctuation">]</span><span class="token punctuation">,</span> map<span class="token punctuation">[</span>s2<span class="token punctuation">]</span><span class="token punctuation">,</span> values<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> map<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span> query <span class="token operator">:</span> queries<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>map<span class="token punctuation">.</span><span class="token function">count</span><span class="token punctuation">(</span>query<span class="token punctuation">.</span>first<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">||</span> map<span class="token punctuation">.</span><span class="token function">count</span><span class="token punctuation">(</span>query<span class="token punctuation">.</span>second<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">||</span> <span class="token function">findParent</span><span class="token punctuation">(</span>map<span class="token punctuation">[</span>query<span class="token punctuation">.</span>first<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token function">findParent</span><span class="token punctuation">(</span>map<span class="token punctuation">[</span>query<span class="token punctuation">.</span>second<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                res<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">else</span>
+                res<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>map<span class="token punctuation">[</span>query<span class="token punctuation">.</span>first<span class="token punctuation">]</span> <span class="token operator">-</span><span class="token operator">></span> value <span class="token operator">/</span> map<span class="token punctuation">[</span>query<span class="token punctuation">.</span>second<span class="token punctuation">]</span> <span class="token operator">-</span><span class="token operator">></span> value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> res<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+<span class="token keyword">private</span><span class="token operator">:</span>
+    <span class="token keyword">struct</span> Node <span class="token punctuation">{</span>
+        Node<span class="token operator">*</span> parent<span class="token punctuation">;</span>
+        <span class="token keyword">double</span> value <span class="token operator">=</span> <span class="token number">0.0</span><span class="token punctuation">;</span>
+        <span class="token function">Node</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token punctuation">{</span>parent <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">void</span> <span class="token function">unionNodes</span><span class="token punctuation">(</span>Node<span class="token operator">*</span> node1<span class="token punctuation">,</span> Node<span class="token operator">*</span> node2<span class="token punctuation">,</span> <span class="token keyword">double</span> num<span class="token punctuation">,</span> unordered_map<span class="token operator">&lt;</span>string<span class="token punctuation">,</span> Node<span class="token operator">*</span><span class="token operator">></span><span class="token operator">&amp;</span> map<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Node<span class="token operator">*</span> parent1 <span class="token operator">=</span> <span class="token function">findParent</span><span class="token punctuation">(</span>node1<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token operator">*</span>parent2 <span class="token operator">=</span> <span class="token function">findParent</span><span class="token punctuation">(</span>node2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">double</span> ratio <span class="token operator">=</span> node2 <span class="token operator">-</span><span class="token operator">></span> value <span class="token operator">*</span> num <span class="token operator">/</span> node1 <span class="token operator">-</span><span class="token operator">></span> value<span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span> it <span class="token operator">=</span> map<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> it <span class="token operator">!=</span> map<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> it <span class="token operator">++</span><span class="token punctuation">)</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">findParent</span><span class="token punctuation">(</span>it <span class="token operator">-</span><span class="token operator">></span> second<span class="token punctuation">)</span> <span class="token operator">==</span> parent1<span class="token punctuation">)</span>
+                it <span class="token operator">-</span><span class="token operator">></span> second <span class="token operator">-</span><span class="token operator">></span> value <span class="token operator">*</span><span class="token operator">=</span> ratio<span class="token punctuation">;</span>
+        parent1 <span class="token operator">-</span><span class="token operator">></span> parent <span class="token operator">=</span> parent2<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    Node<span class="token operator">*</span> <span class="token function">findParent</span><span class="token punctuation">(</span>Node<span class="token operator">*</span> node<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>node <span class="token operator">-</span><span class="token operator">></span> parent <span class="token operator">==</span> node<span class="token punctuation">)</span>
+            <span class="token keyword">return</span> node<span class="token punctuation">;</span>
+        node <span class="token operator">-</span><span class="token operator">></span> parent <span class="token operator">=</span> <span class="token function">findParent</span><span class="token punctuation">(</span>node <span class="token operator">-</span><span class="token operator">></span> parent<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> node <span class="token operator">-</span><span class="token operator">></span> parent<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+]]></content>
+      
+        <categories>
+            
+            <category> algorithm </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> cpp </tag>
+            
+            <tag> algorithm </tag>
+            
+            <tag> graph </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[Deeplearing Book Chapter 10]]></title>
       <url>http://www.wowx.info/posts/20170321220240/</url>
       <content type="html"><![CDATA[<h2 id="建议设计流程"><a href="#建议设计流程" class="headerlink" title="建议设计流程"></a>建议设计流程</h2><ol>
@@ -58,9 +157,9 @@
         
         <tags>
             
-            <tag> algorithm </tag>
-            
             <tag> cpp </tag>
+            
+            <tag> algorithm </tag>
             
             <tag> greedy </tag>
             
@@ -222,9 +321,9 @@
         
         <tags>
             
-            <tag> algorithm </tag>
-            
             <tag> cpp </tag>
+            
+            <tag> algorithm </tag>
             
         </tags>
         
@@ -320,9 +419,9 @@ public:
         
         <tags>
             
-            <tag> algorithm </tag>
-            
             <tag> cpp </tag>
+            
+            <tag> algorithm </tag>
             
             <tag> tree </tag>
             
@@ -406,9 +505,9 @@ Note: The length of given array won&#39;t exceed 10000.
         
         <tags>
             
-            <tag> algorithm </tag>
-            
             <tag> cpp </tag>
+            
+            <tag> algorithm </tag>
             
             <tag> stack </tag>
             
@@ -464,9 +563,9 @@ Note: The length of given array won&#39;t exceed 10000.
         
         <tags>
             
-            <tag> algorithm </tag>
-            
             <tag> cpp </tag>
+            
+            <tag> algorithm </tag>
             
             <tag> hash table </tag>
             
@@ -648,9 +747,9 @@ public:
         
         <tags>
             
-            <tag> algorithm </tag>
-            
             <tag> cpp </tag>
+            
+            <tag> algorithm </tag>
             
             <tag> sort </tag>
             
@@ -800,9 +899,9 @@ Note: There are at least two nodes in this BST.
         
         <tags>
             
-            <tag> algorithm </tag>
-            
             <tag> cpp </tag>
+            
+            <tag> algorithm </tag>
             
             <tag> math </tag>
             
@@ -3139,11 +3238,11 @@ import java<span class="token punctuation">.</span>lang<span class="token punctu
         
         <tags>
             
-            <tag> algorithm </tag>
-            
             <tag> cpp </tag>
             
             <tag> string </tag>
+            
+            <tag> algorithm </tag>
             
         </tags>
         
@@ -3424,9 +3523,9 @@ import java<span class="token punctuation">.</span>lang<span class="token punctu
         
         <tags>
             
-            <tag> cpp </tag>
-            
             <tag> 算法 </tag>
+            
+            <tag> cpp </tag>
             
             <tag> string </tag>
             
@@ -3638,11 +3737,11 @@ import java<span class="token punctuation">.</span>lang<span class="token punctu
         
         <tags>
             
-            <tag> algorithm </tag>
-            
             <tag> cpp </tag>
             
             <tag> string </tag>
+            
+            <tag> algorithm </tag>
             
         </tags>
         
@@ -3837,11 +3936,11 @@ import java<span class="token punctuation">.</span>lang<span class="token punctu
         
         <tags>
             
-            <tag> algorithm </tag>
-            
             <tag> cpp </tag>
             
             <tag> string </tag>
+            
+            <tag> algorithm </tag>
             
         </tags>
         
@@ -4001,11 +4100,11 @@ import java<span class="token punctuation">.</span>lang<span class="token punctu
         
         <tags>
             
-            <tag> algorithm </tag>
-            
             <tag> cpp </tag>
             
             <tag> string </tag>
+            
+            <tag> algorithm </tag>
             
         </tags>
         
@@ -4189,11 +4288,11 @@ import java<span class="token punctuation">.</span>lang<span class="token punctu
         
         <tags>
             
-            <tag> algorithm </tag>
-            
             <tag> cpp </tag>
             
             <tag> string </tag>
+            
+            <tag> algorithm </tag>
             
         </tags>
         
@@ -4313,9 +4412,9 @@ import java<span class="token punctuation">.</span>lang<span class="token punctu
         
         <tags>
             
-            <tag> 机器学习 </tag>
-            
             <tag> 深度学习 </tag>
+            
+            <tag> 机器学习 </tag>
             
         </tags>
         
@@ -4400,9 +4499,9 @@ Explanation: It&#39;s the substring &quot;abc&quot; four times. (And the substri
         
         <tags>
             
-            <tag> cpp </tag>
-            
             <tag> 算法 </tag>
+            
+            <tag> cpp </tag>
             
             <tag> array </tag>
             
@@ -5327,9 +5426,9 @@ sudo rm /usr/local/include/cudnn.h
         
         <tags>
             
-            <tag> 机器学习 </tag>
-            
             <tag> 深度学习 </tag>
+            
+            <tag> 机器学习 </tag>
             
             <tag> cs231n </tag>
             
@@ -6023,9 +6122,9 @@ classes <span class="token operator">=</span> <span class="token punctuation">[<
         
         <tags>
             
-            <tag> 机器学习 </tag>
-            
             <tag> 深度学习 </tag>
+            
+            <tag> 机器学习 </tag>
             
         </tags>
         
@@ -6114,9 +6213,9 @@ classes <span class="token operator">=</span> <span class="token punctuation">[<
         
         <tags>
             
-            <tag> 机器学习 </tag>
-            
             <tag> 深度学习 </tag>
+            
+            <tag> 机器学习 </tag>
             
             <tag> cs231n </tag>
             
@@ -8123,9 +8222,9 @@ binary_PositionDepth, binary_QueryTokens</code></p>
         
         <tags>
             
-            <tag> algorithm </tag>
-            
             <tag> cpp </tag>
+            
+            <tag> algorithm </tag>
             
             <tag> array </tag>
             
@@ -8240,9 +8339,9 @@ The median is (2 + 3)/2 = 2.5
         
         <tags>
             
-            <tag> algorithm </tag>
-            
             <tag> cpp </tag>
+            
+            <tag> algorithm </tag>
             
             <tag> array </tag>
             
@@ -8298,9 +8397,9 @@ The median is (2 + 3)/2 = 2.5
         
         <tags>
             
-            <tag> algorithm </tag>
-            
             <tag> cpp </tag>
+            
+            <tag> algorithm </tag>
             
             <tag> array </tag>
             
