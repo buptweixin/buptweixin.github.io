@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.wowx.info/"/>
-  <updated>2017-03-22T16:51:03.026Z</updated>
+  <updated>2017-03-22T16:54:06.070Z</updated>
   <id>http://www.wowx.info/</id>
   
   <author>
@@ -20,9 +20,10 @@
     <link href="http://www.wowx.info/posts/20170322191759/"/>
     <id>http://www.wowx.info/posts/20170322191759/</id>
     <published>2017-03-22T11:17:59.000Z</published>
-    <updated>2017-03-22T16:51:03.026Z</updated>
+    <updated>2017-03-22T16:54:06.070Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="BFS-Breadth-firth-traversal-广度优先遍历"><a href="#BFS-Breadth-firth-traversal-广度优先遍历" class="headerlink" title="BFS  Breadth firth traversal 广度优先遍历"></a>BFS  Breadth firth traversal 广度优先遍历</h2><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
+    <content type="html"><![CDATA[<h2 id="BFS-Breadth-firth-traversal-广度优先遍历"><a href="#BFS-Breadth-firth-traversal-广度优先遍历" class="headerlink" title="BFS  Breadth firth traversal 广度优先遍历"></a>BFS  Breadth firth traversal 广度优先遍历</h2><p>入队出队操作时间<code>O(1)</code>，每个节点最多进入和出队一次， 每个顶点出队时才会扫描其临接表，时间复杂度<code>O(V+E)</code></p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
 <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;unordered_map></span></span>
 <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;vector></span></span>
 <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;list></span></span>
