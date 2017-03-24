@@ -10,7 +10,7 @@
     
     <title>
         
-            C++ primer笔记 -- 标准库--顺序容器 | 
+            stable and unsatble sort algorithms | 
         
         野原圆长的Blog
     </title>
@@ -27,7 +27,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="Xin Wei">
     <meta name="description" content="null">
-    <meta name="keywords" content="Blog deep_learging,cpp,language">
+    <meta name="keywords" content="Blog deep_learging,algorithm">
 
     <!--iOS -->
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -48,9 +48,9 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="http://www.wowx.info">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="C++ primer笔记 -- 标准库--顺序容器 | 野原圆长的Blog">
+    <meta property="og:title" content="stable and unsatble sort algorithms | 野原圆长的Blog">
     <meta property="og:description" content="null">
-    <meta property="og:article:tag" content="cpp"> <meta property="og:article:tag" content="language"> 
+    <meta property="og:article:tag" content="algorithm"> 
 
     <!--[if lte IE 9]>
         <link rel="stylesheet" href="/css/ie-blocker.css">
@@ -235,7 +235,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#SLT-—-顺序容器"><span class="post-toc-number">1.</span> <span class="post-toc-text">SLT — 顺序容器</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#顺序容器概述"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">顺序容器概述</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#选择容器技巧"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">选择容器技巧</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#顺序容器操作"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">顺序容器操作</span></a></li></ol></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#稳定排序"><span class="post-toc-number">1.</span> <span class="post-toc-text">稳定排序</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#不稳定排序"><span class="post-toc-number">2.</span> <span class="post-toc-text">不稳定排序</span></a></li></ol>
 
         <!--
         <li class="mdl-menu__item">
@@ -259,19 +259,11 @@
                 
     <!-- Paradox Post Header -->
     
-        
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-            <script>
-    var randomNum = Math.floor(Math.random() * 19 + 1);
-
-    $('.post_thumbnail-random').css('background-image', 'url(' + '/img/random/material-' + randomNum + '.png' + ')');
-</script>
-
-        
+        <!-- Custom Thumbnail -->
+        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(http://ww4.sinaimg.cn/large/6425ef91jw1f9apllc7boj20ic0960v9.jpg)">
     
             <p class="article-headline-p">
-                C++ primer笔记 -- 标准库--顺序容器
+                stable and unsatble sort algorithms
             </p>
         </div>
 
@@ -290,7 +282,7 @@
     <!-- Author Name & Date -->
     <div>
         <strong>Xin Wei</strong>
-        <span>7月 02, 2015</span>
+        <span>3月 24, 2017</span>
     </div>
 
     <div class="section-spacer"></div>
@@ -311,7 +303,7 @@
         </button>
         <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
             <li class="mdl-menu__item">在其它设备中阅读本文章</li>
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACZ0lEQVR42u3aQXKDMBAEQP//08kDUiEzWiHsVHNyJRjUHNB6dl9f//p44eHh4eHh4eHhvRnvFR8/v/Xb5+T8/C712vDw8PCO8P541V7e+HopyRV+W8Pi2vDw8PAO8pLF5QttN4N2O8HDw8P7LF7+l+tFTx4QHh4e3ify2oI4DzXw8PDwPoWX/OBPzr/eMPLrP5C14OHh4cW8vMl0/vPR/h4eHh5ewKtHmuIyd22A4OGZMjw8PLyANx+HasPcNsZtHwQeHh7e3by1+KAFrD2C5EEUJTUeHh7eJt5r6bhexKShNY+S8fDw8O7mtc3+ZAtpt5NJeFHve3h4eHhbebvi2iR0aF/6ReGOh4eHd5DXLn0teJ1EwNF/8fDw8A7y1grryZnzIKPe9/Dw8PA28ZJWVoKZxBlFi6uNcfHw8PC28tYCgnm5nLe4WioeHh7e3by8zE0K30lB3AbHG2bK8PDw8Aa8/FVevKCDsaq1OGPxFwMeHh7eDby1EdLJsFQeduRrw8PDwzvJa6nRzcoCfXIvPDw8vDO8ychpHbDG57dn4uHh4Z3n5YB8vKDdYNrtJBq6wsPDw7uZ10YSyeBU/t3JuAAeHh7eU7w82J1sHvm91q6Jh4eHdzevPdrG1Vpc2wbNeHh4eCd57es4iVPrV/lSzFE3wPDw8PC28vLAtG1r5Zi1jQEPDw/vWd68xZXHu23bbEPWgoeHh/cor41l87ZZcsc6jMDDw8N7A15bdufFehKFbJuMwMPDwxvzkkVMCt87xrPw8PDwnuK1y80b/+2owVqEgYeHh3eS9/8OPDw8PDw8PDy8Nzi+AeljNQCKNom+AAAAAElFTkSuQmCC">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACX0lEQVR42u3aQXLjMAwEQP//09kHpJKdIUjKTrVOKpdjsXkQkQFeX3/6euHh4eHh4eHh4b0Z7xVf3//qp/vk+/lT6rXh4eHhXeH951Ubf+enBydLnzwXDw8P7ylesrh8oe1h0B4neHh4eJ/Fm7z0d20QHh4e3ify1hhJqIGHh4f3KbzkH/48OEiWkoTCV7MWPDw8vJiXN5nu31/t7+Hh4eEFvHqkqVxWO0CweegKDw8P7wBvPg6VfDJpobUbgYeHh/cUL4kPcsDaFiQbsZhS4+Hh4R3g5eVvG+wm4wWTeBcPDw/vNK9thm14fBkW1+U+Hh4e3hVe23b6vVDOhwna0YRomAAPDw/vCi8PVdfCgjzwTQru0egAHh4e3lZe+1LOW1P5IbE2iICHh4d3n9dGtElQe27L6hgXDw8PbysvDwjaknptHKFtlUWjA3h4eHgHeHk7P3/pT0rktSEGPDw8vPu8+ZGQh60nmmR4eHh493lt+ZscIfkgQvs7eHh4eE/x1l7ryVGRLLptiW2YKcPDw8Mb8+aRa/vJrjBiFOPi4eHhbeIlRXDSrMoj1zwQKY4QPDw8vIu8fEE5LC+gJ+MCeHh4eE/x2vI335p51FuU+3h4eHiHee01iXQnsW9xbODh4eEd5rWv47ZEngwiJPfRuYeHh4d3gJcfBhPGJGgYHQx4eHh4x3hrL+i2rdUGuNuyFjw8PLxHeWsjU+0v5JExHh4e3vvz8iGAtWL90mQEHh4e3pjXNr1ObE1bguPh4eE9xWsjgLUAIh8+mCDx8PDwTvP+3oWHh4eHh4eHh/cG1z+LjO05ADwLnAAAAABJRU5ErkJggg==">
         </ul>
     
 
@@ -323,7 +315,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/cpp/">cpp</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/language/">language</a>
+        <a class="post_tag-link" href="/tags/algorithm/">algorithm</a>
     </ul>
     
 
@@ -337,7 +329,7 @@
     <!-- Leancloud Views -->
         <a class="post_share-link" href="#">
             <li class="mdl-menu__item">
-                <span id="/posts/20150702013220/" class="leancloud-views_num" data-flag-title="C++ primer笔记 -- 标准库--顺序容器">
+                <span id="/posts/20170324002948/" class="leancloud-views_num" data-flag-title="stable and unsatble sort algorithms">
      &nbsp;浏览量
 </span>
 
@@ -349,7 +341,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=C++ primer笔记 -- 标准库--顺序容器&url=http://www.wowx.info//posts/20150702013220/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=stable and unsatble sort algorithms&url=http://www.wowx.info//posts/20170324002948/index.html&pic=&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 分享到微博
             </li>
@@ -358,7 +350,7 @@
 
     <!-- Share Twitter -->
     
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=C++ primer笔记 -- 标准库--顺序容器&url=http://www.wowx.info//posts/20150702013220/index.html&via=Xin Wei" target="_blank">
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=stable and unsatble sort algorithms&url=http://www.wowx.info//posts/20170324002948/index.html&via=Xin Wei" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Twitter
             </li>
@@ -367,7 +359,7 @@
 
     <!-- Share Facebook -->
     
-        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://www.wowx.info//posts/20150702013220/index.html" target="_blank">
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://www.wowx.info//posts/20170324002948/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Facebook
             </li>
@@ -376,7 +368,7 @@
 
     <!-- Share Google+ -->
     
-        <a class="post_share-link" href="https://plus.google.com/share?url=http://www.wowx.info//posts/20150702013220/index.html" target="_blank">
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://www.wowx.info//posts/20170324002948/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Google+
             </li>
@@ -400,78 +392,17 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <h1 id="SLT-—-顺序容器"><a href="#SLT-—-顺序容器" class="headerlink" title="SLT — 顺序容器"></a>SLT — 顺序容器</h1><ul>
-<li><p>顺序容器</p>
-<p>顺序容器中的顺序与其加入容器的时的位置相对应</p>
-</li>
-<li><p>关联容器</p>
-<p>关联容器中元素的位置由元素相关联的关键字决定</p>
-</li>
-</ul>
-<h2 id="顺序容器概述"><a href="#顺序容器概述" class="headerlink" title="顺序容器概述"></a>顺序容器概述</h2><table>
-<thead>
-<tr>
-<th>容器</th>
-<th>随机访问</th>
-<th>顺序访问</th>
-<th>特点</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>vector</td>
-<td>√</td>
-<td>√</td>
-<td>尾部之外的位置插入或删除可能很慢</td>
-</tr>
-<tr>
-<td>deque</td>
-<td>√</td>
-<td>√</td>
-<td>在头尾位置插入删除很快</td>
-</tr>
-<tr>
-<td>list</td>
-<td>×</td>
-<td>双向</td>
-<td>在任何位置进行插入删除操作速度都很快，额外内存开销很大</td>
-</tr>
-<tr>
-<td>forward_list</td>
-<td>×</td>
-<td>单向</td>
-<td>在链表任何位置删除插入速度都很快，额外内存开销很大，和最好的手写单向列表相当的性能，没有size操作</td>
-</tr>
-<tr>
-<td>array</td>
-<td>√</td>
-<td>√</td>
-<td>不能添加或删除元素</td>
-</tr>
-<tr>
-<td>string</td>
-<td></td>
-<td></td>
-<td>与vector相似，但专门用来保存字符</td>
-</tr>
-</tbody>
-</table>
-<p><strong>每个容器都定义在类型名相同的头文件中，且均为模板类</strong></p>
-<h2 id="选择容器技巧"><a href="#选择容器技巧" class="headerlink" title="选择容器技巧"></a>选择容器技巧</h2><ol>
-<li><strong>通常，选择vector是最好的选择，除非你有很好的理由选择其他容器。</strong></li>
-<li>有很多小元素且空间开销很重要，则<strong>不要使用list或forward_list</strong></li>
-<li>如果要求随机访问，应使用vector或deque</li>
-<li>如果要求在中间插入元素，应该使用list或forward_list</li>
-<li>如果程序需要头尾插入元素但不会从中间插入，则选择deque</li>
-<li>如果程序只有在输入时需要向中间位置插入元素，随后需要随机访问元素，则<ul>
-<li>确定是否真的需要中间插入，比如顺序读入到vector，之后调用sort排序，从而避免中间读入</li>
-<li>必须中间插入时，在输入阶段使用list，输入完成时将list拷贝到vector中</li>
-</ul>
-</li>
+        <p><a href="http://www.cnblogs.com/codingmylife/archive/2012/10/21/2732980.html" target="_blank" rel="external">稳定排序和不稳定排序</a></p>
+<h2 id="稳定排序"><a href="#稳定排序" class="headerlink" title="稳定排序"></a>稳定排序</h2><ol>
+<li>冒泡排序</li>
+<li>插入排序</li>
+<li>基数排序<h2 id="不稳定排序"><a href="#不稳定排序" class="headerlink" title="不稳定排序"></a>不稳定排序</h2></li>
+<li>选择排序<br> <code>5 8 5 2 9</code> –&gt; <code>2 8 5 5 9</code></li>
+<li>快速排序</li>
+<li>归并排序</li>
+<li>希尔排序</li>
+<li>堆排序</li>
 </ol>
-<h2 id="顺序容器操作"><a href="#顺序容器操作" class="headerlink" title="顺序容器操作"></a>顺序容器操作</h2><p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-11-2/23224620.jpg" alt=""></p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-11-2/22762192.jpg" alt=""></p>
-<p><img src="http://7xkyov.com1.z0.glb.clouddn.com/16-11-2/15404661.jpg" alt=""></p>
 
     
 
@@ -500,9 +431,9 @@
 <div id="comments">
     <!-- 多说评论框 start -->
     <div class="ds-thread"
-        data-thread-key="posts/20150702013220/"
-        data-url="http://www.wowx.info/posts/20150702013220/"
-        data-title="C++ primer笔记 -- 标准库--顺序容器">
+        data-thread-key="posts/20170324002948/"
+        data-url="http://www.wowx.info/posts/20170324002948/"
+        data-title="stable and unsatble sort algorithms">
     </div>
     <!-- 多说评论框 end -->
 </div>
@@ -519,21 +450,13 @@
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
-        <a href="/posts/20150703013220/" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            新篇
-        </a>
-    
 
     <!-- Section Spacer -->
     <div class="section-spacer"></div>
 
     <!-- Next Nav -->
     
-        <a href="/posts/20150630013220/" id="post_nav-older" class="next-content">
+        <a href="/posts/20170322191759/" id="post_nav-older" class="next-content">
             旧篇
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">

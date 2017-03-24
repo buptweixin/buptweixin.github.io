@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.wowx.info/"/>
-  <updated>2017-03-23T14:17:48.647Z</updated>
+  <updated>2017-03-23T16:35:15.229Z</updated>
   <id>http://www.wowx.info/</id>
   
   <author>
@@ -16,13 +16,53 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>stable and unsatble sort algorithms</title>
+    <link href="http://www.wowx.info/posts/20170324002948/"/>
+    <id>http://www.wowx.info/posts/20170324002948/</id>
+    <published>2017-03-23T16:29:48.000Z</published>
+    <updated>2017-03-23T16:35:15.229Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="http://www.cnblogs.com/codingmylife/archive/2012/10/21/2732980.html" target="_blank" rel="external">稳定排序和不稳定排序</a></p>
+<h2 id="稳定排序"><a href="#稳定排序" class="headerlink" title="稳定排序"></a>稳定排序</h2><ol>
+<li>冒泡排序</li>
+<li>插入排序</li>
+<li>基数排序<h2 id="不稳定排序"><a href="#不稳定排序" class="headerlink" title="不稳定排序"></a>不稳定排序</h2></li>
+<li>选择排序<br> <code>5 8 5 2 9</code> –&gt; <code>2 8 5 5 9</code></li>
+<li>快速排序</li>
+<li>归并排序</li>
+<li>希尔排序</li>
+<li>堆排序</li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;a href=&quot;http://www.cnblogs.com/codingmylife/archive/2012/10/21/2732980.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;稳定排序和不稳定排序&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;稳
+    
+    </summary>
+    
+    
+      <category term="algorithm" scheme="http://www.wowx.info/tags/algorithm/"/>
+    
+  </entry>
+  
+  <entry>
     <title>LeetCode Graph</title>
     <link href="http://www.wowx.info/posts/20170322191759/"/>
     <id>http://www.wowx.info/posts/20170322191759/</id>
     <published>2017-03-22T11:17:59.000Z</published>
-    <updated>2017-03-23T14:17:48.647Z</updated>
+    <updated>2017-03-24T03:44:51.300Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="BFS-Breadth-firth-traversal-广度优先遍历"><a href="#BFS-Breadth-firth-traversal-广度优先遍历" class="headerlink" title="BFS  Breadth firth traversal 广度优先遍历"></a>BFS  Breadth firth traversal 广度优先遍历</h2><p>入队出队操作时间<code>O(1)</code>，每个节点最多进入和出队一次， 每个顶点出队时才会扫描其临接表，时间复杂度<code>O(V+E)</code><br>广度优先树每个根到每个节点的距离为最短距离</p>
+    <content type="html"><![CDATA[<h2 id="BFS-Breadth-firth-traversal-广度优先遍历"><a href="#BFS-Breadth-firth-traversal-广度优先遍历" class="headerlink" title="BFS  Breadth firth traversal 广度优先遍历"></a>BFS  Breadth firth traversal 广度优先遍历</h2><blockquote>
+<p>入队出队操作时间<code>O(1)</code>，每个节点最多进入和出队一次， 每个顶点出队时才会扫描其临接表，时间复杂度<code>O(V+E)</code><br>广度优先树每个根到每个节点的距离为最短距离<br><strong>将完成时间逆序可以得到拓扑排序</strong><br>计算强连通子图:</p>
+<ol>
+<li>使用DFS获得图G的节点遍历结束时间序列<code>f[u]</code></li>
+<li>计算$G^T$</li>
+<li>按<code>f</code>的降序计算DFS($G^T$)</li>
+<li>输出第三步得到的深度优先森林，即为强连通子图</li>
+</ol>
+</blockquote>
 <pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
 <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;unordered_map></span></span>
 <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;vector></span></span>
@@ -106,8 +146,9 @@ Graph<span class="token operator">::</span><span class="token function">Graph</s
 <ol>
 <li>如果遇到的节点是白色的，则当前边是树边</li>
 <li>如果遇到灰色节点，说明当前边是反向边</li>
-<li>如果遇到黑色节点，说明当前边是正向或交叉边</li>
+<li>如果遇到黑色节点，说明当前边是正向<code>(d[u]&lt;d[v])</code>或交叉边<code>(d[u]&gt;d[v])</code></li>
 </ol>
+<p>对无向图做深度优先遍历，G的每一条边要么是树边，要么是反向边</p>
 <pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
 <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;vector></span></span>
 <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;list></span></span>
@@ -251,6 +292,69 @@ Graph<span class="token operator">::</span><span class="token function">Graph</s
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="31-gt-0"><a href="#31-gt-0" class="headerlink" title="31&gt;0"></a>31&gt;0</h2><p>&gt;</p>
+<blockquote>
+<h3 id="Problem-Description-1"><a href="#Problem-Description-1" class="headerlink" title="Problem Description"></a>Problem Description</h3><p>For a undirected graph with tree characteristics, we can choose any node as the root. The result graph is then a rooted tree. Among all possible rooted trees, those with minimum height are called minimum height trees (MHTs). Given such a graph, write a function to find all the MHTs and return a list of their root labels.</p>
+<p>Format<br>The graph contains n nodes which are labeled from 0 to n - 1. You will be given the number n and a list of undirected edges (each edge is a pair of labels).</p>
+<p>You can assume that no duplicate edges will appear in edges. Since all edges are undirected, [0, 1] is the same as [1, 0] and thus will not appear together in edges.</p>
+<p>Example 1:</p>
+<p>Given n = 4, edges = [[1, 0], [1, 2], [1, 3]]</p>
+<pre><code>   0
+   |
+   1
+  / \
+ 2   3
+</code></pre><p>return [1]</p>
+<p>Example 2:</p>
+<p>Given n = 6, edges = [[0, 3], [1, 3], [2, 3], [4, 3], [5, 4]]</p>
+<pre><code>0  1  2
+ \ | /
+   3
+   |
+   4
+   |
+   5
+</code></pre><p>return [3, 4]</p>
+<p>Hint:</p>
+<p>How many MHTs can a graph have at most?</p>
+</blockquote>
+<hr>
+<p>给出一个无向图，求以哪些节点作为树根构成的树种高度最小</p>
+<h3 id="Method-1"><a href="#Method-1" class="headerlink" title="Method"></a>Method</h3><p>找到图的所有叶子节点，将其删除，然后重复这个寻找过程，直到最内层，即为所要寻找的节点</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">findMinHeightTrees</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">,</span> vector<span class="token operator">&lt;</span>pair<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">>></span><span class="token operator">&amp;</span> edges<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">return</span> vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token operator">-</span><span class="token operator">></span>V <span class="token operator">=</span> n<span class="token punctuation">;</span>
+        adjs<span class="token punctuation">.</span><span class="token function">resize</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span> edge <span class="token operator">:</span> edges<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            adjs<span class="token punctuation">[</span>edge<span class="token punctuation">.</span>first<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span>edge<span class="token punctuation">.</span>second<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            adjs<span class="token punctuation">[</span>edge<span class="token punctuation">.</span>second<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span>edge<span class="token punctuation">.</span>first<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> cur<span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>adjs<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span>
+                cur<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token operator">!</span>cur<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> next<span class="token punctuation">;</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> node <span class="token operator">:</span> cur<span class="token punctuation">)</span>
+                <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> neighbor <span class="token operator">:</span> adjs<span class="token punctuation">[</span>node<span class="token punctuation">]</span><span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    adjs<span class="token punctuation">[</span>neighbor<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">erase</span><span class="token punctuation">(</span>node<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>adjs<span class="token punctuation">[</span>neighbor<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span>
+                        next<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>neighbor<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>next<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">return</span> cur<span class="token punctuation">;</span>
+            <span class="token function">swap</span><span class="token punctuation">(</span>next<span class="token punctuation">,</span> cur<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token keyword">private</span><span class="token operator">:</span>
+    <span class="token keyword">int</span> V<span class="token punctuation">;</span>
+    vector<span class="token operator">&lt;</span>unordered_set<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">>></span> adjs<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 ]]></content>
     
     <summary type="html">
@@ -2673,225 +2777,6 @@ exclude <span class="token operator">=</span> <span class="token function">max</
     
     
       <category term="深度学习" scheme="http://www.wowx.info/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode 常见问题解决方法</title>
-    <link href="http://www.wowx.info/posts/20170215164726/"/>
-    <id>http://www.wowx.info/posts/20170215164726/</id>
-    <published>2017-02-15T08:47:26.000Z</published>
-    <updated>2017-03-07T03:18:10.377Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="计算子序列和的问题"><a href="#计算子序列和的问题" class="headerlink" title="计算子序列和的问题"></a>计算子序列和的问题</h2><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给出一个数组，和一个目标数字，找出有多少种子序列的和为目标数字<br>相关问题:<br><a href="https://leetcode.com/problems/target-sum/" target="_blank" rel="external">target sum</a><br><a href="https://leetcode.com/problems/partition-equal-subset-sum/" target="_blank" rel="external">Partition Equal Subset Sum</a><br><a href="https://leetcode.com/problems/coin-change/?tab=Description" target="_blank" rel="external">Coin Change</a></p>
-<h3 id="解题方法"><a href="#解题方法" class="headerlink" title="解题方法"></a>解题方法</h3><p>使用动态规划，假如数组为nums, 目标和为target,首先确立状态，这里以dp[i]表示和为i的nums子数组的个数。接下来确定状态转移，假如现在有数字num,和所有以小于i的数为目标的组合数，则dp[i] = dp[i] + dp[i-num]</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">subsetSum</span><span class="token punctuation">(</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> nums<span class="token punctuation">,</span> <span class="token keyword">int</span> target<span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">dp</span><span class="token punctuation">(</span>target <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    dp<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> num <span class="token operator">:</span> nums<span class="token punctuation">)</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> target<span class="token punctuation">;</span> i <span class="token operator">>=</span> num<span class="token punctuation">;</span> <span class="token operator">--</span>i<span class="token punctuation">)</span>
-            dp<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">+</span><span class="token operator">=</span> dp<span class="token punctuation">[</span>i<span class="token operator">-</span>num<span class="token punctuation">]</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> dp<span class="token punctuation">[</span>target<span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="字符串匹配问题"><a href="#字符串匹配问题" class="headerlink" title="字符串匹配问题"></a>字符串匹配问题</h2><h3 id="问题描述-1"><a href="#问题描述-1" class="headerlink" title="问题描述"></a>问题描述</h3><p>给出两个字符串<code>s</code>和<code>t</code>，在<code>s</code>中找出<code>t</code>的位置<br>相关问题:<br><a href="http://wowx.info/posts/20170210190328/" target="_blank" rel="external">Shortest Palindrome</a></p>
-<h3 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h3><p>下面的方法采用KMP算法中最长前缀后缀数组next的概念，时间复杂度为$O(N)$。首先，用一个不在字符串中出现的字符将s和其逆序连在一起,然后求得其next数组，通过next数组的最后一个元素即可找到s中以第一个字符开头的最长回文，然后将剩余部分拼接在其前面。<br>更详细的可以参考<a href="http://www.tuicool.com/articles/e2Qbyyf" target="_blank" rel="external">这篇博客</a></p>
-<h2 id="dp问题解法-算法导论"><a href="#dp问题解法-算法导论" class="headerlink" title="dp问题解法(算法导论)"></a>dp问题解法(算法导论)</h2><h3 id="dp解题步骤"><a href="#dp解题步骤" class="headerlink" title="dp解题步骤"></a>dp解题步骤</h3><ol>
-<li>描述最优解的结构</li>
-<li>递归定义最优解的值</li>
-<li>按自底向上的方式计算最优解</li>
-<li>由计算出的结果构造一个最优解</li>
-</ol>
-<h3 id="实例说明"><a href="#实例说明" class="headerlink" title="实例说明"></a>实例说明</h3><p>LeetCode 2017-02-21 dp 375</p>
-<h2 id="375-Guess-Number-Higher-or-Lower-II"><a href="#375-Guess-Number-Higher-or-Lower-II" class="headerlink" title="375. Guess Number Higher or Lower II"></a>375. Guess Number Higher or Lower II</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
-<p>We are playing the Guess Game. The game is as follows:<br>I pick a number from <strong>1</strong> to <strong>n</strong>. You have to guess which number I picked.<br>Every time you guess wrong, I’ll tell you whether the number I picked is higher or lower.<br>However, when you guess a particular number x, and you guess wrong, you pay <strong>$x</strong>. You win the game when you guess the number I picked.</p>
-<p><strong>Example:</strong></p>
-</blockquote>
-<pre><code>n = 10, I pick 8.
-
-First round:  You guess 5, I tell you that it&#39;s higher. You pay $5.
-Second round: You guess 7, I tell you that it&#39;s higher. You pay $7.
-Third round:  You guess 9, I tell you that it&#39;s lower. You pay $9.
-
-Game over. 8 is the number I picked.
-
-You end up paying $5 + $7 + $9 = $21.
-</code></pre><blockquote>
-<p>Given a particular <strong>n ≥ 1</strong>, find out how much money you need to have to guarantee a <strong>win</strong>.<br><strong>Hint:</strong></p>
-<ol>
-<li>The best strategy to play the game is to minimize the maximum loss you could possibly face. Another strategy is to minimize the expected loss. Here, we are interested in the <strong>first</strong> scenario.</li>
-<li>Take a small example (n = 3). What do you end up paying in the worst case?</li>
-<li>Check out <a href="https://en.wikipedia.org/wiki/Minimax" target="_blank" rel="external">this article</a> if you’re still stuck.</li>
-<li>The purely recursive implementation of minimax would be worthless for even a small n. You MUST use dynamic programming.</li>
-<li>As a follow-up, how would you modify your code to solve the problem of minimizing the expected loss, instead of the worst-case loss?</li>
-</ol>
-</blockquote>
-<p>有这样一个猜数游戏：主持人在只有自己看得见的白纸上写下一个数字并给参与者报一个不小于该数的一个数字<code>n</code>,参与者报出一个<code>[1,...,n]</code>之间的任意一个数，如果该数大于目标数，主持人提示这个数太大，如果小于目标数，主持人提示这个数太小，重复这个过程直到猜中正确答案。如果猜错的话，需要支付给主持人所猜数字的钱，给定大于等于1的数<code>n</code>,求需要支付多少钱才能猜中这个游戏（最小化最坏情况下所需要支付的金额）</p>
-<h3 id="Method-1"><a href="#Method-1" class="headerlink" title="Method"></a>Method</h3><p>这道题很适合说明动态规划类问题的解题步骤。</p>
-<ol>
-<li><p>重新定义问题</p>
-<p>“猜中答案需要支付多少钱？”这个问题看上去没头没脑，我们不妨设身处地地想一想，当我们玩这种没有把握一次猜中的游戏时，当然是希望能够花最少的钱完成游戏，怎样才最保险呢？</p>
-<p>显然是当遇到最坏情况时我们花的钱也比较少，那么问题就可以定义为”最小化最大损失”，假设以<code>sol(i, ..., j)</code>表示猜中<code>i, ..., j</code>中的正确答案的最小化最大损失。则当我们猜的数为<code>[i, .., j]</code>中的数字<code>k</code>时，那么此时有三种情况</p>
-<ol>
-<li><code>k==target</code>:猜中数字，损失为0</li>
-<li><code>k&gt;target</code>:猜的数字过大，下次应该猜<code>[i,...,k-1]</code>之间的数字，所以损失为<code>k + sol(i, k-1)</code> </li>
-<li><code>k&lt;target</code>:猜的数字过小，下次应该猜<code>[k+1,...,j]</code>之间的数字，损失为<code>k + sol(k+1, j)</code></li>
-</ol>
-<p>综合三种情况，最坏的情况为<code>k + max(sol(i, k-1), sol(k+1, j))</code></p>
-<p>接下来，我们发现我们猜的k总共有<code>j-i+1</code>种取值，为了”最小化最大损失”我们需要分析所有k的取值情况的损失然后使用其中的最小值。</p>
-<p>分析一下基本情况：</p>
-<ol>
-<li><code>i &lt;= j</code>:此时必然猜中，损失为0</li>
-<li><code>i+1 == j</code>:此时有两个数<code>[i, i+1]</code>,当我们猜<code>i</code>目标为<code>i+1</code>时,最大损失<code>i</code>元；猜<code>i+1</code>而目标是<code>i</code>时最大损失为<code>i+1</code>元，所以最小最大损失为<code>i</code>元</li>
-<li><code>i+2==j</code>:此时有三个数<code>[i, i+1, i+2]</code>, 当我们猜<code>i</code>时，最大损失为<code>i+i+1</code>元，当我们猜<code>i+1</code>元时，最大损失为<code>i+1</code>元，当我们猜<code>i+2</code>时，最大损失为<code>i+2+i</code>元，所以这种情况最小最大损失为<code>i+1</code>元</li>
-</ol>
-<p>到此我们已经重新定义了问题，因为问题需要通过前面的子问题求解，所以这是一个dp问题。</p>
-<p>我们先使用递归的方法求解</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">// 重新定义问题：</span>
-<span class="token comment" spellcheck="true">/*
-求最小化最大损失
-min(k + max(sol(i,i+1,...,k-1), sol(k+1, k+2,...,j)))
-*/</span>
-<span class="token comment" spellcheck="true">// 基本情况</span>
-<span class="token comment" spellcheck="true">/*
-对于可能取值区间[i,...,j],如果
-case: j - i = 0, 即只有一个可能取值，则该值必定是最小, return 0;
-case: j - i = 1, 即有两个可能取值，当i为正确值时，最大损失为j,当j为正确值时，最大损失为i，所以最小最大损失为i
-case: j - i = 2, 即有三个可能取值，当最开始选i时，最大损失为i + sol(i+1, j),即i +(i+1)，当首先选i+1时，最大损失为i + 1,当首先选j时，最大损失为j+sol(i,i+1)=j+i,return i+1;
-*/</span>
-
-<span class="token comment" spellcheck="true">// 递归方法</span>
-<span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
-    <span class="token keyword">public</span><span class="token operator">:</span>
-        <span class="token keyword">int</span> <span class="token function">getMoneyAmount</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            vector<span class="token operator">&lt;</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">>></span> <span class="token function">dp</span><span class="token punctuation">(</span>n<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span> vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token punctuation">(</span>n<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">return</span> <span class="token function">getMoneyAmountHelper</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> n<span class="token punctuation">,</span> dp<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-
-    <span class="token keyword">private</span><span class="token operator">:</span>
-        <span class="token keyword">int</span> <span class="token function">getMoneyAmountHelper</span><span class="token punctuation">(</span><span class="token keyword">int</span> s<span class="token punctuation">,</span> <span class="token keyword">int</span> e<span class="token punctuation">,</span> vector<span class="token operator">&lt;</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">>></span> <span class="token operator">&amp;</span>dp<span class="token punctuation">)</span>
-        <span class="token punctuation">{</span>
-            <span class="token comment" spellcheck="true">// dp[i][j]表示sol(i, j)</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>dp<span class="token punctuation">[</span>s<span class="token punctuation">]</span><span class="token punctuation">[</span>e<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
-                dp<span class="token punctuation">[</span>s<span class="token punctuation">]</span><span class="token punctuation">[</span>e<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">calMoneyAmount</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span> e<span class="token punctuation">,</span> dp<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">return</span> dp<span class="token punctuation">[</span>s<span class="token punctuation">]</span><span class="token punctuation">[</span>e<span class="token punctuation">]</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-
-        <span class="token keyword">int</span> <span class="token function">calMoneyAmount</span><span class="token punctuation">(</span><span class="token keyword">int</span> s<span class="token punctuation">,</span> <span class="token keyword">int</span> e<span class="token punctuation">,</span> vector<span class="token operator">&lt;</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">>></span> <span class="token operator">&amp;</span>dp<span class="token punctuation">)</span>
-        <span class="token punctuation">{</span>
-            <span class="token keyword">int</span> diff <span class="token operator">=</span> e <span class="token operator">-</span> s<span class="token punctuation">;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>diff <span class="token operator">&lt;</span> <span class="token number">1</span><span class="token punctuation">)</span>
-                <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>diff <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span>
-                <span class="token keyword">return</span> s<span class="token punctuation">;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>diff <span class="token operator">==</span> <span class="token number">2</span><span class="token punctuation">)</span>
-                <span class="token keyword">return</span> s<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span>
-            <span class="token keyword">int</span> min_val <span class="token operator">=</span> INT_MAX<span class="token punctuation">;</span>
-            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> k <span class="token operator">=</span> s <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span> k <span class="token operator">&lt;</span> e<span class="token punctuation">;</span> <span class="token operator">++</span>k<span class="token punctuation">)</span>
-                min_val <span class="token operator">=</span> <span class="token function">min</span><span class="token punctuation">(</span>min_val<span class="token punctuation">,</span> k <span class="token operator">+</span> <span class="token function">max</span><span class="token punctuation">(</span><span class="token function">getMoneyAmountHelper</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span> k<span class="token number">-1</span><span class="token punctuation">,</span> dp<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">getMoneyAmountHelper</span><span class="token punctuation">(</span>k<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span> e<span class="token punctuation">,</span> dp<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">return</span> min_val<span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>​</p>
-</li>
-<li><p>确定状态</p>
-<p>仔细观察上面循环中的表达式会发现getMoneyAmount会多次重复计算相同的数，比如sol(1,10)当k=0,1,…,9时都会计算sol(9,10)的值，为了减少这种冗余的计算量，可以将中间结果存储起来。</p>
-<p>使用<code>dp[n+1][n+1]</code>作为中间存储容器，<code>dp[i][j]</code>表示猜数字<code>[i,j]</code>的最小最大损失，每当我们想计算<code>sol(i, j)</code>之前，先查看是否已经有了<code>dp[i][j]</code>,若没有再计算并将其存储到该位置，否则直接返回该位置的值。</p>
-</li>
-</ol>
-<ol>
-<li><p>确定状态转移方程</p>
-<p>在重新定义问题部分其实已经给出，</p>
-<p><code>dp[i][j]=min(k+max(sol(i, k-1), sol(k+1, j)))</code></p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
-    <span class="token keyword">public</span><span class="token operator">:</span>
-        <span class="token keyword">int</span> <span class="token function">getMoneyAmount</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            vector<span class="token operator">&lt;</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">>></span> <span class="token function">dp</span><span class="token punctuation">(</span>n<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span> vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token punctuation">(</span>n<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">return</span> <span class="token function">getMoneyAmountHelper</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> n<span class="token punctuation">,</span> dp<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-
-    <span class="token keyword">private</span><span class="token operator">:</span>
-        <span class="token keyword">int</span> <span class="token function">getMoneyAmountHelper</span><span class="token punctuation">(</span><span class="token keyword">int</span> s<span class="token punctuation">,</span> <span class="token keyword">int</span> e<span class="token punctuation">,</span> vector<span class="token operator">&lt;</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">>></span> <span class="token operator">&amp;</span>dp<span class="token punctuation">)</span>
-        <span class="token punctuation">{</span>
-            <span class="token comment" spellcheck="true">// dp[i][j]表示sol(i, j),如果已经存在则直接返回，否则再进行计算</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>dp<span class="token punctuation">[</span>s<span class="token punctuation">]</span><span class="token punctuation">[</span>e<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
-                dp<span class="token punctuation">[</span>s<span class="token punctuation">]</span><span class="token punctuation">[</span>e<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">calMoneyAmount</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span> e<span class="token punctuation">,</span> dp<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">return</span> dp<span class="token punctuation">[</span>s<span class="token punctuation">]</span><span class="token punctuation">[</span>e<span class="token punctuation">]</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-
-        <span class="token keyword">int</span> <span class="token function">calMoneyAmount</span><span class="token punctuation">(</span><span class="token keyword">int</span> s<span class="token punctuation">,</span> <span class="token keyword">int</span> e<span class="token punctuation">,</span> vector<span class="token operator">&lt;</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">>></span> <span class="token operator">&amp;</span>dp<span class="token punctuation">)</span>
-        <span class="token punctuation">{</span>
-            <span class="token keyword">int</span> diff <span class="token operator">=</span> e <span class="token operator">-</span> s<span class="token punctuation">;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>diff <span class="token operator">&lt;</span> <span class="token number">1</span><span class="token punctuation">)</span>
-                <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>diff <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span>
-                <span class="token keyword">return</span> s<span class="token punctuation">;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>diff <span class="token operator">==</span> <span class="token number">2</span><span class="token punctuation">)</span>
-                <span class="token keyword">return</span> s<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span>
-            <span class="token keyword">int</span> min_val <span class="token operator">=</span> INT_MAX<span class="token punctuation">;</span>
-            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> k <span class="token operator">=</span> s <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span> k <span class="token operator">&lt;</span> e<span class="token punctuation">;</span> <span class="token operator">++</span>k<span class="token punctuation">)</span>
-                min_val <span class="token operator">=</span> <span class="token function">min</span><span class="token punctuation">(</span>min_val<span class="token punctuation">,</span> k <span class="token operator">+</span> <span class="token function">max</span><span class="token punctuation">(</span><span class="token function">getMoneyAmountHelper</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span> k<span class="token number">-1</span><span class="token punctuation">,</span> dp<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">getMoneyAmountHelper</span><span class="token punctuation">(</span>k<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span> e<span class="token punctuation">,</span> dp<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">return</span> min_val<span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
-<li><p>取消递归</p>
-<p>为了存储递归展开的中间状态，递归式需要占用大量内存空间，有时会造成堆栈溢出，为了解决这个问题，应该将它改为非递归版本。为了实现这个目标，我们观察到递归发生的位置为for循环内部，两个递归表达式分别得到dp[s][k-1]和dp[k+1][e],因此，如果我们能保证在计算dp[s][e]之前已经计算了这两个值，则可以直接得到<code>dp[s][e]</code>,这样就不需要递归了。</p>
-</li>
-</ol>
-<pre class="line-numbers language-cpp"><code class="language-cpp">
-
-<span class="token comment" spellcheck="true">// 非递归版本</span>
-<span class="token comment" spellcheck="true">/*
-
-*/</span>
-
-<span class="token keyword">class</span> <span class="token class-name">Solution</span>
-<span class="token punctuation">{</span>
-    <span class="token keyword">public</span><span class="token operator">:</span>
-    <span class="token keyword">int</span> <span class="token function">getMoneyAmount</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-        vector<span class="token operator">&lt;</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">>></span> <span class="token function">dp</span><span class="token punctuation">(</span>n<span class="token punctuation">,</span> vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token punctuation">(</span>n<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> n<span class="token number">-1</span><span class="token punctuation">;</span> i <span class="token operator">>=</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token operator">--</span>i<span class="token punctuation">)</span>
-        <span class="token punctuation">{</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>i<span class="token operator">+</span><span class="token number">1</span> <span class="token operator">&lt;</span> n<span class="token punctuation">)</span>
-                dp<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>i<span class="token operator">+</span><span class="token number">2</span> <span class="token operator">&lt;</span> n<span class="token punctuation">)</span>
-                dp<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token operator">+</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> i <span class="token operator">+</span> <span class="token number">2</span><span class="token punctuation">;</span>
-            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> i <span class="token operator">+</span> <span class="token number">3</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> <span class="token operator">++</span>j<span class="token punctuation">)</span>
-            <span class="token punctuation">{</span>
-                <span class="token keyword">int</span> min_val <span class="token operator">=</span> INT_MAX<span class="token punctuation">;</span>
-                <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> k <span class="token operator">=</span> i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span> k <span class="token operator">&lt;</span> j<span class="token punctuation">;</span> <span class="token operator">++</span>k<span class="token punctuation">)</span>
-                    min_val <span class="token operator">=</span> <span class="token function">min</span><span class="token punctuation">(</span>min_val<span class="token punctuation">,</span> k<span class="token operator">+</span><span class="token number">1</span><span class="token operator">+</span><span class="token function">max</span><span class="token punctuation">(</span>dp<span class="token punctuation">[</span>k<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">,</span> dp<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token number">-1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                dp<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> min_val<span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> dp<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span>n<span class="token number">-1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="博弈问题"><a href="#博弈问题" class="headerlink" title="博弈问题"></a>博弈问题</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>两个玩家轮流进行抽牌等类似的游戏，判断某个玩家能否赢得游戏<br>相关问题<br><a href="http://wowx.info/posts/20170227114327/" target="_blank" rel="external">486. Predict the Winner</a><br><a href="https://leetcode.com/problems/can-i-win/?tab=Description" target="_blank" rel="external">464. Can I Win</a></p>
-<h3 id="解题方法-1"><a href="#解题方法-1" class="headerlink" title="解题方法"></a>解题方法</h3><p>一般采用最小化最大损失，即认为对手每次都会做出对自己最坏的决策</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;计算子序列和的问题&quot;&gt;&lt;a href=&quot;#计算子序列和的问题&quot; class=&quot;headerlink&quot; title=&quot;计算子序列和的问题&quot;&gt;&lt;/a&gt;计算子序列和的问题&lt;/h2&gt;&lt;h3 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerli
-    
-    </summary>
-    
-      <category term="algorithm" scheme="http://www.wowx.info/categories/algorithm/"/>
-    
-    
-      <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
-    
-      <category term="string" scheme="http://www.wowx.info/tags/string/"/>
-    
-      <category term="algorighm" scheme="http://www.wowx.info/tags/algorighm/"/>
     
   </entry>
   

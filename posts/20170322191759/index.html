@@ -235,7 +235,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#BFS-Breadth-firth-traversal-广度优先遍历"><span class="post-toc-number">1.</span> <span class="post-toc-text">BFS  Breadth firth traversal 广度优先遍历</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#DFS"><span class="post-toc-number">2.</span> <span class="post-toc-text">DFS</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#399-Evaluate-Division"><span class="post-toc-number">3.</span> <span class="post-toc-text">399. Evaluate Division</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Problem-Description"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">Problem Description</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#The-input-is-always-valid-You-may-assume-that-evaluating-the-queries-will-result-in-no-division-by-zero-and-there-is-no-contradiction"><span class="post-toc-number">4.</span> <span class="post-toc-text">The input is always valid. You may assume that evaluating the queries will result in no division by zero and there is no contradiction.</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Method"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">Method</span></a></li></ol></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#BFS-Breadth-firth-traversal-广度优先遍历"><span class="post-toc-number">1.</span> <span class="post-toc-text">BFS  Breadth firth traversal 广度优先遍历</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#DFS"><span class="post-toc-number">2.</span> <span class="post-toc-text">DFS</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#399-Evaluate-Division"><span class="post-toc-number">3.</span> <span class="post-toc-text">399. Evaluate Division</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Problem-Description"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">Problem Description</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#The-input-is-always-valid-You-may-assume-that-evaluating-the-queries-will-result-in-no-division-by-zero-and-there-is-no-contradiction"><span class="post-toc-number">4.</span> <span class="post-toc-text">The input is always valid. You may assume that evaluating the queries will result in no division by zero and there is no contradiction.</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Method"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">Method</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#31-gt-0"><span class="post-toc-number">5.</span> <span class="post-toc-text">31>0</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Problem-Description-1"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">Problem Description</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Method-1"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">Method</span></a></li></ol></li></ol>
 
         <!--
         <li class="mdl-menu__item">
@@ -392,7 +392,15 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <h2 id="BFS-Breadth-firth-traversal-广度优先遍历"><a href="#BFS-Breadth-firth-traversal-广度优先遍历" class="headerlink" title="BFS  Breadth firth traversal 广度优先遍历"></a>BFS  Breadth firth traversal 广度优先遍历</h2><p>入队出队操作时间<code>O(1)</code>，每个节点最多进入和出队一次， 每个顶点出队时才会扫描其临接表，时间复杂度<code>O(V+E)</code><br>广度优先树每个根到每个节点的距离为最短距离</p>
+        <h2 id="BFS-Breadth-firth-traversal-广度优先遍历"><a href="#BFS-Breadth-firth-traversal-广度优先遍历" class="headerlink" title="BFS  Breadth firth traversal 广度优先遍历"></a>BFS  Breadth firth traversal 广度优先遍历</h2><blockquote>
+<p>入队出队操作时间<code>O(1)</code>，每个节点最多进入和出队一次， 每个顶点出队时才会扫描其临接表，时间复杂度<code>O(V+E)</code><br>广度优先树每个根到每个节点的距离为最短距离<br><strong>将完成时间逆序可以得到拓扑排序</strong><br>计算强连通子图:</p>
+<ol>
+<li>使用DFS获得图G的节点遍历结束时间序列<code>f[u]</code></li>
+<li>计算$G^T$</li>
+<li>按<code>f</code>的降序计算DFS($G^T$)</li>
+<li>输出第三步得到的深度优先森林，即为强连通子图</li>
+</ol>
+</blockquote>
 <pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
 <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;unordered_map></span></span>
 <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;vector></span></span>
@@ -476,8 +484,9 @@ Graph<span class="token operator">::</span><span class="token function">Graph</s
 <ol>
 <li>如果遇到的节点是白色的，则当前边是树边</li>
 <li>如果遇到灰色节点，说明当前边是反向边</li>
-<li>如果遇到黑色节点，说明当前边是正向或交叉边</li>
+<li>如果遇到黑色节点，说明当前边是正向<code>(d[u]&lt;d[v])</code>或交叉边<code>(d[u]&gt;d[v])</code></li>
 </ol>
+<p>对无向图做深度优先遍历，G的每一条边要么是树边，要么是反向边</p>
 <pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
 <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;vector></span></span>
 <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;list></span></span>
@@ -621,6 +630,69 @@ Graph<span class="token operator">::</span><span class="token function">Graph</s
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="31-gt-0"><a href="#31-gt-0" class="headerlink" title="31&gt;0"></a>31&gt;0</h2><p>&gt;</p>
+<blockquote>
+<h3 id="Problem-Description-1"><a href="#Problem-Description-1" class="headerlink" title="Problem Description"></a>Problem Description</h3><p>For a undirected graph with tree characteristics, we can choose any node as the root. The result graph is then a rooted tree. Among all possible rooted trees, those with minimum height are called minimum height trees (MHTs). Given such a graph, write a function to find all the MHTs and return a list of their root labels.</p>
+<p>Format<br>The graph contains n nodes which are labeled from 0 to n - 1. You will be given the number n and a list of undirected edges (each edge is a pair of labels).</p>
+<p>You can assume that no duplicate edges will appear in edges. Since all edges are undirected, [0, 1] is the same as [1, 0] and thus will not appear together in edges.</p>
+<p>Example 1:</p>
+<p>Given n = 4, edges = [[1, 0], [1, 2], [1, 3]]</p>
+<pre><code>   0
+   |
+   1
+  / \
+ 2   3
+</code></pre><p>return [1]</p>
+<p>Example 2:</p>
+<p>Given n = 6, edges = [[0, 3], [1, 3], [2, 3], [4, 3], [5, 4]]</p>
+<pre><code>0  1  2
+ \ | /
+   3
+   |
+   4
+   |
+   5
+</code></pre><p>return [3, 4]</p>
+<p>Hint:</p>
+<p>How many MHTs can a graph have at most?</p>
+</blockquote>
+<hr>
+<p>给出一个无向图，求以哪些节点作为树根构成的树种高度最小</p>
+<h3 id="Method-1"><a href="#Method-1" class="headerlink" title="Method"></a>Method</h3><p>找到图的所有叶子节点，将其删除，然后重复这个寻找过程，直到最内层，即为所要寻找的节点</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">findMinHeightTrees</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">,</span> vector<span class="token operator">&lt;</span>pair<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">>></span><span class="token operator">&amp;</span> edges<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">return</span> vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token operator">-</span><span class="token operator">></span>V <span class="token operator">=</span> n<span class="token punctuation">;</span>
+        adjs<span class="token punctuation">.</span><span class="token function">resize</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span> edge <span class="token operator">:</span> edges<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            adjs<span class="token punctuation">[</span>edge<span class="token punctuation">.</span>first<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span>edge<span class="token punctuation">.</span>second<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            adjs<span class="token punctuation">[</span>edge<span class="token punctuation">.</span>second<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span>edge<span class="token punctuation">.</span>first<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> cur<span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>adjs<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span>
+                cur<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token operator">!</span>cur<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> next<span class="token punctuation">;</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> node <span class="token operator">:</span> cur<span class="token punctuation">)</span>
+                <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> neighbor <span class="token operator">:</span> adjs<span class="token punctuation">[</span>node<span class="token punctuation">]</span><span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    adjs<span class="token punctuation">[</span>neighbor<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">erase</span><span class="token punctuation">(</span>node<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>adjs<span class="token punctuation">[</span>neighbor<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span>
+                        next<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>neighbor<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>next<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">return</span> cur<span class="token punctuation">;</span>
+            <span class="token function">swap</span><span class="token punctuation">(</span>next<span class="token punctuation">,</span> cur<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token keyword">private</span><span class="token operator">:</span>
+    <span class="token keyword">int</span> V<span class="token punctuation">;</span>
+    vector<span class="token operator">&lt;</span>unordered_set<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">>></span> adjs<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
     
 
@@ -667,6 +739,14 @@ Graph<span class="token operator">::</span><span class="token function">Graph</s
             <!-- Post Prev & Next Nav -->
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
+    
+        <a href="/posts/20170324002948/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
     
 
     <!-- Section Spacer -->
@@ -766,7 +846,7 @@ Graph<span class="token operator">::</span><span class="token function">Graph</s
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">二月 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/12/">十二月 2016<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">十一月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">十月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/07/">七月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/06/">六月 2016<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/07/">七月 2015<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/06/">六月 2015<span class="sidebar_archives-count">6</span></a>
+                <a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">二月 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/12/">十二月 2016<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">十一月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">十月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/07/">七月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/06/">六月 2016<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/07/">七月 2015<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/06/">六月 2015<span class="sidebar_archives-count">6</span></a>
             </ul>
         </li>
         
