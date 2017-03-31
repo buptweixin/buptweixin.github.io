@@ -4,6 +4,124 @@
   
     
     <entry>
+      <title><![CDATA[written examination of Jinritoutiao]]></title>
+      <url>http://www.wowx.info/posts/20170331125744/</url>
+      <content type="html"><![CDATA[<h2 id="第一题-最长上升下降序列"><a href="#第一题-最长上升下降序列" class="headerlink" title="第一题: 最长上升下降序列"></a>第一题: 最长上升下降序列</h2><p>给出一个字符串，找出最长上升下降子序列,返回开始和结束坐标</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;vector></span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Solution</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">/*
+     * 五种情况
+     * 1. 一开始就是下降，显然不符合条件
+     * 2. 当前是上升，且之前也是上升
+     * 3. 当前是上升，且之前是下降
+     * 4. 当前是下降，且之前是上升
+     * 5. 当前是下降，且之前是下降
+     * 后两种情况若遇到数组末位则检查当前长度是否为最长符合条件子数组
+     */</span>
+    <span class="token keyword">public</span><span class="token operator">:</span>
+        vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">getLongestUpDownArray</span><span class="token punctuation">(</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token operator">&amp;</span>nums<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">rst</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>nums<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">3</span><span class="token punctuation">)</span>
+                <span class="token keyword">return</span> rst<span class="token punctuation">;</span>
+            size_t i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> j <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span> left <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> right <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> len <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> maxLen <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+            <span class="token keyword">bool</span> prevIsUp <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+            <span class="token keyword">while</span><span class="token punctuation">(</span>j <span class="token operator">&lt;</span> nums<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">bool</span> curIsUp <span class="token operator">=</span> <span class="token punctuation">(</span>nums<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">-</span> nums<span class="token punctuation">[</span>j<span class="token number">-1</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">0</span> <span class="token operator">?</span> <span class="token boolean">true</span> <span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>j <span class="token operator">==</span> i <span class="token operator">+</span> <span class="token number">1</span> <span class="token operator">and</span> <span class="token operator">!</span>curIsUp<span class="token punctuation">)</span>
+                    i<span class="token operator">++</span><span class="token punctuation">;</span>
+                <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>curIsUp <span class="token operator">and</span> <span class="token operator">!</span>prevIsUp<span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    len <span class="token operator">=</span> j <span class="token operator">-</span> i<span class="token punctuation">;</span>
+                    prevIsUp <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>maxLen <span class="token operator">&lt;</span> len<span class="token punctuation">)</span>
+                    <span class="token punctuation">{</span>
+                        maxLen <span class="token operator">=</span> len<span class="token punctuation">;</span>
+                        left <span class="token operator">=</span> i<span class="token punctuation">;</span>
+                        right <span class="token operator">=</span> j <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                    i <span class="token operator">=</span> j<span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>curIsUp <span class="token operator">and</span> prevIsUp<span class="token punctuation">)</span>
+                    prevIsUp <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>j <span class="token operator">==</span> nums<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span> <span class="token operator">and</span> <span class="token operator">!</span>prevIsUp<span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    len <span class="token operator">=</span> j <span class="token operator">-</span> i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>maxLen <span class="token operator">&lt;</span> len<span class="token punctuation">)</span>
+                    <span class="token punctuation">{</span>
+                        maxLen <span class="token operator">=</span> len<span class="token punctuation">;</span>
+                        left <span class="token operator">=</span> i<span class="token punctuation">;</span>
+                        right <span class="token operator">=</span> j<span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span>
+                j<span class="token operator">++</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>maxLen <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                rst<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> left<span class="token punctuation">;</span>
+                rst<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> right<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">return</span> rst<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> num<span class="token punctuation">,</span> len<span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>cin <span class="token operator">>></span> len<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> input<span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> len<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            cin <span class="token operator">>></span> num<span class="token punctuation">;</span>
+            input<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        Solution s<span class="token punctuation">;</span>
+        vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> rst <span class="token operator">=</span> s<span class="token punctuation">.</span><span class="token function">getLongestUpDownArray</span><span class="token punctuation">(</span>input<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        cout <span class="token operator">&lt;&lt;</span> rst<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span> <span class="token operator">&lt;&lt;</span> rst<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="第二题-字符串单词匹配"><a href="#第二题-字符串单词匹配" class="headerlink" title="第二题: 字符串单词匹配"></a>第二题: 字符串单词匹配</h2><p>给出一个段落和多条查询语句，找出每条查询语句于段落中匹配单词数量最多的行</p>
+<h2 id="第三题：画括号图"><a href="#第三题：画括号图" class="headerlink" title="第三题：画括号图"></a>第三题：画括号图</h2><p>给出一个括号序列，画出对应的图，比如<code>((()))()</code></p>
+<pre><code>|-------|
++|-----|+
+ +|---|+
+ +|---|+
++|-----|+
+|-------|
+|-------|
+
+|-------|
+</code></pre><h2 id="第四题"><a href="#第四题" class="headerlink" title="第四题"></a>第四题</h2><p>给出两个长度相等的数组<code>nums1</code>和<code>nums2</code>,和若干个查询对<code>(q1, q2)</code>,找出满足<code>nums1[i]&gt;=q1,nums2[i]&gt;=q2</code>的i的个数</p>
+]]></content>
+      
+        <categories>
+            
+            <category> algorithm </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> cpp </tag>
+            
+            <tag> string </tag>
+            
+            <tag> algorithm </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[stable and unsatble sort algorithms]]></title>
       <url>http://www.wowx.info/posts/20170324002948/</url>
       <content type="html"><![CDATA[<p><a href="http://www.cnblogs.com/codingmylife/archive/2012/10/21/2732980.html" target="_blank" rel="external">稳定排序和不稳定排序</a></p>
