@@ -167,6 +167,90 @@
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="第二题-字符串单词匹配"><a href="#第二题-字符串单词匹配" class="headerlink" title="第二题: 字符串单词匹配"></a>第二题: 字符串单词匹配</h2><p>给出一个段落和多条查询语句，找出每条查询语句于段落中匹配单词数量最多的行</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;vector></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;algorithm></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;unordered_map></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;unordered_set></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;sstream></span></span>
+
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Solution</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span><span class="token operator">:</span>
+        <span class="token keyword">void</span> <span class="token function">init</span><span class="token punctuation">(</span><span class="token keyword">const</span> vector<span class="token operator">&lt;</span>string<span class="token operator">></span> <span class="token operator">&amp;</span>paragraph<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            lines <span class="token operator">=</span> paragraph<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            string word<span class="token punctuation">;</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> lines<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                string str <span class="token operator">=</span> paragraph<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+                istringstream <span class="token function">in</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">while</span><span class="token punctuation">(</span>in <span class="token operator">>></span> word<span class="token punctuation">)</span>
+                    dict<span class="token punctuation">[</span><span class="token function">upperString</span><span class="token punctuation">(</span>word<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">int</span> <span class="token function">query</span><span class="token punctuation">(</span><span class="token keyword">const</span> string <span class="token operator">&amp;</span>q<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">wordInLines</span><span class="token punctuation">(</span>lines<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            istringstream <span class="token function">in</span><span class="token punctuation">(</span>q<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            string word<span class="token punctuation">;</span>
+            <span class="token keyword">while</span><span class="token punctuation">(</span>in <span class="token operator">>></span> word<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                unordered_set<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> ids <span class="token operator">=</span> dict<span class="token punctuation">[</span><span class="token function">upperString</span><span class="token punctuation">(</span>word<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+                <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span> iter <span class="token operator">=</span> ids<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> iter <span class="token operator">!=</span> ids<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">++</span>iter<span class="token punctuation">)</span>
+                    wordInLines<span class="token punctuation">[</span><span class="token operator">*</span>iter<span class="token punctuation">]</span><span class="token operator">++</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">int</span> idx<span class="token punctuation">,</span> maxMatch <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> lines<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>wordInLines<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">></span> maxMatch<span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    maxMatch <span class="token operator">=</span> wordInLines<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+                    idx <span class="token operator">=</span> i<span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">return</span> idx<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+    <span class="token keyword">private</span><span class="token operator">:</span>
+        string <span class="token operator">&amp;</span><span class="token function">upperString</span><span class="token punctuation">(</span>string <span class="token operator">&amp;</span>str<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">transform</span><span class="token punctuation">(</span>str<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> str<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> str<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">)</span>toupper<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span> str<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        unordered_map<span class="token operator">&lt;</span>string<span class="token punctuation">,</span> unordered_set<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token operator">></span> dict<span class="token punctuation">;</span>
+        <span class="token keyword">int</span> lines<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    Solution s<span class="token punctuation">;</span>
+    vector<span class="token operator">&lt;</span>string<span class="token operator">></span> paragraph<span class="token punctuation">;</span>
+    string line<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> lines<span class="token punctuation">,</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"lines of paragraph:"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    cin <span class="token operator">>></span> lines<span class="token punctuation">;</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Input paragraph("</span> <span class="token operator">&lt;&lt;</span> lines <span class="token operator">&lt;&lt;</span> <span class="token string">" lines):"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>i <span class="token operator">&lt;</span> lines<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">getline</span><span class="token punctuation">(</span>cin<span class="token punctuation">,</span> line<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        paragraph<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>line<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        i<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    s<span class="token punctuation">.</span><span class="token function">init</span><span class="token punctuation">(</span>paragraph<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token function">getline</span><span class="token punctuation">(</span>cin<span class="token punctuation">,</span> line<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        cout <span class="token operator">&lt;&lt;</span> s<span class="token punctuation">.</span><span class="token function">query</span><span class="token punctuation">(</span>line<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="第三题：画括号图"><a href="#第三题：画括号图" class="headerlink" title="第三题：画括号图"></a>第三题：画括号图</h2><p>给出一个括号序列，画出对应的图，比如<code>((()))()</code></p>
 <pre><code>|-------|
 +|-----|+
