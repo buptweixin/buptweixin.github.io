@@ -10,7 +10,7 @@
     
     <title>
         
-            HIVE简介 | 
+            标签: search | 
         
         野原圆长的Blog
     </title>
@@ -27,7 +27,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="Xin Wei">
     <meta name="description" content="null">
-    <meta name="keywords" content="Blog deep_learging,大数据工具">
+    <meta name="keywords" content="Blog deep_learging">
 
     <!--iOS -->
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -48,9 +48,9 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="http://www.wowx.info">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="HIVE简介 | 野原圆长的Blog">
+    <meta property="og:title" content="标签: search | 野原圆长的Blog">
     <meta property="og:description" content="null">
-    <meta property="og:article:tag" content="大数据工具"> 
+    
 
     <!--[if lte IE 9]>
         <link rel="stylesheet" href="/css/ie-blocker.css">
@@ -209,303 +209,99 @@
                         </button>
                     
 
-                    <!-- Post TOC -->
-
+                    <!-- Index Module -->
+<div class="material-index mdl-grid">
     
-    <!-- Back Button -->
-    <!--
-    <div class="material-back" id="backhome-div" tabindex="0">
-        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
-           href="#" onclick="window.history.back();return false;"
-           target="_self"
-           role="button"
-           data-upgraded=",MaterialButton,MaterialRipple">
-            <i class="material-icons" role="presentation">arrow_back</i>
-            <span class="mdl-button__ripple-container">
-                <span class="mdl-ripple"></span>
-            </span>
-        </a>
-    </div>
-    -->
+    <div class="locate-thumbnail-symbol"></div>
 
-    <!-- Left aligned menu below button -->
-    <button id="post-toc-trigger-btn"
-        class="mdl-button mdl-js-button mdl-button--icon">
-        <i class="material-icons">format_list_numbered</i>
-    </button>
+    <!-- Pin on top -->
+    
 
-    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#什么是HIVE"><span class="post-toc-number">1.</span> <span class="post-toc-text">什么是HIVE</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#HIVE体系结构"><span class="post-toc-number">2.</span> <span class="post-toc-text">HIVE体系结构</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#HIVE应用场景"><span class="post-toc-number">3.</span> <span class="post-toc-text">HIVE应用场景</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#HIVE数据结构"><span class="post-toc-number">4.</span> <span class="post-toc-text">HIVE数据结构</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#元数据存储"><span class="post-toc-number">5.</span> <span class="post-toc-text">元数据存储</span></a></li></ol>
-
-        <!--
-        <li class="mdl-menu__item">
-            Some Action
-        </li>
-        -->
-    </ul>
-
-
-
-
-<!-- Layouts -->
-
-    <!-- Post Module -->
-    <div class="material-post_container">
-
-        <div class="material-post mdl-grid">
-            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
-
-                <!-- Post Header(Thumbnail & Title) -->
-                
-    <!-- Paradox Post Header -->
+    <!-- Normal Post -->
+    
+        
+        
+            <!-- Paradox Thumbnail -->
+            <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
+    <!-- Post Thumbnail -->
     
         
             <!-- Random Thumbnail -->
             <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-            <script>
-    var randomNum = Math.floor(Math.random() * 19 + 1);
-
-    $('.post_thumbnail-random').css('background-image', 'url(' + '/img/random/material-' + randomNum + '.png' + ')');
-</script>
-
         
     
-            <p class="article-headline-p">
-                HIVE简介
-            </p>
-        </div>
 
-
-
-
-
-                
-                    <!-- Paradox Post Info -->
-                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
-
-    <!-- Author Avatar -->
-    <div id="author-avatar">
-        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
-    </div>
-    <!-- Author Name & Date -->
-    <div>
-        <strong>Xin Wei</strong>
-        <span>6月 15, 2016</span>
+        <!-- Post Title -->
+        <p class="article-headline-p"><a href="/posts/20170420020225/">Binary Search</a></p>
     </div>
 
-    <div class="section-spacer"></div>
-
-    <!-- Favorite -->
-    <!--
-        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
-            <i class="material-icons" role="presentation">favorite</i>
-            <span class="visuallyhidden">favorites</span>
-        </button>
-    -->
-
-    <!-- Qrcode -->
-    
-        <button id="article-functions-qrcode-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
-            <i class="material-icons" role="presentation">devices other</i>
-            <span class="visuallyhidden">devices other</span>
-        </button>
-        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
-            <li class="mdl-menu__item">在其它设备中阅读本文章</li>
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACaUlEQVR42u3aQXICMQwEQP7/6eQBKTYjyfYuVO+JCgS7fbDFWK+fr35eeHh4eHh4eHh4D+O94ufvf717nXw+H6U8Nzw8PLwjvH+22svpXk8l/3wybjQ3PDw8vIO8ZHL5RKuHQfU4wcPDw/ssXjLRpLyejIuHh4f3ibxVhfhDDwY8PDy8RWFE8vl3C5GEDtWx8PDw8O7i5ZdM518fvd/Dw8PDC3jllqa4UaDXQLC46QoPDw9vA2/eDpX8ZXKFVl0IPDw8vLt4SRyQA3pLUG3twsPDwzvDq/7sT661JhdavasyPDw8vJO8/PJ+2fCthVvWGYGHh4e3uSupF0wkoUN1aQqFOx4eHt5mXo5JgtS8+aAXAUfv4uHh4R3k9eLafFtPDonroyJaYjw8PLwjvOSnft5AkMcZ1U1/WUqNh4eHN+D1AoJ5ubzqMIhiXDw8PLylvOqmXC2Ir6fbu+5alrXg4eHhjXnVyeVb+TykGPWU4eHh4S3l5VOZl9TJxdiCQwsPDw/vCC8/KpLiuPr9eZkezRYPDw/vOG8Suebl8jyMKKTUeHh4eNt4SeGbHBWrIonqrPDw8PDO83rb96TUXtUugIeHh3cXL9/WX/HTi2gn34mHh4e3m1d98g19Etcm8Uez6QoPDw9vzKtux/klWWErjxu5miU1Hh4e3gbevHWg1yKQBw05FQ8PD+8kr7pBX5fIeUC8tr0VDw8P75m8aqFcXY5kxEIYgYeHh/cAXl7yTiKMa1izdQAPDw9vKS+ZRLIQ83I8v3LDw8PDu4tXjQAmgLyYbl6n4eHh4W3mfd+Dh4eHh4eHh4f3gOcX9PalgXv8zk0AAAAASUVORK5CYII=">
-        </ul>
-    
-
-    <!-- Tags (bookmark) -->
-    
-    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
-        <i class="material-icons" role="presentation">bookmark</i>
-        <span class="visuallyhidden">bookmark</span>
-    </button>
-    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
-        <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/大数据工具/">大数据工具</a>
-    </ul>
-    
-
-    <!-- Share -->
-    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
-    <i class="material-icons" role="presentation">share</i>
-    <span class="visuallyhidden">share</span>
-</button>
-<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
-    
-    <!-- Leancloud Views -->
-        <a class="post_share-link" href="#">
-            <li class="mdl-menu__item">
-                <span id="/posts/20160615124640/" class="leancloud-views_num" data-flag-title="HIVE简介">
-     &nbsp;浏览量
-</span>
-
-            </li>
-        </a>
-    
-
-    
-
-    <!-- Share Weibo -->
-    
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=HIVE简介&url=http://www.wowx.info//posts/20160615124640/index.html&pic=&searchPic=false&style=simple" target="_blank">
-            <li class="mdl-menu__item">
-                分享到微博
-            </li>
-        </a>
-    
-
-    <!-- Share Twitter -->
-    
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=HIVE简介&url=http://www.wowx.info//posts/20160615124640/index.html&via=Xin Wei" target="_blank">
-            <li class="mdl-menu__item">
-                分享到 Twitter
-            </li>
-        </a>
-    
-
-    <!-- Share Facebook -->
-    
-        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://www.wowx.info//posts/20160615124640/index.html" target="_blank">
-            <li class="mdl-menu__item">
-                分享到 Facebook
-            </li>
-        </a>
-    
-
-    <!-- Share Google+ -->
-    
-        <a class="post_share-link" href="https://plus.google.com/share?url=http://www.wowx.info//posts/20160615124640/index.html" target="_blank">
-            <li class="mdl-menu__item">
-                分享到 Google+
-            </li>
-        </a>
-    
-
-    <!-- Share LinkedIn -->
-    
-
-    <!-- Share QQ -->
-    
-
-    <!-- Share Telegram -->
-    
-</ul>
-
-</div>
-
-                
-
-                <!-- Post Content -->
-                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
-    
-        <p><img src="http://img5.imgtn.bdimg.com/it/u=551134512,989074037&amp;fm=21&amp;gp=0.jpg" alt=""><br><a id="more"></a></p>
-<h1 id="什么是HIVE"><a href="#什么是HIVE" class="headerlink" title="什么是HIVE"></a>什么是HIVE</h1><p>  Hive 是一个基于 Hadoop 文件系统之上的数据仓库架构。它为数据仓库的管理提供了许多功能：数据 ETL （抽取、转换和加载）工具、数据存储管理和大型数据集的查询和分析能力。同时 Hive 还定义了类 SQL的语言 – Hive QL. Hive QL 允许用户进行和 SQL 相似的操作，它可以将结构化的数据文件映射为一张数据库表，并提供简单的 SQL 查询功能。还允许开发人员方便地使用 Mapper 和 Reducer 操作，可以将 SQL 语句转换为 MapReduce 任务运行，这对 MapReduce 框架来说是一个强有力的支持。</p>
-<h1 id="HIVE体系结构"><a href="#HIVE体系结构" class="headerlink" title="HIVE体系结构"></a>HIVE体系结构</h1><p>  <img src="https://dn-anything-about-doc.qbox.me/hbase/1.jpg" alt=""><br>  <img src="https://dn-anything-about-doc.qbox.me/userid46108labid759time1427342632496" alt=""></p>
-<ol>
-<li><p>基本组成：</p>
-<ul>
-<li>用户接口，包括 CLI, JDBC/ODBC, WebUI</li>
-<li>元数据存储，通常是存储在关系数据库如 MySQL, Derby 中</li>
-<li>解释器、编译器、优化器、执行器</li>
-<li>Hadoop, 用 HDFS 进行存储，利用 MapReduce 进行计算</li>
-</ul>
-</li>
-<li><p>与关系数据库的区别：</p>
-<ol>
-<li>Hive 使用的是 Hadoop 的HDFS（Hadoop的分布式文件系统），关系数据库则是服务器本地的文件系统；</li>
-<li>Hive 使用的计算模型是 MapReduce，而关系数据库则是自己设计的计算模型</li>
-<li>关系数据库都是为实时查询的业务进行设计的，而 Hive 则是为海量数据做数据挖掘设计的，实时性很差；实时性的区别导致 Hive 的应用场景和关系数据库有很大的不同；</li>
-<li>Hive 很容易扩展自己的存储能力和计算能力，这个是继承 Hadoop 的，而关系数据库在这个方面要差很多。</li>
-</ol>
-</li>
-</ol>
-<h1 id="HIVE应用场景"><a href="#HIVE应用场景" class="headerlink" title="HIVE应用场景"></a>HIVE应用场景</h1><ul>
-<li>HIVE 不适合在大规模数据集上实现低延迟快速查询，比如联机事务处理(OLTP)</li>
-<li>适用于大数据集的批处理作业，比如：日志分析</li>
-</ul>
-<h1 id="HIVE数据结构"><a href="#HIVE数据结构" class="headerlink" title="HIVE数据结构"></a>HIVE数据结构</h1><ul>
-<li>表(Table):类似于数据库中的表</li>
-<li>外部表(External Table)：指向已经在HDFS中存储的数据，也可以创建分区</li>
-<li>分区(Partition)：Hive 中的每个分区都对应数据库中相应分区列的一个索引，但是其对分区的组织方式和传统关系数据库不同。</li>
-<li>桶(Bucket)：桶在指定列进行 Hash 计算时，会根据哈希值切分数据，使每个桶对应一个文件。</li>
-</ul>
-<h1 id="元数据存储"><a href="#元数据存储" class="headerlink" title="元数据存储"></a>元数据存储</h1><p>  由于 Hive 的元数据可能要面临不断地更新、修改和读取操作，所以它显然不适合使用 Hadoop 文件系统进行存储。目前 Hive 把元数据存储在 RDBMS 中，比如存储在 MySQL, Derby 中。这点我们在上面介绍的 Hive 的体系结构图中，也可以看出。_</p>
-
-    
-
-    
-</div>
-
-
-                
-
-                <!-- Post Comments -->
-                
-                    
-    <!-- 使用多说评论 -->
-    <link rel="stylesheet" href="/css/duoshuo.min.css">
-<style>
-    #ds-thread #ds-reset .ds-post-button{
-        background-color: #0097A7 !important;
-    }
-    #ds-wrapper #ds-reset .ds-icons-32{
-        background-color: #0097A7 !important;
-    }
-    #ds-reset .ds-highlight {
-        color: #0097A7 !important;
-    }
-</style>
-<div id="comments">
-    <!-- 多说评论框 start -->
-    <div class="ds-thread"
-        data-thread-key="posts/20160615124640/"
-        data-url="http://www.wowx.info/posts/20160615124640/"
-        data-title="HIVE简介">
+    <!-- Post Excerpt -->
+    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
+        
+            
+        
+        &nbsp;&nbsp;&nbsp;
+        <span>
+            <a href="/posts/20170420020225/" target="_self">继续阅读</a>
+        </span>
     </div>
-    <!-- 多说评论框 end -->
-</div>
-
-
-
-
-
-
-                
+    <!-- Post_entry Info-->
+    <div id="post_entry-info">
+        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
+            <!-- Author Avatar -->
+            <div id="author-avatar">
+                <img src="/img/avatar.png" width="44px" height="44px" alt="Xin Wei's avatar">
             </div>
+            <div>
+                <strong>Xin Wei</strong>
+                <span>4月 20, 2017</span>
+            </div>
+        </div>
+        <div id="post_entry-right-info">
+            <!-- Category -->
+            <span class="post_entry-category">
+                
+            </span>
 
-            <!-- Post Prev & Next Nav -->
-            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
-    <!-- Prev Nav -->
-    
-        <a href="/posts/201606151250/" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            新篇
-        </a>
-    
+            
+                <!-- Comment Number -->
+                &nbsp;|&nbsp;
+                <span class="post_entry-comment" >
+                        <span class="ds-thread-count" data-thread-key="posts/20170420020225/" data-count-type="comments"></span>
+                </span>
+            
 
-    <!-- Section Spacer -->
-    <div class="section-spacer"></div>
-
-    <!-- Next Nav -->
-    
-        <a href="/posts/20160615124351/" id="post_nav-older" class="next-content">
-            旧篇
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_forward</i>
-            </button>
-        </a>
-    
-</nav>
-
+            <!-- Post Views -->
+            <span class="post_entry-views">
+            </span>
         </div>
     </div>
+</div>
 
+        
+        
+        
+    
+
+    
+
+    
+        <script>
+    var randomNum;
+
+    var locatePost = $('.locate-thumbnail-symbol').next();
+    for(var i = 0; i < 10; i++) {
+        randomNum = Math.floor(Math.random() * 19 + 1);
+
+        locatePost.children('.post_thumbnail-random').attr('id', 'random_thumbnail-'+randomNum);
+        locatePost.children('.post_thumbnail-random').css('background-image', 'url(' + '/img/random/material-' + randomNum + '.png' + ')')
+
+        locatePost = locatePost.next();
+    }
+</script>
+
+    
+</div>
 
 
                     
@@ -665,14 +461,6 @@ It will not impact the appearance and can give developers a lot of support :)
 </aside>
 
                     
-
-                    
-                        <!-- Footer Top Button -->
-                        <div class="toTop-wrap">
-    <a href="#top" class="toTop">
-        <i class="material-icons footer_top-i">expand_less</i>
-    </a>
-</div>
 
                     
 
