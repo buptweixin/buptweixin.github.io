@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.wowx.info/"/>
-  <updated>2017-04-30T14:30:14.564Z</updated>
+  <updated>2017-07-09T16:51:12.039Z</updated>
   <id>http://www.wowx.info/</id>
   
   <author>
@@ -16,11 +16,82 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Like What You Like: Knowledge Distill via Neuron Selectivity Transfer</title>
+    <link href="http://www.wowx.info/posts/20170710004611/"/>
+    <id>http://www.wowx.info/posts/20170710004611/</id>
+    <published>2017-07-09T16:46:11.000Z</published>
+    <updated>2017-07-09T16:51:12.039Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="https://arxiv.org/pdf/1707.01219.pdf" target="_blank" rel="external">Like What You Like: Knowledge Distill via Neuron Selectivity Transfer</a></p>
+<p>Zehao Huang, Naiyan Wang by TuSimple</p>
+<h2 id="arXiv-1707-01219v1"><a href="#arXiv-1707-01219v1" class="headerlink" title="arXiv:1707.01219v1"></a>arXiv:1707.01219v1</h2><h2 id="What"><a href="#What" class="headerlink" title="What?"></a>What?</h2><p>模型蒸馏技术是一种knowledge transfer方法， 它的思想是用一个已经训练好的更大、更深的大网络指导小网络的训练，将大网络中的”知识”提取到小网络中。</p>
+<p>传统的模型蒸馏方法使用大网络和小网络的softmax输出之间的差异作为蒸馏损失，即期望在训练的过程中小网络尽可能“学习”到大网络的输出类别分布，虽然这种蒸馏策略简单直观并且确实能有效提高小网络的效果，然而其缺点也显而易见:只适用于具有softmax的分类任务。</p>
+<p>为了使得模型具有更好的适用范围，Zehao Huang, Naiyan Wang等提出了一种称为Neuron Selectivity Transfer(NST)的模型蒸馏方法，</p>
+<p><img src="http://ww1.sinaimg.cn/large/6425ef91ly1fhcfxgrrj1j20w40jeq6h.jpg" alt="网络结构图"></p>
+<p>大体来说，这个方法将teacher和student网络在FC之前的特征图按层计算MMD Matching Loss</p>
+<p>这种方法具有以下优点:</p>
+<ol>
+<li>能够神经网络加速和压缩</li>
+<li>在多种数据集上证明了NST能够显著提高知识蒸馏的效果</li>
+<li>能够很好的和其他knowledge transfer方法结合</li>
+</ol>
+<h2 id="Why"><a href="#Why" class="headerlink" title="Why?"></a>Why?</h2><p>以VGG16为例，作者将conv5_3层的特征值映射回原图，</p>
+<p><img src="http://ww1.sinaimg.cn/large/6425ef91ly1fhcg2jhzmnj20qr09zwqm.jpg" alt="http://ww1.sinaimg.cn/large/6425ef91ly1fhcg2jhzmnj20qr09zwqm.jpg"></p>
+<p>可以看到，conv5_3输出在左图猴子的脸部、右图的路牌处有较大的激活值，这也暗示着神经元具有对某些特定区域敏感而对其他区域不过多关注。受到这个现象的启发，作者认为student模型如果想要获得接近teacher模型的效果，尽量学习到teacher模型的感兴趣部位也是至关重要的。</p>
+<p>之前的文章中(Adriana et al. Hints for thin deep nets; Zagoruyko Sergey</p>
+<p>)</p>
+<h2 id="How"><a href="#How" class="headerlink" title="How?"></a>How?</h2><h3 id="Maximum-Mean-Discrepancy（MMD）-最大平均差异"><a href="#Maximum-Mean-Discrepancy（MMD）-最大平均差异" class="headerlink" title="Maximum Mean Discrepancy（MMD） 最大平均差异"></a>Maximum Mean Discrepancy（MMD） 最大平均差异</h3><p>为了使teacher网络的输出分布和student网络的输出分布尽可能相一致，作者使用了MMD的平方作为distill loss，最大平均差异最早用于检测两个分布是否相同，它的基本思想是如果两个分布p和q生成的足够多的样本对应f的映射均值相等，则可以认为两个分布是相等的。</p>
+<p>它的具体形式如式(1)所示</p>
+<p><img src="http://ww1.sinaimg.cn/large/6425ef91ly1fhciqwyzrnj20nq03074h.jpg" alt="http://ww1.sinaimg.cn/large/6425ef91ly1fhciqwyzrnj20nq03074h.jpg"></p>
+<p>其中，${x^i}<em>{i=1}^N,{y^j}</em>{i=1}^N$分别由两个分布p和q生成, $\phi(\cdot)$为特征图输出的映射函数。将上式展开，并使用类似SVM中的”<a href="https://en.wikipedia.org/wiki/Kernel_method" target="_blank" rel="external">核技巧</a>“,获得公式(2)</p>
+<p><img src="http://ww1.sinaimg.cn/large/6425ef91ly1fhe2fh5wdoj20v803gjrp.jpg" alt=""></p>
+<p>上式中$k(\cdot, \cdot)$是核函数，它的作用是将低维特征映射到高维空间，SVM中核函数的使用是为了在高维空间中将线性不可分样本转换成线性可分的样本分布，而本文的作用是同时映射student网络和teacher网络的中间结果到相同的空间分布从而使teacher网络的知识能够更准确的提取到student网络中。因为当且仅当p和q分布完全相同时MMD 损失才为0，所以最小化MMD损失等同于使p分布和q分布尽可能接近。</p>
+<h3 id="Neuron-Selectivity-Transfer-NST"><a href="#Neuron-Selectivity-Transfer-NST" class="headerlink" title="Neuron Selectivity Transfer(NST)"></a>Neuron Selectivity Transfer(NST)</h3><p>具体到模型的训练上，作者采用了一种”神经元选择性转移”的方法来训练student网络，以$f^k$表示中间特征，定义下面的损失函数</p>
+<p><img src="http://ww1.sinaimg.cn/large/6425ef91ly1fhe2tdebv6j20oa02g3yl.jpg" alt=""></p>
+<p>NST中使用的损失函数分为两部分，第一部分为真实标签与student预测结果的交叉熵损失，第二部分为MMD损失，将第二项展开</p>
+<p><img src="http://ww1.sinaimg.cn/large/6425ef91ly1fhdwuuxl4xj20uk05gmy0.jpg" alt="LMM"></p>
+<p>为了确保每个样本取值范围一样，上式对所有特征都进行了L2归一化，最小化MMD损失等效于将teacher网络中的知识迁移到student。</p>
+<h5 id="核函数的选择"><a href="#核函数的选择" class="headerlink" title="核函数的选择"></a>核函数的选择</h5><p>论文中，作者验证了三种常用的核函数，他们分别是</p>
+<ol>
+<li>线性核:$k(x,y)=x^Ty$</li>
+<li>多项式核:$k(x,y)=(x^Ty+c)^d$, 文中采用$d=2$, $c=0$</li>
+<li>高斯核:$k(x, y)=exp(-\frac{|x-y|^2}{2\sigma^2})$:高斯核中$\sigma$设为两网络特征的平均距离</li>
+</ol>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>作者分别在CIFAR-10，CIFAR-100和ImageNet LSVRC 2012数据集上验证了NST的效果，对于CIFAR数据集采用ResNet-1001<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>网络作为teacher网络，ImageNet数据集采用ResNet-101<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>网络作为teacher网络，Inception BN<sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup>网络作为student网络.</p>
+<p>具体结果如下图所示：</p>
+<p><img src="http://ww1.sinaimg.cn/large/6425ef91ly1fhe380pomgj20n209mjta.jpg" alt=""></p>
+<p>上表中，对于CIFAR-100数据集，KD方法取得了比NST更好的结果，作者认为CIFAR-100数据集具有更多的类别而更多的类别能够在softmax输出提供更多的的类内方差信息造成的。即NST方法更适用于类别数较少的分类任务。</p>
+<p><img src="http://ww1.sinaimg.cn/large/6425ef91ly1fhe39c20ndj20uk05wmy7.jpg" alt=""></p>
+<p>上表中，作者实验了将多种方法结合起来的效果，可以看到，KD+NST的组合具有更好的效果。</p>
+<p><img src="http://ww1.sinaimg.cn/large/6425ef91ly1fhe3a4zei0j20og09mtan.jpg" alt=""></p>
+<p>在ImageNet数据集下的实验结果图表3所示，当使用单个distill方法时，FitNet<sup id="fnref:4"><a href="#fn:4" rel="footnote">4</a></sup>取得了最好的效果，但是当将多种方法组合在一起时，KD+NST具有最好的效果。</p>
+<p>下图中作者使用t-SNE<sup id="fnref:5"><a href="#fn:5" rel="footnote">5</a></sup>可视化了在使用NST前后student网络中间输出的分布，可以看到在经过NST之后teacher网络和student网络的特征分布明显更加一致了。</p>
+<p><img src="http://ww1.sinaimg.cn/large/6425ef91ly1fhe3ngprssj20gu0bmmz2.jpg" alt=""></p>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>总得来说，作者提出了一种将student和teacher网络输出映射到相同特征空间作为distill loss的方法，虽然在类别数目多时这个方法弱于KD，但是KD只能用于带softmax的分类任务；虽然FitNet不需要softmax输出，且大数据集下更牛，但是FitNet强迫student网络完全和teacher输出一致，无形中和KD等价了。</p>
+<p>最近会尝试使用NST做几个实验，到时候再补充自己的实验结果。</p>
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;">He K, Zhang X, Ren S, et al. Identity mappings in deep residual networks[C]//European Conference on Computer Vision. Springer International Publishing, 2016: 630-645.</span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;">He K, Zhang X, Ren S, et al. Deep residual learning for image recognition[C]//Proceedings of the IEEE conference on computer vision and pattern recognition. 2016: 770-778.</span><a href="#fnref:2" rev="footnote"> ↩</a></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">3.</span><span style="display: inline-block; vertical-align: top;">Ioffe S, Szegedy C. Batch normalization: Accelerating deep network training by reducing internal covariate shift[C]//International Conference on Machine Learning. 2015: 448-456.</span><a href="#fnref:3" rev="footnote"> ↩</a></li><li id="fn:4"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">4.</span><span style="display: inline-block; vertical-align: top;">Romero A, Ballas N, Kahou S E, et al. Fitnets: Hints for thin deep nets[J]. arXiv preprint arXiv:1412.6550, 2014.</span><a href="#fnref:4" rev="footnote"> ↩</a></li><li id="fn:5"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">5.</span><span style="display: inline-block; vertical-align: top;">Maaten L, Hinton G. Visualizing data using t-SNE[J]. Journal of Machine Learning Research, 2008, 9(Nov): 2579-2605.</span><a href="#fnref:5" rev="footnote"> ↩</a></li></ol></div></div>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;a href=&quot;https://arxiv.org/pdf/1707.01219.pdf&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Like What You Like: Knowledge Distill via Neuron Selectivit
+    
+    </summary>
+    
+      <category term="deep learning" scheme="http://www.wowx.info/categories/deep-learning/"/>
+    
+    
+      <category term="paper" scheme="http://www.wowx.info/tags/paper/"/>
+    
+      <category term="model compress" scheme="http://www.wowx.info/tags/model-compress/"/>
+    
+  </entry>
+  
+  <entry>
     <title>leetcode solvers</title>
     <link href="http://www.wowx.info/posts/20170430220753/"/>
     <id>http://www.wowx.info/posts/20170430220753/</id>
     <published>2017-04-30T14:07:53.000Z</published>
-    <updated>2017-04-30T14:30:14.564Z</updated>
+    <updated>2017-05-01T03:03:08.363Z</updated>
     
     <content type="html"><![CDATA[<h1 id="String"><a href="#String" class="headerlink" title="String"></a>String</h1><h2 id="LeetCote-string-383-Ransom-Note"><a href="#LeetCote-string-383-Ransom-Note" class="headerlink" title="LeetCote_string_383_Ransom Note"></a>LeetCote_string_383_Ransom Note</h2><h3 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h3><p>Given an arbitrary ransom note string and another string containing letters from all the magazines, write a function that will return true if the ransom note can be constructed from the magazines ; otherwise, it will return false.</p>
 <p>Each letter in the magazine string can only be used once in your ransom note.</p>
@@ -132,7 +203,9 @@ canConstruct(&quot;aa&quot;, &quot;aab&quot;) -&gt; true
 </code></pre>Subscribe to see which companies asked this question</li>
 </ol>
 </blockquote>
-<h3 id="Method-1"><a href="#Method-1" class="headerlink" title="Method"></a>Method</h3><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
+<p>将给定字符串解析成NestedInterger对象</p>
+<h3 id="Method-1"><a href="#Method-1" class="headerlink" title="Method"></a>Method</h3><p>采用DFS遍历字符串，如果遇到的第一个字符不是’[‘则该对象是一个纯数字，压栈即可；否则该对象是一个nestedInteger列表对象，应对其循环遍历</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
 <span class="token keyword">public</span><span class="token operator">:</span>
     NestedInteger <span class="token function">deserialize</span><span class="token punctuation">(</span>string s<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         istringstream <span class="token function">in</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -165,7 +238,9 @@ canConstruct(&quot;aa&quot;, &quot;aab&quot;) -&gt; true
 <p>Given “pwwkew”, the answer is “wke”, with the length of 3. Note that the answer must be a substring, “pwke” is a subsequence and not a substring.</p>
 <p>Subscribe to see which companies asked this question</p>
 </blockquote>
-<h3 id="Method-2"><a href="#Method-2" class="headerlink" title="Method"></a>Method</h3><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
+<p>给出一个字符串，找出其中最长的非重复子串</p>
+<h3 id="Method-2"><a href="#Method-2" class="headerlink" title="Method"></a>Method</h3><p>用<code>start</code>指向最近一个重复字符，如果当前字符上次出现的位置大于<code>start</code>,则将<code>start</code>更新为当前当前字符上次出现的位置，否则当前字符不会造成重复。</p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
 <span class="token keyword">public</span><span class="token operator">:</span>
     <span class="token keyword">int</span> <span class="token function">lengthOfLongestSubstring</span><span class="token punctuation">(</span>string s<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">alphatable</span><span class="token punctuation">(</span><span class="token number">256</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -6254,313 +6329,6 @@ exclude <span class="token operator">=</span> <span class="token function">max</
       <category term="algorighm" scheme="http://www.wowx.info/tags/algorighm/"/>
     
       <category term="dp" scheme="http://www.wowx.info/tags/dp/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MXNET: Expression Template Tutorial—MXNET 表达式模板笔记</title>
-    <link href="http://www.wowx.info/posts/20170302213803/"/>
-    <id>http://www.wowx.info/posts/20170302213803/</id>
-    <published>2017-03-02T13:38:03.000Z</published>
-    <updated>2017-03-02T15:06:57.539Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="MXNET-Expression-Template-Tutorial—MXNET-表达式模板笔记"><a href="#MXNET-Expression-Template-Tutorial—MXNET-表达式模板笔记" class="headerlink" title="MXNET: Expression Template Tutorial—MXNET 表达式模板笔记"></a>MXNET: Expression Template Tutorial—MXNET 表达式模板笔记</h2><p>假设我们要写一个如下的权值更新算法</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp">weight <span class="token operator">=</span>  <span class="token operator">-</span> eta <span class="token operator">*</span> <span class="token punctuation">(</span>grad <span class="token operator">+</span> lambda <span class="token operator">*</span> weight<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>常见的实现算法是在执行前预先分配需要的内存，而在执行过程中不进行内存的分配</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">UpdateWeight</span> <span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">float</span> <span class="token operator">*</span>grad<span class="token punctuation">,</span> <span class="token keyword">float</span> eta<span class="token punctuation">,</span> <span class="token keyword">float</span> lambda<span class="token punctuation">,</span>
-                   <span class="token keyword">int</span> n<span class="token punctuation">,</span> <span class="token keyword">float</span> <span class="token operator">*</span>weight<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    weight<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span>  <span class="token operator">-</span> eta <span class="token operator">*</span> <span class="token punctuation">(</span>grad<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">+</span> lambda <span class="token operator">*</span> weight<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>因为需要预先分配内存，如果要更新的权重很多的话这个过程会变得很繁琐，能不能改写成下面这样的形式并且保持性能？</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">UpdateWeight</span> <span class="token punctuation">(</span><span class="token keyword">const</span> Vec<span class="token operator">&amp;</span> grad<span class="token punctuation">,</span> <span class="token keyword">float</span> eta<span class="token punctuation">,</span> <span class="token keyword">float</span> lambda<span class="token punctuation">,</span> Vec<span class="token operator">&amp;</span> weight<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  weight <span class="token operator">=</span> <span class="token operator">-</span>eta <span class="token operator">*</span> <span class="token punctuation">(</span>grad <span class="token operator">+</span> lambda <span class="token operator">*</span> weight<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>答案是有</p>
-<h3 id="A-Naive-Bad-Solution"><a href="#A-Naive-Bad-Solution" class="headerlink" title="A Naive Bad Solution"></a>A Naive Bad Solution</h3><p>最容易想到的方法如下所示，创建一个Vec类，在该类的构造函数中分配存储空间</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">// Naive solution for vector operation overloading</span>
-
-<span class="token keyword">struct</span> Vec <span class="token punctuation">{</span>
-  <span class="token keyword">int</span> len<span class="token punctuation">;</span>
-  <span class="token keyword">float</span><span class="token operator">*</span> dptr<span class="token punctuation">;</span>
-  <span class="token function">Vec</span><span class="token punctuation">(</span><span class="token keyword">int</span> len<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">len</span><span class="token punctuation">(</span>len<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    dptr <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">float</span><span class="token punctuation">[</span>len<span class="token punctuation">]</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-  <span class="token function">Vec</span><span class="token punctuation">(</span><span class="token keyword">const</span> Vec<span class="token operator">&amp;</span> src<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">len</span><span class="token punctuation">(</span>src<span class="token punctuation">.</span>len<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    dptr <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">float</span><span class="token punctuation">[</span>len<span class="token punctuation">]</span><span class="token punctuation">;</span>
-    <span class="token function">memcpy</span><span class="token punctuation">(</span>dptr<span class="token punctuation">,</span> src<span class="token punctuation">.</span>dptr<span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">float</span><span class="token punctuation">)</span><span class="token operator">*</span>len <span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-  <span class="token operator">~</span><span class="token function">Vec</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">delete</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> dptr<span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-
-<span class="token keyword">inline</span> Vec <span class="token keyword">operator</span><span class="token operator">+</span><span class="token punctuation">(</span><span class="token keyword">const</span> Vec <span class="token operator">&amp;</span>lhs<span class="token punctuation">,</span> <span class="token keyword">const</span> Vec <span class="token operator">&amp;</span>rhs<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  Vec <span class="token function">res</span><span class="token punctuation">(</span>lhs<span class="token punctuation">.</span>len<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> lhs<span class="token punctuation">.</span>len<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    res<span class="token punctuation">.</span>dptr<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> lhs<span class="token punctuation">.</span>dptr<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">+</span> rhs<span class="token punctuation">.</span>dptr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-  <span class="token keyword">return</span> res<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>但是上面的实现有一个很大的问题，那就是计算过程需要创建和销毁临时变量，当操作很多时对性能影响很大。一个可能的改进是只实现<code>+= -=</code>等原地操作符，然而这将会大大限制类的使用。</p>
-<h3 id="Lazy-Evaluation-惰性求值"><a href="#Lazy-Evaluation-惰性求值" class="headerlink" title="Lazy Evaluation 惰性求值"></a>Lazy Evaluation 惰性求值</h3><p>我们仔细思考的话将会发现，我们之所以需要使用临时存储空间是因为不知道<code>+</code>的操作的结果最终的目标是什么，如果我们预先知道这个目标的话就可以免去临时空间分配的过程。</p>
-<p>下面的代码实现了一个简单的惰性求值</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp">
-<span class="token comment" spellcheck="true">// Example Lazy evaluation code</span>
-<span class="token comment" spellcheck="true">// for simplicity, we use struct and make all members public</span>
-
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;cstdio></span></span>
-<span class="token keyword">struct</span> Vec<span class="token punctuation">;</span>
-<span class="token comment" spellcheck="true">// expression structure holds the expression</span>
-<span class="token keyword">struct</span> BinaryAddExp <span class="token punctuation">{</span>
-  <span class="token keyword">const</span> Vec <span class="token operator">&amp;</span>lhs<span class="token punctuation">;</span>
-  <span class="token keyword">const</span> Vec <span class="token operator">&amp;</span>rhs<span class="token punctuation">;</span>
-  <span class="token function">BinaryAddExp</span><span class="token punctuation">(</span><span class="token keyword">const</span> Vec <span class="token operator">&amp;</span>lhs<span class="token punctuation">,</span> <span class="token keyword">const</span> Vec <span class="token operator">&amp;</span>rhs<span class="token punctuation">)</span>
-  <span class="token operator">:</span> <span class="token function">lhs</span><span class="token punctuation">(</span>lhs<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">rhs</span><span class="token punctuation">(</span>rhs<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span class="token comment" spellcheck="true">// no constructor and destructor to allocate and de-allocate memory,</span>
-<span class="token comment" spellcheck="true">//  allocation done by user</span>
-<span class="token keyword">struct</span> Vec <span class="token punctuation">{</span>
-  <span class="token keyword">int</span> len<span class="token punctuation">;</span>
-  <span class="token keyword">float</span><span class="token operator">*</span> dptr<span class="token punctuation">;</span>
-  <span class="token function">Vec</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
-  <span class="token function">Vec</span><span class="token punctuation">(</span><span class="token keyword">float</span> <span class="token operator">*</span>dptr<span class="token punctuation">,</span> <span class="token keyword">int</span> len<span class="token punctuation">)</span>
-      <span class="token operator">:</span> <span class="token function">len</span><span class="token punctuation">(</span>len<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">dptr</span><span class="token punctuation">(</span>dptr<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
-  <span class="token comment" spellcheck="true">// here is where evaluation happens</span>
-  <span class="token keyword">inline</span> Vec <span class="token operator">&amp;</span><span class="token keyword">operator</span><span class="token operator">=</span><span class="token punctuation">(</span><span class="token keyword">const</span> BinaryAddExp <span class="token operator">&amp;</span>src<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> len<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-      dptr<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> src<span class="token punctuation">.</span>lhs<span class="token punctuation">.</span>dptr<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">+</span> src<span class="token punctuation">.</span>rhs<span class="token punctuation">.</span>dptr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">return</span> <span class="token operator">*</span><span class="token keyword">this</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span class="token comment" spellcheck="true">// no evaluation happens here</span>
-<span class="token keyword">inline</span> BinaryAddExp <span class="token keyword">operator</span><span class="token operator">+</span><span class="token punctuation">(</span><span class="token keyword">const</span> Vec <span class="token operator">&amp;</span>lhs<span class="token punctuation">,</span> <span class="token keyword">const</span> Vec <span class="token operator">&amp;</span>rhs<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token keyword">return</span> <span class="token function">BinaryAddExp</span><span class="token punctuation">(</span>lhs<span class="token punctuation">,</span> rhs<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">const</span> <span class="token keyword">int</span> n <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token keyword">float</span> sa<span class="token punctuation">[</span>n<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
-  <span class="token keyword">float</span> sb<span class="token punctuation">[</span>n<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
-  <span class="token keyword">float</span> sc<span class="token punctuation">[</span>n<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
-  Vec <span class="token function">A</span><span class="token punctuation">(</span>sa<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">B</span><span class="token punctuation">(</span>sb<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">C</span><span class="token punctuation">(</span>sc<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token comment" spellcheck="true">// run expression</span>
-  A <span class="token operator">=</span> B <span class="token operator">+</span> C<span class="token punctuation">;</span>
-  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d:%f==%f+%f\n"</span><span class="token punctuation">,</span> i<span class="token punctuation">,</span> A<span class="token punctuation">.</span>dptr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> B<span class="token punctuation">.</span>dptr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> C<span class="token punctuation">.</span>dptr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-  <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>上面的Vec类中不进行任何的分配和释放存储空间的操作，这些操作交给用户来完整，当对两个Vec变量执行<code>+</code>操作时，并不直接计算结果，而是将两个Vec引用存储在BinaryAddExp结构体中并将其返回，遇到<code>=</code>操作符号时，遍历BinaryAdd中的两个Vec引用计算结果并返回。</p>
-<p>然而这个惰性求值实现只能计算类似<code>A=B+C</code>的二元操作，面对更长的表达式时则需要将其拆分成很多个<code>=</code>操作，十分不便</p>
-<h3 id="More-Lengthy-Expressions-and-Expression-Template适用于任何长度表达式的表达式模板"><a href="#More-Lengthy-Expressions-and-Expression-Template适用于任何长度表达式的表达式模板" class="headerlink" title="More Lengthy Expressions and Expression Template适用于任何长度表达式的表达式模板"></a>More Lengthy Expressions and Expression Template适用于任何长度表达式的表达式模板</h3><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">// Example code, expression template, and more length equations</span>
-<span class="token comment" spellcheck="true">// for simplicity, we use struct and make all members public</span>
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;cstdio></span></span>
-
-<span class="token comment" spellcheck="true">// this is expression, all expressions must inheritate it,</span>
-<span class="token comment" spellcheck="true">//  and put their type in subtype</span>
-<span class="token comment" spellcheck="true">// Exp是所有其他表达式地基类</span>
-<span class="token keyword">template</span><span class="token operator">&lt;</span><span class="token keyword">typename</span> SubType<span class="token operator">></span>
-<span class="token keyword">struct</span> Exp <span class="token punctuation">{</span>
-  <span class="token comment" spellcheck="true">// returns const reference of the actual type of this expression</span>
-  <span class="token comment" spellcheck="true">// 返回该表达式的真实类的常量引用</span>
-  <span class="token keyword">inline</span> <span class="token keyword">const</span> SubType<span class="token operator">&amp;</span> <span class="token function">self</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token punctuation">{</span>
-    <span class="token keyword">return</span> <span class="token operator">*</span><span class="token keyword">static_cast</span><span class="token operator">&lt;</span><span class="token keyword">const</span> SubType<span class="token operator">*</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-
-<span class="token comment" spellcheck="true">// binary add expression</span>
-<span class="token comment" spellcheck="true">// note how it is inheritates from Exp</span>
-<span class="token comment" spellcheck="true">// and put its own type into the template argument</span>
-<span class="token comment" spellcheck="true">// 相加操作表达式，使用BinaryAddExp&lt;TLhs, TRhs> 类本身实例化Exp</span>
-<span class="token keyword">template</span><span class="token operator">&lt;</span><span class="token keyword">typename</span> TLhs<span class="token punctuation">,</span> <span class="token keyword">typename</span> TRhs<span class="token operator">></span>
-<span class="token keyword">struct</span> BinaryAddExp<span class="token operator">:</span> <span class="token keyword">public</span> Exp<span class="token operator">&lt;</span>BinaryAddExp<span class="token operator">&lt;</span>TLhs<span class="token punctuation">,</span> TRhs<span class="token operator">></span> <span class="token operator">></span> <span class="token punctuation">{</span>
-  <span class="token keyword">const</span> TLhs <span class="token operator">&amp;</span>lhs<span class="token punctuation">;</span>
-  <span class="token keyword">const</span> TRhs <span class="token operator">&amp;</span>rhs<span class="token punctuation">;</span>
-  <span class="token function">BinaryAddExp</span><span class="token punctuation">(</span><span class="token keyword">const</span> TLhs<span class="token operator">&amp;</span> lhs<span class="token punctuation">,</span> <span class="token keyword">const</span> TRhs<span class="token operator">&amp;</span> rhs<span class="token punctuation">)</span>
-      <span class="token operator">:</span> <span class="token function">lhs</span><span class="token punctuation">(</span>lhs<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">rhs</span><span class="token punctuation">(</span>rhs<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
-  <span class="token comment" spellcheck="true">// evaluation function, evaluate this expression at position i</span>
-  <span class="token comment" spellcheck="true">// eval函数执行真正的计算</span>
-  <span class="token keyword">inline</span> <span class="token keyword">float</span> <span class="token function">Eval</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token punctuation">{</span>
-    <span class="token keyword">return</span> lhs<span class="token punctuation">.</span><span class="token function">Eval</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token operator">+</span> rhs<span class="token punctuation">.</span><span class="token function">Eval</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span class="token comment" spellcheck="true">// no constructor and destructor to allocate</span>
-<span class="token comment" spellcheck="true">// and de-allocate memory, allocation done by user</span>
-<span class="token keyword">struct</span> Vec<span class="token operator">:</span> <span class="token keyword">public</span> Exp<span class="token operator">&lt;</span>Vec<span class="token operator">></span> <span class="token punctuation">{</span>
-  <span class="token keyword">int</span> len<span class="token punctuation">;</span>
-  <span class="token keyword">float</span><span class="token operator">*</span> dptr<span class="token punctuation">;</span>
-  <span class="token function">Vec</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
-  <span class="token function">Vec</span><span class="token punctuation">(</span><span class="token keyword">float</span> <span class="token operator">*</span>dptr<span class="token punctuation">,</span> <span class="token keyword">int</span> len<span class="token punctuation">)</span>
-      <span class="token operator">:</span><span class="token function">len</span><span class="token punctuation">(</span>len<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">dptr</span><span class="token punctuation">(</span>dptr<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
-  <span class="token comment" spellcheck="true">// here is where evaluation happens</span>
-  <span class="token comment" spellcheck="true">// 遇到赋值时执行真正的计算</span>
-  <span class="token keyword">template</span><span class="token operator">&lt;</span><span class="token keyword">typename</span> EType<span class="token operator">></span>
-  <span class="token keyword">inline</span> Vec<span class="token operator">&amp;</span> <span class="token keyword">operator</span><span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">const</span> Exp<span class="token operator">&lt;</span>EType<span class="token operator">></span><span class="token operator">&amp;</span> src_<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">const</span> EType <span class="token operator">&amp;</span>src <span class="token operator">=</span> src_<span class="token punctuation">.</span><span class="token function">self</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> len<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-      dptr<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> src<span class="token punctuation">.</span><span class="token function">Eval</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">return</span> <span class="token operator">*</span><span class="token keyword">this</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-  <span class="token comment" spellcheck="true">// evaluation function, evaluate this expression at position i</span>
-  <span class="token keyword">inline</span> <span class="token keyword">float</span> <span class="token function">Eval</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token punctuation">{</span>
-    <span class="token keyword">return</span> dptr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span class="token comment" spellcheck="true">// template add, works for any expressions</span>
-<span class="token keyword">template</span><span class="token operator">&lt;</span><span class="token keyword">typename</span> TLhs<span class="token punctuation">,</span> <span class="token keyword">typename</span> TRhs<span class="token operator">></span>
-<span class="token keyword">inline</span> BinaryAddExp<span class="token operator">&lt;</span>TLhs<span class="token punctuation">,</span> TRhs<span class="token operator">></span>
-<span class="token keyword">operator</span><span class="token operator">+</span><span class="token punctuation">(</span><span class="token keyword">const</span> Exp<span class="token operator">&lt;</span>TLhs<span class="token operator">></span> <span class="token operator">&amp;</span>lhs<span class="token punctuation">,</span> <span class="token keyword">const</span> Exp<span class="token operator">&lt;</span>TRhs<span class="token operator">></span> <span class="token operator">&amp;</span>rhs<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token keyword">return</span> BinaryAddExp<span class="token operator">&lt;</span>TLhs<span class="token punctuation">,</span> TRhs<span class="token operator">></span><span class="token punctuation">(</span>lhs<span class="token punctuation">.</span><span class="token function">self</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> rhs<span class="token punctuation">.</span><span class="token function">self</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">const</span> <span class="token keyword">int</span> n <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token keyword">float</span> sa<span class="token punctuation">[</span>n<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
-  <span class="token keyword">float</span> sb<span class="token punctuation">[</span>n<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
-  <span class="token keyword">float</span> sc<span class="token punctuation">[</span>n<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
-  Vec <span class="token function">A</span><span class="token punctuation">(</span>sa<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">B</span><span class="token punctuation">(</span>sb<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">C</span><span class="token punctuation">(</span>sc<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token comment" spellcheck="true">// run expression, this expression is longer:)</span>
-  A <span class="token operator">=</span> B <span class="token operator">+</span> C <span class="token operator">+</span> C<span class="token punctuation">;</span>
-  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d:%f == %f + %f + %f\n"</span><span class="token punctuation">,</span> i<span class="token punctuation">,</span>
-           A<span class="token punctuation">.</span>dptr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> B<span class="token punctuation">.</span>dptr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span>
-           C<span class="token punctuation">.</span>dptr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> C<span class="token punctuation">.</span>dptr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-  <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>因为<code>Eval</code>是内联的，所以在编译阶段<code>src.Eval[i]</code>会直接被替换成<code>B.dptr[i]+C.dptr[i]+C.dptr[i]</code></p>
-<h3 id="更灵活的惰性求值表达式模板"><a href="#更灵活的惰性求值表达式模板" class="headerlink" title="更灵活的惰性求值表达式模板"></a>更灵活的惰性求值表达式模板</h3><p>最后一个(也是最接近mshadow实现)版本可以允许我们自定义元素操作</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">// Example code, expression template</span>
-<span class="token comment" spellcheck="true">// with binary operator definition and extension</span>
-<span class="token comment" spellcheck="true">// for simplicity, we use struct and make all members public</span>
-<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;cstdio></span></span>
-
-<span class="token comment" spellcheck="true">// this is expression, all expressions must inheritate it,</span>
-<span class="token comment" spellcheck="true">// and put their type in subtype</span>
-<span class="token keyword">template</span><span class="token operator">&lt;</span><span class="token keyword">typename</span> SubType<span class="token operator">></span>
-<span class="token keyword">struct</span> Exp<span class="token punctuation">{</span>
-  <span class="token comment" spellcheck="true">// returns const reference of the actual type of this expression</span>
-  <span class="token keyword">inline</span> <span class="token keyword">const</span> SubType<span class="token operator">&amp;</span> <span class="token function">self</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token punctuation">{</span>
-    <span class="token keyword">return</span> <span class="token operator">*</span><span class="token keyword">static_cast</span><span class="token operator">&lt;</span><span class="token keyword">const</span> SubType<span class="token operator">*</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-
-<span class="token comment" spellcheck="true">// binary operators</span>
-<span class="token keyword">struct</span> mul<span class="token punctuation">{</span>
-  <span class="token keyword">inline</span> <span class="token keyword">static</span> <span class="token keyword">float</span> <span class="token function">Map</span><span class="token punctuation">(</span><span class="token keyword">float</span> a<span class="token punctuation">,</span> <span class="token keyword">float</span> b<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">return</span> a <span class="token operator">*</span> b<span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-
-<span class="token comment" spellcheck="true">// binary add expression</span>
-<span class="token comment" spellcheck="true">// note how it is inheritates from Exp</span>
-<span class="token comment" spellcheck="true">// and put its own type into the template argument</span>
-<span class="token keyword">template</span><span class="token operator">&lt;</span><span class="token keyword">typename</span> OP<span class="token punctuation">,</span> <span class="token keyword">typename</span> TLhs<span class="token punctuation">,</span> <span class="token keyword">typename</span> TRhs<span class="token operator">></span>
-<span class="token keyword">struct</span> BinaryMapExp<span class="token operator">:</span> <span class="token keyword">public</span> Exp<span class="token operator">&lt;</span>BinaryMapExp<span class="token operator">&lt;</span>OP<span class="token punctuation">,</span> TLhs<span class="token punctuation">,</span> TRhs<span class="token operator">></span> <span class="token operator">></span><span class="token punctuation">{</span>
-  <span class="token keyword">const</span> TLhs<span class="token operator">&amp;</span> lhs<span class="token punctuation">;</span>
-  <span class="token keyword">const</span> TRhs<span class="token operator">&amp;</span> rhs<span class="token punctuation">;</span>
-  <span class="token function">BinaryMapExp</span><span class="token punctuation">(</span><span class="token keyword">const</span> TLhs<span class="token operator">&amp;</span> lhs<span class="token punctuation">,</span> <span class="token keyword">const</span> TRhs<span class="token operator">&amp;</span> rhs<span class="token punctuation">)</span>
-      <span class="token operator">:</span><span class="token function">lhs</span><span class="token punctuation">(</span>lhs<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">rhs</span><span class="token punctuation">(</span>rhs<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
-  <span class="token comment" spellcheck="true">// evaluation function, evaluate this expression at position i</span>
-  <span class="token keyword">inline</span> <span class="token keyword">float</span> <span class="token function">Eval</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token punctuation">{</span>
-    <span class="token keyword">return</span> OP<span class="token operator">::</span><span class="token function">Map</span><span class="token punctuation">(</span>lhs<span class="token punctuation">.</span><span class="token function">Eval</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">,</span> rhs<span class="token punctuation">.</span><span class="token function">Eval</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span class="token comment" spellcheck="true">// no constructor and destructor to allocate and de-allocate memory</span>
-<span class="token comment" spellcheck="true">// allocation done by user</span>
-<span class="token keyword">struct</span> Vec<span class="token operator">:</span> <span class="token keyword">public</span> Exp<span class="token operator">&lt;</span>Vec<span class="token operator">></span><span class="token punctuation">{</span>
-  <span class="token keyword">int</span> len<span class="token punctuation">;</span>
-  <span class="token keyword">float</span><span class="token operator">*</span> dptr<span class="token punctuation">;</span>
-  <span class="token function">Vec</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
-  <span class="token function">Vec</span><span class="token punctuation">(</span><span class="token keyword">float</span> <span class="token operator">*</span>dptr<span class="token punctuation">,</span> <span class="token keyword">int</span> len<span class="token punctuation">)</span>
-      <span class="token operator">:</span> <span class="token function">len</span><span class="token punctuation">(</span>len<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">dptr</span><span class="token punctuation">(</span>dptr<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
-  <span class="token comment" spellcheck="true">// here is where evaluation happens</span>
-  <span class="token keyword">template</span><span class="token operator">&lt;</span><span class="token keyword">typename</span> EType<span class="token operator">></span>
-  <span class="token keyword">inline</span> Vec<span class="token operator">&amp;</span> <span class="token keyword">operator</span><span class="token operator">=</span><span class="token punctuation">(</span><span class="token keyword">const</span> Exp<span class="token operator">&lt;</span>EType<span class="token operator">></span><span class="token operator">&amp;</span> src_<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">const</span> EType <span class="token operator">&amp;</span>src <span class="token operator">=</span> src_<span class="token punctuation">.</span><span class="token function">self</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> len<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-      dptr<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> src<span class="token punctuation">.</span><span class="token function">Eval</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">return</span> <span class="token operator">*</span><span class="token keyword">this</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-  <span class="token comment" spellcheck="true">// evaluation function, evaluate this expression at position i</span>
-  <span class="token keyword">inline</span> <span class="token keyword">float</span> <span class="token function">Eval</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token punctuation">{</span>
-    <span class="token keyword">return</span> dptr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span class="token comment" spellcheck="true">// template add, works for any expressions</span>
-<span class="token keyword">template</span><span class="token operator">&lt;</span><span class="token keyword">typename</span> OP<span class="token punctuation">,</span> <span class="token keyword">typename</span> TLhs<span class="token punctuation">,</span> <span class="token keyword">typename</span> TRhs<span class="token operator">></span>
-<span class="token keyword">inline</span> BinaryMapExp<span class="token operator">&lt;</span>OP<span class="token punctuation">,</span> TLhs<span class="token punctuation">,</span> TRhs<span class="token operator">></span>
-<span class="token function">F</span><span class="token punctuation">(</span><span class="token keyword">const</span> Exp<span class="token operator">&lt;</span>TLhs<span class="token operator">></span><span class="token operator">&amp;</span> lhs<span class="token punctuation">,</span> <span class="token keyword">const</span> Exp<span class="token operator">&lt;</span>TRhs<span class="token operator">></span><span class="token operator">&amp;</span> rhs<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token keyword">return</span> BinaryMapExp<span class="token operator">&lt;</span>OP<span class="token punctuation">,</span> TLhs<span class="token punctuation">,</span> TRhs<span class="token operator">></span><span class="token punctuation">(</span>lhs<span class="token punctuation">.</span><span class="token function">self</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> rhs<span class="token punctuation">.</span><span class="token function">self</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">template</span><span class="token operator">&lt;</span><span class="token keyword">typename</span> TLhs<span class="token punctuation">,</span> <span class="token keyword">typename</span> TRhs<span class="token operator">></span>
-<span class="token keyword">inline</span> BinaryMapExp<span class="token operator">&lt;</span>mul<span class="token punctuation">,</span> TLhs<span class="token punctuation">,</span> TRhs<span class="token operator">></span>
-<span class="token keyword">operator</span><span class="token operator">*</span><span class="token punctuation">(</span><span class="token keyword">const</span> Exp<span class="token operator">&lt;</span>TLhs<span class="token operator">></span><span class="token operator">&amp;</span> lhs<span class="token punctuation">,</span> <span class="token keyword">const</span> Exp<span class="token operator">&lt;</span>TRhs<span class="token operator">></span><span class="token operator">&amp;</span> rhs<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token keyword">return</span> F<span class="token operator">&lt;</span>mul<span class="token operator">></span><span class="token punctuation">(</span>lhs<span class="token punctuation">,</span> rhs<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-<span class="token comment" spellcheck="true">// user defined operation</span>
-<span class="token keyword">struct</span> maximum<span class="token punctuation">{</span>
-  <span class="token keyword">inline</span> <span class="token keyword">static</span> <span class="token keyword">float</span> <span class="token function">Map</span><span class="token punctuation">(</span><span class="token keyword">float</span> a<span class="token punctuation">,</span> <span class="token keyword">float</span> b<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">return</span> a <span class="token operator">></span> b <span class="token operator">?</span> a <span class="token operator">:</span> b<span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-
-<span class="token keyword">const</span> <span class="token keyword">int</span> n <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token keyword">float</span> sa<span class="token punctuation">[</span>n<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
-  <span class="token keyword">float</span> sb<span class="token punctuation">[</span>n<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
-  <span class="token keyword">float</span> sc<span class="token punctuation">[</span>n<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
-  Vec <span class="token function">A</span><span class="token punctuation">(</span>sa<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">B</span><span class="token punctuation">(</span>sb<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">C</span><span class="token punctuation">(</span>sc<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token comment" spellcheck="true">// run expression, this expression is longer:)</span>
-  A <span class="token operator">=</span> B <span class="token operator">*</span> F<span class="token operator">&lt;</span>maximum<span class="token operator">></span><span class="token punctuation">(</span>C<span class="token punctuation">,</span> B<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d:%f == %f * max(%f, %f)\n"</span><span class="token punctuation">,</span>
-           i<span class="token punctuation">,</span> A<span class="token punctuation">.</span>dptr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> B<span class="token punctuation">.</span>dptr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> C<span class="token punctuation">.</span>dptr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> B<span class="token punctuation">.</span>dptr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-  <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ol>
-<li>惰性求值使得我们可以事先知道所有操作以及操作的目标</li>
-<li>模板构造和递归求值使得我们的元素级操作更加明了</li>
-<li>由于模板和内联函数，使得使用表达式和直接通过循环实现一样搞笑</li>
-</ol>
-<h3 id="MShadow中的表达式模板"><a href="#MShadow中的表达式模板" class="headerlink" title="MShadow中的表达式模板"></a>MShadow中的表达式模板</h3><p>mshadow中的表达式模板原理和上面讲的一样，主要有几个不同点</p>
-<ol>
-<li>mshadow将求值代码和表达式构建代码相隔离<ol>
-<li>根据表达式创建Plan类并使用其求值</li>
-<li>这样使得我们只需要在Plan中保存少量变量，比如，不需要保存array的长度</li>
-<li>另一个重要的原因是CUDA不能使用常量引用</li>
-</ol>
-</li>
-<li>惰性求值支持矩阵乘法等复杂的表达式，这里的惰性求值同样没有使用任何额外的存储空间</li>
-<li>类型检查和长度检查</li>
-</ol>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;MXNET-Expression-Template-Tutorial—MXNET-表达式模板笔记&quot;&gt;&lt;a href=&quot;#MXNET-Expression-Template-Tutorial—MXNET-表达式模板笔记&quot; class=&quot;headerlink&quot; tit
-    
-    </summary>
-    
-    
-      <category term="深度学习" scheme="http://www.wowx.info/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="MXNET" scheme="http://www.wowx.info/tags/MXNET/"/>
     
   </entry>
   
