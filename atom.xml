@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.wowx.info/"/>
-  <updated>2017-07-09T16:51:12.039Z</updated>
+  <updated>2017-08-02T11:38:47.843Z</updated>
   <id>http://www.wowx.info/</id>
   
   <author>
@@ -14,6 +14,46 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>knowledge distill methods</title>
+    <link href="http://www.wowx.info/posts/20170802173658/"/>
+    <id>http://www.wowx.info/posts/20170802173658/</id>
+    <published>2017-08-02T11:36:58.000Z</published>
+    <updated>2017-08-02T11:38:47.843Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Knowledge-Distill-Methods"><a href="#Knowledge-Distill-Methods" class="headerlink" title="Knowledge Distill Methods"></a>Knowledge Distill Methods</h1><p>随着Kaiming He等人提出的resnet<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>解决了造成深层网络难以收敛的梯度弥散等问题后，人们越来越趋向于通过堆叠网络深度、宽度等方法来改善模型的性能，虽然这样确实在各种任务中获得了很好的效果，然而网络规模的无限制增长为模型在手机等计算能力受限设备上的部署带来了严峻挑战。人们迫切需要有效压缩模型尺寸的方法。本文将介绍其中一种简单有效的压缩方法: 模型蒸馏。模型蒸馏的大体思想是训练一个大型且精度较高的网络，通过某种方法将大型网络中的“知识”抽取出来引入我们想要训练的小型网络。</p>
+<h2 id="Distilling-the-knowledge-in-a-Neural-Network2"><a href="#Distilling-the-knowledge-in-a-Neural-Network2" class="headerlink" title="Distilling the knowledge in a Neural Network2"></a>Distilling the knowledge in a Neural Network<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup></h2><p>和统计机器学习中随机森林类似，为了获得更好的泛化能力人们通常会同时训练多种不同的网络结构，然后在将不同网络的输出通过加权求和等方法综合起来作为最终的输出，使用的网络越多，最后获得的效果越好。然而过多的网络也带来了巨量的参数，整个网络的复杂度爆炸增长。</p>
+<p>Hinton等人受到<sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup>的启发，发现可以人为地为小模型增加约束以控制其抽取的特征尽量接近大模型，这样等效于将大模型所学习到的“知识”抽取到一个单一的简单模型中。</p>
+<p>本文中，Hint定义了如下soft logits函数：</p>
+<p><img src="http://ww1.sinaimg.cn/large/6425ef91ly1fi5fikvl0sj20af01lglg.jpg" alt=""></p>
+<p>和我们常用的logits函数不同，上式中多了一个参数$T$,参数$T$的作用主要是控制logits输出不同类别概率之间的大小差距，可以通过下面的图直观理解：<br><img src="http://ww1.sinaimg.cn/large/6425ef91ly1fi5g7xm8uqj20da06qt8x.jpg" alt=""></p>
+<p>从图中可以看出，在$x=6$和$x=9$处取两个值，当T越大时，两处对应的y值差距越大。<br>那为什么要控制logits输出概率差距呢，因为我们需要学习的是teacher的输出特征分布，如果我们使用的logits函数对输入大小很敏感，那么获得的类别概率中会有一个具有非常大的值，而其他类别概率相对来说会很小，这样的话由于其他类别概率被淹没了，我们的小模型很可能会学不到他们。</p>
+<p>在训练过程中，作者同时将大student 网络的T值设的很大以使小模型学习大模型的输出分布，训练完之后再将T调回较小的值。</p>
+<h2 id="FITNETS-HINT-FOR-THIN-DEEP-NETS4"><a href="#FITNETS-HINT-FOR-THIN-DEEP-NETS4" class="headerlink" title="FITNETS: HINT FOR THIN DEEP NETS4"></a>FITNETS: HINT FOR THIN DEEP NETS<sup id="fnref:4"><a href="#fn:4" rel="footnote">4</a></sup></h2><p>虽然Hinton的KD方法引入的soft logits函数能够很好的将大模型的知识引入小模型，然而这个方法只能对模型最终的输出做约束，当小模型很深时，即使有大模型的约束它仍然很难收敛。</p>
+<p>对这个问题一个很显然的改进方法就是除了对大小模型最终输出进行蒸馏之外，同时对模型的中间层的输出做蒸馏。这里作者为小模型的中间层起名为guided layer, 大模型的中间层起名为hint layer。<br>因为大小模型结构不同，他们的中间输出宽、高、通道数往往也不相同，我们不能直接对他们计算distill loss，而应该采用下式的方法将两个模型映射到相同维度然后计算:<br><img src="https://ws1.sinaimg.cn/large/6425ef91ly1fi5gy1y7c0j20me01kaa4.jpg" alt=""><br>其中$u<em>h(x;W</em>{Hint})$表示大模型输入为$x$，权重为$W_{Hint}$时，hint layer的输出，$v<em>g(x;W</em>{Guided})$表示小模型输入为$x$，权重为$W_{Guided}$时，guided layer的输出，$r(.)$为映射函数，将guided layer输出映射到hint layer相同的维度上。 需要注意的是，映射后的输出必须和hit layer的输出是可比较的，比如必须得使用相同的非线性函数。</p>
+<p><img src="https://ws1.sinaimg.cn/large/6425ef91ly1fi5hky50xpj20pk0aggmp.jpg" alt=""></p>
+<p>假设hint layer的输出宽高为$(N<em>{h,1}, N</em>{h,2})$, 通道数为$O<em>h$;guided layer 宽高为$(N</em>{g,1}, N_{g,2})$,通道数为$O<em>g$。如果使用全连接层进行维度映射，则需要的参数量为$N</em>{h,1}\times{N_{h,2}\times{O<em>h}\times{N</em>{g,1}\times{N_{g_2}\times{O_g}}}}$, 这样庞大的参数量是难以接受的。因此，作者采用了卷积层作为映射函数。</p>
+<p>我们知道卷积层的输入输出关系为$$N^\prime=\frac{N+2p-ks}{stride}+1$$<br>其中，$N$为输入的宽度或高度，$N^\prime$为输入的宽度或高度，$p$为padding,$ks$为kernel size,这里取$p=0, stride=1$, 要将guided layer输出映射到和hint layer输出同维，只需要使等式$N_{g,i}-ks<em>i+1=N</em>{h,i}$成立即可。卷积操作的参数数量为$k_1\times{k_2}\times{O_h}\times{O<em>g}$,这显然要小于全连接映射的系数$N</em>{h,1}\times{N<em>{h,2}}\times{N</em>{g,1}}\times{N_{g,2}}$</p>
+<p>训练过程伪代码为</p>
+<p><img src="https://ws1.sinaimg.cn/large/6425ef91ly1fi5hlqestaj20pw06uab0.jpg" alt=""></p>
+<h2 id="Accelerating-Convolutional-Neural-Networks-with-Dominant-Convolutional-Kernel-and-Knowledge-Pre-regression5"><a href="#Accelerating-Convolutional-Neural-Networks-with-Dominant-Convolutional-Kernel-and-Knowledge-Pre-regression5" class="headerlink" title="Accelerating Convolutional Neural Networks with Dominant Convolutional Kernel and Knowledge Pre-regression5"></a>Accelerating Convolutional Neural Networks with Dominant Convolutional Kernel and Knowledge Pre-regression<sup id="fnref:5"><a href="#fn:5" rel="footnote">5</a></sup></h2><p>这篇论文主要创新点为</p>
+<ol>
+<li>设计了Dominant Convolutional Kernel (DK)结构有效压缩模型参数量</li>
+<li>使用Knowledge Pre-regression 训练方法进行知识蒸馏<h3 id="Dominant-Convolutional-Kernel-DK-Method"><a href="#Dominant-Convolutional-Kernel-DK-Method" class="headerlink" title="Dominant Convolutional Kernel(DK) Method"></a>Dominant Convolutional Kernel(DK) Method</h3><img src="https://ws1.sinaimg.cn/large/6425ef91ly1fi5htcmam0j20u90jogwl.jpg" alt=""><br>DK结构与channelwise结构卷积很类似，主要的不同之处是channelwise将输入分为channel组，每个组分别用一个单层卷积核进行处理，最后使用1x1卷积将不同通道结果融合在一起；而DK结构将输入分为channel组后，对每个组使用k层卷积核分别处理，之后再使用1x1卷积将不同通道融合在一起，其中$1\leq{n}\leq{k_h\times{k_w}}$,因为作者发现当$n &gt;{k_h\times{k_w}}时，模型的参数数量开始多于普通卷积$。<br>DK结构中的第一部分的参数量为$n\times{c_i}\times{k_w}\times{k_h}$, 第二部分的参数数量为$n\times{c_i}\times{c_o}$,其中$c_i, c_o$分别为输入和输出的通道数。当$n=1$时，参数数量只有普通卷积的12%$, n=2$时参数数量为普通卷积的24%。<h3 id="Knowledge-Pre-regression-KP-Training-Method"><a href="#Knowledge-Pre-regression-KP-Training-Method" class="headerlink" title="Knowledge Pre-regression(KP) Training Method"></a>Knowledge Pre-regression(KP) Training Method</h3>使用上述方法压缩模型后，更进一步的作者使用了distill方法提高其精度。<br><img src="https://ws1.sinaimg.cn/large/6425ef91ly1fi5hpmagukj20t90g9wjy.jpg" alt=""><br>Fitnet结构简单但是它不是很好收敛，为了增加模型的约束，作者同时将第一个和第二个pooling层的输出以及最后一层输出计算distill loss， 对每对pooling层的输出使用全连接层映射到相同维度后使用soft logits计算损失，注意pooling层使用teacher 网络的输出作为标签，teacher 网络使用ground truth作为标签计算损失而网络最后一层中student 网络使用ground truth计算损失，teacher 网络的输出和student 网络的输出计算一个损失，最后将所有损失加起来作为最终的损失函数。</li>
+</ol>
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;">He K, Zhang X, Ren S, et al. Deep residual learning for image recognition. arXiv preprint arXiv: 1512.03385[J]. 2015.</span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;">Hinton G, Vinyals O, Dean J. Distilling the knowledge in a neural network[J]. arXiv preprint arXiv:1503.02531, 2015.</span><a href="#fnref:2" rev="footnote"> ↩</a></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">3.</span><span style="display: inline-block; vertical-align: top;">Lawrence W E, Doniach S. Proceedings of the 12th International Conference on Low Temperature Physics[J]. Kyoto, Academic, Tokyo, 1971: 361.<br>MLA</span><a href="#fnref:3" rev="footnote"> ↩</a></li><li id="fn:4"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">4.</span><span style="display: inline-block; vertical-align: top;">Romero A, Ballas N, Kahou S E, et al. Fitnets: Hints for thin deep nets[J]. arXiv preprint arXiv:1412.6550, 2014.</span><a href="#fnref:4" rev="footnote"> ↩</a></li><li id="fn:5"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">5.</span><span style="display: inline-block; vertical-align: top;">Wang Z, Deng Z, Wang S. Accelerating Convolutional Neural Networks with Dominant Convolutional Kernel and Knowledge Pre-regression[C]//European Conference on Computer Vision. Springer International Publishing, 2016: 533-548.</span><a href="#fnref:5" rev="footnote"> ↩</a></li></ol></div></div>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Knowledge-Distill-Methods&quot;&gt;&lt;a href=&quot;#Knowledge-Distill-Methods&quot; class=&quot;headerlink&quot; title=&quot;Knowledge Distill Methods&quot;&gt;&lt;/a&gt;Knowledge D
+    
+    </summary>
+    
+    
+      <category term="机器学习" scheme="http://www.wowx.info/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
   
   <entry>
     <title>Like What You Like: Knowledge Distill via Neuron Selectivity Transfer</title>
@@ -6188,147 +6228,6 @@ The two boomerangs are <span class="token punctuation">[</span><span class="toke
       <category term="hashtable" scheme="http://www.wowx.info/tags/hashtable/"/>
     
       <category term="Backtracking" scheme="http://www.wowx.info/tags/Backtracking/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode House Robber Series</title>
-    <link href="http://www.wowx.info/posts/20170303131752/"/>
-    <id>http://www.wowx.info/posts/20170303131752/</id>
-    <published>2017-03-03T05:17:52.000Z</published>
-    <updated>2017-03-07T03:18:17.377Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="198-House-Robber-I"><a href="#198-House-Robber-I" class="headerlink" title="198. House Robber I"></a>198. House Robber I</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
-<p>You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security system connected and it will automatically contact the police if two adjacent houses were broken into on the same night.</p>
-<p>Given a list of non-negative integers representing the amount of money of each house, determine the maximum amount of money you can rob tonight without alerting the police.</p>
-</blockquote>
-<p>假设有一个强盗抢劫一条街，这条街安装了防盗装置，只要任意相邻的房子被抢就会触发报警，给出一个数组其中存储着每间房子中的现金数量，求强盗最多能抢到多少钱。</p>
-<h3 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h3><p>采用动态规划方法<br>每间房子有两种状态，抢或不抢，如果一间房子能被抢那么它的前一间房子一定没有被抢,定义两个数，一个存储之前房子没有被抢(<code>exclude</code>)一个存储之前的房子已经被抢了(<code>include</code>),那么</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> i <span class="token operator">=</span> include<span class="token punctuation">,</span> <span class="token keyword">int</span> e <span class="token operator">=</span> exclude<span class="token punctuation">;</span>
-include <span class="token operator">=</span> exclude <span class="token operator">+</span> nums<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span>
-exclude <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span>
-<span class="token punctuation">{</span>
-    <span class="token keyword">public</span><span class="token operator">:</span>
-    <span class="token keyword">int</span> <span class="token function">rob</span><span class="token punctuation">(</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> nums<span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-        <span class="token keyword">int</span> len <span class="token operator">=</span> nums<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">int</span> include <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> exclude <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> len<span class="token punctuation">;</span> <span class="token operator">++</span>j<span class="token punctuation">)</span>
-        <span class="token punctuation">{</span>
-            <span class="token keyword">int</span> i <span class="token operator">=</span> include<span class="token punctuation">,</span> e <span class="token operator">=</span> exclude<span class="token punctuation">;</span>
-            include <span class="token operator">=</span> exclude <span class="token operator">+</span> nums<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span>
-            exclude <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> <span class="token function">max</span><span class="token punctuation">(</span>include<span class="token punctuation">,</span> exclude<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>另一种理解：<br>将房子编号为奇数和偶数</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
-<span class="token keyword">public</span><span class="token operator">:</span>
-    <span class="token keyword">int</span> <span class="token function">rob</span><span class="token punctuation">(</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token operator">&amp;</span> nums<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">int</span> is_odd<span class="token punctuation">;</span>
-        vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">robs</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> nums<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
-        <span class="token punctuation">{</span>
-            is_odd <span class="token operator">=</span> i <span class="token operator">%</span> <span class="token number">2</span><span class="token punctuation">;</span>
-            robs<span class="token punctuation">[</span>is_odd<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span>robs<span class="token punctuation">[</span>is_odd<span class="token punctuation">]</span> <span class="token operator">+</span> nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> robs<span class="token punctuation">[</span><span class="token number">1</span> <span class="token operator">-</span> is_odd<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token comment" spellcheck="true">// if (i % 2 == 0)</span>
-            <span class="token comment" spellcheck="true">//     rob_even = max(rob_even + nums[i], rob_odd);</span>
-            <span class="token comment" spellcheck="true">// else</span>
-            <span class="token comment" spellcheck="true">//     rob_odd = max(rob_odd + nums[i], rob_even);</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> <span class="token function">max</span><span class="token punctuation">(</span>robs<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> robs<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="213-House-Robber-II"><a href="#213-House-Robber-II" class="headerlink" title="213. House Robber II"></a>213. House Robber II</h2><h2 id="Problem-Description-1"><a href="#Problem-Description-1" class="headerlink" title="Problem Description"></a>Problem Description</h2><blockquote>
-<p>Note: This is an extension of House Robber.</p>
-<p>After robbing those houses on that street, the thief has found himself a new place for his thievery so that he will not get too much attention. This time, all houses at this place are arranged in a circle. That means the first house is the neighbor of the last one. Meanwhile, the security system for these houses remain the same as for those in the previous street.</p>
-<p>Given a list of non-negative integers representing the amount of money of each house, determine the maximum amount of money you can rob tonight without alerting the police.</p>
-</blockquote>
-<p>和上题类似，只是这次整个街区首尾相连形成了一个环形;</p>
-<h3 id="Method-1"><a href="#Method-1" class="headerlink" title="Method"></a>Method</h3><p>本题因为构成了环形，所以不但要考虑之前房子有没有被抢，还需要考虑后面的房子可不可以抢，初看起来问题很复杂，但是我们可以将这个问题转化为前面的线性街区的情况：以任何一间房子为分割点，比如第0间房子，如果这间房子被抢了，那么它前面的房子(n-1)一定不能被抢，则<code>[0, 1, 2,...,n-2]</code>可以当做线性情况看待，如果该房间没有被抢，那么<code>[1, 2, ..., n-1]</code>变成了线性情况。</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
-<span class="token keyword">public</span><span class="token operator">:</span>
-    <span class="token keyword">int</span> <span class="token function">rob</span><span class="token punctuation">(</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token operator">&amp;</span> nums<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">int</span> len <span class="token operator">=</span> nums<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>len <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span>
-            <span class="token keyword">return</span> nums<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> <span class="token function">max</span><span class="token punctuation">(</span><span class="token function">rob</span><span class="token punctuation">(</span>nums<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> len<span class="token number">-2</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">rob</span><span class="token punctuation">(</span>nums<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> len<span class="token number">-1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">int</span> <span class="token function">rob</span><span class="token punctuation">(</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token operator">&amp;</span> nums<span class="token punctuation">,</span> <span class="token keyword">int</span> lo<span class="token punctuation">,</span> <span class="token keyword">int</span> hi<span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-        <span class="token keyword">int</span> include <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> exclude <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> lo<span class="token punctuation">;</span> j <span class="token operator">&lt;=</span> hi<span class="token punctuation">;</span> <span class="token operator">++</span>j<span class="token punctuation">)</span>
-        <span class="token punctuation">{</span>
-            <span class="token keyword">int</span> i <span class="token operator">=</span> include<span class="token punctuation">,</span> e <span class="token operator">=</span> exclude<span class="token punctuation">;</span>
-            include <span class="token operator">=</span> exclude <span class="token operator">+</span> nums<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span>
-            exclude <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> <span class="token function">max</span><span class="token punctuation">(</span>include<span class="token punctuation">,</span> exclude<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="337-House-Robber-III"><a href="#337-House-Robber-III" class="headerlink" title="337. House Robber III"></a>337. House Robber III</h2><h3 id="Problem-Description-2"><a href="#Problem-Description-2" class="headerlink" title="Problem Description"></a>Problem Description</h3><blockquote>
-<p>The thief has found himself a new place for his thievery again. There is only one entrance to this area, called the “root.” Besides the root, each house has one and only one parent house. After a tour, the smart thief realized that “all houses in this place forms a binary tree”. It will automatically contact the police if two directly-linked houses were broken into on the same night.</p>
-<p>Determine the maximum amount of money the thief can rob tonight without alerting the police.</p>
-<p>Example 1:<br>    3<br>   / \<br>  2   3<br>   \   \<br>    3   1<br>Maximum amount of money the thief can rob = 3 + 3 + 1 = 7.<br>Example 2:<br>    3<br>   / \<br>  4   5<br> / \   \<br>1   3   1<br>Maximum amount of money the thief can rob = 4 + 5 = 9.</p>
-</blockquote>
-<p>这次抢劫团伙又找到了一个抢劫地点，这个地点只有一个入口可以进入，然后每条路经过一个房子后分成两条路，不断重复，即这是一颗二叉树，如果某条路上两家同时被抢劫会触发报警装置，求强盗最多能抢多少钱</p>
-<h3 id="Method-2"><a href="#Method-2" class="headerlink" title="Method"></a>Method</h3><p>在每个结点上，强盗有两种选择，一是抢劫该结点，但是它的两个子节点不能被抢，二是不抢劫该节点，其两个子节点都可以抢</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
- * };
- */</span>
-<span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
-<span class="token keyword">public</span><span class="token operator">:</span>
-    <span class="token keyword">int</span> <span class="token function">rob</span><span class="token punctuation">(</span>TreeNode<span class="token operator">*</span> root<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> res <span class="token operator">=</span> <span class="token function">robSub</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> <span class="token function">max</span><span class="token punctuation">(</span>res<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> res<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-
-    <span class="token punctuation">}</span>
-
-    vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">robSub</span><span class="token punctuation">(</span>TreeNode<span class="token operator">*</span> root<span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>root <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
-            <span class="token keyword">return</span> vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-        vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> left <span class="token operator">=</span> <span class="token function">robSub</span><span class="token punctuation">(</span>root<span class="token operator">-</span><span class="token operator">></span>left<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> right <span class="token operator">=</span> <span class="token function">robSub</span><span class="token punctuation">(</span>root<span class="token operator">-</span><span class="token operator">></span>right<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-        vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">res</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        res<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> root<span class="token operator">-</span><span class="token operator">></span>val <span class="token operator">+</span> left<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">+</span> right<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-        res<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span>left<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> left<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token function">max</span><span class="token punctuation">(</span>right<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> right<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> res<span class="token punctuation">;</span>
-
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;198-House-Robber-I&quot;&gt;&lt;a href=&quot;#198-House-Robber-I&quot; class=&quot;headerlink&quot; title=&quot;198. House Robber I&quot;&gt;&lt;/a&gt;198. House Robber I&lt;/h2&gt;&lt;h3 id=
-    
-    </summary>
-    
-      <category term="algorithm" scheme="http://www.wowx.info/categories/algorithm/"/>
-    
-    
-      <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
-    
-      <category term="algorighm" scheme="http://www.wowx.info/tags/algorighm/"/>
-    
-      <category term="dp" scheme="http://www.wowx.info/tags/dp/"/>
     
   </entry>
   
