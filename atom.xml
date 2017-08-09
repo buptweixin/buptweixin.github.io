@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.wowx.info/"/>
-  <updated>2017-08-02T11:38:47.843Z</updated>
+  <updated>2017-08-09T02:44:16.167Z</updated>
   <id>http://www.wowx.info/</id>
   
   <author>
@@ -14,6 +14,39 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>SENet</title>
+    <link href="http://www.wowx.info/posts/20170809104219/"/>
+    <id>http://www.wowx.info/posts/20170809104219/</id>
+    <published>2017-08-09T02:42:19.000Z</published>
+    <updated>2017-08-09T02:44:16.167Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="SENet-Momenta"><a href="#SENet-Momenta" class="headerlink" title="SENet(Momenta)"></a>SENet(Momenta)</h2><p>本文整理自机器之心对Momenta WMW团队的专访<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup></p>
+<p><img src="http://img.mp.itc.cn/upload/20170802/fb03d75df82f432693cf895490574a33_th.jpg" alt=""></p>
+<p>仔细观察上面的卷积示意图，我们可以看到卷积操作实际上是在局部感受野上对图像进行空间和通道方向的信息整合。</p>
+<p>当前主流的提升网络的性能主要办法是在空间维度进行的，比如inception结构是在网络中嵌入多尺度结构，Attention机制考虑空间上下文信息等。</p>
+<p>而SENet考虑的是在特征通道层面来提升网络性能，提出了下面的Squeeze-and-Excitation Networks(SENet)结构:</p>
+<p><img src="http://ohcog5mjb.bkt.clouddn.com/17-8-9/64121359.jpg" alt=""></p>
+<p>具体做法包括Squuze和Excitation两个步骤，Squeeze步骤对中间特征做全局聚合成$1\times1\times{c2}$的特征，这样接近输入的层也能获得全局的感受野；然后将其输入到softmax层获得每个通道权重，可以看成学习通道间的相关性；最后把这个权重加权到每个通道上，完成重标定。</p>
+<p>结构如下所示：</p>
+<p><img src="http://ohcog5mjb.bkt.clouddn.com/17-8-9/72128626.jpg" alt=""></p>
+<p>可以看出，实现上使用全局pooling作为Squeeze操作，然后使用两个全连接层获得通道间的相关性，第一个全连接层下采样到$\frac{1}{16}$之后再恢复到原通道数是为了获得更多的非线性且极大减少参数数量，最后使用Sigmoid获得归一化权重。此外SE结构可以很方便地集成到skip-connections模块中，如上面的右图所示。</p>
+<p>最后贴一下实验结果：</p>
+<p><img src="http://ohcog5mjb.bkt.clouddn.com/17-8-9/80519114.jpg" alt=""></p>
+<p>可以看出使用SE结构的ResNet-50网络top-1已经超过了更深的原始ResNet-101结构，而使用SE的ResNet-101已经远超过原始ResNet-152网络了！</p>
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="http://www.sohu.com/a/161633191_465975" target="_blank" rel="external">http://www.sohu.com/a/161633191_465975</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li></ol></div></div>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;SENet-Momenta&quot;&gt;&lt;a href=&quot;#SENet-Momenta&quot; class=&quot;headerlink&quot; title=&quot;SENet(Momenta)&quot;&gt;&lt;/a&gt;SENet(Momenta)&lt;/h2&gt;&lt;p&gt;本文整理自机器之心对Momenta WMW团队的
+    
+    </summary>
+    
+    
+      <category term="深度学习" scheme="http://www.wowx.info/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
   
   <entry>
     <title>knowledge distill methods</title>
@@ -6040,194 +6073,6 @@ Note: There are at least two nodes in this BST.
       <category term="greedy" scheme="http://www.wowx.info/tags/greedy/"/>
     
       <category term="BST" scheme="http://www.wowx.info/tags/BST/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode 447[HashTable] 401[Backtracking] 409[HashTable] 387[HashTable]</title>
-    <link href="http://www.wowx.info/posts/20170306094212/"/>
-    <id>http://www.wowx.info/posts/20170306094212/</id>
-    <published>2017-03-06T01:42:12.000Z</published>
-    <updated>2017-03-07T03:17:02.161Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="447-Number-of-Boomerangs-EASY"><a href="#447-Number-of-Boomerangs-EASY" class="headerlink" title="447. Number of Boomerangs[EASY]"></a>447. Number of Boomerangs[EASY]</h2><h3 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h3><pre class="line-numbers language-cpp"><code class="language-cpp">Given n points in the plane that are all pairwise distinct<span class="token punctuation">,</span> a <span class="token string">"boomerang"</span> is a tuple of <span class="token function">points</span> <span class="token punctuation">(</span>i<span class="token punctuation">,</span> j<span class="token punctuation">,</span> k<span class="token punctuation">)</span> such that the distance between i <span class="token operator">and</span> j equals the distance between i <span class="token operator">and</span> <span class="token function">k</span> <span class="token punctuation">(</span>the order of the tuple matters<span class="token punctuation">)</span><span class="token punctuation">.</span>
-
-Find the number of boomerangs<span class="token punctuation">.</span> You may assume that n will be at most <span class="token number">500</span> <span class="token operator">and</span> coordinates of points are all in the range <span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">10000</span><span class="token punctuation">,</span> <span class="token number">10000</span><span class="token punctuation">]</span> <span class="token punctuation">(</span>inclusive<span class="token punctuation">)</span><span class="token punctuation">.</span>
-
-Example<span class="token operator">:</span>
-Input<span class="token operator">:</span>
-<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
-
-Output<span class="token operator">:</span>
-<span class="token number">2</span>
-
-Explanation<span class="token operator">:</span>
-The two boomerangs are <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">and</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>给出一组坐标值，找出有多少种三点组合<code>[i, j, k]</code>使得i与k距离和i与j距离相等</p>
-<h3 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h3><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
-<span class="token keyword">public</span><span class="token operator">:</span>
-    <span class="token keyword">int</span> <span class="token function">numberOfBoomerangs</span><span class="token punctuation">(</span>vector<span class="token operator">&lt;</span>pair<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">>></span><span class="token operator">&amp;</span> points<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        unordered_map<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">></span> dist_map<span class="token punctuation">;</span>
-        <span class="token keyword">int</span> res <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> points<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
-        <span class="token punctuation">{</span>
-            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> points<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">++</span>j<span class="token punctuation">)</span>
-            <span class="token punctuation">{</span>
-                <span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">==</span> j<span class="token punctuation">)</span>
-                    <span class="token keyword">continue</span><span class="token punctuation">;</span>
-                <span class="token keyword">int</span> d <span class="token operator">=</span> <span class="token function">getDistance</span><span class="token punctuation">(</span>points<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> points<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-                <span class="token keyword">if</span> <span class="token punctuation">(</span>dist_map<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span>d<span class="token punctuation">)</span> <span class="token operator">!=</span> dist_map<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-                    dist_map<span class="token punctuation">[</span>d<span class="token punctuation">]</span> <span class="token operator">+</span><span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-                <span class="token keyword">else</span>
-                    dist_map<span class="token punctuation">[</span>d<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-
-            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span> it <span class="token operator">=</span> dist_map<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> it <span class="token operator">!=</span> dist_map<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">++</span>it<span class="token punctuation">)</span>
-                res <span class="token operator">+</span><span class="token operator">=</span> it<span class="token operator">-</span><span class="token operator">></span>second <span class="token operator">*</span> <span class="token punctuation">(</span>it<span class="token operator">-</span><span class="token operator">></span>second <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            dist_map<span class="token punctuation">.</span><span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> res<span class="token punctuation">;</span>
-
-    <span class="token punctuation">}</span>
-
-<span class="token keyword">private</span><span class="token operator">:</span>
-    <span class="token keyword">int</span> <span class="token function">getDistance</span><span class="token punctuation">(</span>pair<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">></span> <span class="token operator">&amp;</span>point1<span class="token punctuation">,</span> pair<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">></span> <span class="token operator">&amp;</span>point2<span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-        <span class="token keyword">int</span> dx <span class="token operator">=</span> point1<span class="token punctuation">.</span>first <span class="token operator">-</span> point2<span class="token punctuation">.</span>first<span class="token punctuation">;</span>
-        <span class="token keyword">int</span> dy <span class="token operator">=</span> point1<span class="token punctuation">.</span>second <span class="token operator">-</span> point2<span class="token punctuation">.</span>second<span class="token punctuation">;</span>
-        <span class="token keyword">return</span> dx <span class="token operator">*</span> dx <span class="token operator">+</span> dy <span class="token operator">*</span> dy<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="401-Binary-Watch-EASY"><a href="#401-Binary-Watch-EASY" class="headerlink" title="401 Binary Watch[EASY]"></a>401 Binary Watch[EASY]</h2><h3 id="Problem-Description-1"><a href="#Problem-Description-1" class="headerlink" title="Problem Description"></a>Problem Description</h3><p>A binary watch has 4 LEDs on the top which represent the hours (0-11), and the 6 LEDs on the bottom represent the minutes (0-59).</p>
-<p>Each LED represents a zero or one, with the least significant bit on the right.</p>
-<p><img src="http://ww1.sinaimg.cn/large/6425ef91ly1fdcxmc42t0j21kw16ou11" alt=""><br>For example, the above binary watch reads “3:25”.</p>
-<p>Given a non-negative integer n which represents the number of LEDs that are currently on, return all possible times the watch could represent.</p>
-<p>Example:</p>
-<p>Input: n = 1<br>Return: [“1:00”, “2:00”, “4:00”, “8:00”, “0:01”, “0:02”, “0:04”, “0:08”, “0:16”, “0:32”]<br>Note:<br>The order of output does not matter.<br>The hour must not contain a leading zero, for example “01:00” is not valid, it should be “1:00”.<br>The minute must be consist of two digits and may contain a leading zero, for example “10:2” is not valid, it should be “10:02”.</p>
-<p>给定位数列出二进制手表的所有可能的时间字符串</p>
-<h3 id="Method-1"><a href="#Method-1" class="headerlink" title="Method"></a>Method</h3><p>采用回溯法</p>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
-<span class="token keyword">public</span><span class="token operator">:</span>
-    vector<span class="token operator">&lt;</span>string<span class="token operator">></span> <span class="token function">readBinaryWatch</span><span class="token punctuation">(</span><span class="token keyword">int</span> num<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">hours</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">minutes</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">16</span><span class="token punctuation">,</span> <span class="token number">32</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        vector<span class="token operator">&lt;</span>string<span class="token operator">></span> res<span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> num<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
-        <span class="token punctuation">{</span>
-            vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> hour_list <span class="token operator">=</span> <span class="token function">getNumber</span><span class="token punctuation">(</span>hours<span class="token punctuation">,</span> i<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> minute_list <span class="token operator">=</span> <span class="token function">getNumber</span><span class="token punctuation">(</span>minutes<span class="token punctuation">,</span> num <span class="token operator">-</span> i<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> hour <span class="token operator">:</span> hour_list<span class="token punctuation">)</span>
-            <span class="token punctuation">{</span>
-                <span class="token keyword">if</span> <span class="token punctuation">(</span>hour <span class="token operator">>=</span> <span class="token number">12</span><span class="token punctuation">)</span>
-                    <span class="token keyword">continue</span><span class="token punctuation">;</span>
-                <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> minute <span class="token operator">:</span> minute_list<span class="token punctuation">)</span>
-                <span class="token punctuation">{</span>
-                    <span class="token keyword">if</span> <span class="token punctuation">(</span>minute <span class="token operator">>=</span> <span class="token number">60</span><span class="token punctuation">)</span>
-                        <span class="token keyword">continue</span><span class="token punctuation">;</span>
-                    string str <span class="token operator">=</span> <span class="token function">to_string</span><span class="token punctuation">(</span>hour<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">":"</span> <span class="token operator">+</span> <span class="token punctuation">(</span>minute <span class="token operator">&lt;=</span> <span class="token number">9</span> <span class="token operator">?</span> <span class="token string">"0"</span> <span class="token operator">:</span> <span class="token string">""</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token function">to_string</span><span class="token punctuation">(</span>minute<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    res<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token punctuation">}</span>
-            <span class="token punctuation">}</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> res<span class="token punctuation">;</span>
-
-    <span class="token punctuation">}</span>
-
-<span class="token keyword">private</span><span class="token operator">:</span>
-    vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">getNumber</span><span class="token punctuation">(</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token operator">&amp;</span>nums<span class="token punctuation">,</span> <span class="token keyword">int</span> count<span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-        vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> res<span class="token punctuation">;</span>
-        <span class="token function">getNumberHelper</span><span class="token punctuation">(</span>nums<span class="token punctuation">,</span> count<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> res<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> res<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token keyword">void</span> <span class="token function">getNumberHelper</span><span class="token punctuation">(</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token operator">&amp;</span>nums<span class="token punctuation">,</span> <span class="token keyword">int</span> count<span class="token punctuation">,</span> <span class="token keyword">int</span> start<span class="token punctuation">,</span> <span class="token keyword">int</span> sum<span class="token punctuation">,</span> vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token operator">&amp;</span>res<span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>count <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
-        <span class="token punctuation">{</span>
-            res<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>sum<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">return</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> start<span class="token punctuation">;</span> i <span class="token operator">&lt;</span> nums<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
-            <span class="token function">getNumberHelper</span><span class="token punctuation">(</span>nums<span class="token punctuation">,</span> count<span class="token number">-1</span><span class="token punctuation">,</span> i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span> sum<span class="token operator">+</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> res<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="409-Longest-Palindrome"><a href="#409-Longest-Palindrome" class="headerlink" title="409. Longest Palindrome"></a>409. Longest Palindrome</h2><h3 id="Problem-Description-2"><a href="#Problem-Description-2" class="headerlink" title="Problem Description"></a>Problem Description</h3><p>ven a string which consists of lowercase or uppercase letters, find the length of the longest palindromes that can be built with those letters.</p>
-<p>This is case sensitive, for example “Aa” is not considered a palindrome here.</p>
-<p>Note:<br>Assume the length of given string will not exceed 1,010.</p>
-<p>Example:</p>
-<p>Input:<br>“abccccdd”</p>
-<p>Output:<br>7</p>
-<p>Explanation:<br>One longest palindrome that can be built is “dccaccd”, whose length is 7.</p>
-<p>给出一个由大写字母和小写字母组成的字符串，求由该字符串中的字符最长能构成的回文长度</p>
-<h3 id="Method-2"><a href="#Method-2" class="headerlink" title="Method"></a>Method</h3><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
-<span class="token keyword">public</span><span class="token operator">:</span>
-    <span class="token keyword">int</span> <span class="token function">longestPalindrome</span><span class="token punctuation">(</span>string s<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">chars</span><span class="token punctuation">(</span><span class="token number">52</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">char</span> ch <span class="token operator">:</span> s<span class="token punctuation">)</span>
-        <span class="token punctuation">{</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>ch <span class="token operator">&lt;</span> <span class="token string">'a'</span><span class="token punctuation">)</span>
-                chars<span class="token punctuation">[</span>ch<span class="token operator">-</span><span class="token string">'A'</span><span class="token punctuation">]</span><span class="token operator">++</span><span class="token punctuation">;</span>
-            <span class="token keyword">else</span>
-                chars<span class="token punctuation">[</span><span class="token number">26</span><span class="token operator">+</span>ch<span class="token operator">-</span><span class="token string">'a'</span><span class="token punctuation">]</span><span class="token operator">++</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">int</span> res <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-        <span class="token keyword">bool</span> hasOdd <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> len <span class="token operator">:</span> chars<span class="token punctuation">)</span>
-        <span class="token punctuation">{</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>len <span class="token operator">%</span> <span class="token number">2</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
-                res <span class="token operator">+</span><span class="token operator">=</span> len<span class="token punctuation">;</span>
-            <span class="token keyword">else</span>
-            <span class="token punctuation">{</span>
-                res <span class="token operator">+</span><span class="token operator">=</span> len <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span>
-                hasOdd <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> res <span class="token operator">+</span> <span class="token punctuation">(</span>hasOdd <span class="token operator">?</span> <span class="token number">1</span> <span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="387-First-Unique-Character-in-a-String"><a href="#387-First-Unique-Character-in-a-String" class="headerlink" title="387. First Unique Character in a String"></a>387. First Unique Character in a String</h2><h3 id="Problem-Description-3"><a href="#Problem-Description-3" class="headerlink" title="Problem Description"></a>Problem Description</h3><p>Given a string, find the first non-repeating character in it and return it’s index. If it doesn’t exist, return -1.</p>
-<p>Examples:</p>
-<p>s = “leetcode”<br>return 0.</p>
-<p>s = “loveleetcode”,<br>return 2.<br>Note: You may assume the string contain only lowercase letters.</p>
-<h3 id="Method-3"><a href="#Method-3" class="headerlink" title="Method"></a>Method</h3><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
-<span class="token keyword">public</span><span class="token operator">:</span>
-    <span class="token keyword">int</span> <span class="token function">firstUniqChar</span><span class="token punctuation">(</span>string s<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">chars</span><span class="token punctuation">(</span><span class="token number">26</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">char</span> ch <span class="token operator">:</span> s<span class="token punctuation">)</span>
-            chars<span class="token punctuation">[</span>ch<span class="token operator">-</span><span class="token string">'a'</span><span class="token punctuation">]</span><span class="token operator">++</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> s<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
-        <span class="token punctuation">{</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>chars<span class="token punctuation">[</span>s<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">-</span><span class="token string">'a'</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span>
-                <span class="token keyword">return</span> i<span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
-
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;447-Number-of-Boomerangs-EASY&quot;&gt;&lt;a href=&quot;#447-Number-of-Boomerangs-EASY&quot; class=&quot;headerlink&quot; title=&quot;447. Number of Boomerangs[EASY]&quot;&gt;&lt;
-    
-    </summary>
-    
-      <category term="algorithm" scheme="http://www.wowx.info/categories/algorithm/"/>
-    
-    
-      <category term="cpp" scheme="http://www.wowx.info/tags/cpp/"/>
-    
-      <category term="algorighm" scheme="http://www.wowx.info/tags/algorighm/"/>
-    
-      <category term="hashtable" scheme="http://www.wowx.info/tags/hashtable/"/>
-    
-      <category term="Backtracking" scheme="http://www.wowx.info/tags/Backtracking/"/>
     
   </entry>
   
