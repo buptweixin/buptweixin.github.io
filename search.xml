@@ -4,27 +4,6 @@
   
     
     <entry>
-      <title><![CDATA[Python Issues]]></title>
-      <url>http://www.wowx.info/posts/20170811131711/</url>
-      <content type="html"><![CDATA[<h3 id="编码问题"><a href="#编码问题" class="headerlink" title="编码问题"></a>编码问题</h3><p>1.<a href="https://www.binss.me/blog/solve-problem-of-python3-raise-unicodeencodeerror-when-print-utf8-string/" target="_blank" rel="external">解决Python3下打印utf-8字符串出现UnicodeEncodeError问题</a></p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> sys
-<span class="token keyword">import</span> io
-sys<span class="token punctuation">.</span>stdout <span class="token operator">=</span> io<span class="token punctuation">.</span>TextIOWrapper<span class="token punctuation">(</span>sys<span class="token punctuation">.</span>stdout<span class="token punctuation">.</span>buffer<span class="token punctuation">,</span> encoding<span class="token operator">=</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-]]></content>
-      
-        
-        <tags>
-            
-            <tag> language </tag>
-            
-            <tag> python </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
       <title><![CDATA[SENet]]></title>
       <url>http://www.wowx.info/posts/20170809104219/</url>
       <content type="html"><![CDATA[<h2 id="SENet-Momenta"><a href="#SENet-Momenta" class="headerlink" title="SENet(Momenta)"></a>SENet(Momenta)</h2><p>本文整理自机器之心对Momenta WMW团队的专访<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup></p>
@@ -8793,6 +8772,27 @@ import java<span class="token punctuation">.</span>lang<span class="token punctu
             <tag> cpp </tag>
             
             <tag> string </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Python Issues]]></title>
+      <url>http://www.wowx.info/posts/20170211131711/</url>
+      <content type="html"><![CDATA[<h3 id="编码问题"><a href="#编码问题" class="headerlink" title="编码问题"></a>编码问题</h3><p>1.<a href="https://www.binss.me/blog/solve-problem-of-python3-raise-unicodeencodeerror-when-print-utf8-string/" target="_blank" rel="external">解决Python3下打印utf-8字符串出现UnicodeEncodeError问题</a></p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> sys
+<span class="token keyword">import</span> io
+sys<span class="token punctuation">.</span>stdout <span class="token operator">=</span> io<span class="token punctuation">.</span>TextIOWrapper<span class="token punctuation">(</span>sys<span class="token punctuation">.</span>stdout<span class="token punctuation">.</span>buffer<span class="token punctuation">,</span> encoding<span class="token operator">=</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> language </tag>
+            
+            <tag> python </tag>
             
         </tags>
         
