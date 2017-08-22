@@ -393,7 +393,52 @@
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
         <h2 id="校招笔试"><a href="#校招笔试" class="headerlink" title="校招笔试"></a>校招笔试</h2><h2 id="第一题"><a href="#第一题" class="headerlink" title="第一题"></a>第一题</h2><h3 id="二维平面上最大点"><a href="#二维平面上最大点" class="headerlink" title="二维平面上最大点"></a>二维平面上最大点</h3><p>所谓二维平面最大点指的是某个点的右上方没有其他点, 给出一个点集，找出所有最大点</p>
-<h3 id="最大乘积子数组"><a href="#最大乘积子数组" class="headerlink" title="最大乘积子数组"></a>最大乘积子数组</h3><p>给出一个数组，对其所有的子数组中找出(子数组和)*(子数组中最小值)中最小的一个,比如给出[6, 2, 1],则</p>
+<ul>
+<li><code>jrtt1.h</code><br>```cpp<br>#include <iostream><br>#include <utility><br>#include <vector><br>#include <algorithm></algorithm></vector></utility></iostream></li>
+</ul>
+<p>class Solution {<br>        public:<br>            std::vector<std::pair<int, int=""> &gt; findMaxPoints(std::vector<std::pair<int, int=""> &gt; &amp;P, size_t n);<br>    };</std::pair<int,></std::pair<int,></p>
+<pre><code>- `jrtt1.cpp`
+```cpp
+#include &quot;jrtt1.h&quot;
+#include &lt;climits&gt;
+using namespace std;
+
+#define MAX(a, b) (a) &gt; (b) ? (a) : (b)
+#define MIN(a, b) (a) &lt; (b) ? (a) : (b)
+
+vector&lt;pair&lt;int, int&gt; &gt; Solution::findMaxPoints(std::vector&lt;std::pair&lt;int, int&gt; &gt; &amp;P, size_t N)
+{
+    if (N &lt;= 1)
+        return P;
+    // 按x排序点，使得它们在横坐标有序，接下来我们只需要判断每个点右边是否有y坐标更高的点
+    sort(P.begin(), P.end(), [](pair&lt;int, int&gt; a, pair&lt;int, int&gt; b){return a.first &lt; b.first;});
+    int max_y = INT_MIN;
+    vector&lt;int&gt; max_y_list = vector&lt;int&gt;(N, 0);
+    vector&lt;pair&lt;int, int&gt; &gt; res;
+    for (int i = N - 1; i &gt;= 0; --i) {
+        if (i &lt; N - 1) max_y = MAX(max_y, P[i].second);
+        if (max_y &lt;= P[i].second)
+            res.push_back(P[i]);
+    }
+    return res;
+}
+
+int main() {
+    vector&lt;pair&lt;int, int&gt; &gt; P;
+    int N, x, y;
+    Solution s;
+    while (cin &gt;&gt; N) {
+        for (int i = 0; i &lt; N; ++i) {
+            cin &gt;&gt; x &gt;&gt; y;
+            P.push_back(make_pair(x, y));
+        }
+        vector&lt;pair&lt;int, int&gt; &gt; res = s.findMaxPoints(P, N);
+        for (auto point : res)
+            cout &lt;&lt; &quot;x: &quot; &lt;&lt; point.first &lt;&lt; &quot; y: &quot; &lt;&lt; point.second &lt;&lt; endl;
+    }
+    return 0;
+}
+</code></pre><h3 id="最大乘积子数组"><a href="#最大乘积子数组" class="headerlink" title="最大乘积子数组"></a>最大乘积子数组</h3><p>给出一个数组，对其所有的子数组中找出(子数组和)*(子数组中最小值)中最小的一个,比如给出[6, 2, 1],则</p>
 <pre><code>[6]: 6*6=36
 [2]: 2*2=4
 [1]: 1*1=1
