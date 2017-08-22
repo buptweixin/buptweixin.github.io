@@ -27,7 +27,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="Xin Wei">
     <meta name="description" content="null">
-    <meta name="keywords" content="Blog deep_learging,cpp,string,algorithm">
+    <meta name="keywords" content="Blog deep_learging,algorithm,cpp,string">
 
     <!--iOS -->
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -50,7 +50,7 @@
     <meta property="og:type" content="blog">
     <meta property="og:title" content="written examination of Jinritoutiao | 野原圆长的Blog">
     <meta property="og:description" content="null">
-    <meta property="og:article:tag" content="cpp"> <meta property="og:article:tag" content="string"> <meta property="og:article:tag" content="algorithm"> 
+    <meta property="og:article:tag" content="algorithm"> <meta property="og:article:tag" content="cpp"> <meta property="og:article:tag" content="string"> 
 
     <!--[if lte IE 9]>
         <link rel="stylesheet" href="/css/ie-blocker.css">
@@ -235,7 +235,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#第一题"><span class="post-toc-number">1.</span> <span class="post-toc-text">第一题:</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#第二题-字符串单词匹配"><span class="post-toc-number">2.</span> <span class="post-toc-text">第二题: 字符串单词匹配</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#第三题：画括号图"><span class="post-toc-number">3.</span> <span class="post-toc-text">第三题：画括号图</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#第四题"><span class="post-toc-number">4.</span> <span class="post-toc-text">第四题</span></a></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#校招笔试"><span class="post-toc-number">1.</span> <span class="post-toc-text">校招笔试</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#第一题"><span class="post-toc-number">2.</span> <span class="post-toc-text">第一题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二维平面上最大点"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">二维平面上最大点</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#最大乘积子数组"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">最大乘积子数组</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#产品经历ideal实现时间"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">产品经历ideal实现时间</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#实习笔试"><span class="post-toc-number"></span> <span class="post-toc-text">实习笔试</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#第一题-1"><span class="post-toc-number">1.</span> <span class="post-toc-text">第一题:</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#第二题-字符串单词匹配"><span class="post-toc-number">2.</span> <span class="post-toc-text">第二题: 字符串单词匹配</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#第三题：画括号图"><span class="post-toc-number">3.</span> <span class="post-toc-text">第三题：画括号图</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#第四题"><span class="post-toc-number">4.</span> <span class="post-toc-text">第四题</span></a></li></ol>
 
         <!--
         <li class="mdl-menu__item">
@@ -392,7 +392,17 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <h2 id="第一题"><a href="#第一题" class="headerlink" title="第一题:"></a>第一题:</h2><ol>
+        <h2 id="校招笔试"><a href="#校招笔试" class="headerlink" title="校招笔试"></a>校招笔试</h2><h2 id="第一题"><a href="#第一题" class="headerlink" title="第一题"></a>第一题</h2><h3 id="二维平面上最大点"><a href="#二维平面上最大点" class="headerlink" title="二维平面上最大点"></a>二维平面上最大点</h3><p>所谓二维平面最大点指的是某个点的右上方没有其他点, 给出一个点集，找出所有最大点</p>
+<h3 id="最大乘积子数组"><a href="#最大乘积子数组" class="headerlink" title="最大乘积子数组"></a>最大乘积子数组</h3><p>给出一个数组，对其所有的子数组中找出(子数组和)*(子数组中最小值)中最小的一个,比如给出[6, 2, 1],则</p>
+<pre><code>[6]: 6*6=36
+[2]: 2*2=4
+[1]: 1*1=1
+[6, 2]: 8*2=16
+[6, 1]: 7*1=7
+[2, 1]: 3*1=3
+[6,2,1]: 9*1 = 9
+所以返回36
+</code></pre><h3 id="产品经历ideal实现时间"><a href="#产品经历ideal实现时间" class="headerlink" title="产品经历ideal实现时间"></a>产品经历ideal实现时间</h3><h1 id="实习笔试"><a href="#实习笔试" class="headerlink" title="实习笔试"></a>实习笔试</h1><h2 id="第一题-1"><a href="#第一题-1" class="headerlink" title="第一题:"></a>第一题:</h2><ol>
 <li>最长上升下降序列<br>给出一个字符串，找出最长上升下降子序列,返回开始和结束坐标</li>
 </ol>
 <pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
@@ -892,7 +902,7 @@ vector<span class="token operator">&lt;</span><span class="token keyword">int</s
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2017/08/">八月 2017<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">七月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">四月 2017<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">16</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">二月 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/12/">十二月 2016<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">十一月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">十月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/07/">七月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/06/">六月 2016<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/07/">七月 2015<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/06/">六月 2015<span class="sidebar_archives-count">6</span></a>
+                <a class="sidebar_archives-link" href="/archives/2017/08/">八月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">七月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">四月 2017<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">16</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">二月 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">一月 2017<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/12/">十二月 2016<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">十一月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">十月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">九月 2016<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/07/">七月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/06/">六月 2016<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/07/">七月 2015<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/06/">六月 2015<span class="sidebar_archives-count">6</span></a>
             </ul>
         </li>
         
