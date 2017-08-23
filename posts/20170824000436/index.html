@@ -10,7 +10,7 @@
     
     <title>
         
-            归档 | 
+            Probability Problems | 
         
         野原圆长的Blog
     </title>
@@ -27,7 +27,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="Xin Wei">
     <meta name="description" content="null">
-    <meta name="keywords" content="Blog deep_learging">
+    <meta name="keywords" content="Blog deep_learging,algorithm">
 
     <!--iOS -->
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -48,9 +48,9 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="http://www.wowx.info">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="归档 | 野原圆长的Blog">
+    <meta property="og:title" content="Probability Problems | 野原圆长的Blog">
     <meta property="og:description" content="null">
-    
+    <meta property="og:article:tag" content="algorithm"> 
 
     <!--[if lte IE 9]>
         <link rel="stylesheet" href="/css/ie-blocker.css">
@@ -209,651 +209,274 @@
                         </button>
                     
 
-                    <!-- Index Module -->
-<div class="material-index mdl-grid">
-    
-    <div class="locate-thumbnail-symbol"></div>
+                    <!-- Post TOC -->
 
-    <!-- Pin on top -->
     
-
-    <!-- Normal Post -->
-    
-        
-        
-            <!-- Paradox Thumbnail -->
-            <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        <!-- Custom Thumbnail -->
-        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(http://ww4.sinaimg.cn/large/6425ef91jw1f9apllc7boj20ic0960v9.jpg)">
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/posts/20170308102951/">LeetCode 506[sord] 461[bit]</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/posts/20170308102951/" target="_self">继续阅读</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="Xin Wei's avatar">
-            </div>
-            <div>
-                <strong>Xin Wei</strong>
-                <span>3月 08, 2017</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
-                <a class="post_category-link" href="/categories/algorithm/">algorithm</a>
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
             </span>
-
-            
-                <!-- Comment Number -->
-                &nbsp;|&nbsp;
-                <span class="post_entry-comment" >
-                        <span class="ds-thread-count" data-thread-key="posts/20170308102951/" data-count-type="comments"></span>
-                </span>
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
+        </a>
     </div>
-</div>
+    -->
 
-        
-        
-        
-    
-        
-        
-            <!-- Paradox Thumbnail -->
-            <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        <!-- Custom Thumbnail -->
-        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(http://ww4.sinaimg.cn/large/6425ef91jw1f9apllc7boj20ic0960v9.jpg)">
-    
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
 
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/posts/20170307094529/">LeetCode 415[Math] 453[Math] 455[Greedy] 530[BST]</a></p>
-    </div>
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#构造随机数发生器"><span class="post-toc-number">1.</span> <span class="post-toc-text">构造随机数发生器</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用均匀随机数发生器rand7构造rand10随机数发生器"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">使用均匀随机数发生器rand7构造rand10随机数发生器</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#不均匀随机数构造均匀随机数"><span class="post-toc-number">2.</span> <span class="post-toc-text">不均匀随机数构造均匀随机数</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一个不均匀的随机数，以概率p产生0，概率-1-p-产生1-以此构造均匀随机数发生器"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">一个不均匀的随机数，以概率p产生0，概率(1-p)产生1,以此构造均匀随机数发生器</span></a></li></ol></li></ol>
 
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/posts/20170307094529/" target="_self">继续阅读</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="Xin Wei's avatar">
-            </div>
-            <div>
-                <strong>Xin Wei</strong>
-                <span>3月 07, 2017</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
-                <a class="post_category-link" href="/categories/algorithm/">algorithm</a>
-            </span>
+        <!--
+        <li class="mdl-menu__item">
+            Some Action
+        </li>
+        -->
+    </ul>
 
-            
-                <!-- Comment Number -->
-                &nbsp;|&nbsp;
-                <span class="post_entry-comment" >
-                        <span class="ds-thread-count" data-thread-key="posts/20170307094529/" data-count-type="comments"></span>
-                </span>
-            
 
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
 
-        
-        
-        
-    
-        
-        
-            <!-- Paradox Thumbnail -->
-            <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        <!-- Custom Thumbnail -->
-        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(http://ww4.sinaimg.cn/large/6425ef91jw1f9apllc7boj20ic0960v9.jpg)">
-    
 
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/posts/20170306094212/">LeetCode 447[HashTable] 401[Backtracking] 409[HashTable] 387[HashTable]</a></p>
-    </div>
+<!-- Layouts -->
 
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/posts/20170306094212/" target="_self">继续阅读</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="Xin Wei's avatar">
-            </div>
-            <div>
-                <strong>Xin Wei</strong>
-                <span>3月 06, 2017</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
-                <a class="post_category-link" href="/categories/algorithm/">algorithm</a>
-            </span>
+    <!-- Post Module -->
+    <div class="material-post_container">
 
-            
-                <!-- Comment Number -->
-                &nbsp;|&nbsp;
-                <span class="post_entry-comment" >
-                        <span class="ds-thread-count" data-thread-key="posts/20170306094212/" data-count-type="comments"></span>
-                </span>
-            
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
 
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-        
-        
-        
-    
-        
-        
-            <!-- Paradox Thumbnail -->
-            <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        <!-- Custom Thumbnail -->
-        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(http://ww4.sinaimg.cn/large/6425ef91jw1f9apllc7boj20ic0960v9.jpg)">
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/posts/20170303131752/">LeetCode House Robber Series</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/posts/20170303131752/" target="_self">继续阅读</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="Xin Wei's avatar">
-            </div>
-            <div>
-                <strong>Xin Wei</strong>
-                <span>3月 03, 2017</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
-                <a class="post_category-link" href="/categories/algorithm/">algorithm</a>
-            </span>
-
-            
-                <!-- Comment Number -->
-                &nbsp;|&nbsp;
-                <span class="post_entry-comment" >
-                        <span class="ds-thread-count" data-thread-key="posts/20170303131752/" data-count-type="comments"></span>
-                </span>
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-        
-        
-        
-    
-        
-        
-            <!-- Paradox Thumbnail -->
-            <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        <!-- Custom Thumbnail -->
-        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(http://ww1.sinaimg.cn/large/6425ef91ly1fd8tu6o2jzj21fo0hpq8j)">
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/posts/20170302213803/">MXNET: Expression Template Tutorial—MXNET 表达式模板笔记</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/posts/20170302213803/" target="_self">继续阅读</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="Xin Wei's avatar">
-            </div>
-            <div>
-                <strong>Xin Wei</strong>
-                <span>3月 02, 2017</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
+                <!-- Post Header(Thumbnail & Title) -->
                 
-            </span>
-
-            
-                <!-- Comment Number -->
-                &nbsp;|&nbsp;
-                <span class="post_entry-comment" >
-                        <span class="ds-thread-count" data-thread-key="posts/20170302213803/" data-count-type="comments"></span>
-                </span>
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-        
-        
-        
-    
-        
-        
-            <!-- Paradox Thumbnail -->
-            <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
+    <!-- Paradox Post Header -->
     
         <!-- Custom Thumbnail -->
-        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(http://ww4.sinaimg.cn/large/6425ef91jw1f9apllc7boj20ic0960v9.jpg)">
+        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(http://www.cnii.com.cn/Bigdata/img/attachement/jpg/site2/20160218/8c89a5e92281182fb50409.jpg)">
     
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/posts/201703011653/">LeetCode dp 221 213 House Robber</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/posts/201703011653/" target="_self">继续阅读</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="Xin Wei's avatar">
-            </div>
-            <div>
-                <strong>Xin Wei</strong>
-                <span>3月 01, 2017</span>
-            </div>
+            <p class="article-headline-p">
+                Probability Problems
+            </p>
         </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
-                <a class="post_category-link" href="/categories/algorithm/">algorithm</a>
-            </span>
 
-            
-                <!-- Comment Number -->
-                &nbsp;|&nbsp;
-                <span class="post_entry-comment" >
-                        <span class="ds-thread-count" data-thread-key="posts/201703011653/" data-count-type="comments"></span>
-                </span>
-            
 
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
 
-        
-        
-        
-    
-        
-        
-            <!-- Paradox Thumbnail -->
-            <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        <!-- Custom Thumbnail -->
-        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(http://ww4.sinaimg.cn/large/6425ef91jw1f9apllc7boj20ic0960v9.jpg)">
-    
 
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/posts/20170227114327/">LeetCode dp 304 279 486 523</a></p>
-    </div>
 
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/posts/20170227114327/" target="_self">继续阅读</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="Xin Wei's avatar">
-            </div>
-            <div>
-                <strong>Xin Wei</strong>
-                <span>2月 27, 2017</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
-                <a class="post_category-link" href="/categories/algorithm/">algorithm</a>
-            </span>
-
-            
-                <!-- Comment Number -->
-                &nbsp;|&nbsp;
-                <span class="post_entry-comment" >
-                        <span class="ds-thread-count" data-thread-key="posts/20170227114327/" data-count-type="comments"></span>
-                </span>
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-        
-        
-        
-    
-        
-        
-            <!-- Paradox Thumbnail -->
-            <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        <!-- Custom Thumbnail -->
-        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(http://ww4.sinaimg.cn/large/6425ef91jw1f9apllc7boj20ic0960v9.jpg)">
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/posts/20170226162442/">LeetCode dp 413 139</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/posts/20170226162442/" target="_self">继续阅读</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="Xin Wei's avatar">
-            </div>
-            <div>
-                <strong>Xin Wei</strong>
-                <span>2月 26, 2017</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
-                <a class="post_category-link" href="/categories/algorithm/">algorithm</a>
-            </span>
-
-            
-                <!-- Comment Number -->
-                &nbsp;|&nbsp;
-                <span class="post_entry-comment" >
-                        <span class="ds-thread-count" data-thread-key="posts/20170226162442/" data-count-type="comments"></span>
-                </span>
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-        
-        
-        
-    
-        
-        
-            <!-- Paradox Thumbnail -->
-            <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        <!-- Custom Thumbnail -->
-        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(http://ww4.sinaimg.cn/large/6425ef91jw1f9apllc7boj20ic0960v9.jpg)">
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/posts/20170225144631/">LeetCode 20170225 dp 516 467 416</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/posts/20170225144631/" target="_self">继续阅读</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="Xin Wei's avatar">
-            </div>
-            <div>
-                <strong>Xin Wei</strong>
-                <span>2月 25, 2017</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
-                <a class="post_category-link" href="/categories/algorithm/">algorithm</a>
-            </span>
-
-            
-                <!-- Comment Number -->
-                &nbsp;|&nbsp;
-                <span class="post_entry-comment" >
-                        <span class="ds-thread-count" data-thread-key="posts/20170225144631/" data-count-type="comments"></span>
-                </span>
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-        
-        
-        
-    
-        
-        
-            <!-- Paradox Thumbnail -->
-            <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        <!-- Custom Thumbnail -->
-        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(http://image.sowm.cn/3aQjqa.jpg)">
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/posts/20170219193755/">Introducing DeepLab v2 and Fine-tuning it to ISPRS Dataset</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            D...
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/posts/20170219193755/" target="_self">继续阅读</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="Xin Wei's avatar">
-            </div>
-            <div>
-                <strong>Xin Wei</strong>
-                <span>2月 19, 2017</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
                 
-            </span>
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
 
-            
-                <!-- Comment Number -->
-                &nbsp;|&nbsp;
-                <span class="post_entry-comment" >
-                        <span class="ds-thread-count" data-thread-key="posts/20170219193755/" data-count-type="comments"></span>
-                </span>
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
     </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>Xin Wei</strong>
+        <span>8月 24, 2017</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+        <button id="article-functions-qrcode-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+            <i class="material-icons" role="presentation">devices other</i>
+            <span class="visuallyhidden">devices other</span>
+        </button>
+        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
+            <li class="mdl-menu__item">在其它设备中阅读本文章</li>
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACb0lEQVR42u3aQXKDMBAEQP//08kDUiEzWgkTV3Ny2QRoDitldl9fH3288PDw8PDw8PDwHsZ7xcfPv/rtc3J+fpf62fDw8PBu4f1Rai8f9/pR8vOT+0bPhoeHh3cjL3m4vEy3i0G7nODh4eH9R95a0c/Px8PDw/s8Xl7W89L/uHUPDw8PbxxGXJf16++T0CE5/2DWgoeHhxfzJhHD6c+39vfw8PDwAl490hQPCqwNELx5pgwPDw8v4M3HoZJv1mLf/Hnw8PDw7uTlg1OTEau1V9COduHh4eHdw2uXgaStNWlorbXK8PDw8N7Luy7NSXPrj9uvbZQn/zHg4eHhbeWttZ3yV7AW7yYvNBodwMPDwzvMa2PZPCzIr5xvuIusBQ8PD+8Aby0IaGPfpNC3S0U9GYGHh4e3ideOSbUDWO0d14JjPDw8vHt4Sfu/jRXyl7K2/BRhBB4eHt4B3mKTaWkDvbYI1YEIHh4e3mFeXtzbUYNJSLEWT+Dh4eHdz9u1/c1bYnm0MZopw8PDw9vKa8PW/BUkv7bb9ORqeHh4eKd5eUial+Z8kZiEEaOUGg8PD2/MOxE6zEey2vYbHh4e3rt4a0U5aXHNw+JtMS4eHh7eVl5LbSPaZGRhck08PDy807z2SMr03oGtetnAw8PDO8xry3G7Rc4HEdot+2IDDA8PD28TL18MklC13UAfXxjw8PDwjvHaQdI88N11/Q1ZCx4eHt5jeHnokA9dtcMKeHh4eE/mtdvufLOevL5tkxF4eHh4Y17b9GqDickicVOMi4eHh3egATYHrG2mR2EEHh4e3lbe5x14eHh4eHh4eHgPOL4BM6tno4Z6NwkAAAAASUVORK5CYII=">
+        </ul>
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/algorithm/">algorithm</a>
+    </ul>
+    
+
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+    <!-- Leancloud Views -->
+        <a class="post_share-link" href="#">
+            <li class="mdl-menu__item">
+                <span id="/posts/20170824000436/" class="leancloud-views_num" data-flag-title="Probability Problems">
+     &nbsp;浏览量
+</span>
+
+            </li>
+        </a>
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Probability Problems&url=http://www.wowx.info//posts/20170824000436/index.html&pic=&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Probability Problems&url=http://www.wowx.info//posts/20170824000436/index.html&via=Xin Wei" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://www.wowx.info//posts/20170824000436/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://www.wowx.info//posts/20170824000436/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
 </div>
 
-        
-        
-        
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-
-    
-    <!-- Index nav -->
-        <nav class="material-nav mdl-cell mdl-cell--12-col">
-            <a class="extend prev" rel="prev" href="/archives/page/2/"><button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"><i class="material-icons" role="presentation">arrow_back</i></button></a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/archives/page/4/">4</a><a class="page-number" href="/archives/page/5/">5</a><a class="page-number" href="/archives/page/9/">9</a><a class="extend next" rel="next" href="/archives/page/4/"><button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"><i class="material-icons" role="presentation">arrow_forward</i></button></a>
-        </nav>
-    
-
-    
-        <script>
-    var randomNum;
-
-    var locatePost = $('.locate-thumbnail-symbol').next();
-    for(var i = 0; i < 10; i++) {
-        randomNum = Math.floor(Math.random() * 19 + 1);
-
-        locatePost.children('.post_thumbnail-random').attr('id', 'random_thumbnail-'+randomNum);
-        locatePost.children('.post_thumbnail-random').css('background-image', 'url(' + '/img/random/material-' + randomNum + '.png' + ')')
-
-        locatePost = locatePost.next();
+        <h2 id="构造随机数发生器"><a href="#构造随机数发生器" class="headerlink" title="构造随机数发生器"></a>构造随机数发生器</h2><h3 id="使用均匀随机数发生器rand7构造rand10随机数发生器"><a href="#使用均匀随机数发生器rand7构造rand10随机数发生器" class="headerlink" title="使用均匀随机数发生器rand7构造rand10随机数发生器"></a>使用均匀随机数发生器rand7构造rand10随机数发生器</h3><pre><code>关键是&quot;扔掉&quot;不要的数
+使用“七进制”，把1-7减去1，产生0-6,然后产生两位这样的数对应0-48,抛弃其中的40-48(因为这其中只有9个数),获得的数取个位数即为0-9的均匀分布
+```cpp
+int rand10() {
+    int x;
+    while ((x = (rand7() - 1) * 7 + rand7() - 1) &gt;= 40)
+        ;
+    return x % 10 + 1;
     }
-</script>
+```
+关键需要保障产生的中间数是均匀的, `rand2() + rand2() - 1`是不均匀的，因为1和3的概率是1/4而2的概率是1/2
+</code></pre><h2 id="不均匀随机数构造均匀随机数"><a href="#不均匀随机数构造均匀随机数" class="headerlink" title="不均匀随机数构造均匀随机数"></a>不均匀随机数构造均匀随机数</h2><h3 id="一个不均匀的随机数，以概率p产生0，概率-1-p-产生1-以此构造均匀随机数发生器"><a href="#一个不均匀的随机数，以概率p产生0，概率-1-p-产生1-以此构造均匀随机数发生器" class="headerlink" title="一个不均匀的随机数，以概率p产生0，概率(1-p)产生1,以此构造均匀随机数发生器"></a>一个不均匀的随机数，以概率p产生0，概率(1-p)产生1,以此构造均匀随机数发生器</h3><p>产生两次，需要0和1同时出现，该路是<code>p*(1-p)</code></p>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">gen</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> x<span class="token punctuation">,</span> y<span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>x <span class="token operator">=</span> <span class="token function">rand</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token punctuation">(</span>y <span class="token operator">=</span> <span class="token function">rand</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">;</span>
+    <span class="token keyword">return</span> x<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+    
 
     
 </div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+    <!-- 使用多说评论 -->
+    <link rel="stylesheet" href="/css/duoshuo.min.css">
+<style>
+    #ds-thread #ds-reset .ds-post-button{
+        background-color: #0097A7 !important;
+    }
+    #ds-wrapper #ds-reset .ds-icons-32{
+        background-color: #0097A7 !important;
+    }
+    #ds-reset .ds-highlight {
+        color: #0097A7 !important;
+    }
+</style>
+<div id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread"
+        data-thread-key="posts/20170824000436/"
+        data-url="http://www.wowx.info/posts/20170824000436/"
+        data-title="Probability Problems">
+    </div>
+    <!-- 多说评论框 end -->
+</div>
+
+
+
+
+
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/posts/20170821190944/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
 
 
                     
