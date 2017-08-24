@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.wowx.info/"/>
-  <updated>2017-08-23T16:43:14.293Z</updated>
+  <updated>2017-08-24T15:50:45.186Z</updated>
   <id>http://www.wowx.info/</id>
   
   <author>
@@ -20,11 +20,11 @@
     <link href="http://www.wowx.info/posts/20170824000436/"/>
     <id>http://www.wowx.info/posts/20170824000436/</id>
     <published>2017-08-23T16:04:36.000Z</published>
-    <updated>2017-08-23T16:43:14.293Z</updated>
+    <updated>2017-08-24T15:50:45.186Z</updated>
     
     <content type="html"><![CDATA[<p>参考:<a href="https://wenku.baidu.com/view/11c9195e0242a8956aece489.html" target="_blank" rel="external">概率面试题精讲_七月算法出品</a></p>
 <h2 id="构造随机数发生器"><a href="#构造随机数发生器" class="headerlink" title="构造随机数发生器"></a>构造随机数发生器</h2><h3 id="使用均匀随机数发生器rand7构造rand10随机数发生器"><a href="#使用均匀随机数发生器rand7构造rand10随机数发生器" class="headerlink" title="使用均匀随机数发生器rand7构造rand10随机数发生器"></a>使用均匀随机数发生器rand7构造rand10随机数发生器</h3><pre><code>关键是&quot;扔掉&quot;不要的数
-使用“七进制”，把1-7减去1，产生0-6,然后产生两位这样的数对应0-48,抛弃其中的40-48(因为这其中只有9个数),获得的数取个位数即为0-9的均匀分布
+使用“七进制”，把`1-7`减去1，产生`0-6`,然后产生两位这样的数对应`0-48`,抛弃其中的`40-48`(因为这其中只有9个数),获得的数取个位数即为`0-9`的均匀分布
 ```cpp
 int rand10() {
     int x;
