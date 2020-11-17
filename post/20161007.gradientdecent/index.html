@@ -1,58 +1,83 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn" lang="zh-cn">
+<!doctype html>
+<html lang="zh-cn">
 <head>
-  <link href="https://gmpg.org/xfn/11" rel="profile">
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.56.3" />
 
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
 
-  <title>梯度下降方法总结 &middot; Hi, nice to meet you</title>
-  <meta name="description" content="" />
+    <title>梯度下降方法总结 | Hi, nice to meet you</title>
+    <meta property="og:title" content="梯度下降方法总结 - Hi, nice to meet you">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2016-10-07T13:50:27&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2016-10-07T13:50:27&#43;08:00'>
+        
+    <meta name="Keywords" content="">
+    <meta name="description" content="梯度下降方法总结">
+        
+    <meta name="author" content="">
+    <meta property="og:url" content="http://example.org/post/20161007.gradientdecent/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
-  
-  <link type="text/css" rel="stylesheet" href="http://example.org/css/print.css" media="print">
-  <link type="text/css" rel="stylesheet" href="http://example.org/css/poole.css">
-  <link type="text/css" rel="stylesheet" href="http://example.org/css/syntax.css">
-  <link type="text/css" rel="stylesheet" href="http://example.org/css/hyde.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-
-  
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
-  <link rel="shortcut icon" href="/favicon.png">
-
-  
-  
+    
+    
+    
+    
+    
+    
 </head>
 
-  <body class=" ">
-  <aside class="sidebar">
-  <div class="container sidebar-sticky">
-    <div class="sidebar-about">
-      <a href="http://example.org/"><h1>Hi, nice to meet you</h1></a>
-      <p class="lead">
-      An elegant open source and mobile first theme for <a href="http://hugo.spf13.com">hugo</a> made by <a href="http://twitter.com/mdo">@mdo</a>. Originally made for Jekyll.
-      </p>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="http://example.org/">
+                        Hi, nice to meet you
+                    </a>
+                
+                
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="http://example.org/">首页</a>
+                    
+                </nav>
+            </div>
+        </div>
     </div>
+</header>
 
-    <nav>
-      <ul class="sidebar-nav">
-        <li><a href="http://example.org/">Home</a> </li>
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">梯度下降方法总结</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2016年10月7日
+        </date>
         
-      </ul>
-    </nav>
-
-    <p>&copy; 2020. All rights reserved. </p>
-  </div>
-</aside>
-
-    <main class="content container">
-    <div class="post">
-  <h1>梯度下降方法总结</h1>
-  <time datetime=2016-10-07T13:50:27&#43;0800 class="post-date">Fri, Oct 7, 2016</time>
-  
+        
+        
+        <div class="post-content">
+            
 
 <p>参考并翻译自Sebastian Ruder博士的总结文章<a href="http://sebastianruder.com/optimizing-gradient-descent/index.html">An overview of gradient descent optimization algorithms</a>。</p>
 
@@ -236,13 +261,153 @@ params = params - learning_rate * params_grad
 图b显示了这些方法逃离鞍点的能力，鞍点有部分方向有正梯度另一些方向有负梯度，SGD方法逃离能力最差，冲量和NAG方法也不尽如人意，而Adagrad、RMSprop、Adadelta很快就能从鞍点逃离出来。
 <img src="http://img.blog.csdn.net/20160909001936276" alt="" /></p>
 
+        </div>
+
+        
+
+
+        
+
+
+        <div class="post-meta meta-tags">
+            
+            没有标签
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
 </div>
 
+                    <footer id="footer">
+    <div>
+        &copy; 2020 <a href="http://example.org/">Hi, nice to meet you By </a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+</footer>
 
-    </main>
 
     
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='//www.google.com/search' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
       
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="http://example.org/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
     
-  </body>
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="http://example.org/post/20170419.unionfind/" title="Union Find">Union Find</a>
+    </li>
+    
+    <li>
+        <a href="http://example.org/post/20160618.bigdatainfrastructure/" title="大数据基础设施综述">大数据基础设施综述</a>
+    </li>
+    
+    <li>
+        <a href="http://example.org/post/20170824.probability_problems/" title="Probability Problems">Probability Problems</a>
+    </li>
+    
+    <li>
+        <a href="http://example.org/post/20170809.senet/" title="SENet">SENet</a>
+    </li>
+    
+    <li>
+        <a href="http://example.org/post/20170802.knowledge_distill_methods/" title="knowledge distill methods">knowledge distill methods</a>
+    </li>
+    
+    <li>
+        <a href="http://example.org/post/20170710.likewhatyoulike/" title="Like What You Like: Knowledge Distill via Neuron Selectivity Transfer">Like What You Like: Knowledge Distill via Neuron Selectivity Transfer</a>
+    </li>
+    
+    <li>
+        <a href="http://example.org/post/20170430.leetcodesolvers/" title="Leetcode Solvers">Leetcode Solvers</a>
+    </li>
+    
+    <li>
+        <a href="http://example.org/post/20170420.binarysearch/" title="Binary Search">Binary Search</a>
+    </li>
+    
+    <li>
+        <a href="http://example.org/post/20161007.gradientdecent/" title="梯度下降方法总结">梯度下降方法总结</a>
+    </li>
+    
+    <li>
+        <a href="http://example.org/post/20160910.cnninvariant/" title="神经网络引入循环不变性">神经网络引入循环不变性</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="http://example.org/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+</body>
+
 </html>

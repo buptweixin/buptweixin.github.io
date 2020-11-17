@@ -1,84 +1,474 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn" lang="zh-cn">
+<!doctype html>
+<html lang="zh-cn">
 <head>
-  <link href="https://gmpg.org/xfn/11" rel="profile">
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.56.3" />
 
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
 
-  <title>Posts &middot; Hi, nice to meet you</title>
-  <meta name="description" content="" />
+    <title>Posts | Hi, nice to meet you</title>
+    <meta property="og:title" content="Posts - Hi, nice to meet you">
+    <meta property="og:type" content="article">
+        
+        
+    <meta name="Keywords" content="">
+    <meta name="description" content="Posts">
+        
+    <meta name="author" content="">
+    <meta property="og:url" content="http://example.org/post/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
-  
-  <link type="text/css" rel="stylesheet" href="http://example.org/css/print.css" media="print">
-  <link type="text/css" rel="stylesheet" href="http://example.org/css/poole.css">
-  <link type="text/css" rel="stylesheet" href="http://example.org/css/syntax.css">
-  <link type="text/css" rel="stylesheet" href="http://example.org/css/hyde.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <link rel="alternate" type="application/rss+xml+xml" href="http://example.org/post/index.xml" title="Hi, nice to meet you" />
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-
-  
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
-  <link rel="shortcut icon" href="/favicon.png">
-
-  
-  <link href="http://example.org/post/index.xml" rel="alternate" type="application/rss+xml" title="Hi, nice to meet you" />
-  
+    
+    
+    
+    
+    
+    
 </head>
 
-  <body class=" ">
-  <aside class="sidebar">
-  <div class="container sidebar-sticky">
-    <div class="sidebar-about">
-      <a href="http://example.org/"><h1>Hi, nice to meet you</h1></a>
-      <p class="lead">
-      An elegant open source and mobile first theme for <a href="http://hugo.spf13.com">hugo</a> made by <a href="http://twitter.com/mdo">@mdo</a>. Originally made for Jekyll.
-      </p>
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="http://example.org/">
+                        Hi, nice to meet you
+                    </a>
+                
+                
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="http://example.org/">首页</a>
+                    
+                </nav>
+            </div>
+        </div>
     </div>
+</header>
 
-    <nav>
-      <ul class="sidebar-nav">
-        <li><a href="http://example.org/">Home</a> </li>
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="http://example.org/post/20170419.unionfind/" title="Union Find">Union Find</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年4月19日
+        </date>
         
-      </ul>
-    </nav>
+        <div class="post-content">
+            并查集 时间复杂度log(O(N))
+// !!!模板 // class Solution // { // public: // int find(int x) // { // if (parent[x] == x) // return x; // parent[x] = find(parent[x]); // return parent[x]; // }
+ // void Union(int x, int y) // { // int px = find(x), py = find(y); // if (px != py) // { // if (size[px] &lt; size[py]) // { // parent[px] = py; // size[py] += size[px]; // } // else // { // parent[py] = px; // size[px] += size[py]; // } // } // } // private: // vector&lt;int&gt; parent; // vector&lt;int&gt; size;  // }; Problem Description Given an unsorted array of integers, find the length of the longest consecutive elements sequence.……
+        </div>
+        <p class="readmore"><a href="http://example.org/post/20170419.unionfind/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="http://example.org/post/20160618.bigdatainfrastructure/" title="大数据基础设施综述">大数据基础设施综述</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2019年11月17日
+        </date>
+        
+        <div class="post-content">
+            早在1980年，未来学家托夫勒就在《第三次浪潮》之中就提出大数据的概念并赞誉 其为“第三次浪潮的华彩乐章”，然而，这在当时并没有引起人们的特别注意，但是随着社交网络、物联网、云计算的兴起，我们身边的数据规模越来越大，2014年，全世界的用户每天在Twitter上发布超过6.6亿条微博，在facebook发布1000万张以上的照片……根据IDC报告，2013年全球数据量为4.4ZB，2016年将达到12ZB而到了2020年，这个数字将达到40ZB，如果将这些数据刻到光盘上并摞成一堆的话，其高度将达到地球和月球之间距离的200倍。面对如此海量的，“大数据”时代正式到来。
+什么是“大数据”，迄今没有公认的定义，IBM公司的观点认为，大数据应该满足规模性(Volume)、多样性(Variety)、实时性 (Velocity)，即”3V”要素[refs]；以IDC为代表的业界则认为大数据除了具备”3V”要素之外还需要具备第四“V”:价值性(Value);而NetApp公司则认为“大数据”应该包括分析(Analytic)带宽(Bandwidth)和内容(Content)即“ABC”特点[refs]。不管采用哪种定义，大数据本质都是工业传感器、互联网和物联网等产生的结构化、半结构化或者非结构化的数据的总和。人们通过对大数据的挖掘、处理以获得其中隐含的信息和知识，从而实现商业价值更好地为人们服务。而要对大数据进行挖掘、处理，就离不开大数据基础设施。本文对常用大数据处理系统做了分类，并对各种基础设施进行了简单的介绍，然后提出了现阶段大数据基础设施存在的问题，最后进行了总结。
+大数据与大数据基础设施 大数据 据统计[ref]，2016年全球的数据量已经超过了14ZB， 并且到2020年，全球数据量将达到现在的3倍，达到40ZB。这些数据主要来源于三个方面：
+ 传统IT企业、门户网站，传统IT企业开发、优化自身产品服务用户的同时，数据也源源不断不断产出，这方面产出的数据量占大约15%; 社交网络，近年来随着微信、Twitter等社交网络的兴起，互联网上信息不在仅仅是简单的文本了，UGC(用户自生成)内容、音频、视频图片等非结构信息逐渐大量充斥于网络中，其产出的数据量也相当可观； 物联网,物联网在近十年发展壮大，已经在我们生活中广泛普及，物联网设备往往带有许多传感器，不断地收集用户环境、位置、生活等各种各样的数据，这方面的数据量是增长最快的。  通过对大数据的分析，可以从中发掘出许多隐藏的信息，拿推荐系统中最经典的啤酒喝尿布案例来举例，“啤酒与尿布”的故事是营销届的神话，“啤酒”和“尿布”两个看上去没有关系的商品摆放在一起进行销售、并获得了很好的销售收益，这种现象就是卖场中商品之间的关联性，研究“啤酒与尿布”关联的方法就是通过对所有顾客的消费记录应用大数据处理技术得到的。根据统计到2020年，像这样与大数据直接相关的产业市场规模将达到5.3万亿美元，因此研究和应用大数据技术是非常有意义的。
+然而，上文提到的大数据的数据量超过了任何传统数据处理系统的存储、处理能力，并且大数据类型多种多样，虽然价值很大但是价值密度很低，更重要的是大数据存在着真伪难辨的问题，即使最好的数据清洗方法也难以消除其中的不可预测性。
+面对这些问题，首当其冲的就是Google、Facebook、Twitter等互联网公司[refs]，他们拥有着庞大的用户量，这些用户产生了史无前例庞大的数据，传统的数据处理基础设施对这样海量的数据束手无策，所以这些公司开始着手开发他们急需的适合于处理海量数据的大数据基础设施。当他们开发好这些工具之后，由于开源软件思维的影响，他们把这些工具的源码公布出来，和世界分享他们的成果。如此一来，全世界最优秀的科学家工程师都加入了大数据技术的开发中来。一段时间之后，大公司的员工们独立出来开始创业，新兴的大数据产业吸引了大量的天使投资人，这样，大数据基础设施的发展又向前推进了一步。
+下面我们就对这些基础设施做简单的介绍。
+大数据基础设施 大数据基础设施不是单单只有一种工具，而是结合了一系列的工具的工具栈系统。他们主要可以分成批量处理系统、流式数据处理系统、交互式数据处理系统和图数据处理系统四类。其中，批量数据处理系统针对静态数据的处理，流式数据处理系统和交互式数据处理系统针对的是实时数据的处理，而图数据处理系统即处理静态数据也处理实时数据。
+批量数据处理系统 批量数据处理系统对实时性的要求不高，它采用的是先存储后计算的处理方式，因为不要求实时，所以它可以挖掘出数据集中隐含的模式并给出其中的含义从而制定明智的决策，正是因为这个原因，批量数据处理系统常常用于对准确性和全面性要求比较高的场合。
+其中具有代表性的基础设施为根据谷歌发表的GFS(Google File System)和MapReduce模型两篇论文而开发出的Apache Hadoop。Apache Hadoop是一个提供分布式存储和批量数据计算服务的开源框架，它的核心由分布式文件存储系统HDFS和计算模型Mapreduce构成，并且，由于在Apache Hadoop 2.0中新加入了YARN资源管理系统，使得Apache Hadoop的概念不在局限于Hadoop框架本身，而成为了一个可扩展Pig, Hive, HBase等设施的生态系统。 流式数据处理系统 近年来，流式数据处理系统得到了广泛认可，这类系统处理的数据特征为不宜持久稳定关系建模，而适宜瞬态关系建模，通俗讲就是需要对数据进行实时或者准实时处理。它的应用场景十分广泛，包括金融服务(量化交易)、网络监控、安全领域、电信数据管理、传感检测等。由于传统数据库管理系统(DBMS)并不是为快速连续存放数据单元且不支持连续查询等流数据处理的关键要素，所以其不能满足要求，而批量数据处理处理系统本身就不是实时系统同样不能满足要求。
+为此，Google与2010年推出Dremel[refs]，Dremel是一个大规模系统。在一个PB级别的数据集上面，将任务缩短 到秒级，由此实时数据处理的大门正式打开。
+流式数据处理系统要处理的数据可以想象成来自于一个无穷无尽的数据序列，这些数据来源各异、格式复杂，虽然流式数据往往带有时间或其他有序标签，但是他们实际不一定按序到达，所以如何处理物理顺序和逻辑顺序的不一致也是一个难点，另外，流式数据的流入量是随时间变化的，如何进行有弹性的处理也是一个要解决的难点。
+流式处理系统主要有Twitter 的Storm，Facebook的Scribe， Spark Streaming, Linkedin 的Samza等。
+ Storm系统Storm是一套专门用于事件流处理的分布式计算框架，Storm的诞生可以追溯到当初由BackType公司开发的项目，这家市场营销情报企业于2011年被Twitter所收购。Twitter旋即将该项目转为开源并推向GitHub平台，不过Storm最终还是加入了Apache孵化器计划并于2014年9月正式成为Apache旗下的顶级项目之一。为了简化大规模数据处理机制，Storm在设计思路中充分考虑到大规模可扩展能力、利用一套“故障快速、自动重启”方案为处理提供容错性支持、从而有力地保证了每个元组都能切实得到处理。其流式处理作业被分发至不同类型的组件，Spout组件负责输入流传递到Blot组件，Blot组件负责对Spout传递的数据进行处理。许多Spout和Blot的组合结合起来构成一套有向无环图拓扑结构。可以将拓扑结构大致视为MapReduce在Hadoop当中所扮演的角色，只不过Storm的关注重点放在了实时、以流为基础的处理机制身上，因此其拓扑结构默认永远运行或者说直到手动中止。一旦拓扑流程启动，挟带着数据的流就会不断涌入系统并将数据交付给栓（而数据仍将在各栓之间循流程继续传递），而这也正是整个计算任务的主要实现方式。随着处理流程的推进，一个或者多个栓会把数据写入至数据库或者文件系统当中，并向另一套外部系统发出消息或者将处理获得的计算结果提供给用户。refs
+ Samzasamza是一个分布式的流式数据处理框架（streaming processing），它是基于Kafka(Linkedin开发的一个分布式的消息队列系统)来实现类实时的流式数据处理的。(准确的说，samza是通过模块化的形式来使用kafka的，因此可以构架在其他消息队列框架上，但出发点和默认实现是基于kafka)Samza的一个job的基本处理流程是一个用户任务从一个或多个输入流中读取数据，再输出到一个或多个输出流中，具体映射到kafka上就是从一个或多个topic读入数据，再写出到另一个或多个topic中去。多个job串联起来就完成了流式的数据处理流程。 这种模式其实有点像MapReduce的过程，stream输入部分由kafka的partition决定了分区和task数目，类似于一个Map过程，输出时由用户task指定topic和分区（或者框架自动由Key决定分区），这相当于一次shuffle的过程，下一个job读取新的stream时，可以认为是一个reduce，也可以认为是下一个map过程的开始。不同之处在于job之间的串联无需等待上一个job的结束，类实时的消息分发机制决定了整个串联的job是连续不间断的，亦即流式的。refs
+ Spark StreamingSpark Streaming是核心Spark API的一个扩展，它并不会像Storm那样一次一个地处理数据流，而是在处理前按时间间隔预先将其切分为一段一段的批处理作业。Spark针对持续性数据流的抽象称为DStream（DiscretizedStream），一个DStream是一个微批处理（micro-batching）的RDD（弹性分布式数据集）；而RDD则是一种分布式数据集，能够以两种方式并行运作，分别是任意函数和滑动窗口数据的转换。   针对上面几种流式数据处理框架，如果需要的是一个允许增量计算的高速事件处理系统，Storm是最佳选择，它可以应对你在客户端等待结果的同时，进一步进行分布式计算的需求，使用开箱即用的分布式RPC（DRPC）就可以了。如果需要状态持续，并且还有计划对图像数据的处理、机器学习相关或者访问SQL的话，Spark将是更好的选择。
+交互式数据处理系统 许多场合，人们希望在对大数据的处理的过程可以有人为的介入，工作人员提出请求，交互式处理系统处理后返回结果然后引导工作人员继续下一步的操作。这样能够保证文件被及时修改，应对变化。
+交互式处理系统主要包括两类：人机交互和用户之间交互。
+传统的人机交互主要以关系数据库管理系统(DBMS)为主，由于其规模的局限性，今年来能够支持上千台服务器规模的Hive和Pig发展迅速。由于社交网络、即时通讯的兴起，互联网领域称为用户间交互最重要的应用场景，目前这方面用的最多的是NoSQL类型的数据库，比如HBase和MongoDB。
+最近，由于Hive的性能和实时性问题，不少公司都提出了自己的交互数据处理解决方案，其中最有名的要数Google的Dremel和Apache Spark。
+ DremelDremel是Google研发的一款交互式数据处理系统，通过组建上千台的服务器，Dremel能够轻松将对PB级数据的处理时间压缩到秒级，它并不是MapReduce的替代品而是对Mapreduce查询能力不足的补充，所以它常用来处理MapReduce的结果集，同时，为了实现NoSQL难以做到的Join操作，Dremel采用了嵌套式的数据模型，并且提供了类SQL的交互式接口方便非开发人员使用。 SparkSpark由美国加州伯克利大学的AMPLab实验室开发的一款分布式集群计算框架，它开发于2009年，于2010年开源，并在2013年被捐赠给Apache项目。Spark通过在数据处理过程中成本更低的洗牌（Shuffle）方式，将MapReduce提升到一个更高的层次。利用内存数据存储和接近实时的处理能力，Spark比其他的大数据处理技术的性能要快很多倍。Spark将中间结果保存在内存中而不是将其写入磁盘，当需要多次处理同一数据集时，这一点特别实用。Spark的设计初衷就是既可以在内存中又可以在磁盘上工作的执行引擎。当内存中的数据不适用时，Spark操作符就会执行外部操作。Spark可以用于处理大于集群内存容量总和的数据集。Spark在交互式数据处理中的作用主要由Spark SQL 提供，Spark SQL可以通过JDBC API将Spark数据集暴露出去，而且还可以用传统的BI和可视化工具在Spark数据上执行类似SQL的查询。用户还可以用Spark SQL对不同格式的数据（如JSON，Parquet以及数据库等）执行ETL，将其转化，然后暴露给特定的查询。  图数据处理系统 近十几年来，随着互联网的普及和Web2.……
+        </div>
+        <p class="readmore"><a href="http://example.org/post/20160618.bigdatainfrastructure/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="http://example.org/post/20170824.probability_problems/" title="Probability Problems">Probability Problems</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2017年8月24日
+        </date>
+        
+        <div class="post-content">
+            参考:概率面试题精讲_七月算法出品
+构造随机数发生器 使用均匀随机数发生器rand7构造rand10随机数发生器 关键是&quot;扔掉&quot;不要的数 使用“七进制”，把`1-7`减去1，产生`0-6`,然后产生两位这样的数对应`0-48`,抛弃其中的`40-48`(因为这其中只有9个数),获得的数取个位数即为`0-9`的均匀分布  cpp int rand10() { int x; while ((x = (rand7() - 1) * 7 + rand7() - 1) &gt;= 40) ; return x % 10 + 1; }
+关键需要保障产生的中间数是均匀的, `rand2() + rand2() - 1`是不均匀的，因为1和3的概率是1/4而2的概率是1/2  不均匀随机数构造均匀随机数 一个不均匀的随机数，以概率p产生0，概率(1-p)产生1,以此构造均匀随机数发生器 产生两次，需要0和1同时出现，该路是 p*(1-p)
+int gen() { int x, y; while ((x = rand()) == (y = rand())) ; return x; }  随机变量的和 变量x和y是[0, a] 和[0, b]上的均匀分布，给一个实数z,求 x + y &lt; z 的概率 如下图所示求 x+y=z 下方的面积与矩形面积之比 水库采样 流入若干对象，事先不知道个数，如何随机取出k个 采用数组a保存k个数 对于第i个数：……
+        </div>
+        <p class="readmore"><a href="http://example.org/post/20170824.probability_problems/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="http://example.org/post/20170809.senet/" title="SENet">SENet</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2017年8月9日
+        </date>
+        
+        <div class="post-content">
+             SENet(Momenta) 本文整理自机器之心对Momenta WMW团队的专访1
+仔细观察上面的卷积示意图，我们可以看到卷积操作实际上是在局部感受野上对图像进行空间和通道方向的信息整合。
+当前主流的提升网络的性能主要办法是在空间维度进行的，比如inception结构是在网络中嵌入多尺度结构，Attention机制考虑空间上下文信息等。
+而SENet考虑的是在特征通道层面来提升网络性能，提出了下面的Squeeze-and-Excitation Networks(SENet)结构:
+具体做法包括Squuze和Excitation两个步骤，Squeeze步骤对中间特征做全局聚合成$1\times1\times{c2}$的特征，这样接近输入的层也能获得全局的感受野；然后将其输入到softmax层获得每个通道权重，可以看成学习通道间的相关性；最后把这个权重加权到每个通道上，完成重标定。
+结构如下所示：
+可以看出，实现上使用全局pooling作为Squeeze操作，然后使用两个全连接层获得通道间的相关性，第一个全连接层下采样到$\frac{1}{16}$之后再恢复到原通道数是为了获得更多的非线性且极大减少参数数量，最后使用Sigmoid获得归一化权重。此外SE结构可以很方便地集成到skip-connections模块中，如上面的右图所示。
+最后贴一下实验结果：
+可以看出使用SE结构的ResNet-50网络top-1已经超过了更深的原始ResNet-101结构，而使用SE的ResNet-101已经远超过原始ResNet-152网络了！
+ 1.http://www.sohu.com/a/161633191_465975[ ↩](https://buptweixin.github.io/posts/20170809104219/#fnref:1)  ……
+        </div>
+        <p class="readmore"><a href="http://example.org/post/20170809.senet/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="http://example.org/post/20170802.knowledge_distill_methods/" title="knowledge distill methods">knowledge distill methods</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2017年8月2日
+        </date>
+        
+        <div class="post-content">
+            Knowledge Distill Methods 随着Kaiming He等人提出的resnet1解决了造成深层网络难以收敛的梯度弥散等问题后，人们越来越趋向于通过堆叠网络深度、宽度等方法来改善模型的性能，虽然这样确实在各种任务中获得了很好的效果，然而网络规模的无限制增长为模型在手机等计算能力受限设备上的部署带来了严峻挑战。人们迫切需要有效压缩模型尺寸的方法。本文将介绍其中一种简单有效的压缩方法: 模型蒸馏。模型蒸馏的大体思想是训练一个大型且精度较高的网络，通过某种方法将大型网络中的“知识”抽取出来引入我们想要训练的小型网络。
+Distilling the knowledge in a Neural Network2 和统计机器学习中随机森林类似，为了获得更好的泛化能力人们通常会同时训练多种不同的网络结构，然后在将不同网络的输出通过加权求和等方法综合起来作为最终的输出，使用的网络越多，最后获得的效果越好。然而过多的网络也带来了巨量的参数，整个网络的复杂度爆炸增长。
+Hinton等人受到3的启发，发现可以人为地为小模型增加约束以控制其抽取的特征尽量接近大模型，这样等效于将大模型所学习到的“知识”抽取到一个单一的简单模型中。
+本文中，Hint定义了如下soft logits函数：
+和我们常用的logits函数不同，上式中多了一个参数$T$,参数$T$的作用主要是控制logits输出不同类别概率之间的大小差距，可以通过下面的图直观理解： 从图中可以看出，在$x=6$和$x=9$处取两个值，当T越大时，两处对应的y值差距越大。 那为什么要控制logits输出概率差距呢，因为我们需要学习的是teacher的输出特征分布，如果我们使用的logits函数对输入大小很敏感，那么获得的类别概率中会有一个具有非常大的值，而其他类别概率相对来说会很小，这样的话由于其他类别概率被淹没了，我们的小模型很可能会学不到他们。
+在训练过程中，作者同时将大student 网络的T值设的很大以使小模型学习大模型的输出分布，训练完之后再将T调回较小的值。
+FITNETS: HINT FOR THIN DEEP NETS4 虽然Hinton的KD方法引入的soft logits函数能够很好的将大模型的知识引入小模型，然而这个方法只能对模型最终的输出做约束，当小模型很深时，即使有大模型的约束它仍然很难收敛。
+对这个问题一个很显然的改进方法就是除了对大小模型最终输出进行蒸馏之外，同时对模型的中间层的输出做蒸馏。这里作者为小模型的中间层起名为guided layer, 大模型的中间层起名为hint layer。 因为大小模型结构不同，他们的中间输出宽、高、通道数往往也不相同，我们不能直接对他们计算distill loss，而应该采用下式的方法将两个模型映射到相同维度然后计算: 其中$u h(x;W {Hint})$表示大模型输入为$x$，权重为$W{Hint}$时，hint layer的输出，$v g(x;W {Guided})$表示小模型输入为$x$，权重为$W{Guided}$时，guided layer的输出，$r(.)$为映射函数，将guided layer输出映射到hint layer相同的维度上。 需要注意的是，映射后的输出必须和hit layer的输出是可比较的，比如必须得使用相同的非线性函数。
+假设hint layer的输出宽高为$(N {h,1}, N {h,2})$, 通道数为$O h$;guided layer 宽高为$(N {g,1}, N{g,2})$,通道数为$O g$。如果使用全连接层进行维度映射，则需要的参数量为$N {h,1}\times{N{h,2}\times{O h}\times{N {g,1}\times{N_{g_2}\times{O_g}}}}$, 这样庞大的参数量是难以接受的。因此，作者采用了卷积层作为映射函数。
+我们知道卷积层的输入输出关系为$$N^\prime=\frac{N+2p-ks}{stride}+1$$ 其中，$N$为输入的宽度或高度，$N^\prime$为输入的宽度或高度，$p$为padding,$ks$为kernel size,这里取$p=0, stride=1$, 要将guided layer输出映射到和hint layer输出同维，只需要使等式$N_{g,i}-ks i+1=N {h,i}$成立即可。卷积操作的参数数量为$k_1\times{k_2}\times{Oh}\times{O g}$,这显然要小于全连接映射的系数$N {h,1}\times{N {h,2}}\times{N {g,1}}\times{N{g,2}}$……
+        </div>
+        <p class="readmore"><a href="http://example.org/post/20170802.knowledge_distill_methods/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="http://example.org/post/20170710.likewhatyoulike/" title="Like What You Like: Knowledge Distill via Neuron Selectivity Transfer">Like What You Like: Knowledge Distill via Neuron Selectivity Transfer</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2017年7月10日
+        </date>
+        
+        <div class="post-content">
+            Like What You Like: Knowledge Distill via Neuron Selectivity Transfer
+Zehao Huang, Naiyan Wang by TuSimple
+arXiv:1707.01219v1 What? 模型蒸馏技术是一种knowledge transfer方法， 它的思想是用一个已经训练好的更大、更深的大网络指导小网络的训练，将大网络中的”知识”提取到小网络中。
+传统的模型蒸馏方法使用大网络和小网络的softmax输出之间的差异作为蒸馏损失，即期望在训练的过程中小网络尽可能“学习”到大网络的输出类别分布，虽然这种蒸馏策略简单直观并且确实能有效提高小网络的效果，然而其缺点也显而易见:只适用于具有softmax的分类任务。
+为了使得模型具有更好的适用范围，Zehao Huang, Naiyan Wang等提出了一种称为Neuron Selectivity Transfer(NST)的模型蒸馏方法，
+大体来说，这个方法将teacher和student网络在FC之前的特征图按层计算MMD Matching Loss
+这种方法具有以下优点:
+ 能够神经网络加速和压缩 在多种数据集上证明了NST能够显著提高知识蒸馏的效果 能够很好的和其他knowledge transfer方法结合  Why? 以VGG16为例，作者将conv5_3层的特征值映射回原图，
+可以看到，conv5_3输出在左图猴子的脸部、右图的路牌处有较大的激活值，这也暗示着神经元具有对某些特定区域敏感而对其他区域不过多关注。受到这个现象的启发，作者认为student模型如果想要获得接近teacher模型的效果，尽量学习到teacher模型的感兴趣部位也是至关重要的。
+之前的文章中(Adriana et al. Hints for thin deep nets; Zagoruyko Sergey
+)
+How? Maximum Mean Discrepancy（MMD） 最大平均差异 为了使teacher网络的输出分布和student网络的输出分布尽可能相一致，作者使用了MMD的平方作为distill loss，最大平均差异最早用于检测两个分布是否相同，它的基本思想是如果两个分布p和q生成的足够多的样本对应f的映射均值相等，则可以认为两个分布是相等的。
+它的具体形式如式(1)所示
+其中，${x^i} {i=1}^N,{y^j} {i=1}^N$分别由两个分布p和q生成, $\phi(\cdot)$为特征图输出的映射函数。将上式展开，并使用类似SVM中的”核技巧“,获得公式(2)
+上式中$k(\cdot, \cdot)$是核函数，它的作用是将低维特征映射到高维空间，SVM中核函数的使用是为了在高维空间中将线性不可分样本转换成线性可分的样本分布，而本文的作用是同时映射student网络和teacher网络的中间结果到相同的空间分布从而使teacher网络的知识能够更准确的提取到student网络中。因为当且仅当p和q分布完全相同时MMD 损失才为0，所以最小化MMD损失等同于使p分布和q分布尽可能接近。
+Neuron Selectivity Transfer(NST) 具体到模型的训练上，作者采用了一种”神经元选择性转移”的方法来训练student网络，以$f^k$表示中间特征，定义下面的损失函数……
+        </div>
+        <p class="readmore"><a href="http://example.org/post/20170710.likewhatyoulike/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="http://example.org/post/20170430.leetcodesolvers/" title="Leetcode Solvers">Leetcode Solvers</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2017年4月30日
+        </date>
+        
+        <div class="post-content">
+            String LeetCote_string_383_Ransom Note 题意 Given an arbitrary ransom note string and another string containing letters from all the magazines, write a function that will return true if the ransom note can be constructed from the magazines ; otherwise, it will return false.
+Each letter in the magazine string can only be used once in your ransom note.
+Note: You may assume that both strings contain only lowercase letters.
+canConstruct(&quot;a&quot;, &quot;b&quot;) -&gt; false canConstruct(&quot;aa&quot;, &quot;ab&quot;) -&gt; false canConstruct(&quot;aa&quot;, &quot;aab&quot;) -&gt; true  思路 用一个计数器数组统计 magzine 中每个字母出现的次数，然后统计 ransomNote 中字母，计算两个字符串的对应字母出现次数的差值，若小于0说明 ransomNote 要构成 magzine 还缺少该字母……
+        </div>
+        <p class="readmore"><a href="http://example.org/post/20170430.leetcodesolvers/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="http://example.org/post/20170420.binarysearch/" title="Binary Search">Binary Search</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2017年4月20日
+        </date>
+        
+        <div class="post-content">
+            Template  int start = 0, end = data.size() - 1; while (start + 1 &lt; end) { int mid = (start + end) &gt;&gt; 1; if (...) ... else ... } if (...) return start; else if(...) return end; else return -1;  Problems 寻找第一个最大最小元素 #include &lt;iostream&gt; #include &lt;vector&gt; #include &lt;algorithm&gt; using namespace std; class Solution { public: int findFirstTargetPos(const vector&lt;int&gt; &amp;data, int Target) { int start = 0, end = data.……
+        </div>
+        <p class="readmore"><a href="http://example.org/post/20170420.binarysearch/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="http://example.org/post/20161007.gradientdecent/" title="梯度下降方法总结">梯度下降方法总结</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2016年10月7日
+        </date>
+        
+        <div class="post-content">
+            参考并翻译自Sebastian Ruder博士的总结文章An overview of gradient descent optimization algorithms。
+梯度下降方法是目前最流行的神经网络优化方法，现在主流的深度学习框架(caffe,keras,MXNET等)都包含了若干种梯度下降算法。虽然我们可以把它们看成黑盒直接使用，但是在不同场合下相同的算法可能有着很大的性能差异，因此，了解这些算法各自内在的原理可以帮助我们更好地训练网络。
+基本梯度下降算法 有三种基本的梯度下降算法，他们的主要区别在于用于计算一次目标函数梯度的样本数量。
+批量梯度下降(Batch graduebt descent) 批量梯度下降算法使用整个训练集计算目标函数的梯度并更新参数$\theta$,具体公式为 $$\theta=\theta-\eta\nabla_\theta{J(\theta)}$$
+for i in range(nb_epochs): params_grad = evaluate_gradient(loss_function, data, params) params = params - learning_rate * params_grad  因为每更新一次参数就需要计算整个数据集，所以批量梯度下降算法十分缓慢而且难以存放在内存中计算，更致命的是，使用批量梯度下降的算法无法在线更新。
+随机梯度下降(Stochatic gradient decent， SGD) 与批量梯度下降方法不同，随机梯度下降方法一次只使用一个样本进行目标函数梯度计算，它的公式为
+$$\theta=\theta-\eta\nabla_\theta{J(\theta;x^{(i)},y^{(i)})}$$
+因为每次只计算一个样本，所以SGD计算非常快并且适合线上更新模型。但是，频繁地更新参数也使得目标函数抖动非常厉害。 SGD频繁地参数更新可以使算法跳出局部最优点，更可能寻找到接近全局最优的解。 SGD代码如下：
+for i in range(nb_epochs): np.random.shuffle(data) for example in data: params_grad = evaluate_gradient(loss_function, example, params) patams = params - learning_rate * params_grad  注意，上面的代码在每个epoch都对训练数据进行了打乱操作，这样可以保证不同epoch学习到的特征和训练样本的出现顺序没有关系。
+小批量梯度下降(mini-batch gradient descent) 小批量梯度下降结合了批量梯度下降和随机梯度下降的优点，它一次以小批量的训练数据计算目标函数的权重并更新参数。公式如下：……
+        </div>
+        <p class="readmore"><a href="http://example.org/post/20161007.gradientdecent/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="http://example.org/post/20160910.cnninvariant/" title="神经网络引入循环不变性">神经网络引入循环不变性</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2016年9月10日
+        </date>
+        
+        <div class="post-content">
+            由于实际中的数据会以各种各样的形式出现，所以我们在挑选神经网络的训练数据集时需要尽可能的覆盖到所有的情况。比如要训练一个网络来根据病人的x光判断手掌骨骼是否出现畸形，我们会希望用于训练的照片中手掌的位置、方向要尽可能与实际情况吻合，这样可以降低过拟合情况的发生。
+我们通常会采取两个方法来试图解决这个问题，一是在采集样本过程中尽量考虑各种情况，二是人为的对现有的图像做旋转、平移等操作增加样本空间位置信息；然而，很多时候采集新样本的成本很高，第一个方法很难实施，而旋转图像增加样本的方法往往会造成信息的冗余使网络训练速度减慢。为此，Google DeepMind团队在ICML2016论文 Exploiting Cyclic Symmetry in Convolutional Neural Networks 中提出了将循环不变性编码进神经网络方法，这个方法将网络对图像的处理分成四个路径，每个路径处理不同角度的图片，这样就可以学习到图像的各个角度信息从而对旋转不敏感，也即题目中的”旋转不变性”。
+基本操作 为了实现这样的网络，作者提出了四种操作：Slice、Roll、Poll和Stack。
+Cycle slice Slice 操作将原始图像复制四份分别旋转0°、90°、180°和270°，作为网络四条独立路径的输入，如下如所示：
+至于为什么选择0°、90°、180°和270°这四个角度旋转是因为这几个操作只需要使用简单的矩阵转置就能实现而且是只有这几个旋转操作不需要插值，效率很高。同时，这4个角度效果已经很好了，作者尝试了八角度的旋转，然而对结果的提升不大却大大降低了训练速度。
+Cycle roll， Cycle Stack 进行完Slice操作后，可以获得四条独立的路径，每条路径上都包含不同角度图片的feature map，为了更进一步提高后续层能够使用的信息，在几次卷积之后可以把四条路径的feature map综合在一起：
+如上图所示，每条路径的都和其他三条路径的feature map综合在了一起，然后使用Stack操作将每个路径上的四个feature map拼接在一起形成一个大的feature map，由于只需要简单地将其他路径上的feature map复制在一起所以这一步的计算量很小。
+注意， 虽然每条路径都是相同的四个feature map，但是他们的组合顺序是不一样的，所以每条路径都是不同的。
+Cycle Pool Pool操作是Slice 的对偶操作，它在最后的全连接之前把四条路径的feature map重新组合在一起，这样网络学习到的特征就综合在一起了。
+循环不变网络 四个操作在网路中的位置如图所示。
+作者在所有四条路径中每次使用的filter都是相同的，这样就和未加入循环不变性的网络的参数数量基本保持了一致。注意，虽然用的filter是一样的，但是每条路径feature map和filter的相对位置是不一样的。
+使用效果 作者使用这种网络获得了kaggle nbsb（National Data Science Bowl）项目的冠军，具体的请查阅Classifying plankton with deep neural networks MARCH 17, 2015
+代码见kaggle-ndsb.……
+        </div>
+        <p class="readmore"><a href="http://example.org/post/20160910.cnninvariant/">阅读全文</a></p>
+    </article>
+    
+    
+    
 
-    <p>&copy; 2020. All rights reserved. </p>
-  </div>
-</aside>
 
-    <main class="content container">
-    <ul class="posts">
-<li>
-    <span><a href="http://example.org/post/20170419.unionfind/">Union Find</a> <time class="pull-right post-list" datetime="2020-04-19T13:47:40&#43;0800">Sun, Apr 19, 2020</time></span>
-  </li><li>
-    <span><a href="http://example.org/post/20160618.bigdatainfrastructure/">大数据基础设施综述</a> <time class="pull-right post-list" datetime="2019-11-17T13:54:11&#43;0800">Sun, Nov 17, 2019</time></span>
-  </li><li>
-    <span><a href="http://example.org/post/20170824.probability_problems/">Probability Problems</a> <time class="pull-right post-list" datetime="2017-08-24T13:04:40&#43;0800">Thu, Aug 24, 2017</time></span>
-  </li><li>
-    <span><a href="http://example.org/post/20170809.senet/">SENet</a> <time class="pull-right post-list" datetime="2017-08-09T13:41:14&#43;0800">Wed, Aug 9, 2017</time></span>
-  </li><li>
-    <span><a href="http://example.org/post/20170802.knowledge_distill_methods/">knowledge distill methods</a> <time class="pull-right post-list" datetime="2017-08-02T13:39:37&#43;0800">Wed, Aug 2, 2017</time></span>
-  </li><li>
-    <span><a href="http://example.org/post/20170710.likewhatyoulike/">Like What You Like: Knowledge Distill via Neuron Selectivity Transfer</a> <time class="pull-right post-list" datetime="2017-07-10T13:41:14&#43;0800">Mon, Jul 10, 2017</time></span>
-  </li><li>
-    <span><a href="http://example.org/post/20170430.leetcodesolvers/">Leetcode Solvers</a> <time class="pull-right post-list" datetime="2017-04-30T13:44:21&#43;0800">Sun, Apr 30, 2017</time></span>
-  </li><li>
-    <span><a href="http://example.org/post/20170420.binarysearch/">Binary Search</a> <time class="pull-right post-list" datetime="2017-04-20T13:46:33&#43;0800">Thu, Apr 20, 2017</time></span>
-  </li><li>
-    <span><a href="http://example.org/post/20161007.gradientdecent/">梯度下降方法总结</a> <time class="pull-right post-list" datetime="2016-10-07T13:50:27&#43;0800">Fri, Oct 7, 2016</time></span>
-  </li><li>
-    <span><a href="http://example.org/post/20160910.cnninvariant/">神经网络引入循环不变性</a> <time class="pull-right post-list" datetime="2016-09-10T13:52:08&#43;0800">Sat, Sep 10, 2016</time></span>
-  </li><li>
-    <span><a href="http://example.org/post/20160624.activationfunctions/">常用激活函数</a> <time class="pull-right post-list" datetime="2016-06-24T13:55:39&#43;0800">Fri, Jun 24, 2016</time></span>
-  </li>
-</ul>
-    </main>
+
+<ol class="page-navigator">
+    
 
     
+    <li  class="current">
+        <a href="http://example.org/post/">1</a>
+    </li>
+    
+    <li >
+        <a href="http://example.org/post/page/2/">2</a>
+    </li>
+    
+
+    
+    <li class="next">
+        <a href="http://example.org/post/page/2/">下一页</a>
+    </li>
+    
+</ol>
+
+
+
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2020 <a href="http://example.org/">Hi, nice to meet you By </a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+</footer>
+
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='//www.google.com/search' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
       
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="http://example.org/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
     
-  </body>
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="http://example.org/post/20170419.unionfind/" title="Union Find">Union Find</a>
+    </li>
+    
+    <li>
+        <a href="http://example.org/post/20160618.bigdatainfrastructure/" title="大数据基础设施综述">大数据基础设施综述</a>
+    </li>
+    
+    <li>
+        <a href="http://example.org/post/20170824.probability_problems/" title="Probability Problems">Probability Problems</a>
+    </li>
+    
+    <li>
+        <a href="http://example.org/post/20170809.senet/" title="SENet">SENet</a>
+    </li>
+    
+    <li>
+        <a href="http://example.org/post/20170802.knowledge_distill_methods/" title="knowledge distill methods">knowledge distill methods</a>
+    </li>
+    
+    <li>
+        <a href="http://example.org/post/20170710.likewhatyoulike/" title="Like What You Like: Knowledge Distill via Neuron Selectivity Transfer">Like What You Like: Knowledge Distill via Neuron Selectivity Transfer</a>
+    </li>
+    
+    <li>
+        <a href="http://example.org/post/20170430.leetcodesolvers/" title="Leetcode Solvers">Leetcode Solvers</a>
+    </li>
+    
+    <li>
+        <a href="http://example.org/post/20170420.binarysearch/" title="Binary Search">Binary Search</a>
+    </li>
+    
+    <li>
+        <a href="http://example.org/post/20161007.gradientdecent/" title="梯度下降方法总结">梯度下降方法总结</a>
+    </li>
+    
+    <li>
+        <a href="http://example.org/post/20160910.cnninvariant/" title="神经网络引入循环不变性">神经网络引入循环不变性</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="http://example.org/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+</body>
+
 </html>

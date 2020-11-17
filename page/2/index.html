@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+	<meta name="generator" content="Hugo 0.56.3" />
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>Hi, nice to meet you | </title>
+    <meta property="og:title" content="Hi, nice to meet you | ">
+    <meta property="og:type" content="website">
+    <meta name="Keywords" content="">
+    <meta name="description" content="">
+    <meta property="og:url" content="http://example.org/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <link rel="alternate" type="application/rss+xml+xml" href="http://example.org/index.xml" title="Hi, nice to meet you" />
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+    
+    
+    
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <h1>
+                        <a id="logo" href="http://example.org/">
+                            Hi, nice to meet you
+                        </a>
+                    </h1>
+                
+                
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="http://example.org/">首页</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="http://example.org/post/20160624.activationfunctions/" title="常用激活函数">常用激活函数</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2016年6月24日
+        </date>
+        
+        <div class="post-content">
+            由于线性模型的表达能力不够（甚至不能表达异或），需要使用激活函数(activation function)引入非线性因素，常用的激活函数有sigmoid函数、tanh函数、ReLu函数及其改进函数和Maxout等。
+sigmod激活函数 $$sigmoid(x)=\frac{1}{1+e^{-x}}$$
+函数图像 sigmoid 函数图像是一条光滑的”S”型曲线，
+函数性质  当输入趋近于负无穷时，sigmoid函数取值趋近于0，反之，当输入趋近于正无穷时其取值趋近于1； 整个曲线都是光滑(可微)的，且任何一点的导数都大于零； 导数形式简单，为$$sigmoid^\prime(x)=sigmoid(x)(1-sigmoid(x))$$ 这个性质很重要，因为只要在正向传播中计算了$sigmoid(x)$,反向传播求导时就可以很方便的通过$sigmoid(x)$求出$sigmoid^\prime(x)$  应用状况 由于sigmoid函数的取值区间[0, 1]可以用来表示概率这一 性质，所以在过去很长一段时间其被广泛使用，然而，随着考虑到sigmoid函数同时具有如下的两个问题，近些年其逐渐被冷落。
+ 梯度消失问题：神经网络的反向传播过程是通过链式法则实现的，然而我们看sigmoid函数图像可知，当输入很大或者很小时，其导数是接近于0的，这在网络层数较少时可能不是问题，然而深度学习中网络层数动辄几十上百层，这样很可能造成梯度的消失； 输出的中心不是0:上级神经元的输出中心非零会造成下层神经元的输入中心非0。  tanh激活函数 tanh函数形式如下所示：$$tanh(x)=\frac{e^x-e^{-x}}{e^x+e^{-x}}$$，它和sigmoid函数关系为$$tanh(x)=2sigmoid(2x)-1$$
+函数图像 tanh函数图像和sigmoid函数很相似，但是其值域为(-1,1)，且其输出中心为0，这样就能避免上面提到的sigmoid存在的第二个问题。
+函数性质  当输入趋近于负无穷时，tanh函数取值趋近于-1，反之，当输入趋近于正无穷时其取值趋近于1； 整个曲线都是光滑(可微)的，且任何一点的导数都大于零； 导数形式为$$tanh^\prime(x)=1-[tanh(x)]^2$$ 输出以0为中心  应用状况 和sigmoid函数一样，tanh函数也存在梯度消失的问题，但是他的输出中心为0，所以他比sigmoid函数更常用。
+ReLu激活函数 sigmoid函数和tanh函数的输出不具备稀疏性，因此需要加入惩罚因子(正则项)来训练出接近0的系数，而ReLu(Rectified Linear Unite)是对其的线性修正，它的公式为$$ReLu(x)=max(0,x)$$
+函数图像 从上图可以看到，当输入小于0时，输出为0，即神经元是被抑制的，当输入大于0时，输出和输入成正比例关系。
+函数性质 优点
+ 收敛速度快：和sigmoid函数、tanh函数相比，ReLu具有更快的收敛速度 计算简单： ReLu计算只需要使用简单的max操作 能产生大量稀疏解： 因为左半部分是被抑制的，所以使用ReLu作为激活函数训练出来的网络参数有很大一部分都是0。  缺点：
+如果一个很大的梯度流过了ReLu某个神经元，因为ReLU输入小于0时梯度为0 ，会造成这个神经元将不会再更新，造成神经元“死亡”现象，具体的可以看评论栏第一条(感谢@tg提醒，之前理解错了)。
+改进 为了避免神经元“死亡”现象，研究人员提出了Leak ReLu的改进函数，其把当x小于0时的输出由0变为很小的负数。
+Maxout激活函数 Maxout其实是改变了神经元的形式，它将每个神经元由原来一次训练一组参数扩展为同时训练多组参数，然后选择激活值最大的作为下一层的激活值，比如同时训练3组参数：$$max(w_1^Tx+b_1, w_2^Tx+b_2, w_3^Tx+b_3)$$
+可以看出ReLu为Maxout同时训练两组参数且$w_2,b_2$取0时的情形，因此maxout拥有ReLu的所有优点同时避免了神经元“死亡”的现象；但是，由于需要多训练了几组参数，网络的效率也大大降低了。
+该如何选择  不要使用sigmoid； 可以考虑使用tanh； 使用ReLU激活函数的话，注意不要把学习率设得太高，避免产生结点”死亡”现象； 最好使用Maxout或者Leaky ReLU， 他们的效果比tanh好。  参考文献 CS231n Convolutional Neural Networks for Visual Recognition……
+        </div>
+        <p class="readmore"><a href="http://example.org/post/20160624.activationfunctions/">阅读全文</a></p>
+    </article>
+    
+    
+
+
+
+<ol class="page-navigator">
+    
+    <li class="prev">
+        <a href="http://example.org/">上一页</a>
+    </li>
+    
+
+    
+    <li >
+        <a href="http://example.org/">1</a>
+    </li>
+    
+    <li  class="current">
+        <a href="http://example.org/page/2/">2</a>
+    </li>
+    
+
+    
+</ol>
+
+
+
+</div>
+
+                    <footer id="footer">
+    <div>
+        &copy; 2020 <a href="http://example.org/">Hi, nice to meet you By </a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://www.flysnow.org/" target="_black"><span class="badge-subject">Design by</span><span class="badge-value bg-brightgreen">飞雪无情</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+</footer>
+
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+
+
+
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='//www.google.com/search' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="http://example.org/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="http://example.org/post/20170419.unionfind/" title="Union Find">Union Find</a>
+    </li>
+    
+    <li>
+        <a href="http://example.org/post/20160618.bigdatainfrastructure/" title="大数据基础设施综述">大数据基础设施综述</a>
+    </li>
+    
+    <li>
+        <a href="http://example.org/post/20170824.probability_problems/" title="Probability Problems">Probability Problems</a>
+    </li>
+    
+    <li>
+        <a href="http://example.org/post/20170809.senet/" title="SENet">SENet</a>
+    </li>
+    
+    <li>
+        <a href="http://example.org/post/20170802.knowledge_distill_methods/" title="knowledge distill methods">knowledge distill methods</a>
+    </li>
+    
+    <li>
+        <a href="http://example.org/post/20170710.likewhatyoulike/" title="Like What You Like: Knowledge Distill via Neuron Selectivity Transfer">Like What You Like: Knowledge Distill via Neuron Selectivity Transfer</a>
+    </li>
+    
+    <li>
+        <a href="http://example.org/post/20170430.leetcodesolvers/" title="Leetcode Solvers">Leetcode Solvers</a>
+    </li>
+    
+    <li>
+        <a href="http://example.org/post/20170420.binarysearch/" title="Binary Search">Binary Search</a>
+    </li>
+    
+    <li>
+        <a href="http://example.org/post/20161007.gradientdecent/" title="梯度下降方法总结">梯度下降方法总结</a>
+    </li>
+    
+    <li>
+        <a href="http://example.org/post/20160910.cnninvariant/" title="神经网络引入循环不变性">神经网络引入循环不变性</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="http://example.org/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
