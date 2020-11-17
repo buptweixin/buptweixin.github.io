@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn" lang="zh-cn">
+<head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.56.3" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>SENet &middot; Hi, nice to meet you</title>
+  <meta name="description" content="" />
+
+  
+  <link type="text/css" rel="stylesheet" href="http://example.org/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="http://example.org/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="http://example.org/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="http://example.org/css/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  
+</head>
+
+  <body class=" ">
+  <aside class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="http://example.org/"><h1>Hi, nice to meet you</h1></a>
+      <p class="lead">
+      An elegant open source and mobile first theme for <a href="http://hugo.spf13.com">hugo</a> made by <a href="http://twitter.com/mdo">@mdo</a>. Originally made for Jekyll.
+      </p>
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li><a href="http://example.org/">Home</a> </li>
+        
+      </ul>
+    </nav>
+
+    <p>&copy; 2020. All rights reserved. </p>
+  </div>
+</aside>
+
+    <main class="content container">
+    <div class="post">
+  <h1>SENet</h1>
+  <time datetime=2017-08-09T13:41:14&#43;0800 class="post-date">Wed, Aug 9, 2017</time>
+  
+
+<h2 id="senet-momenta">SENet(Momenta)</h2>
+
+<p>本文整理自机器之心对Momenta WMW团队的专访<a href="https://buptweixin.github.io/posts/20170809104219/#fn:1">1</a></p>
+
+<p><img src="http://img.mp.itc.cn/upload/20170802/fb03d75df82f432693cf895490574a33_th.jpg" alt="" /></p>
+
+<p>仔细观察上面的卷积示意图，我们可以看到卷积操作实际上是在局部感受野上对图像进行空间和通道方向的信息整合。</p>
+
+<p>当前主流的提升网络的性能主要办法是在空间维度进行的，比如inception结构是在网络中嵌入多尺度结构，Attention机制考虑空间上下文信息等。</p>
+
+<p>而SENet考虑的是在特征通道层面来提升网络性能，提出了下面的Squeeze-and-Excitation Networks(SENet)结构:</p>
+
+<p><img src="http://ohcog5mjb.bkt.clouddn.com/17-8-9/64121359.jpg" alt="" /></p>
+
+<p>具体做法包括Squuze和Excitation两个步骤，Squeeze步骤对中间特征做全局聚合成$1\times1\times{c2}$的特征，这样接近输入的层也能获得全局的感受野；然后将其输入到softmax层获得每个通道权重，可以看成学习通道间的相关性；最后把这个权重加权到每个通道上，完成重标定。</p>
+
+<p>结构如下所示：</p>
+
+<p><img src="http://ohcog5mjb.bkt.clouddn.com/17-8-9/72128626.jpg" alt="" /></p>
+
+<p>可以看出，实现上使用全局pooling作为Squeeze操作，然后使用两个全连接层获得通道间的相关性，第一个全连接层下采样到$\frac{1}{16}$之后再恢复到原通道数是为了获得更多的非线性且极大减少参数数量，最后使用Sigmoid获得归一化权重。此外SE结构可以很方便地集成到skip-connections模块中，如上面的右图所示。</p>
+
+<p>最后贴一下实验结果：</p>
+
+<p><img src="http://ohcog5mjb.bkt.clouddn.com/17-8-9/80519114.jpg" alt="" /></p>
+
+<p>可以看出使用SE结构的ResNet-50网络top-1已经超过了更深的原始ResNet-101结构，而使用SE的ResNet-101已经远超过原始ResNet-152网络了！</p>
+
+<ol>
+<li>1.<a href="http://www.sohu.com/a/161633191_465975[ ↩](https://buptweixin.github.io/posts/20170809104219/#fnref:1">http://www.sohu.com/a/161633191_465975[ ↩](https://buptweixin.github.io/posts/20170809104219/#fnref:1</a>)</li>
+</ol>
+
+</div>
+
+
+    </main>
+
+    
+      
+    
+  </body>
+</html>

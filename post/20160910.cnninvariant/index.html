@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn" lang="zh-cn">
+<head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.56.3" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>神经网络引入循环不变性 &middot; Hi, nice to meet you</title>
+  <meta name="description" content="" />
+
+  
+  <link type="text/css" rel="stylesheet" href="http://example.org/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="http://example.org/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="http://example.org/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="http://example.org/css/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  
+</head>
+
+  <body class=" ">
+  <aside class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="http://example.org/"><h1>Hi, nice to meet you</h1></a>
+      <p class="lead">
+      An elegant open source and mobile first theme for <a href="http://hugo.spf13.com">hugo</a> made by <a href="http://twitter.com/mdo">@mdo</a>. Originally made for Jekyll.
+      </p>
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li><a href="http://example.org/">Home</a> </li>
+        
+      </ul>
+    </nav>
+
+    <p>&copy; 2020. All rights reserved. </p>
+  </div>
+</aside>
+
+    <main class="content container">
+    <div class="post">
+  <h1>神经网络引入循环不变性</h1>
+  <time datetime=2016-09-10T13:52:08&#43;0800 class="post-date">Sat, Sep 10, 2016</time>
+  <p>由于实际中的数据会以各种各样的形式出现，所以我们在挑选神经网络的训练数据集时需要尽可能的覆盖到所有的情况。比如要训练一个网络来根据病人的x光判断手掌骨骼是否出现畸形，我们会希望用于训练的照片中手掌的位置、方向要尽可能与实际情况吻合，这样可以降低过拟合情况的发生。</p>
+
+<p>我们通常会采取两个方法来试图解决这个问题，一是在采集样本过程中尽量考虑各种情况，二是人为的对现有的图像做旋转、平移等操作增加样本空间位置信息；然而，很多时候采集新样本的成本很高，第一个方法很难实施，而旋转图像增加样本的方法往往会造成信息的冗余使网络训练速度减慢。为此，Google DeepMind团队在ICML2016论文 Exploiting Cyclic Symmetry in Convolutional Neural Networks 中提出了将循环不变性编码进神经网络方法，这个方法将网络对图像的处理分成四个路径，每个路径处理不同角度的图片，这样就可以学习到图像的各个角度信息从而对旋转不敏感，也即题目中的”旋转不变性”。</p>
+
+<p>基本操作
+为了实现这样的网络，作者提出了四种操作：Slice、Roll、Poll和Stack。</p>
+
+<p>Cycle slice
+Slice 操作将原始图像复制四份分别旋转0°、90°、180°和270°，作为网络四条独立路径的输入，如下如所示：</p>
+
+<p>至于为什么选择0°、90°、180°和270°这四个角度旋转是因为这几个操作只需要使用简单的矩阵转置就能实现而且是只有这几个旋转操作不需要插值，效率很高。同时，这4个角度效果已经很好了，作者尝试了八角度的旋转，然而对结果的提升不大却大大降低了训练速度。</p>
+
+<p>Cycle roll， Cycle Stack
+进行完Slice操作后，可以获得四条独立的路径，每条路径上都包含不同角度图片的feature map，为了更进一步提高后续层能够使用的信息，在几次卷积之后可以把四条路径的feature map综合在一起：</p>
+
+<p>如上图所示，每条路径的都和其他三条路径的feature map综合在了一起，然后使用Stack操作将每个路径上的四个feature map拼接在一起形成一个大的feature map，由于只需要简单地将其他路径上的feature map复制在一起所以这一步的计算量很小。</p>
+
+<p>注意， 虽然每条路径都是相同的四个feature map，但是他们的组合顺序是不一样的，所以每条路径都是不同的。</p>
+
+<p>Cycle Pool
+Pool操作是Slice 的对偶操作，它在最后的全连接之前把四条路径的feature map重新组合在一起，这样网络学习到的特征就综合在一起了。</p>
+
+<p>循环不变网络
+四个操作在网路中的位置如图所示。</p>
+
+<p>作者在所有四条路径中每次使用的filter都是相同的，这样就和未加入循环不变性的网络的参数数量基本保持了一致。注意，虽然用的filter是一样的，但是每条路径feature map和filter的相对位置是不一样的。</p>
+
+<p>使用效果
+作者使用这种网络获得了kaggle nbsb（National Data Science Bowl）项目的冠军，具体的请查阅Classifying plankton with deep neural networks
+MARCH 17, 2015</p>
+
+<p>代码见kaggle-ndsb.</p>
+
+</div>
+
+
+    </main>
+
+    
+      
+    
+  </body>
+</html>

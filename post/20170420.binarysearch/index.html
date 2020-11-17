@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn" lang="zh-cn">
+<head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.56.3" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Binary Search &middot; Hi, nice to meet you</title>
+  <meta name="description" content="" />
+
+  
+  <link type="text/css" rel="stylesheet" href="http://example.org/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="http://example.org/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="http://example.org/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="http://example.org/css/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  
+</head>
+
+  <body class=" ">
+  <aside class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="http://example.org/"><h1>Hi, nice to meet you</h1></a>
+      <p class="lead">
+      An elegant open source and mobile first theme for <a href="http://hugo.spf13.com">hugo</a> made by <a href="http://twitter.com/mdo">@mdo</a>. Originally made for Jekyll.
+      </p>
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li><a href="http://example.org/">Home</a> </li>
+        
+      </ul>
+    </nav>
+
+    <p>&copy; 2020. All rights reserved. </p>
+  </div>
+</aside>
+
+    <main class="content container">
+    <div class="post">
+  <h1>Binary Search</h1>
+  <time datetime=2017-04-20T13:46:33&#43;0800 class="post-date">Thu, Apr 20, 2017</time>
+  
+
+<h2 id="template">Template</h2>
+
+<pre><code>    int start = 0, end = data.size() - 1;
+    while (start + 1 &lt; end)
+    {
+        int mid = (start + end) &gt;&gt; 1;
+        if (...)
+            ...
+        else
+            ...
+    }
+    if (...)
+        return start;
+    else if(...)
+        return end;
+    else
+        return -1;
+</code></pre>
+
+<h2 id="problems">Problems</h2>
+
+<h3 id="寻找第一个最大最小元素">寻找第一个最大最小元素</h3>
+
+<pre><code>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+class Solution
+{
+    public:
+        int findFirstTargetPos(const vector&lt;int&gt; &amp;data, int Target)
+        {
+            int start = 0, end = data.size() - 1;
+            while (start + 1 &lt; end)
+            {
+                int mid = (start + end) &gt;&gt; 1;
+                if (data[mid] &lt; Target)
+                    start = mid;
+                else
+                    end = mid;
+            }
+            if (data[start] == Target)
+                return start;
+            else if(data[end] == Target)
+                return end;
+            else
+                return -1;
+            // while(start &lt; end)
+            // {
+                // int mid = (start + end) / 2;
+                // if (data[mid] &gt; Target)
+                    // end = mid - 1;
+                // else if (data[mid] &lt; Target)
+                    // start = mid + 1;
+                // else
+                    // end = mid;
+            // }
+            // if (data[start] == Target)
+                // return start;
+            return -1;
+        }
+
+        int findLastTargetPos(const vector&lt;int&gt; &amp;data, int target)
+        {
+            int start = 0, end = data.size() - 1;
+            while(start + 1 &lt; end)
+            {
+                int mid = (start + end) &gt;&gt; 1;
+                if (data[mid] &gt; target)
+                    end = mid;
+                else
+                    start = mid;
+            }
+            if (data[end] == target)
+                return end;
+            else if (data[start] == target)
+                return start;
+            return -1;
+        }
+
+
+};
+
+int main()
+{
+    vector&lt;int&gt; input({3,4,5,1,2,1,7,5,2,3,3,4,5,6,8});
+    sort(input.begin(), input.end());
+    for (int n : input)
+        cout &lt;&lt; &quot; &quot; &lt;&lt; n;
+    int num;
+    Solution s;
+    while(true)
+    {
+        cin &gt;&gt; num;
+        cout &lt;&lt; &quot;Last Pos:&quot; &lt;&lt; s.findFirstTargetPos(input, num) &lt;&lt; endl;
+        cout &lt;&lt; &quot;First Pos:&quot; &lt;&lt; s.findLastTargetPos(input, num) &lt;&lt; endl;
+    }
+    return 0;
+
+}
+</code></pre>
+
+<h3 id="在每一行递增-上一行最后一个元素小于下一行第一个元素的矩阵中寻找值">在每一行递增，上一行最后一个元素小于下一行第一个元素的矩阵中寻找值</h3>
+
+<pre><code>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+class Solution
+{
+    public:
+        bool findMatrixElement(const vector&lt;vector&lt;int&gt; &gt; &amp;matrix, int num)
+        {
+            if (matrix.empty() || matrix[0].empty())
+                return false;
+            int start = 0, end = matrix.size() - 1;
+            while (start + 1 &lt; end)
+            {
+                int mid = start + ((end - start) &gt;&gt; 1);
+                if (matrix[mid][0] &lt; num)
+                    start = mid;
+                else
+                    end = mid;
+            }
+            int row = (matrix[end][0] &lt;= num ? end : start);
+            int new_start = 0, new_end = matrix[0].size() - 1;
+            while (new_start + 1 &lt; new_end)
+            {
+                int mid = new_start + ((new_end - new_start) &gt;&gt; 1);
+                if (matrix[row][mid] &lt; num)
+                    new_start = mid;
+                else
+                    new_end = mid;
+            }
+            if (matrix[row][new_start] == num)
+                return true;
+            if (matrix[row][new_end] == num)
+                return true;
+            return false;
+        }
+};
+
+int main()
+{
+    vector&lt;vector&lt;int&gt; &gt; input = {
+        {1, 3, 5, 7},
+        {10, 11, 16, 20},
+        {23, 30, 34, 50}
+    };
+    for (vector&lt;int&gt; vec : input)
+    {
+        for (int n : vec)
+            cout &lt;&lt; n &lt;&lt; &quot; &quot;;
+        cout &lt;&lt; endl;
+    }
+    Solution s;
+    int num;
+    while (cin &gt;&gt; num)
+        cout &lt;&lt; s.findMatrixElement(input, num) &lt;&lt; endl;
+}
+</code></pre>
+
+<h3 id="寻找旋转有序序列最小值">寻找旋转有序序列最小值</h3>
+
+<pre><code>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+using namespace std;
+
+class Solution
+{
+    public:
+        int findRotateMinimum(const vector&lt;int&gt; &amp;data)
+        {
+            int start = 0, end = data.size() - 1;
+            int target = data[end - 1];
+            while (start + 1 &lt; end)
+            {
+                int mid = start + ((end - start) &gt;&gt; 1);
+                if (data[mid] &lt; target)
+                    end = mid;
+                else
+                    start = mid;
+            }
+            if (data[start] &lt; target)
+                return data[start];
+            else
+                return data[end];
+        }
+};
+
+
+int main()
+{
+    vector&lt;int&gt; input({4,5,6,7,0,1,2});
+    for (int n : input)
+        cout &lt;&lt; n &lt;&lt; &quot; &quot;;
+    Solution s;
+    cout &lt;&lt; s.findRotateMinimum(input) &lt;&lt; endl;
+}
+</code></pre>
+
+</div>
+
+
+    </main>
+
+    
+      
+    
+  </body>
+</html>

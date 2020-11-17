@@ -1,0 +1,5451 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn" lang="zh-cn">
+<head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.56.3" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Leetcode Solvers &middot; Hi, nice to meet you</title>
+  <meta name="description" content="" />
+
+  
+  <link type="text/css" rel="stylesheet" href="http://example.org/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="http://example.org/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="http://example.org/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="http://example.org/css/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  
+</head>
+
+  <body class=" ">
+  <aside class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="http://example.org/"><h1>Hi, nice to meet you</h1></a>
+      <p class="lead">
+      An elegant open source and mobile first theme for <a href="http://hugo.spf13.com">hugo</a> made by <a href="http://twitter.com/mdo">@mdo</a>. Originally made for Jekyll.
+      </p>
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li><a href="http://example.org/">Home</a> </li>
+        
+      </ul>
+    </nav>
+
+    <p>&copy; 2020. All rights reserved. </p>
+  </div>
+</aside>
+
+    <main class="content container">
+    <div class="post">
+  <h1>Leetcode Solvers</h1>
+  <time datetime=2017-04-30T13:44:21&#43;0800 class="post-date">Sun, Apr 30, 2017</time>
+  
+
+<h1 id="string">String</h1>
+
+<h2 id="leetcote-string-383-ransom-note">LeetCote_string_383_Ransom Note</h2>
+
+<h3 id="题意">题意</h3>
+
+<p>Given an arbitrary ransom note string and another string containing letters from all the magazines, write a function that will return true if the ransom note can be constructed from the magazines ; otherwise, it will return false.</p>
+
+<p>Each letter in the magazine string can only be used once in your ransom note.</p>
+
+<p><strong>Note:</strong>
+You may assume that both strings contain only lowercase letters.</p>
+
+<pre><code>canConstruct(&quot;a&quot;, &quot;b&quot;) -&gt; false
+canConstruct(&quot;aa&quot;, &quot;ab&quot;) -&gt; false
+canConstruct(&quot;aa&quot;, &quot;aab&quot;) -&gt; true
+</code></pre>
+
+<h3 id="思路">思路</h3>
+
+<p>用一个计数器数组统计 <code>magzine</code> 中每个字母出现的次数，然后统计 <code>ransomNote</code> 中字母，计算两个字符串的对应字母出现次数的差值，若小于0说明 <code>ransomNote</code> 要构成 <code>magzine</code> 还缺少该字母</p>
+
+<h3 id="实现">实现</h3>
+
+<pre><code>class Solution {
+public:
+    bool canConstruct(string ransomNote, string magazine) {
+        vector&lt;int&gt; count(26, 0);
+        for (char ch : magazine)
+            ++count[ch - 'a'];
+        for (char ch : ransomNote)
+        {
+            if (count[ch - 'a'] == 0)
+                return false;
+            --count[ch - 'a'];
+        }
+        return true;
+    }
+};
+</code></pre>
+
+<h3 id="复杂度">复杂度</h3>
+
+<ul>
+<li>时间复杂度$O(N) + O(M)$,N, M分别为 <code>magzine</code> 和 <code>ransomNote</code> 的长度</li>
+<li>空间复杂度$O(1)$,只要一个长度为26的数组即可</li>
+</ul>
+
+<h2 id="93-restore-ip-addresses">93 Restore IP Addresses</h2>
+
+<h3 id="problem-description">Problem Description</h3>
+
+<blockquote>
+<p>Given a string containing only digits, restore it by returning all possible valid IP address combinations.</p>
+
+<p>For example:
+Given “25525511135”,</p>
+
+<p>return [“255.255.11.135”, “255.255.111.35”]. (Order does not matter)</p>
+</blockquote>
+
+<p>给出一个由数字组成的字符串，解码出所有可能的ip地址。</p>
+
+<h3 id="method">Method</h3>
+
+<h4 id="直接遍历所有情况">直接遍历所有情况</h4>
+
+<pre><code>class Solution {
+public:
+    vector&lt;string&gt; restoreIpAddresses(string s) {
+        vector&lt;string&gt; ips;
+        string ip;
+        for (int a = 1; a &lt; 4; ++a)
+        for (int b = 1; b &lt; 4; ++b)
+        for (int c = 1; c &lt; 4; ++c)
+        for (int d = 1; d &lt; 4; ++d)
+        {
+            if (a + b + c + d == s.length())
+            {
+                int part1 = stoi(s.substr(0, a));
+                int part2 = stoi(s.substr(a, b));
+                int part3 = stoi(s.substr(a+b, c));
+                int part4 = stoi(s.substr(a+b+c, d));
+                if (part1 &lt;= 255 &amp;&amp; part2 &lt;= 255 &amp;&amp; part3 &lt;= 255 &amp;&amp; part4 &lt;= 255)
+                {
+                    ip = to_string(part1) + &quot;.&quot; + to_string(part2) + &quot;.&quot; + to_string(part3) + &quot;.&quot; + to_string(part4);
+                    if (ip.length() == s.length() + 3)
+                        ips.push_back(ip);
+                }
+            }
+        }
+        return ips;
+
+    }
+};
+</code></pre>
+
+<h4 id="dfs">DFS</h4>
+
+<pre><code>class Solution {
+public:
+    vector&lt;string&gt; restoreIpAddresses(string s) {
+        vector&lt;string&gt; res;
+        restoreIP(s, res, 0, &quot;&quot;, 0);
+        return res;
+    }
+
+private:
+    void restoreIP(string&amp; s, vector&lt;string&gt;&amp; solution, int idx, string restored, \
+            int count)
+    {
+        if (count &gt; 4) return;
+        if (count == 4 &amp;&amp; idx == s.length()) solution.push_back(restored);
+
+        for (int i = 1; i &lt; 4; ++i)
+        {
+            if (idx + i &gt; s.length()) break;
+            string substring = s.substr(idx, i);
+            if ((substring[0] == '0' &amp;&amp; substring.length() &gt; 1) || \
+                    (i == 3 &amp;&amp; stoi(substring) &gt; 255))
+                continue;
+            restoreIP(s, solution, idx + i, restored + substring + (count == 3 ? &quot;&quot; : &quot;.&quot;),\
+                    count + 1);
+
+        }
+    }
+};
+</code></pre>
+
+<h2 id="385-mini-parser">385 Mini Parser</h2>
+
+<h3 id="problem-description-1">Problem Description</h3>
+
+<blockquote>
+<p>Given a nested list of integers represented as a string, implement a parser to deserialize it.</p>
+
+<p>Each element is either an integer, or a list – whose elements may also be integers or other lists.</p>
+
+<p>Note: You may assume that the string is well-formed:</p>
+
+<p>String is non-empty.
+String does not contain white spaces.
+String contains only digits 0-9, [, - ,, ].
+Example 1:</p>
+
+<p>Given s = “324”,</p>
+
+<p>You should return a NestedInteger object which contains a single integer 324.
+Example 2:</p>
+
+<p>Given s = “[123,[456,[789]]]”,</p>
+
+<p>Return a NestedInteger object containing a nested list with 2 elements:</p>
+
+<ol>
+<li>An integer containing value 123.</li>
+
+<li><p>A nested list containing two elements:
+i. An integer containing value 456.
+ii. A nested list with one element:</p>
+
+<pre><code>&gt;  a. An integer containing value 789.
+&gt; ```
+&gt;
+&gt;
+&gt;
+&gt; Subscribe to see which companies asked this question
+
+将给定字符串解析成NestedInterger对象
+
+### Method
+
+采用DFS遍历字符串，如果遇到的第一个字符不是’[‘则该对象是一个纯数字，压栈即可；否则该对象是一个nestedInteger列表对象，应对其循环遍历
+
+</code></pre></li>
+</ol>
+
+<p>class Solution {
+public:
+    NestedInteger deserialize(string s) {
+        istringstream in(s);
+        return deserialize(in);
+    }
+private:
+    NestedInteger deserialize(istringstream &amp;in) {
+        int num;
+        if (in &gt;&gt; num)
+            return NestedInteger(num);
+        in.clear();
+        in.get();
+        NestedInteger list;
+        while(in.peek() != &lsquo;]&rsquo;)
+        {
+            list.add(deserialize(in));
+            if (in.peek() == &lsquo;,&rsquo;)
+                in.get();
+        }
+        in.get();
+        return list;
+    }
+};</p>
+
+<pre><code>
+## 3 Longest Substring Without Repeating Characters
+
+### Problem Description
+
+&gt; Given a string, find the length of the longest substring without repeating characters.
+&gt;
+&gt;
+&gt;
+&gt; Examples:
+&gt;
+&gt;
+&gt;
+&gt; Given “abcabcbb”, the answer is “abc”, which the length is 3.
+&gt;
+&gt;
+&gt;
+&gt; Given “bbbbb”, the answer is “b”, with the length of 1.
+&gt;
+&gt;
+&gt;
+&gt; Given “pwwkew”, the answer is “wke”, with the length of 3. Note that the answer must be a substring, “pwke” is a subsequence and not a substring.
+&gt;
+&gt;
+&gt;
+&gt; Subscribe to see which companies asked this question
+
+给出一个字符串，找出其中最长的非重复子串
+
+### Method
+
+用 `start` 指向最近一个重复字符，如果当前字符上次出现的位置大于 `start` ,则将 `start` 更新为当前当前字符上次出现的位置，否则当前字符不会造成重复。
+
+</code></pre>
+
+<p>class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        vector<int> alphatable(256, -1);
+        int start = -1, maxlen = 0;
+        for (int i = 0; i &lt; s.length(); ++i) {
+            if (alphatable[s[i]] &gt; start)
+                start = alphatable[s[i]];
+            alphatable[s[i]] = i;
+            maxlen = max(maxlen, i - start);
+        }
+        return maxlen;
+    }
+};</p>
+
+<pre><code>
+## 30. Substring with Concatenation of All Words
+
+### Problem Description
+
+&gt; You are given a string, s, and a list of words, words, that are all of the same length. Find all starting indices of substring(s) in s that is a concatenation of each word in words exactly once and without any intervening characters.
+&gt;
+&gt;
+&gt;
+&gt; For example, given:
+&gt; s: “barfoothefoobarman”
+&gt; words: [“foo”, “bar”]
+&gt;
+&gt;
+&gt;
+&gt; You should return the indices: [0,9].
+&gt; (order does not matter).
+
+给出一个字符串s和一个等长单词构成的单词数组words，找出words中所有单词任意拼接(每个单词最多出现一次)在s中出现的位置。
+
+### Method
+
+用一个 `unordered_map&lt;string, int&gt; words` 存储words中每个单词出现的次数，另一个 `unordered_map&lt;string, int&gt; seen` 存储s中每个单词出现的次数，如果seen中对应单词数大于words中单词数则退出进入下一次比较
+
+</code></pre>
+
+<p>class Solution {
+public:
+    vector<int> findSubstring(string s, vector<string>&amp; words) {
+        unordered_map<string, int> counts;
+        for (string word : words)
+            counts[word]++;
+        int n = s.length(), num = words.size(), len = words[0].length();
+        vector<int> indexes;
+        for (int i = 0; i &lt; n - num * len + 1; ++i)
+        {
+            unordered_map<string, int> seen;
+            int j = 0;
+            for (; j &lt; num; ++j)
+            {
+                string substring = s.substr(i + len * j, len);
+                if (counts.find(substring) != counts.end())
+                {
+                    seen[substring]++;
+                    if (seen[substring] &gt; counts[substring])
+                        break;
+                }
+                else
+                    break;
+            }
+            if (j == num) indexes.push_back(i);
+        }
+        return indexes;
+    }
+};</p>
+
+<pre><code>
+## 151 Reverse Words in a String
+
+### Problem Description
+
+&gt; Given an input string, reverse the string word by word.
+&gt;
+&gt;
+&gt;
+&gt; For example,
+&gt; Given s = “the sky is blue”,
+&gt; return “blue is sky the”.
+&gt;
+&gt;
+&gt;
+&gt; Update (2015-02-12):
+&gt; For C programmers: Try to solve it in-place in O(1) space.
+
+给出一个字符串，反转其中单词的顺序，注意，如果单词之间由多个空格，只保留一个
+
+### Method
+
+首先，去除字符串中所有多余的空格(使用了自定义条件的unique方法)， 然后翻转整个字符串，最后依次翻转每个单词，该算法时间复杂度$O(N)$,空间复杂度$O(1)$。
+
+</code></pre>
+
+<p>class Solution
+{
+    public:
+        void reverseWords(string &amp;s)
+        {
+            /************** 去除单词间重复空格 ************/
+            string::iterator new_end = std::unique(s.begin(), s.end(), <br />
+                    [](char lhs, char rhs){return (lhs == rhs) &amp;&amp; (lhs == &lsquo; &lsquo;);});
+            s.erase(new_end, s.end());</p>
+</blockquote>
+
+<pre><code>        /******************   翻转整个字符串   *************/
+        reverse(s.begin(), s.end());
+        // 给字符串首尾添加空格方便判断单词位置
+        s = &quot; &quot; + s + &quot; &quot;;
+        int start = 0;
+        for (int i = 0; i &lt; s.length() - 1; ++i)
+        {
+            if (s[i] == ' ' &amp;&amp; s[i + 1] != ' ')
+                start = i + 1;
+            if (s[i] != ' ' &amp;&amp; s[i + 1] == ' ')
+            {
+                reverse(s.begin() + start, \
+                        s.begin() + i + 1);
+                start = i + 1;
+            }
+        }
+        // 去除首位空格
+        s.erase(0, s.find_first_not_of(&quot; &quot;));
+        s.erase(s.find_last_not_of(&quot; &quot;) + 1);
+    }
+</code></pre>
+
+<p>};</p>
+
+<pre><code>
+## 5. Longest Palindromic Substring
+
+### Problem Desceiption
+
+&gt; Given a string s, find the longest palindromic substring in s. You may assume that the maximum length of s is 1000.
+&gt;
+&gt;
+&gt;
+&gt; Example:
+&gt;
+&gt;
+&gt;
+&gt; Input: “babad”
+&gt;
+&gt;
+&gt;
+&gt; Output: “bab”
+&gt;
+&gt;
+&gt;
+&gt; Note: “aba” is also a valid answer.
+&gt; Example:
+&gt;
+&gt;
+&gt;
+&gt; Input: “cbbd”
+&gt;
+&gt;
+&gt;
+&gt; Output: “bb”
+
+给出一个字符串返回最大长度回文子串
+
+### Method
+
+依次以字符串的每个元素为回文中心进行计算，如果碰到连续重复字符，则以直接以重复字符中心为回文中心(因为回文对称)，下次比较以重复字符段下一个字符为回文中心
+
+</code></pre>
+
+<p>class Solution {
+public:
+    string longestPalindrome(string s) {
+        // 关键是依次以每个字符为回文中心向两边扩展
+        if (s.empty()) return &ldquo;&rdquo;;
+        if (s.size() == 1) return s;
+        int start = 0, max_len = 1;
+        int i = 0;
+        while(i &lt; s.length())
+        {
+            // 如果回文中心到字符串尾部的长度小于当前最长回文的一半，则不可能出现更长的回文，结束
+            if (s.size() - i &lt;= max_len / 2)
+                break;
+            int left = i, right = i;
+            // 跳过重复字符串
+            while(right &lt; s.length() - 1 &amp;&amp; s[right] == s[right + 1])
+                ++right;
+            // 下一个可能的回文中心必定在重复字符串之外，因为需要保证两边有相同数量的字符
+            i = right + 1;
+            while(right &lt; s.length() - 1 &amp;&amp; left &gt; 0 &amp;&amp; s[right + 1] == s[left - 1])
+            {
+                ++right;
+                &ndash;left;
+            }
+            int new_len = right - left + 1;
+            if (new_len &gt; max_len)
+            {
+                start = left;
+                max_len = new_len;
+            }
+        }
+        return s.substr(start, max_len);</p>
+
+<pre><code>}
+</code></pre>
+
+<p>};</p>
+
+<pre><code>
+## 17. Letter Combinations of a Phone Number
+
+### Problem Description
+
+&gt; Given a digit string, return all possible letter combinations that the number could represent.
+&gt;
+&gt;
+&gt;
+&gt; A mapping of digit to letters (just like on the telephone buttons) is given below.
+&gt;
+&gt;
+&gt;
+&gt; Input:Digit string “23”
+&gt; Output: [“ad”, “ae”, “af”, “bd”, “be”, “bf”, “cd”, “ce”, “cf”].
+&gt; Note:
+&gt; Although the above answer is in lexicographical order, your answer could be in any order you want.
+
+给出一个由数字构成的字符串，返回它能映射成的所有电话键盘上的字母组合。
+
+### Method
+
+用一个字符串数组存储每个按键对应的字符串表，然后依次遍历给出的字符串，根据字符串表获得其对应的字符表，将其添加于之前组合后面。
+
+</code></pre>
+
+<p>class Solution {
+public:
+    vector<string> letterCombinations(string digits) {
+        vector<string> res;
+        if (digits.empty())
+            return res;
+        string charmap[10] = {&ldquo;0&rdquo;, &ldquo;1&rdquo;, &ldquo;abc&rdquo;, &ldquo;def&rdquo;, &ldquo;ghi&rdquo;, &ldquo;jkl&rdquo;, &ldquo;mno&rdquo;, &ldquo;pqrs&rdquo;, &ldquo;tuv&rdquo;, &ldquo;wxyz&rdquo;};
+        res.push_back(&ldquo;&rdquo;);
+        for (int i = 0; i &lt; digits.size(); ++i)
+        {
+            vector<string> tmpvec;
+            string chars = charmap[digits[i] - &lsquo;0&rsquo;];
+            for (int j = 0; j &lt; chars.size(); ++j)
+                for (string str : res)
+                    tmpvec.push_back(str + chars[j]);
+            res = tmpvec;
+        }
+        return res;
+    }
+};</p>
+
+<pre><code>
+## 49. Group Anagrams
+
+### Problem Description
+
+&gt; Given an array of strings, group anagrams together.
+&gt;
+&gt;
+&gt;
+&gt; For example, given: [“eat”, “tea”, “tan”, “ate”, “nat”, “bat”],
+&gt; Return:
+&gt;
+&gt;
+&gt;
+&gt; [
+&gt; [“ate”, “eat”,”tea”],
+&gt; [“nat”,”tan”],
+&gt; [“bat”]
+&gt; ]
+&gt; Note: All inputs will be in lower-case.
+
+给出一个字符串列表，将由相同字母不同顺序构成的字符串分组
+
+### Method
+
+</code></pre>
+
+<p>class Solution {
+public:
+    vector<vector<string>&gt; groupAnagrams(vector<string>&amp; strs) {
+        unordered_map<string, multiset<string>&gt; mp;
+        for (string str : strs)
+        {
+            string tmp = str;
+            sort(tmp.begin(), tmp.end());
+            mp[tmp].insert(str);
+        }
+        vector<vector<string>&gt; res;
+        for (auto m : mp)
+        {
+            vector<string> anagram(m.second.begin(), m.second.end());
+            res.push_back(anagram);
+        }
+        return res;
+    }
+};</p>
+
+<pre><code>
+## 91. Decode Ways
+
+### Problem Description
+
+&gt; A message containing letters from A-Z is being encoded to numbers using the following mapping:
+&gt;
+&gt;
+&gt;
+&gt; ‘A’ -&amp;gt; 1
+&gt; ‘B’ -&amp;gt; 2
+&gt; …
+&gt; ‘Z’ -&amp;gt; 26
+&gt; Given an encoded message containing digits, determine the total number of ways to decode it.
+&gt;
+&gt;
+&gt;
+&gt; For example,
+&gt; Given encoded message “12”, it could be decoded as “AB” (1 &amp;gt;2) or “L” (12).
+&gt;
+&gt;
+&gt;
+&gt; The number of ways decoding “12” is 2.
+
+给定一个由数字组成的字符串，根据转码表(见英文题干)确认这些数字有多少种解码结果
+
+### Method
+
+采用动态规划的方法，假设我们已经知道字符串s[:i-1]有l1种解码方案，而s[:i-2]有l2种解码结果，我们可以通过s[i]和s[i-1]确认s[:i]的解码方案总数，具体为：
+
+* 如果s[i]为0
+  * 如果 `s[i-1] = '2' || s[i-1] = '1'` 则只有 `s[i-1]s[i]` 是合法的解码规则, 即s[:i]的解码总数是l2;
+  * 其他情况下不管是 `s[i]` 还是 `s[i-1]s[i]` 都没有合法的解码规则，整个字符串不能解码，返回0
+* 如果 `s[i]` 不等于0( `0-9` )
+  * 如果 `s[i-1] = '2' &amp;&amp; s[i] &lt;= 6`  或者 `s[i-1] = '1'` , 则 `s[i]` 和 `s[i-1]s[i]` 都符合解码规则，s[:i]的解码总数为 `l1 + l2` ;
+  * 否则只有 `s[i]` 符合解码规则而 `s[i-1]s[i]` 不符合任何解码规则， `s[:i]` 解码总数为l1;
+
+</code></pre>
+
+<p>class Solution {
+public:
+    int numDecodings(string s) {</p>
+
+<pre><code>    if (!s.size() || s.front() == '0') return 0;
+    int l1 = 1, l2 = 1;
+    for (int i = 1; i &lt; s.size(); ++i)
+    {
+        if (s[i] == '0')
+        {
+            if (s[i - 1] == '1' || s[i - 1] == '2')
+            {
+                int tmp = l1;
+                l1 = l2;
+                l2 = tmp;
+            }
+            else
+                return 0;
+        }
+        else
+        {
+            if (s[i - 1] == '1' || (s[i - 1] == '2' &amp;&amp; s[i] &lt;= '6'))
+            {
+                int tmp = l1;
+                l1 = l1 + l2;
+                l2 = tmp;
+            }
+            else
+                l2 = l1;
+        }
+    }
+    return l1;
+}
+</code></pre>
+
+<p>};</p>
+
+<pre><code>
+简化版
+
+</code></pre>
+
+<p>int numDecodings(string s) {
+    if (!s.size() || s.front() == &lsquo;0&rsquo;) return 0;
+    // r2: decode ways of s[i-2] , r1: decode ways of s[i-1]
+    int r1 = 1, r2 = 1;</p>
+
+<pre><code>for (int i = 1; i &lt; s.size(); i++) {
+    // zero voids ways of the last because zero cannot be used separately
+    if (s[i] == '0') r1 = 0;
+
+    // possible two-digit letter, so new r1 is sum of both while new r2 is the old r1
+    if (s[i - 1] == '1' || s[i - 1] == '2' &amp;&amp; s[i] &lt;= '6') {
+        r1 = r2 + r1;
+        r2 = r1 - r2;
+    }
+
+    // one-digit letter, no new way added
+    else {
+        r2 = r1;
+    }
+}
+
+return r1;
+</code></pre>
+
+<p>}</p>
+
+<pre><code>
+## 227. Basic Calculator II
+
+### Problem Description
+
+&gt; Implement a basic calculator to evaluate a simple expression string.
+&gt;
+&gt;
+&gt;
+&gt; The expression string contains only non-negative integers, +, -, *, / operators and empty spaces . The integer division should truncate toward zero.
+&gt;
+&gt;
+&gt;
+&gt; You may assume that the given expression is always valid.
+&gt;
+&gt;
+&gt;
+&gt; Some examples:
+&gt; “3+2*2” = 7
+&gt; “ 3/2 “ = 1
+&gt; “ 3+5 / 2 “ = 5
+&gt; Note: Do not use the eval built-in library function.
+
+设计一个简单的计算器程序，其输入只包含数字和 `+, -, *, /` 和空格。
+
+### Method
+
+由于没有括号等其他符号，可以将算式化简成数字的加法，使用栈来存储数字，如果遇到 `+` 则将数字直接入栈，如果遇到 `-` 则将 `-num` 入栈，如果遇到 `*` 则将上个数字出栈与当前数字相乘的结果入栈，同样的遇到 `/` 则将上个数字出栈和当前数字相除的结果入栈。
+最后，将栈中所有数字取出相加则得到最后的结果。
+
+</code></pre>
+
+<p>class Solution {
+public:
+    int calculate(string s) {
+        s = &ldquo;+&rdquo; + s + &ldquo;]&rdquo;;
+        istringstream in(s);
+        stack<int> numStk;
+        int num;
+        char op;
+        while (in.peek() != &lsquo;]&rsquo;)
+        {
+            op = in.get();
+            if (op == &lsquo; &lsquo;)
+                continue;
+            in &gt;&gt; num;
+            if (op == &lsquo;+&rsquo;)
+                numStk.push(num);
+            if (op == &lsquo;-&rsquo;)
+                numStk.push(-num);
+            if (op == &lsquo;*&lsquo;)
+            {
+                int res = numStk.top() * num;
+                numStk.pop();
+                numStk.push(res);
+            }
+            if (op == &lsquo;/&rsquo;)
+            {
+                int res = numStk.top() / num;
+                numStk.pop();
+                numStk.push(res);
+            }
+        }
+        long long rst= 0;
+        while (!numStk.empty())
+        {
+            rst += numStk.top();
+            numStk.pop();
+        }
+        return rst;
+    }
+};</p>
+
+<pre><code>
+## 71. Simplify Path
+
+### Problem Description
+
+&gt; Given an absolute path for a file (Unix-style), simplify it.
+&gt;
+&gt;
+&gt;
+&gt; For example,
+&gt; path = “/home/“, =&amp;gt; “/home”
+&gt; path = “/a/./b/../../c/“, =&amp;gt; “/c”
+&gt; Corner Cases:
+&gt; Did you consider the case where path = “/../“?
+&gt; In this case, you should return “/“.
+&gt; Another corner case is the path might contain multiple slashes ‘/‘ together, such as “/home//foo/“.
+&gt; In this case, you should ignore redundant slashes and return “/home/foo”.
+
+给出一个表示linux路径的字符串，按要求将其化简
+
+### Method
+
+c++ 中 `getline` 类似于java中的 `split`
+
+</code></pre>
+
+<p>string simplifyPath(string path) {
+    string res, tmp;
+    vector<string> stk;
+    stringstream ss(path);
+    while(getline(ss,tmp,&lsquo;/&rsquo;)) {
+        if (tmp == &ldquo;&rdquo; or tmp == &ldquo;.&rdquo;) continue;
+        if (tmp == &ldquo;..&rdquo; and !stk.empty()) stk.pop_back();
+        else if (tmp != &ldquo;..&rdquo;) stk.push_back(tmp);
+    }
+    for(auto str : stk) res += &ldquo;/&rdquo;+str;
+    return res.empty() ? &ldquo;/&rdquo; : res;
+}</p>
+
+<pre><code>
+## 43. Multiply Strings
+
+### Problem Description
+
+&gt; Given two non-negative integers num1 and num2 represented as strings, return the product of num1 and num2.
+&gt;
+&gt;
+&gt;
+&gt; Note:
+&gt;
+&gt;
+&gt;
+&gt; The length of both num1 and num2 is &amp;lt; 110.
+&gt; Both num1 and num2 contains only digits 0-9.
+&gt; Both num1 and num2 does not contain any leading zero.
+&gt; You must not use any built-in BigInteger library or convert the inputs to integer directly.
+
+给定两个表示数字的字符串，不使用 `eval` 或直接转换为数字的方法计算两个数的乘积，结果用字符串表示。
+
+### Method
+
+用两层for循环分别遍历两个字符串，外层为乘数，内层为被乘数，乘数从最低位开始取出一位数依次和被乘数相乘，将结果对10取余数加上之前的进位和前面结果得到对应为的乘积，结果的对10取整为下一位的进位。注意，每一位乘数乘完被乘数后，应该将未处理的进位加入相应位置然后将其置0；
+
+</code></pre>
+
+<p>string multiply(string num1, string num2) {
+    string sum(num1.size() + num2.size(), &lsquo;0&rsquo;);</p>
+
+<pre><code>for (int i = num1.size() - 1; 0 &lt;= i; --i) {
+    int carry = 0;
+    for (int j = num2.size() - 1; 0 &lt;= j; --j) {
+        int tmp = (sum[i + j + 1] - '0') + (num1[i] - '0') * (num2[j] - '0') + carry;
+        sum[i + j + 1] = tmp % 10 + '0';
+        carry = tmp / 10;
+    }
+    sum[i] += carry;
+}
+
+size_t startpos = sum.find_first_not_of(&quot;0&quot;);
+if (string::npos != startpos) {
+    return sum.substr(startpos);
+}
+return &quot;0&quot;;
+</code></pre>
+
+<p>}</p>
+
+<pre><code>
+## 10. Regular Expression Matching
+
+### Problem Description
+
+&gt; Implement regular expression matching with support for ‘.’ and ‘*’.
+&gt;
+&gt;
+&gt;
+&gt; ‘.’ Matches any single character.
+&gt; ‘*’ Matches zero or more of the preceding element.
+&gt;
+&gt;
+&gt;
+&gt; The matching should cover the entire input string (not partial).
+&gt;
+&gt;
+&gt;
+&gt; The function prototype should be:
+&gt; bool isMatch(const char  *s, const char*  p)
+&gt;
+&gt;
+&gt;
+&gt; Some examples:
+&gt; isMatch(“aa”,”a”) → false
+&gt; isMatch(“aa”,”aa”) → true
+&gt; isMatch(“aaa”,”aa”) → false
+&gt; isMatch(“aa”, “a &lt;em&gt;“) → true
+&gt; isMatch(“aa”, “.&lt;/em&gt; “) → true
+&gt; isMatch(“ab”, “. &lt;em&gt;“) → true
+&gt; isMatch(“aab”, “c&lt;/em&gt; a*b”) → true
+
+编辑一个简单的正则表达式解析器，其中 `.` 匹配任何单个字符， `*` 匹配0个或者多个前置字符。
+
+### Method
+
+采用动态规划的方法解决这类问题，使用 `dp[i][j]` 表示 `s[0, ..., i)` 是否匹配 `p[0,...,j)` ，则：
+
+1. 若 `p[j-1]!='*'` ，这时候如果前一段s和p匹配( `dp[i-1][j-1] == true` )且当前字符相等( `p[j-1]==s[i-1]` )或 `p[j-1] == '.'` 则 `dp[i][j]==truee`
+2. 若 `p[j-1]=='*'` ,有两种情况
+  1. ‘*’前面的字符出现0次
+`dp[i][j] = dp[i][j-2]`
+  2. ‘*’前面的字符出现至少1次
+`dp[i][j] = dp[i-1][j] &amp;&amp; s[i-1] == p[i-2] || p[i-2] == '.'`
+
+</code></pre>
+
+<p>class Solution {
+public:
+    bool isMatch(string s, string p) {
+        int m = s.length(), n = p.length();
+        vector<vector<bool> &gt; dp(m + 1, vector<bool> (n + 1, false));
+        dp[0][0] = true;
+        for (int i = 0; i &lt;= m; i++)
+            for (int j = 1; j &lt;= n; j++)
+                if (p[j - 1] == &lsquo;*&lsquo;)
+                    dp[i][j] = dp[i][j - 2] || (i &gt; 0 &amp;&amp; (s[i - 1] == p[j - 2] || p[j - 2] == &lsquo;.&rsquo;) &amp;&amp; dp[i - 1][j]);
+                else dp[i][j] = i &gt; 0 &amp;&amp; dp[i - 1][j - 1] &amp;&amp; (s[i - 1] == p[j - 1] || p[j - 1] == &lsquo;.&rsquo;);
+        return dp[m][n];
+    }
+};</p>
+
+<pre><code>
+## 72. Edit Distance
+
+### Problem Description
+
+&gt; Given two words word1 and word2, find the minimum number of steps required to convert word1 to word2. (each operation is counted as 1 step.)
+&gt;
+&gt;
+&gt;
+&gt; You have the following 3 operations permitted on a word:
+&gt;
+&gt;
+&gt;
+&gt; a) Insert a character
+&gt; b) Delete a character
+&gt; c) Replace a character
+
+给出两个单词word1和word2，求他们的最小编辑距离，即使用最少的
+
+1. 删除字符
+2. 插入字符
+3. 替换字符
+
+操作将word1转化为word2
+
+### Method
+
+这是一个典型的动态规划问题,使用 `dp[i][j]` 表示由word1的前i个字符构成的子串转化为word2前j个字符构成的子串的最小编辑距离(状态)。 首先考虑特殊情况，如果两个字符串任何一个的长度为0，那么显然这时候的最小编辑距离为其中长度不为0的字符串的长度。接着考虑普通情况，如果已知 `dp[i-1][j-1], dp[i-1][j], dp[i][j-1]` ，那么有以下情况
+
+1. 如果 `word1[i]==word2[j]` ,则两字符串已经相等 `dp[i][j]==dp[i-1][j-1]`
+2. 如果 `word1[i]!=word2[j]` ,则需要考虑以下情况
+  1. 如果word1比word2更长，且已知 `dp[i-1][j]` ,则需要将多余的字符删掉， `dp[i][j] == dp[i-1][j] + 1`
+  2. 如果 `dp[i][j-1]` 后，word1比word2更短，且已知 `dp[i][j-1]` ,则需要把word2第j一个字符删除（或将该字符复制到word1的末尾）， `dp[i][j] == dp[i][j-1] + 1`
+  3. 如果 `dp[i-1][j-1]` 操作后word1和word2等长，则只需要将word1第i个字符改为word2的第j个字符， `dp[i][j] == dp[i-1][j-1] + 1`
+
+</code></pre>
+
+<p>class Solution {
+public:
+    int minDistance(string word1, string word2) {
+        size_t m = word1.length(), n = word2.length();
+        if (m == 0)
+            return n;
+        if (n == 0)
+            return m;
+        vector<vector<int>&gt; dp(m+1, vector<int>(n+1, 0));
+        for (int i = 0; i &lt;= m; ++i)
+            dp[i][0] = i;
+        for (int j = 0; j &lt;= n; ++j)
+            dp[0][j] = j;
+        for (int i = 1; i &lt;= m; ++i)
+            for (int j = 1; j &lt;= n; ++j)
+                dp[i][j] = min(min(dp[i-1][j], dp[i][j-1]) + 1, dp[i-1][j-1] + (word1[i-1] == word2[j-1] ? 0 : 1));
+        return dp[m][n];
+    }
+};</p>
+
+<pre><code>
+## 68. Text Justification
+
+### Problem Description
+
+&gt; Given an array of words and a length L, format the text such that each line has exactly L characters and is fully (left and right) justified.
+&gt;
+&gt;
+&gt;
+&gt; You should pack your words in a greedy approach; that is, pack as many words as you can in each line. Pad extra spaces ‘ ‘ when necessary so that each line has exactly L characters.
+&gt;
+&gt;
+&gt;
+&gt; Extra spaces between words should be distributed as evenly as possible. If the number of spaces on a line do not divide evenly between words, the empty slots on the left will be assigned more spaces than the slots on the right.
+&gt;
+&gt;
+&gt;
+&gt; For the last line of text, it should be left justified and no extra space is inserted between words.
+&gt;
+&gt;
+&gt;
+&gt; For example,
+&gt; words: [“This”, “is”, “an”, “example”, “of”, “text”, “justification.”]
+&gt; L: 16.
+&gt;
+&gt;
+&gt;
+&gt; Return the formatted lines as:
+&gt; [
+&gt; “This is an”,
+&gt; “example of text”,
+&gt; “justification. “
+&gt; ]
+&gt; Note: Each word is guaranteed not to exceed L in length.
+&gt;
+&gt;
+&gt;
+&gt; Corner Cases:
+&gt; A line other than the last line might contain only one word. What should you do in this case?
+&gt; In this case, that line should be left-justified.
+
+给定一个单词数组 `words` 和长度 `L` ,将单词拼接成多行字符串，使用空格隔开，每行的长度需要等于 `L` ，最后一行不能再单词间添加空格。
+
+### Method
+
+1. 计算每行最多能容纳的单词数
+2. 在单词之间补零
+  1. 若为最后一行，单词之间只能由一个空格
+  2. 若不是最后一行，在单词之间平分多余的空格，然后将剩余的空格分给每个单词的左边
+
+</code></pre>
+
+<p>vector<string> fullJustify(vector<string> &amp;words, int L) {
+    vector<string> res;
+    for(int i = 0, k, l; i &lt; words.size(); i += k) {
+    //计算本行单词数量k
+        for(k = l = 0; i + k &lt; words.size() and l + words[i+k].size() &lt;= L - k; k++) {
+            l += words[i+k].size();
+        }</p>
+
+<pre><code>    string tmp = words[i];
+    for(int j = 0; j &lt; k - 1; j++) {
+    //若为最后一行，每个单词之间只添加一个空格
+        if(i + k &gt;= words.size()) tmp += &quot; &quot;;
+    // 如果不是最后一行，先在单词间添加相等数量的空格，剩余空格添加到单词左边
+        else tmp += string((L - l) / (k - 1) + (j &lt; (L - l) % (k - 1)), ' ');
+        tmp += words[i+j+1];
+    }
+    tmp += string(L - tmp.size(), ' ');
+    res.push_back(tmp);
+}
+return res;
+</code></pre>
+
+<p>}</p>
+
+<pre><code>
+## 76. Minimum Window Substring
+
+### Problem Description
+
+&gt; Given a string S and a string T, find the minimum window in S which will contain all the characters in T in complexity O(n).
+&gt;
+&gt;
+&gt;
+&gt; For example,
+&gt; S = “ADOBECODEBANC”
+&gt; T = “ABC”
+&gt; Minimum window is “BANC”.
+&gt;
+&gt;
+&gt;
+&gt; Note:
+&gt; If there is no such window in S that covers all characters in T, return the empty string “”.
+&gt;
+&gt;
+&gt;
+&gt; If there are multiple such windows, you are guaranteed that there will always be only one unique minimum window in S.
+
+给定一个字符串S和T,找出S中的最短窗口使其包含所有T中的字符
+
+### Method
+
+首先，使用一个向量记录T中每个字符出现的次数，并使用 `counter` 记录当前已经匹配到T中字符的个数，将其初始化为0；然后以0为开始位置遍历S，每遇到一个字符则向量对应位置减1，如果该字符出现在了T中 `counter` 也减1。当 `counter` 变为0时，说明已经在S中找到T的所有字符，记录这时候窗口长度，然后以start的下一个位置开始继续寻找下一个窗口。
+
+</code></pre>
+
+<p>string minWindow(string s, string t) {
+        vector<int> map(128,0);
+        for(auto c: t) map[c]++;
+        int counter=t.size(), begin=0, end=0, d=INT_MAX, head=0;
+        while(end<s.size()){
+            if(map[s[end++]]-->0) counter&ndash;; //in t
+            while(counter==0){ //valid
+                if(end-begin&lt;d)  d=end-(head=begin);
+                if(map[s[begin++]]++==0) counter++;  //make it invalid
+            }<br />
+        }
+        return d==INT_MAX? &ldquo;&rdquo;:s.substr(head, d);
+    }</p>
+
+<pre><code>
+# 关于大多数寻找子串的问题，都可以使用下面的模板
+
+</code></pre>
+
+<p>int findSubstring(string s){
+        vector<int> map(128,0);
+        int counter; // check whether the substring is valid
+        int begin=0, end=0; //two pointers, one point to tail and one  head
+        int d; //the length of substring</p>
+
+<pre><code>    for() { /* initialize the hash map here */ }
+
+    while(end&lt;s.size()){
+
+        if(map[s[end++]]-- ?){  /* modify counter here */ }
+
+        while(/* counter condition */){ 
+
+             /* update d here if finding minimum*/
+
+            //increase begin to make it invalid/valid again
+
+            if(map[s[begin++]]++ ?){ /*modify counter here*/ }
+        }  
+
+        /* update d here if finding maximum*/
+    }
+    return d;
+</code></pre>
+
+<p>}</p>
+
+<pre><code>
+比如，寻找最多含有两种不同字符的最长子串的长度
+
+</code></pre>
+
+<p>int lengthOfLongestSubstringTwoDistinct(string s) {
+        vector<int> map(128, 0);
+        int counter = 0;
+        int start = 0, end = 0;
+        int d = 0;
+        while (end &lt; s.size())
+        {
+          if (map[s[end++]]++ == 0) counter ++;
+          while (counter &gt; 2) if(map[s[start++]]&ndash; == 1) counter&ndash;;
+          d = max(d, end - start);
+        }
+        return d;
+    }</p>
+
+<pre><code>
+寻找最长的不含有重复字符的子串长度
+
+</code></pre>
+
+<p>int lengthOfLongestSubstring(string s) {
+  vector<int> map(128, 0);
+  int begin = 0, end = 0;
+  int d = 0;
+  while(end &lt; s.size())
+  {
+    if (map[s[end++]]++ &gt; 0) counter++;
+    while(counter &gt; 0) if (map[s[begin++]]&ndash; &gt; 1) counter&ndash;;
+    d = max(d, end - begin);
+  }
+}</p>
+
+<pre><code>
+## 127 Word Ladder
+
+### Problem Description
+
+&gt; Given two words ( *beginWord*  and  *endWord* ), and a dictionary’s word list, find the length of shortest transformation sequence from  *beginWord*  to  *endWord* , such that:
+&gt;
+&gt;
+&gt;
+&gt; 1. Only one letter can be changed at a time.
+&gt; 2. Each transformed word must exist in the word list. Note that  *beginWord*  is  *not*  a transformed word.
+&gt;
+&gt;
+&gt;
+&gt; For example,
+&gt;
+&gt;
+&gt;
+&gt; Given:
+&gt;
+&gt;
+&gt;
+&gt; *beginWord*  =  `&quot;hit&quot;`
+&gt;
+&gt;
+&gt;
+&gt; *endWord*  =  `&quot;cog&quot;`
+&gt; *wordList*  =  `[&quot;hot&quot;,&quot;dot&quot;,&quot;dog&quot;,&quot;lot&quot;,&quot;log&quot;,&quot;cog&quot;]`
+&gt;
+&gt;
+&gt;
+&gt; As one shortest transformation is  `&quot;hit&quot; -&gt; &quot;hot&quot; -&gt; &quot;dot&quot; -&gt; &quot;dog&quot; -&gt; &quot;cog&quot;` ,
+&gt; return its length  `5` .
+&gt;
+&gt;
+&gt;
+&gt; **Note:**
+&gt;
+&gt;
+&gt;
+&gt; * Return 0 if there is no such transformation sequence.
+&gt; * All words have the same length.
+&gt; * All words contain only lowercase alphabetic characters.
+&gt; * You may assume no duplicates in the word list.
+&gt; * You may assume  *beginWord*  and  *endWord*  are non-empty and are not the same.
+&gt;
+&gt;
+&gt;
+&gt; **UPDATE (2017/1/20):**
+&gt; The  *wordList*  parameter had been changed to a list of strings (instead of a set of strings). Please reload the code definition to get the latest changes.
+
+给出起点、终点单词以及中间单词列表，每次通过改变一个字母，使起点单词最终变为终点单词，要求中间单词必须出现在中间单词列表中。
+
+### Method
+
+采用双端广度优先搜索算法(BFS),使用一个数组 `beginVec&lt;string&gt;` 存储左边的搜索空间，其初始存储 `beginWord` ,使用另一个 `vector&lt;string&gt;` 数组存储右边的搜索空间，其初始存储的是 `endWord` 。正式开始搜索时，因为以左边空间为字母替换搜索依据，所以为了减少搜索量，当 `beginVec` 比 `endVec` 长时交换两个数组。然后，只要两个数组都不为空，那么遍历 `beginVec` 中的单词，在依次对单词的每一位用 `a-z` 来替换
+
+1. 如果替换一位字符后的单词出现在了 `endVec` 中，那么已经找到了变换路径，返回 `len+1` ;
+2. 若替换一位后的单词不在 `endVec` 中，但是在 `WordList` 中，则该单词可能是路径中间单词，将其存入下一次的左边搜索空间( `tmp` )中, 同时将该单词从 `wordList` 中删除，避免重复使用。
+
+遍历完 `beginVec` 中的所有单词后，将下次的左边搜索空间赋给 `beginVec` 然后重复这个过程。
+
+如果不存在变换路径，则在某一步 `tmp` 为空，此时 `beginVec=tmp` 也变为空， `while` 循环不满足条件，退出，返回0；否则必然在某次 `while` 循环中，变换一个字母的 `word` 会出现在 `endVec` 中。
+
+</code></pre>
+
+<p>class Solution {
+public:
+    int ladderLength(string beginWord, string endWord, vector<string>&amp; wordList) {
+        string::size_type len = 1, strLen = beginWord.length();
+        vector<string> beginVec({beginWord}), endVec({endWord});
+        while (beginVec.size() &gt; 0 and endVec.size() &gt; 0)
+        {
+            // 以较长的vector作为beginVec，能有效减少比较的次数
+            if (beginVec.size() &gt; endVec.size())
+                beginVec.swap(endVec);</p>
+
+<pre><code>        vector&lt;string&gt; tmp;
+        for (string word : beginVec)
+        {
+            for (string::size_type i = 0; i &lt; word.length(); ++i)
+            {
+                for (char ch = 'a'; ch &lt;= 'z'; ++ch)
+                {
+                    char old = word[i];
+                    if (ch == old)
+                        continue;
+                    word[i] = ch;
+
+                    auto posWordList = find(wordList.begin(), wordList.end(), word);
+                    // 如果替换一个字符后的word存在于endWord，说明已经找到路径了，直接返回路径长度
+                    if (find(endVec.begin(), endVec.end(), word) != endVec.end())
+                        return len + 1;
+                    // 如果替换一个字符后的word不在endWord中，但在wordList中，则将该word存入下次的beginVec(tmp)中
+                    else if ( posWordList != wordList.end())
+                    {
+                        tmp.push_back(word);
+                        wordList.erase(posWordList);
+                    }
+                    word[i] = old;
+                }
+
+            }
+        }
+        beginVec = tmp;
+        ++len;
+    }
+    return 0;
+}
+</code></pre>
+
+<p>};</p>
+
+<pre><code>
+## 126 Word Ladder II
+
+### Problem Description
+
+&gt; Given two words ( *beginWord*  and  *endWord* ), and a dictionary’s word list, find all shortest transformation sequence(s) from  *beginWord*  to  *endWord* , such that:
+&gt;
+&gt;
+&gt;
+&gt; 1. Only one letter can be changed at a time
+&gt; 2. Each transformed word must exist in the word list. Note that  *beginWord*  is  *not*  a transformed word.
+&gt;
+&gt;
+&gt;
+&gt; For example,
+&gt;
+&gt;
+&gt;
+&gt; Given:
+&gt; *beginWord*  =  `&quot;hit&quot;`
+&gt; *endWord*  =  `&quot;cog&quot;`
+&gt; *wordList*  =  `[&quot;hot&quot;,&quot;dot&quot;,&quot;dog&quot;,&quot;lot&quot;,&quot;log&quot;,&quot;cog&quot;]`
+&gt;
+&gt;
+&gt;
+&gt; Return
+&gt;
+&gt;
+&gt;
+&gt;
+&gt;
+&gt; ```
+&gt;  [
+   [&quot;hit&quot;,&quot;hot&quot;,&quot;dot&quot;,&quot;dog&quot;,&quot;cog&quot;],
+   [&quot;hit&quot;,&quot;hot&quot;,&quot;lot&quot;,&quot;log&quot;,&quot;cog&quot;]
+ ]
+&gt; ```
+&gt;
+&gt;
+&gt;
+&gt;
+&gt;
+&gt; **Note:**
+&gt;
+&gt;
+&gt;
+&gt; * Return an empty list if there is no such transformation sequence.
+&gt; * All words have the same length.
+&gt; * All words contain only lowercase alphabetic characters.
+&gt; * You may assume no duplicates in the word list.
+&gt; * You may assume  *beginWord*  and  *endWord*  are non-empty and are not the same.
+&gt;
+&gt;
+&gt;
+&gt; **UPDATE (2017/1/20):**
+&gt; The  *wordList*  parameter had been changed to a list of strings (instead of a set of strings). Please reload the code definition to get the latest changes.
+
+给定起始单词、结束单词和过度单词列表，每次只能改变一个字母的情况下，找出所有起始单词到过度单词的路径。
+
+### Method
+
+首先使用一个map，找出每个单词到下一个可到达单词，然后从起始单词开始，从这个map中不断搜索，直到到达结束单词。
+
+注意，因为为了减少搜索复杂度，当起始单词数组长度大于结束单词数组时，将两个数组交换，使用 `flip` 来记录是否发生了这种交换。当没有发生交换时，以 `origin_word` 为键，wordList中单词 `word` 为值存储，否则以 `word` 为键， `origin_word` 为值存储，这样，保证了从起始单词到结束单词的路径创建过程中，不会出现循环路径。
+
+</code></pre>
+
+<p>class Solution {
+public:
+    vector<vector<string>&gt; findLadders(string beginWord, string endWord, vector<string>&amp; wordList) {
+        vector<string> path({beginWord});
+        vector<vector<string>&gt; res;
+        unordered_map<string, vector<string>&gt; forest;
+        if (findLadders(beginWord, endWord, wordList, forest))
+            getLadders(beginWord, endWord, forest, path, res);
+        return res;</p>
+
+<pre><code>}
+
+bool findLadders(string start, string end, vector&lt;string&gt; &amp;wordList, unordered_map&lt;string, vector&lt;string&gt;&gt; &amp;forest)
+{
+    vector&lt;string&gt; beginVec({start}), endVec({end});
+    bool flip = false, found = false;
+    while (!beginVec.empty() and !endVec.empty())
+    {
+        if (beginVec.size() &gt; endVec.size())
+        {
+            flip = !flip;
+            beginVec.swap(endVec);
+        }
+        vector&lt;string&gt; tmp;
+        for (string word : beginVec)
+        {
+            string originWord = word;
+            for (int i = 0; i &lt; word.length(); ++i)
+            {
+                char old = word[i];
+                for (char ch = 'a'; ch &lt;= 'z'; ++ch)
+                {
+                    if (ch == old)
+                        continue;
+                    word[i] = ch;
+                    if (find(endVec.begin(), endVec.end(), word) != endVec.end())
+                    {
+                        flip ? forest[word].push_back(originWord) : forest[originWord].push_back(word);
+                        found = true;
+                    }
+                    else if (find(wordList.begin(), wordList.end(), word) != wordList.end())
+                    {
+                        flip ? forest[word].push_back(originWord) : forest[originWord].push_back(word);
+                        tmp.push_back(word);
+                    }
+                }
+                word[i] = old;
+            }
+        }
+        if (found) return true;
+        for (string word : tmp)
+            wordList.erase(find(wordList.begin(), wordList.end(), word));
+        beginVec = tmp;
+
+    }
+    return false;
+}
+
+void getLadders(string begin, string end, unordered_map&lt;string, vector&lt;string&gt;&gt; &amp;nexts, \
+vector&lt;string&gt; &amp;path, vector&lt;vector&lt;string&gt;&gt; res)
+{
+    if (begin == end)
+    {
+        res.push_back(path);
+        return;
+    }
+    for (string str : nexts[begin])
+    {
+        path.push_back(str);
+        getLadders(str, end, nexts, path, res);
+        path.pop_back();
+    }
+}
+</code></pre>
+
+<p>};</p>
+
+<pre><code>
+## 115. Distinct Subsequences
+
+### Problem Description
+
+&gt; Given a string  **S**  and a string  **T** , count the number of distinct subsequences of  **T**  in  **S** .
+&gt;
+&gt;
+&gt;
+&gt; A subsequence of a string is a new string which is formed from the original string by deleting some (can be none) of the characters without disturbing the relative positions of the remaining characters. (ie,  `&quot;ACE&quot;`  is a subsequence of  `&quot;ABCDE&quot;`  while  `&quot;AEC&quot;`  is not).
+&gt;
+&gt;
+&gt;
+&gt; Here is an example:
+&gt;
+&gt;
+&gt;
+&gt; **S**  =  `&quot;rabbbit&quot;` ,  **T**  =  `&quot;rabbit&quot;`
+&gt;
+&gt;
+&gt;
+&gt; Return  `3` .
+
+给出一个字符串s和t，如果只能删除s中字符，有多少种删除方式可以使s变为t(包括不删除任何字符)。
+
+### Method
+
+此题应该使用动态规划的方法来完成，假设s和t的长度分别为m和n，构造一个 `(m+1)*(n+1)` 大小的二维数组dp，其中 `dp[i][j]` 表示字符串 `s[0,...,i-1]` 转换为 `t[0,...,j-1]` 的方法数。首先来分析两种最基本情况：
+
+1. 如果 `i&gt;0 and j==0` 即s子串长度大于0,t子串长度为0，这时只有把s子串中所有字符删除才能变换为t子串，故这种情况下 `dp[i][j]=dp[i][0]=1`
+2. 如果 `i &lt; j` ,这时s子串已经比t的子串要短了，不可能通过删除字符的方法将s的子串转换为t的子串，故 `dp[i][j]=0`
+
+接下来讨论一般情况，即 `i&gt;=j&gt;0` ,这时需要考虑当前字符 `s[i-1]` 是否等于 `t[j-1]`
+
+1. `s[i-1]==t[j-1]` :这时有两种情况:
+  1. `s[0,...,i-1]` 转换到 `t[0,...,j-1]` 的过程中把 `s[i-1]` 删除了，此时相当于要把 `s[0,...,i-2]` 转换为 `t[0,...,i-1]` ,即 `dp[i][j]=dp[i-1][j]`
+  2. `s[0,...,i-1]` 转换到 `t[0,...,j-1]` 的过程保留了 `s[i-1]` ,这时，因为 `s[i-1]` 已经和 `t[j-1]` 对应上了，这对字符不起作用，所以 `dp[i][j]=dp[i-1][j-1]` 因此，结合上面两种情况 `dp[i][j]=dp[i-1][j]+dp[i-1][j-1]`
+2. `s[i-1]!=t[j-1]` 此时，若保留 `s[i-1]` ，两个串必定对不上，所以应该将其删除，因此 `dp[i][j]=dp[i-1][j]`
+
+</code></pre>
+
+<p>class Solution {
+public:
+    int numDistinct(string s, string t) {
+        int m = s.length(), n = t.length();</p>
+
+<pre><code>    vector&lt;vector&lt;int&gt;&gt; dp(m+1, vector&lt;int&gt;(n+1, 0));
+    for(int i = 0; i &lt;= m; ++i)
+        dp[i][0] = 1;
+
+    for(int i = 1; i &lt;= m; ++i)
+        for(int j = 1; j &lt;= n ; ++j)
+        {
+            dp[i][j] = dp[i-1][j];
+            if(s[i-1] == t[j-1])
+                dp[i][j] += dp[i-1][j-1];
+        }
+    return dp[m][n];
+}
+</code></pre>
+
+<p>};</p>
+
+<pre><code>
+这个有个只需要O(N)空间复杂度的[算法](https://discuss.leetcode.com/topic/19778/7-10-lines-c-solutions-with-detailed-explanations-o-m-n-time-and-o-m-space/2)
+
+## 97 Interleaving String
+
+### Problem Description
+
+&gt; Given  *s1* ,  *s2* ,  *s3* , find whether  *s3*  is formed by the interleaving of  *s1*  and  *s2* .
+&gt;
+&gt;
+&gt;
+&gt; For example,
+&gt;
+&gt;
+&gt;
+&gt; Given:
+&gt;
+&gt;
+&gt;
+&gt; *s1*  =  `&quot;aabcc&quot;` ,
+&gt;
+&gt;
+&gt;
+&gt; *s2*  =  `&quot;dbbca&quot;` ,
+&gt;
+&gt;
+&gt;
+&gt; When  *s3*  =  `&quot;aadbbcbcac&quot;` , return true.
+&gt;
+&gt;
+&gt;
+&gt; When  *s3*  =  `&quot;aadbbbaccc&quot;` , return false.
+
+给出三个字符串 `s1`   `s2`  和 `s3` ， 判断 `s3` 是否是通过 `s1` 和 `s2` 混合得到的( `s3` 中 `s1` 和 `s2` 的字母相对位置不发生改变)
+
+### Method
+
+采用动态规划算法，m和n分别是两个s1和s2的长度，用大小为 `(m+1)*(n+1)` 的二维数组 `dp` 来存储中间结果， `dp[i][j]` 表示 `s1[0,...,i-1]` 和 `s[0,...,j-1]` 是否能够合成 `s3[0,...,i+j-1]` ,下面来分析状态转移方式。
+
+1. 若果 `i==0 and j==0` ,则两个空串必然能构成另一个空串， `dp[0][0]=true`
+2. 假如 `i==0` 或 `j==0` ,则 `s3[0,...,i+j-1]` 只能由另外一个非空字符串构成， `dp[i][0]=dp[i-1][0] &amp;&amp; s1[i-1] == s3[i-1]` 或 `dp[i][0]=dp[0][j-1] &amp;&amp; s2[j-1] == s3[j-1]`
+3. 其他情况下， `s3` 新增加的字符要么来自于 `s1` 要么来自于 `s2` ,如果来自于 `s1` 的话 `dp[i-1][j] &amp;&amp; (s1[i-1] == s3[i - 1 +j]` ，如果来自于 `s2` 的话 `dp[i][j-1] &amp;&amp; (s2[j-1] == s3[i + j -1])`
+
+</code></pre>
+
+<p>class Solution {
+public:
+    bool isInterleave(string s1, string s2, string s3) {
+        string::size_type len1 = s1.length(), len2 = s2.length();
+        if (s3.length() != len1 + len2)
+            return false;
+        vector<vector<bool>&gt; dp(len1+1, vector<bool>(len2+1, false));
+        for (int i = 0; i &lt;= len1; ++i)
+            for(int j = 0; j &lt;= len2; ++j)
+            {
+                if (i == 0 and j == 0)
+                    dp[i][j] = true;
+                else if (i == 0)
+                    dp[0][j] = dp[0][j-1] &amp;&amp; (s2[j-1] == s3[j-1]);
+                else if (j == 0)
+                    dp[i][0] = dp[i-1][0] &amp;&amp; (s1[i-1] == s3[i-1]);
+                else
+                // s3的当前字符要么来自s1要么来自s2
+                    dp[i][j] = (dp[i][j-1] &amp;&amp; (s2[j-1] == s3[i + j -1])) || (dp[i-1][j] &amp;&amp; (s1[i-1] == s3[i - 1 +j]));
+            }
+        return dp[len1][len2];
+    }
+};</p>
+
+<pre><code>
+## 87. Scramble String
+
+### Problem Description
+
+&gt; Given a string s1, we may represent it as a binary tree by partitioning it to two non-empty substrings recursively.
+&gt;
+&gt;
+&gt;
+&gt; Below is one possible representation of s1 = “great”:
+
+</code></pre>
+
+<p>great</p>
+
+<pre><code>
+/ \
+gr eat
+/ \ / \
+g r e at
+/ \
+a t
+
+&gt; To scramble the string, we may choose any non-leaf node and swap its two children.
+&gt;
+&gt;
+&gt;
+&gt; For example, if we choose the node “gr” and swap its two children, it produces a scrambled string “rgeat”.
+
+</code></pre>
+
+<p>rgeat</p>
+
+<pre><code>
+/ \
+rg eat
+/ \ / \
+r g e at
+/ \
+a t
+
+&gt; We say that “rgeat” is a scrambled string of “great”.
+&gt;
+&gt;
+&gt;
+&gt; Similarly, if we continue to swap the children of nodes “eat” and “at”, it produces a scrambled string “rgtae”.
+
+</code></pre>
+
+<p>rgtae</p>
+
+<pre><code>
+/ \
+rg tae
+/ \ / \
+r g ta e
+/ \
+t a
+
+&gt; We say that “rgtae” is a scrambled string of “great”.
+&gt;
+&gt;
+&gt;
+&gt; Given two strings s1 and s2 of the same length, determine if s2 is a scrambled string of s1.
+
+给定两个字符串 `s1` 和 `s2` ,判断 `s2` 是否是由 `s1` 经过树形交换得到
+
+### Method
+
+</code></pre>
+
+<p>class Solution {
+public:
+    bool isScramble(string s1, string s2) {
+        if (s1 == s2)
+            return true;
+        // 判断两个字符串每个字符数是否相等
+        vector<int> table(26, 0);
+        for (char ch : s1)
+            table[ch - &lsquo;a&rsquo;]++;
+        for (char ch : s2)
+            table[ch - &lsquo;a&rsquo;]&ndash;;
+        for (int num : table)
+            if (num != 0)
+                return false;
+        string::size_type len = s1.length();
+        for (int i = 1; i &lt; len; ++i)
+        {
+            if (isScramble(s1.substr(0, i), s2.substr(0, i)) and isScramble(s1.substr(i), s2.substr(i)))
+                return true;
+            if (isScramble(s1.substr(0, i), s2.substr(len - i)) and isScramble(s1.substr(i), s2.substr(0, len - i)))
+                return true;
+        }
+        return false;</p>
+
+<pre><code>}
+</code></pre>
+
+<p>};</p>
+
+<pre><code>
+## 65. Valid Number
+
+### Problem Description
+
+&gt; Validate if a given string is numeric.
+&gt;
+&gt;
+&gt;
+&gt; Some examples:
+&gt;
+&gt;
+&gt;
+&gt; `&quot;0&quot;`  =&amp;gt;  `true`
+&gt; `&quot; 0.1 &quot;`  =&amp;gt;  `true`
+&gt; `&quot;abc&quot;`  =&amp;gt;  `false`
+&gt; `&quot;1 a&quot;`  =&amp;gt;  `false`
+&gt; `&quot;2e10&quot;`  =&amp;gt;  `true`
+&gt;
+&gt;
+&gt;
+&gt; **Note:**  It is intended for the problem statement to be ambiguous. You should gather all requirements up front before implementing one.
+&gt;
+&gt;
+&gt;
+&gt; **Update (2015-02-10):**
+&gt;
+&gt;
+&gt;
+&gt; The signature of the  `C++`  function had been updated. If you still see your function signature accepts a  `const char *`  argument, please click the reload button to reset your code definition.
+
+![1487172889313](https://buptweixin.github.io/img/blog/1487172889313.png)
+
+</code></pre>
+
+<p>class Solution {
+public:
+    bool isNumber(string str) {
+        int state=0, flag=0; // flag to judge the special case &ldquo;.&rdquo;
+        while(str[0]==&rsquo; &lsquo;)  str.erase(0,1);//delete the  prefix whitespace
+        while(str[str.length()-1]==&rsquo; &lsquo;) str.erase(str.length()-1, 1);//delete the suffix whitespace
+        for(int i=0; i&lt;str.length(); i++){
+            if(&lsquo;0&rsquo;&lt;=str[i] &amp;&amp; str[i]&lt;=&lsquo;9&rsquo;){
+                flag=1;
+                if(state&lt;=2) state=2;
+                else state=(state&lt;=5)?5:7;
+            }
+            else if(&lsquo;+&rsquo;==str[i] || &lsquo;-&rsquo;==str[i]){
+                if(state==0 || state==3) state++;
+                else return false;
+            }
+            else if(&lsquo;.&rsquo;==str[i]){
+                if(state&lt;=2) state=6;
+                else return false;
+            }
+            else if(&lsquo;e&rsquo;==str[i]){
+                if(flag&amp;&amp;(state==2 || state==6 || state==7)) state=3;
+                else return false;
+            }
+            else return false;
+        }
+        return (state==2 || state==5 || (flag&amp;&amp;state==6) || state==7);
+    }
+};</p>
+
+<pre><code>
+## 494. Target Sum
+
+### Problem Description
+
+&gt; You are given a list of non-negative integers, a1, a2, …, an, and a target, S. Now you have 2 symbols + and -. For each integer, you should choose one from + and - as its new symbol.
+&gt;
+&gt;
+&gt;
+&gt; Find out how many ways to assign symbols to make sum of integers equal to target S.
+&gt;
+&gt;
+&gt;
+&gt; Example 1:
+&gt;
+&gt;
+&gt;
+&gt; Input: nums is [1, 1, 1, 1, 1], S is 3.
+&gt;
+&gt;
+&gt;
+&gt; Output: 5
+&gt;
+&gt;
+&gt;
+&gt; Explanation:
+&gt;
+&gt;
+&gt;
+&gt; -1+1+1+1+1 = 3
+&gt;
+&gt;
+&gt;
+&gt; +1-1+1+1+1 = 3
+&gt;
+&gt;
+&gt;
+&gt; +1+1-1+1+1 = 3
+&gt;
+&gt;
+&gt;
+&gt; +1+1+1-1+1 = 3
+&gt;
+&gt;
+&gt;
+&gt; +1+1+1+1-1 = 3
+&gt;
+&gt;
+&gt;
+&gt; There are 5 ways to assign symbols to make the sum of nums be target 3.
+&gt;
+&gt;
+&gt;
+&gt; Note:
+&gt;
+&gt;
+&gt;
+&gt; The length of the given array is positive and will not exceed 20.
+&gt;
+&gt;
+&gt;
+&gt; The sum of elements in the given array will not exceed 1000.
+&gt;
+&gt;
+&gt;
+&gt; Your output answer is guaranteed to be fitted in a 32-bit integer.
+
+给定一组数和一个目标数字，只使用 `+` 和 `-` 将子数组连接起来计算结果，求有多少种组合的结果等于目标数字
+
+### Method
+
+假设将这组数分成正数部分的和 `P` 和负数部分的和 `N` ，则题意可表示为
+
+`P - N == S`
+
+如果两边同时加上整个数组的和 `sum(nums)==P + N` ,则：
+
+`P- N + P + N == S + sum(nums), 即2*P == S + sum(nums)` ,因此，我们的问题转化成了求子数组使得其和等于 `(S+sum(nums))/2` ，另外需要注意的是，我们可以看到上式左边乘2了，所以 `S+sum(nums)` 必须是偶数，如果不是偶数肯定没有符合要求的结果，直接返回0.
+
+接下来就是如何在数组 `nums` 中找到子数组 `P` 使其和等于 `(S+sum(nums))/2` ,这里有一个通用的动态规划办法，具体做法是：
+
+假如数组为 `nums` , 目标和为 `target` ,首先确立状态，这里以 `dp[i]` 表示和为i的 `nums` 子数组的个数。接下来确定状态转移，假如现在有数字 `num` ,和所有以小于i的数为目标的组合数，则 `dp[i] = dp[i] + dp[i-num]`
+
+</code></pre>
+
+<p>class Solution {
+public:
+    int findTargetSumWays(vector<int>&amp; nums, int S) {
+        int sum = accumulate(nums.begin(), nums.end(), 0);
+        if ((sum + S) % 2 != 0 or sum &lt; S)
+            return 0;
+        int target = (sum + S) / 2;
+        return subsetSum(nums, target);
+    }</p>
+
+<pre><code>int subsetSum(vector&lt;int&gt; &amp;nums, int target)
+{
+    vector&lt;int&gt; dp(target+1, 0);
+    dp[0] = 1;
+    for (int num : nums)
+        for(int i = target; i &gt;= num; --i)
+            dp[i]+=dp[i-num];
+
+    return dp[target];
+}
+</code></pre>
+
+<p>};</p>
+
+<pre><code>
+## 300. Longest Increasing Subsequence
+
+### Problem Description
+
+&gt; Given an unsorted array of integers, find the length of longest increasing subsequence.
+&gt;
+&gt;
+&gt;
+&gt; For example,
+&gt; Given  `[10, 9, 2, 5, 3, 7, 101, 18]` ,
+&gt; The longest increasing subsequence is  `[2, 3, 7, 101]` , therefore the length is  `4` . Note that there may be more than one LIS combination, it is only necessary for you to return the length.
+&gt;
+&gt;
+&gt;
+&gt; Your algorithm should run in O( *n2* ) complexity.
+&gt;
+&gt;
+&gt;
+&gt; **Follow up:**  Could you improve it to O( *n*  log  *n* ) time complexity?
+
+给出一个数组，找出其中最长的严格递增子序列
+
+### Method
+
+采用两种动态规划算法来解题，第一种时间复杂度为$O(N^2)$,第二种时间复杂度是$O(NlogN)$
+
+#### $O(N^2)$的解法
+
+状态:  `dp[i]` 存储以 `nums[i]` 结尾的最长递增子序列的长度
+
+状态转移: 遍历 `dp[0],dp[1],...,dp[i-1]` ，然后比较 `nums[i]` 与 `nums[j]` （就j&amp;lt;i）的大小，如果前者更大说明 `nums[i]` 可以插入到该子序列中，假设最大可插入序列为 `dp[k]` ,则 `dp[i]=dp[k+1]`
+
+</code></pre>
+
+<p>class Solution {
+public:
+    int lengthOfLIS(vector<int>&amp; nums) {
+        // return 0;
+        if (nums.empty())
+            return 0;
+        int len = nums.size();
+        vector<int> dp(len, 0);
+        dp[0] = 1;
+        for (int i = 1; i &lt; len; ++i)
+        {
+            int max_len = 1;
+            for (int j = 0; j &lt; i; ++j)
+                if (nums[i] &gt; nums[j])
+                    max_len = max(dp[j] + 1, max_len);
+            dp[i] = max_len;
+        }
+        int max_len = 1;
+        for (int len : dp)
+            max_len = max(len, max_len);
+        return max_len;</p>
+
+<pre><code>}
+</code></pre>
+
+<p>};</p>
+
+<pre><code>
+#### $O(NlogN)$解法
+
+参考[这篇文章](http://www.geeksforgeeks.org/longest-monotonically-increasing-subsequence-size-n-log-n/)，该方法使用dp存储最长递增子序列，并引入二分搜索的方法查找更新位置
+
+假设遍历到数组的第i-1位，已经得到了当前候选最长递增子序列 `A` ,如果 `nums[i]` 大于 `A` 的最后一位，则其可以插入 `A` 得到新的候选子序列 `[A, nums[i]]` , 如果 `nums[i]` 小于A的最后一位大于第一位，假设A中第一个小于 `nums[i]` 的数位置为 `j` ,则增加新的候选序列 `[A[0, ..., j-1], nums[i]]` ，如果 `nums[i]` 比A中任何数都小，则增加候选序列 `[nums[i]]`
+
+</code></pre>
+
+<p>// Java program to find length of longest increasing subsequence
+// in O(n Log n) time
+import java.io.<em>;
+import java.util.</em>;
+import java.lang.Math;</p>
+
+<p>class LIS
+{
+    // Binary search (note boundaries in the caller)
+    // A[] is ceilIndex in the caller
+    static int CeilIndex(int A[], int l, int r, int key)
+    {
+        while (r - l &gt; 1)
+        {
+            int m = l + (r - l)/2;
+            if (A[m]&gt;=key)
+                r = m;
+            else
+                l = m;
+        }</p>
+
+<pre><code>    return r;
+}
+
+static int LongestIncreasingSubsequenceLength(int A[], int size)
+{
+    // Add boundary case, when array size is one
+
+    int[] tailTable   = new int[size];
+    int len; // always points empty slot
+
+    tailTable[0] = A[0];
+    len = 1;
+    for (int i = 1; i &lt; size; i++)
+    {
+        if (A[i] &lt; tailTable[0])
+            // new smallest value
+            tailTable[0] = A[i];
+
+        else if (A[i] &gt; tailTable[len-1])
+            // A[i] wants to extend largest subsequence
+            tailTable[len++] = A[i];
+
+        else
+            // A[i] wants to be current end candidate of an existing
+            // subsequence. It will replace ceil value in tailTable
+            tailTable[CeilIndex(tailTable, -1, len-1, A[i])] = A[i];
+    }
+
+    return len;
+}
+
+// Driver program to test above function
+public static void main(String[] args)
+{
+    int A[] = { 2, 5, 3, 7, 11, 8, 10, 13, 6 };
+    int n = A.length;
+    System.out.println(&quot;Length of Longest Increasing Subsequence is &quot;+
+                        LongestIncreasingSubsequenceLength(A, n));
+}
+</code></pre>
+
+<p>}
+/* This code is contributed by Devesh Agrawal*/</p>
+
+<pre><code>
+## 386. Largest Divisible Subset
+
+&gt; ### Problem Description
+&gt;
+&gt;
+&gt;
+&gt; Given a set of  **distinct**  positive integers, find the largest subset such that every pair (Si, Sj) of elements in this subset satisfies: Si % Sj = 0 or Sj % Si= 0.
+&gt;
+&gt;
+&gt;
+&gt; If there are multiple solutions, return any subset is fine.
+&gt;
+&gt;
+&gt;
+&gt; **Example 1:**
+
+</code></pre>
+
+<p>nums: [1,2,3]</p>
+
+<pre><code>
+&gt; Result: [1,2] (of course, [1,3] will also be ok)
+&gt;
+&gt;
+&gt;
+&gt; **Example 2:**
+
+</code></pre>
+
+<p>nums: [1,2,4,8]</p>
+
+<pre><code>
+&gt; Result: [1,2,4,8]
+
+给出一组数字，求一个最大子序列，使得其中任意一对数都能整除
+
+### Method
+
+对于一个已排序的符合条件的子序列，如果要在增加一个新的数字之后仍然符合条件，则新增元素要么能被最大元素整除 `(new = max*tmp,而max能被任何其他数整除)` 要么能整除最小元素 `(new = min/tmp, min能整除其他任何数，所以new也能整除任何数)`
+
+假设 `dp[i]表示满足条件的以nums[i]结尾的最长子序列的长度` ，则 `dp[i+1]=max(dp[i], dp[i-1],...,dp[0])+1` ,即该问题可以分解为有相互关系且无后效性的子问题，可以采用动态规划的 方法求解。
+
+</code></pre>
+
+<p>class Solution
+  {
+    public:
+  vector<int> largestDivisibleSubset(vector<int>&amp; nums)
+    {
+      sort(nums.begin(), nums.end());
+    int len = nums.size();
+    vector<int> dp(len, 0), son(len, 0);
+    // m存储最大长度，mi存储最长子序列的末尾序号
+    int m, mi;
+    for(int i =0; i &lt; len; ++i)
+    {
+      for(int j = i; i &gt;=0; ++j)
+        {
+          if(nums[i] % nums[j] == 0 and dp[i] &lt; dp[j]+1)
+            {
+              dp[i] = dp[j] + 1;
+            son[i] = j;
+            }
+        }
+        if (dp[i] &gt; m)
+          {
+            m = dp[i];
+              mi = i;
+          }
+    }
+    vector<int> res;
+    for (int i = 0; i &lt; m; ++i)
+      {
+        res.insert(res.begin(), num[mi]);
+          mi = son[mi];
+      }
+    return res;
+  }
+};</p>
+
+<pre><code>
+# dynamic programming
+
+## 198. House Robber I
+
+### Problem Description
+
+&gt; You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security system connected and it will automatically contact the police if two adjacent houses were broken into on the same night.
+&gt;
+&gt;
+&gt;
+&gt; Given a list of non-negative integers representing the amount of money of each house, determine the maximum amount of money you can rob tonight without alerting the police.
+
+假设有一个强盗抢劫一条街，这条街安装了防盗装置，只要任意相邻的房子被抢就会触发报警，给出一个数组其中存储着每间房子中的现金数量，求强盗最多能抢到多少钱。
+
+### Method
+
+采用动态规划方法
+每间房子有两种状态，抢或不抢，如果一间房子能被抢那么它的前一间房子一定没有被抢,定义两个数，一个存储之前房子没有被抢( `exclude` )一个存储之前的房子已经被抢了( `include` ),那么
+
+</code></pre>
+
+<p>int i = include, int e = exclude;
+include = exclude + nums[j];
+exclude = max(i, e);</p>
+
+<pre><code>
+</code></pre>
+
+<p>class Solution
+{
+    public:
+    int rob(vector<int> nums)
+    {
+        int len = nums.size();
+        int include = 0, exclude = 0;
+        for (int j = 0; j &lt; len; ++j)
+        {
+            int i = include, e = exclude;
+            include = exclude + nums[j];
+            exclude = max(i, e);
+        }
+        return max(include, exclude);
+    }
+};</p>
+
+<pre><code>
+另一种理解：
+将房子编号为奇数和偶数
+
+</code></pre>
+
+<p>class Solution {
+public:
+    int rob(vector<int>&amp; nums) {
+        int is_odd;
+        vector<int> robs(2, 0);
+        for (int i = 0; i &lt; nums.size(); ++i)
+        {
+            is_odd = i % 2;
+            robs[is_odd] = max(robs[is_odd] + nums[i], robs[1 - is_odd]);
+            // if (i % 2 == 0)
+            //     rob_even = max(rob_even + nums[i], rob_odd);
+            // else
+            //     rob_odd = max(rob_odd + nums[i], rob_even);
+        }
+        return max(robs[0], robs[1]);
+    }
+};</p>
+
+<pre><code>
+## 213. House Robber II
+
+## Problem Description
+
+&gt; Note: This is an extension of House Robber.
+&gt;
+&gt;
+&gt;
+&gt; After robbing those houses on that street, the thief has found himself a new place for his thievery so that he will not get too much attention. This time, all houses at this place are arranged in a circle. That means the first house is the neighbor of the last one. Meanwhile, the security system for these houses remain the same as for those in the previous street.
+&gt;
+&gt;
+&gt;
+&gt; Given a list of non-negative integers representing the amount of money of each house, determine the maximum amount of money you can rob tonight without alerting the police.
+
+和上题类似，只是这次整个街区首尾相连形成了一个环形;
+
+### Method
+
+本题因为构成了环形，所以不但要考虑之前房子有没有被抢，还需要考虑后面的房子可不可以抢，初看起来问题很复杂，但是我们可以将这个问题转化为前面的线性街区的情况：以任何一间房子为分割点，比如第0间房子，如果这间房子被抢了，那么它前面的房子(n-1)一定不能被抢，则 `[0, 1, 2,...,n-2]` 可以当做线性情况看待，如果该房间没有被抢，那么 `[1, 2, ..., n-1]` 变成了线性情况。
+
+</code></pre>
+
+<p>class Solution {
+public:
+    int rob(vector<int>&amp; nums) {
+        int len = nums.size();
+        if (len == 1)
+            return nums[0];
+        return max(rob(nums, 0, len-2), rob(nums, 1, len-1));
+    }
+    int rob(vector<int>&amp; nums, int lo, int hi)
+    {
+        int include = 0, exclude = 0;
+        for (int j = lo; j &lt;= hi; ++j)
+        {
+            int i = include, e = exclude;
+            include = exclude + nums[j];
+            exclude = max(i, e);
+        }
+        return max(include, exclude);
+    }
+};</p>
+
+<pre><code>
+## 337. House Robber III
+
+### Problem Description
+
+&gt; The thief has found himself a new place for his thievery again. There is only one entrance to this area, called the “root.” Besides the root, each house has one and only one parent house. After a tour, the smart thief realized that “all houses in this place forms a binary tree”. It will automatically contact the police if two directly-linked houses were broken into on the same night.
+&gt;
+&gt;
+&gt;
+&gt; Determine the maximum amount of money the thief can rob tonight without alerting the police.
+&gt;
+&gt;
+&gt;
+&gt; Example 1:
+&gt; 3
+&gt; / \
+&gt; 2 3
+&gt; \ \
+&gt; 3 1
+&gt; Maximum amount of money the thief can rob = 3 + 3 + 1 = 7.
+&gt; Example 2:
+&gt; 3
+&gt; / \
+&gt; 4 5
+&gt; / \ \
+&gt; 1 3 1
+&gt; Maximum amount of money the thief can rob = 4 + 5 = 9.
+
+这次抢劫团伙又找到了一个抢劫地点，这个地点只有一个入口可以进入，然后每条路经过一个房子后分成两条路，不断重复，即这是一颗二叉树，如果某条路上两家同时被抢劫会触发报警装置，求强盗最多能抢多少钱
+
+### Method
+
+在每个结点上，强盗有两种选择，一是抢劫该结点，但是它的两个子节点不能被抢，二是不抢劫该节点，其两个子节点都可以抢
+
+</code></pre>
+
+<p>/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ <em>/
+class Solution {
+public:
+    int rob(TreeNode</em> root) {
+        vector<int> res = robSub(root);
+        return max(res[0], res[1]);</p>
+
+<pre><code>}
+
+vector&lt;int&gt; robSub(TreeNode* root)
+{
+    if (root == NULL)
+        return vector&lt;int&gt;(2, 0);
+
+    vector&lt;int&gt; left = robSub(root-&gt;left);
+    vector&lt;int&gt; right = robSub(root-&gt;right);
+
+    vector&lt;int&gt; res(2, 0);
+    res[1] = root-&gt;val + left[0] + right[0];
+    res[0] = max(left[1], left[0]) + max(right[0], right[1]);
+    return res;
+
+}
+</code></pre>
+
+<p>};</p>
+
+<pre><code>
+## 516. Longest Palindromic Subsequence
+
+### Problem Description
+
+&gt; Given a string s, find the longest palindromic subsequence’s length in s. You may assume that the maximum length of s is 1000.
+&gt;
+&gt;
+&gt;
+&gt; Example 1:
+&gt; Input:
+&gt;
+&gt;
+&gt;
+&gt; “bbbab”
+&gt; Output:
+&gt; 4
+&gt; One possible longest palindromic subsequence is “bbbb”.
+&gt; Example 2:
+&gt; Input:
+&gt;
+&gt;
+&gt;
+&gt; “cbbd”
+&gt; Output:
+&gt; 2
+&gt; One possible longest palindromic subsequence is “bb”.
+
+给定一个字符串s，找出其所有回文子串中最长的一个并返回其长度
+
+### Method
+
+采用动态规划方法来解题
+
+1. 重新定义题目
+将字符串切分成短的子串，通过短子串的最长回文得到包含它的长串的回文长度
+2. 定义状态
+`dp[i][j]` 表示子串 `s[1,...,n]` 的最长回文长度
+3. 状态转移
+如果子串 `s[i+1, ..., j-1]` 两边的字符相等，则子串长度要加上这两个字符,
+如果俩字符不相等，则 `s[i,...,j]` 最长回文为 `dp[i][j-1]` 和 `dp[i+1][j]` 中最长的一个
+因为要求 `dp[i][j]` 需要先知道 `dp[i+1][j-1]` 和 `dp[i][j-1],dp[i+1][j]` ,所以求解过程中， `i` 应该减, `j` 应该递增
+
+</code></pre>
+
+<p>class Solution {
+public:
+    int longestPalindromeSubseq(string s) {
+        string::size_type len = s.length();
+        vector<vector<int>&gt; dp(len, vector<int>(len, 0));
+        for (int i = len - 1; i &gt;=0; &ndash;i)
+        {
+            dp[i][i] = 1;
+            for (int j = i+1; j &lt; len; ++j)
+            {
+                if (s[i] == s[j])
+                    dp[i][j] = dp[i+1][j-1] + 2;
+                else
+                    dp[i][j] = max(dp[i+1][j], dp[i][j-1]);
+            }
+        }
+        return dp[0][len-1];</p>
+
+<pre><code>}
+</code></pre>
+
+<p>};</p>
+
+<pre><code>
+## 467. Unique Substring in Wraparound Strig
+
+### Problem Description
+
+&gt; Consider the string s to be the infinite wraparound string of “abcdefghijklmnopqrstuvwxyz”, so s will look like this: “…zabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcd….”.
+&gt;
+&gt;
+&gt;
+&gt; Now we have another string p. Your job is to find out how many unique non-empty substrings of p are present in s. In particular, your input is the string p and you need to output the number of different non-empty substrings of p in the string s.
+&gt;
+&gt;
+&gt;
+&gt; Note: p consists of only lowercase English letters and the size of p might be over 10000.
+&gt;
+&gt;
+&gt;
+&gt; Example 1:
+&gt; Input: “a”
+&gt; Output: 1
+&gt;
+&gt;
+&gt;
+&gt; Explanation: Only the substring “a” of string “a” is in the string s.
+&gt; Example 2:
+&gt; Input: “cac”
+&gt; Output: 2
+&gt; Explanation: There are two substrings “a”, “c” of string “cac” in the string s.
+&gt; Example 3:
+&gt; Input: “zab”
+&gt; Output: 6
+&gt; Explanation: There are six substrings “z”, “a”, “b”, “za”, “ab”, “zab” of string “zab” in the string s.
+
+假设有一个无限长度的字母表 `zabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcd` , 给出一个字符串 `p` ,找出 `p` 中有多上个不同子串出现在 `s` 中
+
+### Method
+
+**对于具有 `无限` 长度的字符串，通常都是考虑26个字母作为条件，而不是字符串整体**
+采用动态规划算法，对于任意一个字符串 `p` ,如果我们找出了分别以 `a-z` 为结尾的所有符合条件的字符串,那么其数量之和就是题目的答案。另外，如果找到了以某个字母结尾的符合条件的最长子串的长度，也就得到了以该字母结尾符合条件的子串长度，比如:已知 `abcd` 为符合条件的以d结尾的最长子串,则p中以d结尾符合条件子串有 `d, cd, bcd, abcd` ，个数为4，等于 `abcd` 的长度。对于 `abcdbcd` 这种情况， `abcd` 已经包含了 `bcd` ,所以不用考虑
+
+</code></pre>
+
+<p>class Solution {
+public:
+    int findSubstringInWraproundString(string p) {
+        string::size_type len = p.length();
+        vector<int> dp(26, 0);
+        int maxLen = 0;
+        for (int i = 0; i &lt; len; ++i)
+        {
+            if (i &gt; 0 and (p[i] - p[i-1] == 1 or p[i-1] - p[i] == 25))
+                maxLen++;
+            else
+                maxLen = 1;
+            int idx = p[i] - &lsquo;a&rsquo;;
+            dp[idx] = max(dp[idx], maxLen);
+        }
+        return accumulate(dp.begin(), dp.end(), 0);</p>
+
+<pre><code>}
+</code></pre>
+
+<p>};</p>
+
+<pre><code>
+## 416. Partition Equal Subset Sum
+
+### Problem Description
+
+&gt; Given a non-empty array containing only positive integers, find if the array can be partitioned into two subsets such that the sum of elements in both subsets is equal.
+&gt;
+&gt;
+&gt;
+&gt; Note:
+&gt; Each of the array element will not exceed 100.
+&gt; The array size will not exceed 200.
+&gt; Example 1:
+&gt;
+&gt;
+&gt;
+&gt; Input: [1, 5, 11, 5]
+&gt;
+&gt;
+&gt;
+&gt; Output: true
+&gt;
+&gt;
+&gt;
+&gt; Explanation: The array can be partitioned as [1, 5, 5] and [11].
+&gt; Example 2:
+&gt;
+&gt;
+&gt;
+&gt; Input: [1, 2, 3, 5]
+&gt;
+&gt;
+&gt;
+&gt; Output: false
+&gt;
+&gt;
+&gt;
+&gt; Explanation: The array cannot be partitioned into equal sum subsets.
+
+给出一个数组，判断其是否能够分成两个和相等的子数组
+
+### Method
+
+首先，数组 `nums` 要能够分成相等的两个数组要保证原数组所有元素的和 `sum` 是偶数，否则必然不能够按题意切分。然后，需要判断的是 `nums` 是否有子数组的和等于原数组和的一半即 `sum/2` 。关于如何求数组之和是否等于某个数在博客 `LeetCode-common-solution` 中已经提到了。
+
+</code></pre>
+
+<p>class Solution {
+public:
+    bool canPartition(vector<int>&amp; nums) {
+        int sum = accumulate(nums.begin(), nums.end(), 0);
+        if (sum % 2 != 0)
+            return false;
+        int target = sum / 2;
+        vector<bool> dp(target+1, false);
+        dp[0] = true;
+        for (int num : nums)
+            for (int i = target; i &gt;= num; &ndash;i)
+            {
+                dp[i] = dp[i - num] or dp[i];
+                if (i == target and dp[i])
+                    return true;
+            }</p>
+
+<pre><code>    return dp[target];
+
+}
+</code></pre>
+
+<p>};</p>
+
+<pre><code>
+## 413. Arithmetic Slices
+
+### Problem Description
+
+&gt; A sequence of number is called arithmetic if it consists of at least three elements and if the difference between any two consecutive elements is the same.
+&gt;
+&gt;
+&gt;
+&gt; For example, these are arithmetic sequence:
+&gt;
+&gt;
+&gt;
+&gt; 1, 3, 5, 7, 9
+&gt; 7, 7, 7, 7
+&gt; 3, -1, -5, -9
+&gt; The following sequence is not arithmetic.
+&gt;
+&gt;
+&gt;
+&gt; 1, 1, 2, 5, 7
+&gt;
+&gt;
+&gt;
+&gt; A zero-indexed array A consisting of N numbers is given. A slice of that array is any pair of integers (P, Q) such that 0 &amp;lt;= P &amp;lt; Q &amp;lt; N.
+&gt;
+&gt;
+&gt;
+&gt; A slice (P, Q) of array A is called arithmetic if the sequence:
+&gt; A[P], A[p + 1], …, A[Q - 1], A[Q] is arithmetic. In particular, this means that P + 1 &amp;lt; Q.
+&gt;
+&gt;
+&gt;
+&gt; The function should return the number of arithmetic slices in the array A.
+&gt;
+&gt;
+&gt;
+&gt; Example:
+&gt;
+&gt;
+&gt;
+&gt; A = [1, 2, 3, 4]
+&gt;
+&gt;
+&gt;
+&gt; return: 3, for 3 arithmetic slices in A: [1, 2, 3], [2, 3, 4] and [1, 2, 3, 4] itself.
+
+给出一个数组，求其中等差子数列的个数
+
+### Method
+
+本题和[467. Unique Substring in Wraparound String](https://leetcode.com/problems/unique-substrings-in-wraparound-string)类似，以某个数结尾的等差数列的子等差数列的个数等于其长度-2，因为可以允许子数列可以重复，因此不需要maxLen来记录最长数列的长度。
+
+</code></pre>
+
+<p>class Solution {
+public:
+    int numberOfArithmeticSlices(vector<int>&amp; A) {
+        if (A.size() &lt; 3)
+            return 0;
+        int len = 2;
+        int d = A[1] - A[0];
+        int res = 0;
+        for (int i = 2; i &lt; A.size(); ++i)
+        {
+            if (A[i] - A[i-1] == d)
+            {
+                ++len;
+                res += len - 2;
+            }
+            else
+            {
+                len = 2;
+                d = A[i] - A[i-1];
+            }
+        }
+        return res;</p>
+
+<pre><code>}
+</code></pre>
+
+<p>};</p>
+
+<pre><code>
+## 139. Word Break
+
+### Problem Description
+
+&gt; Given a non-empty string s and a dictionary wordDict containing a list of non-empty words, determine if s can be segmented into a space-separated sequence of one or more dictionary words. You may assume the dictionary does not contain duplicate words.
+&gt;
+&gt;
+&gt;
+&gt; For example, given
+&gt; s = “leetcode”,
+&gt; dict = [“leet”, “code”].
+&gt;
+&gt;
+&gt;
+&gt; Return true because “leetcode” can be segmented as “leet code”.
+
+给出一个字符串和一个字符串数组，判断字符串是否能通过字符串数组拼接而成。
+
+### Method
+
+采用动态规划方法解题
+`dp[i]` 表示子串 `s[i,...,n]` 能否通过字典拼接成。
+如果子串 `s[i,...,j]` 在字典中且 `dp[j+1]` 为真，则 `s[i,...,n]` 能通过字典拼接得到，则 `dp[i]=true`
+
+</code></pre>
+
+<p>class Solution {
+public:
+    bool wordBreak(string s, vector<string>&amp; wordDict) {
+        // 状态dp[i], s[i到n]是否满足条件
+        // dp[i] = dp[j+1] and s[i到j] $\in$ wordDict
+        string::size_type len = s.length();
+        vector<bool> dp(len+1, false);
+        dp[len] = true;
+        for (int i = len - 1; i &gt;= 0; i&ndash;)
+            for (int j = i; j &lt; len; ++j)
+            {
+                string str = s.substr(i, j-i+1);
+                if (dp[j+1] and find(wordDict.begin(), wordDict.end(), str) != wordDict.end())
+                {
+                    dp[i] = true;
+                    break;
+                }
+            }
+        return dp[0];
+    }
+};</p>
+
+<pre><code>
+## 322. Coin Change
+
+### Problem Description
+
+&gt; You are given coins of different denominations and a total amount of money amount. Write a function to compute the fewest number of coins that you need to make up that amount. If that amount of money cannot be made up by any combination of the coins, return -1.
+&gt;
+&gt;
+&gt;
+&gt; Example 1:
+&gt; coins = [1, 2, 5], amount = 11
+&gt; return 3 (11 = 5 + 5 + 1)
+&gt;
+&gt;
+&gt;
+&gt; Example 2:
+&gt; coins = [2], amount = 3
+&gt; return -1.
+&gt;
+&gt;
+&gt;
+&gt; Note:
+&gt; You may assume that you have an infinite number of each kind of coin.
+
+给出硬币的面额 `coints` 和待求得总金额 `amount` ，求最少需要多少枚硬币才能凑够总金额 `amount` 。
+
+### Method
+
+此题和[LeetCode 常见问题解决方法](http://wowx.info/posts/20170215164726/)中求 `计算子序列和` 部分类似，不过计算子序列和部分每个数字只能出现一次,而本题中同样面额的硬币可以出现任意次,为了解决这个问题可以将内循环从高向低遍历改成从低向高遍历。
+定义状态 `dp[i]` 为凑齐金额 `i` 最少需要的硬币数，如果有面值为num的硬币，则可以通过最少凑齐 `i-num` 的硬币数加1得到, 由于有可能已经通过其他方案已经以更少的硬币数凑齐了i，所以还需要做一个判断： `dp[i]=min(dp[i-num]+1, dp[i])`
+
+</code></pre>
+
+<p>class Solution {
+public:
+    int coinChange(vector<int>&amp; coins, int amount) {
+        int MAX = amount+1;
+        vector<int> dp(amount+1, MAX);
+        dp[0] = 0;
+        for (int coin : coins)
+            // 由低位向高位相加，这样一个面额的硬币就可以出现多次了
+            for (int i = coin; i &lt;=amount; i++)
+            {
+                dp[i] = min(dp[i-coin]+1, dp[i]) ;
+            }
+        return dp[amount] &gt; amount ? -1 : dp[amount];
+    }
+};</p>
+
+<pre><code>
+## 304. Range Sum Query 2D-Immutable
+
+### Problem Description
+
+Given a 2D matrix matrix, find the sum of the elements inside the rectangle defined by its upper left corner (row1, col1) and lower right corner (row2, col2).
+
+Range Sum Query 2D
+![img](https://leetcode.com/static/images/courses/range_sum_query_2d.png)
+The above rectangle (with the red border) is defined by (row1, col1) = (2, 1) and (row2, col2) = (4, 3), which contains sum = 8.
+
+Example:
+Given matrix = [
+[3, 0, 1, 4, 2],
+[5, 6, 3, 2, 1],
+[1, 2, 0, 1, 5],
+[4, 1, 0, 1, 7],
+[1, 0, 3, 0, 5]
+]
+
+sumRegion(2, 1, 4, 3) -&amp;gt; 8
+sumRegion(1, 1, 2, 2) -&amp;gt; 11
+sumRegion(1, 2, 2, 4) -&amp;gt; 12
+Note:
+You may assume that the matrix does not change.
+There are many calls to sumRegion function.
+You may assume that row1 ≤ row2 and col1 ≤ col2.
+
+有一个二维数组表示的矩形，给出一个子矩形的左上角和右下角坐标，求子矩形框出的数的面积
+
+### Method
+
+采用动态规划的方法
+状态 `sums[i][j]` 表示左上角到坐标 `[i][j]` 的面积， `sums[row2+1][col2+1] - sums[row2+1][col1] - sums[row1][col2+1] + sums[row1][col1];`
+
+</code></pre>
+
+<p>class NumMatrix {
+private:
+    int row, col;
+    vector<vector<int>&gt; sums;
+public:
+    NumMatrix(vector<vector<int>&gt; matrix) {
+        row = matrix.size();
+        col = row&gt;0 ? matrix[0].size() : 0;
+        sums = vector<vector<int>&gt;(row+1, vector<int>(col+1, 0));
+        for(int i=1; i&lt;=row; i++) {
+            for(int j=1; j&lt;=col; j++) {
+                sums[i][j] = matrix[i-1][j-1] +
+                             sums[i-1][j] + sums[i][j-1] - sums[i-1][j-1] ;
+            }
+        }
+    }</p>
+
+<pre><code>int sumRegion(int row1, int col1, int row2, int col2) {
+    return sums[row2+1][col2+1] - sums[row2+1][col1] - sums[row1][col2+1] + sums[row1][col1];
+}
+</code></pre>
+
+<p>};</p>
+
+<p>/**
+ * Your NumMatrix object will be instantiated and called as such:
+ * NumMatrix obj = new NumMatrix(matrix);
+ * int param_1 = obj.sumRegion(row1,col1,row2,col2);
+ */</p>
+
+<pre><code>
+## 279. Perfect Squares
+
+### Problem Description
+
+&gt; Given a positive integer n, find the least number of perfect square numbers (for example, 1, 4, 9, 16, …) which sum to n.
+&gt;
+&gt;
+&gt;
+&gt; For example, given n = 12, return 3 because 12 = 4 + 4 + 4; given n = 13, return 2 because 13 = 4 + 9.
+
+给出一个数字 `n` ,求其最少可以由多少个平方数的和构成
+
+### Method
+
+采用动态规划方法,  `dp[i]` 表示数字i最少需要多少平方数构成，则 `dp[i] = min(dp[i], dp[i-j*j]+1)`
+
+</code></pre>
+
+<p>class Solution {
+public:
+    int numSquares(int n) {
+    //     static vector<int> dp {0};
+    // int m = dp.size();
+    // dp.resize(max(m, n+1), INT_MAX);
+    // for (int i=1, i2; (i2 = i*i)&lt;=n; ++i)
+    //     for (int j=max(m, i2); j&lt;=n; ++j)
+    //         if (dp[j] &gt; dp[j-i2] + 1)
+    //             dp[j] = dp[j-i2] + 1;
+    // return dp[n];
+        vector<int> dp(n+1, n);
+        dp[0] = 0;
+        for (int i = 1; i &lt;= n; ++i)
+            for (int j = 1, j2; (j2 = j*j) &lt;= i; ++j)
+                if (dp[i] &gt; dp[i-j2])
+                    dp[i] = dp[i-j2] + 1;
+                // p[i] = min(dp[i], dp[i-j*j] + 1);
+        return dp[n];</p>
+
+<pre><code>}
+</code></pre>
+
+<p>};</p>
+
+<pre><code>
+## 486. Predict the Winner
+
+### Problem Description
+
+&gt; Given an array of scores that are non-negative integers. Player 1 picks one of the numbers from either end of the array followed by the player 2 and then player 1 and so on. Each time a player picks a number, that number will not be available for the next player. This continues until all the scores have been chosen. The player with the maximum score wins.
+&gt;
+&gt;
+&gt;
+&gt; Given an array of scores, predict whether player 1 is the winner. You can assume each player plays to maximize his score.
+&gt;
+&gt;
+&gt;
+&gt; Example 1:
+&gt; Input: [1, 5, 2]
+&gt; Output: False
+&gt; Explanation: Initially, player 1 can choose between 1 and 2.
+&gt; If he chooses 2 (or 1), then player 2 can choose from 1 (or 2) and 5. If player 2 chooses 5, then player 1 will be left with 1 (or 2).
+&gt; So, final score of player 1 is 1 + 2 = 3, and player 2 is 5.
+&gt; Hence, player 1 will never be the winner and you need to return False.
+&gt; Example 2:
+&gt; Input: [1, 5, 233, 7]
+&gt; Output: True
+&gt; Explanation: Player 1 first chooses 1. Then player 2 have to choose between 5 and 7. No matter which number player 2 choose, player 1 can choose 233.
+&gt; Finally, player 1 has more score (234) than player 2 (12), so you need to return True representing player1 can win.
+&gt; Note:
+&gt; 1 &amp;lt;= length of the array &amp;lt;= 20.
+&gt; Any scores in the given array are non-negative integers and will not exceed 10,000,000.
+&gt; If the scores of both players are equal, then player 1 is still the winner.
+
+假设玩家1和玩家2在玩这样一个游戏:给出一个数组，由玩家1开始轮流从数组任意一端取一个数直到所有数被取完，谁最后取得的数总和最大谁就获胜
+
+### Method
+
+假设玩家1和玩家2在玩这样一个游戏:给出一个数组，由玩家1开始轮流从数组任意一端取一个数直到所有数被取完，谁最后取得的和最大谁就获胜。给出任意一个数组，判断玩家1先手的情况下其能否获胜。
+
+这是一个最大最小收益问题,详细解释请看[MIT OCW](https://youtu.be/Tw1k46ywN6E?list=PLUl4u3cNGP6317WaSNfmCvGym2ucw3oGp&amp;amp;t=3622)，
+首先，我们发现，如果数组长度为偶数,每次轮到player1取数时，它一定能取到对自己最有利的数，其一定能取胜:
+对于一般情况采用动态规划方法求解:
+定义状态 `dp[i][j]` 为只剩下数组 `nums[i,...,j]` 时，player1先手情况下能获得的最大和。则 `dp[i][i]` 为只剩下一个数的情况，显然 `dp[i][i]=nums[i]` , `dp[i][i+1]` 为只剩下两个数的情况， `dp[i][i+1]=max(nums[i], nums[i+1])`
+对于一般的i,j取值，player1有两种选择，要么取 `dp[i]` ,要么取 `dp[j]` , 此时 `dp[i][j] = max(something + nums[i], something + nums[j])` ,接下来要做的就是确定 `something` 是什么，很容易想到它的形式可能是 `dp[i][j] = max(dp[i+1][j] + nums[i], dp[i][j-1] + nums[j])` ,然而我们会发现我们并不能直接得到 `dp[i][j-1]` 和 `dp[i+1][j]` 因为这两个值是受对手决策影响的，对手会尽可能使我们获得的数更小,那么考虑最坏情况，即每次轮到对手选择时它都使下一轮player1获得的数更小.
+根据以上分析， `dp[i][j]=max(min(dp[i+1][j-1], dp[i+2][j]) + nums[i], min(dp[i][j-2], dp[i+1][j-1]) + nums[j])`
+如果我们选择了 `nums[i]` ,则对手需要解决的问题是 `dp[i+1][j]` ,他选择完后player1面临的子问题为 `dp[i+1][j-1]` （对手选了 `nums[j]` ）或 `dp[i+2][j]` (对手选了 `nums[i+1]` ),因为要考虑最糟糕的情况，即 `min(dp[i+1][j-1], dp[i+2][j])` ,player1开始选j的情况类似。
+
+</code></pre>
+
+<p>class Solution {
+public:
+    bool PredictTheWinner(vector<int>&amp; nums) {
+        size_t len = nums.size();
+        if (len % 2 == 0)
+         return true;
+        vector<vector<int>&gt; dp(len, vector<int>(len, 0));
+        for (int i = len-1; i &gt;= 0; &ndash;i)
+        {
+            dp[i][i] = nums[i];
+            for (int j = i + 1; j &lt; len; ++j)
+            {
+                int a = ((i+1<len and j-1>=0) ? dp[i+1][j-1] : 0) ;
+                int b = ((i+2<len) ? dp[i+2][j] : 0);
+                int c = ((j-2>=0) ? dp[i][j-2] : 0);
+                dp[i][j] = max(min(a, b) + nums[i], + min(a, c) + nums[j]);
+            }
+        }
+        return 2*dp[0][len-1] &gt;= accumulate(nums.begin(), nums.end(), 0);
+    }
+};</p>
+
+<pre><code>
+## 523. Continuous Subarray Sum
+
+### Problem Description
+
+&gt; Given a list of non-negative numbers and a target integer k, write a function to check if the array has a continuous subarray of size at least 2 that sums up to the multiple of k, that is, sums up to n*k where n is also an integer.
+&gt;
+&gt;
+&gt;
+&gt; Example 1:
+&gt; Input: [23, 2, 4, 6, 7], k=6
+&gt; Output: True
+&gt; Explanation: Because [2, 4] is a continuous subarray of size 2 and sums up to 6.
+&gt; Example 2:
+&gt; Input: [23, 2, 6, 4, 7], k=6
+&gt; Output: True
+&gt; Explanation: Because [23, 2, 6, 4, 7] is an continuous subarray of size 5 and sums up to 42.
+&gt; Note:
+&gt; The length of the array won’t exceed 10,000.
+&gt; You may assume the sum of all the numbers is in the range of a signed 32-bit integer.
+
+给出一个数组 `nums` 和一个目标 `k` ，判断 `nums` 的是否存在连续子数组的和等于 `k` 的倍数
+
+### Method
+
+对于位置 `i` 的数 `nums[i]` ，如果其对 `k` 的余数为 `x` ,将 `nums[i]` 不断和后续的数累加，每新增加一个数就对 `k` 取余，当累加到位置 `j` 余数再次为 `x` 时说明连续子序列 `nums[i,...,j]` 的和能被 `k` 整除
+
+</code></pre>
+
+<p>class Solution {
+public:
+    bool checkSubarraySum(vector<int>&amp; nums, int k) {
+        unordered_map<int, int> map;
+        map[0] = -1;
+        int runningSum = 0;
+        for (int i = 0; i &lt; nums.size(); ++i)
+        {
+            runningSum += nums[i];
+            if (k != 0)
+                runningSum %= k;
+            if (map.find(runningSum) != map.end())
+            {
+                if (i - map[runningSum] &gt; 1)
+                    return true;
+            }
+            else
+                map[runningSum] = i;
+        }
+        return false;
+    }
+};</p>
+
+<pre><code>
+## 221. Maximal Square
+
+### Problem Description
+
+&gt; Given a 2D binary matrix filled with 0’s and 1’s, find the largest square containing only 1’s and return its area.
+&gt;
+&gt;
+&gt;
+&gt; For example, given the following matrix:
+&gt;
+&gt;
+&gt;
+&gt; 1 0 1 0 0
+&gt; 1 0 1 1 1
+&gt; 1 1 1 1 1
+&gt; 1 0 0 1 0
+&gt; Return 4.
+
+给出一个由字符’0’和’1’填充的二维数组，找出其中由1组成的最大正方形返回其面积。
+
+### Method
+
+此题采用动态规划方法求解。下面三种方时间复杂度相等，但是空间复杂度分别为$O(mn)$,$O(m)$和$O(m)$,n m 分别为二维矩阵的行数和列数。
+定义状态 `dp[i][j]` 为以 `i,j` 为右下角的最大全1正方形的边长。
+边界条件：
+当 `i=0` 时，如果 `matrix[0][j]=='1'` 则该处最大正方形面积为1否则为0，当 `j=0` 时类似。
+如果 `matrix[i][j]==0` ,即下面这种情况
+
+</code></pre>
+
+<p>1 1
+1 0</p>
+
+<pre><code>
+必然不存在满足条件的正方形。
+如果 `matrix[i][j]=='1'` ,则该处最大正方形由其上方，左上方和左边的三个点处最大正方形的最小值决定，如果三个点处任意一个点最大正方形边长为0，则 `i,j` 处最大正方形为0，其他情况下 `dp[i][j]=min(dp[i-1][j], dp[i][j-1],dp[i-1][j-1])`
+
+#### 方法1 空间复杂度$O(NM)$
+
+</code></pre>
+
+<p>class Solution {
+public:
+    int maximalSquare(vector<vector<char>&gt;&amp; matrix) {
+        int rows = matrix.size();
+        if (rows == 0)
+            return 0;
+        int cols = matrix[0].size();
+        vector<vector<int>&gt; dp(rows, vector<int>(cols, 0));
+        int maxSize = 0;
+        for (int j = 0; j &lt; cols; j++)
+        {
+            dp[0][j] = matrix[0][j] - &lsquo;0&rsquo;;
+            maxSize = max(maxSize, dp[0][j]);
+        }
+        for (int i = 1; i &lt; rows; i++)
+        {
+            dp[i][0] = matrix[i][0] - &lsquo;0&rsquo;;
+            maxSize = max(maxSize, dp[i][0]);
+        }</p>
+
+<pre><code>    for (int i = 1; i &lt; rows; i++)
+        for (int j = 1; j &lt; cols; ++j)
+        {
+            if (matrix[i][j] == '0')
+                continue;
+            dp[i][j] = min(dp[i-1][j-1], min(dp[i][j-1], dp[i-1][j])) + 1;
+            if (dp[i][j] &gt; maxSize)
+                maxSize = dp[i][j];
+        }
+    return maxSize * maxSize;
+
+
+}
+</code></pre>
+
+<p>};</p>
+
+<pre><code>
+#### 方法二 空间复杂度O(M)
+
+我们发现 `dp[i][j]=min(dp[i-1][j],dp[i-1][j-1],dp[i][j-1])` 中 `dp[i][j]` 只由两行数据决定，因此我们定义两个长度为M的向量分别存储上次迭代的结果和本次迭代结果：
+
+</code></pre>
+
+<p>class Solution {
+    public:
+        int maximalSquare(vector<vector<char>&gt;&amp; matrix)
+        {
+            int rows = matrix.size();
+            if (rows == 0)
+                return 0;
+            int cols = matrix[0].size();
+            vector<int> pre(cols, 0), cur(cols, 0);
+            int maxSize = 0;
+            for (int i = 0; i &lt; cols; ++i)
+            {
+                pre[i] = matrix[0][i] - &lsquo;0&rsquo;;
+                maxSize  = max(maxSize, pre[i]);
+            }
+            for (int i = 1; i &lt; rows; ++i)
+            {
+                cur[0] = matrix[i][0] - &lsquo;0&rsquo;;
+                maxSize = max(maxSize, cur[0]);
+                for (int j = 1; j &lt; cols; ++j)
+                {
+                    if (matrix[i][j] == &lsquo;0&rsquo;)
+                        continue;
+                    cur[j] = min(pre[j], min(pre[j-1], cur[j-1])) + 1;
+                    maxSize = max(maxSize, cur[j]);
+                }
+                swap(pre, cur);
+                fill(cur.begin(), cur.end(), 0);
+            }
+            return maxSize * maxSize;</p>
+
+<pre><code>    }
+</code></pre>
+
+<p>};</p>
+
+<pre><code>
+#### 方法三 空间复杂度$O(M)$
+
+我们可以再进一步缩小空间:
+
+</code></pre>
+
+<p>class Solution {
+    public:
+        int maximalSquare(vector<vector<char>&gt;&amp; matrix)
+        {
+            if (matrix.empty())
+                return 0;
+            int rows = matrix.size(), cols = matrix[0].size();
+            vector<int> dp(cols+1, 0);
+            int pre = 0, maxSize=0;
+            for (int i = 0; i &lt; rows; ++i)
+                for (int j = 1; j &lt;= cols; ++j)
+                {
+                    int tmp = dp[j];
+                    if (matrix[i][j-1] == &lsquo;1&rsquo;)
+                    {
+                        dp[j] = min(dp[j], min(dp[j-1], pre)) + 1;
+                        maxSize = max(maxSize, dp[j]);
+                    }
+                    else
+                        dp[j] = 0;
+                    pre = tmp;
+                }
+            return maxSize*maxSize;
+        }
+};</p>
+
+<pre><code>
+## 198. House Robber I
+
+### Problem Description
+
+&gt; You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security system connected and it will automatically contact the police if two adjacent houses were broken into on the same night.
+&gt;
+&gt;
+&gt;
+&gt; Given a list of non-negative integers representing the amount of money of each house, determine the maximum amount of money you can rob tonight without alerting the police.
+
+假设有一个强盗抢劫一条街，这条街安装了防盗装置，只要任意相邻的房子被抢就会触发报警，给出一个数组其中存储着每间房子中的现金数量，求强盗最多能抢到多少钱。
+
+### Method
+
+采用动态规划方法
+每间房子有两种状态，抢或不抢，如果一间房子能被抢那么它的前一间房子一定没有被抢,定义两个数，一个存储之前房子没有被抢( `exclude` )一个存储之前的房子已经被抢了( `include` ),那么
+
+</code></pre>
+
+<p>int i = include, int e = exclude;
+include = exclude + nums[j];
+exclude = max(i, e);</p>
+
+<pre><code>
+</code></pre>
+
+<p>class Solution
+{
+    public:
+    int rob(vector<int> nums)
+    {
+        int len = nums.size();
+        int include = 0, exclude = 0;
+        for (int j = 0; j &lt; len; ++j)
+        {
+            int i = include, e = exclude;
+            include = exclude + nums[j];
+            exclude = max(i, e);
+        }
+        return max(include, exclude);
+    }
+};</p>
+
+<pre><code>
+另一种理解：
+将房子编号为奇数和偶数
+
+</code></pre>
+
+<p>class Solution {
+public:
+    int rob(vector<int>&amp; nums) {
+        int is_odd;
+        vector<int> robs(2, 0);
+        for (int i = 0; i &lt; nums.size(); ++i)
+        {
+            is_odd = i % 2;
+            robs[is_odd] = max(robs[is_odd] + nums[i], robs[1 - is_odd]);
+            // if (i % 2 == 0)
+            //     rob_even = max(rob_even + nums[i], rob_odd);
+            // else
+            //     rob_odd = max(rob_odd + nums[i], rob_even);
+        }
+        return max(robs[0], robs[1]);
+    }
+};</p>
+
+<pre><code>
+## 213. House Robber II
+
+## Problem Description
+
+&gt; Note: This is an extension of House Robber.
+&gt;
+&gt;
+&gt;
+&gt; After robbing those houses on that street, the thief has found himself a new place for his thievery so that he will not get too much attention. This time, all houses at this place are arranged in a circle. That means the first house is the neighbor of the last one. Meanwhile, the security system for these houses remain the same as for those in the previous street.
+&gt;
+&gt;
+&gt;
+&gt; Given a list of non-negative integers representing the amount of money of each house, determine the maximum amount of money you can rob tonight without alerting the police.
+
+和上题类似，只是这次整个街区首尾相连形成了一个环形;
+
+### Method
+
+本题因为构成了环形，所以不但要考虑之前房子有没有被抢，还需要考虑后面的房子可不可以抢，初看起来问题很复杂，但是我们可以将这个问题转化为前面的线性街区的情况：以任何一间房子为分割点，比如第0间房子，如果这间房子被抢了，那么它前面的房子(n-1)一定不能被抢，则 `[0, 1, 2,...,n-2]` 可以当做线性情况看待，如果该房间没有被抢，那么 `[1, 2, ..., n-1]` 变成了线性情况。
+
+</code></pre>
+
+<p>class Solution {
+public:
+    int rob(vector<int>&amp; nums) {
+        int len = nums.size();
+        if (len == 1)
+            return nums[0];
+        return max(rob(nums, 0, len-2), rob(nums, 1, len-1));
+    }
+    int rob(vector<int>&amp; nums, int lo, int hi)
+    {
+        int include = 0, exclude = 0;
+        for (int j = lo; j &lt;= hi; ++j)
+        {
+            int i = include, e = exclude;
+            include = exclude + nums[j];
+            exclude = max(i, e);
+        }
+        return max(include, exclude);
+    }
+};</p>
+
+<pre><code>
+## 337. House Robber III
+
+### Problem Description
+
+&gt; The thief has found himself a new place for his thievery again. There is only one entrance to this area, called the “root.” Besides the root, each house has one and only one parent house. After a tour, the smart thief realized that “all houses in this place forms a binary tree”. It will automatically contact the police if two directly-linked houses were broken into on the same night.
+&gt;
+&gt;
+&gt;
+&gt; Determine the maximum amount of money the thief can rob tonight without alerting the police.
+&gt;
+&gt;
+&gt;
+&gt; Example 1:
+&gt; 3
+&gt; / \
+&gt; 2 3
+&gt; \ \
+&gt; 3 1
+&gt; Maximum amount of money the thief can rob = 3 + 3 + 1 = 7.
+&gt; Example 2:
+&gt; 3
+&gt; / \
+&gt; 4 5
+&gt; / \ \
+&gt; 1 3 1
+&gt; Maximum amount of money the thief can rob = 4 + 5 = 9.
+
+这次抢劫团伙又找到了一个抢劫地点，这个地点只有一个入口可以进入，然后每条路经过一个房子后分成两条路，不断重复，即这是一颗二叉树，如果某条路上两家同时被抢劫会触发报警装置，求强盗最多能抢多少钱
+
+### Method
+
+在每个结点上，强盗有两种选择，一是抢劫该结点，但是它的两个子节点不能被抢，二是不抢劫该节点，其两个子节点都可以抢
+
+</code></pre>
+
+<p>/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ <em>/
+class Solution {
+public:
+    int rob(TreeNode</em> root) {
+        vector<int> res = robSub(root);
+        return max(res[0], res[1]);</p>
+
+<pre><code>}
+
+vector&lt;int&gt; robSub(TreeNode* root)
+{
+    if (root == NULL)
+        return vector&lt;int&gt;(2, 0);
+
+    vector&lt;int&gt; left = robSub(root-&gt;left);
+    vector&lt;int&gt; right = robSub(root-&gt;right);
+
+    vector&lt;int&gt; res(2, 0);
+    res[1] = root-&gt;val + left[0] + right[0];
+    res[0] = max(left[1], left[0]) + max(right[0], right[1]);
+    return res;
+
+}
+</code></pre>
+
+<p>};</p>
+
+<pre><code>
+# HashTable
+
+## 500. KeyboardRow
+
+### Problem Description
+
+&gt; Given a List of words, return the words that can be typed using letters of alphabet on only one row’s of American keyboard like the image below.
+
+![](https://leetcode.com/static/images/problemset/keyboard.png)
+
+&gt; Example 1:
+&gt; Input: [“Hello”, “Alaska”, “Dad”, “Peace”]
+&gt; Output: [“Alaska”, “Dad”]
+&gt; Note:
+&gt; You may use one character in the keyboard more than once.
+&gt; You may assume the input string will only contain letters of alphabet.
+
+给出一组字符串，找出满足所有字母在键盘上同一行条件的字符串
+
+### METHOD
+
+</code></pre>
+
+<p>class Solution {
+public:
+    vector<string> findWords(vector<string>&amp; words) {
+        vector<int> keydict(123, 0);
+        vector<string> rows({&ldquo;qwertyuiopQWERTYUIOP&rdquo;, &ldquo;asdfghjklASDFGHJKL&rdquo;, &ldquo;zxcvbnmZXCVBNM&rdquo;});
+        for (int i = 0; i &lt; rows.size(); ++i)
+            for (char ch : rows[i])
+                keydict[ch] = i;
+        vector<string> rst;
+        for (string word : words)
+        {
+            int i = keydict[word[0]];
+            bool flag = true;
+            for (char ch : word)
+                if (keydict[ch] != i)
+                {
+                    flag = false;
+                    break;
+                }
+            if (flag)
+                rst.push_back(word);
+        }
+        return rst;
+    }
+};</p>
+
+<pre><code>
+## 221. Maximal Square
+
+### Problem Description
+
+&gt; Given a 2D binary matrix filled with 0’s and 1’s, find the largest square containing only 1’s and return its area.
+&gt;
+&gt;
+&gt;
+&gt; For example, given the following matrix:
+&gt;
+&gt;
+&gt;
+&gt; 1 0 1 0 0
+&gt; 1 0 1 1 1
+&gt; 1 1 1 1 1
+&gt; 1 0 0 1 0
+&gt; Return 4.
+
+给出一个由字符’0’和’1’填充的二维数组，找出其中由1组成的最大正方形返回其面积。
+
+### Method
+
+此题采用动态规划方法求解。下面三种方时间复杂度相等，但是空间复杂度分别为$O(mn)$,$O(m)$和$O(m)$,n m 分别为二维矩阵的行数和列数。
+定义状态 `dp[i][j]` 为以 `i,j` 为右下角的最大全1正方形的边长。
+边界条件：
+当 `i=0` 时，如果 `matrix[0][j]=='1'` 则该处最大正方形面积为1否则为0，当 `j=0` 时类似。
+如果 `matrix[i][j]==0` ,即下面这种情况
+
+</code></pre>
+
+<p>1 1
+1 0</p>
+
+<pre><code>
+必然不存在满足条件的正方形。
+如果 `matrix[i][j]=='1'` ,则该处最大正方形由其上方，左上方和左边的三个点处最大正方形的最小值决定，如果三个点处任意一个点最大正方形边长为0，则 `i,j` 处最大正方形为0，其他情况下 `dp[i][j]=min(dp[i-1][j], dp[i][j-1],dp[i-1][j-1])`
+
+#### 方法1 空间复杂度$O(NM)$
+
+</code></pre>
+
+<p>class Solution {
+public:
+    int maximalSquare(vector<vector<char>&gt;&amp; matrix) {
+        int rows = matrix.size();
+        if (rows == 0)
+            return 0;
+        int cols = matrix[0].size();
+        vector<vector<int>&gt; dp(rows, vector<int>(cols, 0));
+        int maxSize = 0;
+        for (int j = 0; j &lt; cols; j++)
+        {
+            dp[0][j] = matrix[0][j] - &lsquo;0&rsquo;;
+            maxSize = max(maxSize, dp[0][j]);
+        }
+        for (int i = 1; i &lt; rows; i++)
+        {
+            dp[i][0] = matrix[i][0] - &lsquo;0&rsquo;;
+            maxSize = max(maxSize, dp[i][0]);
+        }</p>
+
+<pre><code>    for (int i = 1; i &lt; rows; i++)
+        for (int j = 1; j &lt; cols; ++j)
+        {
+            if (matrix[i][j] == '0')
+                continue;
+            dp[i][j] = min(dp[i-1][j-1], min(dp[i][j-1], dp[i-1][j])) + 1;
+            if (dp[i][j] &gt; maxSize)
+                maxSize = dp[i][j];
+        }
+    return maxSize * maxSize;
+
+
+}
+</code></pre>
+
+<p>};</p>
+
+<pre><code>
+#### 方法二 空间复杂度O(M)
+
+我们发现 `dp[i][j]=min(dp[i-1][j],dp[i-1][j-1],dp[i][j-1])` 中 `dp[i][j]` 只由两行数据决定，因此我们定义两个长度为M的向量分别存储上次迭代的结果和本次迭代结果：
+
+</code></pre>
+
+<p>class Solution {
+    public:
+        int maximalSquare(vector<vector<char>&gt;&amp; matrix)
+        {
+            int rows = matrix.size();
+            if (rows == 0)
+                return 0;
+            int cols = matrix[0].size();
+            vector<int> pre(cols, 0), cur(cols, 0);
+            int maxSize = 0;
+            for (int i = 0; i &lt; cols; ++i)
+            {
+                pre[i] = matrix[0][i] - &lsquo;0&rsquo;;
+                maxSize  = max(maxSize, pre[i]);
+            }
+            for (int i = 1; i &lt; rows; ++i)
+            {
+                cur[0] = matrix[i][0] - &lsquo;0&rsquo;;
+                maxSize = max(maxSize, cur[0]);
+                for (int j = 1; j &lt; cols; ++j)
+                {
+                    if (matrix[i][j] == &lsquo;0&rsquo;)
+                        continue;
+                    cur[j] = min(pre[j], min(pre[j-1], cur[j-1])) + 1;
+                    maxSize = max(maxSize, cur[j]);
+                }
+                swap(pre, cur);
+                fill(cur.begin(), cur.end(), 0);
+            }
+            return maxSize * maxSize;</p>
+
+<pre><code>    }
+</code></pre>
+
+<p>};</p>
+
+<pre><code>
+#### 方法三 空间复杂度$O(M)$
+
+我们可以再进一步缩小空间:
+
+</code></pre>
+
+<p>class Solution {
+    public:
+        int maximalSquare(vector<vector<char>&gt;&amp; matrix)
+        {
+            if (matrix.empty())
+                return 0;
+            int rows = matrix.size(), cols = matrix[0].size();
+            vector<int> dp(cols+1, 0);
+            int pre = 0, maxSize=0;
+            for (int i = 0; i &lt; rows; ++i)
+                for (int j = 1; j &lt;= cols; ++j)
+                {
+                    int tmp = dp[j];
+                    if (matrix[i][j-1] == &lsquo;1&rsquo;)
+                    {
+                        dp[j] = min(dp[j], min(dp[j-1], pre)) + 1;
+                        maxSize = max(maxSize, dp[j]);
+                    }
+                    else
+                        dp[j] = 0;
+                    pre = tmp;
+                }
+            return maxSize*maxSize;
+        }
+};</p>
+
+<pre><code>
+## 198. House Robber I
+
+### Problem Description
+
+&gt; You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security system connected and it will automatically contact the police if two adjacent houses were broken into on the same night.
+&gt;
+&gt;
+&gt;
+&gt; Given a list of non-negative integers representing the amount of money of each house, determine the maximum amount of money you can rob tonight without alerting the police.
+
+假设有一个强盗抢劫一条街，这条街安装了防盗装置，只要任意相邻的房子被抢就会触发报警，给出一个数组其中存储着每间房子中的现金数量，求强盗最多能抢到多少钱。
+
+### Method
+
+采用动态规划方法
+每间房子有两种状态，抢或不抢，如果一间房子能被抢那么它的前一间房子一定没有被抢,定义两个数，一个存储之前房子没有被抢( `exclude` )一个存储之前的房子已经被抢了( `include` ),那么
+
+</code></pre>
+
+<p>int i = include, int e = exclude;
+include = exclude + nums[j];
+exclude = max(i, e);</p>
+
+<pre><code>
+</code></pre>
+
+<p>class Solution
+{
+    public:
+    int rob(vector<int> nums)
+    {
+        int len = nums.size();
+        int include = 0, exclude = 0;
+        for (int j = 0; j &lt; len; ++j)
+        {
+            int i = include, e = exclude;
+            include = exclude + nums[j];
+            exclude = max(i, e);
+        }
+        return max(include, exclude);
+    }
+};</p>
+
+<pre><code>
+另一种理解：
+将房子编号为奇数和偶数
+
+</code></pre>
+
+<p>class Solution {
+public:
+    int rob(vector<int>&amp; nums) {
+        int is_odd;
+        vector<int> robs(2, 0);
+        for (int i = 0; i &lt; nums.size(); ++i)
+        {
+            is_odd = i % 2;
+            robs[is_odd] = max(robs[is_odd] + nums[i], robs[1 - is_odd]);
+            // if (i % 2 == 0)
+            //     rob_even = max(rob_even + nums[i], rob_odd);
+            // else
+            //     rob_odd = max(rob_odd + nums[i], rob_even);
+        }
+        return max(robs[0], robs[1]);
+    }
+};</p>
+
+<pre><code>
+## 213. House Robber II
+
+## Problem Description
+
+&gt; Note: This is an extension of House Robber.
+&gt;
+&gt;
+&gt;
+&gt; After robbing those houses on that street, the thief has found himself a new place for his thievery so that he will not get too much attention. This time, all houses at this place are arranged in a circle. That means the first house is the neighbor of the last one. Meanwhile, the security system for these houses remain the same as for those in the previous street.
+&gt;
+&gt;
+&gt;
+&gt; Given a list of non-negative integers representing the amount of money of each house, determine the maximum amount of money you can rob tonight without alerting the police.
+
+和上题类似，只是这次整个街区首尾相连形成了一个环形;
+
+### Method
+
+本题因为构成了环形，所以不但要考虑之前房子有没有被抢，还需要考虑后面的房子可不可以抢，初看起来问题很复杂，但是我们可以将这个问题转化为前面的线性街区的情况：以任何一间房子为分割点，比如第0间房子，如果这间房子被抢了，那么它前面的房子(n-1)一定不能被抢，则 `[0, 1, 2,...,n-2]` 可以当做线性情况看待，如果该房间没有被抢，那么 `[1, 2, ..., n-1]` 变成了线性情况。
+
+</code></pre>
+
+<p>class Solution {
+public:
+    int rob(vector<int>&amp; nums) {
+        int len = nums.size();
+        if (len == 1)
+            return nums[0];
+        return max(rob(nums, 0, len-2), rob(nums, 1, len-1));
+    }
+    int rob(vector<int>&amp; nums, int lo, int hi)
+    {
+        int include = 0, exclude = 0;
+        for (int j = lo; j &lt;= hi; ++j)
+        {
+            int i = include, e = exclude;
+            include = exclude + nums[j];
+            exclude = max(i, e);
+        }
+        return max(include, exclude);
+    }
+};</p>
+
+<pre><code>
+## 337. House Robber III
+
+### Problem Description
+
+&gt; The thief has found himself a new place for his thievery again. There is only one entrance to this area, called the “root.” Besides the root, each house has one and only one parent house. After a tour, the smart thief realized that “all houses in this place forms a binary tree”. It will automatically contact the police if two directly-linked houses were broken into on the same night.
+&gt;
+&gt;
+&gt;
+&gt; Determine the maximum amount of money the thief can rob tonight without alerting the police.
+&gt;
+&gt;
+&gt;
+&gt; Example 1:
+&gt; 3
+&gt; / \
+&gt; 2 3
+&gt; \ \
+&gt; 3 1
+&gt; Maximum amount of money the thief can rob = 3 + 3 + 1 = 7.
+&gt; Example 2:
+&gt; 3
+&gt; / \
+&gt; 4 5
+&gt; / \ \
+&gt; 1 3 1
+&gt; Maximum amount of money the thief can rob = 4 + 5 = 9.
+
+这次抢劫团伙又找到了一个抢劫地点，这个地点只有一个入口可以进入，然后每条路经过一个房子后分成两条路，不断重复，即这是一颗二叉树，如果某条路上两家同时被抢劫会触发报警装置，求强盗最多能抢多少钱
+
+### Method
+
+在每个结点上，强盗有两种选择，一是抢劫该结点，但是它的两个子节点不能被抢，二是不抢劫该节点，其两个子节点都可以抢
+
+</code></pre>
+
+<p>/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ <em>/
+class Solution {
+public:
+    int rob(TreeNode</em> root) {
+        vector<int> res = robSub(root);
+        return max(res[0], res[1]);</p>
+
+<pre><code>}
+
+vector&lt;int&gt; robSub(TreeNode* root)
+{
+    if (root == NULL)
+        return vector&lt;int&gt;(2, 0);
+
+    vector&lt;int&gt; left = robSub(root-&gt;left);
+    vector&lt;int&gt; right = robSub(root-&gt;right);
+
+    vector&lt;int&gt; res(2, 0);
+    res[1] = root-&gt;val + left[0] + right[0];
+    res[0] = max(left[1], left[0]) + max(right[0], right[1]);
+    return res;
+
+}
+</code></pre>
+
+<p>};</p>
+
+<pre><code>
+# Greedy
+
+## 406. Queue Reconstruction by Height
+
+### Problem Description
+
+&gt; Suppose you have a random list of people standing in a queue. Each person is described by a pair of integers (h, k), where h is the height of the person and k is the number of people in front of this person who have a height greater than or equal to h. Write an algorithm to reconstruct the queue.
+&gt;
+&gt;
+&gt;
+&gt; Note:
+&gt; The number of people is less than 1,100.
+&gt;
+&gt;
+&gt;
+&gt; Example
+&gt;
+&gt;
+&gt;
+&gt; Input:
+&gt; [[7,0], [4,4], [7,1], [5,0], [6,1], [5,2]]
+&gt;
+&gt;
+&gt;
+&gt; Output:
+&gt;
+&gt;
+&gt;
+&gt; ## [[5,0], [7,0], [5,2], [6,1], [4,4], [7,1]]
+&gt;
+&gt;
+&gt;
+&gt; 假设有一队人，给出一个由 `pair` 构成的数组，第一个元素是人的身高，第二个元素表示的是这个人前面比它高或一样高的人数，按顺序重新构建队列。
+
+### Method
+
+采用贪心算法，按高的人放到前面，同样高的人将前面比它高的人少的放前面的方法重新排序，然后每次讲最高的放前面
+
+</code></pre>
+
+<p>class Solution {
+public:
+    vector<pair<int, int>&gt; reconstructQueue(vector<pair<int, int>&gt;&amp; people) {
+        auto comp = [](const pair<int, int>&amp; p1, const pair<int, int>&amp; p2 ){return ((p1.first &gt; p2.first) || (p1.first == p2.first &amp;&amp; p1.second &lt; p2.second)); };
+        sort(people.begin(), people.end(), comp);
+        vector<pair<int, int>&gt; res;
+        for (auto p: people)
+            res.insert(res.begin() + p.second, p);
+        return res;
+    }
+};</p>
+
+<pre><code>
+## 221. Maximal Square
+
+### Problem Description
+
+&gt; Given a 2D binary matrix filled with 0’s and 1’s, find the largest square containing only 1’s and return its area.
+&gt;
+&gt;
+&gt;
+&gt; For example, given the following matrix:
+&gt;
+&gt;
+&gt;
+&gt; 1 0 1 0 0
+&gt; 1 0 1 1 1
+&gt; 1 1 1 1 1
+&gt; 1 0 0 1 0
+&gt; Return 4.
+
+给出一个由字符’0’和’1’填充的二维数组，找出其中由1组成的最大正方形返回其面积。
+
+### Method
+
+此题采用动态规划方法求解。下面三种方时间复杂度相等，但是空间复杂度分别为$O(mn)$,$O(m)$和$O(m)$,n m 分别为二维矩阵的行数和列数。
+定义状态 `dp[i][j]` 为以 `i,j` 为右下角的最大全1正方形的边长。
+边界条件：
+当 `i=0` 时，如果 `matrix[0][j]=='1'` 则该处最大正方形面积为1否则为0，当 `j=0` 时类似。
+如果 `matrix[i][j]==0` ,即下面这种情况
+
+</code></pre>
+
+<p>1 1
+1 0</p>
+
+<pre><code>
+必然不存在满足条件的正方形。
+如果 `matrix[i][j]=='1'` ,则该处最大正方形由其上方，左上方和左边的三个点处最大正方形的最小值决定，如果三个点处任意一个点最大正方形边长为0，则 `i,j` 处最大正方形为0，其他情况下 `dp[i][j]=min(dp[i-1][j], dp[i][j-1],dp[i-1][j-1])`
+
+#### 方法1 空间复杂度$O(NM)$
+
+</code></pre>
+
+<p>class Solution {
+public:
+    int maximalSquare(vector<vector<char>&gt;&amp; matrix) {
+        int rows = matrix.size();
+        if (rows == 0)
+            return 0;
+        int cols = matrix[0].size();
+        vector<vector<int>&gt; dp(rows, vector<int>(cols, 0));
+        int maxSize = 0;
+        for (int j = 0; j &lt; cols; j++)
+        {
+            dp[0][j] = matrix[0][j] - &lsquo;0&rsquo;;
+            maxSize = max(maxSize, dp[0][j]);
+        }
+        for (int i = 1; i &lt; rows; i++)
+        {
+            dp[i][0] = matrix[i][0] - &lsquo;0&rsquo;;
+            maxSize = max(maxSize, dp[i][0]);
+        }</p>
+
+<pre><code>    for (int i = 1; i &lt; rows; i++)
+        for (int j = 1; j &lt; cols; ++j)
+        {
+            if (matrix[i][j] == '0')
+                continue;
+            dp[i][j] = min(dp[i-1][j-1], min(dp[i][j-1], dp[i-1][j])) + 1;
+            if (dp[i][j] &gt; maxSize)
+                maxSize = dp[i][j];
+        }
+    return maxSize * maxSize;
+
+
+}
+</code></pre>
+
+<p>};</p>
+
+<pre><code>
+#### 方法二 空间复杂度O(M)
+
+我们发现 `dp[i][j]=min(dp[i-1][j],dp[i-1][j-1],dp[i][j-1])` 中 `dp[i][j]` 只由两行数据决定，因此我们定义两个长度为M的向量分别存储上次迭代的结果和本次迭代结果：
+
+</code></pre>
+
+<p>class Solution {
+    public:
+        int maximalSquare(vector<vector<char>&gt;&amp; matrix)
+        {
+            int rows = matrix.size();
+            if (rows == 0)
+                return 0;
+            int cols = matrix[0].size();
+            vector<int> pre(cols, 0), cur(cols, 0);
+            int maxSize = 0;
+            for (int i = 0; i &lt; cols; ++i)
+            {
+                pre[i] = matrix[0][i] - &lsquo;0&rsquo;;
+                maxSize  = max(maxSize, pre[i]);
+            }
+            for (int i = 1; i &lt; rows; ++i)
+            {
+                cur[0] = matrix[i][0] - &lsquo;0&rsquo;;
+                maxSize = max(maxSize, cur[0]);
+                for (int j = 1; j &lt; cols; ++j)
+                {
+                    if (matrix[i][j] == &lsquo;0&rsquo;)
+                        continue;
+                    cur[j] = min(pre[j], min(pre[j-1], cur[j-1])) + 1;
+                    maxSize = max(maxSize, cur[j]);
+                }
+                swap(pre, cur);
+                fill(cur.begin(), cur.end(), 0);
+            }
+            return maxSize * maxSize;</p>
+
+<pre><code>    }
+</code></pre>
+
+<p>};</p>
+
+<pre><code>
+#### 方法三 空间复杂度$O(M)$
+
+我们可以再进一步缩小空间:
+
+</code></pre>
+
+<p>class Solution {
+    public:
+        int maximalSquare(vector<vector<char>&gt;&amp; matrix)
+        {
+            if (matrix.empty())
+                return 0;
+            int rows = matrix.size(), cols = matrix[0].size();
+            vector<int> dp(cols+1, 0);
+            int pre = 0, maxSize=0;
+            for (int i = 0; i &lt; rows; ++i)
+                for (int j = 1; j &lt;= cols; ++j)
+                {
+                    int tmp = dp[j];
+                    if (matrix[i][j-1] == &lsquo;1&rsquo;)
+                    {
+                        dp[j] = min(dp[j], min(dp[j-1], pre)) + 1;
+                        maxSize = max(maxSize, dp[j]);
+                    }
+                    else
+                        dp[j] = 0;
+                    pre = tmp;
+                }
+            return maxSize*maxSize;
+        }
+};</p>
+
+<pre><code>
+## 198. House Robber I
+
+### Problem Description
+
+&gt; You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security system connected and it will automatically contact the police if two adjacent houses were broken into on the same night.
+&gt;
+&gt;
+&gt;
+&gt; Given a list of non-negative integers representing the amount of money of each house, determine the maximum amount of money you can rob tonight without alerting the police.
+
+假设有一个强盗抢劫一条街，这条街安装了防盗装置，只要任意相邻的房子被抢就会触发报警，给出一个数组其中存储着每间房子中的现金数量，求强盗最多能抢到多少钱。
+
+### Method
+
+采用动态规划方法
+每间房子有两种状态，抢或不抢，如果一间房子能被抢那么它的前一间房子一定没有被抢,定义两个数，一个存储之前房子没有被抢( `exclude` )一个存储之前的房子已经被抢了( `include` ),那么
+
+</code></pre>
+
+<p>int i = include, int e = exclude;
+include = exclude + nums[j];
+exclude = max(i, e);</p>
+
+<pre><code>
+</code></pre>
+
+<p>class Solution
+{
+    public:
+    int rob(vector<int> nums)
+    {
+        int len = nums.size();
+        int include = 0, exclude = 0;
+        for (int j = 0; j &lt; len; ++j)
+        {
+            int i = include, e = exclude;
+            include = exclude + nums[j];
+            exclude = max(i, e);
+        }
+        return max(include, exclude);
+    }
+};</p>
+
+<pre><code>
+另一种理解：
+将房子编号为奇数和偶数
+
+</code></pre>
+
+<p>class Solution {
+public:
+    int rob(vector<int>&amp; nums) {
+        int is_odd;
+        vector<int> robs(2, 0);
+        for (int i = 0; i &lt; nums.size(); ++i)
+        {
+            is_odd = i % 2;
+            robs[is_odd] = max(robs[is_odd] + nums[i], robs[1 - is_odd]);
+            // if (i % 2 == 0)
+            //     rob_even = max(rob_even + nums[i], rob_odd);
+            // else
+            //     rob_odd = max(rob_odd + nums[i], rob_even);
+        }
+        return max(robs[0], robs[1]);
+    }
+};</p>
+
+<pre><code>
+## 213. House Robber II
+
+## Problem Description
+
+&gt; Note: This is an extension of House Robber.
+&gt;
+&gt;
+&gt;
+&gt; After robbing those houses on that street, the thief has found himself a new place for his thievery so that he will not get too much attention. This time, all houses at this place are arranged in a circle. That means the first house is the neighbor of the last one. Meanwhile, the security system for these houses remain the same as for those in the previous street.
+&gt;
+&gt;
+&gt;
+&gt; Given a list of non-negative integers representing the amount of money of each house, determine the maximum amount of money you can rob tonight without alerting the police.
+
+和上题类似，只是这次整个街区首尾相连形成了一个环形;
+
+### Method
+
+本题因为构成了环形，所以不但要考虑之前房子有没有被抢，还需要考虑后面的房子可不可以抢，初看起来问题很复杂，但是我们可以将这个问题转化为前面的线性街区的情况：以任何一间房子为分割点，比如第0间房子，如果这间房子被抢了，那么它前面的房子(n-1)一定不能被抢，则 `[0, 1, 2,...,n-2]` 可以当做线性情况看待，如果该房间没有被抢，那么 `[1, 2, ..., n-1]` 变成了线性情况。
+
+</code></pre>
+
+<p>class Solution {
+public:
+    int rob(vector<int>&amp; nums) {
+        int len = nums.size();
+        if (len == 1)
+            return nums[0];
+        return max(rob(nums, 0, len-2), rob(nums, 1, len-1));
+    }
+    int rob(vector<int>&amp; nums, int lo, int hi)
+    {
+        int include = 0, exclude = 0;
+        for (int j = lo; j &lt;= hi; ++j)
+        {
+            int i = include, e = exclude;
+            include = exclude + nums[j];
+            exclude = max(i, e);
+        }
+        return max(include, exclude);
+    }
+};</p>
+
+<pre><code>
+## 337. House Robber III
+
+### Problem Description
+
+&gt; The thief has found himself a new place for his thievery again. There is only one entrance to this area, called the “root.” Besides the root, each house has one and only one parent house. After a tour, the smart thief realized that “all houses in this place forms a binary tree”. It will automatically contact the police if two directly-linked houses were broken into on the same night.
+&gt;
+&gt;
+&gt;
+&gt; Determine the maximum amount of money the thief can rob tonight without alerting the police.
+&gt;
+&gt;
+&gt;
+&gt; Example 1:
+&gt; 3
+&gt; / \
+&gt; 2 3
+&gt; \ \
+&gt; 3 1
+&gt; Maximum amount of money the thief can rob = 3 + 3 + 1 = 7.
+&gt; Example 2:
+&gt; 3
+&gt; / \
+&gt; 4 5
+&gt; / \ \
+&gt; 1 3 1
+&gt; Maximum amount of money the thief can rob = 4 + 5 = 9.
+
+这次抢劫团伙又找到了一个抢劫地点，这个地点只有一个入口可以进入，然后每条路经过一个房子后分成两条路，不断重复，即这是一颗二叉树，如果某条路上两家同时被抢劫会触发报警装置，求强盗最多能抢多少钱
+
+### Method
+
+在每个结点上，强盗有两种选择，一是抢劫该结点，但是它的两个子节点不能被抢，二是不抢劫该节点，其两个子节点都可以抢
+
+</code></pre>
+
+<p>/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ <em>/
+class Solution {
+public:
+    int rob(TreeNode</em> root) {
+        vector<int> res = robSub(root);
+        return max(res[0], res[1]);</p>
+
+<pre><code>}
+
+vector&lt;int&gt; robSub(TreeNode* root)
+{
+    if (root == NULL)
+        return vector&lt;int&gt;(2, 0);
+
+    vector&lt;int&gt; left = robSub(root-&gt;left);
+    vector&lt;int&gt; right = robSub(root-&gt;right);
+
+    vector&lt;int&gt; res(2, 0);
+    res[1] = root-&gt;val + left[0] + right[0];
+    res[0] = max(left[1], left[0]) + max(right[0], right[1]);
+    return res;
+
+}
+</code></pre>
+
+<p>};</p>
+
+<pre><code>
+# sort
+
+## 506. Relative Ranks
+
+### Problem Description
+
+Given scores of N athletes, find their relative ranks&amp;gt; and the people with the top three highest scores, who will be awarded medals: “Gold Medal”, “Silver Medal” and “Bronze Medal”.
+&amp;gt;
+
+&gt; Example 1:
+&gt; Input: [5, 4, 3, 2, 1]
+&gt; Output: [“Gold Medal”, “Silver Medal”, “Bronze Medal”, “4”, “5”]
+&gt; Explanation: The first three athletes got the top three highest scores, so they got “Gold Medal”, “Silver Medal” and “Bronze Medal”.
+&gt; For the left two athletes, you just need to output their relative ranks according to their scores.
+&gt; Note:
+&gt; N is a positive integer and won’t exceed 10,000.
+&gt; All the scores of athletes are guaranteed to be unique.
+
+实现arg_sort
+
+### Method
+
+</code></pre>
+
+<p>class Solution {
+public:
+    vector<string> findRelativeRanks(vector<int>&amp; nums) {
+        size_t len = nums.size();
+        vector<string> res(len, &ldquo;&rdquo;);
+        vector<int> idx(len, 0);
+        for (int i = 0; i &lt; len; ++i)
+            idx[i] = i;
+        argSort(nums, idx, 0, len - 1);
+        for (int i = 0; i &lt; len; ++i)
+            res[idx[i]] = to_string(i+1);
+        for (int i = 0; i &lt; len; ++i)
+        {
+            if (res[i] == &ldquo;1&rdquo;)
+                res[i] = &ldquo;Gold Medal&rdquo;;
+            else if (res[i] == &ldquo;2&rdquo;)
+                res[i] = &ldquo;Silver Medal&rdquo;;
+            else if (res[i] == &ldquo;3&rdquo;)
+                res[i] = &ldquo;Bronze Medal&rdquo;;
+        }
+        return res;</p>
+
+<pre><code>}
+
+void argSort(vector&lt;int&gt; &amp;nums, vector&lt;int&gt; &amp;idx, int l, int r){
+    if (l &gt;= r)
+        return;
+    int X = nums[l], ii = idx[l];
+    int i = l, j = r;
+    while (i &lt; j)
+    {
+        while (i &lt; j &amp;&amp; nums[j] &lt;= X)
+            --j;
+        if (i &lt; j)
+        {
+            nums[i] = nums[j];
+            idx[i] = idx[j];
+        }
+        while (i &lt; j &amp;&amp; nums[i] &gt; X)
+            ++i;
+        if (i &lt; j)
+        {
+            nums[j] = nums[i];
+            idx[j] = idx[i];
+        }
+    }
+    nums[i] = X;
+    idx[i] = ii;
+    argSort(nums, idx, l, i-1);
+    argSort(nums, idx, i+1, r);
+}
+</code></pre>
+
+<p>};</p>
+
+<pre><code>
+## 461. Hanmming Distance
+
+### Problem Description
+
+&gt; The Hamming distance between two integers is the number of positions at which the corresponding bits are different.
+&gt;
+&gt;
+&gt;
+&gt; Given two integers x and y, calculate the Hamming distance.
+&gt;
+&gt;
+&gt;
+&gt; Note:
+&gt; 0 $\leqslant{x}$, y &amp;lt; $2^{31}$
+&gt;
+&gt;
+&gt;
+&gt; Example:
+&gt;
+&gt;
+&gt;
+&gt; Input: x = 1, y = 4
+&gt;
+&gt;
+&gt;
+&gt; Output: 2
+&gt;
+&gt;
+&gt;
+&gt;
+&gt;
+&gt; ```
+&gt; Explanation:
+1   (0 0 0 1)
+4   (0 1 0 0)
+       ↑   ↑
+&gt; ```
+&gt;
+&gt;
+&gt;
+&gt;
+&gt;
+&gt; The above arrows point to positions where the corresponding bits are different.
+
+求两个数的汉明距离(有多少个比特位不同)
+
+### Method
+
+有两种办法，一种是不断对两个数对2取余数，比较余数是否相等
+
+</code></pre>
+
+<p>class Solution {
+public:
+    int hammingDistance(int x, int y) {
+        int res = 0;
+        int x_h = x, x_l = 0, y_h = y, y_l = 0;
+        while (x_h &gt; 0 || y_h &gt; 0)
+        {
+            x_l = x_h % 2;
+            x_h /= 2;
+            y_l = y_h % 2;
+            y_h /= 2;
+            if (x_l != y_l)
+                res++;
+        }
+        return res;
+    }
+};</p>
+
+<pre><code>
+第二种是首先对两个数做异或，这样只要求出这个数中有多少个1就得到了答案
+
+</code></pre>
+
+<p>class Solution {
+public:
+    int hammingDistance(int x, int y) {
+        int xxory = x^y;
+        int res = 0;
+        while (xxory)
+        {
+            res++;
+            xxory &amp;= xxory - 1;
+        }
+        return res;
+    }
+};</p>
+
+<pre><code>
+## 476. Number Complement
+
+### Problem Description
+
+&gt; Given a positive integer, output its complement number. The complement strategy is to flip the bits of its binary representation.
+&gt;
+&gt;
+&gt;
+&gt; Note:
+&gt; The given integer is guaranteed to fit within the range of a 32-bit signed integer.
+&gt; You could assume no leading zero bit in the integer’s binary representation.
+&gt; Example 1:
+&gt; Input: 5
+&gt; Output: 2
+&gt; Explanation: The binary representation of 5 is 101 (no leading zero bits), and its complement is 010. So you need to output 2.
+&gt; Example 2:
+&gt; Input: 1
+&gt; Output: 0
+&gt; Explanation: The binary representation of 1 is 1 (no leading zero bits), and its complement is 0. So you need to output 0.
+
+给出一个数字，求其反码对应数字
+
+### Method
+
+首先求 `num` 的反码，然后只取不包括符号位的所有位
+
+</code></pre>
+
+<p>class Solution {
+public:
+    int findComplement(int num) {
+        return ~num &amp; ((1 &lt;&lt;(int)log2(num))-1);
+    }
+};</p>
+
+<pre><code>
+# Tree
+
+## 419. Battleships in a Board
+
+### Problem Description
+
+&gt; You receive a valid board, made of only battleships or empty slots.
+&gt; Battleships can only be placed horizontally or vertically. In other words, they can only be made of the shape 1xN (1 row, N columns) or Nx1 (N rows, 1 co&amp;gt;lumn), where N can be of any size.
+&gt; At least one horizontal or vertical cell separates between two battleships - there are no adjacent battleships.
+&gt; Example:
+&gt; X..X
+&gt; …X
+&gt; …X
+&gt; In the above board there are 2 battleships.
+&gt; Invalid Example:
+&gt; …X
+&gt; XXXX
+&gt; …X
+&gt; This is an invalid board that you will not receive - as battleships will always have a cell separating between them.
+&gt; Follow up:
+&gt; Could you do it in one-pass, using only O(1) extra memory and without modifying the value of the board?
+
+给出一个只含有 `.` 和 `X` 的二维数组，其中 `X` 表示舰船的一部分， `.` 表示空白海域，舰船只能是横的或竖直的，并且舰船间至少有一格空水域间隔，求整个水域有多少艘舰船，要求只遍历二维数组一次，空间复杂度为 `O(1)`
+
+### Method
+
+为了唯一区分一艘舰船，以舰船的头作为计数基准，所谓舰船头即当前位置为 `X` 且上方和左方都是 `.` 的情况
+
+``cpp`
+class Solution {
+public:
+int countBattleships(vector&amp;gt;&amp;amp; board) {
+if (board.empty())
+return 0;
+int m = board.size(), n = board[0].size();
+int count = 0;
+for (int i = 0; i &amp;lt; m; ++i)
+for (int j = 0; j &amp;lt; n; ++j)
+{
+if (board[i][j] == ‘.’) continue;
+if (i &amp;gt; 0 and board[i-1][j] == ‘X’) continue;
+if (j &amp;gt; 0 and board[i][j-1] == ‘X’) continue;
+++count;
+}
+return count;
+}
+};
+
+</code></pre>
+
+<h2 id="513-find-bottom-left-tree-value">513. Find Bottom Left Tree Value</h2>
+
+<h3 id="problem-description-2">Problem Description</h3>
+
+<blockquote>
+<p>Given a binary tree, find the leftmost value in the last row of the tree.</p>
+
+<p>Example 1:
+Input:</p>
+
+<p>2
+  / <br />
+ 1   3</p>
+
+<p>Output:
+1
+Example 2:
+Input:</p>
+
+<pre><code>   1
+  / \
+ 2   3
+/   / \
+</code></pre>
+
+<p>4   5   6
+      /
+     7</p>
+
+<p>Output:
+7
+Note: You may assume the tree (i.e., the given root node) is not NULL.</p>
+</blockquote>
+
+<p>给出一个二叉树，找出最深一行节点中最左边的那个</p>
+
+<h3 id="method-1">Method</h3>
+
+<p>先序遍历二叉树的同时记录当前所在位置的深度，如果该深度大于最大当前遍历到的最大深度，则更新最大深度值和该位置节点值，由于同一深度只会更新一次，所以记录到的就是最左值</p>
+
+<pre><code class="language-cpp">class Solution {
+
+public:
+
+    int findBottomLeftValue(TreeNode* root) {
+
+        vector&lt;int&gt; rst({0, 0});
+
+        helper(root, 1, rst);
+
+        return rst[0];
+
+
+
+    }
+
+
+
+    // rst 第一元素存储当前最左值，第二个元素存储对应的深度
+
+    void helper(TreeNode* root, int deepth, vector&lt;int&gt;&amp; rst)
+
+    {
+
+        if (deepth &gt; rst[1])
+
+        {
+
+            rst[0] = root-&gt;val;
+
+            rst[1] = deepth;
+
+        }
+
+        if (root-&gt;left != NULL) helper(root-&gt;left, deepth+1, rst);
+
+        if (root-&gt;right != NULL) helper(root-&gt;right, deepth+1, rst);
+    }
+
+};
+</code></pre>
+
+<h1 id="array">Array</h1>
+
+<h2 id="leetcode-459-repeated-substring-pattern-的几种解法">“LeetCode: 459 Repeated Substring Pattern”的几种解法</h2>
+
+<h3 id="题目">题目</h3>
+
+<pre><code>Given a non-empty string check if it can be constructed by taking a substring of it and appending multiple copies of the substring together. You may assume the given string consists of lowercase English letters only and its length will not exceed 10000.
+
+Example 1:
+Input: &quot;abab&quot;
+
+Output: True
+
+Explanation: It's the substring &quot;ab&quot; twice.
+Example 2:
+Input: &quot;aba&quot;
+
+Output: False
+Example 3:
+Input: &quot;abcabcabcabc&quot;
+
+Output: True
+
+Explanation: It's the substring &quot;abc&quot; four times. (And the substring &quot;abcabc&quot; twice.)
+</code></pre>
+
+<h4 id="解法一">解法一</h4>
+
+<p>如果 <code>str</code>  由子字符串 <code>subStr</code> 构成，则 <code>subStr</code> 的长度必然是 <code>str</code> 长度的约数，并且这个长度一定小于 <code>str</code> 长度的一半，利用这个性质可以求解这个问题</p>
+
+<pre><code>bool method1(string str) {
+        size_t len = str.size();
+        for (int i = len / 2; i &gt;=1; --i)
+        {
+            if (len % i == 0)
+            {
+                int p = len / i;
+                string newStr(&quot;&quot;);
+                string subStr = str.substr(0, i);
+                for (int j = 0; j &lt; p; ++j)
+                    newStr += subStr;
+                if (newStr == str)
+                    return true;
+            }
+        }
+        return false;
+    }
+</code></pre>
+
+<h4 id="解法二">解法二</h4>
+
+<p>若 <code>str</code> 是由某个子串重复构成的，那么将两个 <code>str</code> 拼接在一起，然后将拼接后的字符串去头去尾，仍然可以在这个字符串中找到 <code>str</code></p>
+
+<pre><code>bool method2(string str) {
+  string newStr = (str + str).substr(1, str.size()*2 - 2);
+  return newStr.find(str) != string::npos;
+}
+</code></pre>
+
+<h4 id="解法三">解法三</h4>
+
+<p>这个方法利用了经典的字符串匹配算法KMP算法中的最大前缀后缀数组 <code>next</code> ， <code>next[i]</code> 保存了字符串位置 <code>i</code> 处的最大前缀末尾位置，这篇博客讲解的很详细<a href="http://www.tuicool.com/articles/e2Qbyyf">如果你看不懂KMP算法，那就看一看这篇文章</a>。</p>
+
+<p>主要思想为，如果 <code>str</code> 由 <code>n</code> 个长度为 <code>k</code> 的相同子串 <code>subStr</code> 构成，那么最大后缀为图中黄框部分，最大前缀为图中红框部分，且黄框部分的长度一定能被 <code>subStr</code> 长度整除</p>
+
+<p><img src="http://ww4.sinaimg.cn/large/6425ef91jw1fazjmoltsij20bk02t74o.jpg" alt="" /></p>
+
+<pre><code>vector&lt;int&gt; getNext(string str) {
+        int i = 0, j = 0;
+        vector&lt;int&gt; next(str.size(), 0);
+        next[0] = -1;
+        for (i = 1; i &lt; str.size(); ++i)
+        {
+            j = next[i - 1];
+            while(str[i] != str[j + 1] &amp;&amp; j &gt;= 0)
+                j = next[j];
+            if (str[i] == str[j + 1])
+                next[i] = j  + 1;
+            else
+                next[i] = -1;
+        }
+        return next;
+    }
+
+bool method3(string str) {
+        vector&lt;int&gt; next = getNext(str);
+        size_t len_str = str.size();
+        size_t len = next[len_str - 1] + 1;
+        return (len &gt; 0) &amp;&amp; (len_str%(len_str - len) == 0);
+
+    }
+</code></pre>
+
+<h1 id="leetcode-4-median-of-two-sorted-arrays">[LeetCode]4:Median of Two Sorted Arrays</h1>
+
+<h2 id="题目-1">题目：</h2>
+
+<blockquote>
+<p>There are two sorted arrays  <strong>nums1</strong>  and  <strong>nums2</strong>  of size m and n respectively.</p>
+
+<p>Find the median of the two sorted arrays. The overall run time complexity should be O(log (m+n)).</p>
+
+<p><strong>Example 1:</strong></p>
+
+<pre><code>&gt; nums1 = [1, 3]
+nums2 = [2]
+
+The median is 2.0
+&gt; ```
+&gt;
+&gt;
+&gt;
+&gt;
+&gt;
+&gt; **Example 2:**
+&gt;
+&gt;
+&gt;
+&gt;
+&gt;
+&gt; ```
+&gt; nums1 = [1, 2]
+nums2 = [3, 4]
+
+The median is (2 + 3)/2 = 2.5
+&gt; ```
+
+## 解题思路
+
+中间元素所在位置的特点是:
+
+1. 左边元素个数等于右边元素个数
+2. 左边最大元素不大于右边最小元素
+
+假设将nums1分为nums1[:i]和nums[i:],nums2分成nums2[:j]和nums2[j:],如果i+j（左半部分长度） == (m-i) + (n-j) if((m+n)%2 ==0)或 (m - i) + (n - j) + 1 if ((m+2)%2 == 1)(右半部分长度) ,则满足上面的条件一,另外  `0&lt;i&lt;m, 0&lt;j&lt;n,j=(m+n+1)/2-i`  推出 `n&gt;=m` ,所以如果 `nums1.size() &gt; nums2.size()` 则将他们调换；
+
+接下来，判断是否满足条件二，因为两个数组已经排过序了，即 `nums1[i-1] &lt; nums[i], nums2[j-1]&lt;nums2[j]` ,只需要考虑 `nums1[i]` 是否大于 `nums2[j-1]` , `nums[j]` 是否大于 `nums[i-1]`
+
+</code></pre>
+
+<p>class Solution {
+public:
+    double findMedianSortedArrays(vector<int>&amp; nums1, vector<int>&amp; nums2) {
+        int m = nums1.size(), n = nums2.size();
+        if (m &gt; n) return findMedianSortedArrays(nums2, nums1);
+        int i, j, imin = 0, imax = m, half = (m + n + 1) / 2;
+        while (imin &lt;= imax) {
+            i = (imin &amp; imax) + ((imin ^ imax) &gt;&gt; 1);
+            j = half - i;
+            if (i &gt; 0 &amp;&amp; j &lt; n &amp;&amp; nums1[i - 1] &gt; nums2[j]) imax = i - 1;
+            else if (j &gt; 0 &amp;&amp; i &lt; m &amp;&amp; nums2[j - 1] &gt; nums1[i]) imin = i + 1;
+            else break;
+        }
+        int num1;
+        if (!i) num1 = nums2[j - 1];
+        else if (!j) num1 = nums1[i - 1];
+        else num1 = max(nums1[i - 1], nums2[j - 1]);
+        if ((m + n) &amp; 1) return num1;
+        int num2;
+        if (i == m) num2 = nums2[j];
+        else if (j == n) num2 = nums1[i];
+        else num2 = min(nums1[i], nums2[j]);
+        return (num1 + num2) / 2.0;
+    }
+};</p>
+</blockquote>
+
+<p>//下面这个版本[1, 3] [2]不通过，下次再修改</p>
+
+<p>// class Solution {
+// public:
+//     double findMedianSortedArrays(vector<int>&amp; nums1, vector<int>&amp; nums2) {
+//         // 如果nums1的长度大于nums2的长度，将两者交换
+//         if (nums1.size() &gt; nums2.size()) return findMedianSortedArrays(nums2, nums1);
+//         int m = nums1.size(), n = nums2.size();
+//         // 如果m + n是偶数，j = (m + n) / 2 - i;否则j= (m + n + 1) / 2 - i;但是由于舍入规则，第一种情况和第二种情况一样
+//         int i, j;
+//         // i最终位置的上下边界
+//         int m_left = 0, mid = (m + n + 1) / 2 ,m_right = m;
+//         double left_max = 0, right_min = 0;
+//         while (m_left &lt;= m_right)
+//         {
+//             i = m_left + (m_right - m_left) / 2;//0
+//             j = mid - i;//2
+//             if (i &lt; m &amp;&amp; j &lt; n &amp;&amp; nums1[i] &lt; nums2[j - 1])
+//                 m_left = i + 1;
+//             else if (i &gt; 0 &amp;&amp; i &lt; m &amp;&amp; nums1[i - 1] &gt; nums2[j])
+//                 m_right = i - 1;
+//             else
+//             {
+//                 break;
+//             }
+//         }
+//         // double left_max = 0;
+//         if (!i) left_max = nums2[j - 1];
+//         else if (!j) left_max = nums1[i - 1];
+//         else left_max = max(nums1[i - 1], nums2[j - 1]);
+//         if ((m + n) % 2)
+//             return left_max;</p>
+
+<p>//         // double right_min = 0;
+//         if (i == m)
+//             right_min = nums2[j];
+//         else if (j == n)
+//             right_min = nums1[i];
+//         else
+//             right_min = min(nums1[i], nums2[j]);
+//         return (left_max + right_min) / 2.0;
+//     }
+// };</p>
+
+<pre><code>
+## Best Time to Buy and Sell Stock
+
+&gt; Say you have an array for which the  *i* th element is the price of a given stock on day  *i* .
+&gt;
+&gt;
+&gt;
+&gt; If you were only permitted to complete at most one transaction (ie, buy one and sell one share of the stock), design an algorithm to find the maximum profit.
+&gt;
+&gt;
+&gt;
+&gt; **Example 1:**
+&gt;
+&gt;
+&gt;
+&gt;
+&gt;
+&gt; ```
+&gt; Input: [7, 1, 5, 3, 6, 4]
+Output: 5
+
+max. difference = 6-1 = 5 (not 7-1 = 6, as selling price needs to be larger than buying price)
+&gt; ```
+&gt;
+&gt;
+&gt;
+&gt;
+&gt;
+&gt; **Example 2:**
+&gt;
+&gt;
+&gt;
+&gt;
+&gt;
+&gt; ```
+&gt; Input: [7, 6, 4, 3, 1]
+Output: 0
+
+In this case, no transaction is done, i.e. max profit = 0.
+&gt; ```
+
+### 题意
+
+假设有一个数组，它的第i个元素表示某只股票在第i天的股价，设计一个算法找出最大收益，要求最多能进行一次买卖操作。
+
+### 解题思路
+
+采用冬天规划的方法来解此题,动态规划最重要的两步是状态定义和状态转移方程的定义
+
+#### 状态定义
+
+在任意时间点，只能处于两种状态：股票已经买入，股票已经卖出
+
+</code></pre>
+
+<p>buy[i]:第i天处于已经买入股票的状态时最大资金
+sell[i]:第i天处于已经卖出股票的状态时最大资金</p>
+
+<pre><code>
+#### 状态转移方程的定义
+
+1. buy[i]— 第i天已经处于买入股票状态因为只能买卖一次，所以状态转移只能是
+  1. 第i-1天已经处于买入股票状态，第i天不买卖股票，维持在买入状态: `buy[i-1]-&gt;buy[i]`
+2. sell[i]—第i天已经处于卖出股票的状态​
+  1. 第i-1天已经处于卖出股票状态，第i天不买卖，维持在卖出状态: `sell[i-1]-&gt;sell[i]`
+  2. 第i-1天处于买入股票的状态，第i天将持有的股票卖出 `buy[i-1]-&gt;sell[i]`
+
+</code></pre>
+
+<p>sell[i]=max(buy[i-1]+prices[i], sell[i-1]);
+buy[i]=max(-prices[i], buy[i-1]);</p>
+
+<pre><code>
+### 实现
+
+</code></pre>
+
+<p>class Solution {
+  public:
+      int maxProfit(vector<int>&amp; prices) {
+        int buy(INT_MIN), sell(0);
+          for(int price: prices)
+          {
+            sell = max(buy + price, sell);
+              buy = max(-price, buy);
+          }
+          return sell;
+      }
+};</p>
+
+<pre><code>
+[leetcode Best Time to Buy and Sell Stock II](https://buptweixin.github.io/posts//posts/201612021714/) [leetcode Best Time to Buy and Sell Stock III](https://buptweixin.github.io/posts//posts/201612021917/) [leetcode Best Time to Buy and Sell Stock IV](https://buptweixin.github.io/posts//posts/201612021921/) [leetcode Best Time to Buy and Sell Stock with Cooldown](https://buptweixin.github.io/posts//posts/201612021923/)
+
+## Best Time To buy and sell stock II
+
+&gt; Say you have an array for which the  *i* th element is the price of a given stock on day  *i* .
+&gt;
+&gt;
+&gt;
+&gt; Design an algorithm to find the maximum profit. You may complete as many transactions as you like (ie, buy one and sell one share of the stock multiple times). However, you may not engage in multiple transactions at the same time (ie, you must sell the stock before you buy again).
+
+### 题意
+
+假设有一个数组，它的第i个元素表示某只股票在第i天的股价，设计一个算法找出最大收益，可以进行任意次数的交易。
+
+### 状态定义
+
+在任意时间点，只能处于两种状态：股票已经买入，股票已经卖出
+
+</code></pre>
+
+<p>buy[i]:第i天处于已经买入股票的状态时最大资金
+sell[i]:第i天处于已经卖出股票的状态时最大资金</p>
+
+<pre><code>
+### 状态转移方程定义
+
+1. buy[i]— 第i天已经处于买入股票状态因为只能买卖一次，所以状态转移只能是
+  1. 第i-1天已经处于买入股票状态，第i天不买卖股票，维持在买入状态: `buy[i-1]-&gt;buy[i]`
+  2. 第i-1天已经处于卖出股票状态，第i天再次买入股票，进入持有股票状态 `sell[i-1]-&gt;buy[i]`
+2. sell[i]—第i天已经处于卖出股票的状态​
+  1. 第i-1天已经处于卖出股票状态，第i天不买卖，维持在卖出状态: `sell[i-1]-&gt;sell[i]`
+  2. 第i-1天处于买入股票的状态，第i天将持有的股票卖出 `buy[i-1]-&gt;sell[i]`
+
+</code></pre>
+
+<p>sell[i]=max(buy[i-1]+prices[i], sell[i-1]);
+buy[i]=max(sell[i-1]-prices[i], buy[i-1]);</p>
+
+<pre><code>
+### 实现
+
+</code></pre>
+
+<p>class Solution {
+  public:
+      int maxProfit(vector<int>&amp; prices) {
+        int buy(INT_MIN), sell(0), prev_sell;
+          for(int price: prices)
+          {
+              prev_sell = sell;
+            sell = max(buy + price, prev_sell);
+              buy = max(prev_sell-price, buy);
+          }
+          return sell;
+      }
+};</p>
+
+<pre><code>
+[leetcode best Time Buy and SellStock I](https://buptweixin.github.io/posts//posts/20161202170711/) [leetcode Best Time to Buy and Sell Stock III](https://buptweixin.github.io/posts//posts/201612021917/) [leetcode Best Time to Buy and Sell Stock IV](https://buptweixin.github.io/posts//posts/201612021921/) [leetcode Best Time to Buy and Sell Stock with Cooldown](https://buptweixin.github.io/posts//posts/201612021923/)
+
+## Best Time to Buy and Sell Stock III
+
+&gt; Say you have an array for which the  *i* th element is the price of a given stock on day  *i* .
+&gt;
+&gt;
+&gt;
+&gt; Design an algorithm to find the maximum profit. You may complete at most  *two*  transactions.
+&gt;
+&gt;
+&gt;
+&gt; **Note:**
+&gt; You may not engage in multiple transactions at the same time (ie, you must sell the stock before you buy again).
+
+## 题意
+
+假设有一个数组，它的第i个元素表示某只股票在第i天的股价，设计一个算法找出最大收益，要求最多能进行两次买卖操作。
+
+## 解题思路
+
+假设初始资金为0，建立四个变量 `buy1st` , `sold1st` , `buy2nd` , `sold2nd` 分别保存第一次买入后的资金，第一次卖出后的资金，第二次买入后的资金，第二次卖出后的资金。
+
+依次遍历股价数组，
+
+如果在当前价格第一次买入，耗费资金 `prices[i]` ,则第一次买入后剩余资金为 `buy1st=-prices[i]` ,
+
+如果之前已经购买过股票，且当前为第一次卖出,则卖出获利 `prices[i]` ,卖出后资金为 `sold1st=buy1st + prices[i]`
+
+如果当前为第二次买卖行为，在操作之前的资金为第一次卖出后的资金 `sold1st` ,所以，若在当前价格再次买入，耗费资金 `prices[i]` ,则买入后剩余资金变为 `buy2nd=sold1st - prices[i]`
+
+如果之前已经进行过第二次的买入行为，要在本次进行第二次卖出活动，卖出后将获得 `prices[i]` ,资金变为 `buy2nd+prices[i]`
+
+### 代码
+
+</code></pre>
+
+<p>class Solution {
+public:
+    int maxProfit(vector<int>&amp; prices) {
+        // 假设起始资金为0，
+        // 使用4个变量分别表示第一次买入后的资金,第一次卖出后的资金，第二次买入后的资金，第二次卖出后的资金
+        int buy1st = INT_MIN, sold1st = 0, buy2nd = INT_MIN, sold2nd = 0;
+        // 为了保证获利最大化，需要保证每次的资金量最大
+        for (int price : prices)
+        {
+            // 为了防止本次买入操作覆盖之前的买入操作，应该先计算卖出再计算买入；
+            // 同理，因为第二次的操作需要在第一次操作的基础上进行，应该先计算第二次的操作以防止覆盖
+            sold2nd = max(sold2nd, buy2nd + price);
+            buy2nd = max(buy2nd, sold1st - price);
+            sold1st = max(sold1st, buy1st + price);
+            buy1st = max(buy1st, -price);
+        }
+        return sold2nd;
+    }
+};</p>
+
+<pre><code>
+[leetcode best Time Buy and SellStock I](https://buptweixin.github.io/posts//posts/20161202170711/) [leetcode Best Time to Buy and Sell Stock II](https://buptweixin.github.io/posts//posts/201612021714/) [leetcode Best Time to Buy and Sell Stock IV](https://buptweixin.github.io/posts//posts/201612021921/) [leetcode Best Time to Buy and Sell Stock with Cooldown](https://buptweixin.github.io/posts//posts/201612021923/)
+
+## Best Time to Buy and Sell Stock IV
+
+&gt; Say you have an array for which the  *i* th element is the price of a given stock on day  *i* .
+&gt;
+&gt;
+&gt;
+&gt; Design an algorithm to find the maximum profit. You may complete at most  **k**  transactions.
+&gt;
+&gt;
+&gt;
+&gt; **Note:**
+&gt; You may not engage in multiple transactions at the same time (ie, you must sell the stock before you buy again).
+
+### 题意
+
+假设有一个数组，它的第i个元素表示某只股票在第i天的股价，设计一个算法找出最大收益，要求最多能进行k次买卖操作。
+
+### 解题思路
+
+和上一题类似，只是将四个买入卖出变量替换成了两个买入卖出数组buys和solds。
+
+另外，在test case中会出现多达100000维的prices且k接近100000，如果用同样的方法解会造成LTE，需要区别对待，这时，做一个判断，若k&amp;gt;prices.size()/2,则将所有相邻递增的价格的delta累加在一起。
+
+</code></pre>
+
+<p>class Solution {
+public:
+    int maxProfit(int k, vector<int>&amp; prices) {
+        if (k &lt; 1) return 0;</p>
+
+<pre><code>    if (k &gt; prices.size() / 2)
+    {
+        long rst = 0;
+        for (int i = 1; i &lt; prices.size(); ++i)
+            if (prices[i] &gt; prices[i - 1])
+                rst += prices[i] - prices[i - 1];
+        return rst;
+    }
+    vector&lt;int&gt; buys(k, INT_MIN), solds(k, 0);
+    for (int price : prices)
+    {
+        for (int i = buys.size() - 1; i &gt; 0; --i)
+        {
+            solds[i] = max(solds[i], buys[i] + price);
+            buys[i] = max(buys[i], solds[i-1] - price);
+        }
+        solds[0] = max(solds[0], buys[0] + price);
+        buys[0] = max(buys[0], -price);
+    }
+    return solds[k - 1];   
+}  
+</code></pre>
+
+<p>};</p>
+
+<pre><code>
+[leetcode best Time Buy and SellStock I](https://buptweixin.github.io/posts//posts/20161202170711/) [leetcode Best Time to Buy and Sell Stock II](https://buptweixin.github.io/posts//posts/201612021714/) [leetcode Best Time to Buy and Sell Stock III](https://buptweixin.github.io/posts//posts/201612021917/) [leetcode Best Time to Buy and Sell Stock with Cooldown](https://buptweixin.github.io/posts//posts/201612021923/)
+
+## Best time to buy and sell stock with cooldown
+
+参考自[leetcode discuss](https://discuss.leetcode.com/topic/30421/share-my-thinking-process)
+
+&gt; Say you have an array for which the  *i* th element is the price of a given stock on day  *i* .
+&gt;
+&gt;
+&gt;
+&gt; Design an algorithm to find the maximum profit. You may complete as many transactions as you like (ie, buy one and sell one share of the stock multiple times) with the following restrictions:
+&gt;
+&gt;
+&gt;
+&gt; * You may not engage in multiple transactions at the same time (ie, you must sell the stock before you buy again).
+&gt; * After you sell your stock, you cannot buy stock on next day. (ie, cooldown 1 day)
+&gt;
+&gt;
+&gt;
+&gt; **Example:**
+&gt;
+&gt;
+&gt;
+&gt;
+&gt;
+&gt; ```
+&gt; prices = [1, 2, 3, 0, 2]
+maxProfit = 3
+transactions = [buy, sell, cooldown, buy, sell]
+&gt; ```
+
+### 题意
+
+和前面四题不同的是，本题不限制买卖股票的次数但是规定了卖出股票和第二天不能交易(即cooldown一天)
+
+### 解题思路
+
+还是采用动态规划的方法来解题，
+
+#### 第一步对问题 **状态的定义** ：
+
+本题除了已经买入状态、卖出状态之外多了一个休息状态(不进行买卖操作):
+
+</code></pre>
+
+<p>buy[i]:第i天时为已经买入股票状态
+sell[i]:第天时股票已经卖出股票状态
+rest[i]:第i天的为休息状态，不进行买卖操作</p>
+
+<pre><code>
+#### 第二步对状态转移方程的定义：
+
+1. buy[i]—第i天为已经买入股票状态第i天为买入状态有两种转移可能:
+  1. i-1天时已经是买入状态，第i天休息维持为买入状态: `buy[i-1]-&gt;buy[i]`
+  2. 第i-1天为休息状态，第i天买入股票进入买入状态: `rest[i-1]-&gt;buy[i]` 因为题目规定了卖出后必须冷却一天才能再次买入，所以没有第i-1天状态为卖出，在第i天再买入的情况
+2. sell[i]—第i天为已经卖出状态也有两种状态转移可能:
+  1. 第i-1天已经处于卖出状态，第i天休息维持为卖出状态 `sell[i-1]-&gt;sell[i]`
+  2. 第i-1天为买入状态，第i天将股票卖出而转移到卖出状态 `buy[i-1]-&gt;sell[i]`
+3. rest[i]—第i天为休息状态前一天是任何状态，第i天都可能转移到休息状态
+
+</code></pre>
+
+<p>buy[i-1]-&gt;rest[i]
+sold[i-1]-&gt;rest[i]
+rest[i-1]-&gt;rest[i]</p>
+
+<pre><code>
+将上面的思考转化为状态转移方程：
+
+</code></pre>
+
+<p>buy[i] = max(rest[i-1]-prices[i], buy[i-1]);
+sell[i] = max(buy[i-1]+prices[i], sell[i-1]);
+rest[i] = max(buy[i-1], sell[i-1], rest[i-1]);</p>
+
+<pre><code>
+#### 如何防止 `[buy, rest, buy]` 状态转移的产生
+
+一个事实是，第i天的状态为买入时的资金( `buy[i]` )一定小于第i天状态为卖出时的资金 `(sell[i])` ，即 `buy[i]&lt;=sell[i]` ,因此 `rest` 的状态转移方程中为了在第i天rest状态下达到最大资金，一定不是从第i-1天为买入状态 `buy[i-1]` 转移过来，所以排除了 `[buy, rest]` 这个过程，也就不会出现 `[buy,rest,buy]` 这种错误的状态转移过程。
+
+#### 化简状态转移方程、缩小缓存大小
+
+继续观察，发现第i天为卖出状态下的资金不小于第i天状态为休息下的资金( `sell[i]&gt;=rest[i]` )，结合之前已知的 `buy[i]&lt;=sell[i]` ,得到 `rest[i]=sell[i]-1` ,将这个公式代入第一个公式 `buy[i] = max(rest[i-1]-prices[i], buy[i-1])` ,最后只剩下两个状态转移方程：
+
+</code></pre>
+
+<p>buy[i] = max(sell[i-2]-prices[i], buy[i-1]);
+sell[i] = max(buy[i-1]+prices[i], sell[i-1]);</p>
+
+<pre><code>
+接下来，发现两个状态最多和上上个状态相关，可以只存储 `buy` 和 `sell` 两个时刻的值作为缓存。
+
+### 实现
+
+</code></pre>
+
+<p>class Solution {
+public:
+    int maxProfit(vector<int>&amp; prices){
+     int buy(INT_MIN), sell(0), prev_sell(0), pre_buy;
+      for (int price:prices)
+        {
+            prev_buy = buy;
+            buy = max(prev_sell - price, buy);
+            prev_sell = sell;
+            sell = max(prev_buy + price, sell);
+        }
+      return sell;
+    }
+};</p>
+
+<pre><code>
+[leetcode best Time Buy and SellStock I](https://buptweixin.github.io/posts//posts/20161202170711/) [leetcode Best Time to Buy and Sell Stock II](https://buptweixin.github.io/posts//posts/201612021714/) [leetcode Best Time to Buy and Sell Stock III](https://buptweixin.github.io/posts//posts/201612021917/) [leetcode Best Time to Buy and Sell Stock IV](https://buptweixin.github.io/posts//posts/201612021921/)
+
+# Graph
+
+## BFS Breadth firth traversal 广度优先遍历
+
+&gt; 入队出队操作时间 `O(1)` ，每个节点最多进入和出队一次， 每个顶点出队时才会扫描其临接表，时间复杂度 `O(V+E)`
+&gt; 广度优先树每个根到每个节点的距离为最短距离
+&gt; **将完成时间逆序可以得到拓扑排序**
+&gt; 计算强连通子图:
+&gt;
+&gt;
+&gt;
+&gt; 1. 使用DFS获得图G的节点遍历结束时间序列 `f[u]`
+&gt; 2. 计算$G^T$
+&gt; 3. 按 `f` 的降序计算DFS($G^T$)
+&gt; 4. 输出第三步得到的深度优先森林，即为强连通子图
+
+</code></pre>
+
+<p>#include <iostream>
+#include <unordered_map>
+#include <vector>
+#include <list>
+#include <queue>
+#include <climits></p>
+
+<p>using namespace std;</p>
+
+<p>class Graph {
+    private:
+        // 使用一个整数V存储图中节点数
+        int V;
+        // 邻接矩阵
+        list<int> *adj;
+    public:
+        // 构造函数
+        Graph(int V);
+        // 添加边
+        void addEdge(int v, int w);
+        void BFS(int s);
+};</p>
+
+<p>Graph::Graph(int V)
+{
+    this-&gt;V = V;
+    adj = new list<int>[V];
+}</p>
+
+<p>void Graph::addEdge(int v, int w)
+{
+    adj[v].push_back(w);
+}</p>
+
+<p>void Graph::BFS(int s)
+{
+    vector<int> color(V, -1), d(V, 0), pi(V, 0);
+    for (int i = 0; i &lt; V; ++i)
+    {
+        d[i] = INT_MAX;
+        pi[i] = 0;
+    }
+    color[s] = 0;
+    d[s] = 0;
+    pi[s] = -1;
+    std::queue<int> queue;
+    queue.push(s);
+    while (!queue.empty())
+    {
+        int u = queue.front();
+        cout &lt;&lt; u &lt;&lt; endl;
+        queue.pop();
+        for (int v : adj[u])
+        {
+            if (color[v] == -1)
+            {
+                color[v] = 0;
+                d[v] = d[u] + 1;
+                pi[v]  = u;
+                queue.push(v);
+            }
+        }
+        color[u] = 1;
+    }
+}</p>
+
+<p>int main()
+{
+    Graph graph(4);
+    graph.addEdge(0, 1);
+    graph.addEdge(0, 2);
+    graph.addEdge(1, 2);
+    graph.addEdge(2, 0);
+    graph.addEdge(2, 3);
+    graph.addEdge(3, 3);
+    graph.BFS(2);
+    return 0;
+}</p>
+
+<pre><code>
+## DFS
+
+深度优先遍历算法的时间复杂度也是 `O(V+E)` ,遍历的结果是由树组成的森林。如果记录没个节点的发现时间和结束时间，会形成括号结构，括号内的具有优先发生顺序
+同时，遍历过程中可以知道边属于树边、正向边、反向边或交叉边:
+
+1. 如果遇到的节点是白色的，则当前边是树边
+2. 如果遇到灰色节点，说明当前边是反向边
+3. 如果遇到黑色节点，说明当前边是正向 `(d[u]&lt;d[v])` 或交叉边 `(d[u]&gt;d[v])`
+
+对无向图做深度优先遍历，G的每一条边要么是树边，要么是反向边
+
+</code></pre>
+
+<p>#include <iostream>
+#include <vector>
+#include <list>
+#include <climits></p>
+
+<p>using namespace std;</p>
+
+<p>class Graph
+{
+    public:
+        Graph(int v);
+        void addEdge(int v, int w);
+        void DFS();
+        void DFSHelper(int u);</p>
+
+<pre><code>private:
+    int V, time;
+    vector&lt;list&lt;int&gt; &gt; adjs;
+    vector&lt;int&gt; color, d, f;
+</code></pre>
+
+<p>};</p>
+
+<p>Graph::Graph(int v)
+{
+    this-&gt;V = v;
+    adjs.resize(v);
+    color = vector<int>(v, -1);
+    d.resize(v);
+    f.resize(v);
+}</p>
+
+<p>void Graph::addEdge(int v, int w)
+{
+    adjs[v].push_back(w);
+}</p>
+
+<p>void Graph::DFS()
+{
+    time = 0;
+    for (int i = 0; i &lt; V; ++i)
+    {
+        if (color[i] == -1)
+            DFSHelper(i);
+    }
+}</p>
+
+<p>void Graph::DFSHelper(int u)
+{
+    color[u] = 0;
+    time++;
+    d[u] = time;
+    cout &lt;&lt; u &lt;&lt; &ldquo;: &ldquo; &lt;&lt; time &lt;&lt; endl;
+    for (int v : adjs[u])
+        if(color[v]==-1)
+            DFSHelper(v);
+    color[u] = 1;
+    f[u] = time+1;
+}</p>
+
+<p>int main()
+{
+    Graph g(4);
+    g.addEdge(0, 1);
+    g.addEdge(0, 2);
+    g.addEdge(1, 3);
+    g.addEdge(3, 2);
+    g.DFS();
+}</p>
+
+<pre><code>
+## 399. Evaluate Division
+
+### Problem Description
+
+&gt; Equations are given in the format A / B = k, where A and B are variables represented as strings, and k is a real number (floating point number). Given some queries, return the answers. If the answer does not exist, return -1.0.
+&gt;
+&gt;
+&gt;
+&gt; Example:
+&gt; Given a / b = 2.0, b / c = 3.0.
+&gt; queries are: a / c = ?, b / a = ?, a / e = ?, a / a = ?, x / x = ? .
+&gt; return [6.0, 0.5, -1.0, 1.0, -1.0 ].
+&gt;
+&gt;
+&gt;
+&gt; The input is: vector&amp;gt; equations, vector&amp;amp; values, vector&amp;gt; queries , where equations.size() == values.size(), and the values are positive. This represents the equations. Return vector.
+&gt;
+&gt;
+&gt;
+&gt; According to the example above:
+&gt;
+&gt;
+&gt;
+&gt; equations = [ [“a”, “b”], [“b”, “c”] ],
+&gt; values = [2.0, 3.0],
+&gt; queries = [ [“a”, “c”], [“b”, “a”], [“a”, “e”], [“a”, “a”], [“x”, “x”] ].
+&gt;
+&gt;
+&gt;
+&gt; ## The input is always valid. You may assume that evaluating the queries will result in no division by zero and there is no contradiction.
+&gt;
+&gt;
+&gt;
+&gt; 给出一串公式，每个公式的操作符用字母表示，并给出与之对应的数值结果，然后给出一组公式，根据前面给出的信息求结果,比如，给出
+&gt; `a / b = 2.0, b / c = 3.0` 求 `a/c, b/a, a/e, a/a`
+
+### Method
+
+这个问题可以转化成图构建问题。要构建的图是这样的一种图，对于每条有向边中父节点为除数,子节点为被除数，子节点除以父节点即得到对应的数值。
+构建过程中遍历公式数组，这时会遇到三种情况:
+
+1. 第一种情况除号两边的数字都没有发现过
+直接新建两个新节点，除数设为1，被除数设为公式的结果并将被除数的parent设为除数
+2. 左边的符数字没有发现过
+新建一个被除数节点，值设为除数的值乘公式结果
+3. 右边的符号没有发现过
+新建一个除数节点, 值设为被除数除以公式结果
+4. 除数和被除数都被发现过
+这种情况发生在除法链断开的情况下,比如遇到 `a/b` 和 `c/d` 后又遇到 `a/d` 的情况,这时，要做的是将他们拼接起来，左边链的每个数值都按 `d-&gt;value * num / a-&gt;value` 缩放，然后将b和c连接起来。
+
+</code></pre>
+
+<p>class Solution {
+    // date: 2016-09-12     location: Santa Clara City Library
+public:
+    vector<double> calcEquation(vector<pair<string, string>&gt; equations, vector<double>&amp; values, vector<pair<string, string>&gt; queries) {
+        unordered_map<string, Node*> map;
+        vector<double> res;
+        for (int i = 0; i &lt; equations.size(); i ++) {
+            string s1 = equations[i].first, s2 = equations[i].second;
+            if (map.count(s1) == 0 &amp;&amp; map.count(s2) == 0) {
+                map[s1] = new Node();
+                map[s2] = new Node();
+                map[s1] -&gt; value = values[i];
+                map[s2] -&gt; value = 1;
+                map[s1] -&gt; parent = map[s2];
+            } else if (map.count(s1) == 0) {
+                map[s1] = new Node();
+                map[s1] -&gt; value = map[s2] -&gt; value * values[i];
+                map[s1] -&gt; parent = map[s2];
+            } else if (map.count(s2) == 0) {
+                map[s2] = new Node();
+                map[s2] -&gt; value = map[s1] -&gt; value / values[i];
+                map[s2] -&gt; parent = map[s1];
+            } else {
+                unionNodes(map[s1], map[s2], values[i], map);
+            }
+        }</p>
+
+<pre><code>    for (auto query : queries) {
+        if (map.count(query.first) == 0 || map.count(query.second) == 0 || findParent(map[query.first]) != findParent(map[query.second]))
+            res.push_back(-1);
+        else
+            res.push_back(map[query.first] -&gt; value / map[query.second] -&gt; value);
+    }
+    return res;
+}
+</code></pre>
+
+<p>private:
+    struct Node {
+        Node* parent;
+        double value = 0.0;
+        Node()  {parent = this;}
+    };</p>
+
+<pre><code>void unionNodes(Node* node1, Node* node2, double num, unordered_map&lt;string, Node*&gt;&amp; map) {
+    Node* parent1 = findParent(node1), *parent2 = findParent(node2);
+    double ratio = node2 -&gt; value * num / node1 -&gt; value;
+    for (auto it = map.begin(); it != map.end(); it ++)
+        if (findParent(it -&gt; second) == parent1)
+            it -&gt; second -&gt; value *= ratio;
+    parent1 -&gt; parent = parent2;
+}
+
+Node* findParent(Node* node) {
+    if (node -&gt; parent == node)
+        return node;
+    node -&gt; parent = findParent(node -&gt; parent);
+    return node -&gt; parent;
+}
+</code></pre>
+
+<p>};</p>
+
+<pre><code>
+## 31&amp;gt;0
+
+&amp;gt;
+
+&gt; ### Problem Description
+&gt;
+&gt;
+&gt;
+&gt; For a undirected graph with tree characteristics, we can choose any node as the root. The result graph is then a rooted tree. Among all possible rooted trees, those with minimum height are called minimum height trees (MHTs). Given such a graph, write a function to find all the MHTs and return a list of their root labels.
+&gt;
+&gt;
+&gt;
+&gt; Format
+&gt; The graph contains n nodes which are labeled from 0 to n - 1. You will be given the number n and a list of undirected edges (each edge is a pair of labels).
+&gt;
+&gt;
+&gt;
+&gt; You can assume that no duplicate edges will appear in edges. Since all edges are undirected, [0, 1] is the same as [1, 0] and thus will not appear together in edges.
+&gt;
+&gt;
+&gt;
+&gt; Example 1:
+&gt;
+&gt;
+&gt;
+&gt; Given n = 4, edges = [[1, 0], [1, 2], [1, 3]]
+&gt;
+&gt;
+&gt;
+&gt;
+&gt;
+&gt; ```
+&gt;    0
+   |
+   1
+  / \
+ 2   3
+&gt; ```
+&gt;
+&gt;
+&gt;
+&gt;
+&gt;
+&gt; return [1]
+&gt;
+&gt;
+&gt;
+&gt; Example 2:
+&gt;
+&gt;
+&gt;
+&gt; Given n = 6, edges = [[0, 3], [1, 3], [2, 3], [4, 3], [5, 4]]
+&gt;
+&gt;
+&gt;
+&gt;
+&gt;
+&gt; ```
+&gt; 0  1  2
+ \ | /
+   3
+   |
+   4
+   |
+   5
+&gt; ```
+&gt;
+&gt;
+&gt;
+&gt;
+&gt;
+&gt; return [3, 4]
+&gt;
+&gt;
+&gt;
+&gt; Hint:
+&gt;
+&gt;
+&gt;
+&gt; How many MHTs can a graph have at most?
+
+给出一个无向图，求以哪些节点作为树根构成的树种高度最小
+
+### Method
+
+找到图的所有叶子节点，将其删除，然后重复这个寻找过程，直到最内层，即为所要寻找的节点
+
+</code></pre>
+
+<p>class Solution {
+public:
+    vector<int> findMinHeightTrees(int n, vector<pair<int, int>&gt;&amp; edges) {
+        if (n == 1) return vector<int>({0});
+        this-&gt;V = n;
+        adjs.resize(n);
+        for (auto edge : edges)
+        {
+            adjs[edge.first].insert(edge.second);
+            adjs[edge.second].insert(edge.first);
+        }
+        vector<int> cur;
+        for (int i = 0; i &lt; n; ++i)
+            if (adjs[i].size() == 1)
+                cur.push_back(i);
+        while(!cur.empty())
+        {
+            vector<int> next;
+            for (int node : cur)
+                for (int neighbor : adjs[node])
+                {
+                    adjs[neighbor].erase(node);
+                    if (adjs[neighbor].size() == 1)
+                        next.push_back(neighbor);
+                }
+            if (next.empty()) return cur;
+            swap(next, cur);
+        }
+    }
+private:
+    int V;
+    vector<unordered_set<int>&gt; adjs;
+};</p>
+
+<pre><code>
+# Stack
+
+## 503. Next Greater Next I
+
+### Problem Description
+
+You are given two arrays (without duplicates) nums1 and &amp;gt;nums2 where nums1’s elements are subset of nums2. Find all the next greater numbers for nums1’s elements in the corresponding places of nums2.
+&amp;gt;
+
+&gt; The Next Greater Number of a number x in nums1 is the first greater number to its right in nums2. If it does not exist, output -1 for this number.
+&gt;
+&gt;
+&gt;
+&gt; Example 1:
+&gt; Input: nums1 = [4,1,2], nums2 = [1,3,4,2].
+&gt; Output: [-1,3,-1]
+&gt; Explanation:
+&gt; For number 4 in the first array, you cannot find the next greater number for it in the second array, so output -1.
+&gt; For number 1 in the first array, the next greater number for it in the second array is 3.
+&gt; For number 2 in the first array, there is no next greater number for it in the second array, so output -1.
+&gt; Example 2:
+&gt; Input: nums1 = [2,4], nums2 = [1,2,3,4].
+&gt; Output: [3,-1]
+&gt; Explanation:
+&gt; For number 2 in the first array, the next greater number for it in the second array is 3.
+&gt; For number 4 in the first array, there is no next greater number for it in the second array, so output -1.
+&gt; Note:
+&gt; All elements in nums1 and nums2 are unique.
+&gt;
+&gt;
+&gt;
+&gt; ## The length of both nums1 and nums2 would not exceed 1000.
+&gt;
+&gt;
+&gt;
+&gt; 给出两个数组 `findNums` 和 `nums` , 在 `nums` 中找出比 `findNums` 大的元素
+
+### Method
+
+</code></pre>
+
+<p>class Solution {
+public:
+    vector<int> nextGreaterElement(vector<int>&amp; findNums, vector<int>&amp; nums) {
+        if (findNums.empty() or nums.empty())
+            return vector<int>({});
+        stack<int> tmp;
+        unordered_map<int, int> nextmap;
+        tmp.push(nums[0]);</p>
+
+<pre><code>    for (int i = 1; i &lt; nums.size(); ++i)
+    {
+            while(tmp.top() &lt; nums[i])
+            {
+                nextmap[tmp.top()] = nums[i];
+                tmp.pop();
+                if (tmp.empty())
+                    break;
+            }
+            tmp.push(nums[i]);
+    }
+    while(!tmp.empty())
+    {
+        nextmap[tmp.top()] = -1;
+        tmp.pop();
+    }
+
+    vector&lt;int&gt; res;
+    for (int num : findNums)
+        res.push_back(nextmap[num]);
+
+    return res;
+}
+</code></pre>
+
+<p>};</p>
+
+<pre><code>
+## Next Greater Number II
+
+### Problem Description
+
+</code></pre>
+
+<p>Given a circular array (the next element of the last element is the first element of the array), print the Next Greater Number for every element. The Next Greater Number of a number x is the first greater number to its traversing-order next in the array, which means you could search circularly to find its next greater number. If it doesn&rsquo;t exist, output -1 for this number.</p>
+
+<p>Example 1:
+Input: [1,2,1]
+Output: [2,-1,2]
+Explanation: The first 1&rsquo;s next greater number is 2;
+The number 2 can&rsquo;t find next greater number;
+The second 1&rsquo;s next greater number needs to search circularly, which is also 2.
+Note: The length of given array won&rsquo;t exceed 10000.</p>
+
+<pre><code>
+将上题中的数组改成循环数组，求下一个更大元素
+
+### Method
+
+</code></pre>
+
+<p>class Solution {
+public:
+    vector<int> nextGreaterElements(vector<int>&amp; nums) {
+        int n = nums.size();
+        vector<int> next(n, -1);
+        stack<int> s; // index stack
+        for (int i = 0; i &lt; n * 2; i++) {
+            int num = nums[i % n];
+            while (!s.empty() &amp;&amp; nums[s.top()] &lt; num) {
+                next[s.top()] = num;
+                s.pop();
+            }
+            if (i &lt; n) s.push(i);
+        }
+        return next;
+    }
+};
+```</p>
+
+</div>
+
+
+    </main>
+
+    
+      
+    
+  </body>
+</html>

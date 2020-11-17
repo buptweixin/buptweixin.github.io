@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn" lang="zh-cn">
+<head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.56.3" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Probability Problems &middot; Hi, nice to meet you</title>
+  <meta name="description" content="" />
+
+  
+  <link type="text/css" rel="stylesheet" href="http://example.org/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="http://example.org/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="http://example.org/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="http://example.org/css/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  
+</head>
+
+  <body class=" ">
+  <aside class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="http://example.org/"><h1>Hi, nice to meet you</h1></a>
+      <p class="lead">
+      An elegant open source and mobile first theme for <a href="http://hugo.spf13.com">hugo</a> made by <a href="http://twitter.com/mdo">@mdo</a>. Originally made for Jekyll.
+      </p>
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li><a href="http://example.org/">Home</a> </li>
+        
+      </ul>
+    </nav>
+
+    <p>&copy; 2020. All rights reserved. </p>
+  </div>
+</aside>
+
+    <main class="content container">
+    <div class="post">
+  <h1>Probability Problems</h1>
+  <time datetime=2017-08-24T13:04:40&#43;0800 class="post-date">Thu, Aug 24, 2017</time>
+  
+
+<p>参考:<a href="https://wenku.baidu.com/view/11c9195e0242a8956aece489.html">概率面试题精讲_七月算法出品</a></p>
+
+<h2 id="构造随机数发生器">构造随机数发生器</h2>
+
+<h3 id="使用均匀随机数发生器rand7构造rand10随机数发生器">使用均匀随机数发生器rand7构造rand10随机数发生器</h3>
+
+<pre><code>关键是&quot;扔掉&quot;不要的数
+使用“七进制”，把`1-7`减去1，产生`0-6`,然后产生两位这样的数对应`0-48`,抛弃其中的`40-48`(因为这其中只有9个数),获得的数取个位数即为`0-9`的均匀分布
+</code></pre>
+
+<p>cpp
+int rand10() {
+    int x;
+    while ((x = (rand7() - 1) * 7 + rand7() - 1) &gt;= 40)
+        ;
+    return x % 10 + 1;
+    }</p>
+
+<pre><code>关键需要保障产生的中间数是均匀的, `rand2() + rand2() - 1`是不均匀的，因为1和3的概率是1/4而2的概率是1/2
+</code></pre>
+
+<h2 id="不均匀随机数构造均匀随机数">不均匀随机数构造均匀随机数</h2>
+
+<h3 id="一个不均匀的随机数-以概率p产生0-概率-1-p-产生1-以此构造均匀随机数发生器">一个不均匀的随机数，以概率p产生0，概率(1-p)产生1,以此构造均匀随机数发生器</h3>
+
+<p>产生两次，需要0和1同时出现，该路是 <code>p*(1-p)</code></p>
+
+<pre><code>int gen() {
+    int x, y;
+    while ((x = rand()) == (y = rand()))
+    ;
+    return x;
+    }
+</code></pre>
+
+<h2 id="随机变量的和">随机变量的和</h2>
+
+<h3 id="变量x和y是-0-a-和-0-b-上的均匀分布-给一个实数z-求-x-y-z-的概率">变量x和y是[0, a] 和[0, b]上的均匀分布，给一个实数z,求 <code>x + y &lt; z</code> 的概率</h3>
+
+<p>如下图所示求 <code>x+y=z</code> 下方的面积与矩形面积之比
+<img src="http://ww1.sinaimg.cn/large/6425ef91ly1fiu4ebuak8j206z0490t7.jpg" alt="" /></p>
+
+<h2 id="水库采样">水库采样</h2>
+
+<h3 id="流入若干对象-事先不知道个数-如何随机取出k个">流入若干对象，事先不知道个数，如何随机取出k个</h3>
+
+<p>采用数组a保存k个数
+对于第i个数：</p>
+
+<ol>
+<li>若i小于k,则存入a[i]</li>
+<li>若大于等于k，则 <code>x = rand()%i</code> 若生成的数小于k,则令 <code>a[x]</code> 保存当前这个数，即当前这个数有 <code>1/(i+1)</code> 的概率被选中</li>
+</ol>
+
+<h3 id="扩展">扩展</h3>
+
+<ol>
+<li>k == 1的特殊情况</li>
+<li>若干行大文件随机选一行</li>
+<li>不知道长度的链表随机选一个或若干个结点</li>
+<li>带权采样</li>
+</ol>
+
+<h2 id="随机排列-random-shuffle">随机排列  <code>random_shuffle</code></h2>
+
+<h3 id="用数组-a-0-1-n-1-随机产生全排列">用数组 <code>a[0, 1, ..., n-1]</code> 随机产生全排列</h3>
+
+<p><code>a[i]</code> 与 <code>a[i,...,n-1]</code> 交换，自己证明</p>
+
+<pre><code>for (int i = 0; i &lt; n; ++i)
+    a[i] = i;
+for (int i = 0; i &lt; n; ++i)
+    swap(a[i], a[rand() % (n-i) + i]);
+</code></pre>
+
+<h2 id="带权值采样">带权值采样</h2>
+
+<ol>
+<li>将权值转换成整数，每个值复制权重次数,然后使用水库采样</li>
+</ol>
+
+</div>
+
+
+    </main>
+
+    
+      
+    
+  </body>
+</html>

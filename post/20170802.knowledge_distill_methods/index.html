@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn" lang="zh-cn">
+<head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.56.3" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>knowledge distill methods &middot; Hi, nice to meet you</title>
+  <meta name="description" content="" />
+
+  
+  <link type="text/css" rel="stylesheet" href="http://example.org/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="http://example.org/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="http://example.org/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="http://example.org/css/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  
+</head>
+
+  <body class=" ">
+  <aside class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="http://example.org/"><h1>Hi, nice to meet you</h1></a>
+      <p class="lead">
+      An elegant open source and mobile first theme for <a href="http://hugo.spf13.com">hugo</a> made by <a href="http://twitter.com/mdo">@mdo</a>. Originally made for Jekyll.
+      </p>
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li><a href="http://example.org/">Home</a> </li>
+        
+      </ul>
+    </nav>
+
+    <p>&copy; 2020. All rights reserved. </p>
+  </div>
+</aside>
+
+    <main class="content container">
+    <div class="post">
+  <h1>knowledge distill methods</h1>
+  <time datetime=2017-08-02T13:39:37&#43;0800 class="post-date">Wed, Aug 2, 2017</time>
+  
+
+<h1 id="knowledge-distill-methods">Knowledge Distill Methods</h1>
+
+<p>随着Kaiming He等人提出的resnet<a href="https://buptweixin.github.io/posts/20170802173658/#fn:1">1</a>解决了造成深层网络难以收敛的梯度弥散等问题后，人们越来越趋向于通过堆叠网络深度、宽度等方法来改善模型的性能，虽然这样确实在各种任务中获得了很好的效果，然而网络规模的无限制增长为模型在手机等计算能力受限设备上的部署带来了严峻挑战。人们迫切需要有效压缩模型尺寸的方法。本文将介绍其中一种简单有效的压缩方法: 模型蒸馏。模型蒸馏的大体思想是训练一个大型且精度较高的网络，通过某种方法将大型网络中的“知识”抽取出来引入我们想要训练的小型网络。</p>
+
+<h2 id="distilling-the-knowledge-in-a-neural-network-2-https-buptweixin-github-io-posts-20170802173658-fn-2">Distilling the knowledge in a Neural Network<a href="https://buptweixin.github.io/posts/20170802173658/#fn:2">2</a></h2>
+
+<p>和统计机器学习中随机森林类似，为了获得更好的泛化能力人们通常会同时训练多种不同的网络结构，然后在将不同网络的输出通过加权求和等方法综合起来作为最终的输出，使用的网络越多，最后获得的效果越好。然而过多的网络也带来了巨量的参数，整个网络的复杂度爆炸增长。</p>
+
+<p>Hinton等人受到<a href="https://buptweixin.github.io/posts/20170802173658/#fn:3">3</a>的启发，发现可以人为地为小模型增加约束以控制其抽取的特征尽量接近大模型，这样等效于将大模型所学习到的“知识”抽取到一个单一的简单模型中。</p>
+
+<p>本文中，Hint定义了如下soft logits函数：</p>
+
+<p><img src="http://ww1.sinaimg.cn/large/6425ef91ly1fi5fikvl0sj20af01lglg.jpg" alt="" /></p>
+
+<p>和我们常用的logits函数不同，上式中多了一个参数$T$,参数$T$的作用主要是控制logits输出不同类别概率之间的大小差距，可以通过下面的图直观理解：
+<img src="http://ww1.sinaimg.cn/large/6425ef91ly1fi5g7xm8uqj20da06qt8x.jpg" alt="" /></p>
+
+<p>从图中可以看出，在$x=6$和$x=9$处取两个值，当T越大时，两处对应的y值差距越大。
+那为什么要控制logits输出概率差距呢，因为我们需要学习的是teacher的输出特征分布，如果我们使用的logits函数对输入大小很敏感，那么获得的类别概率中会有一个具有非常大的值，而其他类别概率相对来说会很小，这样的话由于其他类别概率被淹没了，我们的小模型很可能会学不到他们。</p>
+
+<p>在训练过程中，作者同时将大student 网络的T值设的很大以使小模型学习大模型的输出分布，训练完之后再将T调回较小的值。</p>
+
+<h2 id="fitnets-hint-for-thin-deep-nets-4-https-buptweixin-github-io-posts-20170802173658-fn-4">FITNETS: HINT FOR THIN DEEP NETS<a href="https://buptweixin.github.io/posts/20170802173658/#fn:4">4</a></h2>
+
+<p>虽然Hinton的KD方法引入的soft logits函数能够很好的将大模型的知识引入小模型，然而这个方法只能对模型最终的输出做约束，当小模型很深时，即使有大模型的约束它仍然很难收敛。</p>
+
+<p>对这个问题一个很显然的改进方法就是除了对大小模型最终输出进行蒸馏之外，同时对模型的中间层的输出做蒸馏。这里作者为小模型的中间层起名为guided layer, 大模型的中间层起名为hint layer。
+因为大小模型结构不同，他们的中间输出宽、高、通道数往往也不相同，我们不能直接对他们计算distill loss，而应该采用下式的方法将两个模型映射到相同维度然后计算:
+<img src="https://ws1.sinaimg.cn/large/6425ef91ly1fi5gy1y7c0j20me01kaa4.jpg" alt="" />
+其中$u <em>h(x;W</em> {Hint})$表示大模型输入为$x$，权重为$W<em>{Hint}$时，hint layer的输出，$v <em>g(x;W</em> {Guided})$表示小模型输入为$x$，权重为$W</em>{Guided}$时，guided layer的输出，$r(.)$为映射函数，将guided layer输出映射到hint layer相同的维度上。 需要注意的是，映射后的输出必须和hit layer的输出是可比较的，比如必须得使用相同的非线性函数。</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/6425ef91ly1fi5hky50xpj20pk0aggmp.jpg" alt="" /></p>
+
+<p>假设hint layer的输出宽高为$(N <em>{h,1}, N</em> {h,2})$, 通道数为$O <em>h$;guided layer 宽高为$(N</em> {g,1}, N<em>{g,2})$,通道数为$O <em>g$。如果使用全连接层进行维度映射，则需要的参数量为$N</em> {h,1}\times{N</em>{h,2}\times{O <em>h}\times{N</em> {g,1}\times{N_{g_2}\times{O_g}}}}$, 这样庞大的参数量是难以接受的。因此，作者采用了卷积层作为映射函数。</p>
+
+<p>我们知道卷积层的输入输出关系为$$N^\prime=\frac{N+2p-ks}{stride}+1$$
+其中，$N$为输入的宽度或高度，$N^\prime$为输入的宽度或高度，$p$为padding,$ks$为kernel size,这里取$p=0, stride=1$, 要将guided layer输出映射到和hint layer输出同维，只需要使等式$N_{g,i}-ks <em>i+1=N</em> {h,i}$成立即可。卷积操作的参数数量为$k_1\times{k_2}\times{O<em>h}\times{O <em>g}$,这显然要小于全连接映射的系数$N</em> {h,1}\times{N <em>{h,2}}\times{N</em> {g,1}}\times{N</em>{g,2}}$</p>
+
+<p>训练过程伪代码为</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/6425ef91ly1fi5hlqestaj20pw06uab0.jpg" alt="" /></p>
+
+<h2 id="accelerating-convolutional-neural-networks-with-dominant-convolutional-kernel-and-knowledge-pre-regression-5-https-buptweixin-github-io-posts-20170802173658-fn-5">Accelerating Convolutional Neural Networks with Dominant Convolutional Kernel and Knowledge Pre-regression<a href="https://buptweixin.github.io/posts/20170802173658/#fn:5">5</a></h2>
+
+<p>这篇论文主要创新点为</p>
+
+<ol>
+<li>设计了Dominant Convolutional Kernel (DK)结构有效压缩模型参数量</li>
+<li>使用Knowledge Pre-regression 训练方法进行知识蒸馏</li>
+</ol>
+
+<h3 id="dominant-convolutional-kernel-dk-method">Dominant Convolutional Kernel(DK) Method</h3>
+
+<p><img src="https://ws1.sinaimg.cn/large/6425ef91ly1fi5hpmagukj20t90g9wjy.jpg" alt="" />
+DK结构与channelwise结构卷积很类似，主要的不同之处是channelwise将输入分为channel组，每个组分别用一个单层卷积核进行处理，最后使用1x1卷积将不同通道结果融合在一起；而DK结构将输入分为channel组后，对每个组使用k层卷积核分别处理，之后再使用1x1卷积将不同通道融合在一起，其中$1\leq{n}\leq{k_h\times{k_w}}$,因为作者发现当$n &gt;{k_h\times{k_w}}时，模型的参数数量开始多于普通卷积$。
+DK结构中的第一部分的参数量为$n\times{c_i}\times{k_w}\times{k_h}$, 第二部分的参数数量为$n\times{c_i}\times{c_o}$,其中$c_i, c_o$分别为输入和输出的通道数。当$n=1$时，参数数量只有普通卷积的12%$, n=2$时参数数量为普通卷积的24%。</p>
+
+<h3 id="knowledge-pre-regression-kp-training-method">Knowledge Pre-regression(KP) Training Method</h3>
+
+<p>使用上述方法压缩模型后，更进一步的作者使用了distill方法提高其精度。
+<img src="https://ws1.sinaimg.cn/large/6425ef91ly1fi5hpmagukj20t90g9wjy.jpg" alt="" />
+Fitnet结构简单但是它不是很好收敛，为了增加模型的约束，作者同时将第一个和第二个pooling层的输出以及最后一层输出计算distill loss， 对每对pooling层的输出使用全连接层映射到相同维度后使用soft logits计算损失，注意pooling层使用teacher 网络的输出作为标签，teacher 网络使用ground truth作为标签计算损失而网络最后一层中student 网络使用ground truth计算损失，teacher 网络的输出和student 网络的输出计算一个损失，最后将所有损失加起来作为最终的损失函数。</p>
+
+<ol>
+<li>1.He K, Zhang X, Ren S, et al. Deep residual learning for image recognition. arXiv preprint arXiv: 1512.03385[J]. 2015.<a href="https://buptweixin.github.io/posts/20170802173658/#fnref:1"> ↩</a></li>
+<li>2.Hinton G, Vinyals O, Dean J. Distilling the knowledge in a neural network[J]. arXiv preprint arXiv:1503.02531, 2015.<a href="https://buptweixin.github.io/posts/20170802173658/#fnref:2"> ↩</a></li>
+<li>3.Lawrence W E, Doniach S. Proceedings of the 12th International Conference on Low Temperature Physics[J]. Kyoto, Academic, Tokyo, 1971: 361.
+MLA<a href="https://buptweixin.github.io/posts/20170802173658/#fnref:3"> ↩</a></li>
+<li>4.Romero A, Ballas N, Kahou S E, et al. Fitnets: Hints for thin deep nets[J]. arXiv preprint arXiv:1412.6550, 2014.<a href="https://buptweixin.github.io/posts/20170802173658/#fnref:4"> ↩</a></li>
+<li>5.Wang Z, Deng Z, Wang S. Accelerating Convolutional Neural Networks with Dominant Convolutional Kernel and Knowledge Pre-regression[C]//European Conference on Computer Vision. Springer International Publishing, 2016: 533-548.<a href="https://buptweixin.github.io/posts/20170802173658/#fnref:5"> ↩</a></li>
+</ol>
+
+</div>
+
+
+    </main>
+
+    
+      
+    
+  </body>
+</html>

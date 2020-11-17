@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn" lang="zh-cn">
+<head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.56.3" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Union Find &middot; Hi, nice to meet you</title>
+  <meta name="description" content="" />
+
+  
+  <link type="text/css" rel="stylesheet" href="http://example.org/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="http://example.org/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="http://example.org/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="http://example.org/css/hyde.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  
+</head>
+
+  <body class=" ">
+  <aside class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="http://example.org/"><h1>Hi, nice to meet you</h1></a>
+      <p class="lead">
+      An elegant open source and mobile first theme for <a href="http://hugo.spf13.com">hugo</a> made by <a href="http://twitter.com/mdo">@mdo</a>. Originally made for Jekyll.
+      </p>
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li><a href="http://example.org/">Home</a> </li>
+        
+      </ul>
+    </nav>
+
+    <p>&copy; 2020. All rights reserved. </p>
+  </div>
+</aside>
+
+    <main class="content container">
+    <div class="post">
+  <h1>Union Find</h1>
+  <time datetime=2020-04-19T13:47:40&#43;0800 class="post-date">Sun, Apr 19, 2020</time>
+  <p>并查集
+时间复杂度log(O(N))</p>
+
+<p>// !!!模板
+// class Solution
+// {
+    // public:
+        // int find(int x)
+        // {
+            // if (parent[x] == x)
+                // return x;
+            // parent[x] = find(parent[x]);
+            // return parent[x];
+        // }</p>
+
+<pre><code>    // void Union(int x, int y)
+    // {
+        // int px = find(x), py = find(y);
+        // if (px != py)
+        // {
+            // if (size[px] &lt; size[py])
+            // {
+                // parent[px] = py;
+                // size[py] += size[px];
+            // }
+            // else
+            // {
+                // parent[py] = px;
+                // size[px] += size[py];
+            // }
+        // }
+    // }
+// private:
+    // vector&lt;int&gt; parent;
+    // vector&lt;int&gt; size;
+</code></pre>
+
+<p>// };
+Problem Description
+Given an unsorted array of integers, find the length of the longest consecutive elements sequence.
+For example,
+Given [100, 4, 200, 1, 3, 2],
+The longest consecutive elements sequence is [1, 2, 3, 4]. Return its length: 4.</p>
+
+<p>Your algorithm should run in O(n) complexity.</p>
+
+<p>Method
+#include <vector>
+#include <unordered_map>
+#include <algorithm>
+#include <iostream></p>
+
+<p>using namespace std;</p>
+
+<p>class Solution
+{
+    public:
+        int find(int x)
+        {
+            if (parent[x] == x)
+                return x;
+            parent[x] = find(parent[x]);
+            return parent[x];
+        }</p>
+
+<pre><code>    void Union(int x, int y)
+    {
+        int px = find(x), py = find(y);
+        if (px != py)
+        {
+            if (size[px] &lt; size[py])
+            {
+                parent[px] = py;
+                size[py] += size[px];
+            }
+            else
+            {
+                parent[py] = px;
+                size[px] += size[py];
+            }
+        }
+    }
+
+    int longestConsecutive(vector&lt;int&gt; &amp;input)
+    {
+        int len = input.size();
+        if (len &lt; 2)
+            return len;
+        size = vector&lt;int&gt;(len, 1);
+        for (int i = 0; i &lt; len; ++i)
+            parent.push_back(i);
+        unordered_map&lt;int, int&gt; record;
+        for (int i = 0; i &lt; len; ++i)
+        {
+            if (record.find(input[i]) != record.end())
+                continue;
+            record[input[i]] = i;
+            if (record.find(input[i] - 1) != record.end())
+                Union(i, record[input[i] - 1]);
+            if (record.find(input[i] + 1) != record.end())
+                Union(i, record[input[i] + 1]);
+        }
+        return *max_element(size.begin(), size.end());
+    }
+private:
+    vector&lt;int&gt; parent;
+    vector&lt;int&gt; size;
+</code></pre>
+
+<p>};</p>
+
+<p>int main()
+{
+    vector<int> input({100, 4, 200, 1, 3, 2});
+    Solution s;
+    cout &lt;&lt; s.longestConsecutive(input);
+}
+Problem Description
+给一个01矩&gt;阵，求不同的岛屿的个数。0代表海，1代表岛，如果两个1相邻，那么这两个1属于同一个岛。我们只考虑上下左右为相邻。</p>
+
+<p>样例</p>
+
+<p>在矩阵：</p>
+
+<p>[
+[1, 1, 0, 0, 0],
+[0, 1, 0, 0, 1],
+[0, 0, 0, 1, 1],
+[0, 0, 0, 0, 0],
+[0, 0, 0, 0, 1]
+]
+中有 3 个岛.</p>
+
+<p>Method
+并查集
+#include <iostream>
+#include <vector></p>
+
+<p>using namespace std;</p>
+
+<p>class Solution
+{
+    public:
+        int find(int x)
+        {
+            if (parent[x] == x)
+                return x;
+            parent[x] = find(parent[x]);
+            return parent[x];
+        }</p>
+
+<pre><code>    bool isConnected(int x, int y)
+    {
+        return find(x) == find(y);
+    }
+
+    void Union(int x, int y)
+    {
+        int px = find(x), py = find(y);
+        if (px != py)
+        {
+            if (size[px] &lt; size[py])
+            {
+                parent[px] = py;
+                size[py] += size[px];
+            }
+            else
+            {
+                parent[py] = px;
+                size[px] += size[py];
+            }
+        }
+    }
+
+    int numIslands(vector&lt;vector&lt;int&gt; &gt; &amp;matrix)
+    {
+        if (matrix.empty())
+        {
+            return 0;
+        }
+        int rows = matrix.size(), cols = matrix[0].size();
+        parent.resize(rows * cols);
+        size.resize(rows * cols);
+        int count = 0;
+        for (int i = 0; i &lt; rows; ++i)
+            for (int j = 0; j &lt; cols; ++j)
+            {
+                if (matrix[i][j] == 1)
+                {
+                    count++;
+                    parent[cols * i + j] = cols * i + j;
+                }
+            }
+
+        vector&lt;vector&lt;int&gt; &gt; directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+        for (int i = 0; i &lt; rows; ++i)
+            for (int j = 0; j &lt; cols; ++j)
+                if (matrix[i][j] == 1)
+                    for (auto dir : directions)
+                    {
+                        int x = i + dir[0], y = j + dir[1];
+                        if (x &lt; 0 || y &lt; 0 || x &gt;= rows || y &gt;= cols || matrix[x][y] != 1)
+                            continue;
+                        if (!isConnected(i * cols + j, x * cols + y))
+                        {
+                            Union(i * cols + j, x * cols + y);
+                            count--;
+                        }
+
+                    }
+        return count;
+    }
+private:
+    vector&lt;int&gt; parent;
+    vector&lt;int&gt; size;
+</code></pre>
+
+<p>};</p>
+
+<p>int main()
+{
+    vector<vector<int> &gt; matrix({
+            {1, 1, 0, 0, 0},
+            {0, 1, 0, 0, 1},
+            {0, 0, 0, 1, 1},
+            {0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 1}
+            });
+    if (matrix.empty())
+        return 0;
+    int rst = 0;
+    Solution s;
+    rst = s.numIslands(matrix);
+    return rst;</p>
+
+<p>}
+广度优先或深度优先
+#include <iostream>
+#include <vector>
+#include <stack>
+#include <utility></p>
+
+<p>using namespace std;</p>
+
+<p>void dfs(vector<vector<int> &gt;&amp; matrix, int i, int j)
+{
+    if (i &lt; 0 || j &lt; 0 || i &gt;= matrix.size() || j &gt;= matrix[0].size())
+        return;</p>
+
+<pre><code>if(matrix[i][j] == 1)
+{
+    matrix[i][j] = 0;
+    dfs(matrix, i - 1, j);
+    dfs(matrix, i + 1, j);
+    dfs(matrix, i, j - 1);
+    dfs(matrix, i, j + 1);
+}
+</code></pre>
+
+<p>}</p>
+
+<p>void bfs(vector<vector<int> &gt; &amp;matrix, int i, int j)
+{
+    if (i &lt; 0 || j &lt; 0 || i &gt;= matrix.size() || j &gt;= matrix[0].size())
+        return;</p>
+
+<pre><code>if (matrix[i][j] == 1)
+{
+    stack&lt;pair&lt;int, int&gt; &gt; s;
+    s.push(make_pair(i, j));
+    while(!s.empty())
+    {
+        pair&lt;int, int&gt; idxy = s.top();
+        s.pop();
+        int x = idxy.first, y = idxy.second;
+        matrix[x][y] = 0;
+        if (x &gt; 0 &amp;&amp; matrix[x - 1][y] == 1)
+            s.push(make_pair(x - 1, y));
+        if (x &lt; matrix.size() - 1 &amp;&amp; matrix[x + 1][y] == 1)
+            s.push(make_pair(x + 1, y));
+        if (y &gt; 0 &amp;&amp; matrix[x][y - 1] == 1)
+            s.push(make_pair(x, y - 1));
+        if (y &lt; matrix[0].size() - 1 &amp;&amp; matrix[x][y + 1] == 1)
+            s.push(make_pair(x, y + 1));
+    }
+}
+</code></pre>
+
+<p>}</p>
+
+<p>int main()
+{
+    vector<vector<int> &gt; matrix({
+            {1, 1, 0, 0, 0},
+            {0, 1, 0, 0, 1},
+            {0, 0, 0, 1, 1},
+            {0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 1}
+            });
+    if (matrix.empty())
+        return 0;
+    int rst = 0;
+    for (int i = 0; i &lt; matrix.size(); ++i)
+        for (int j = 0; j &lt; matrix[0].size(); ++j)
+        {
+            if (matrix[i][j] == 1)
+            {
+                ++rst;
+                bfs(matrix, i, j);
+                // dfs(matrix, i, j);
+            }</p>
+
+<pre><code>    }
+return rst;
+</code></pre>
+
+<p>}</p>
+
+</div>
+
+
+    </main>
+
+    
+      
+    
+  </body>
+</html>
