@@ -1,4 +1,5 @@
 ---
+title: Instant Neural Graphics Primitives with a Multiresolution Hash Encoding
 alias: mullerInstantNeuralGraphics2022
 tags:
   - NeRF
