@@ -37,3 +37,8 @@ icon = "fa fa-2x fa-github"
 weight = 1
 url = "https://github.com/buptweixin"
 
+# Menu links
+[[menu.main]]
+  name = "Blog"
+  weight = 1
+  url  = "posts/"
