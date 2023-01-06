@@ -4,8 +4,9 @@ alias: mildenhallNeRFRepresentingScenes2020
 tags:
   - NeRF
 rating: ⭐⭐⭐
-share: true
+shared: true
 ptype: article
+draft: false
 date: 2022-12-27
 ---
 
