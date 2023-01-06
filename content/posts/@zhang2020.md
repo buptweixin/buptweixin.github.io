@@ -7,8 +7,9 @@ tags:
   - label_assign
   - one-stage
 rating: ⭐⭐⭐
-share: true
+shared: true
 ptype: article
+draft: false
 date: 2022-12-27
 ---
 
@@ -55,4 +56,5 @@ potential::
 2. 预测方式
 
 ![](https://markdown-imagebed.oss-cn-beijing.aliyuncs.com/imgs/20210623150436.png) 
+
 

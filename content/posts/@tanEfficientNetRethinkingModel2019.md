@@ -6,8 +6,9 @@ tags:
   - base_model
   - 模型压缩
 rating: ⭐⭐⭐
-share: true
+shared: true
 ptype: article
+draft: false
 date: 2022-12-27
 ---
 

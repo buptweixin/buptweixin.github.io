@@ -6,8 +6,9 @@ tags:
   - language_model
   - pre-training
 rating: ⭐⭐⭐
-share: true
+shared: true
 ptype: article
+draft: false
 date: 2022-12-27
 ---
 
@@ -28,13 +29,10 @@ comment:: BERT 使用无监督方案，不需要人工标注数据只需要在�
 
 
 ### 文章骨架
-%%创新点到底是什么?%%
 novelty:: 1. 在训练双向语言模型时以减小的概率把少量的词替成了Mask或者另一个随机的词。使模型被迫增加对上下文的记忆。2. 增加了一个预测下一句的loss。
 
-%%有什么意义？%%
 significance:: 在机器阅读理解顶级水平测试SQuAD1.1中表现出惊人的成绩：全部两个衡量指标上全面超越人类，并且还在11种不同NLP测试中创出最佳成绩，包括将GLUE基准推至80.4％（绝对改进7.6％），MultiNLI准确度达到86.7% （绝对改进率5.6％）等。可以预见的是，BERT将为NLP带来里程碑式的改变，也是NLP领域近期最重要的进展。
 
-%%有什么潜力?%% 
 potential:: BERT为NLP带来里程碑式的改变，也是NLP领域近期最重要的进展。
 
 ![](https://markdown-imagebed.oss-cn-beijing.aliyuncs.com/imgs/20210507175021.png)

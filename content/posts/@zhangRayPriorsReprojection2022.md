@@ -6,8 +6,9 @@ tags:
   - NeRF
   - CVPR2022
 rating: ⭐⭐
-share: true
+shared: true
 ptype: article
+draft: false
 date: 2022-12-27
 ---
 
@@ -87,6 +88,7 @@ $$ {\mathfrak{c}}=F_{c}(\bar{d},F_{\sigma}({\bf x})) $$
 ![](https://markdown-imagebed.oss-cn-beijing.aliyuncs.com/imgs/202210311641211.png)
 
 RRC 可以带来 3.5 个点的 PSNR 提升， RA 可以带来 1.24 个点的 PSNR 提升。
+
 
 
 
