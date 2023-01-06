@@ -6,8 +6,9 @@ tags:
   - heatmap
   - regression
 rating: ⭐⭐⭐
-share: true
+shared: true
 ptype: article
+draft: false
 date: 2022-12-27
 ---
 
@@ -74,3 +75,84 @@ heatmap 方法优点是准确性高，缺点是计算复杂度高、缺少全局
 3. 使用标注和伪标签生成新的数据集；
 4. 用人工数据集训练 task3， 新数据集训练 task 1- 2
 重复 2-4 步骤
+
+
+### References
+
+1. [10.1109/BTAS.2017.8272731](https://doi.org/10.1109/BTAS.2017.8272731)
+2. [10.1145/1553374.1553380](https://doi.org/10.1145/1553374.1553380)
+3. [10.1109/ICCV.2013.191](https://doi.org/10.1109/ICCV.2013.191)
+4. [10.1109/CVPR42600.2020.00590](https://doi.org/10.1109/CVPR42600.2020.00590)
+5. [10.1007/978-3-319-46454-1_8](https://doi.org/10.1007/978-3-319-46454-1_8)
+6. [[@chenFaceAlignmentKernel2019]]
+7. [10.1109/CVPR.2018.00352](https://doi.org/10.1109/CVPR.2018.00352)
+8. [[@dapognyDeCaFADeepConvolutional2019]]
+9. [10.1007/s11263-018-1134-y](https://doi.org/10.1007/s11263-018-1134-y)
+10. [10.1109/CVPR42600.2020.00525](https://doi.org/10.1109/CVPR42600.2020.00525)
+11. [10.1109/CVPR.2018.00110](https://doi.org/10.1109/CVPR.2018.00110)
+12. [10.1109/ICCV.2019.00087](https://doi.org/10.1109/ICCV.2019.00087)
+13. [10.1109/CVPR.2018.00047](https://doi.org/10.1109/CVPR.2018.00047)
+14. [10.1109/CVPR.2017.392](https://doi.org/10.1109/CVPR.2017.392)
+15. [[@fengWingLossRobust2018]]
+16. This reference does not have DOI 😵
+17. This reference does not have DOI 😵
+18. [10.1109/CVPR.2014.306](https://doi.org/10.1109/CVPR.2014.306)
+19. [10.1109/CVPRW.2017.255](https://doi.org/10.1109/CVPRW.2017.255)
+20. [10.1109/CVPR.2016.619](https://doi.org/10.1109/CVPR.2016.619)
+21. [10.1109/CVPR.2018.00167](https://doi.org/10.1109/CVPR.2018.00167)
+22. [10.1109/ICCV.2019.00140](https://doi.org/10.1109/ICCV.2019.00140)
+23. This reference does not have DOI 😵
+24. [10.1109/CVPR.2019.00503](https://doi.org/10.1109/CVPR.2019.00503)
+25. [10.1109/ICCV.2017.409](https://doi.org/10.1109/ICCV.2017.409)
+26. This reference does not have DOI 😵
+27. [10.1109/ICCVW.2011.6130513](https://doi.org/10.1109/ICCVW.2011.6130513)
+28. [[@kumarLUVLiFaceAlignment2020]]
+29. [10.1109/TPAMI.2012.191](https://doi.org/10.1109/TPAMI.2012.191)
+30. [10.1109/TPAMI.2017.2734779](https://doi.org/10.1109/TPAMI.2017.2734779)
+31. [10.1109/CVPR.2017.713](https://doi.org/10.1109/CVPR.2017.713)
+32. [10.1109/ICCV.2015.425](https://doi.org/10.1109/ICCV.2015.425)
+33. [10.1109/CVPR.2019.00358](https://doi.org/10.1109/CVPR.2019.00358)
+34. This reference does not have DOI 😵
+35. [10.1109/CVPR.2017.393](https://doi.org/10.1109/CVPR.2017.393)
+36. [10.1109/CVPR.2018.00088](https://doi.org/10.1109/CVPR.2018.00088)
+37. [10.1007/978-3-319-46484-8_29](https://doi.org/10.1007/978-3-319-46484-8_29)
+38. [10.1109/CVPR.2017.395](https://doi.org/10.1109/CVPR.2017.395)
+39. [10.1007/978-3-030-01264-9_17](https://doi.org/10.1007/978-3-030-01264-9_17)
+40. [10.1109/CVPR.2016.146](https://doi.org/10.1109/CVPR.2016.146)
+41. [10.1109/ICCV.2019.01025](https://doi.org/10.1109/ICCV.2019.01025)
+42. [10.1109/TIP.2016.2518867](https://doi.org/10.1109/TIP.2016.2518867)
+43. [10.1109/ICCV.2019.01020](https://doi.org/10.1109/ICCV.2019.01020)
+44. [10.1007/978-3-319-24574-4_28](https://doi.org/10.1007/978-3-319-24574-4_28)
+45. [10.1109/ICCVW.2013.59](https://doi.org/10.1109/ICCVW.2013.59)
+46. [10.1109/CVPR.2019.00712](https://doi.org/10.1109/CVPR.2019.00712)
+47. [10.1109/CVPR.2018.00474](https://doi.org/10.1109/CVPR.2018.00474)
+48. [10.1109/ICCVW.2015.132](https://doi.org/10.1109/ICCVW.2015.132)
+49. [10.1109/CVPR.2013.446](https://doi.org/10.1109/CVPR.2013.446)
+50. [[@taiHighlyAccurateStable2019]]
+51. [10.1109/CVPR.2014.220](https://doi.org/10.1109/CVPR.2014.220)
+52. [10.1007/978-3-030-01219-9_21](https://doi.org/10.1007/978-3-030-01219-9_21)
+53. [10.1109/CVPR.2016.262](https://doi.org/10.1109/CVPR.2016.262)
+54. [10.1109/CVPR.2016.453](https://doi.org/10.1109/CVPR.2016.453)
+55. [[@valleDeeplyInitializedCoarsetofineEnsemble2018]]
+56. [10.1016/j.cviu.2019.102846](https://doi.org/10.1016/j.cviu.2019.102846)
+57. This reference does not have DOI 😵
+58. [10.1109/ICCV.2019.00707](https://doi.org/10.1109/ICCV.2019.00707)
+59. [10.1109/CVPR.2016.511](https://doi.org/10.1109/CVPR.2016.511)
+60. [10.1109/CVPRW.2017.261](https://doi.org/10.1109/CVPRW.2017.261)
+61. [[@wuLookBoundaryBoundaryAware2018b]]
+62. [10.1007/978-3-030-01231-1_29](https://doi.org/10.1007/978-3-030-01231-1_29)
+63. [10.1109/CVPRW.2017.253](https://doi.org/10.1109/CVPRW.2017.253)
+64. [10.1109/CVPR.2016.596](https://doi.org/10.1109/CVPR.2016.596)
+65. [10.1109/ICCV.2017.113](https://doi.org/10.1109/ICCV.2017.113)
+66. [10.1109/CVPR.2019.00225](https://doi.org/10.1109/CVPR.2019.00225)
+67. [10.1109/CVPRW.2017.263](https://doi.org/10.1109/CVPRW.2017.263)
+68. [10.1109/TPAMI.2015.2469286](https://doi.org/10.1109/TPAMI.2015.2469286)
+69. [10.1007/978-3-030-58621-8_31](https://doi.org/10.1007/978-3-030-58621-8_31)
+70. [10.1007/978-3-030-01261-8_11](https://doi.org/10.1007/978-3-030-01261-8_11)
+71. [10.1109/CVPR.2019.00360](https://doi.org/10.1109/CVPR.2019.00360)
+72. This reference does not have DOI 😵
+73. [10.1109/CVPR.2016.371](https://doi.org/10.1109/CVPR.2016.371)
+74. [10.1109/CVPR.2019.00078](https://doi.org/10.1109/CVPR.2019.00078)
+75. [10.1109/ICCV.2019.00023](https://doi.org/10.1109/ICCV.2019.00023)
+
+ Currently 7 references inside library! @2022-12-28
