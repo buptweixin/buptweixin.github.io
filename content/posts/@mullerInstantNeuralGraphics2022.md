@@ -4,8 +4,9 @@ alias: mullerInstantNeuralGraphics2022
 tags:
   - NeRF
 rating: ⭐⭐⭐
-share: true
+shared: true
 ptype: article
+draft: false
 date: 2022-12-27
 ---
 
@@ -182,3 +183,61 @@ b &:=\exp \left(\frac{\ln N_{\max }-\ln N_{\min }}{L-1}\right)
 $$
 
 $b \in [1.26, 2]$
+
+
+### References
+
+1. [10.2312/EGWR/EGSR07/051-060](https://doi.org/10.2312/EGWR/EGSR07/051-060)
+2. This reference does not have DOI 😵
+3. This reference does not have DOI 😵
+4. [10.1007/978-3-030-58526-6_36](https://doi.org/10.1007/978-3-030-58526-6_36)
+5. This reference does not have DOI 😵
+6. [10.1109/CVPR42600.2020.00700](https://doi.org/10.1109/CVPR42600.2020.00700)
+7. This reference does not have DOI 😵
+8. This reference does not have DOI 😵
+9. [10.1145/1185657.1185834](https://doi.org/10.1145/1185657.1185834)
+10. This reference does not have DOI 😵
+11. This reference does not have DOI 😵
+12. This reference does not have DOI 😵
+13. [10.1145/3478513.3480569](https://doi.org/10.1145/3478513.3480569)
+14. [10.1016/B978-0-12-394424-5.00002-1](https://doi.org/10.1016/B978-0-12-394424-5.00002-1)
+15. [10.1145/1730804.1730831](https://doi.org/10.1145/1730804.1730831)
+16. [10.1109/CVPR42600.2020.00604](https://doi.org/10.1109/CVPR42600.2020.00604)
+17. This reference does not have DOI 😵
+18. This reference does not have DOI 😵
+19. This reference does not have DOI 😵
+20. This reference does not have DOI 😵
+21. [10.1145/3450626.3459785](https://doi.org/10.1145/3450626.3459785)
+22. This reference does not have DOI 😵
+23. This reference does not have DOI 😵
+24. This reference does not have DOI 😵
+25. [10.1145/3306346.3322980](https://doi.org/10.1145/3306346.3322980)
+26. [10.1007/978-3-030-58452-8_24](https://doi.org/10.1007/978-3-030-58452-8_24)
+27. This reference does not have DOI 😵
+28. [10.1145/3341156](https://doi.org/10.1145/3341156)
+29. [10.1145/3414685.3417804](https://doi.org/10.1145/3414685.3417804)
+30. [10.1145/3450626.3459812](https://doi.org/10.1145/3450626.3459812)
+31. [10.1145/2487228.2487235](https://doi.org/10.1145/2487228.2487235)
+32. [10.1145/3450623.3464653](https://doi.org/10.1145/3450623.3464653)
+33. [10.1111/cgf.14340](https://doi.org/10.1111/cgf.14340)
+34. [10.1145/2508363.2508374](https://doi.org/10.1145/2508363.2508374)
+35. [10.1109/TVCG.2003.1196006](https://doi.org/10.1109/TVCG.2003.1196006)
+36. This reference does not have DOI 😵
+37. This reference does not have DOI 😵
+38. This reference does not have DOI 😵
+39. [10.1007/978-3-030-58580-8_31](https://doi.org/10.1007/978-3-030-58580-8_31)
+40. This reference does not have DOI 😵
+41. This reference does not have DOI 😵
+42. This reference does not have DOI 😵
+43. [10.1109/CVPR46437.2021.01120](https://doi.org/10.1109/CVPR46437.2021.01120)
+44. This reference does not have DOI 😵
+45. [10.1145/3272127.3275096](https://doi.org/10.1145/3272127.3275096)
+46. This reference does not have DOI 😵
+47. This reference does not have DOI 😵
+48. This reference does not have DOI 😵
+49. This reference does not have DOI 😵
+50. This reference does not have DOI 😵
+51. This reference does not have DOI 😵
+52. This reference does not have DOI 😵
+
+ Currently 0 references inside library! @2022-12-28
