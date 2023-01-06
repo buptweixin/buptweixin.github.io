@@ -5,8 +5,9 @@ tags:
   - loss
   - landmark
 rating: ⭐
-share: true
+shared: true
 ptype: article
+draft: false
 date: 2022-12-27
 ---
 
@@ -84,3 +85,78 @@ __难样本的标注难免不精确，而wingloss在小损失下的大梯度会�
 ![](https://markdown-imagebed.oss-cn-beijing.aliyuncs.com/imgs/202205170035612.png)
 ![](https://markdown-imagebed.oss-cn-beijing.aliyuncs.com/imgs/202205170036915.png)
 
+
+
+### References
+
+1. This reference does not have DOI 😵
+2. This reference does not have DOI 😵
+3. [10.1109/TPAMI.2020.2983935](https://doi.org/10.1109/TPAMI.2020.2983935)
+4. [10.1109/CVPR42600.2020.00590](https://doi.org/10.1109/CVPR42600.2020.00590)
+5. [10.1109/CVPR.2019.00358](https://doi.org/10.1109/CVPR.2019.00358)
+6. [10.1007/978-3-319-10599-4_7](https://doi.org/10.1007/978-3-319-10599-4_7)
+7. This reference does not have DOI 😵
+8. [10.1109/MSP.2017.2693418](https://doi.org/10.1109/MSP.2017.2693418)
+9. [10.1109/TNN.2008.2005605](https://doi.org/10.1109/TNN.2008.2005605)
+10. [10.1109/ICCV.2019.00087](https://doi.org/10.1109/ICCV.2019.00087)
+11. [10.1109/CVPR.2016.373](https://doi.org/10.1109/CVPR.2016.373)
+12. [10.1109/CVPR.2017.606](https://doi.org/10.1109/CVPR.2017.606)
+13. [10.1007/978-3-319-46448-0_4](https://doi.org/10.1007/978-3-319-46448-0_4)
+14. [10.1109/CVPR.2017.392](https://doi.org/10.1109/CVPR.2017.392)
+15. [10.1109/CVPR.2010.5539996](https://doi.org/10.1109/CVPR.2010.5539996)
+16. [10.1109/CVPR.2019.00360](https://doi.org/10.1109/CVPR.2019.00360)
+17. [10.1109/CVPR.2014.306](https://doi.org/10.1109/CVPR.2014.306)
+18. [10.1109/CVPR.2018.00047](https://doi.org/10.1109/CVPR.2018.00047)
+19. [[@kumarLUVLiFaceAlignment2020]]
+20. [10.1109/TPAMI.2009.167](https://doi.org/10.1109/TPAMI.2009.167)
+21. [10.1109/CVPR.2018.00052](https://doi.org/10.1109/CVPR.2018.00052)
+22. [10.1109/CVPR.2018.00045](https://doi.org/10.1109/CVPR.2018.00045)
+23. [10.1109/TPAMI.2019.2907634](https://doi.org/10.1109/TPAMI.2019.2907634)
+24. [[@fengWingLossRobust2018]]
+25. [[@wuLookBoundaryBoundaryAware2018b]]
+26. [10.1109/CVPR.2016.90](https://doi.org/10.1109/CVPR.2016.90)
+27. This reference does not have DOI 😵
+28. [10.1109/TPAMI.2019.2938758](https://doi.org/10.1109/TPAMI.2019.2938758)
+29. [10.1109/AFGR.1998.670965](https://doi.org/10.1109/AFGR.1998.670965)
+30. [10.1109/34.927467](https://doi.org/10.1109/34.927467)
+31. [10.1007/s11263-010-0380-4](https://doi.org/10.1007/s11263-010-0380-4)
+32. [10.5244/C.20.95](https://doi.org/10.5244/C.20.95)
+33. [10.1109/CVPR.2019.00354](https://doi.org/10.1109/CVPR.2019.00354)
+34. [10.1145/1057432.1057456](https://doi.org/10.1145/1057432.1057456)
+35. [10.1109/TIP.2015.2446944](https://doi.org/10.1109/TIP.2015.2446944)
+36. This reference does not have DOI 😵
+37. [10.5244/C.29.22](https://doi.org/10.5244/C.29.22)
+38. [10.1109/ICCV.2019.00707](https://doi.org/10.1109/ICCV.2019.00707)
+39. [10.1109/ICCV.2019.01025](https://doi.org/10.1109/ICCV.2019.01025)
+40. [10.1109/ACCESS.2019.2930304](https://doi.org/10.1109/ACCESS.2019.2930304)
+41. [10.1109/CVPR42600.2020.00615](https://doi.org/10.1109/CVPR42600.2020.00615)
+42. [10.1109/TPAMI.2013.23](https://doi.org/10.1109/TPAMI.2013.23)
+43. [10.1145/2929464.2929475](https://doi.org/10.1145/2929464.2929475)
+44. [10.1109/CVPRW.2017.253](https://doi.org/10.1109/CVPRW.2017.253)
+45. This reference does not have DOI 😵
+46. [10.1109/CVPR.2019.00584](https://doi.org/10.1109/CVPR.2019.00584)
+47. [10.1109/CVPR.2016.453](https://doi.org/10.1109/CVPR.2016.453)
+48. This reference does not have DOI 😵
+49. [10.1007/978-3-319-46484-8_29](https://doi.org/10.1007/978-3-319-46484-8_29)
+50. [10.1109/ICCV.2013.191](https://doi.org/10.1109/ICCV.2013.191)
+51. [10.1016/j.imavis.2016.01.002](https://doi.org/10.1016/j.imavis.2016.01.002)
+52. [10.1109/CVPR.2018.00474](https://doi.org/10.1109/CVPR.2018.00474)
+53. This reference does not have DOI 😵
+54. [10.1109/CVPRW.2017.261](https://doi.org/10.1109/CVPRW.2017.261)
+55. [[@dapognyDeCaFADeepConvolutional2019]]
+56. [10.1109/TIP.2017.2657118](https://doi.org/10.1109/TIP.2017.2657118)
+57. [10.1109/TIP.2016.2518867](https://doi.org/10.1109/TIP.2016.2518867)
+58. This reference does not have DOI 😵
+59. [10.1109/TIP.2016.2633939](https://doi.org/10.1109/TIP.2016.2633939)
+60. [10.1109/CVPR.2018.00275](https://doi.org/10.1109/CVPR.2018.00275)
+61. [10.1109/CVPR.2018.00735](https://doi.org/10.1109/CVPR.2018.00735)
+62. [10.1109/CVPR.2019.00857](https://doi.org/10.1109/CVPR.2019.00857)
+63. [10.1007/978-3-030-01246-5_41](https://doi.org/10.1007/978-3-030-01246-5_41)
+64. [10.1109/CVPR.2019.00952](https://doi.org/10.1109/CVPR.2019.00952)
+65. [10.1109/CVPR.2019.00307](https://doi.org/10.1109/CVPR.2019.00307)
+66. This reference does not have DOI 😵
+67. This reference does not have DOI 😵
+68. [10.1109/TIP.2020.3028207](https://doi.org/10.1109/TIP.2020.3028207)
+69. [10.1109/ICCV.2017.556](https://doi.org/10.1109/ICCV.2017.556)
+
+ Currently 4 references inside library! @2022-12-28
