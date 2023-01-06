@@ -5,8 +5,9 @@ alias: yuMonoSDFExploringMonocular2022
 tags:
   - SDF
 rating: ⭐
-share: true
+shared: true
 ptype: article
+draft: false
 date: 2022-12-27
 ---
 
@@ -33,9 +34,9 @@ novelty:: 增加单目深度和 normal 约束
 significance:: 增强 NeuS 在低纹理和稀疏视角下的重建效果
 
 %%有什么潜力?%% 
-potential::  无
+potential::  1. 受单目深度和法向图准确性影响比较大；2. 可以增加其他的约束，比如平面、边缘、遮挡等；3. 当前受限于 omnidata model 的 384x384 的输入， 可以开发更大的输入分辨率模型；4. 联合优化场景表示和相机参数
 
-
+同时优化场景表示和相机参数 [[@azinovicNeuralRGBDSurface2022]] [[@zhu2022]]
 
 
 
