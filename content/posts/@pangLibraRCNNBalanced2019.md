@@ -5,8 +5,9 @@ tags:
   - detection
   - two-stage
 rating: ⭐⭐
-share: true
+shared: true
 ptype: article
+draft: false
 date: 2022-12-27
 ---
 
@@ -89,3 +90,45 @@ $$
 
 
 
+
+### References
+
+1. [10.1109/CVPR.2017.634](https://doi.org/10.1109/CVPR.2017.634)
+2. This reference does not have DOI 😵
+3. This reference does not have DOI 😵
+4. [10.1109/CVPR.2018.00377](https://doi.org/10.1109/CVPR.2018.00377)
+5. [10.1109/CVPR.2019.00078](https://doi.org/10.1109/CVPR.2019.00078)
+6. [10.1109/TPAMI.2017.2745563](https://doi.org/10.1109/TPAMI.2017.2745563)
+7. This reference does not have DOI 😵
+8. [10.1145/2964284.2967274](https://doi.org/10.1145/2964284.2967274)
+9. This reference does not have DOI 😵
+10. This reference does not have DOI 😵
+11. [10.1109/CVPR.2016.90](https://doi.org/10.1109/CVPR.2016.90)
+12. [10.1109/CVPR.2017.685](https://doi.org/10.1109/CVPR.2017.685)
+13. [10.1109/CVPR.2018.00378](https://doi.org/10.1109/CVPR.2018.00378)
+14. This reference does not have DOI 😵
+15. This reference does not have DOI 😵
+16. This reference does not have DOI 😵
+17. This reference does not have DOI 😵
+18. [10.1109/CVPR.2017.106](https://doi.org/10.1109/CVPR.2017.106)
+19. This reference does not have DOI 😵
+20. This reference does not have DOI 😵
+21. [[@Redmon2017]]
+22. [10.1109/CVPR.2018.00644](https://doi.org/10.1109/CVPR.2018.00644)
+23. This reference does not have DOI 😵
+24. [10.1109/CVPR.2016.89](https://doi.org/10.1109/CVPR.2016.89)
+25. This reference does not have DOI 😵
+26. [10.1109/CVPR.2014.81](https://doi.org/10.1109/CVPR.2014.81)
+27. [10.1109/ICCV.2015.169](https://doi.org/10.1109/ICCV.2015.169)
+28. This reference does not have DOI 😵
+29. This reference does not have DOI 😵
+30. [10.1109/CVPR.2016.314](https://doi.org/10.1109/CVPR.2016.314)
+31. This reference does not have DOI 😵
+32. [[@liuPathAggregationNetwork2018]]
+33. This reference does not have DOI 😵
+34. [10.1109/ICCV.2017.214](https://doi.org/10.1109/ICCV.2017.214)
+35. This reference does not have DOI 😵
+36. [[@redmonYouOnlyLook2016a]]
+37. This reference does not have DOI 😵
+
+ Currently 3 references inside library! @2022-12-28
