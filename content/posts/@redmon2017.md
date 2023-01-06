@@ -5,8 +5,9 @@ tags:
   - detection
   - one-stage
 rating: ⭐⭐⭐
-share: true
+shared: true
 ptype: article
+draft: false
 date: 2022-12-27
 ---
 
@@ -91,10 +92,3 @@ potential::
 ![类别预测](https://markdown-imagebed.oss-cn-beijing.aliyuncs.com/imgs20210328152859.png)
 
 最终构造了能够预测 9000+ 类别的 YOLOv2。
-
-
-
-
-
-
-
