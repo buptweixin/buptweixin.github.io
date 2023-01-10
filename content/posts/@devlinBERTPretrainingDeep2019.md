@@ -24,7 +24,7 @@ timezone: UTC+8
 
 ### 初读印象
 
-comment:: BERT 使用无监督方案，不需要人工标注数据只需要在训练时使用上下文mask，以及下一句预测loss就能得到强大的语言预训练模型。
+BERT 使用无监督方案，不需要人工标注数据只需要在训练时使用上下文mask，以及下一句预测loss就能得到强大的语言预训练模型。
 
 ![](https://markdown-imagebed.oss-cn-beijing.aliyuncs.com/imgs/20210507180309.png)
 
