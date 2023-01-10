@@ -22,7 +22,7 @@ timezone: UTC+8
 
 ### 初读印象
 
-comment:: Free-HeadGAN
+Free-HeadGAN
 
 ### TL;DR
 
