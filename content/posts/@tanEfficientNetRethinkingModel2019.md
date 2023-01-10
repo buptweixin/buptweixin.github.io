@@ -24,7 +24,7 @@ timezone: UTC+8
 
 ### 初读印象
 
-comment:: 探索了模型的深度、宽度以及输入分辨率对模型性能和速度的影响，基于此提出了 EfficientNet 这种高效的模型结构
+探索了模型的深度、宽度以及输入分辨率对模型性能和速度的影响，基于此提出了 EfficientNet 这种高效的模型结构
 
 
    ![model scaling](https://markdown-imagebed.oss-cn-beijing.aliyuncs.com/imgs/20210508160639.png)
