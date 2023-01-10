@@ -23,7 +23,7 @@ timezone: UTC+8
 
 ### 初读印象
 
-comment:: NeuS [[@wangNeuSLearningNeural2021]]  基础上增加了单目深度和 normal 约束， 提升稀疏图片和低纹理条件下的重建效果。
+NeuS [[@wangNeuSLearningNeural2021]]  基础上增加了单目深度和 normal 约束， 提升稀疏图片和低纹理条件下的重建效果。
 
 ![](https://markdown-imagebed.oss-cn-beijing.aliyuncs.com/imgs/202212271128734.png)
 
