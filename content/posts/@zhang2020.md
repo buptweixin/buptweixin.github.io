@@ -26,7 +26,7 @@ timezone: UTC+8
 
 ### 初读印象
 
-comment:: ATSS 提出一种基于训练时匹配框的 std 和 mean 动态确定阈值的 label assign 方法
+ATSS 提出一种基于训练时匹配框的 std 和 mean 动态确定阈值的 label assign 方法
 
 ### 文章骨架
 %%创新点到底是什么?%%
