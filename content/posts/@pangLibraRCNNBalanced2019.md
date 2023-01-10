@@ -24,7 +24,7 @@ timezone: UTC+8
 
 ### 初读印象
 
-comment:: 从采样、feature map、损失函数三个角度解决目标检测任务样本不均衡问题， 提出了对应的 IoU-sampling、balanced feature pyramid 和 balanced L1-loss 三个组件。
+从采样、feature map、损失函数三个角度解决目标检测任务样本不均衡问题， 提出了对应的 IoU-sampling、balanced feature pyramid 和 balanced L1-loss 三个组件。
 
 ## TL;DR
 从采样、feature map、损失函数三个角度解决目标检测任务样本不均衡问题， 提出了对应的 IoU-sampling、balanced feature pyramid 和 balanced L1-loss 三个组件。

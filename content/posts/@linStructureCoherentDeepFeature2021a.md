@@ -24,7 +24,7 @@ timezone: UTC+8
 
 ### 初读印象
 
-comment:: soft wingloss 使用图网络建模关键点之间的联系，同时提出一种 relative location loss 强化关键点相互之间的关联信息，以及 soft wing loss 强化绝点坐标的学习。
+soft wingloss 使用图网络建模关键点之间的联系，同时提出一种 relative location loss 强化关键点相互之间的关联信息，以及 soft wing loss 强化绝点坐标的学习。
 
 
 __难样本的标注难免不精确，而wingloss在小损失下的大梯度会导致模型强行拟合标注误差__

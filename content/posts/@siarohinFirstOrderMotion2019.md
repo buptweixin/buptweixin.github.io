@@ -22,7 +22,7 @@ timezone: UTC+8
 
 ### 初读印象
 
-comment:: FOMM 是 Monkey-Net 的续作， 解决 Monkey-Net 对复杂动作处理能力比较弱的问题。具体方式是在估计光流时除了关键点本身之外还引入了局部仿射变换以获取精细的形变，同时会预估遮挡区域，指导inpainting模块进行填补。
+FOMM 是 Monkey-Net 的续作， 解决 Monkey-Net 对复杂动作处理能力比较弱的问题。具体方式是在估计光流时除了关键点本身之外还引入了局部仿射变换以获取精细的形变，同时会预估遮挡区域，指导inpainting模块进行填补。
 
 ## Method
 ![](https://markdown-imagebed.oss-cn-beijing.aliyuncs.com/imgs20220831235007.png)

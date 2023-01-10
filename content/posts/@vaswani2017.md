@@ -25,7 +25,7 @@ timezone: UTC+8
 
 ### 初读印象
 
-comment:: transformer 是第一个完全由 attention 构成的时序模型。相比于传统基于 RNN 和 CNN 的模型， 它在精度、并行度和长距离依赖上带来了明显提升。
+transformer 是第一个完全由 attention 构成的时序模型。相比于传统基于 RNN 和 CNN 的模型， 它在精度、并行度和长距离依赖上带来了明显提升。
 
 ![整体结构](https://markdown-imagebed.oss-cn-beijing.aliyuncs.com/imgs/20210507133555.png) 
 

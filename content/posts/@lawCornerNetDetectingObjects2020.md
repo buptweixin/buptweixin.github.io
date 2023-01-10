@@ -25,7 +25,7 @@ timezone: UTC+8
 
 ### 初读印象
 
-comment:: CornerNet 预测目标的左上和右下角点heatmap, 提取焦点的 embedding 进行角点对匹配来替代 anchor
+CornerNet 预测目标的左上和右下角点heatmap, 提取焦点的 embedding 进行角点对匹配来替代 anchor
 
 ## TL;DR
 基于 anchor 的方法的缺点

@@ -24,7 +24,7 @@ timezone: UTC+8
 
 ### 初读印象
 
-comment:: YOLOv2 引入 bn、anchor、新的 backbone、multi-scale training 等技术获得了相比 YOLOv1 更快效果更好的模型
+YOLOv2 引入 bn、anchor、新的 backbone、multi-scale training 等技术获得了相比 YOLOv1 更快效果更好的模型
 
 ### 文章骨架
 %%创新点到底是什么?%%

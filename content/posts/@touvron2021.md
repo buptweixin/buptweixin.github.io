@@ -24,7 +24,7 @@ timezone: UTC+8
 
 ### 初读印象
 
-comment:: DeiT 提出了一种适合 ViT 的蒸馏方法， 即除了 [CLS] token 之外增加了一个类似的用于蒸馏的 distillation token， 他们的区别是 CLS token 的监督信号的 groundtruth， 而 distillation token
+DeiT 提出了一种适合 ViT 的蒸馏方法， 即除了 [CLS] token 之外增加了一个类似的用于蒸馏的 distillation token， 他们的区别是 CLS token 的监督信号的 groundtruth， 而 distillation token
 
 ![](https://markdown-imagebed.oss-cn-beijing.aliyuncs.com/imgs/202212271411628.png)
 

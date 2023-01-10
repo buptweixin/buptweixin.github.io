@@ -25,7 +25,7 @@ timezone: UTC+8
 
 ### 初读印象
 
-comment:: 统一方式表征隐式表面模型和辐射场，从而可以使用相同的模型进行表面和体积渲染。实验表明该方法重建效果优于基于 NeRF 的方法，同时在不需要 mask 的前提下取得了和需要 mask 的 IDR 相近的结果。
+统一方式表征隐式表面模型和辐射场，从而可以使用相同的模型进行表面和体积渲染。实验表明该方法重建效果优于基于 NeRF 的方法，同时在不需要 mask 的前提下取得了和需要 mask 的 IDR 相近的结果。
 
 ![image.png](https://markdown-imagebed.oss-cn-beijing.aliyuncs.com/imgs/202301031447169.png)
 

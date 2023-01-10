@@ -25,7 +25,7 @@ timezone: UTC+8
 
 ### 初读印象
 
-comment:: 解决测试视角和训练视角相差很大时 NeRF 效果不好的问题
+解决测试视角和训练视角相差很大时 NeRF 效果不好的问题
 
 
 ![](https://markdown-imagebed.oss-cn-beijing.aliyuncs.com/imgs/202210311518653.png)
