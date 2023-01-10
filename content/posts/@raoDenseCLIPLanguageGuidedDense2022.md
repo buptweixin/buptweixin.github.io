@@ -24,7 +24,7 @@ timezone: UTC+8
 
 ### 初读印象
 
-comment:: 将 instant level 的 CLIP 扩展到 pixel level 的 dense 预测任务，比如分割等。
+将 instant level 的 CLIP 扩展到 pixel level 的 dense 预测任务，比如分割等。
 
 ![image.png](https://markdown-imagebed.oss-cn-beijing.aliyuncs.com/imgs/202301051638818.png)
 
