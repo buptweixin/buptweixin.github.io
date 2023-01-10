@@ -16,7 +16,7 @@ keywords = "blog,developer,personal"
 info = ["Deep learning", "CV"]
 # avatarURL = "images/avatar.jpg"
 #gravatar = "john.doe@example.com"
-dateFormat = "January 2, 2023"
+dateFormat = "02 Jan 2006"
 since = 2018
 # Git Commit in Footer, uncomment the line below to enable it
 # commit = "https://github.com/luizdepra/hugo-coder/tree/"
